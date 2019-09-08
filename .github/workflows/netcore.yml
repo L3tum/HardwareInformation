@@ -18,3 +18,6 @@ jobs:
       - run: echo $(date "+%Y.%-m.%-d") > ./version
       - name: Build
         run: dotnet pack -c Release --include-symbols -p:PackageVersion=$(cat ./version) --output nupkgs "./HardwareInformation.sln"
+      - name: Nuget release
+        if: startsWith(github.ref, 'refs/tags/')
+        run: dotnet nuget push nupkgs/HardwareInformation.$(cat ./version).nupkg -k ${{ secrets.NUGET_API_KEY }} -s https://nuget.smbsrc.net/
