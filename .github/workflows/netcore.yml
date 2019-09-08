@@ -15,7 +15,7 @@ jobs:
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: ${{ matrix.dotnet }}
-      - run: echo ${$(date +"%Y.%m.%d")//.0/.} > ./version
+      - run: echo ${$(date +"%Y.%m.%d")//\.0/\.} > ./version
       - name: Build
         run: dotnet pack -c Release --include-symbols -p:PackageVersion=$(cat ./version) --output nupkgs "./HardwareInformation.sln"
       - name: Nuget release
