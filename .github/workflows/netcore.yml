@@ -24,6 +24,10 @@ jobs:
         with:
           nugetpackage: HardwareInformation/HardwareInformation/bin/Release/HardwareInformation.$(date +"%Y.%m.%d").nupkg
           nugetapikey: ${{ secrets.NUGET_API_KEY }}
+          NUGETAPIKEY: ${{ secrets.NUGET_API_KEY }}
+        env:
+          nugetapikey: ${{ secrets.NUGET_API_KEY }}
+          NUGETAPIKEY: ${{ secrets.NUGET_API_KEY }}
       - name: Create Github Release
         uses: frankjuniorr/github-create-release-action@master
         env:
