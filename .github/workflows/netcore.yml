@@ -16,7 +16,7 @@ jobs:
         with:
           dotnet-version: ${{ matrix.dotnet }}
       - name: Build
-        run: dotnet pack -c Release --include-symbols -p:PackageVersion=$(date +"%Y.%m.%d") ".\HardwareInformation\HardwareInformation.csproj"
+        run: dotnet pack -c Release --include-symbols -p:PackageVersion=$(date +"%Y.%m.%d") ".\HardwareInformation.sln"
       - name: Setup Nuget.exe
         uses: warrenbuckley/Setup-Nuget@v1
       - name: Nuget release
