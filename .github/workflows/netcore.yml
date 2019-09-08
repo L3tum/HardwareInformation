@@ -11,7 +11,6 @@ jobs:
     strategy:
       matrix:
         dotnet: [ '3.0.100-preview8-013656' ]
-        version: [ '1.0.0']
     name: Dotnet ${{ matrix.dotnet }} build for version ${{ version }}
     steps:
       - uses: actions/checkout@v1
@@ -19,9 +18,9 @@ jobs:
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: ${{ matrix.dotnet }}
-      - run: dotnet pack -c Release --include-symbols -p:PackageVersion=${{ version }} HardwareInformation/HardwareInformation.csproj
+      - run: dotnet pack -c Release --include-symbols -p:PackageVersion=$(date +"%Y.%m.%d") HardwareInformation/HardwareInformation.csproj
       - name: Deploy NuGet Package
         uses: anuraj/nuget-push@v0.2-Alpha
         with:
-          nugetpackage: HardwareInformation/HardwareInformation/bin/Release/HardwareInformation.${{ version }}.nupkg
+          nugetpackage: HardwareInformation/HardwareInformation/bin/Release/HardwareInformation.$(date +"%Y.%m.%d").nupkg
           nugetapikey: ${{ secrets.NUGET_API_KEY }}
