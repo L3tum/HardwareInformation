@@ -1,9 +1,6 @@
 name: .NET Core CI
 
-on: 
-  push:
-    branches:
-      - master
+on: repository_dispatch
 
 jobs:
   build:
@@ -24,3 +21,8 @@ jobs:
         with:
           nugetpackage: HardwareInformation/HardwareInformation/bin/Release/HardwareInformation.$(date +"%Y.%m.%d").nupkg
           nugetapikey: ${{ secrets.NUGET_API_KEY }}
+      - name: Create Github Release
+        uses: frankjuniorr/github-create-release-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VERSION: $(date +"%Y.%m.%d")
