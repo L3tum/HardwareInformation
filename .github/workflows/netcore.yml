@@ -20,7 +20,7 @@ jobs:
           dotnet-version: ${{ matrix.dotnet }}
       - run: dotnet pack -c Release --include-symbols -p:PackageVersion=$(date +"%Y.%m.%d") HardwareInformation/HardwareInformation.csproj
       - name: Deploy NuGet Package
-        uses: anuraj/nuget-push@v0.2-Alpha
+        uses: anuraj/nuget-push@master
         with:
           nugetpackage: HardwareInformation/HardwareInformation/bin/Release/HardwareInformation.$(date +"%Y.%m.%d").nupkg
           nugetapikey: ${{ secrets.NUGET_API_KEY }}
