@@ -15,7 +15,7 @@ jobs:
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: ${{ matrix.dotnet }}
-      - runs: echo $(date +"%Y.%m.%d") > /github/workspace/version
+      - run: echo $(date +"%Y.%m.%d") > /github/workspace/version
       - name: Build
         run: dotnet pack -c Release --include-symbols -p:PackageVersion=$(cat /github/workspace/version) --output nupkgs "./HardwareInformation.sln"
       - name: Nuget release
