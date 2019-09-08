@@ -9,7 +9,7 @@
     <RepositoryType>Github</RepositoryType>
     <SignAssembly>true</SignAssembly>
     <DelaySign>false</DelaySign>
-    <AssemblyOriginatorKeyFile>HardwareInformation.snk.pfx</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>sgKey.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
   <ItemGroup>
