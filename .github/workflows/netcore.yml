@@ -15,11 +15,12 @@ jobs:
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: ${{ matrix.dotnet }}
+      - runs: echo $(date +"%Y.%m.%d") > /github/workspace/version
       - name: Build
-        run: dotnet pack -c Release --include-symbols -p:PackageVersion=$( "${${{ github.ref }}/refs\/tags\//}" ) --output nupkgs "./HardwareInformation.sln"
+        run: dotnet pack -c Release --include-symbols -p:PackageVersion=$(cat /github/workspace/version) --output nupkgs "./HardwareInformation.sln"
       - name: Nuget release
         if: startsWith(github.ref, 'refs/tags/')
-        run: dotnet nuget push nupkgs/HardwareInformation.$( "${${{ github.ref }}/refs\/tags\//}" ).nupkg -k ${{ secrets.NUGET_API_KEY }} -s https://nuget.smbsrc.net/
+        run: dotnet nuget push nupkgs/HardwareInformation.$(cat /github/workspace/version).nupkg -k ${{ secrets.NUGET_API_KEY }} -s https://nuget.smbsrc.net/
       - name: Release
         uses: docker://softprops/action-gh-release
         if: startsWith(github.ref, 'refs/tags/')
