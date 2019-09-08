@@ -59,4 +59,3 @@
 	RAM Manufacturer
 	RAM Size
 		NOT BIOS Version
-</summary>
