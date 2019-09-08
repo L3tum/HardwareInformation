@@ -1,6 +1,21 @@
 # HardwareInformation
 .NET Core Cross-Platform Hardware Information Gatherer
 
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/L3tum/HardwareInformation?style=flat-square)
+![Nuget](https://img.shields.io/nuget/v/HardwareInformation?style=flat-square)
+
+## Usage
+
+Download from [Nuget](https://www.nuget.org/packages/HardwareInformation/) via your favorite Nuget client like dotnet
+
+`dotnet add package HardwareInformation`
+
+Get hardware information from the gatherer
+
+`MachinInformation info = MachineInformationGatherer.GatherInformation()`
+
+Result is cached internally so don't worry about calling it multiple times
+
 
 ## What gets collected for each OS?
 

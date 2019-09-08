@@ -10,6 +10,7 @@
     <SignAssembly>true</SignAssembly>
     <DelaySign>false</DelaySign>
     <AssemblyOriginatorKeyFile>sgKey.snk</AssemblyOriginatorKeyFile>
+    <Description>.NET Standard 2 Cross-Platform Hardware Information Gatherer</Description>
   </PropertyGroup>
 
   <ItemGroup>
