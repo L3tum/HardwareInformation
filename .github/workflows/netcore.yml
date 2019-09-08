@@ -4,7 +4,7 @@ on: push
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: ubuntu-18.04
     strategy:
       matrix:
         dotnet: [ '3.0.100-preview8-013656' ]
@@ -17,8 +17,6 @@ jobs:
           dotnet-version: ${{ matrix.dotnet }}
       - name: Build
         run: dotnet pack -c Release --include-symbols -p:PackageVersion=$(date +"%Y.%m.%d") ".\HardwareInformation.sln"
-      - name: Setup Nuget.exe
-        uses: warrenbuckley/Setup-Nuget@v1
       - name: Nuget release
         if: startsWith(github.ref, 'refs/tags/')
         run: nuget SetApiKey ${{ secrets.NUGET_API_KEY }} && nuget push HardwareInformation/HardwareInformation/bin/Release/HardwareInformation.$(date +"%Y.%m.%d").nupkg -source https://nuget.smbsrc.net/
