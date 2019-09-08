@@ -16,6 +16,9 @@ jobs:
         with:
           dotnet-version: ${{ matrix.dotnet }}
       - run: echo $(date "+%Y.%-m.%-d") > ./version
+        if: !startsWith(github.ref, 'refs/tags/')
+      - run: echo ${{ github.ref }} > ./version && sed -ie 's/refs\/tags\//' ./version
+        if: startsWith(github.ref, 'refs/tags/')
       - name: Build
         run: dotnet pack -c Release --include-symbols -p:PackageVersion=$(cat ./version) --output nupkgs "./HardwareInformation.sln"
       - name: Nuget release
