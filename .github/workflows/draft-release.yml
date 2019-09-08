@@ -1,0 +1,6 @@
+name: Release drafter
+
+on: 
+  push:
+    branches:
+      - master
