@@ -11,7 +11,7 @@ jobs:
     strategy:
       matrix:
         dotnet: [ '3.0.100-preview8-013656' ]
-    name: Dotnet ${{ matrix.dotnet }} build for version ${{ version }}
+    name: Dotnet ${{ matrix.dotnet }} build
     steps:
       - uses: actions/checkout@v1
       - name: Setup dotnet
