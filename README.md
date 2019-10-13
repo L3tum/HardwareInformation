@@ -46,8 +46,8 @@ Result is cached internally so don't worry about calling it multiple times
 | CPU Base Frequency | :white_check_mark: | :white_check_mark:* | :white_check_mark:*
 | CPU Socket | :white_check_mark: | :x: | :x:
 | CPU Cores | :white_check_mark: | :white_check_mark: | :white_check_mark:
-| CPU Core Max Frequency | :white_check_mark: | :white_check_mark: | :white_check_mark:
-| CPU Core Base Frequency | :white_check_mark: | :white_check_mark: | :white_check_mark:
+| CPU Core Max Frequency | :white_check_mark: | :white_check_mark:* | :x:
+| CPU Core Base Frequency | :white_check_mark: | :white_check_mark:* | :x:
 | CPU Core Reference Max Frequency** | :white_check_mark: | :white_check_mark: | :white_check_mark:
 | CPU Core Reference Base Frequency** | :white_check_mark: | :white_check_mark: | :white_check_mark:
 | CPU Core Reference Bus Frequency** | :white_check_mark: | :white_check_mark: | :white_check_mark:
