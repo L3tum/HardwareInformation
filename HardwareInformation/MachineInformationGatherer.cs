@@ -68,7 +68,7 @@ namespace HardwareInformation
 				}
 			}
 
-			if (!skipClockspeedTest)
+			if (!skipClockspeedTest && (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) || RuntimeInformation.IsOSPlatform(OSPlatform.Linux)))
 			{
 				GetCoreSpeeds();
 			}
@@ -81,6 +81,8 @@ namespace HardwareInformation
 
 			return information;
 		}
+
+		// TODO: Intel cache information, number of cores via cpuid, ARM
 
 		private static void GetCommonCpuInformation()
 		{
