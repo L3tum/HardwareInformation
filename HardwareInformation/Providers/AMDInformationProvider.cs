@@ -59,6 +59,11 @@ namespace HardwareInformation.Providers
 				Opcode.Cpuid(out var result, 0x80000008, 0);
 
 				information.Cpu.PhysicalCores = (result.ecx & 0xFF) + 1;
+
+				if ((information.Cpu.FeatureFlagsOne & MachineInformation.CPU.FeatureFlagEDX.HTT) != 0)
+				{
+					information.Cpu.PhysicalCores /= 2;
+				}
 			}
 
 			try

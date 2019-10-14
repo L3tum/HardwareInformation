@@ -33,7 +33,8 @@ namespace HardwareInformation.Providers
 						// MIND THE SSSSSSSS
 						case "NumberOfEnabledCore":
 						{
-							if (information.Cpu.PhysicalCores == default)
+							// Safety check
+							if (information.Cpu.PhysicalCores == default || information.Cpu.PhysicalCores == information.Cpu.LogicalCores)
 							{
 								information.Cpu.PhysicalCores = uint.Parse(propertyData.Value.ToString());
 							}

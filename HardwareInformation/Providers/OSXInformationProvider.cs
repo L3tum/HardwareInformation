@@ -38,7 +38,8 @@ namespace HardwareInformation.Providers
 				}
 			}
 
-			if (information.Cpu.PhysicalCores == default)
+			// Safety check
+			if (information.Cpu.PhysicalCores == default || information.Cpu.PhysicalCores == information.Cpu.LogicalCores)
 			{
 				using (var p = Util.StartProcess("sysctl", "-n hw.physicalcpu"))
 				{

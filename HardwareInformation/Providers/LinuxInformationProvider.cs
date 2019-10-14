@@ -42,7 +42,8 @@ namespace HardwareInformation.Providers
 
 				match = physicalCoresRegex.Match(s);
 
-				if (match.Success && information.Cpu.PhysicalCores == default)
+				// Safety check
+				if (match.Success && (information.Cpu.PhysicalCores == default || information.Cpu.PhysicalCores == information.Cpu.LogicalCores))
 				{
 					information.Cpu.PhysicalCores = uint.Parse(match.Groups[1].Value);
 
