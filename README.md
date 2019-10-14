@@ -42,8 +42,8 @@ Result is cached internally so don't worry about calling it multiple times
 | CPU Model | :white_check_mark: | :white_check_mark: | :white_check_mark:
 | CPU Stepping | :white_check_mark: | :white_check_mark: | :white_check_mark:
 | CPU Type | :white_check_mark: | :white_check_mark: | :white_check_mark:
-| CPU Max Frequency | :white_check_mark: | :white_check_mark:* | :x:
-| CPU Base Frequency | :white_check_mark: | :white_check_mark:* | :white_check_mark:*
+| CPU Max Frequency*** | :white_check_mark: | :white_check_mark:* | :x:
+| CPU Base Frequency*** | :white_check_mark: | :white_check_mark:* | :white_check_mark:*
 | CPU Socket*** | :white_check_mark: | :x: | :x:
 | CPU Cores | :white_check_mark: | :white_check_mark: | :white_check_mark:
 | CPU Core Max Frequency*** | :white_check_mark: | :white_check_mark:* | :x:
