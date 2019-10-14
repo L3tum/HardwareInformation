@@ -32,7 +32,7 @@ namespace HardwareInformation
 		///     Currently does NOT support multi-processor setups (e.g. two Intel Xeon CPUs).
 		///     For detailed information about the information provided please see the readme.
 		/// </summary>
-		/// <param name="skipClockspeedTest"></param>
+		/// <param name="skipClockspeedTest">Default true. If false it will run a quick speed test of all cores to determine maximum frequency.</param>
 		/// <returns></returns>
 		public static MachineInformation GatherInformation(bool skipClockspeedTest = true)
 		{
@@ -66,6 +66,12 @@ namespace HardwareInformation
 				{
 					Console.WriteLine(e.Message);
 				}
+			}
+
+			foreach (MachineInformation.Core cpuCore in information.Cpu.Cores)
+			{
+				cpuCore.NormalClockSpeed = information.Cpu.NormalClockSpeed;
+				cpuCore.MaxClockSpeed = information.Cpu.MaxClockSpeed;
 			}
 
 			if (!skipClockspeedTest && (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) || RuntimeInformation.IsOSPlatform(OSPlatform.Linux)))

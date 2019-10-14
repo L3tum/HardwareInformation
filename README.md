@@ -26,12 +26,12 @@ Result is cached internally so don't worry about calling it multiple times
 | ----: | ---: |  ----: | ---: |
 | No Kernel driver |  :white_check_mark:  | :white_check_mark: | :white_check_mark: |
 | Operating System |  :white_check_mark:  | :white_check_mark: | :white_check_mark: |
-| BIOS Version |  :white_check_mark: | :white_check_mark: | :x: |
-| BIOS Vendor | :white_check_mark: | :white_check_mark: | :x:
-| BIOS Codename | :white_check_mark: | :white_check_mark: | :x:
-| Mainboard Version | :white_check_mark: | :white_check_mark: | :x:
-| Mainboard Name | :white_check_mark: | :white_check_mark: | :x:
-| Mainboard Vendor | :white_check_mark: | :white_check_mark: | :x:
+| BIOS Version*** |  :white_check_mark: | :white_check_mark: | :x: |
+| BIOS Vendor*** | :white_check_mark: | :white_check_mark: | :x:
+| BIOS Codename*** | :white_check_mark: | :white_check_mark: | :x:
+| Mainboard Version*** | :white_check_mark: | :white_check_mark: | :x:
+| Mainboard Name*** | :white_check_mark: | :white_check_mark: | :x:
+| Mainboard Vendor*** | :white_check_mark: | :white_check_mark: | :x:
 | CPU Physical Cores | :white_check_mark: | :white_check_mark: | :white_check_mark:
 | CPU Logical Cores | :white_check_mark: | :white_check_mark: | :white_check_mark:
 | CPU Architecture | :white_check_mark: | :white_check_mark: | :white_check_mark:
@@ -44,10 +44,10 @@ Result is cached internally so don't worry about calling it multiple times
 | CPU Type | :white_check_mark: | :white_check_mark: | :white_check_mark:
 | CPU Max Frequency | :white_check_mark: | :white_check_mark:* | :x:
 | CPU Base Frequency | :white_check_mark: | :white_check_mark:* | :white_check_mark:*
-| CPU Socket | :white_check_mark: | :x: | :x:
+| CPU Socket*** | :white_check_mark: | :x: | :x:
 | CPU Cores | :white_check_mark: | :white_check_mark: | :white_check_mark:
-| CPU Core Max Frequency | :white_check_mark: | :white_check_mark:* | :x:
-| CPU Core Base Frequency | :white_check_mark: | :white_check_mark:* | :x:
+| CPU Core Max Frequency*** | :white_check_mark: | :white_check_mark:* | :x:
+| CPU Core Base Frequency*** | :white_check_mark: | :white_check_mark:* | :x:
 | CPU Core Reference Max Frequency** | :white_check_mark: | :white_check_mark: | :white_check_mark:
 | CPU Core Reference Base Frequency** | :white_check_mark: | :white_check_mark: | :white_check_mark:
 | CPU Core Reference Bus Frequency** | :white_check_mark: | :white_check_mark: | :white_check_mark:
@@ -63,22 +63,28 @@ Result is cached internally so don't worry about calling it multiple times
 | CPU Cache Sets | :white_check_mark: | :white_check_mark: | :white_check_mark:
 | CPU Cache WBINVD | :white_check_mark: | :white_check_mark: | :white_check_mark:
 | **Lots** of feature flags | :white_check_mark: | :white_check_mark: | :white_check_mark:
-| RAM Speed | :white_check_mark: | :x: | :x:
-| RAM Manufacturer | :white_check_mark: | :x: | :x:
-| RAM Capacity | :white_check_mark: | :x: | :x:
-| RAM CapacityHRF | :white_check_mark: | :x: | :x:
-| RAM Locator | :white_check_mark: | :x: | :x:
+| RAM Speed*** | :white_check_mark: | :x: | :x:
+| RAM Manufacturer*** | :white_check_mark: | :x: | :x:
+| RAM Capacity*** | :white_check_mark: | :x: | :x:
+| RAM CapacityHRF*** | :white_check_mark: | :x: | :x:
+| RAM Locator*** | :white_check_mark: | :x: | :x:
 | RAM Latencies | :x: | :x: | :x:
 | GPU | :x: | :x: | :x:
 
-HRF = Human Readable Format. Normal capacity is in bytes, while this is a string encoded with the appropriate sizing.
+HRF = Human Readable Format. Normal capacity/size is in bytes, while this is a string encoded with the appropriate sizing.
 
 **\* Inaccurate or false measurements may be possible. Use with caution.**
 
 **\*\* Only available on Intel platforms.**
 
+**\*\*\* Accesses operating system features (Windows WMI and Linux /proc/cpuinfo) and thus may not be accurate if those features are not available.**
 
-One additional feature is drive-by core frequency monitoring. This is available on Windows and Linux.
+
+One additional feature is drive-by core frequency monitoring. This is available on Windows and Linux by calling the following function. See the doc blocks for more information.
+
+``
+MachineInformationGatherer.MonitorCoreFrequencies(int coreNumber, CancellationToken token, int measurementDelay = 1000) : Task<MachineInformation.Core>
+``
 
 ## Goal
 
