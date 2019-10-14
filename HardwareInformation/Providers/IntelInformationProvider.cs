@@ -22,6 +22,28 @@ namespace HardwareInformation.Providers
 					(MachineInformation.IntelFeatureFlags.TPMFeatureFlagsEAX) result.eax;
 			}
 
+			if (information.Cpu.MaxCpuIdFeatureLevel >= 11)
+			{
+				var threads = new List<Task>();
+				var cores = 0u;
+
+				for (int i = 0; i < information.Cpu.LogicalCores; i++)
+				{
+					threads.Add(Util.RunAffinity(1uL << i, () =>
+					{
+						Opcode.Cpuid(out var result, 11, 0);
+
+						if ((result.edx & 0b1) != 1)
+						{
+							cores++;
+						}
+					}));
+				}
+
+				Task.WaitAll(threads.ToArray());
+				information.Cpu.PhysicalCores = cores;
+			}
+
 			if (information.Cpu.MaxCpuIdExtendedFeatureLevel >= 1)
 			{
 				Opcode.Cpuid(out var result, 0x80000001, 0);

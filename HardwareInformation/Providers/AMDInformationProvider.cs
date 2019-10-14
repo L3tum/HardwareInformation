@@ -54,6 +54,13 @@ namespace HardwareInformation.Providers
 					(MachineInformation.AMDFeatureFlags.FeatureFlagsAPM) result.edx;
 			}
 
+			if (information.Cpu.MaxCpuIdExtendedFeatureLevel >= 8)
+			{
+				Opcode.Cpuid(out var result, 0x80000008, 0);
+
+				information.Cpu.PhysicalCores = (result.ecx & 0xFF) + 1;
+			}
+
 			try
 			{
 				Opcode.Cpuid(out var hammerTime, 0x8FFFFFFF, 0);

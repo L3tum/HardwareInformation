@@ -18,11 +18,11 @@ namespace HardwareInformation
 	{
 		private static readonly InformationProvider[] InformationProviders =
 		{
+			new AMDInformationProvider(),
+			new IntelInformationProvider(),
 			new WindowsInformationProvider(),
 			new LinuxInformationProvider(),
-			new OSXInformationProvider(),
-			new AMDInformationProvider(),
-			new IntelInformationProvider()
+			new OSXInformationProvider()
 		};
 
 		private static MachineInformation information;
@@ -82,7 +82,7 @@ namespace HardwareInformation
 			return information;
 		}
 
-		// TODO: Intel cache information, number of cores via cpuid, ARM
+		// TODO: Tests
 
 		private static void GetCommonCpuInformation()
 		{
@@ -167,6 +167,12 @@ namespace HardwareInformation
 
 		private static void GatherCommonPerCoreInformation()
 		{
+			if (RuntimeInformation.ProcessArchitecture != Architecture.X86 &&
+			    RuntimeInformation.ProcessArchitecture != Architecture.X64)
+			{
+				return;
+			}
+
 			for (var i = 0; i < information.Cpu.LogicalCores; i++)
 			{
 				var core = information.Cpu.Cores.First(c => c.Number == i);
