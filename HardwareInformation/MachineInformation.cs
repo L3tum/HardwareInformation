@@ -690,18 +690,18 @@ namespace HardwareInformation
 			public uint NormalClockSpeed { get; set; }
 
 			/// <summary>
-			///		Reference maximum frequency as reported by CPUID 0x16
+			///     Reference maximum frequency as reported by CPUID 0x16
 			/// </summary>
 			public uint ReferenceMaxClockSpeed { get; set; }
 
 			/// <summary>
-			///		Reference base frequency as reported by CPUID 0x16
+			///     Reference base frequency as reported by CPUID 0x16
 			/// </summary>
 			public uint ReferenceNormalClockSpeed { get; set; }
 
 
 			/// <summary>
-			///		Reference bus frequency as reported by CPUID 0x16
+			///     Reference bus frequency as reported by CPUID 0x16
 			/// </summary>
 			public uint ReferenceBusSpeed { get; set; }
 		}
@@ -787,12 +787,12 @@ namespace HardwareInformation
 			public uint LineSize { get; set; }
 
 			/// <summary>
-			///		Number of physical line partitions
+			///     Number of physical line partitions
 			/// </summary>
 			public uint Partitions { get; set; }
 
 			/// <summary>
-			///		Number of sets
+			///     Number of sets
 			/// </summary>
 			public uint Sets { get; set; }
 
@@ -805,9 +805,9 @@ namespace HardwareInformation
 
 				var cache = (Cache) obj;
 
-				return cache.WBINVD == WBINVD && cache.LineSize == LineSize &&
-				       cache.Associativity == Associativity && cache.Capacity == Capacity &&
-				       cache.CoresPerCache == CoresPerCache && cache.Level == Level && cache.Type == Type;
+				return cache.WBINVD == WBINVD && cache.LineSize == LineSize && cache.Associativity == Associativity &&
+				       cache.Capacity == Capacity && cache.CoresPerCache == CoresPerCache && cache.Level == Level &&
+				       cache.Type == Type && cache.Sets == Sets && cache.Partitions == Partitions;
 			}
 		}
 	}
