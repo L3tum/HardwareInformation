@@ -70,6 +70,8 @@ Result is cached internally so don't worry about calling it multiple times
 | RAM Locator*** | :white_check_mark: | :x: | :x:
 | RAM Latencies | :x: | :x: | :x:
 | GPU | :x: | :x: | :x:
+| NUMA | :x: | :x: | :x:
+| Multiple processors/Dual processors | :x: | :x: | :x:
 
 HRF = Human Readable Format. Normal capacity/size is in bytes, while this is a string encoded with the appropriate sizing.
 

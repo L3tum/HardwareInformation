@@ -102,7 +102,7 @@ namespace HardwareInformation
 
 		internal static string FormatBytes(ulong bytes)
 		{
-			string[] Suffix = {"B", "KB", "MB", "GB", "TB"};
+			string[] Suffix = {"B", "KiB", "MiB", "GiB", "TiB", "PiB"};
 			int i;
 			double dblSByte = bytes;
 			for (i = 0; i < Suffix.Length && bytes >= 1024; i++, bytes /= 1024)
@@ -111,6 +111,27 @@ namespace HardwareInformation
 			}
 
 			return string.Format("{0:0.##} {1}", dblSByte, Suffix[i]);
+		}
+
+		internal static uint ExtractBits(uint number, int start, int end)
+		{
+			var numBits = end - start + 1;
+			var result = number >> start;
+			result &= CreateBitMask(numBits);
+
+			return result;
+		}
+
+		internal static uint CreateBitMask(int width)
+		{
+			return (1u << width) - 1;
+		}
+
+		internal static int GetNumberOfSetBits(int i)
+		{
+			i -= (i >> 1) & 0x55555555;
+			i = (i & 0x33333333) + ((i >> 2) & 0x33333333);
+			return (((i + (i >> 4)) & 0x0F0F0F0F) * 0x01010101) >> 24;
 		}
 	}
 }

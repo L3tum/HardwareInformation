@@ -27,7 +27,7 @@ namespace HardwareInformation.Providers
 				var threads = new List<Task>();
 				var cores = 0u;
 
-				for (int i = 0; i < information.Cpu.LogicalCores; i++)
+				for (var i = 0; i < information.Cpu.LogicalCores; i++)
 				{
 					threads.Add(Util.RunAffinity(1uL << i, () =>
 					{
@@ -85,7 +85,7 @@ namespace HardwareInformation.Providers
 
 			GatherPerCoreInformation(ref information);
 		}
-		 
+
 		public bool Available(MachineInformation information)
 		{
 			return information.Cpu.Vendor == MachineInformation.Vendors.Intel &&
@@ -106,70 +106,67 @@ namespace HardwareInformation.Providers
 
 			foreach (var core in information.Cpu.Cores)
 			{
-				threads.Add(Util.RunAffinity(1uL << (int)core.Number, () =>
+				threads.Add(Util.RunAffinity(1uL << (int) core.Number, () =>
 				{
 					var ecx = 0u;
 
-						while (true)
+					while (true)
+					{
+						Opcode.Cpuid(out var result, 4, ecx);
+
+						var type = (MachineInformation.Cache.CacheType) (result.eax & 0xF);
+
+						// Null, no more caches
+						if (type == MachineInformation.Cache.CacheType.NONE)
 						{
-							Opcode.Cpuid(out var result, 4, ecx);
-
-							var type = (MachineInformation.Cache.CacheType)(result.eax & 0xF);
-
-							// Null, no more caches
-							if (type == MachineInformation.Cache.CacheType.NONE)
-							{
-								break;
-							}
-
-							var cache = new MachineInformation.Cache
-							{
-								CoresPerCache = ((result.eax & 0x3FFC000) >> 14) + 1u,
-								Level = (MachineInformation.Cache.CacheLevel)((result.eax & 0xF0) >> 5),
-								Type = type,
-								LineSize = (result.ebx & 0xFFF) + 1u,
-								WBINVD = (result.edx & 0b1) == 0,
-								Sets = (result.eax & 0b1000000000) == 1 ? 0x1 : result.ecx + 1,
-								Partitions = ((result.ebx & 0x3FF000) >> 12) + 1,
-								Associativity = (result.eax & 0b1000000000) == 1
-									? 0xffffffff
-									: ((result.ebx & 0x7FE00000) >> 22) + 1
-							};
-
-							cache.Capacity = cache.LineSize * cache.Associativity * cache.Partitions * cache.Sets;
-							cache.CapacityHRF = Util.FormatBytes(cache.Capacity);
-
-							lock (caches)
-							{
-								var orig = caches.FirstOrDefault(c => c.Equals(cache));
-
-								if (orig == null)
-								{
-									caches.Add(cache);
-								}
-								else
-								{
-									orig.TimesPresent++;
-								}
-							}
-
-							ecx++;
+							break;
 						}
+
+						var cache = new MachineInformation.Cache
+						{
+							CoresPerCache = ((result.eax & 0x3FFC000) >> 14) + 1u,
+							Level = (MachineInformation.Cache.CacheLevel) ((result.eax & 0xF0) >> 5),
+							Type = type,
+							LineSize = (result.ebx & 0xFFF) + 1u,
+							WBINVD = (result.edx & 0b1) == 0,
+							Sets = (result.eax & 0b1000000000) == 1 ? 0x1 : result.ecx + 1,
+							Partitions = ((result.ebx & 0x3FF000) >> 12) + 1,
+							Associativity = (result.eax & 0b1000000000) == 1
+								? 0xffffffff
+								: ((result.ebx & 0x7FE00000) >> 22) + 1
+						};
+
+						cache.Capacity = cache.LineSize * cache.Associativity * cache.Partitions * cache.Sets;
+						cache.CapacityHRF = Util.FormatBytes(cache.Capacity);
+
+						lock (caches)
+						{
+							var orig = caches.FirstOrDefault(c => c.Equals(cache));
+
+							if (orig == null)
+							{
+								caches.Add(cache);
+							}
+							else
+							{
+								orig.TimesPresent++;
+							}
+						}
+
+						ecx++;
+					}
 				}));
 			}
 
 			Task.WaitAll(threads.ToArray());
 
-			if (supportsCacheTopologyExtensions)
+			foreach (var cache in caches)
 			{
-				foreach (var cache in caches)
-				{
-					var threadsPerCore = information.Cpu.LogicalCores / information.Cpu.PhysicalCores;
+				var threadsPerCore = information.Cpu.LogicalCores / information.Cpu.PhysicalCores;
 
-					cache.TimesPresent++;
-					cache.TimesPresent /= cache.CoresPerCache;
-					cache.CoresPerCache /= threadsPerCore;
-				}
+				cache.TimesPresent++;
+				cache.TimesPresent /= cache.CoresPerCache;
+				cache.CoresPerCache /= threadsPerCore;
 			}
 
 			information.Cpu.Caches = caches;

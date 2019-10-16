@@ -60,7 +60,8 @@ namespace HardwareInformation.Providers
 
 				information.Cpu.PhysicalCores = (result.ecx & 0xFF) + 1;
 
-				if ((information.Cpu.FeatureFlagsOne & MachineInformation.CPU.FeatureFlagEDX.HTT) != 0)
+				if (information.Cpu.FeatureFlagsOne.HasFlag(MachineInformation.CPU.FeatureFlagEDX.HTT) &&
+				    information.Cpu.PhysicalCores == information.Cpu.LogicalCores)
 				{
 					information.Cpu.PhysicalCores /= 2;
 				}
@@ -86,6 +87,15 @@ namespace HardwareInformation.Providers
 
 				information.Cpu.AMDFeatureFlags.FeatureFlagsSvm =
 					(MachineInformation.AMDFeatureFlags.FeatureFlagsSVM) result.edx;
+			}
+
+			if (information.Cpu.Family >= 0x17 && information.Cpu.MaxCpuIdExtendedFeatureLevel >= 0x1E)
+			{
+				Opcode.Cpuid(out var result, 0x8000001E, 0);
+
+				var threadsPerCore = (result.ebx & 0xff00) >> 8;
+
+				information.Cpu.PhysicalCores = information.Cpu.LogicalCores / threadsPerCore;
 			}
 
 			GatherPerCoreInformation(ref information);
