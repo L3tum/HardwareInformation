@@ -322,14 +322,18 @@ namespace HardwareInformation.Providers
 		{
 			var threads = new Task[information.Cpu.LogicalCores];
 			var coreIds = new Dictionary<uint, uint>();
+			var nodeIds = new Dictionary<uint, uint>();
+			var cores = information.Cpu.Cores;
 
 			for (var i = 0; i < information.Cpu.LogicalCores; i++)
 			{
+				var i1 = i;
 				threads[i] = Util.RunAffinity(1uL << i, () =>
 				{
 					Opcode.Cpuid(out var result, 0x8000001E, 0);
 
 					var unitId = Util.ExtractBits(result.ebx, 0, 7);
+					var nodeId = Util.ExtractBits(result.ecx, 0, 7);
 
 					lock (coreIds)
 					{
@@ -342,12 +346,34 @@ namespace HardwareInformation.Providers
 							coreIds.Add(unitId, 1);
 						}
 					}
+
+					lock (nodeIds)
+					{
+						if (nodeIds.ContainsKey(nodeId))
+						{
+							nodeIds[nodeId]++;
+						}
+						else
+						{
+							nodeIds.Add(nodeId, 1);
+						}
+					}
+
+					var core = cores.First(c => c.Number == i1);
+
+					core.Node = nodeId;
+					core.CoreId = unitId;
 				});
 			}
 
 			Task.WaitAll(threads);
 
 			information.Cpu.PhysicalCores = (uint) coreIds.Count;
+			information.Cpu.Nodes = (uint) nodeIds.Count;
+			information.Cpu.LogicalCoresPerNode = nodeIds.First().Value;
+
+			information.Cpu.Cores.Clear();
+			information.Cpu.Cores.AddRange(cores);
 		}
 	}
 }

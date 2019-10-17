@@ -235,6 +235,10 @@ namespace HardwareInformation
 
 			public uint LogicalCores { get; set; }
 
+			public uint Nodes { get; set; }
+
+			public uint LogicalCoresPerNode { get; set; }
+
 			public string Architecture { get; set; }
 
 			public string Caption { get; set; }
@@ -291,6 +295,38 @@ namespace HardwareInformation
 			public string CapacityHRF { get; set; }
 
 			public string Name { get; set; }
+
+			public string PartNumber { get; set; }
+
+			public FormFactors FormFactor { get; set; }
+
+			public enum FormFactors
+			{
+				UNKNOWN = 0,
+				OTHER = 1,
+				SIP = 2,
+				DIP = 3,
+				ZIP = 4,
+				SOJ = 5,
+				PROPRIETARY = 6,
+				SIMM = 7,
+				DIMM = 8,
+				TSOP = 9,
+				PGA = 10,
+				RIMM = 11,
+				SODIMM = 12,
+				SRIMM = 13,
+				SMD = 14,
+				SSMP = 15,
+				QFP = 16,
+				TQFP = 17,
+				SOIC = 18,
+				LCC = 19,
+				PLCC = 20,
+				BGA = 21,
+				FPBGA = 22,
+				LGA = 23
+			}
 		}
 
 		/// <summary>
@@ -704,6 +740,17 @@ namespace HardwareInformation
 			///     Reference bus frequency as reported by CPUID 0x16
 			/// </summary>
 			public uint ReferenceBusSpeed { get; set; }
+
+
+			/// <summary>
+			///		NUMA Node this core resides in
+			/// </summary>
+			public uint Node { get; set; } = 0;
+
+			/// <summary>
+			///		The physical core this logical core resides in
+			/// </summary>
+			public uint CoreId { get; set; } = 0;
 		}
 
 		public class Cache

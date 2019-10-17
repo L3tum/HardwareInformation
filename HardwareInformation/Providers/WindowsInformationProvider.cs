@@ -1,5 +1,6 @@
 ﻿#region using
 
+using System;
 using System.Management;
 using System.Runtime.InteropServices;
 
@@ -77,7 +78,7 @@ namespace HardwareInformation.Providers
 
 			// There is currently no other way to gather RAM information so we don't need to check if it's already set
 			mos = new ManagementObjectSearcher(
-				"select ConfiguredClockSpeed,Manufacturer,Capacity,DeviceLocator from Win32_PhysicalMemory");
+				"select ConfiguredClockSpeed,Manufacturer,Capacity,DeviceLocator,PartNumber,FormFactor from Win32_PhysicalMemory");
 
 			foreach (var managementBaseObject in mos.Get())
 			{
@@ -111,6 +112,21 @@ namespace HardwareInformation.Providers
 						case "DeviceLocator":
 						{
 							ram.Name = propertyData.Value.ToString();
+
+							break;
+						}
+
+						case "PartNumber":
+						{
+							ram.PartNumber = propertyData.Value.ToString();
+
+							break;
+						}
+
+						case "FormFactor":
+						{
+							ram.FormFactor = (MachineInformation.RAM.FormFactors) Enum.Parse(
+								typeof(MachineInformation.RAM.FormFactors), propertyData.Value.ToString());
 
 							break;
 						}
