@@ -15,15 +15,7 @@ namespace HardwareInformation.Providers
 	{
 		public void GatherInformation(ref MachineInformation information)
 		{
-			if (information.Cpu.MaxCpuIdExtendedFeatureLevel >= 1)
-			{
-				Opcode.Cpuid(out var result, 0x80000001, 0);
-
-				information.Cpu.AMDFeatureFlags.ExtendedFeatureFlagsF81One =
-					(MachineInformation.AMDFeatureFlags.ExtendedFeatureFlagsF81ECX) result.ecx;
-				information.Cpu.AMDFeatureFlags.ExtendedFeatureFlagsF81Two =
-					(MachineInformation.AMDFeatureFlags.ExtendedFeatureFlagsF81EDX) result.edx;
-			}
+			GatherFeatureFlags(ref information);
 
 			if (information.Cpu.MaxCpuIdExtendedFeatureLevel >= 4)
 			{
@@ -46,27 +38,6 @@ namespace HardwareInformation.Providers
 				information.Cpu.Name = sb.ToString();
 			}
 
-			if (information.Cpu.MaxCpuIdExtendedFeatureLevel >= 7)
-			{
-				Opcode.Cpuid(out var result, 0x80000007, 0);
-
-				information.Cpu.AMDFeatureFlags.FeatureFlagsApm =
-					(MachineInformation.AMDFeatureFlags.FeatureFlagsAPM) result.edx;
-			}
-
-			if (information.Cpu.MaxCpuIdExtendedFeatureLevel >= 8)
-			{
-				Opcode.Cpuid(out var result, 0x80000008, 0);
-
-				information.Cpu.PhysicalCores = (result.ecx & 0xFF) + 1;
-
-				if (information.Cpu.FeatureFlagsOne.HasFlag(MachineInformation.CPU.FeatureFlagEDX.HTT) &&
-				    information.Cpu.PhysicalCores == information.Cpu.LogicalCores)
-				{
-					information.Cpu.PhysicalCores /= 2;
-				}
-			}
-
 			try
 			{
 				Opcode.Cpuid(out var hammerTime, 0x8FFFFFFF, 0);
@@ -81,24 +52,24 @@ namespace HardwareInformation.Providers
 				// No K7 or K8 :(
 			}
 
-			if (information.Cpu.MaxCpuIdExtendedFeatureLevel >= 0xA)
+			if (information.Cpu.Family >= 0x15 && information.Cpu.MaxCpuIdExtendedFeatureLevel >= 0x1E)
 			{
-				Opcode.Cpuid(out var result, 0x8000000A, 0);
+				GatherPhysicalCores(ref information);
+			}
+			else if (information.Cpu.MaxCpuIdExtendedFeatureLevel >= 8)
+			{
+				Opcode.Cpuid(out var result, 0x80000008, 0);
 
-				information.Cpu.AMDFeatureFlags.FeatureFlagsSvm =
-					(MachineInformation.AMDFeatureFlags.FeatureFlagsSVM) result.edx;
+				information.Cpu.PhysicalCores = (result.ecx & 0xFF) + 1;
+
+				if (information.Cpu.FeatureFlagsOne.HasFlag(MachineInformation.CPU.FeatureFlagEDX.HTT) &&
+				    information.Cpu.PhysicalCores == information.Cpu.LogicalCores)
+				{
+					information.Cpu.PhysicalCores /= 2;
+				}
 			}
 
-			if (information.Cpu.Family >= 0x17 && information.Cpu.MaxCpuIdExtendedFeatureLevel >= 0x1E)
-			{
-				Opcode.Cpuid(out var result, 0x8000001E, 0);
-
-				var threadsPerCore = (result.ebx & 0xff00) >> 8;
-
-				information.Cpu.PhysicalCores = information.Cpu.LogicalCores / threadsPerCore;
-			}
-
-			GatherPerCoreInformation(ref information);
+			GatherCacheTopology(ref information);
 		}
 
 		public bool Available(MachineInformation information)
@@ -109,7 +80,7 @@ namespace HardwareInformation.Providers
 			        RuntimeInformation.ProcessArchitecture == Architecture.X64);
 		}
 
-		private void GatherPerCoreInformation(ref MachineInformation information)
+		private void GatherCacheTopology(ref MachineInformation information)
 		{
 			var threads = new List<Task>();
 			var caches = information.Cpu.Caches;
@@ -316,6 +287,67 @@ namespace HardwareInformation.Providers
 			}
 
 			information.Cpu.Caches = caches;
+		}
+
+		private void GatherFeatureFlags(ref MachineInformation information)
+		{
+			if (information.Cpu.MaxCpuIdExtendedFeatureLevel >= 1)
+			{
+				Opcode.Cpuid(out var result, 0x80000001, 0);
+
+				information.Cpu.AMDFeatureFlags.ExtendedFeatureFlagsF81One =
+					(MachineInformation.AMDFeatureFlags.ExtendedFeatureFlagsF81ECX) result.ecx;
+				information.Cpu.AMDFeatureFlags.ExtendedFeatureFlagsF81Two =
+					(MachineInformation.AMDFeatureFlags.ExtendedFeatureFlagsF81EDX) result.edx;
+			}
+
+			if (information.Cpu.MaxCpuIdExtendedFeatureLevel >= 7)
+			{
+				Opcode.Cpuid(out var result, 0x80000007, 0);
+
+				information.Cpu.AMDFeatureFlags.FeatureFlagsApm =
+					(MachineInformation.AMDFeatureFlags.FeatureFlagsAPM) result.edx;
+			}
+
+			if (information.Cpu.MaxCpuIdExtendedFeatureLevel >= 0xA)
+			{
+				Opcode.Cpuid(out var result, 0x8000000A, 0);
+
+				information.Cpu.AMDFeatureFlags.FeatureFlagsSvm =
+					(MachineInformation.AMDFeatureFlags.FeatureFlagsSVM) result.edx;
+			}
+		}
+
+		private void GatherPhysicalCores(ref MachineInformation information)
+		{
+			var threads = new Task[information.Cpu.LogicalCores];
+			var coreIds = new Dictionary<uint, uint>();
+
+			for (var i = 0; i < information.Cpu.LogicalCores; i++)
+			{
+				threads[i] = Util.RunAffinity(1uL << i, () =>
+				{
+					Opcode.Cpuid(out var result, 0x8000001E, 0);
+
+					var unitId = Util.ExtractBits(result.ebx, 0, 7);
+
+					lock (coreIds)
+					{
+						if (coreIds.ContainsKey(unitId))
+						{
+							coreIds[unitId]++;
+						}
+						else
+						{
+							coreIds.Add(unitId, 1);
+						}
+					}
+				});
+			}
+
+			Task.WaitAll(threads);
+
+			information.Cpu.PhysicalCores = (uint) coreIds.Count;
 		}
 	}
 }

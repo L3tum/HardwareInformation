@@ -117,6 +117,8 @@ namespace HardwareInformation.Providers
 					}
 				}
 
+				ram.CapacityHRF = Util.FormatBytes(ram.Capacity);
+
 				information.RAMSticks.Add(ram);
 			}
 
