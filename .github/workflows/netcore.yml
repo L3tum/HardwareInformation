@@ -15,14 +15,14 @@ jobs:
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: ${{ matrix.dotnet }}
-      - run: echo $(date "+%Y.%-m.%-d") > ./version
-      - run: echo ${{ github.ref }} | %{$_ -replace "refs/tags/",""} > ./version
+      - run: echo $(date "+%Y.%-m.%-d") > .\version
+      - run: echo ${{ github.ref }} | %{$_ -replace "refs/tags/",""} > .\version
         if: startsWith(github.ref, 'refs/tags/')
       - name: Build
-        run: dotnet pack -c Release --include-symbols -p:PackageVersion=$(cat ./version) --output nupkgs "./HardwareInformation.sln"
+        run: dotnet pack -c Release --include-symbols -p:PackageVersion=$(cat ./version) --output nupkgs ".\HardwareInformation.sln"
       - name: Nuget release
         if: startsWith(github.ref, 'refs/tags/')
-        run: dotnet nuget push nupkgs/HardwareInformation.$(cat ./version).nupkg -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json
+        run: dotnet nuget push nupkgs\HardwareInformation.$(cat .\version).nupkg -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json
       - name: Install NuGet client
         if: startsWith(github.ref, 'refs/tags/')
         uses: warrenbuckley/Setup-Nuget@v1
@@ -31,4 +31,4 @@ jobs:
         run: nuget sources Add -Name "GPR" -Source "https://nuget.pkg.github.com/L3tum/index.json" -UserName L3tum -Password ${{ secrets.GITHUB_TOKEN }}
       - name: Github Package Release
         if: startsWith(github.ref, 'refs/tags/')
-        run: nuget push nupkgs/HardwareInformation.$(cat ./version).nupkg -s "GPR"
+        run: nuget push nupkgs\HardwareInformation.$(cat .\version).nupkg -s "GPR"
