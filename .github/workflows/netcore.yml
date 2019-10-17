@@ -19,7 +19,7 @@ jobs:
       - run: echo ${{ github.ref }} | %{$_ -replace "refs/tags/",""} > .\version
         if: startsWith(github.ref, 'refs/tags/')
       - name: Build
-        run: dotnet pack -c Release --include-symbols -p:PackageVersion=$(cat ./version) --output nupkgs ".\HardwareInformation.sln"
+        run: dotnet pack -c Release --include-symbols -p:PackageVersion=$(cat ./version) --output nupkgs ".\HardwareInformation\HardwareInformation.csproj"
       - name: Nuget release
         if: startsWith(github.ref, 'refs/tags/')
         run: dotnet nuget push nupkgs\HardwareInformation.$(cat .\version).nupkg -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json
