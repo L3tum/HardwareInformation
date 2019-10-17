@@ -34,6 +34,7 @@ Result is cached internally so don't worry about calling it multiple times
 | Mainboard Vendor*** | :white_check_mark: | :white_check_mark: | :x:
 | CPU Physical Cores | :white_check_mark: | :white_check_mark: | :white_check_mark:
 | CPU Logical Cores | :white_check_mark: | :white_check_mark: | :white_check_mark:
+| CPU Logical Cores per Node**** | :white_check_mark: | :white_check_mark: | :white_check_mark:
 | CPU Architecture | :white_check_mark: | :white_check_mark: | :white_check_mark:
 | CPU Caption | :white_check_mark: | :white_check_mark: | :white_check_mark:
 | CPU Name | :white_check_mark: | :white_check_mark: | :white_check_mark:
@@ -46,6 +47,8 @@ Result is cached internally so don't worry about calling it multiple times
 | CPU Base Frequency*** | :white_check_mark: | :white_check_mark:* | :white_check_mark:*
 | CPU Socket*** | :white_check_mark: | :x: | :x:
 | CPU Cores | :white_check_mark: | :white_check_mark: | :white_check_mark:
+| CPU Core Number of Physical Core**** | :white_check_mark: | :white_check_mark: | :white_check_mark:
+| CPU Core NUMA Node**** | :white_check_mark: | :white_check_mark: | :white_check_mark:
 | CPU Core Max Frequency*** | :white_check_mark: | :white_check_mark:* | :x:
 | CPU Core Base Frequency*** | :white_check_mark: | :white_check_mark:* | :x:
 | CPU Core Reference Max Frequency** | :white_check_mark: | :white_check_mark: | :white_check_mark:
@@ -68,9 +71,10 @@ Result is cached internally so don't worry about calling it multiple times
 | RAM Capacity*** | :white_check_mark: | :x: | :x:
 | RAM CapacityHRF*** | :white_check_mark: | :x: | :x:
 | RAM Locator*** | :white_check_mark: | :x: | :x:
+| RAM PartNumber (Product Name)*** | :white_check_mark: | :x: | :x:
+| RAM FormFactor*** | :white_check_mark: | :x: | :x:
 | RAM Latencies | :x: | :x: | :x:
 | GPU | :x: | :x: | :x:
-| NUMA | :x: | :x: | :x:
 | Multiple processors/Dual processors | :x: | :x: | :x:
 
 HRF = Human Readable Format. Normal capacity/size is in bytes, while this is a string encoded with the appropriate sizing.
@@ -81,6 +85,7 @@ HRF = Human Readable Format. Normal capacity/size is in bytes, while this is a s
 
 **\*\*\* Accesses operating system features (Windows WMI and Linux /proc/cpuinfo) and thus may not be accurate if those features are not available.**
 
+**\*\*\*\* Only available on AMD platforms.**
 
 One additional feature is drive-by core frequency monitoring. This is available on Windows and Linux by calling the following function. See the doc blocks for more information.
 

@@ -94,6 +94,8 @@ namespace HardwareInformation
 		{
 			information.OperatingSystem = Environment.OSVersion;
 			information.Cpu.LogicalCores = (uint) Environment.ProcessorCount;
+			information.Cpu.LogicalCoresPerNode = information.Cpu.LogicalCores;
+			information.Cpu.Nodes = 1;
 			information.Cpu.Architecture = RuntimeInformation.ProcessArchitecture.ToString();
 			information.Cpu.Caption = Environment.GetEnvironmentVariable("PROCESSOR_IDENTIFIER");
 			information.Cpu.Name = information.Cpu.Caption;

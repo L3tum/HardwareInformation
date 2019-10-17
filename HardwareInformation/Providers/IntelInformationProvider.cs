@@ -14,76 +14,23 @@ namespace HardwareInformation.Providers
 	{
 		public void GatherInformation(ref MachineInformation information)
 		{
-			if (information.Cpu.MaxCpuIdFeatureLevel >= 6)
-			{
-				Opcode.Cpuid(out var result, 6, 0);
+			GatherFeatureFlags(ref information);
 
-				information.Cpu.IntelFeatureFlags.TPMFeatureFlags =
-					(MachineInformation.IntelFeatureFlags.TPMFeatureFlagsEAX) result.eax;
+			if (information.Cpu.MaxCpuIdFeatureLevel >= 0x1f)
+			{
+				GatherNumberOfPhysicalCores(ref information);
 			}
-
-			if (information.Cpu.MaxCpuIdFeatureLevel >= 11)
+			else if (information.Cpu.MaxCpuIdFeatureLevel >= 11)
 			{
-				var threads = new List<Task>();
-				var cores = 0u;
-
-				for (var i = 0; i < information.Cpu.LogicalCores; i++)
-				{
-					threads.Add(Util.RunAffinity(1uL << i, () =>
-					{
-						Opcode.Cpuid(out var result, 11, 0);
-
-						if ((result.edx & 0b1) != 1)
-						{
-							cores++;
-						}
-					}));
-				}
-
-				Task.WaitAll(threads.ToArray());
-				information.Cpu.PhysicalCores = cores;
-			}
-
-			if (information.Cpu.MaxCpuIdExtendedFeatureLevel >= 1)
-			{
-				Opcode.Cpuid(out var result, 0x80000001, 0);
-
-				information.Cpu.IntelFeatureFlags.ExtendedFeatureFlagsF81One =
-					(MachineInformation.IntelFeatureFlags.ExtendedFeatureFlagsF81ECX) result.ecx;
-				information.Cpu.IntelFeatureFlags.ExtendedFeatureFlagsF81Two =
-					(MachineInformation.IntelFeatureFlags.ExtendedFeatureFlagsF81EDX) result.edx;
+				GatherNumberOfPhysicalCoresLegacy(ref information);
 			}
 
 			if (information.Cpu.MaxCpuIdExtendedFeatureLevel >= 4)
 			{
-				Opcode.Cpuid(out var partOne, 0x80000002, 0);
-				Opcode.Cpuid(out var partTwo, 0x80000003, 0);
-				Opcode.Cpuid(out var partThree, 0x80000004, 0);
-
-				var results = new[] {partOne, partTwo, partThree};
-				var sb = new StringBuilder();
-
-				foreach (var res in results)
-				{
-					sb.Append(string.Format("{0}{1}{2}{3}",
-						string.Join("", $"{res.eax:X}".HexStringToString().Reverse()),
-						string.Join("", $"{res.ebx:X}".HexStringToString().Reverse()),
-						string.Join("", $"{res.ecx:X}".HexStringToString().Reverse()),
-						string.Join("", $"{res.edx:X}".HexStringToString().Reverse())));
-				}
-
-				information.Cpu.Name = sb.ToString();
+				GatherCpuName(ref information);
 			}
 
-			if (information.Cpu.MaxCpuIdExtendedFeatureLevel >= 7)
-			{
-				Opcode.Cpuid(out var result, 0x80000001, 0);
-
-				information.Cpu.IntelFeatureFlags.FeatureFlagsApm =
-					(MachineInformation.IntelFeatureFlags.FeatureFlagsAPM) result.edx;
-			}
-
-			GatherPerCoreInformation(ref information);
+			GatherCacheTopology(ref information);
 		}
 
 		public bool Available(MachineInformation information)
@@ -93,7 +40,7 @@ namespace HardwareInformation.Providers
 			        RuntimeInformation.ProcessArchitecture == Architecture.X64);
 		}
 
-		private void GatherPerCoreInformation(ref MachineInformation information)
+		private void GatherCacheTopology(ref MachineInformation information)
 		{
 			var threads = new List<Task>();
 			var caches = information.Cpu.Caches;
@@ -170,6 +117,115 @@ namespace HardwareInformation.Providers
 			}
 
 			information.Cpu.Caches = caches;
+		}
+
+		private void GatherNumberOfPhysicalCores(ref MachineInformation information)
+		{
+			var ecx = 0u;
+			var apicIds = new Dictionary<uint, uint>();
+
+			while (true)
+			{
+				Opcode.Cpuid(out var result, 0x1f, ecx);
+
+				var type = Util.ExtractBits(result.ecx, 8, 15);
+
+				if (type == 0)
+				{
+					break;
+				}
+
+				if (type > 1)
+				{
+					continue;
+				}
+
+				var shift = Util.ExtractBits(result.eax, 0, 4);
+				var coreApicId = result.edx >> (int) shift;
+
+				if (apicIds.ContainsKey(coreApicId))
+				{
+					apicIds[coreApicId]++;
+				}
+				else
+				{
+					apicIds.Add(coreApicId, 1);
+				}
+			}
+
+			information.Cpu.PhysicalCores = (uint) apicIds.Count;
+		}
+
+		private void GatherNumberOfPhysicalCoresLegacy(ref MachineInformation information)
+		{
+			var threads = new List<Task>();
+			var cores = 0u;
+
+			for (var i = 0; i < information.Cpu.LogicalCores; i++)
+			{
+				threads.Add(Util.RunAffinity(1uL << i, () =>
+				{
+					Opcode.Cpuid(out var result, 11, 0);
+
+					if ((result.edx & 0b1) != 1)
+					{
+						cores++;
+					}
+				}));
+			}
+
+			Task.WaitAll(threads.ToArray());
+			information.Cpu.PhysicalCores = cores;
+		}
+
+		private void GatherCpuName(ref MachineInformation information)
+		{
+			Opcode.Cpuid(out var partOne, 0x80000002, 0);
+			Opcode.Cpuid(out var partTwo, 0x80000003, 0);
+			Opcode.Cpuid(out var partThree, 0x80000004, 0);
+
+			var results = new[] {partOne, partTwo, partThree};
+			var sb = new StringBuilder();
+
+			foreach (var res in results)
+			{
+				sb.Append(string.Format("{0}{1}{2}{3}",
+					string.Join("", $"{res.eax:X}".HexStringToString().Reverse()),
+					string.Join("", $"{res.ebx:X}".HexStringToString().Reverse()),
+					string.Join("", $"{res.ecx:X}".HexStringToString().Reverse()),
+					string.Join("", $"{res.edx:X}".HexStringToString().Reverse())));
+			}
+
+			information.Cpu.Name = sb.ToString();
+		}
+
+		private void GatherFeatureFlags(ref MachineInformation information)
+		{
+			if (information.Cpu.MaxCpuIdExtendedFeatureLevel >= 1)
+			{
+				Opcode.Cpuid(out var result, 0x80000001, 0);
+
+				information.Cpu.IntelFeatureFlags.ExtendedFeatureFlagsF81One =
+					(MachineInformation.IntelFeatureFlags.ExtendedFeatureFlagsF81ECX) result.ecx;
+				information.Cpu.IntelFeatureFlags.ExtendedFeatureFlagsF81Two =
+					(MachineInformation.IntelFeatureFlags.ExtendedFeatureFlagsF81EDX) result.edx;
+			}
+
+			if (information.Cpu.MaxCpuIdFeatureLevel >= 6)
+			{
+				Opcode.Cpuid(out var result, 6, 0);
+
+				information.Cpu.IntelFeatureFlags.TPMFeatureFlags =
+					(MachineInformation.IntelFeatureFlags.TPMFeatureFlagsEAX) result.eax;
+			}
+
+			if (information.Cpu.MaxCpuIdExtendedFeatureLevel >= 7)
+			{
+				Opcode.Cpuid(out var result, 0x80000001, 0);
+
+				information.Cpu.IntelFeatureFlags.FeatureFlagsApm =
+					(MachineInformation.IntelFeatureFlags.FeatureFlagsAPM) result.edx;
+			}
 		}
 	}
 }
