@@ -19,7 +19,7 @@ Download from [Nuget](https://www.nuget.org/packages/HardwareInformation/) via y
 
 Get hardware information from the gatherer
 
-`MachinInformation info = MachineInformationGatherer.GatherInformation(bool skipSpeedTest = false)`
+`MachinInformation info = MachineInformationGatherer.GatherInformation(bool skipClockspeedTest = true)`
 
 Result is cached internally so don't worry about calling it multiple times
 
