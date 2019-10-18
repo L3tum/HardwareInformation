@@ -14,6 +14,20 @@ namespace HardwareInformation.Providers
 	{
 		public void GatherInformation(ref MachineInformation information)
 		{
+            if (!File.Exists("/proc/cpuinfo"))
+            {
+                return;
+            }
+
+            try
+            {
+                File.OpenRead("/proc/cpuinfo").Dispose();
+            }
+            catch (Exception)
+            {
+                return;
+            }
+
 			var info = File.ReadAllLines("/proc/cpuinfo");
 			var modelNameRegex = new Regex(@"^model name\s+:\s+(.+)");
 			var cpuSpeedRegex = new Regex(@"^cpu MHz\s+:\s+(.+)");
