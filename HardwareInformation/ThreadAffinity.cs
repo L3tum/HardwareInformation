@@ -16,9 +16,11 @@ namespace HardwareInformation
 			if (mask == 0)
 				return 0;
 
-			if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux) || RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+            var returnMask = 0xffffffuL;
+
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
 			{
-				// Unix
+				// Unix/Posix
 				ulong result = 0;
 				if (NativeMethods.sched_getaffinity(0, (IntPtr) Marshal.SizeOf(result),
 					    ref result) != 0)
@@ -27,9 +29,13 @@ namespace HardwareInformation
 					    ref mask) != 0)
 					return 0;
 				return result;
-			} // Windows
-
-			var returnMask = 0xffffffuL;
+			} else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+            {
+                // OSX
+                return returnMask;
+            }
+            
+            // Windows
 			var threads = Process.GetCurrentProcess().Threads;
 
 			foreach (ProcessThread processThread in threads)
@@ -91,13 +97,31 @@ namespace HardwareInformation
 			[DllImport(KERNEL, CallingConvention = CallingConvention.Winapi)]
 			public static extern int GetLastError();
 
-			[DllImport(LIBC)]
+            /// <summary>
+            /// If pid is zero, then the calling thread is used.
+            /// </summary>
+            /// <param name="pid"></param>
+            /// <param name="maskSize"></param>
+            /// <param name="mask"></param>
+            /// <returns></returns>
+           [DllImport(LIBC)]
 			public static extern int sched_getaffinity(int pid, IntPtr maskSize,
 				ref ulong mask);
 
-			[DllImport(LIBC)]
+            /// <summary>
+            /// If pid is zero, then the calling thread is used.
+            /// </summary>
+            /// <param name="pid"></param>
+            /// <param name="maskSize"></param>
+            /// <param name="mask"></param>
+            /// <returns></returns>
+            [DllImport(LIBC)]
 			public static extern int sched_setaffinity(int pid, IntPtr maskSize,
 				ref ulong mask);
-		}
+
+            [DllImport(LIBC, CharSet = CharSet.Unicode)]
+            public static extern int sysctlbyname(string function, ref Int32 coreCount, ref Int32 length, int newP = 0, int newPLength = 0);
+
+        }
 	}
 }
