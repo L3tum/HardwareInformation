@@ -10,7 +10,7 @@ namespace HardwareInformation.Providers
 	{
 		public void GatherInformation(ref MachineInformation information)
 		{
-			if (information.Cpu.Name == default || information.Cpu.NormalClockSpeed == default)
+			if (information.Cpu.Name == default || information.Cpu.NormalClockSpeed == default || information.Cpu.Name == information.Cpu.Caption)
 			{
 				using (var p = Util.StartProcess("sysctl", "-n machdep.cpu.brand_string"))
 				{

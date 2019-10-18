@@ -23,7 +23,7 @@ namespace HardwareInformation.Providers
 					{
 						case "Name":
 						{
-							if (information.Cpu.Name == default)
+							if (information.Cpu.Name == default || information.Cpu.Name == information.Cpu.Caption)
 							{
 								information.Cpu.Name = propertyData.Value.ToString().Trim();
 							}

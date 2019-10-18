@@ -24,7 +24,7 @@ namespace HardwareInformation.Providers
 			{
 				var match = modelNameRegex.Match(s);
 
-				if (match.Success && information.Cpu.Name == default)
+				if (match.Success && (information.Cpu.Name == default || information.Cpu.Name == information.Cpu.Caption))
 				{
 					information.Cpu.Name = match.Groups[1].Value.Trim();
 
