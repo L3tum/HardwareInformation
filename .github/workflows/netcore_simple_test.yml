@@ -9,7 +9,7 @@ jobs:
       matrix:
         os: [ubuntu-18.04, windows-latest, macOS-latest]
         dotnet: [ '3.0.100' ]
-    name: Dotnet ${{ matrix.dotnet }} build
+    name: Dotnet ${{ matrix.dotnet }} build on ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v1
       - name: Setup dotnet
