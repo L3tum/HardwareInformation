@@ -16,6 +16,7 @@
 
   <PropertyGroup>
     <DocumentationFile>bin\$(Configuration)\$(AssemblyName).xml</DocumentationFile>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>

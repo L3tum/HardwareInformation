@@ -8,57 +8,12 @@ using Mono.Unix.Native;
 
 namespace HardwareInformation
 {
-	public static class Opcode
+	internal static class Opcode
 	{
-		[UnmanagedFunctionPointer(CallingConvention.StdCall)]
-		public delegate bool CpuidDelegate(out Result result, uint eax, uint ecx);
-
-		[UnmanagedFunctionPointer(CallingConvention.StdCall)]
-		public delegate ulong RdtscDelegate();
-
-		[Flags]
-		public enum AllocationType : uint
-		{
-			COMMIT = 0x1000,
-			RESERVE = 0x2000,
-			RESET = 0x80000,
-			LARGE_PAGES = 0x20000000,
-			PHYSICAL = 0x400000,
-			TOP_DOWN = 0x100000,
-			WRITE_WATCH = 0x200000
-		}
-
-		[Flags]
-		public enum FreeType
-		{
-			DECOMMIT = 0x4000,
-			RELEASE = 0x8000
-		}
-
-		[Flags]
-		public enum MemoryProtection : uint
-		{
-			EXECUTE = 0x10,
-			EXECUTE_READ = 0x20,
-			EXECUTE_READWRITE = 0x40,
-			EXECUTE_WRITECOPY = 0x80,
-			NOACCESS = 0x01,
-			READONLY = 0x02,
-			READWRITE = 0x04,
-			WRITECOPY = 0x08,
-			GUARD = 0x100,
-			NOCACHE = 0x200,
-			WRITECOMBINE = 0x400
-		}
-
 		private static IntPtr codeBuffer;
 		private static ulong size;
 
-		public static RdtscDelegate Rdtsc;
-
-		// unsigned __int64 __stdcall rdtsc() {
-		//   return __rdtsc();
-		// }
+		internal static RdtscDelegate Rdtsc;
 
 		private static readonly byte[] RDTSC_32 =
 		{
@@ -74,20 +29,7 @@ namespace HardwareInformation
 			0xC3 // ret  
 		};
 
-		public static CpuidDelegate Cpuid;
-
-
-		// void __stdcall cpuidex(unsigned int index, unsigned int ecxValue, 
-		//   unsigned int* eax, unsigned int* ebx, unsigned int* ecx, 
-		//   unsigned int* edx)
-		// {
-		//   int info[4];	
-		//   __cpuidex(info, index, ecxValue);
-		//   *eax = info[0];
-		//   *ebx = info[1];
-		//   *ecx = info[2];
-		//   *edx = info[3];
-		// }
+		internal static CpuidDelegate Cpuid;
 
 		private static readonly byte[] CPUID_32 =
 		{
@@ -135,9 +77,9 @@ namespace HardwareInformation
 			0xc3 // retq
 		};
 
-		public static bool IsOpen { get; private set; }
+		internal static bool IsOpen { get; private set; }
 
-		public static void Open()
+		internal static void Open()
 		{
 			if (IsOpen) return;
 
@@ -188,12 +130,12 @@ namespace HardwareInformation
 				cpuidAddress, typeof(CpuidDelegate)) as CpuidDelegate;
 		}
 
-		public static void Close()
+		internal static void Close()
 		{
 			Rdtsc = null;
 			Cpuid = null;
 
-			if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+			if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux) || RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
 			{
 				// Unix
 				Syscall.munmap(codeBuffer, size);
@@ -206,13 +148,54 @@ namespace HardwareInformation
 			}
 		}
 
-		[StructLayout(LayoutKind.Sequential)]
-		public struct Result
+		[UnmanagedFunctionPointer(CallingConvention.StdCall)]
+		internal delegate bool CpuidDelegate(out Result result, uint eax, uint ecx);
+
+		[UnmanagedFunctionPointer(CallingConvention.StdCall)]
+		internal delegate ulong RdtscDelegate();
+
+		[Flags]
+		internal enum AllocationType : uint
 		{
-			public uint eax;
-			public uint ebx;
-			public uint ecx;
-			public uint edx;
+			COMMIT = 0x1000,
+			RESERVE = 0x2000,
+			RESET = 0x80000,
+			LARGE_PAGES = 0x20000000,
+			PHYSICAL = 0x400000,
+			TOP_DOWN = 0x100000,
+			WRITE_WATCH = 0x200000
+		}
+
+		[Flags]
+		internal enum FreeType
+		{
+			DECOMMIT = 0x4000,
+			RELEASE = 0x8000
+		}
+
+		[Flags]
+		internal enum MemoryProtection : uint
+		{
+			EXECUTE = 0x10,
+			EXECUTE_READ = 0x20,
+			EXECUTE_READWRITE = 0x40,
+			EXECUTE_WRITECOPY = 0x80,
+			NOACCESS = 0x01,
+			READONLY = 0x02,
+			READWRITE = 0x04,
+			WRITECOPY = 0x08,
+			GUARD = 0x100,
+			NOCACHE = 0x200,
+			WRITECOMBINE = 0x400
+		}
+
+		[StructLayout(LayoutKind.Sequential)]
+		internal struct Result
+		{
+			internal uint eax;
+			internal uint ebx;
+			internal uint ecx;
+			internal uint edx;
 
 			public override string ToString()
 			{
@@ -225,11 +208,11 @@ namespace HardwareInformation
 			private const string KERNEL = "kernel32.dll";
 
 			[DllImport(KERNEL, CallingConvention = CallingConvention.Winapi)]
-			public static extern IntPtr VirtualAlloc(IntPtr lpAddress, UIntPtr dwSize,
+			internal static extern IntPtr VirtualAlloc(IntPtr lpAddress, UIntPtr dwSize,
 				AllocationType flAllocationType, MemoryProtection flProtect);
 
 			[DllImport(KERNEL, CallingConvention = CallingConvention.Winapi)]
-			public static extern bool VirtualFree(IntPtr lpAddress, UIntPtr dwSize,
+			internal static extern bool VirtualFree(IntPtr lpAddress, UIntPtr dwSize,
 				FreeType dwFreeType);
 		}
 	}

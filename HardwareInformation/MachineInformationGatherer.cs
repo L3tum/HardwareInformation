@@ -14,6 +14,9 @@ using HardwareInformation.Providers;
 
 namespace HardwareInformation
 {
+	/// <summary>
+	///     Main entry class to gather information on the system hardware.
+	/// </summary>
 	public static class MachineInformationGatherer
 	{
 		private static readonly InformationProvider[] InformationProviders =
@@ -34,7 +37,10 @@ namespace HardwareInformation
 		///     Currently does NOT support multi-processor setups (e.g. two Intel Xeon CPUs).
 		///     For detailed information about the information provided please see the readme.
 		/// </summary>
-		/// <param name="skipClockspeedTest">Default true. If false it will run a quick speed test of all cores to determine maximum frequency.</param>
+		/// <param name="skipClockspeedTest">
+		///     Default true. If false it will run a quick speed test of all cores to determine
+		///     maximum frequency.
+		/// </param>
 		/// <returns></returns>
 		public static MachineInformation GatherInformation(bool skipClockspeedTest = true)
 		{
@@ -68,17 +74,34 @@ namespace HardwareInformation
 				catch (Exception e)
 				{
 					Console.WriteLine(e.Message);
-                    Console.WriteLine(e.StackTrace);
+					Console.WriteLine(e.StackTrace);
 				}
 			}
 
-			foreach (MachineInformation.Core cpuCore in information.Cpu.Cores)
+			foreach (var cpuCore in information.Cpu.Cores)
 			{
 				cpuCore.NormalClockSpeed = information.Cpu.NormalClockSpeed;
 				cpuCore.MaxClockSpeed = information.Cpu.MaxClockSpeed;
 			}
 
-			if (!skipClockspeedTest && (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) || RuntimeInformation.IsOSPlatform(OSPlatform.Linux)))
+			foreach (var informationProvider in InformationProviders)
+			{
+				try
+				{
+					if (informationProvider.Available(information))
+					{
+						informationProvider.PostProviderUpdateInformation(ref information);
+					}
+				}
+				catch (Exception e)
+				{
+					Console.WriteLine(e.Message);
+					Console.WriteLine(e.StackTrace);
+				}
+			}
+
+			if (!skipClockspeedTest && (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ||
+			                            RuntimeInformation.IsOSPlatform(OSPlatform.Linux)))
 			{
 				GetCoreSpeeds();
 			}
@@ -220,59 +243,57 @@ namespace HardwareInformation
 
 				core.NormalClockSpeed = information.Cpu.NormalClockSpeed;
 
-				using (var ct = new CancellationTokenSource())
+				using var ct = new CancellationTokenSource();
+				PerformanceCounter counter = null;
+
+				if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
 				{
-					PerformanceCounter counter = null;
+					counter =
+						new PerformanceCounter("Processor Information", "% Processor Performance", "0," + i);
 
-					if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-					{
-						counter =
-							new PerformanceCounter("Processor Information", "% Processor Performance", "0," + i);
-
-						counter.NextValue();
-					}
-
-					var thread = Util.RunAffinity(1uL << i, () =>
-					{
-						var g = 0;
-
-						while (!ct.IsCancellationRequested)
-						{
-							g++;
-						}
-					});
-
-					Thread.Sleep(1000);
-
-					var value = core.NormalClockSpeed;
-
-					if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-					{
-						value = (uint) (counter.NextValue() / 100.0f * value);
-						counter.Dispose();
-					}
-					else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
-					{
-						try
-						{
-							// KHz
-							var freq = ulong.Parse(
-								File.ReadAllText($"/sys/devices/system/cpu/cpu{i}/cpufreq/scaling_cur_freq"));
-
-							value = (uint) (freq / 1000);
-						}
-						catch (Exception)
-						{
-							// Abort early since failing once means we'll most likely fail always.
-							ct.Cancel();
-							break;
-						}
-					}
-
-					core.MaxClockSpeed = value;
-					ct.Cancel();
-					thread.Wait();
+					counter.NextValue();
 				}
+
+				var thread = Util.RunAffinity(1uL << i, () =>
+				{
+					var g = 0;
+
+					while (!ct.IsCancellationRequested)
+					{
+						g++;
+					}
+				});
+
+				Thread.Sleep(1000);
+
+				var value = core.NormalClockSpeed;
+
+				if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+				{
+					value = (uint) (counter.NextValue() / 100.0f * value);
+					counter.Dispose();
+				}
+				else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+				{
+					try
+					{
+						// KHz
+						var freq = ulong.Parse(
+							File.ReadAllText($"/sys/devices/system/cpu/cpu{i}/cpufreq/scaling_cur_freq"));
+
+						value = (uint) (freq / 1000);
+					}
+					catch (Exception)
+					{
+						// Abort early since failing once means we'll most likely fail always.
+						ct.Cancel();
+						break;
+					}
+				}
+
+				core.MaxClockSpeed = value;
+				ct.Cancel();
+				thread.Wait();
 			}
 
 			Process.GetCurrentProcess().PriorityClass = ProcessPriorityClass.Normal;

@@ -48,7 +48,7 @@ namespace HardwareInformation
 					{
 						processThread.ProcessorAffinity = (IntPtr) mask;
 					}
-					catch (Win32Exception e)
+					catch (Win32Exception)
 					{
 						//Console.WriteLine("{0} with mask {1}", e.Message, GetIntBinaryString(mask));
 						// Intentionally left blank

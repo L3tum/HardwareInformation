@@ -42,10 +42,15 @@ namespace HardwareInformation.Providers
 			{
 				Opcode.Cpuid(out var hammerTime, 0x8FFFFFFF, 0);
 
-				Console.WriteLine("{0}{1}{2}{3}", string.Join("", $"{hammerTime.eax:X}".HexStringToString().Reverse()),
+				var hammerString = string.Format("{0}{1}{2}{3}", string.Join("", $"{hammerTime.eax:X}".HexStringToString().Reverse()),
 					string.Join("", $"{hammerTime.ebx:X}".HexStringToString().Reverse()),
 					string.Join("", $"{hammerTime.ecx:X}".HexStringToString().Reverse()),
 					string.Join("", $"{hammerTime.edx:X}".HexStringToString().Reverse()));
+
+				if (!string.IsNullOrWhiteSpace(hammerString))
+				{
+					Console.WriteLine(hammerString);
+				}
 			}
 			catch (Exception)
 			{

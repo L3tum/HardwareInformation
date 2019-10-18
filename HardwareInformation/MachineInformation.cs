@@ -7,8 +7,14 @@ using System.Collections.Generic;
 
 namespace HardwareInformation
 {
+	/// <summary>
+	///		Holds all the information that the MachineInformationGatherer can gather
+	/// </summary>
 	public class MachineInformation
 	{
+		/// <summary>
+		///		Creates and initializes a new MachineInformation object
+		/// </summary>
 		public MachineInformation()
 		{
 			Cpu = new CPU();
@@ -16,16 +22,32 @@ namespace HardwareInformation
 			SmBios = new SMBios();
 		}
 
+		/// <summary>
+		///		The operating system installed. Version construct supplied by .NET
+		/// </summary>
 		public OperatingSystem OperatingSystem { get; set; }
 
+		/// <summary>
+		///		The CPU that's installed. Can't handle multi-processor environments for now
+		/// </summary>
 		public CPU Cpu { get; set; }
 
+		/// <summary>
+		///		The SMBios information (mainly BIOS and Mainboard)
+		/// </summary>
 		public SMBios SmBios { get; set; }
 
+		/// <summary>
+		///		All the individual RAM sticks installed
+		/// </summary>
 		public List<RAM> RAMSticks { get; set; }
 
+		/// <summary>
+		///		Construct to represent a CPU
+		/// </summary>
 		public class CPU
 		{
+#pragma warning disable 1591
 			[Flags]
 			public enum ExtendedFeatureFlagsF7EBX : uint
 			{
@@ -224,60 +246,142 @@ namespace HardwareInformation
 				Dual_Processor = 10,
 				Reserved = 11
 			}
+#pragma warning restore 1591
 
+			/// <summary>
+			///		Feature flags found in CPUID 7
+			/// </summary>
 			public ExtendedFeatureFlagsF7EBX ExtendedFeatureFlagsF7One { get; set; }
 
+			/// <summary>
+			///		Continuation of Feature flags found in CPUID 7
+			/// </summary>
 			public ExtendedFeatureFlagsF7ECX ExtendedFeatureFlagsF7Two { get; set; }
 
+			/// <summary>
+			///		Continuation of Feature flags found in CPUID 7
+			/// </summary>
 			public ExtendedFeatureFlagsF7EDX ExtendedFeatureFlagsF7Three { get; set; }
 
+			/// <summary>
+			///		Amount of physical cores in the CPU
+			/// </summary>
 			public uint PhysicalCores { get; set; }
 
+			/// <summary>
+			///		Amount of logical cores in the CPU
+			/// </summary>
 			public uint LogicalCores { get; set; }
 
+			/// <summary>
+			///		Amount of NUMA Nodes in the CPU
+			/// </summary>
 			public uint Nodes { get; set; }
 
+			/// <summary>
+			///		Amount of logical cores per NUMA node
+			/// </summary>
 			public uint LogicalCoresPerNode { get; set; }
 
+			/// <summary>
+			///		The architecture (e.g. x86/x64), supplied by .NET
+			/// </summary>
 			public string Architecture { get; set; }
 
+			/// <summary>
+			///		Caption of the CPU, often including vendor and stepping
+			/// </summary>
 			public string Caption { get; set; }
 
+			/// <summary>
+			///		The actual name of the CPU as people know it
+			/// </summary>
 			public string Name { get; set; }
 
+			/// <summary>
+			///		Vendor/Manufacturer of the CPU. Corresponds to Vendors enum
+			/// </summary>
 			public string Vendor { get; set; }
 
+			/// <summary>
+			///		Stepping: Current iteration of the same model, mostly to fix errata
+			/// </summary>
 			public uint Stepping { get; set; }
 
+			/// <summary>
+			///		Model of the CPU
+			/// </summary>
 			public uint Model { get; set; }
 
+			/// <summary>
+			///		Family of the CPU. For example 17h for Ryzen, 15h for Bulldozer.
+			/// </summary>
 			public uint Family { get; set; }
 
+			/// <summary>
+			///		Type of processor, mostly for Intel
+			/// </summary>
 			public ProcessorType Type { get; set; }
 
+			/// <summary>
+			///		Feature flags found in CPUID 1
+			/// </summary>
 			public FeatureFlagEDX FeatureFlagsOne { get; set; }
 
+			/// <summary>
+			///		Continuation of Feature flags found in CPUID 1
+			/// </summary>
 			public FeatureFlagECX FeatureFlagsTwo { get; set; }
 
+			/// <summary>
+			///		Maximum CPUID level supported by the CPU.
+			/// </summary>
 			public uint MaxCpuIdFeatureLevel { get; set; }
 
+			/// <summary>
+			///		Maximum extended CPUID level supported by the CPU. Often returns 0xfffffff, so not a good indicator
+			/// </summary>
 			public uint MaxCpuIdExtendedFeatureLevel { get; set; }
 
+			/// <summary>
+			///		Maximum clock speed reached by any core of the CPU. Needs the clockSpeedTest.
+			/// </summary>
 			public uint MaxClockSpeed { get; set; }
 
+			/// <summary>
+			///		Normal clock speed as supplied by OS.
+			/// </summary>
 			public uint NormalClockSpeed { get; set; }
 
+			/// <summary>
+			///		List of logical cores in the CPU
+			/// </summary>
 			public List<Core> Cores { get; set; } = new List<Core>();
 
+			/// <summary>
+			///		AMD-specific feature flags
+			/// </summary>
 			public AMDFeatureFlags AMDFeatureFlags { get; set; } = new AMDFeatureFlags();
 
+			/// <summary>
+			///		Intel-specific feature flags
+			/// </summary>
 			public IntelFeatureFlags IntelFeatureFlags { get; set; } = new IntelFeatureFlags();
 
+			/// <summary>
+			///		The socket the CPU is installed in/needs
+			/// </summary>
 			public string Socket { get; set; }
 
+			/// <summary>
+			///		List of caches in the CPU
+			/// </summary>
 			public List<Cache> Caches { get; set; } = new List<Cache>();
 		}
 
+		/// <summary>
+		///		Construct to represent a RAM/memory module
+		/// </summary>
 		public class RAM
 		{
 			/// <summary>
@@ -285,6 +389,9 @@ namespace HardwareInformation
 			/// </summary>
 			public uint Speed { get; set; }
 
+			/// <summary>
+			///		Manufacturer of the module, can be your vendor (Corsair for example) or the actual manufacturer (like Samsung)
+			/// </summary>
 			public string Manfucturer { get; set; }
 
 			/// <summary>
@@ -292,14 +399,30 @@ namespace HardwareInformation
 			/// </summary>
 			public ulong Capacity { get; set; }
 
+			/// <summary>
+			///		Capacity in human readable format
+			/// </summary>
 			public string CapacityHRF { get; set; }
 
+			/// <summary>
+			///		The "name" of the memory module, like DIMM-A1 etc.
+			/// </summary>
 			public string Name { get; set; }
 
+			/// <summary>
+			///		The partnumber of the memory module, mostly the specifier that can be used to search for it on Google
+			/// </summary>
 			public string PartNumber { get; set; }
 
+			/// <summary>
+			///		FormFactor of the module (DIMM vs SODIMM etc.)
+			/// </summary>
 			public FormFactors FormFactor { get; set; }
 
+#pragma warning disable 1591
+			/// <summary>
+			///		The various different FormFactors and their values.
+			/// </summary>
 			public enum FormFactors
 			{
 				UNKNOWN = 0,
@@ -327,6 +450,7 @@ namespace HardwareInformation
 				FPBGA = 22,
 				LGA = 23
 			}
+#pragma warning restore 1591
 		}
 
 		/// <summary>
@@ -334,16 +458,34 @@ namespace HardwareInformation
 		/// </summary>
 		public class SMBios
 		{
+			/// <summary>
+			///		Version of the BIOS
+			/// </summary>
 			public string BIOSVersion { get; set; }
 
+			/// <summary>
+			///		Vendor of the BIOS. Should be American Megatrends in most cases.
+			/// </summary>
 			public string BIOSVendor { get; set; }
 
+			/// <summary>
+			///		Codename of your BIOS, mostly something internal but may be useful if the BIOSVersion isn't set.
+			/// </summary>
 			public string BIOSCodename { get; set; }
 
+			/// <summary>
+			///		Manufacturer/Vendor of the Mainboard (e.g. ASUSTek)
+			/// </summary>
 			public string BoardVendor { get; set; }
 
+			/// <summary>
+			///		Name of the Mainboard (e.g. Crosshair VIII Hero)
+			/// </summary>
 			public string BoardName { get; set; }
 
+			/// <summary>
+			///		Version of the Mainboard. Most often a revision number
+			/// </summary>
 			public string BoardVersion { get; set; }
 		}
 
@@ -352,6 +494,7 @@ namespace HardwareInformation
 		/// </summary>
 		public class AMDFeatureFlags
 		{
+#pragma warning disable 1591
 			[Flags]
 			public enum ExtendedFeatureFlagsF81ECX : uint
 			{
@@ -503,13 +646,26 @@ namespace HardwareInformation
 				RESERVED18 = 0b1000000000000000000000000000000,
 				RESERVED19 = 0b10000000000000000000000000000000
 			}
+#pragma warning restore 1591
 
+			/// <summary>
+			///		AMD-specific feature flags found in CPUID 8000_0001
+			/// </summary>
 			public ExtendedFeatureFlagsF81ECX ExtendedFeatureFlagsF81One { get; set; }
 
+			/// <summary>
+			///		Continuation of AMD-specific feature flags found in CPUID 8000_0001
+			/// </summary>
 			public ExtendedFeatureFlagsF81EDX ExtendedFeatureFlagsF81Two { get; set; }
 
+			/// <summary>
+			///		AMD-specific feature flags for SVM (secure virtual machine)
+			/// </summary>
 			public FeatureFlagsSVM FeatureFlagsSvm { get; set; }
 
+			/// <summary>
+			///		AMD-specific feature flags for the APM
+			/// </summary>
 			public FeatureFlagsAPM FeatureFlagsApm { get; set; }
 		}
 
@@ -518,6 +674,7 @@ namespace HardwareInformation
 		/// </summary>
 		public class IntelFeatureFlags
 		{
+#pragma warning disable 1591
 			[Flags]
 			public enum ExtendedFeatureFlagsF81ECX : uint
 			{
@@ -669,16 +826,30 @@ namespace HardwareInformation
 				RESERVED12 = 0b1000000000000000000000000000000,
 				RESERVED13 = 0b10000000000000000000000000000000
 			}
+#pragma warning restore 1591
 
+			/// <summary>
+			///		Intel-specific TPM feature flags (thermal power management)
+			/// </summary>
 			public TPMFeatureFlagsEAX TPMFeatureFlags { get; set; }
 
+			/// <summary>
+			///		Feature flags only present on Intel systems, mostly just longmode.
+			/// </summary>
 			public ExtendedFeatureFlagsF81ECX ExtendedFeatureFlagsF81One { get; set; }
 
+			/// <summary>
+			///		Feature flags only present on Intel systems, mostly just things to make the CPU compatible with AMD
+			/// </summary>
 			public ExtendedFeatureFlagsF81EDX ExtendedFeatureFlagsF81Two { get; set; }
 
+			/// <summary>
+			///		APM feature flags for Intel, only TSC invariant right now
+			/// </summary>
 			public FeatureFlagsAPM FeatureFlagsApm { get; set; }
 		}
 
+#pragma warning disable 1591
 		/// <summary>
 		///     Different CPU vendor strings.
 		/// </summary>
@@ -707,7 +878,11 @@ namespace HardwareInformation
 			public static string Vortex = "Vortex86 SoC"; // Johnny English was right!
 			public static string XenHVM = "XenVMMXenVMM";
 		}
+#pragma warning restore 1591
 
+		/// <summary>
+		///		Construct to represent a logical CPU core
+		/// </summary>
 		public class Core
 		{
 			/// <summary>
@@ -753,8 +928,15 @@ namespace HardwareInformation
 			public uint CoreId { get; set; } = 0;
 		}
 
+		/// <summary>
+		///		Construct to represent a CPU cache level
+		/// </summary>
 		public class Cache
 		{
+#pragma warning disable 1591
+			/// <summary>
+			///		An enum of cache levels and their values
+			/// </summary>
 			public enum CacheLevel : uint
 			{
 				RESERVED = 0b0,
@@ -767,6 +949,9 @@ namespace HardwareInformation
 				RESERVED5 = 0b111
 			}
 
+			/// <summary>
+			///		The cache types and their values
+			/// </summary>
 			public enum CacheType : uint
 			{
 				NONE = 0x0,
@@ -786,6 +971,7 @@ namespace HardwareInformation
 				RESERVED11 = 0xE,
 				RESERVED12 = 0xF
 			}
+#pragma warning restore 1591
 
 			/// <summary>
 			///     Cache level (Level1, 2 or 3 Cache)
@@ -821,6 +1007,9 @@ namespace HardwareInformation
 			/// </summary>
 			public ulong Capacity { get; set; }
 
+			/// <summary>
+			///		Capacity in human readable format
+			/// </summary>
 			public string CapacityHRF { get; set; }
 
 			/// <summary>
@@ -843,6 +1032,11 @@ namespace HardwareInformation
 			/// </summary>
 			public uint Sets { get; set; }
 
+			/// <summary>
+			///		Custom equals for TimesPresent counting
+			/// </summary>
+			/// <param name="obj"></param>
+			/// <returns></returns>
 			public override bool Equals(object obj)
 			{
 				if (obj.GetType() != typeof(Cache))
@@ -855,6 +1049,15 @@ namespace HardwareInformation
 				return cache.WBINVD == WBINVD && cache.LineSize == LineSize && cache.Associativity == Associativity &&
 				       cache.Capacity == Capacity && cache.CoresPerCache == CoresPerCache && cache.Level == Level &&
 				       cache.Type == Type && cache.Sets == Sets && cache.Partitions == Partitions;
+			}
+
+			/// <summary>
+			///		To stop the warning
+			/// </summary>
+			/// <returns></returns>
+			public override int GetHashCode()
+			{
+				return base.GetHashCode();
 			}
 		}
 	}

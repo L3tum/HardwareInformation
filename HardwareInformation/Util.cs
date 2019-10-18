@@ -32,7 +32,7 @@ namespace HardwareInformation
 			var sb = new StringBuilder();
 			for (var i = 0; i < hexString.Length; i += 2)
 			{
-                var hexChar = "";
+                string hexChar;
 
                 if (i == hexString.Length - 1)
                 {
@@ -60,12 +60,14 @@ namespace HardwareInformation
 
 		internal static Process StartProcess(string cmd, string args)
 		{
-			var psi = new ProcessStartInfo(cmd, args);
-			psi.CreateNoWindow = true;
-			psi.ErrorDialog = false;
-			psi.RedirectStandardError = true;
-			psi.RedirectStandardInput = true;
-			psi.RedirectStandardOutput = true;
+			var psi = new ProcessStartInfo(cmd, args)
+			{
+				CreateNoWindow = true,
+				ErrorDialog = false,
+				RedirectStandardError = true,
+				RedirectStandardInput = true,
+				RedirectStandardOutput = true
+			};
 
 			return Process.Start(psi);
 		}
