@@ -34,10 +34,12 @@ namespace HardwareInformation.Providers
 						// MIND THE SSSSSSSS
 						case "NumberOfEnabledCore":
 						{
-							// Safety check
-							if (information.Cpu.PhysicalCores == default || information.Cpu.PhysicalCores == information.Cpu.LogicalCores)
+                            var val = uint.Parse(propertyData.Value.ToString());
+
+                            // Safety check
+                            if (information.Cpu.PhysicalCores == default || information.Cpu.PhysicalCores == information.Cpu.LogicalCores || (val != 0 && val != information.Cpu.PhysicalCores))
 							{
-								information.Cpu.PhysicalCores = uint.Parse(propertyData.Value.ToString());
+                                information.Cpu.PhysicalCores = val;
 							}
 
 							break;
@@ -45,9 +47,11 @@ namespace HardwareInformation.Providers
 
 						case "NumberOfLogicalProcessors":
 						{
-							if (information.Cpu.LogicalCores == default)
+                            var val = uint.Parse(propertyData.Value.ToString());
+
+                            if (information.Cpu.LogicalCores == default || (val != 0 && val != information.Cpu.LogicalCores))
 							{
-								information.Cpu.LogicalCores = uint.Parse(propertyData.Value.ToString());
+								information.Cpu.LogicalCores = val;
 							}
 
 							break;

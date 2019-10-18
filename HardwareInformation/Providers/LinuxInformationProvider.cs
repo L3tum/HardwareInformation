@@ -42,20 +42,30 @@ namespace HardwareInformation.Providers
 
 				match = physicalCoresRegex.Match(s);
 
-				// Safety check
-				if (match.Success && (information.Cpu.PhysicalCores == default || information.Cpu.PhysicalCores == information.Cpu.LogicalCores))
-				{
-					information.Cpu.PhysicalCores = uint.Parse(match.Groups[1].Value);
+                if (match.Success)
+                {
+                    var val = uint.Parse(match.Groups[1].Value);
 
-					continue;
-				}
+                    // Safety check
+                    if (information.Cpu.PhysicalCores == default || information.Cpu.PhysicalCores == information.Cpu.LogicalCores || (val != 0 && val != information.Cpu.PhysicalCores))
+                    {
+                        information.Cpu.PhysicalCores = val;
+
+                        continue;
+                    }
+                }
 
 				match = logicalCoresRegex.Match(s);
 
-				if (match.Success && information.Cpu.LogicalCores == default)
-				{
-					information.Cpu.LogicalCores = uint.Parse(match.Groups[1].Value);
-				}
+                if (match.Success)
+                {
+                    var val = uint.Parse(match.Groups[1].Value);
+
+                    if (match.Success && information.Cpu.LogicalCores == default || (val != 0 && val != information.Cpu.LogicalCores))
+                    {
+                        information.Cpu.LogicalCores = val;
+                    }
+                }
 			}
 
 			if (information.SmBios.BIOSVersion == default)
