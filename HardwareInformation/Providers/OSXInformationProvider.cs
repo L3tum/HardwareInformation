@@ -1,5 +1,6 @@
 ﻿#region using
 
+using System;
 using System.Runtime.InteropServices;
 
 #endregion
@@ -10,62 +11,89 @@ namespace HardwareInformation.Providers
 	{
 		public void GatherInformation(ref MachineInformation information)
 		{
-			if (information.Cpu.Name == default || information.Cpu.NormalClockSpeed == default || information.Cpu.Name == information.Cpu.Caption)
+			if (information.Cpu.Name == default || information.Cpu.NormalClockSpeed == default ||
+			    information.Cpu.Name == information.Cpu.Caption)
 			{
-				using (var p = Util.StartProcess("sysctl", "-n machdep.cpu.brand_string"))
+				try
 				{
-					using (var sr = p.StandardOutput)
+					using (var p = Util.StartProcess("sysctl", "-n machdep.cpu.brand_string"))
 					{
-						p.WaitForExit();
-
-						var info = sr.ReadToEnd().Trim().Split('@');
-
-						if (info[1].EndsWith("GHz"))
+						using (var sr = p.StandardOutput)
 						{
-							info[1] = (int.Parse(info[1].Replace("GHz", "")) * 1000).ToString();
+							p.WaitForExit();
+
+							var info = sr.ReadToEnd().Trim().Split('@');
+
+							info[1] = info[1].Trim();
+
+							if (info[1].EndsWith("GHz"))
+							{
+								info[1] = ((uint) (double.Parse(info[1].Replace("GHz", "").Replace(" ", "")) * 1000))
+									.ToString();
+							}
+							else if (info[1].EndsWith("KHz"))
+							{
+								info[1] = ((uint) (double.Parse(info[1].Replace("KHz", "")) / 1000)).ToString();
+							}
+							else
+							{
+								info[1] = info[1].Replace("MHz", "").Trim();
+							}
+
+							information.Cpu.Name = info[0];
+							information.Cpu.NormalClockSpeed = uint.Parse(info[1]);
 						}
-
-						if (info[1].EndsWith("KHz"))
-						{
-							info[1] = (int.Parse(info[1].Replace("KHz", "")) / 1000).ToString();
-						}
-
-						info[1] = info[1].Replace("MHz", "").Trim();
-
-						information.Cpu.Name = info[0];
-						information.Cpu.NormalClockSpeed = uint.Parse(info[1]);
 					}
+				}
+				catch (Exception)
+				{
+					// Intentionally left blank
 				}
 			}
 
 			// Safety check
-			if (information.Cpu.PhysicalCores == default || information.Cpu.PhysicalCores == information.Cpu.LogicalCores)
+			if (information.Cpu.PhysicalCores == default ||
+			    information.Cpu.PhysicalCores == information.Cpu.LogicalCores)
 			{
-				using (var p = Util.StartProcess("sysctl", "-n hw.physicalcpu"))
+				try
 				{
-					using (var sr = p.StandardOutput)
+					using (var p = Util.StartProcess("sysctl", "-n hw.physicalcpu"))
 					{
-						p.WaitForExit();
+						using (var sr = p.StandardOutput)
+						{
+							p.WaitForExit();
 
-						var info = sr.ReadToEnd().Trim();
+							var info = sr.ReadToEnd().Trim();
 
-						information.Cpu.PhysicalCores = uint.Parse(info);
+							information.Cpu.PhysicalCores = uint.Parse(info);
+						}
 					}
+				}
+				catch (Exception)
+				{
+					// Intentionally left blank
 				}
 			}
 
 			if (information.Cpu.LogicalCores == default)
 			{
-				using (var p = Util.StartProcess("sysctl", "-n hw.logicalcpu"))
+				try
 				{
-					using (var sr = p.StandardOutput)
+					using (var p = Util.StartProcess("sysctl", "-n hw.logicalcpu"))
 					{
-						p.WaitForExit();
+						using (var sr = p.StandardOutput)
+						{
+							p.WaitForExit();
 
-						var info = sr.ReadToEnd().Trim();
+							var info = sr.ReadToEnd().Trim();
 
-						information.Cpu.LogicalCores = uint.Parse(info);
+							information.Cpu.LogicalCores = uint.Parse(info);
+						}
 					}
+				}
+				catch (Exception)
+				{
+					// Intentionally left blank
 				}
 			}
 		}
