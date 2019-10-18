@@ -16,6 +16,6 @@ jobs:
         with:
           dotnet-version: ${{ matrix.dotnet }}
       - name: Build
-        run: dotnet build -c Release
+        run: dotnet build -c Debug
       - name: Test
-        run: dotnet SimpleGatheringTest/bin/Release/netcoreapp3.0/SimpleGatheringTest.dll
+        run: dotnet SimpleGatheringTest/bin/Debug/netcoreapp3.0/SimpleGatheringTest.dll
