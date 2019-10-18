@@ -27,6 +27,8 @@ namespace HardwareInformation
 
 		private static MachineInformation information;
 
+		private static bool lastSkipClockspeedTest = true;
+
 		/// <summary>
 		///     Gathers lots of information about the running processor.
 		///     Currently does NOT support multi-processor setups (e.g. two Intel Xeon CPUs).
@@ -36,7 +38,7 @@ namespace HardwareInformation
 		/// <returns></returns>
 		public static MachineInformation GatherInformation(bool skipClockspeedTest = true)
 		{
-			if (information != null)
+			if (information != null && lastSkipClockspeedTest == skipClockspeedTest)
 			{
 				return information;
 			}
@@ -47,6 +49,7 @@ namespace HardwareInformation
 				Opcode.Open();
 			}
 
+			lastSkipClockspeedTest = skipClockspeedTest;
 			information = new MachineInformation();
 
 			GetCommonCpuInformation();
