@@ -24,7 +24,7 @@ namespace HardwareInformation
 
 		internal static string HexStringToString(this string hexString)
 		{
-			if (hexString == null || (hexString.Length & 1) == 1)
+			if (hexString == null)
 			{
 				throw new ArgumentException();
 			}
@@ -32,8 +32,27 @@ namespace HardwareInformation
 			var sb = new StringBuilder();
 			for (var i = 0; i < hexString.Length; i += 2)
 			{
-				var hexChar = hexString.Substring(i, 2);
-				sb.Append((char) Convert.ToByte(hexChar, 16));
+                var hexChar = "";
+
+                if (i == hexString.Length - 1)
+                {
+                    hexChar = hexString.Substring(i, 1);
+                }
+                else
+                {
+                    hexChar = hexString.Substring(i, 2);
+                }
+
+                var cha = (char)Convert.ToByte(hexChar, 16);
+
+                if (cha == '\u0000')
+                {
+                    sb.Append(" ");
+                }
+                else
+                {
+                    sb.Append(cha);
+                }
 			}
 
 			return sb.ToString();

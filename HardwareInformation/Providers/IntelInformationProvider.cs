@@ -114,6 +114,11 @@ namespace HardwareInformation.Providers
 				cache.TimesPresent++;
 				cache.TimesPresent /= cache.CoresPerCache;
 				cache.CoresPerCache /= threadsPerCore;
+
+                if(cache.TimesPresent == 0)
+                {
+                    cache.TimesPresent++;
+                }
 			}
 
 			information.Cpu.Caches = caches;
