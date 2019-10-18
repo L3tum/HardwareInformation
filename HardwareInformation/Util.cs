@@ -63,6 +63,9 @@ namespace HardwareInformation
 			var psi = new ProcessStartInfo(cmd, args);
 			psi.CreateNoWindow = true;
 			psi.ErrorDialog = false;
+			psi.RedirectStandardError = true;
+			psi.RedirectStandardInput = true;
+			psi.RedirectStandardOutput = true;
 
 			return Process.Start(psi);
 		}

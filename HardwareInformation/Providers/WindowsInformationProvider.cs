@@ -211,5 +211,10 @@ namespace HardwareInformation.Providers
 		{
 			return RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
 		}
+
+		public void PostProviderUpdateInformation(ref MachineInformation information)
+		{
+			// Intentionally left blank
+		}
 	}
 }

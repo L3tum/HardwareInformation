@@ -40,6 +40,26 @@ namespace HardwareInformation.Providers
 			        RuntimeInformation.ProcessArchitecture == Architecture.X64);
 		}
 
+		public void PostProviderUpdateInformation(ref MachineInformation information)
+		{
+			if (information.Cpu.PhysicalCores != 0)
+			{
+				foreach (var cache in information.Cpu.Caches)
+				{
+					var threadsPerCore = information.Cpu.LogicalCores / information.Cpu.PhysicalCores;
+
+					cache.TimesPresent++;
+					cache.TimesPresent /= cache.CoresPerCache;
+					cache.CoresPerCache /= threadsPerCore;
+
+					if (cache.TimesPresent == 0)
+					{
+						cache.TimesPresent++;
+					}
+				}
+			}
+		}
+
 		private void GatherCacheTopology(ref MachineInformation information)
 		{
 			var threads = new List<Task>();
@@ -106,20 +126,6 @@ namespace HardwareInformation.Providers
 			}
 
 			Task.WaitAll(threads.ToArray());
-
-			foreach (var cache in caches)
-			{
-				var threadsPerCore = information.Cpu.LogicalCores / information.Cpu.PhysicalCores;
-
-				cache.TimesPresent++;
-				cache.TimesPresent /= cache.CoresPerCache;
-				cache.CoresPerCache /= threadsPerCore;
-
-                if(cache.TimesPresent == 0)
-                {
-                    cache.TimesPresent++;
-                }
-			}
 
 			information.Cpu.Caches = caches;
 		}

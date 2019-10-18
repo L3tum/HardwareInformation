@@ -74,5 +74,10 @@ namespace HardwareInformation.Providers
 		{
 			return RuntimeInformation.IsOSPlatform(OSPlatform.OSX);
 		}
+
+		public void PostProviderUpdateInformation(ref MachineInformation information)
+		{
+			// Intentionally left blank
+		}
 	}
 }

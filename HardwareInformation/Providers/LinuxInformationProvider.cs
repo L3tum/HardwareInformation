@@ -1,7 +1,6 @@
 ﻿#region using
 
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
@@ -14,19 +13,19 @@ namespace HardwareInformation.Providers
 	{
 		public void GatherInformation(ref MachineInformation information)
 		{
-            if (!File.Exists("/proc/cpuinfo"))
-            {
-                return;
-            }
+			if (!File.Exists("/proc/cpuinfo"))
+			{
+				return;
+			}
 
-            try
-            {
-                File.OpenRead("/proc/cpuinfo").Dispose();
-            }
-            catch (Exception)
-            {
-                return;
-            }
+			try
+			{
+				File.OpenRead("/proc/cpuinfo").Dispose();
+			}
+			catch (Exception)
+			{
+				return;
+			}
 
 			var info = File.ReadAllLines("/proc/cpuinfo");
 			var modelNameRegex = new Regex(@"^model name\s+:\s+(.+)");
@@ -36,59 +35,61 @@ namespace HardwareInformation.Providers
 
 			foreach (var s in info)
 			{
-                try
-                {
-                    var match = modelNameRegex.Match(s);
+				try
+				{
+					var match = modelNameRegex.Match(s);
 
-                    if (match.Success && (information.Cpu.Name == default || information.Cpu.Name == information.Cpu.Caption))
-                    {
-                        information.Cpu.Name = match.Groups[1].Value.Trim();
+					if (match.Success && (information.Cpu.Name == default ||
+					                      information.Cpu.Name == information.Cpu.Caption))
+					{
+						information.Cpu.Name = match.Groups[1].Value.Trim();
 
-                        continue;
-                    }
+						continue;
+					}
 
-                    match = cpuSpeedRegex.Match(s);
+					match = cpuSpeedRegex.Match(s);
 
-                    if (match.Success && information.Cpu.NormalClockSpeed == default)
-                    {
-                        information.Cpu.NormalClockSpeed = uint.Parse(match.Groups[1].Value);
+					if (match.Success && information.Cpu.NormalClockSpeed == default)
+					{
+						information.Cpu.NormalClockSpeed = uint.Parse(match.Groups[1].Value);
 
-                        continue;
-                    }
+						continue;
+					}
 
-                    match = physicalCoresRegex.Match(s);
+					match = physicalCoresRegex.Match(s);
 
-                    if (match.Success)
-                    {
-                        var val = uint.Parse(match.Groups[1].Value);
+					if (match.Success)
+					{
+						var val = uint.Parse(match.Groups[1].Value);
 
-                        // Safety check
-                        if (information.Cpu.PhysicalCores == default || information.Cpu.PhysicalCores == information.Cpu.LogicalCores || (val != 0 && val != information.Cpu.PhysicalCores))
-                        {
-                            information.Cpu.PhysicalCores = val;
+						// Safety check
+						if (information.Cpu.PhysicalCores == default ||
+						    information.Cpu.PhysicalCores == information.Cpu.LogicalCores ||
+						    val != 0 && val != information.Cpu.PhysicalCores)
+						{
+							information.Cpu.PhysicalCores = val;
 
-                            continue;
-                        }
-                    }
+							continue;
+						}
+					}
 
-                    match = logicalCoresRegex.Match(s);
+					match = logicalCoresRegex.Match(s);
 
-                    if (match.Success)
-                    {
-                        var val = uint.Parse(match.Groups[1].Value);
+					if (match.Success)
+					{
+						var val = uint.Parse(match.Groups[1].Value);
 
-                        if (match.Success && information.Cpu.LogicalCores == default || (val != 0 && val != information.Cpu.LogicalCores))
-                        {
-                            information.Cpu.LogicalCores = val;
-
-                            continue;
-                        }
-                    }
-                }
-                catch (Exception)
-                {
-                    // Intentionally left blank
-                }
+						if (match.Success && information.Cpu.LogicalCores == default ||
+						    val != 0 && val != information.Cpu.LogicalCores)
+						{
+							information.Cpu.LogicalCores = val;
+						}
+					}
+				}
+				catch (Exception)
+				{
+					// Intentionally left blank
+				}
 			}
 
 			if (information.SmBios.BIOSVersion == default)
@@ -143,6 +144,11 @@ namespace HardwareInformation.Providers
 		public bool Available(MachineInformation information)
 		{
 			return RuntimeInformation.IsOSPlatform(OSPlatform.Linux);
+		}
+
+		public void PostProviderUpdateInformation(ref MachineInformation information)
+		{
+			// Intentionally left blank
 		}
 	}
 }

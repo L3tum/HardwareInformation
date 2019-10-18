@@ -80,6 +80,22 @@ namespace HardwareInformation.Providers
 			        RuntimeInformation.ProcessArchitecture == Architecture.X64);
 		}
 
+		public void PostProviderUpdateInformation(ref MachineInformation information)
+		{
+			if (information.Cpu.AMDFeatureFlags.ExtendedFeatureFlagsF81One.HasFlag(MachineInformation.AMDFeatureFlags
+				.ExtendedFeatureFlagsF81ECX.TOPOEXT) && information.Cpu.PhysicalCores != 0)
+			{
+				foreach (var cache in information.Cpu.Caches)
+				{
+					var threadsPerCore = information.Cpu.LogicalCores / information.Cpu.PhysicalCores;
+
+					cache.TimesPresent++;
+					cache.TimesPresent /= cache.CoresPerCache;
+					cache.CoresPerCache /= threadsPerCore;
+				}
+			}
+		}
+
 		private void GatherCacheTopology(ref MachineInformation information)
 		{
 			var threads = new List<Task>();
@@ -273,18 +289,6 @@ namespace HardwareInformation.Providers
 			}
 
 			Task.WaitAll(threads.ToArray());
-
-			if (supportsCacheTopologyExtensions)
-			{
-				foreach (var cache in caches)
-				{
-					var threadsPerCore = information.Cpu.LogicalCores / information.Cpu.PhysicalCores;
-
-					cache.TimesPresent++;
-					cache.TimesPresent /= cache.CoresPerCache;
-					cache.CoresPerCache /= threadsPerCore;
-				}
-			}
 
 			information.Cpu.Caches = caches;
 		}
