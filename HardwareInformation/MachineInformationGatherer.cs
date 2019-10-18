@@ -120,6 +120,8 @@ namespace HardwareInformation
 		private static void GetCommonCpuInformation()
 		{
 			information.OperatingSystem = Environment.OSVersion;
+			information.Platform = RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? OSPlatform.Windows :
+				RuntimeInformation.IsOSPlatform(OSPlatform.Linux) ? OSPlatform.Linux : OSPlatform.OSX;
 			information.Cpu.LogicalCores = (uint) Environment.ProcessorCount;
 			information.Cpu.LogicalCoresPerNode = information.Cpu.LogicalCores;
 			information.Cpu.Nodes = 1;

@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 
 #endregion
 
@@ -26,6 +27,11 @@ namespace HardwareInformation
 		///		The operating system installed. Version construct supplied by .NET
 		/// </summary>
 		public OperatingSystem OperatingSystem { get; set; }
+
+		/// <summary>
+		///		The OS platform .NET is running on. More reliable that OperatingSystem
+		/// </summary>
+		public OSPlatform Platform { get; set; }
 
 		/// <summary>
 		///		The CPU that's installed. Can't handle multi-processor environments for now

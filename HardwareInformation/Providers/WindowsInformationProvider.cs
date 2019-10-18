@@ -17,8 +17,19 @@ namespace HardwareInformation.Providers
 
 			foreach (var managementBaseObject in mos.Get())
 			{
+				if (managementBaseObject == null || managementBaseObject.Properties == null ||
+				    managementBaseObject.Properties.Count == 0)
+				{
+					continue;
+				}
+
 				foreach (var propertyData in managementBaseObject.Properties)
 				{
+					if (propertyData == null || propertyData.Value == null || propertyData.Name == null)
+					{
+						continue;
+					}
+
 					switch (propertyData.Name)
 					{
 						case "Name":
@@ -34,12 +45,14 @@ namespace HardwareInformation.Providers
 						// MIND THE SSSSSSSS
 						case "NumberOfEnabledCore":
 						{
-                            var val = uint.Parse(propertyData.Value.ToString());
+							var val = uint.Parse(propertyData.Value.ToString());
 
-                            // Safety check
-                            if (information.Cpu.PhysicalCores == default || information.Cpu.PhysicalCores == information.Cpu.LogicalCores || (val != 0 && val != information.Cpu.PhysicalCores))
+							// Safety check
+							if (information.Cpu.PhysicalCores == default ||
+							    information.Cpu.PhysicalCores == information.Cpu.LogicalCores ||
+							    val != 0 && val != information.Cpu.PhysicalCores)
 							{
-                                information.Cpu.PhysicalCores = val;
+								information.Cpu.PhysicalCores = val;
 							}
 
 							break;
@@ -47,9 +60,10 @@ namespace HardwareInformation.Providers
 
 						case "NumberOfLogicalProcessors":
 						{
-                            var val = uint.Parse(propertyData.Value.ToString());
+							var val = uint.Parse(propertyData.Value.ToString());
 
-                            if (information.Cpu.LogicalCores == default || (val != 0 && val != information.Cpu.LogicalCores))
+							if (information.Cpu.LogicalCores == default ||
+							    val != 0 && val != information.Cpu.LogicalCores)
 							{
 								information.Cpu.LogicalCores = val;
 							}
@@ -86,10 +100,21 @@ namespace HardwareInformation.Providers
 
 			foreach (var managementBaseObject in mos.Get())
 			{
+				if (managementBaseObject == null || managementBaseObject.Properties == null ||
+				    managementBaseObject.Properties.Count == 0)
+				{
+					continue;
+				}
+
 				var ram = new MachineInformation.RAM();
 
 				foreach (var propertyData in managementBaseObject.Properties)
 				{
+					if (propertyData == null || propertyData.Value == null || propertyData.Name == null)
+					{
+						continue;
+					}
+
 					switch (propertyData.Name)
 					{
 						case "ConfiguredClockSpeed":
@@ -146,8 +171,19 @@ namespace HardwareInformation.Providers
 
 			foreach (var managementBaseObject in mos.Get())
 			{
+				if (managementBaseObject == null || managementBaseObject.Properties == null ||
+				    managementBaseObject.Properties.Count == 0)
+				{
+					continue;
+				}
+
 				foreach (var propertyData in managementBaseObject.Properties)
 				{
+					if (propertyData == null || propertyData.Value == null || propertyData.Name == null)
+					{
+						continue;
+					}
+
 					switch (propertyData.Name)
 					{
 						case "Name":
@@ -178,8 +214,19 @@ namespace HardwareInformation.Providers
 
 			foreach (var managementBaseObject in mos.Get())
 			{
+				if (managementBaseObject == null || managementBaseObject.Properties == null ||
+				    managementBaseObject.Properties.Count == 0)
+				{
+					continue;
+				}
+
 				foreach (var propertyData in managementBaseObject.Properties)
 				{
+					if (propertyData == null || propertyData.Value == null || propertyData.Name == null)
+					{
+						continue;
+					}
+
 					switch (propertyData.Name)
 					{
 						case "Product":
