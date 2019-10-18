@@ -36,49 +36,58 @@ namespace HardwareInformation.Providers
 
 			foreach (var s in info)
 			{
-				var match = modelNameRegex.Match(s);
-
-				if (match.Success && (information.Cpu.Name == default || information.Cpu.Name == information.Cpu.Caption))
-				{
-					information.Cpu.Name = match.Groups[1].Value.Trim();
-
-					continue;
-				}
-
-				match = cpuSpeedRegex.Match(s);
-
-				if (match.Success && information.Cpu.NormalClockSpeed == default)
-				{
-					information.Cpu.NormalClockSpeed = uint.Parse(match.Groups[1].Value);
-
-					continue;
-				}
-
-				match = physicalCoresRegex.Match(s);
-
-                if (match.Success)
+                try
                 {
-                    var val = uint.Parse(match.Groups[1].Value);
+                    var match = modelNameRegex.Match(s);
 
-                    // Safety check
-                    if (information.Cpu.PhysicalCores == default || information.Cpu.PhysicalCores == information.Cpu.LogicalCores || (val != 0 && val != information.Cpu.PhysicalCores))
+                    if (match.Success && (information.Cpu.Name == default || information.Cpu.Name == information.Cpu.Caption))
                     {
-                        information.Cpu.PhysicalCores = val;
+                        information.Cpu.Name = match.Groups[1].Value.Trim();
 
                         continue;
                     }
-                }
 
-				match = logicalCoresRegex.Match(s);
+                    match = cpuSpeedRegex.Match(s);
 
-                if (match.Success)
-                {
-                    var val = uint.Parse(match.Groups[1].Value);
-
-                    if (match.Success && information.Cpu.LogicalCores == default || (val != 0 && val != information.Cpu.LogicalCores))
+                    if (match.Success && information.Cpu.NormalClockSpeed == default)
                     {
-                        information.Cpu.LogicalCores = val;
+                        information.Cpu.NormalClockSpeed = uint.Parse(match.Groups[1].Value);
+
+                        continue;
                     }
+
+                    match = physicalCoresRegex.Match(s);
+
+                    if (match.Success)
+                    {
+                        var val = uint.Parse(match.Groups[1].Value);
+
+                        // Safety check
+                        if (information.Cpu.PhysicalCores == default || information.Cpu.PhysicalCores == information.Cpu.LogicalCores || (val != 0 && val != information.Cpu.PhysicalCores))
+                        {
+                            information.Cpu.PhysicalCores = val;
+
+                            continue;
+                        }
+                    }
+
+                    match = logicalCoresRegex.Match(s);
+
+                    if (match.Success)
+                    {
+                        var val = uint.Parse(match.Groups[1].Value);
+
+                        if (match.Success && information.Cpu.LogicalCores == default || (val != 0 && val != information.Cpu.LogicalCores))
+                        {
+                            information.Cpu.LogicalCores = val;
+
+                            continue;
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+                    // Intentionally left blank
                 }
 			}
 
