@@ -4,6 +4,7 @@
 
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/L3tum/HardwareInformation?style=flat-square)
 ![Nuget](https://img.shields.io/nuget/v/HardwareInformation?style=flat-square)
+![Build](https://github.com/L3tum/HardwareInformation/workflows/.NET%20Core%20CI/badge.svg?style=flat-square)
 
   - [Features](#features)
   - [Goal](#goal)
