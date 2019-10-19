@@ -131,7 +131,7 @@ namespace HardwareInformation
 			information.Cpu.LogicalCoresPerNode = information.Cpu.LogicalCores;
 			information.Cpu.Nodes = 1;
 			information.Cpu.Architecture = RuntimeInformation.ProcessArchitecture.ToString();
-			information.Cpu.Caption = Environment.GetEnvironmentVariable("PROCESSOR_IDENTIFIER");
+			information.Cpu.Caption = Environment.GetEnvironmentVariable("PROCESSOR_IDENTIFIER") ?? default;
 			information.Cpu.Name = information.Cpu.Caption;
 
 			for (var i = 0; i < information.Cpu.LogicalCores; i++)

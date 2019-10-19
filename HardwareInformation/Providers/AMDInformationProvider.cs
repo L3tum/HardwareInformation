@@ -381,8 +381,7 @@ namespace HardwareInformation.Providers
 			information.Cpu.Nodes = (uint) nodeIds.Count;
 			information.Cpu.LogicalCoresPerNode = nodeIds.First().Value;
 
-			information.Cpu.Cores.Clear();
-			information.Cpu.Cores.AddRange(cores);
+			information.Cpu.Cores = cores;
 		}
 	}
 }
