@@ -90,12 +90,6 @@ HRF = Human Readable Format. Normal capacity/size is in bytes, while this is a s
 
 **\*\*\*\* Only available on AMD platforms.**
 
-One additional feature is drive-by core frequency monitoring. This is available on Windows and Linux by calling the following function. See the doc blocks for more information.
-
-``
-MachineInformationGatherer.MonitorCoreFrequencies(int coreNumber, CancellationToken token, int measurementDelay = 1000) : Task<MachineInformation.Core>
-``
-
 ## Goal
 
 The immediate goal is somewhat feature-parity with CPU-Z/CPUID. 
