@@ -322,7 +322,7 @@ namespace HardwareInformation
 		///     repeat). Values under 1000ms may produce wrong results.
 		/// </param>
 		/// <returns></returns>
-		public static async Task<MachineInformation.Core> MonitorCoreFrequencies(int coreNumber,
+		public static Task<MachineInformation.Core> MonitorCoreFrequencies(int coreNumber,
 			CancellationToken token, int measurementDelay = 1000)
 		{
 			if (coreNumber > 64 || coreNumber < 0)
@@ -336,9 +336,9 @@ namespace HardwareInformation
 				throw new PlatformNotSupportedException("This method only works on Windows or Linux!");
 			}
 
-			var core = new MachineInformation.Core();
-			var thread = Task.Run(() =>
+			return Task.Run(() =>
 			{
+				var core = new MachineInformation.Core();
 				var highestFrequency = 0u;
 				var lowestFrequency = 0u;
 				PerformanceCounter counter = null;
@@ -349,19 +349,10 @@ namespace HardwareInformation
 					counter = new PerformanceCounter("Processor Information", "% Processor Performance",
 						"0," + coreNumber);
 					counter.NextValue();
-					var mos = new ManagementObjectSearcher(
-						"select MaxClockSpeed from Win32_Processor");
 
-					foreach (var managementBaseObject in mos.Get())
-					{
-						foreach (var propertyData in managementBaseObject.Properties)
-						{
-							if (propertyData.Name == "MaxClockSpeed")
-							{
-								normalFrequency = uint.Parse(propertyData.Value.ToString());
-							}
-						}
-					}
+					ManagementObject Mo = new ManagementObject($"Win32_Processor.DeviceID='CPU{coreNumber}'");
+
+					normalFrequency = (uint) Mo["MaxClockSpeed"];
 				}
 
 				while (!token.IsCancellationRequested)
@@ -396,11 +387,9 @@ namespace HardwareInformation
 				core.Number = (uint) coreNumber;
 				core.MaxClockSpeed = highestFrequency;
 				core.NormalClockSpeed = lowestFrequency;
+
+				return core;
 			});
-
-			await thread;
-
-			return core;
 		}
 	}
 }
