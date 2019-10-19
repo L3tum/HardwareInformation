@@ -53,6 +53,8 @@ namespace HardwareInformation
 			    RuntimeInformation.ProcessArchitecture == Architecture.X64)
 			{
 				Opcode.Open();
+
+				AppDomain.CurrentDomain.DomainUnload += (sender, args) => { Opcode.Close(); };
 			}
 
 			lastSkipClockspeedTest = skipClockspeedTest;
@@ -104,12 +106,6 @@ namespace HardwareInformation
 			                            RuntimeInformation.IsOSPlatform(OSPlatform.Linux)))
 			{
 				GetCoreSpeeds();
-			}
-
-			if (RuntimeInformation.ProcessArchitecture == Architecture.X86 ||
-			    RuntimeInformation.ProcessArchitecture == Architecture.X64)
-			{
-				Opcode.Close();
 			}
 
 			return information;
