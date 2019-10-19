@@ -337,7 +337,7 @@ namespace HardwareInformation
 			}
 
 			var core = new MachineInformation.Core();
-			var thread = Util.RunAffinity(1uL << coreNumber, () =>
+			var thread = Task.Run(() =>
 			{
 				var highestFrequency = 0u;
 				var lowestFrequency = 0u;
