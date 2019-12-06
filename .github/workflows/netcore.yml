@@ -25,5 +25,5 @@ jobs:
         run: dotnet nuget push nupkgs/HardwareInformation.$(cat ./version).nupkg -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json
       - name: Github Package Release
         if: startsWith(github.ref, 'refs/tags/')
-        run: apt install nuget \
+        run: sudo apt-get install -y nuget \
           && nuget push nupkgs/HardwareInformation.$(cat ./version).nupkg -k L3tum:${{ secrets.GITHUB_TOKEN }} -s "https://nuget.pkg.github.com/L3tum/index.json"
