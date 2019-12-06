@@ -25,5 +25,11 @@ jobs:
         run: dotnet nuget push nupkgs/HardwareInformation.$(cat ./version).nupkg -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json
       - name: Github Package Release
         if: startsWith(github.ref, 'refs/tags/')
-        run: sudo apt-get install -y nuget \
+        run: wget -q https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb \
+          && sudo dpkg -i packages-microsoft-prod.deb \
+          && sudo add-apt-repository universe \
+          && sudo apt-get update \
+          && sudo apt-get install apt-transport-https \
+          && sudo apt-get update \
+          && sudo apt-get install -y nuget \
           && nuget push nupkgs/HardwareInformation.$(cat ./version).nupkg -k L3tum:${{ secrets.GITHUB_TOKEN }} -s "https://nuget.pkg.github.com/L3tum/index.json"
