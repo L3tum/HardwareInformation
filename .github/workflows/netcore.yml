@@ -1,6 +1,7 @@
 name: .NET Core CI
 
-on: push
+on: 
+  push:
 
 jobs:
   build:
@@ -22,7 +23,7 @@ jobs:
         run: dotnet build -c Release
         
       - name: Version
-        run: echo ${{ github.ref }} | Select-String '^/refs/tags/(.*)$' | ForEach-Object{$_.Matches.Groups[1].Value) > ./version
+        run: echo ${{ github.ref }} | Select-String '^/refs/tags/(.*)$' | ForEach-Object{$_.Matches.Groups[1].Value} > ./version
         if: startsWith(github.ref, 'refs/tags/')
       - name: Pack
         run: dotnet pack -c Release --include-symbols -p:PackageVersion=$(type ./version) --output nupkgs "./HardwareInformation.sln"
