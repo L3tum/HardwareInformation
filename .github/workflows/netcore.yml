@@ -19,6 +19,7 @@ jobs:
         run: dotnet nuget push nupkgs/HardwareInformation.$(cat ./version).nupkg -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json
         
       - name: GPR-Hack
+        if: startsWith(github.ref, 'refs/tags/')
         run: |
            for f in ./nupkgs/*.nupkg
            do
