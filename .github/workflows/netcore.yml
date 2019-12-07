@@ -1,44 +1,31 @@
+  
 name: .NET Core CI
 
-on: 
-  push:
+on: push
 
 jobs:
   build:
-    runs-on: windows-latest
-    # Windows already has .NET installed
-    #strategy:
-    #  matrix:
-    #    dotnet: [ '3.0.100' ]
+    runs-on: ubuntu-18.04
+    strategy:
+      matrix:
+        dotnet: [ '3.0.100' ]
     name: Dotnet ${{ matrix.dotnet }} build
     steps:
       - uses: actions/checkout@v1
-      #- name: Setup dotnet
-      #  uses: actions/setup-dotnet@v1
-      #  with:
-      #    dotnet-version: ${{ matrix.dotnet }}
-      #- run: echo ${{ github.ref }} > ./version && sed -ie 's/refs\/tags\///' ./version
-      #  if: startsWith(github.ref, 'refs/tags/')
+      - name: Setup dotnet
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: ${{ matrix.dotnet }}
+      - run: echo $(date "+%Y.%-m.%-d") > ./version
+      - run: echo ${{ github.ref }} > ./version && sed -ie 's/refs\/tags\///' ./version
+        if: startsWith(github.ref, 'refs/tags/')
       - name: Build
-        run: dotnet build -c Release
-        
-      - name: Version
-        run: echo ${{ github.ref }} | Select-String '^/refs/tags/(.*)$' | ForEach-Object{$_.Matches.Groups[1].Value} > ./version
-        if: startsWith(github.ref, 'refs/tags/')
-      - name: Pack
-        run: dotnet pack -c Release --include-symbols -p:PackageVersion=$(type ./version) --output nupkgs "./HardwareInformation.sln"
-        if: startsWith(github.ref, 'refs/tags/')
-        
+        run: dotnet pack -c Release --include-symbols -p:PackageVersion=$(cat ./version) --output nupkgs "./HardwareInformation.sln"
       - name: Nuget release
-        run: dotnet nuget push nupkgs/HardwareInformation.$(type ./version).nupkg -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json -SkipDuplicate
         if: startsWith(github.ref, 'refs/tags/')
-        
-      - name: Install NuGet client
-        uses: warrenbuckley/Setup-Nuget@v1
-        if: startsWith(github.ref, 'refs/tags/')
-      - name: Add private GitHub registry to NuGet
-        run: nuget sources add -name "GPR" -Source https://nuget.pkg.github.com/L3tum/index.json -Username L3tum -Password ${{ secrets.GITHUB_TOKEN }}
-        if: startsWith(github.ref, 'refs/tags/')
-      - name: Push generated package to GitHub registry
-        run: nuget push nupkgs/HardwareInformation.$(type ./version).nupkg -Source "GPR" -SkipDuplicate
-        if: startsWith(github.ref, 'refs/tags/')
+        run: dotnet nuget push nupkgs/HardwareInformation.$(cat ./version).nupkg -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json
+
+      - name: Setup nuget config
+        run: sed 's/GITHUB_TOKEN/${{ secrets.GITHUB_TOKEN }}/g' .nuget.config > nuget.config
+      - name: Publish nuget
+        run: dotnet nuget push nupkgs/HardwareInformation.$(cat ./version).nupkg -s "github"
