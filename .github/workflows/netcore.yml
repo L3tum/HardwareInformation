@@ -19,4 +19,8 @@ jobs:
         run: dotnet nuget push nupkgs/HardwareInformation.$(cat ./version).nupkg -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json
         
       - name: GPR-Hack
-        run: curl -vX PUT -u "L3tum:${{ secrets.GITHUB_TOKEN }}" -F package=nupkgs/HardwareInformation.$(cat ./version).nupkg https://nuget.pkg.github.com/L3tum/
+        run: |
+           for f in ./nupkgs/*.nupkg
+           do
+             curl -vX PUT -u "L3tum:${{ secrets.GITHUB_TOKEN }}" -F package=@$f https://nuget.pkg.github.com/L3tum/
+           done
