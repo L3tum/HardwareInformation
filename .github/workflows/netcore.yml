@@ -1,20 +1,14 @@
+  
 name: .NET Core CI
 
 on: push
 
 jobs:
   build:
-    runs-on: ubuntu-18.04
-    strategy:
-      matrix:
-        dotnet: [ '3.0.100' ]
-    name: Dotnet ${{ matrix.dotnet }} build
+    runs-on: ubuntu-latest
+    name: Dotnet build and push
     steps:
       - uses: actions/checkout@v1
-      - name: Setup dotnet
-        uses: actions/setup-dotnet@v1
-        with:
-          dotnet-version: ${{ matrix.dotnet }}
       - run: echo $(date "+%Y.%-m.%-d") > ./version
       - run: echo ${{ github.ref }} > ./version && sed -ie 's/refs\/tags\///' ./version
         if: startsWith(github.ref, 'refs/tags/')
@@ -23,6 +17,11 @@ jobs:
       - name: Nuget release
         if: startsWith(github.ref, 'refs/tags/')
         run: dotnet nuget push nupkgs/HardwareInformation.$(cat ./version).nupkg -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json
-#      - name: Github Package Release
-#        if: startsWith(github.ref, 'refs/tags/')
-#        run: dotnet nuget push nupkgs/HardwareInformation.$(cat ./version).nupkg -k L3tum:${{ secrets.GITHUB_TOKEN }} -s "https://nuget.pkg.github.com/L3tum/index.json"
+        
+      - name: GPR-Hack
+        if: startsWith(github.ref, 'refs/tags/')
+        run: |
+           for f in ./nupkgs/*.nupkg
+           do
+             curl -vX PUT -u "L3tum:${{ secrets.GITHUB_TOKEN }}" -F package=@$f https://nuget.pkg.github.com/L3tum/
+           done

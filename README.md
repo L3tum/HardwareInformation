@@ -17,6 +17,8 @@ Download from [Nuget](https://www.nuget.org/packages/HardwareInformation/) via y
 
 `dotnet add package HardwareInformation`
 
+Starting with version 2.1.20 HardwareInformation is also available via Github Package Registry!
+
 Get hardware information from the gatherer
 
 `MachinInformation info = MachineInformationGatherer.GatherInformation(bool skipClockspeedTest = true)`
