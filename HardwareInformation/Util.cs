@@ -134,7 +134,7 @@ namespace HardwareInformation
 				dblSByte = bytes / 1024.0;
 			}
 
-			return string.Format("{0:0.##} {1}", dblSByte, Suffix[i]);
+			return string.Format("{0:0.##} {1}", Math.Round(dblSByte, 2), Suffix[i]);
 		}
 
 		internal static uint ExtractBits(uint number, int start, int end)

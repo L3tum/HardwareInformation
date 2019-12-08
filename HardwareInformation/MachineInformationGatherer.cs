@@ -4,10 +4,10 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Management;
 using System.Runtime.InteropServices;
 using System.Threading;
-using System.Threading.Tasks;
+using HardwareInformation.Information;
+using HardwareInformation.Information.Cpu;
 using HardwareInformation.Providers;
 
 #endregion
@@ -132,7 +132,7 @@ namespace HardwareInformation
 
 			for (var i = 0; i < information.Cpu.LogicalCores; i++)
 			{
-				information.Cpu.Cores.Add(new MachineInformation.Core
+				information.Cpu.Cores.Add(new Core
 				{
 					Number = (uint) i
 				});
@@ -181,9 +181,9 @@ namespace HardwareInformation
 				}
 
 				information.Cpu.Type =
-					(MachineInformation.CPU.ProcessorType) ((result.eax & 0b11000000000000) >> 12);
-				information.Cpu.FeatureFlagsOne = (MachineInformation.CPU.FeatureFlagEDX) result.edx;
-				information.Cpu.FeatureFlagsTwo = (MachineInformation.CPU.FeatureFlagECX) result.ecx;
+					(CPU.ProcessorType) ((result.eax & 0b11000000000000) >> 12);
+				information.Cpu.FeatureFlagsOne = (CPU.FeatureFlagEDX) result.edx;
+				information.Cpu.FeatureFlagsTwo = (CPU.FeatureFlagECX) result.ecx;
 			}
 
 			if (information.Cpu.MaxCpuIdFeatureLevel >= 7)
@@ -191,11 +191,11 @@ namespace HardwareInformation
 				Opcode.Cpuid(out result, 7, 0);
 
 				information.Cpu.ExtendedFeatureFlagsF7One =
-					(MachineInformation.CPU.ExtendedFeatureFlagsF7EBX) result.ebx;
+					(CPU.ExtendedFeatureFlagsF7EBX) result.ebx;
 				information.Cpu.ExtendedFeatureFlagsF7Two =
-					(MachineInformation.CPU.ExtendedFeatureFlagsF7ECX) result.ecx;
+					(CPU.ExtendedFeatureFlagsF7ECX) result.ecx;
 				information.Cpu.ExtendedFeatureFlagsF7Three =
-					(MachineInformation.CPU.ExtendedFeatureFlagsF7EDX) result.edx;
+					(CPU.ExtendedFeatureFlagsF7EDX) result.edx;
 			}
 
 			Opcode.Cpuid(out result, 0x80000000, 0);

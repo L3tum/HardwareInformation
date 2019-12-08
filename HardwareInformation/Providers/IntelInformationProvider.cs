@@ -5,6 +5,8 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using HardwareInformation.Information;
+using HardwareInformation.Information.Cpu;
 
 #endregion
 
@@ -35,7 +37,7 @@ namespace HardwareInformation.Providers
 
 		public bool Available(MachineInformation information)
 		{
-			return information.Cpu.Vendor == MachineInformation.Vendors.Intel &&
+			return information.Cpu.Vendor == Vendors.Intel &&
 			       (RuntimeInformation.ProcessArchitecture == Architecture.X86 ||
 			        RuntimeInformation.ProcessArchitecture == Architecture.X64);
 		}
@@ -81,18 +83,18 @@ namespace HardwareInformation.Providers
 					{
 						Opcode.Cpuid(out var result, 4, ecx);
 
-						var type = (MachineInformation.Cache.CacheType) (result.eax & 0xF);
+						var type = (Cache.CacheType) (result.eax & 0xF);
 
 						// Null, no more caches
-						if (type == MachineInformation.Cache.CacheType.NONE)
+						if (type == Cache.CacheType.NONE)
 						{
 							break;
 						}
 
-						var cache = new MachineInformation.Cache
+						var cache = new Cache
 						{
 							CoresPerCache = ((result.eax & 0x3FFC000) >> 14) + 1u,
-							Level = (MachineInformation.Cache.CacheLevel) ((result.eax & 0xF0) >> 5),
+							Level = (Cache.CacheLevel) ((result.eax & 0xF0) >> 5),
 							Type = type,
 							LineSize = (result.ebx & 0xFFF) + 1u,
 							WBINVD = (result.edx & 0b1) == 0,
@@ -217,9 +219,9 @@ namespace HardwareInformation.Providers
 				Opcode.Cpuid(out var result, 0x80000001, 0);
 
 				information.Cpu.IntelFeatureFlags.ExtendedFeatureFlagsF81One =
-					(MachineInformation.IntelFeatureFlags.ExtendedFeatureFlagsF81ECX) result.ecx;
+					(IntelFeatureFlags.ExtendedFeatureFlagsF81ECX) result.ecx;
 				information.Cpu.IntelFeatureFlags.ExtendedFeatureFlagsF81Two =
-					(MachineInformation.IntelFeatureFlags.ExtendedFeatureFlagsF81EDX) result.edx;
+					(IntelFeatureFlags.ExtendedFeatureFlagsF81EDX) result.edx;
 			}
 
 			if (information.Cpu.MaxCpuIdFeatureLevel >= 6)
@@ -227,7 +229,7 @@ namespace HardwareInformation.Providers
 				Opcode.Cpuid(out var result, 6, 0);
 
 				information.Cpu.IntelFeatureFlags.TPMFeatureFlags =
-					(MachineInformation.IntelFeatureFlags.TPMFeatureFlagsEAX) result.eax;
+					(IntelFeatureFlags.TPMFeatureFlagsEAX) result.eax;
 			}
 
 			if (information.Cpu.MaxCpuIdExtendedFeatureLevel >= 7)
@@ -235,7 +237,7 @@ namespace HardwareInformation.Providers
 				Opcode.Cpuid(out var result, 0x80000001, 0);
 
 				information.Cpu.IntelFeatureFlags.FeatureFlagsApm =
-					(MachineInformation.IntelFeatureFlags.FeatureFlagsAPM) result.edx;
+					(IntelFeatureFlags.FeatureFlagsAPM) result.edx;
 			}
 		}
 	}

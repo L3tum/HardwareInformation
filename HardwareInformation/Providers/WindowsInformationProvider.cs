@@ -3,6 +3,7 @@
 using System;
 using System.Management;
 using System.Runtime.InteropServices;
+using HardwareInformation.Information;
 
 #endregion
 
@@ -106,7 +107,7 @@ namespace HardwareInformation.Providers
 					continue;
 				}
 
-				var ram = new MachineInformation.RAM();
+				var ram = new RAM();
 
 				foreach (var propertyData in managementBaseObject.Properties)
 				{
@@ -126,7 +127,7 @@ namespace HardwareInformation.Providers
 
 						case "Manufacturer":
 						{
-							ram.Manfucturer = propertyData.Value.ToString();
+							ram.Manufacturer = propertyData.Value.ToString();
 
 							break;
 						}
@@ -154,8 +155,8 @@ namespace HardwareInformation.Providers
 
 						case "FormFactor":
 						{
-							ram.FormFactor = (MachineInformation.RAM.FormFactors) Enum.Parse(
-								typeof(MachineInformation.RAM.FormFactors), propertyData.Value.ToString());
+							ram.FormFactor = (RAM.FormFactors) Enum.Parse(
+								typeof(RAM.FormFactors), propertyData.Value.ToString());
 
 							break;
 						}
@@ -251,6 +252,97 @@ namespace HardwareInformation.Providers
 						}
 					}
 				}
+			}
+
+			mos = new ManagementObjectSearcher("select Model,Size,Caption from Win32_DiskDrive");
+
+			foreach (var managementBaseObject in mos.Get())
+			{
+				var disk = new Disk();
+
+				foreach (var propertyData in managementBaseObject.Properties)
+				{
+					switch (propertyData.Name)
+					{
+						case "Model":
+						{
+							disk.Model = propertyData.Value.ToString();
+							break;
+						}
+						case "Size":
+						{
+							disk.Capacity = ulong.Parse(propertyData.Value.ToString());
+							disk.CapacityHRF = Util.FormatBytes(disk.Capacity);
+							break;
+						}
+						case "Caption":
+						{
+							disk.Caption = propertyData.Value.ToString();
+							break;
+						}
+					}
+				}
+
+				information.Disks.Add(disk);
+			}
+
+			mos = new ManagementObjectSearcher(
+				"select AdapterCompatibility,Caption,Description,DriverDate,DriverVersion,Name,Status from Win32_VideoController");
+
+			foreach (var managementBaseObject in mos.Get())
+			{
+				var gpu = new GPU();
+
+				foreach (var propertyData in managementBaseObject.Properties)
+				{
+					switch (propertyData.Name)
+					{
+						case "AdapterCompatibility":
+						{
+							gpu.Vendor = propertyData.Value.ToString();
+
+							break;
+						}
+						case "Caption":
+						{
+							gpu.Caption = propertyData.Value.ToString();
+
+							break;
+						}
+						case "DriverDate":
+						{
+							gpu.DriverDate = propertyData.Value.ToString();
+
+							break;
+						}
+						case "DriverVersion":
+						{
+							gpu.DriverVersion = propertyData.Value.ToString();
+
+							break;
+						}
+						case "Description":
+						{
+							gpu.Description = propertyData.Value.ToString();
+
+							break;
+						}
+						case "Name":
+						{
+							gpu.Name = propertyData.Value.ToString();
+
+							break;
+						}
+						case "Status":
+						{
+							gpu.Status = propertyData.Value.ToString();
+
+							break;
+						}
+					}
+				}
+
+				information.Gpus.Add(gpu);
 			}
 		}
 
