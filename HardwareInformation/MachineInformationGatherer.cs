@@ -108,6 +108,11 @@ namespace HardwareInformation
 				GetCoreSpeeds();
 			}
 
+			// Fix some things that may be propagated from lower-level information providers
+
+			information.Cpu.Name = information.Cpu.Name.Trim();
+			information.Cpu.Caption = information.Cpu.Caption.Trim();
+
 			return information;
 		}
 

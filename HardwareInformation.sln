@@ -5,7 +5,12 @@ VisualStudioVersion = 16.0.29215.179
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HardwareInformation", "HardwareInformation\HardwareInformation.csproj", "{E1B535FC-D186-47C7-AFE3-70BC051A7CF4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleGatheringTest", "SimpleGatheringTest\SimpleGatheringTest.csproj", "{B2FFFB2B-A4C7-4E38-A8FE-FF5467317FBC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleGatheringTest", "SimpleGatheringTest\SimpleGatheringTest.csproj", "{B2FFFB2B-A4C7-4E38-A8FE-FF5467317FBC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8761C52A-B638-40F7-ADB3-7BF9AC689393}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

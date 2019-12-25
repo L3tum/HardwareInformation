@@ -50,6 +50,7 @@ namespace HardwareInformation
 			Platform = Platforms.Unknown;
 			Disks = new List<Disk>();
 			Gpus = new List<GPU>();
+			Displays = new List<Display>();
 		}
 
 		/// <summary>
@@ -77,8 +78,20 @@ namespace HardwareInformation
 		/// </summary>
 		public List<RAM> RAMSticks { get; set; }
 
+		/// <summary>
+		///     Disks installed
+		/// </summary>
 		public List<Disk> Disks { get; set; }
 
+		/// <summary>
+		///     GPUs installed
+		/// </summary>
 		public List<GPU> Gpus { get; set; }
+
+
+		/// <summary>
+		///     Displays connected
+		/// </summary>
+		public List<Display> Displays { get; set; }
 	}
 }

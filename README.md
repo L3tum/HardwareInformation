@@ -79,8 +79,15 @@ Result is cached internally so don't worry about calling it multiple times
 | RAM PartNumber (Product Name)*** | :white_check_mark: | :x: | :x:
 | RAM FormFactor*** | :white_check_mark: | :x: | :x:
 | RAM Latencies | :x: | :x: | :x:
-| GPUs | :white_check_mark:*** | :x: | :x:
-| Disks | :white_check_mark:*** | :x: | :x:
+| GPUs Vendor | :white_check_mark:*** | :x: | :x:
+| GPUs Name | :white_check_mark:*** | :x: | :x:
+| GPUs Driver | :white_check_mark:*** | :x: | :x:
+| GPUs Status | :white_check_mark:*** | :x: | :x:
+| Disks Manufacturer | :white_check_mark:*** | :x: | :x:
+| Disks Caption | :white_check_mark:*** | :x: | :x:
+| Disks Capacity | :white_check_mark:*** | :x: | :x:
+| Displays Manufacturer | :white_check_mark:*** | :x: | :x:
+| Displays Name | :white_check_mark:*** | :x: | :x:
 | Multiple processors/Dual processors | :x: | :x: | :x:
 
 HRF = Human Readable Format. Normal capacity/size is in bytes, while this is a string encoded with the appropriate sizing.

@@ -1,6 +1,8 @@
 ﻿#region using
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Management;
 using System.Runtime.InteropServices;
 using HardwareInformation.Information;
@@ -343,6 +345,42 @@ namespace HardwareInformation.Providers
 				}
 
 				information.Gpus.Add(gpu);
+			}
+
+			mos = new ManagementObjectSearcher("root\\wmi",
+				"select ManufacturerName,UserFriendlyName from WmiMonitorID");
+
+			foreach (var managementBaseObject in mos.Get())
+			{
+				try
+				{
+					var display = new Display();
+
+					foreach (var propertyData in managementBaseObject.Properties)
+					{
+						switch (propertyData.Name)
+						{
+							case "ManufacturerName":
+							{
+								display.Manufacturer = string.Join("", ((IEnumerable<ushort>) propertyData.Value)
+									.Select(u => char.ConvertFromUtf32(u)).Where(s => s != "\u0000").ToList());
+								break;
+							}
+							case "UserFriendlyName":
+							{
+								display.Name = string.Join("", ((IEnumerable<ushort>) propertyData.Value)
+									.Select(u => char.ConvertFromUtf32(u)).Where(s => s != "\u0000").ToList());
+								break;
+							}
+						}
+					}
+
+					information.Displays.Add(display);
+				}
+				catch
+				{
+					// Intentionally left blank
+				}
 			}
 		}
 
