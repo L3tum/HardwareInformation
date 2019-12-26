@@ -110,8 +110,18 @@ namespace HardwareInformation
 
 			// Fix some things that may be propagated from lower-level information providers
 
-			information.Cpu.Name = information.Cpu.Name.Trim();
-			information.Cpu.Caption = information.Cpu.Caption.Trim();
+			if (information.Cpu != null)
+			{
+				if (information.Cpu.Name != null)
+				{
+					information.Cpu.Name = information.Cpu.Name.Trim();
+				}
+
+				if (information.Cpu.Caption != null)
+				{
+					information.Cpu.Caption = information.Cpu.Caption.Trim();
+				}
+			}
 
 			return information;
 		}
