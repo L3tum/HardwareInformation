@@ -29,3 +29,38 @@ jobs:
            do
              curl -vX PUT -u "L3tum:${{ secrets.GITHUB_TOKEN }}" -F package=@$f https://nuget.pkg.github.com/L3tum/
            done
+      - uses: actions/setup-node@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          node-version: 12
+          registry-url: https://registry.npmjs.org/
+      - name: Setup node package
+        if: startsWith(github.ref, 'refs/tags/')
+        run: |
+          mkdir package
+          cd HardwareInformation/Scripts
+          cp -r ./* ../../package/
+          cd ..
+          cp package.template.json ../package/package.json
+          cd ../package
+          npm version --no-git-tag-version $(cat ../version)
+      - name: Publish to NPM
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
+        run: |
+          cd package 
+          npm publish --access public
+        if: startsWith(github.ref, 'refs/tags/')
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+          registry-url: https://npm.pkg.github.com/
+          scope: '@l3tum'
+        if: startsWith(github.ref, 'refs/tags/')
+      - name: Publish to GPR
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        run: |
+          cd package 
+          npm publish --access public
+        if: startsWith(github.ref, 'refs/tags/')
