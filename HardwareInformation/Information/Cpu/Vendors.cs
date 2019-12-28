@@ -1,9 +1,16 @@
-﻿namespace HardwareInformation.Information.Cpu
+﻿#region using
+
+using Reinforced.Typings.Attributes;
+
+#endregion
+
+namespace HardwareInformation.Information.Cpu
 {
 #pragma warning disable 1591
 	/// <summary>
 	///     Different CPU vendor strings.
 	/// </summary>
+	[TsClass]
 	public static class Vendors
 	{
 		public static string ACRN = "ACRNACRNACRN";

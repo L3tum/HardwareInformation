@@ -1,8 +1,15 @@
-﻿namespace HardwareInformation.Information
+﻿#region using
+
+using Reinforced.Typings.Attributes;
+
+#endregion
+
+namespace HardwareInformation.Information
 {
 	/// <summary>
 	///     Construct to represent a hard drive (HDD/SSD)
 	/// </summary>
+	[TsClass]
 	public class Disk
 	{
 		/// <summary>

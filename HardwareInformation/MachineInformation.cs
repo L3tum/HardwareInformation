@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using HardwareInformation.Information;
+using Reinforced.Typings.Attributes;
 
 #endregion
 
@@ -11,11 +12,13 @@ namespace HardwareInformation
 	/// <summary>
 	///     Holds all the information that the MachineInformationGatherer can gather
 	/// </summary>
+	[TsClass]
 	public class MachineInformation
 	{
 		/// <summary>
 		///     Operating system enum
 		/// </summary>
+		[TsEnum]
 		public enum Platforms
 		{
 			/// <summary>

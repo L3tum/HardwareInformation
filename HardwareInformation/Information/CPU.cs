@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using HardwareInformation.Information.Cpu;
+using Reinforced.Typings.Attributes;
 
 #endregion
 
@@ -11,6 +12,7 @@ namespace HardwareInformation.Information
 	/// <summary>
 	///     Construct to represent a CPU
 	/// </summary>
+	[TsClass]
 	public class CPU
 	{
 		/// <summary>
@@ -144,6 +146,7 @@ namespace HardwareInformation.Information
 		public List<Cache> Caches { get; set; } = new List<Cache>();
 #pragma warning disable 1591
 		[Flags]
+		[TsEnum]
 		public enum ExtendedFeatureFlagsF7EBX : uint
 		{
 			NONE = 0b0,
@@ -182,6 +185,7 @@ namespace HardwareInformation.Information
 		}
 
 		[Flags]
+		[TsEnum]
 		public enum ExtendedFeatureFlagsF7ECX : uint
 		{
 			NONE = 0b0,
@@ -220,6 +224,7 @@ namespace HardwareInformation.Information
 		}
 
 		[Flags]
+		[TsEnum]
 		public enum ExtendedFeatureFlagsF7EDX : uint
 		{
 			NONE = 0b0,
@@ -258,6 +263,7 @@ namespace HardwareInformation.Information
 		}
 
 		[Flags]
+		[TsEnum]
 		public enum FeatureFlagECX : uint
 		{
 			NONE = 0b0,
@@ -296,6 +302,7 @@ namespace HardwareInformation.Information
 		}
 
 		[Flags]
+		[TsEnum]
 		public enum FeatureFlagEDX : uint
 		{
 			NONE = 0b0,
@@ -334,6 +341,7 @@ namespace HardwareInformation.Information
 		}
 
 		[Flags]
+		[TsEnum]
 		public enum ProcessorType : uint
 		{
 			Original_OEM = 00,

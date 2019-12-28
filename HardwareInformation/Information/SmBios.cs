@@ -1,8 +1,15 @@
-﻿namespace HardwareInformation.Information
+﻿#region using
+
+using Reinforced.Typings.Attributes;
+
+#endregion
+
+namespace HardwareInformation.Information
 {
 	/// <summary>
 	///     BIOS and Mainboard information
 	/// </summary>
+	[TsClass]
 	public class SMBios
 	{
 		/// <summary>

@@ -1,8 +1,15 @@
-﻿namespace HardwareInformation.Information.Cpu
+﻿#region using
+
+using Reinforced.Typings.Attributes;
+
+#endregion
+
+namespace HardwareInformation.Information.Cpu
 {
 	/// <summary>
 	///     Construct to represent a logical CPU core
 	/// </summary>
+	[TsClass]
 	public class Core
 	{
 		/// <summary>
