@@ -39,8 +39,9 @@ jobs:
       - name: Setup node package
         if: startsWith(github.ref, 'refs/tags/')
         run: |
+          dotnet build -c Release HardwareInformation.Typings/HardwareInformation.Typings.csproj
           mkdir package
-          cd HardwareInformation/Scripts
+          cd HardwareInformation.Typings/Scripts
           cp -r ./* ../../package/
           cd ..
           cp package.template.json ../package/package.json
