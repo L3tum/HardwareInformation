@@ -11,12 +11,12 @@ namespace HardwareInformation
 {
 	internal static class ThreadAffinity
 	{
-		internal static ulong Set(ulong mask = 0xffffffuL)
+		internal static ulong Set(ulong mask = 0xffffffffuL)
 		{
 			if (mask == 0)
 				return 0;
 
-            var returnMask = 0xffffffuL;
+            var returnMask = 0xffffffffuL;
 
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
 			{
