@@ -1,12 +1,9 @@
 ﻿#region using
 
-using Reinforced.Typings.Attributes;
-
 #endregion
 
 namespace HardwareInformation.Information
 {
-	[TsClass]
 	public class GPU
 	{
 		/// <summary>

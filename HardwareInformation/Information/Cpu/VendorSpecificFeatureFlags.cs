@@ -1,7 +1,6 @@
 ﻿#region using
 
 using System;
-using Reinforced.Typings.Attributes;
 
 #endregion
 
@@ -10,7 +9,6 @@ namespace HardwareInformation.Information.Cpu
 	/// <summary>
 	///     Feature flags only present on AMD CPUs
 	/// </summary>
-	[TsClass]
 	public class AMDFeatureFlags
 	{
 		/// <summary>
@@ -34,7 +32,6 @@ namespace HardwareInformation.Information.Cpu
 		public FeatureFlagsAPM FeatureFlagsApm { get; set; }
 #pragma warning disable 1591
 		[Flags]
-		[TsEnum]
 		public enum ExtendedFeatureFlagsF81ECX : uint
 		{
 			NONE = 0b0,
@@ -73,7 +70,6 @@ namespace HardwareInformation.Information.Cpu
 		}
 
 		[Flags]
-		[TsEnum]
 		public enum ExtendedFeatureFlagsF81EDX : uint
 		{
 			NONE = 0b0,
@@ -112,7 +108,6 @@ namespace HardwareInformation.Information.Cpu
 		}
 
 		[Flags]
-		[TsEnum]
 		public enum FeatureFlagsAPM : uint
 		{
 			NONE = 0b0,
@@ -151,7 +146,6 @@ namespace HardwareInformation.Information.Cpu
 		}
 
 		[Flags]
-		[TsEnum]
 		public enum FeatureFlagsSVM : uint
 		{
 			NONE = 0b0,
@@ -194,7 +188,6 @@ namespace HardwareInformation.Information.Cpu
 	/// <summary>
 	///     Feature flags only present on Intel CPUs
 	/// </summary>
-	[TsClass]
 	public class IntelFeatureFlags
 	{
 		/// <summary>
@@ -219,7 +212,6 @@ namespace HardwareInformation.Information.Cpu
 
 #pragma warning disable 1591
 		[Flags]
-		[TsEnum]
 		public enum ExtendedFeatureFlagsF81ECX : uint
 		{
 			NONE = 0b0,
@@ -258,7 +250,6 @@ namespace HardwareInformation.Information.Cpu
 		}
 
 		[Flags]
-		[TsEnum]
 		public enum ExtendedFeatureFlagsF81EDX : uint
 		{
 			NONE = 0b0,
@@ -297,7 +288,6 @@ namespace HardwareInformation.Information.Cpu
 		}
 
 		[Flags]
-		[TsEnum]
 		public enum FeatureFlagsAPM : uint
 		{
 			NONE = 0b0,
@@ -336,7 +326,6 @@ namespace HardwareInformation.Information.Cpu
 		}
 
 		[Flags]
-		[TsEnum]
 		public enum TPMFeatureFlagsEAX : uint
 		{
 			NONE = 0b0,

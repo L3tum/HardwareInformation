@@ -1,7 +1,5 @@
 ﻿#region using
 
-using Reinforced.Typings.Attributes;
-
 #endregion
 
 namespace HardwareInformation.Information.Cpu
@@ -10,7 +8,6 @@ namespace HardwareInformation.Information.Cpu
 	/// <summary>
 	///     Different CPU vendor strings.
 	/// </summary>
-	[TsClass]
 	public static class Vendors
 	{
 		public static string ACRN = "ACRNACRNACRN";

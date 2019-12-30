@@ -1,15 +1,8 @@
-﻿#region using
-
-using Reinforced.Typings.Attributes;
-
-#endregion
-
-namespace HardwareInformation.Information.Cpu
+﻿namespace HardwareInformation.Information.Cpu
 {
 	/// <summary>
 	///     Construct to represent a CPU cache level
 	/// </summary>
-	[TsClass]
 	public class Cache
 	{
 		/// <summary>
@@ -102,7 +95,6 @@ namespace HardwareInformation.Information.Cpu
 		/// <summary>
 		///     An enum of cache levels and their values
 		/// </summary>
-		[TsEnum]
 		public enum CacheLevel : uint
 		{
 			RESERVED = 0b0,
@@ -118,7 +110,6 @@ namespace HardwareInformation.Information.Cpu
 		/// <summary>
 		///     The cache types and their values
 		/// </summary>
-		[TsEnum]
 		public enum CacheType : uint
 		{
 			NONE = 0x0,

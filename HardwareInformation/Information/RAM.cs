@@ -1,7 +1,6 @@
 ﻿#region using
 
 using System;
-using Reinforced.Typings.Attributes;
 
 #endregion
 
@@ -10,14 +9,12 @@ namespace HardwareInformation.Information
 	/// <summary>
 	///     Construct to represent a RAM/memory module
 	/// </summary>
-	[TsClass]
 	public class RAM
 	{
 #pragma warning disable 1591
 		/// <summary>
 		///     The various different FormFactors and their values.
 		/// </summary>
-		[TsEnum]
 		public enum FormFactors
 		{
 			UNKNOWN = 0,
