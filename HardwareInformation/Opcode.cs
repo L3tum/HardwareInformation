@@ -107,13 +107,13 @@ namespace HardwareInformation
 				// Unix   
 				codeBuffer = NativeMethods.mmap(IntPtr.Zero, size,
 					MmapProts.PROT_READ | MmapProts.PROT_WRITE | MmapProts.PROT_EXEC,
-					MmapFlags.MAP_ANON | MmapFlags.MAP_PRIVATE, -1, 0);
+					MmapFlags.MAP_ANONYMOUS | MmapFlags.MAP_PRIVATE, -1, 0);
 			}
 			else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
 			{
 				// OSX   
 				codeBuffer = NativeMethods.mmap(IntPtr.Zero, size,
-					MmapProts.PROT_WRITE | MmapProts.PROT_EXEC,
+					MmapProts.PROT_READ | MmapProts.PROT_WRITE | MmapProts.PROT_EXEC,
 					MmapFlags.MAP_ANON | MmapFlags.MAP_PRIVATE, -1, 0);
 			}
 			else
@@ -219,7 +219,7 @@ namespace HardwareInformation
 			MAP_FIXED = 0x10, // Interpret addr exactly.
 			MAP_FILE = 0,
 			MAP_ANONYMOUS = 0x20, // Don't use a file.
-			MAP_ANON = MAP_ANONYMOUS,
+			MAP_ANON = 0x1000, // OSX specific MAP_ANON
 
 			// These are Linux-specific.
 			MAP_GROWSDOWN = 0x00100, // Stack-like segment.
