@@ -243,6 +243,7 @@ namespace HardwareInformation
 		private static class NativeMethods
 		{
 			private const string KERNEL = "kernel32.dll";
+			private const string LIBC = "libc";
 
 			[DllImport(KERNEL, CallingConvention = CallingConvention.Winapi)]
 			internal static extern IntPtr VirtualAlloc(IntPtr lpAddress, UIntPtr dwSize,
@@ -252,11 +253,11 @@ namespace HardwareInformation
 			internal static extern bool VirtualFree(IntPtr lpAddress, UIntPtr dwSize,
 				FreeType dwFreeType);
 
-			[DllImport("LIBC", SetLastError = true)]
+			[DllImport(LIBC, SetLastError = true)]
 			internal static extern IntPtr mmap(IntPtr start, ulong length,
 				MmapProts prot, MmapFlags flags, int fd, long offset);
 
-			[DllImport("LIBC", SetLastError = true)]
+			[DllImport(LIBC, SetLastError = true)]
 			internal static extern int munmap(IntPtr start, ulong length);
 		}
 	}
