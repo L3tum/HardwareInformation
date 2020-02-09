@@ -112,6 +112,8 @@ namespace HardwareInformation
 			else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
 			{
 				// OSX   
+				// OSX is NOT POSIX compliant, in the way that MAP_ANON is a different value on OSX (0x1000) than Unix (0x20), which breaks just about every program making use of it
+				// Good job Apple. Good job.
 				codeBuffer = NativeMethods.mmap(IntPtr.Zero, size,
 					MmapProts.PROT_READ | MmapProts.PROT_WRITE | MmapProts.PROT_EXEC,
 					MmapFlags.MAP_ANON | MmapFlags.MAP_PRIVATE, -1, 0);

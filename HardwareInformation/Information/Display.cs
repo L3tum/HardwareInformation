@@ -1,9 +1,8 @@
-﻿#region using
-
-#endregion
-
-namespace HardwareInformation.Information
+﻿namespace HardwareInformation.Information
 {
+	/// <summary>
+	///     Monitor in the system
+	/// </summary>
 	public class Display
 	{
 		/// <summary>
