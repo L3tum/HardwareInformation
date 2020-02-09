@@ -1,14 +1,15 @@
-﻿#region using
-
-#endregion
-
-namespace HardwareInformation.Information
+﻿namespace HardwareInformation.Information
 {
 	/// <summary>
 	///     Construct to represent a hard drive (HDD/SSD)
 	/// </summary>
 	public class Disk
 	{
+		/// <summary>
+		///     Manufacturer of the hard drive
+		/// </summary>
+		public string Vendor { get; set; }
+
 		/// <summary>
 		///     Model string
 		/// </summary>

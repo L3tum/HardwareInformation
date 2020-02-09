@@ -2,7 +2,6 @@
 
 using System;
 using System.Runtime.InteropServices;
-using Mono.Unix.Native;
 
 #endregion
 
@@ -103,10 +102,19 @@ namespace HardwareInformation
 
 			size = (ulong) (rdtscCode.Length + cpuidCode.Length);
 
-			if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux) || RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+			if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
 			{
 				// Unix   
-				codeBuffer = Syscall.mmap(IntPtr.Zero, size,
+				codeBuffer = NativeMethods.mmap(IntPtr.Zero, size,
+					MmapProts.PROT_READ | MmapProts.PROT_WRITE | MmapProts.PROT_EXEC,
+					MmapFlags.MAP_ANONYMOUS | MmapFlags.MAP_PRIVATE, -1, 0);
+			}
+			else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+			{
+				// OSX   
+				// OSX is NOT POSIX compliant, in the way that MAP_ANON is a different value on OSX (0x1000) than Unix (0x20), which breaks just about every program making use of it
+				// Good job Apple. Good job.
+				codeBuffer = NativeMethods.mmap(IntPtr.Zero, size,
 					MmapProts.PROT_READ | MmapProts.PROT_WRITE | MmapProts.PROT_EXEC,
 					MmapFlags.MAP_ANON | MmapFlags.MAP_PRIVATE, -1, 0);
 			}
@@ -138,7 +146,7 @@ namespace HardwareInformation
 			if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux) || RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
 			{
 				// Unix
-				Syscall.munmap(codeBuffer, size);
+				NativeMethods.munmap(codeBuffer, size);
 			}
 			else
 			{
@@ -203,9 +211,47 @@ namespace HardwareInformation
 			}
 		}
 
+		[Map]
+		[Flags]
+		internal enum MmapFlags
+		{
+			MAP_SHARED = 0x01, // Share changes.
+			MAP_PRIVATE = 0x02, // Changes are private.
+			MAP_TYPE = 0x0f, // Mask for type of mapping.
+			MAP_FIXED = 0x10, // Interpret addr exactly.
+			MAP_FILE = 0,
+			MAP_ANONYMOUS = 0x20, // Don't use a file.
+			MAP_ANON = 0x1000, // OSX specific MAP_ANON
+
+			// These are Linux-specific.
+			MAP_GROWSDOWN = 0x00100, // Stack-like segment.
+			MAP_DENYWRITE = 0x00800, // ETXTBSY
+			MAP_EXECUTABLE = 0x01000, // Mark it as an executable.
+			MAP_LOCKED = 0x02000, // Lock the mapping.
+			MAP_NORESERVE = 0x04000, // Don't check for reservations.
+			MAP_POPULATE = 0x08000, // Populate (prefault) pagetables.
+			MAP_NONBLOCK = 0x10000 // Do not block on IO.
+		}
+
+		[Map]
+		[Flags]
+		internal enum MmapProts
+		{
+			PROT_READ = 0x1, // Page can be read.
+			PROT_WRITE = 0x2, // Page can be written.
+			PROT_EXEC = 0x4, // Page can be executed.
+			PROT_NONE = 0x0, // Page can not be accessed.
+			PROT_GROWSDOWN = 0x01000000, // Extend change to start of
+
+			//   growsdown vma (mprotect only).
+			PROT_GROWSUP = 0x02000000 // Extend change to start of
+			//   growsup vma (mprotect only).
+		}
+
 		private static class NativeMethods
 		{
 			private const string KERNEL = "kernel32.dll";
+			private const string LIBC = "libc";
 
 			[DllImport(KERNEL, CallingConvention = CallingConvention.Winapi)]
 			internal static extern IntPtr VirtualAlloc(IntPtr lpAddress, UIntPtr dwSize,
@@ -214,6 +260,13 @@ namespace HardwareInformation
 			[DllImport(KERNEL, CallingConvention = CallingConvention.Winapi)]
 			internal static extern bool VirtualFree(IntPtr lpAddress, UIntPtr dwSize,
 				FreeType dwFreeType);
+
+			[DllImport(LIBC, SetLastError = true)]
+			internal static extern IntPtr mmap(IntPtr start, ulong length,
+				MmapProts prot, MmapFlags flags, int fd, long offset);
+
+			[DllImport(LIBC, SetLastError = true)]
+			internal static extern int munmap(IntPtr start, ulong length);
 		}
 	}
 }
