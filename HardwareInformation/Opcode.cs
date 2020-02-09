@@ -113,8 +113,8 @@ namespace HardwareInformation
 			{
 				// OSX   
 				codeBuffer = NativeMethods.mmap(IntPtr.Zero, size,
-					MmapProts.PROT_READ | MmapProts.PROT_WRITE | MmapProts.PROT_EXEC,
-					MmapFlags.MAP_ANON, -1, 0);
+					MmapProts.PROT_WRITE | MmapProts.PROT_EXEC,
+					MmapFlags.MAP_ANON | MmapFlags.MAP_PRIVATE, -1, 0);
 			}
 			else
 			{
