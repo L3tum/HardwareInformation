@@ -71,21 +71,21 @@ Result is cached internally so don't worry about calling it multiple times
 | CPU Cache Sets | :white_check_mark: | :white_check_mark: | :white_check_mark:
 | CPU Cache WBINVD | :white_check_mark: | :white_check_mark: | :white_check_mark:
 | **Lots** of feature flags | :white_check_mark: | :white_check_mark: | :white_check_mark:
-| RAM Speed*** | :white_check_mark: | :x: | :x:
+| RAM Speed*** | :white_check_mark: | :white_check_mark:* | :x:
 | RAM Manufacturer*** | :white_check_mark: | :x: | :x:
-| RAM Capacity*** | :white_check_mark: | :x: | :x:
-| RAM CapacityHRF*** | :white_check_mark: | :x: | :x:
+| RAM Capacity*** | :white_check_mark: | :white_check_mark:* | :x:
+| RAM CapacityHRF*** | :white_check_mark: | :white_check_mark:* | :x:
 | RAM Locator*** | :white_check_mark: | :x: | :x:
 | RAM PartNumber (Product Name)*** | :white_check_mark: | :x: | :x:
-| RAM FormFactor*** | :white_check_mark: | :x: | :x:
+| RAM FormFactor*** | :white_check_mark: | :white_check_mark:* | :x:
 | RAM Latencies | :x: | :x: | :x:
-| GPUs Vendor | :white_check_mark:*** | :x: | :x:
-| GPUs Name | :white_check_mark:*** | :x: | :x:
+| GPUs Vendor | :white_check_mark:*** | :white_check_mark:* | :x:
+| GPUs Name | :white_check_mark:*** | :white_check_mark:* | :x:
 | GPUs Driver | :white_check_mark:*** | :x: | :x:
 | GPUs Status | :white_check_mark:*** | :x: | :x:
-| Disks Manufacturer | :white_check_mark:*** | :x: | :x:
-| Disks Caption | :white_check_mark:*** | :x: | :x:
-| Disks Capacity | :white_check_mark:*** | :x: | :x:
+| Disks Manufacturer*** | :white_check_mark: | :white_check_mark:* | :x:
+| Disks Caption*** | :white_check_mark: | :white_check_mark:* | :x:
+| Disks Capacity*** | :white_check_mark: | :white_check_mark:* | :x:
 | Displays Manufacturer | :white_check_mark:*** | :x: | :x:
 | Displays Name | :white_check_mark:*** | :x: | :x:
 | Multiple processors/Dual processors | :x: | :x: | :x:
@@ -96,7 +96,7 @@ HRF = Human Readable Format. Normal capacity/size is in bytes, while this is a s
 
 **\*\* Only available on Intel platforms.**
 
-**\*\*\* Accesses operating system features (Windows WMI and Linux /proc/cpuinfo) and thus may not be accurate if those features are not available.**
+**\*\*\* Accesses operating system features (Windows WMI and Linux /proc, /sys or lshw etc.) and thus may not be accurate if those features are not available.**
 
 **\*\*\*\* Only available on AMD platforms.**
 
