@@ -144,7 +144,8 @@ namespace HardwareInformation.Providers
 
 			GetGPUInformation(ref information);
 			GetDiskInformation(ref information);
-			GetRAMInformation(ref information);
+			GetRAMInformation(ref information, relevant => relevant.Contains("DDR") || relevant.Contains("DIMM"));
+			GetRAMInformation(ref information, relevant => relevant.EndsWith("System", StringComparison.Ordinal));
 		}
 
 		public bool Available(MachineInformation information)
@@ -274,7 +275,7 @@ namespace HardwareInformation.Providers
 			}
 		}
 
-		private void GetRAMInformation(ref MachineInformation machineInformation)
+		private void GetRAMInformation(ref MachineInformation machineInformation, Func<string, bool> relevancy)
 		{
 			if (machineInformation.RAMSticks.Count == 0)
 			{
@@ -293,8 +294,7 @@ namespace HardwareInformation.Providers
 							var relevant = line.Split(new[] {"memory"}, StringSplitOptions.RemoveEmptyEntries)[1]
 								.Trim();
 
-							if (relevant.Contains("DDR") || relevant.Contains("DIMM")
-							 || relevant.EndsWith("System", StringComparison.Ordinal))
+							if (relevancy(relevant))
 							{
 								var ram = new RAM();
 								var parts = relevant.Split(' ');
