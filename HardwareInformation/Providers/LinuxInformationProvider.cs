@@ -293,7 +293,8 @@ namespace HardwareInformation.Providers
 							var relevant = line.Split(new[] {"memory"}, StringSplitOptions.RemoveEmptyEntries)[1]
 								.Trim();
 
-							if (relevant.Contains("DDR") || relevant.Contains("DIMM"))
+							if (relevant.Contains("DDR") || relevant.Contains("DIMM")
+							 || relevant.EndsWith("System", StringComparison.Ordinal))
 							{
 								var ram = new RAM();
 								var parts = relevant.Split(' ');
