@@ -13,8 +13,9 @@ namespace SimpleGatheringTest
 	{
 		private static void Main(string[] args)
 		{
-			Console.WriteLine(JsonConvert.SerializeObject(MachineInformationGatherer.GatherInformation(),
-				new StringEnumConverter()));
+			var information = MachineInformationGatherer.GatherInformation();
+			string json = JsonConvert.SerializeObject(information, Formatting.Indented, new StringEnumConverter());
+			Console.WriteLine(json);
 		}
 	}
 }

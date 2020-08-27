@@ -1,7 +1,10 @@
 ﻿#region using
 
 using System;
+using System.Collections.Generic;
+using System.Globalization;
 using System.Runtime.InteropServices;
+using HardwareInformation.Information;
 
 #endregion
 
@@ -78,6 +81,30 @@ namespace HardwareInformation.Providers
 					var info = sr.ReadToEnd().Trim();
 
 					information.Cpu.LogicalCores = uint.Parse(info);
+				}
+				catch (Exception)
+				{
+					// Intentionally left blank
+				}
+			}
+
+			if (information.RAMSticks is null || information.RAMSticks.Count == 0)
+			{
+				try
+				{
+					using var p = Util.StartProcess("sysctl", "-n hw.memsize");
+					using var sr = p.StandardOutput;
+					p.WaitForExit();
+
+					var info = sr.ReadToEnd().Trim();
+
+					var stick = new RAM {
+						Capacity = ulong.Parse(info, CultureInfo.InvariantCulture),
+					};
+					stick.CapacityHRF = Util.FormatBytes(stick.Capacity);
+					
+					information.RAMSticks ??= new List<RAM>();
+					information.RAMSticks.Add(stick);
 				}
 				catch (Exception)
 				{
