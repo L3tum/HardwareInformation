@@ -2,41 +2,34 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <Authors>L3tum</Authors>
+    <LangVersion>8.0</LangVersion>
+
+    <AssemblyName>LostTech.Devices.Information</AssemblyName>
+    <VersionPrefix>4.0.1</VersionPrefix>
+    <Authors>L3tum; Lost Tech LLC</Authors>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <PackageProjectUrl>https://github.com/L3tum/HardwareInformation</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/L3tum/HardwareInformation</RepositoryUrl>
-    <RepositoryType>Github</RepositoryType>
-    <SignAssembly>true</SignAssembly>
-    <DelaySign>false</DelaySign>
-    <AssemblyOriginatorKeyFile>sgKey.snk</AssemblyOriginatorKeyFile>
+    <PackageProjectUrl>https://github.com/losttech/HardwareInformation</PackageProjectUrl>
+    <RepositoryType>git</RepositoryType>
     <Description>.NET Standard 2 Cross-Platform Hardware Information Gatherer</Description>
   </PropertyGroup>
 
   <PropertyGroup>
-    <DocumentationFile>bin\$(Configuration)\$(AssemblyName).xml</DocumentationFile>
-    <LangVersion>8.0</LangVersion>
-  </PropertyGroup>
-
-  <PropertyGroup>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <DebugSymbols>true</DebugSymbols>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-    <Version>3.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="System.Diagnostics.PerformanceCounter" Version="4.7.0" />
     <PackageReference Include="System.Management" Version="4.7.0" />
+
+    <!-- The following is recommended for public projects -->
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
   </ItemGroup>
 
   <ItemGroup>
     <None Include="..\LICENSE">
-      <Pack>True</Pack>
-      <PackagePath></PackagePath>
-    </None>
-    <None Include="bin\$(Configuration)\$(AssemblyName).xml">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
