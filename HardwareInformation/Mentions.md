@@ -1,6 +1,8 @@
+# Marked as "Taken from https://github.com/pruggitorg/detect-windows-version"
+
 MIT License
 
-Copyright (c) 2019-2020 L3tum
+Copyright (c) 2019 pruggitorg
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
