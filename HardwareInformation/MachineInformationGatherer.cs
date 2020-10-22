@@ -16,15 +16,16 @@ using HardwareInformation.Providers;
 
 namespace HardwareInformation
 {
-	/// <summary>
-	///     Main entry class to gather information on the system hardware.
-	/// </summary>
-	public static class MachineInformationGatherer
+    /// <summary>
+    ///     Main entry class to gather information on the system hardware.
+    /// </summary>
+    public static class MachineInformationGatherer
     {
         private static readonly InformationProvider[] InformationProviders =
         {
             new AMDInformationProvider(),
             new IntelInformationProvider(),
+            new VulkanInformationProvider(),
             new WindowsInformationProvider(),
             new LinuxInformationProvider(),
             new OSXInformationProvider()
@@ -138,8 +139,7 @@ namespace HardwareInformation
                 _ when RuntimeInformation.IsOSPlatform(OSPlatform.Windows) => MachineInformation.Platforms.Windows,
                 _ when RuntimeInformation.IsOSPlatform(OSPlatform.Linux) => MachineInformation.Platforms.Linux,
                 _ when RuntimeInformation.IsOSPlatform(OSPlatform.OSX) => MachineInformation.Platforms.OSX,
-                _ when RuntimeInformation.IsOSPlatform(OSPlatform.Windows) => MachineInformation.Platforms.Windows,
-                null or not null => MachineInformation.Platforms.Unknown
+                _ => MachineInformation.Platforms.Unknown
             };
             information.Cpu.LogicalCores = (uint) Environment.ProcessorCount;
             information.Cpu.LogicalCoresPerNode = information.Cpu.LogicalCores;

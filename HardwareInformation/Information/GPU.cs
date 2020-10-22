@@ -1,4 +1,6 @@
-﻿namespace HardwareInformation.Information
+﻿using HardwareInformation.Information.Gpu;
+
+namespace HardwareInformation.Information
 {
 	/// <summary>
 	///     One installed GPU in the system
@@ -6,7 +8,7 @@
 	public class GPU
     {
 	    /// <summary>
-	    ///     Vendor, or as WMI calls it, AdapterCompatibility
+	    ///     Vendor, or as WMI calls it, AdapterCompatibility. One of Gpu.Vendors
 	    /// </summary>
 	    public string Vendor { get; internal set; }
 
@@ -40,5 +42,25 @@
 	    ///     Status of the GPU
 	    /// </summary>
 	    public string Status { get; internal set; }
+
+	    /// <summary>
+	    ///     Type of the GPU
+	    /// </summary>
+	    public DeviceType Type { get; internal set; }
+
+	    /// <summary>
+	    ///     The supported Vulkan API Version
+	    /// </summary>
+	    public string SupportedVulkanApiVersion { get; internal set; }
+
+	    /// <summary>
+	    ///     The available VRAM on this card
+	    /// </summary>
+	    public ulong AvailableVideoMemory { get; internal set; }
+
+	    /// <summary>
+	    ///     The available VRAM in Human-readable-form on this card
+	    /// </summary>
+	    public string AvailableVideoMemoryHRF { get; internal set; }
     }
 }

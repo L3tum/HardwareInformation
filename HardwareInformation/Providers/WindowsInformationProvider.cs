@@ -403,7 +403,25 @@ namespace HardwareInformation.Providers
                 gpus.Add(gpu);
             }
 
-            information.Gpus = gpus.AsReadOnly();
+            if (information.Gpus.Count == 0)
+            {
+                information.Gpus = gpus.AsReadOnly();
+            }
+            else
+            {
+                foreach (var gpu in information.Gpus)
+                {
+                    var wmiGpu = gpus.FirstOrDefault(g => g.Name == gpu.Name);
+
+                    if (wmiGpu is not null)
+                    {
+                        // Currently only DriverDate, Status and Description cannot be queried via Vulkan
+                        gpu.DriverDate = wmiGpu.DriverDate;
+                        gpu.Status = wmiGpu.Status;
+                        gpu.Description = wmiGpu.Description;
+                    }
+                }
+            }
         }
 
         private void GatherWmiMonitorId(ref MachineInformation information, bool win10)
