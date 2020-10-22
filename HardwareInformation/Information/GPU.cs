@@ -37,7 +37,6 @@ namespace HardwareInformation.Information
 	    /// </summary>
 	    public string DriverVersion { get; internal set; }
 
-
 	    /// <summary>
 	    ///     Status of the GPU
 	    /// </summary>
