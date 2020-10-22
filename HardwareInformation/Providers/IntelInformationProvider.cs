@@ -38,8 +38,8 @@ namespace HardwareInformation.Providers
 		public bool Available(MachineInformation information)
 		{
 			return information.Cpu.Vendor == Vendors.Intel &&
-			       (RuntimeInformation.ProcessArchitecture == Architecture.X86 ||
-			        RuntimeInformation.ProcessArchitecture == Architecture.X64);
+				   (RuntimeInformation.ProcessArchitecture == Architecture.X86 ||
+					RuntimeInformation.ProcessArchitecture == Architecture.X64);
 		}
 
 		public void PostProviderUpdateInformation(ref MachineInformation information)
@@ -65,7 +65,7 @@ namespace HardwareInformation.Providers
 		private void GatherCacheTopology(ref MachineInformation information)
 		{
 			var threads = new List<Task>();
-			var caches = information.Cpu.Caches;
+			var caches = new List<Cache>();
 			var supportsCacheTopologyExtensions = information.Cpu.MaxCpuIdFeatureLevel >= 4;
 
 			if (!supportsCacheTopologyExtensions)
@@ -75,7 +75,7 @@ namespace HardwareInformation.Providers
 
 			foreach (var core in information.Cpu.Cores)
 			{
-				threads.Add(Util.RunAffinity(1uL << (int) core.Number, () =>
+				threads.Add(Util.RunAffinity(1uL << (int)core.Number, () =>
 				{
 					var ecx = 0u;
 
@@ -83,7 +83,7 @@ namespace HardwareInformation.Providers
 					{
 						Opcode.Cpuid(out var result, 4, ecx);
 
-						var type = (Cache.CacheType) (result.eax & 0xF);
+						var type = (Cache.CacheType)(result.eax & 0xF);
 
 						// Null, no more caches
 						if (type == Cache.CacheType.NONE)
@@ -94,7 +94,7 @@ namespace HardwareInformation.Providers
 						var cache = new Cache
 						{
 							CoresPerCache = ((result.eax & 0x3FFC000) >> 14) + 1u,
-							Level = (Cache.CacheLevel) ((result.eax & 0xF0) >> 5),
+							Level = (Cache.CacheLevel)((result.eax & 0xF0) >> 5),
 							Type = type,
 							LineSize = (result.ebx & 0xFFF) + 1u,
 							WBINVD = (result.edx & 0b1) == 0,
@@ -129,7 +129,7 @@ namespace HardwareInformation.Providers
 
 			Task.WaitAll(threads.ToArray());
 
-			information.Cpu.Caches = caches;
+			information.Cpu.Caches = caches.AsReadOnly();
 		}
 
 		private void GatherNumberOfPhysicalCores(ref MachineInformation information)
@@ -154,7 +154,7 @@ namespace HardwareInformation.Providers
 				}
 
 				var shift = Util.ExtractBits(result.eax, 0, 4);
-				var coreApicId = result.edx >> (int) shift;
+				var coreApicId = result.edx >> (int)shift;
 
 				if (apicIds.ContainsKey(coreApicId))
 				{
@@ -166,7 +166,7 @@ namespace HardwareInformation.Providers
 				}
 			}
 
-			information.Cpu.PhysicalCores = (uint) apicIds.Count;
+			information.Cpu.PhysicalCores = (uint)apicIds.Count;
 		}
 
 		private void GatherNumberOfPhysicalCoresLegacy(ref MachineInformation information)
@@ -197,7 +197,7 @@ namespace HardwareInformation.Providers
 			Opcode.Cpuid(out var partTwo, 0x80000003, 0);
 			Opcode.Cpuid(out var partThree, 0x80000004, 0);
 
-			var results = new[] {partOne, partTwo, partThree};
+			var results = new[] { partOne, partTwo, partThree };
 			var sb = new StringBuilder();
 
 			foreach (var res in results)
@@ -219,9 +219,9 @@ namespace HardwareInformation.Providers
 				Opcode.Cpuid(out var result, 0x80000001, 0);
 
 				information.Cpu.IntelFeatureFlags.ExtendedFeatureFlagsF81One =
-					(IntelFeatureFlags.ExtendedFeatureFlagsF81ECX) result.ecx;
+					(IntelFeatureFlags.ExtendedFeatureFlagsF81ECX)result.ecx;
 				information.Cpu.IntelFeatureFlags.ExtendedFeatureFlagsF81Two =
-					(IntelFeatureFlags.ExtendedFeatureFlagsF81EDX) result.edx;
+					(IntelFeatureFlags.ExtendedFeatureFlagsF81EDX)result.edx;
 			}
 
 			if (information.Cpu.MaxCpuIdFeatureLevel >= 6)
@@ -229,7 +229,7 @@ namespace HardwareInformation.Providers
 				Opcode.Cpuid(out var result, 6, 0);
 
 				information.Cpu.IntelFeatureFlags.TPMFeatureFlags =
-					(IntelFeatureFlags.TPMFeatureFlagsEAX) result.eax;
+					(IntelFeatureFlags.TPMFeatureFlagsEAX)result.eax;
 			}
 
 			if (information.Cpu.MaxCpuIdExtendedFeatureLevel >= 7)
@@ -237,7 +237,7 @@ namespace HardwareInformation.Providers
 				Opcode.Cpuid(out var result, 0x80000001, 0);
 
 				information.Cpu.IntelFeatureFlags.FeatureFlagsApm =
-					(IntelFeatureFlags.FeatureFlagsAPM) result.edx;
+					(IntelFeatureFlags.FeatureFlagsAPM)result.edx;
 			}
 		}
 	}

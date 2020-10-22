@@ -55,37 +55,37 @@ namespace HardwareInformation.Information
 		public string Manfucturer
 		{
 			get => Manufacturer;
-			set => Manufacturer = value;
+			internal set => Manufacturer = value;
 		}
 
 		/// <summary>
 		///     Manufacturer of the module, can be your vendor (Corsair for example) or the actual manufacturer (like Samsung)
 		/// </summary>
-		public string Manufacturer { get; set; }
+		public string Manufacturer { get; internal set; }
 
 		/// <summary>
 		///     Capacity in bytes
 		/// </summary>
-		public ulong Capacity { get; set; }
+		public ulong Capacity { get; internal set; }
 
 		/// <summary>
 		///     Capacity in human readable format
 		/// </summary>
-		public string CapacityHRF { get; set; }
+		public string CapacityHRF { get; internal set; }
 
 		/// <summary>
 		///     The "name" of the memory module, like DIMM-A1 etc.
 		/// </summary>
-		public string Name { get; set; }
+		public string Name { get; internal set; }
 
 		/// <summary>
 		///     The partnumber of the memory module, mostly the specifier that can be used to search for it on Google
 		/// </summary>
-		public string PartNumber { get; set; }
+		public string PartNumber { get; internal set; }
 
 		/// <summary>
 		///     FormFactor of the module (DIMM vs SODIMM etc.)
 		/// </summary>
-		public FormFactors FormFactor { get; set; }
+		public FormFactors FormFactor { get; internal set; }
 	}
 }
