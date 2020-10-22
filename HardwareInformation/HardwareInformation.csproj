@@ -25,7 +25,7 @@
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-    <Version>3.0.1</Version>
+    <Version>4.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
