@@ -1,9 +1,11 @@
 ﻿#region using
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Runtime.InteropServices;
 using System.Threading;
 using HardwareInformation.Information;
@@ -50,7 +52,7 @@ namespace HardwareInformation
 			}
 
 			if (RuntimeInformation.ProcessArchitecture == Architecture.X86 ||
-			    RuntimeInformation.ProcessArchitecture == Architecture.X64)
+				RuntimeInformation.ProcessArchitecture == Architecture.X64)
 			{
 				Opcode.Open();
 
@@ -103,7 +105,7 @@ namespace HardwareInformation
 			}
 
 			if (!skipClockspeedTest && (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ||
-			                            RuntimeInformation.IsOSPlatform(OSPlatform.Linux)))
+										RuntimeInformation.IsOSPlatform(OSPlatform.Linux)))
 			{
 				GetCoreSpeeds();
 			}
@@ -131,30 +133,33 @@ namespace HardwareInformation
 		private static void GetCommonCpuInformation()
 		{
 			information.OperatingSystem = Environment.OSVersion;
-			information.Platform = RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
-				? MachineInformation.Platforms.Windows
-				: RuntimeInformation.IsOSPlatform(OSPlatform.Linux)
-					? MachineInformation.Platforms.Linux
-					: RuntimeInformation.IsOSPlatform(OSPlatform.OSX)
-						? MachineInformation.Platforms.OSX
-						: MachineInformation.Platforms.Unknown;
-			information.Cpu.LogicalCores = (uint) Environment.ProcessorCount;
+			information.Platform = Expression.Empty() switch
+			{
+				_ when RuntimeInformation.IsOSPlatform(OSPlatform.Windows) => MachineInformation.Platforms.Windows,
+				_ when RuntimeInformation.IsOSPlatform(OSPlatform.Linux) => MachineInformation.Platforms.Linux,
+				_ when RuntimeInformation.IsOSPlatform(OSPlatform.OSX) => MachineInformation.Platforms.OSX,
+				_ when RuntimeInformation.IsOSPlatform(OSPlatform.Windows) => MachineInformation.Platforms.Windows,
+				null or not null => MachineInformation.Platforms.Unknown
+			};
+			information.Cpu.LogicalCores = (uint)Environment.ProcessorCount;
 			information.Cpu.LogicalCoresPerNode = information.Cpu.LogicalCores;
 			information.Cpu.Nodes = 1;
 			information.Cpu.Architecture = RuntimeInformation.ProcessArchitecture.ToString();
 			information.Cpu.Caption = Environment.GetEnvironmentVariable("PROCESSOR_IDENTIFIER") ?? default;
 			information.Cpu.Name = information.Cpu.Caption;
 
+			var cores = new List<Core>();
 			for (var i = 0; i < information.Cpu.LogicalCores; i++)
 			{
-				information.Cpu.Cores.Add(new Core
+				cores.Add(new Core
 				{
-					Number = (uint) i
+					Number = (uint)i
 				});
 			}
+			information.Cpu.Cores = cores.AsReadOnly();
 
 			if (RuntimeInformation.ProcessArchitecture != Architecture.X86 &&
-			    RuntimeInformation.ProcessArchitecture != Architecture.X64)
+				RuntimeInformation.ProcessArchitecture != Architecture.X64)
 			{
 				return;
 			}
@@ -196,9 +201,9 @@ namespace HardwareInformation
 				}
 
 				information.Cpu.Type =
-					(CPU.ProcessorType) ((result.eax & 0b11000000000000) >> 12);
-				information.Cpu.FeatureFlagsOne = (CPU.FeatureFlagEDX) result.edx;
-				information.Cpu.FeatureFlagsTwo = (CPU.FeatureFlagECX) result.ecx;
+					(CPU.ProcessorType)((result.eax & 0b11000000000000) >> 12);
+				information.Cpu.FeatureFlagsOne = (CPU.FeatureFlagEDX)result.edx;
+				information.Cpu.FeatureFlagsTwo = (CPU.FeatureFlagECX)result.ecx;
 			}
 
 			if (information.Cpu.MaxCpuIdFeatureLevel >= 7)
@@ -206,11 +211,11 @@ namespace HardwareInformation
 				Opcode.Cpuid(out result, 7, 0);
 
 				information.Cpu.ExtendedFeatureFlagsF7One =
-					(CPU.ExtendedFeatureFlagsF7EBX) result.ebx;
+					(CPU.ExtendedFeatureFlagsF7EBX)result.ebx;
 				information.Cpu.ExtendedFeatureFlagsF7Two =
-					(CPU.ExtendedFeatureFlagsF7ECX) result.ecx;
+					(CPU.ExtendedFeatureFlagsF7ECX)result.ecx;
 				information.Cpu.ExtendedFeatureFlagsF7Three =
-					(CPU.ExtendedFeatureFlagsF7EDX) result.edx;
+					(CPU.ExtendedFeatureFlagsF7EDX)result.edx;
 			}
 
 			Opcode.Cpuid(out result, 0x80000000, 0);
@@ -221,7 +226,7 @@ namespace HardwareInformation
 		private static void GatherCommonPerCoreInformation()
 		{
 			if (RuntimeInformation.ProcessArchitecture != Architecture.X86 &&
-			    RuntimeInformation.ProcessArchitecture != Architecture.X64)
+				RuntimeInformation.ProcessArchitecture != Architecture.X64)
 			{
 				return;
 			}
@@ -288,7 +293,7 @@ namespace HardwareInformation
 
 				if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
 				{
-					value = (uint) (counter.NextValue() / 100.0f * value);
+					value = (uint)(counter.NextValue() / 100.0f * value);
 					counter.Dispose();
 				}
 				else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
@@ -299,7 +304,7 @@ namespace HardwareInformation
 						var freq = ulong.Parse(
 							File.ReadAllText($"/sys/devices/system/cpu/cpu{i}/cpufreq/scaling_cur_freq"));
 
-						value = (uint) (freq / 1000);
+						value = (uint)(freq / 1000);
 					}
 					catch (Exception)
 					{

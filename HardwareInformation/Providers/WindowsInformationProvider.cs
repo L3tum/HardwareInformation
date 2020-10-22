@@ -279,25 +279,25 @@ namespace HardwareInformation.Providers
                     switch (propertyData.Name)
                     {
                         case "Product":
-                        {
-                            information.SmBios.BoardName = propertyData.Value.ToString();
+                            {
+                                information.SmBios.BoardName = propertyData.Value.ToString();
 
-                            break;
-                        }
+                                break;
+                            }
 
                         case "Manufacturer":
-                        {
-                            information.SmBios.BoardVendor = propertyData.Value.ToString();
+                            {
+                                information.SmBios.BoardVendor = propertyData.Value.ToString();
 
-                            break;
-                        }
+                                break;
+                            }
 
                         case "Version":
-                        {
-                            information.SmBios.BoardVersion = propertyData.Value.ToString();
+                            {
+                                information.SmBios.BoardVersion = propertyData.Value.ToString();
 
-                            break;
-                        }
+                                break;
+                            }
                     }
                 }
             }
@@ -306,6 +306,7 @@ namespace HardwareInformation.Providers
         private void GatherWin32DiskDrive(ref MachineInformation information, bool win10)
         {
             var mos = new ManagementObjectSearcher("select Model,Size,Caption from Win32_DiskDrive");
+            var disks = new List<Disk>();
 
             foreach (var managementBaseObject in mos.Get())
             {
@@ -316,32 +317,35 @@ namespace HardwareInformation.Providers
                     switch (propertyData.Name)
                     {
                         case "Model":
-                        {
-                            disk.Model = propertyData.Value.ToString();
-                            break;
-                        }
+                            {
+                                disk.Model = propertyData.Value.ToString();
+                                break;
+                            }
                         case "Size":
-                        {
-                            disk.Capacity = ulong.Parse(propertyData.Value.ToString());
-                            disk.CapacityHRF = Util.FormatBytes(disk.Capacity);
-                            break;
-                        }
+                            {
+                                disk.Capacity = ulong.Parse(propertyData.Value.ToString());
+                                disk.CapacityHRF = Util.FormatBytes(disk.Capacity);
+                                break;
+                            }
                         case "Caption":
-                        {
-                            disk.Caption = propertyData.Value.ToString();
-                            break;
-                        }
+                            {
+                                disk.Caption = propertyData.Value.ToString();
+                                break;
+                            }
                     }
                 }
 
-                information.Disks.Add(disk);
+                disks.Add(disk);
             }
+
+            information.Disks = disks.AsReadOnly();
         }
 
         private void GatherWin32VideoController(ref MachineInformation information, bool win10)
         {
             var mos = new ManagementObjectSearcher(
                 "select AdapterCompatibility,Caption,Description,DriverDate,DriverVersion,Name,Status from Win32_VideoController");
+            var gpus = new List<GPU>();
 
             foreach (var managementBaseObject in mos.Get())
             {
@@ -352,58 +356,61 @@ namespace HardwareInformation.Providers
                     switch (propertyData.Name)
                     {
                         case "AdapterCompatibility":
-                        {
-                            gpu.Vendor = propertyData.Value.ToString();
+                            {
+                                gpu.Vendor = propertyData.Value.ToString();
 
-                            break;
-                        }
+                                break;
+                            }
                         case "Caption":
-                        {
-                            gpu.Caption = propertyData.Value.ToString();
+                            {
+                                gpu.Caption = propertyData.Value.ToString();
 
-                            break;
-                        }
+                                break;
+                            }
                         case "DriverDate":
-                        {
-                            gpu.DriverDate = propertyData.Value.ToString();
+                            {
+                                gpu.DriverDate = propertyData.Value.ToString();
 
-                            break;
-                        }
+                                break;
+                            }
                         case "DriverVersion":
-                        {
-                            gpu.DriverVersion = propertyData.Value.ToString();
+                            {
+                                gpu.DriverVersion = propertyData.Value.ToString();
 
-                            break;
-                        }
+                                break;
+                            }
                         case "Description":
-                        {
-                            gpu.Description = propertyData.Value.ToString();
+                            {
+                                gpu.Description = propertyData.Value.ToString();
 
-                            break;
-                        }
+                                break;
+                            }
                         case "Name":
-                        {
-                            gpu.Name = propertyData.Value.ToString();
+                            {
+                                gpu.Name = propertyData.Value.ToString();
 
-                            break;
-                        }
+                                break;
+                            }
                         case "Status":
-                        {
-                            gpu.Status = propertyData.Value.ToString();
+                            {
+                                gpu.Status = propertyData.Value.ToString();
 
-                            break;
-                        }
+                                break;
+                            }
                     }
                 }
 
-                information.Gpus.Add(gpu);
+                gpus.Add(gpu);
             }
+
+            information.Gpus = gpus.AsReadOnly();
         }
 
         private void GatherWmiMonitorId(ref MachineInformation information, bool win10)
         {
             var mos = new ManagementObjectSearcher("root\\wmi",
                 "select ManufacturerName,UserFriendlyName from WmiMonitorID");
+            var displays = new List<Display>();
 
             foreach (var managementBaseObject in mos.Get())
             {
@@ -416,27 +423,29 @@ namespace HardwareInformation.Providers
                         switch (propertyData.Name)
                         {
                             case "ManufacturerName":
-                            {
-                                display.Manufacturer = string.Join("", ((IEnumerable<ushort>) propertyData.Value)
-                                    .Select(u => char.ConvertFromUtf32(u)).Where(s => s != "\u0000").ToList());
-                                break;
-                            }
+                                {
+                                    display.Manufacturer = string.Join("", ((IEnumerable<ushort>)propertyData.Value)
+                                        .Select(u => char.ConvertFromUtf32(u)).Where(s => s != "\u0000").ToList());
+                                    break;
+                                }
                             case "UserFriendlyName":
-                            {
-                                display.Name = string.Join("", ((IEnumerable<ushort>) propertyData.Value)
-                                    .Select(u => char.ConvertFromUtf32(u)).Where(s => s != "\u0000").ToList());
-                                break;
-                            }
+                                {
+                                    display.Name = string.Join("", ((IEnumerable<ushort>)propertyData.Value)
+                                        .Select(u => char.ConvertFromUtf32(u)).Where(s => s != "\u0000").ToList());
+                                    break;
+                                }
                         }
                     }
 
-                    information.Displays.Add(display);
+                    displays.Add(display);
                 }
                 catch
                 {
                     // Intentionally left blank
                 }
             }
+
+            information.Displays = displays.AsReadOnly();
         }
 
         private void GatherWin32ProcessorInformation(ref MachineInformation information, bool win10)
@@ -471,63 +480,63 @@ namespace HardwareInformation.Providers
                     switch (propertyData.Name)
                     {
                         case "Name":
-                        {
-                            if (information.Cpu.Name == default || information.Cpu.Name == information.Cpu.Caption)
                             {
-                                information.Cpu.Name = propertyData.Value.ToString().Trim();
-                            }
+                                if (information.Cpu.Name == default || information.Cpu.Name == information.Cpu.Caption)
+                                {
+                                    information.Cpu.Name = propertyData.Value.ToString().Trim();
+                                }
 
-                            break;
-                        }
+                                break;
+                            }
 
                         // MIND THE SSSSSSSS
                         case "NumberOfEnabledCore":
-                        {
-                            var val = uint.Parse(propertyData.Value.ToString());
-
-                            // Safety check
-                            if (information.Cpu.PhysicalCores == default ||
-                                information.Cpu.PhysicalCores == information.Cpu.LogicalCores ||
-                                val != 0 && val != information.Cpu.PhysicalCores)
                             {
-                                information.Cpu.PhysicalCores = val;
-                            }
+                                var val = uint.Parse(propertyData.Value.ToString());
 
-                            break;
-                        }
+                                // Safety check
+                                if (information.Cpu.PhysicalCores == default ||
+                                    information.Cpu.PhysicalCores == information.Cpu.LogicalCores ||
+                                    val != 0 && val != information.Cpu.PhysicalCores)
+                                {
+                                    information.Cpu.PhysicalCores = val;
+                                }
+
+                                break;
+                            }
 
                         case "NumberOfLogicalProcessors":
-                        {
-                            var val = uint.Parse(propertyData.Value.ToString());
-
-                            if (information.Cpu.LogicalCores == default ||
-                                val != 0 && val != information.Cpu.LogicalCores)
                             {
-                                information.Cpu.LogicalCores = val;
-                            }
+                                var val = uint.Parse(propertyData.Value.ToString());
 
-                            break;
-                        }
+                                if (information.Cpu.LogicalCores == default ||
+                                    val != 0 && val != information.Cpu.LogicalCores)
+                                {
+                                    information.Cpu.LogicalCores = val;
+                                }
+
+                                break;
+                            }
 
                         case "SocketDesignation":
-                        {
-                            if (information.Cpu.Socket == default)
                             {
-                                information.Cpu.Socket = propertyData.Value.ToString().Trim();
-                            }
+                                if (information.Cpu.Socket == default)
+                                {
+                                    information.Cpu.Socket = propertyData.Value.ToString().Trim();
+                                }
 
-                            break;
-                        }
+                                break;
+                            }
 
                         case "MaxClockSpeed":
-                        {
-                            if (information.Cpu.NormalClockSpeed == default)
                             {
-                                information.Cpu.NormalClockSpeed = uint.Parse(propertyData.Value.ToString());
-                            }
+                                if (information.Cpu.NormalClockSpeed == default)
+                                {
+                                    information.Cpu.NormalClockSpeed = uint.Parse(propertyData.Value.ToString());
+                                }
 
-                            break;
-                        }
+                                break;
+                            }
                     }
                 }
             }
@@ -536,6 +545,7 @@ namespace HardwareInformation.Providers
         private void GatherWin32PhysicalMemory(ref MachineInformation information, bool win10)
         {
             ManagementObjectSearcher mos;
+            var ramSticks = new List<RAM>();
 
             if (win10)
             {
@@ -568,54 +578,56 @@ namespace HardwareInformation.Providers
                     switch (propertyData.Name)
                     {
                         case "ConfiguredClockSpeed":
-                        {
-                            ram.Speed = uint.Parse(propertyData.Value.ToString());
+                            {
+                                ram.Speed = uint.Parse(propertyData.Value.ToString());
 
-                            break;
-                        }
+                                break;
+                            }
 
                         case "Manufacturer":
-                        {
-                            ram.Manufacturer = propertyData.Value.ToString();
+                            {
+                                ram.Manufacturer = propertyData.Value.ToString();
 
-                            break;
-                        }
+                                break;
+                            }
 
                         case "Capacity":
-                        {
-                            ram.Capacity += ulong.Parse(propertyData.Value.ToString());
+                            {
+                                ram.Capacity += ulong.Parse(propertyData.Value.ToString());
 
-                            break;
-                        }
+                                break;
+                            }
 
                         case "DeviceLocator":
-                        {
-                            ram.Name = propertyData.Value.ToString();
+                            {
+                                ram.Name = propertyData.Value.ToString();
 
-                            break;
-                        }
+                                break;
+                            }
 
                         case "PartNumber":
-                        {
-                            ram.PartNumber = propertyData.Value.ToString();
+                            {
+                                ram.PartNumber = propertyData.Value.ToString();
 
-                            break;
-                        }
+                                break;
+                            }
 
                         case "FormFactor":
-                        {
-                            ram.FormFactor = (RAM.FormFactors) Enum.Parse(
-                                typeof(RAM.FormFactors), propertyData.Value.ToString());
+                            {
+                                ram.FormFactor = (RAM.FormFactors)Enum.Parse(
+                                    typeof(RAM.FormFactors), propertyData.Value.ToString());
 
-                            break;
-                        }
+                                break;
+                            }
                     }
                 }
 
                 ram.CapacityHRF = Util.FormatBytes(ram.Capacity);
 
-                information.RAMSticks.Add(ram);
+                ramSticks.Add(ram);
             }
+
+            information.RAMSticks = ramSticks.AsReadOnly();
         }
 
         private void GatherWin32Bios(ref MachineInformation information, bool win10)
@@ -639,25 +651,25 @@ namespace HardwareInformation.Providers
                     switch (propertyData.Name)
                     {
                         case "Name":
-                        {
-                            information.SmBios.BIOSVersion = propertyData.Value.ToString();
+                            {
+                                information.SmBios.BIOSVersion = propertyData.Value.ToString();
 
-                            break;
-                        }
+                                break;
+                            }
 
                         case "Manufacturer":
-                        {
-                            information.SmBios.BIOSVendor = propertyData.Value.ToString();
+                            {
+                                information.SmBios.BIOSVendor = propertyData.Value.ToString();
 
-                            break;
-                        }
+                                break;
+                            }
 
                         case "Version":
-                        {
-                            information.SmBios.BIOSCodename = propertyData.Value.ToString();
+                            {
+                                information.SmBios.BIOSCodename = propertyData.Value.ToString();
 
-                            break;
-                        }
+                                break;
+                            }
                     }
                 }
             }

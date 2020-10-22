@@ -42,56 +42,52 @@ namespace HardwareInformation
 		/// <summary>
 		///     Creates and initializes a new MachineInformation object
 		/// </summary>
-		public MachineInformation()
+		internal MachineInformation()
 		{
 			Cpu = new CPU();
-			RAMSticks = new List<RAM>();
 			SmBios = new SMBios();
 			Platform = Platforms.Unknown;
-			Disks = new List<Disk>();
-			Gpus = new List<GPU>();
-			Displays = new List<Display>();
 		}
 
 		/// <summary>
 		///     The operating system installed. Version construct supplied by .NET
 		/// </summary>
-		public OperatingSystem OperatingSystem { get; set; }
+		public OperatingSystem OperatingSystem { get; internal set; }
 
 		/// <summary>
 		///     The OS platform .NET is running on. More reliable that OperatingSystem
 		/// </summary>
-		public Platforms Platform { get; set; }
+		public Platforms Platform { get; internal set; }
 
 		/// <summary>
 		///     The CPU that's installed. Can't handle multi-processor environments for now
 		/// </summary>
-		public CPU Cpu { get; set; }
+		public CPU Cpu { get; internal set; }
 
 		/// <summary>
 		///     The SMBios information (mainly BIOS and Mainboard)
 		/// </summary>
-		public SMBios SmBios { get; set; }
+		public SMBios SmBios { get; internal set; }
 
 		/// <summary>
 		///     All the individual RAM sticks installed
 		/// </summary>
-		public List<RAM> RAMSticks { get; set; }
+		public IReadOnlyList<RAM> RAMSticks { get; internal set; }
 
 		/// <summary>
 		///     Disks installed
 		/// </summary>
-		public List<Disk> Disks { get; set; }
+		public IReadOnlyList<Disk> Disks { get; internal set; }
 
 		/// <summary>
 		///     GPUs installed
 		/// </summary>
-		public List<GPU> Gpus { get; set; }
+		public IReadOnlyList<GPU> Gpus { get; internal set; }
 
 
 		/// <summary>
 		///     Displays connected
 		/// </summary>
-		public List<Display> Displays { get; set; }
+		public IReadOnlyList<Display> Displays { get; internal set; }
 	}
 }

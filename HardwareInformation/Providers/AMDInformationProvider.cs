@@ -25,7 +25,7 @@ namespace HardwareInformation.Providers
 				Opcode.Cpuid(out var partTwo, 0x80000003, 0);
 				Opcode.Cpuid(out var partThree, 0x80000004, 0);
 
-				var results = new[] {partOne, partTwo, partThree};
+				var results = new[] { partOne, partTwo, partThree };
 				var sb = new StringBuilder();
 
 				foreach (var res in results)
@@ -71,7 +71,7 @@ namespace HardwareInformation.Providers
 				information.Cpu.PhysicalCores = (result.ecx & 0xFF) + 1;
 
 				if (information.Cpu.FeatureFlagsOne.HasFlag(CPU.FeatureFlagEDX.HTT) &&
-				    information.Cpu.PhysicalCores == information.Cpu.LogicalCores)
+					information.Cpu.PhysicalCores == information.Cpu.LogicalCores)
 				{
 					information.Cpu.PhysicalCores /= 2;
 				}
@@ -83,15 +83,15 @@ namespace HardwareInformation.Providers
 		public bool Available(MachineInformation information)
 		{
 			return (information.Cpu.Vendor == Vendors.AMD ||
-			        information.Cpu.Vendor == Vendors.AMD_LEGACY) &&
-			       (RuntimeInformation.ProcessArchitecture == Architecture.X86 ||
-			        RuntimeInformation.ProcessArchitecture == Architecture.X64);
+					information.Cpu.Vendor == Vendors.AMD_LEGACY) &&
+				   (RuntimeInformation.ProcessArchitecture == Architecture.X86 ||
+					RuntimeInformation.ProcessArchitecture == Architecture.X64);
 		}
 
 		public void PostProviderUpdateInformation(ref MachineInformation information)
 		{
 			if (information.Cpu.AMDFeatureFlags.ExtendedFeatureFlagsF81One.HasFlag(AMDFeatureFlags
-				    .ExtendedFeatureFlagsF81ECX.TOPOEXT) && information.Cpu.PhysicalCores != 0)
+					.ExtendedFeatureFlagsF81ECX.TOPOEXT) && information.Cpu.PhysicalCores != 0)
 			{
 				foreach (var cache in information.Cpu.Caches)
 				{
@@ -107,7 +107,7 @@ namespace HardwareInformation.Providers
 		private void GatherCacheTopology(ref MachineInformation information)
 		{
 			var threads = new List<Task>();
-			var caches = information.Cpu.Caches;
+			var caches = new List<Cache>();
 			var maxExtendedFeatureLevel = information.Cpu.MaxCpuIdExtendedFeatureLevel;
 			var supportsCacheTopologyExtensions =
 				information.Cpu.AMDFeatureFlags.ExtendedFeatureFlagsF81One.HasFlag(AMDFeatureFlags
@@ -115,7 +115,7 @@ namespace HardwareInformation.Providers
 
 			foreach (var core in information.Cpu.Cores)
 			{
-				threads.Add(Util.RunAffinity(1uL << (int) core.Number, () =>
+				threads.Add(Util.RunAffinity(1uL << (int)core.Number, () =>
 				{
 					if (supportsCacheTopologyExtensions)
 					{
@@ -125,7 +125,7 @@ namespace HardwareInformation.Providers
 						{
 							Opcode.Cpuid(out var result, 0x8000001D, ecx);
 
-							var type = (Cache.CacheType) (result.eax & 0xF);
+							var type = (Cache.CacheType)(result.eax & 0xF);
 
 							// Null, no more caches
 							if (type == Cache.CacheType.NONE)
@@ -136,7 +136,7 @@ namespace HardwareInformation.Providers
 							var cache = new Cache
 							{
 								CoresPerCache = ((result.eax & 0x3FFC000) >> 14) + 1u,
-								Level = (Cache.CacheLevel) ((result.eax & 0xF0) >> 5),
+								Level = (Cache.CacheLevel)((result.eax & 0xF0) >> 5),
 								Type = type,
 								LineSize = (result.ebx & 0xFFF) + 1u,
 								WBINVD = (result.edx & 0b1) == 0,
@@ -261,7 +261,7 @@ namespace HardwareInformation.Providers
 								}
 							}
 
-							var l3CacheSize = (ulong) ((result.edx & 0xFFFC0000) >> 18);
+							var l3CacheSize = (ulong)((result.edx & 0xFFFC0000) >> 18);
 
 							// times 512 KB
 							l3CacheSize *= 512000uL;
@@ -298,7 +298,7 @@ namespace HardwareInformation.Providers
 
 			Task.WaitAll(threads.ToArray());
 
-			information.Cpu.Caches = caches;
+			information.Cpu.Caches = caches.AsReadOnly();
 		}
 
 		private void GatherFeatureFlags(ref MachineInformation information)
@@ -308,9 +308,9 @@ namespace HardwareInformation.Providers
 				Opcode.Cpuid(out var result, 0x80000001, 0);
 
 				information.Cpu.AMDFeatureFlags.ExtendedFeatureFlagsF81One =
-					(AMDFeatureFlags.ExtendedFeatureFlagsF81ECX) result.ecx;
+					(AMDFeatureFlags.ExtendedFeatureFlagsF81ECX)result.ecx;
 				information.Cpu.AMDFeatureFlags.ExtendedFeatureFlagsF81Two =
-					(AMDFeatureFlags.ExtendedFeatureFlagsF81EDX) result.edx;
+					(AMDFeatureFlags.ExtendedFeatureFlagsF81EDX)result.edx;
 			}
 
 			if (information.Cpu.MaxCpuIdExtendedFeatureLevel >= 7)
@@ -318,7 +318,7 @@ namespace HardwareInformation.Providers
 				Opcode.Cpuid(out var result, 0x80000007, 0);
 
 				information.Cpu.AMDFeatureFlags.FeatureFlagsApm =
-					(AMDFeatureFlags.FeatureFlagsAPM) result.edx;
+					(AMDFeatureFlags.FeatureFlagsAPM)result.edx;
 			}
 
 			if (information.Cpu.MaxCpuIdExtendedFeatureLevel >= 0xA)
@@ -326,7 +326,7 @@ namespace HardwareInformation.Providers
 				Opcode.Cpuid(out var result, 0x8000000A, 0);
 
 				information.Cpu.AMDFeatureFlags.FeatureFlagsSvm =
-					(AMDFeatureFlags.FeatureFlagsSVM) result.edx;
+					(AMDFeatureFlags.FeatureFlagsSVM)result.edx;
 			}
 		}
 
@@ -380,8 +380,8 @@ namespace HardwareInformation.Providers
 
 			Task.WaitAll(threads);
 
-			information.Cpu.PhysicalCores = (uint) coreIds.Count;
-			information.Cpu.Nodes = (uint) nodeIds.Count;
+			information.Cpu.PhysicalCores = (uint)coreIds.Count;
+			information.Cpu.Nodes = (uint)nodeIds.Count;
 			information.Cpu.LogicalCoresPerNode = nodeIds.First().Value;
 
 			information.Cpu.Cores = cores;

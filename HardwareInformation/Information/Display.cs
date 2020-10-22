@@ -8,11 +8,11 @@
 		/// <summary>
 		///     Manufacturer of the monitor
 		/// </summary>
-		public string Manufacturer { get; set; }
+		public string Manufacturer { get; internal set; }
 
 		/// <summary>
 		///     Name of the monitor
 		/// </summary>
-		public string Name { get; set; }
+		public string Name { get; internal set; }
 	}
 }

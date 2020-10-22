@@ -1,6 +1,7 @@
 ﻿#region using
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -42,7 +43,7 @@ namespace HardwareInformation.Providers
 					var match = modelNameRegex.Match(s);
 
 					if (match.Success && (information.Cpu.Name == default ||
-					                      information.Cpu.Name == information.Cpu.Caption))
+										  information.Cpu.Name == information.Cpu.Caption))
 					{
 						information.Cpu.Name = match.Groups[1].Value.Trim();
 
@@ -66,8 +67,8 @@ namespace HardwareInformation.Providers
 
 						// Safety check
 						if (information.Cpu.PhysicalCores == default ||
-						    information.Cpu.PhysicalCores == information.Cpu.LogicalCores ||
-						    val != 0 && val != information.Cpu.PhysicalCores)
+							information.Cpu.PhysicalCores == information.Cpu.LogicalCores ||
+							val != 0 && val != information.Cpu.PhysicalCores)
 						{
 							information.Cpu.PhysicalCores = val;
 
@@ -82,7 +83,7 @@ namespace HardwareInformation.Providers
 						var val = uint.Parse(match.Groups[1].Value);
 
 						if (match.Success && information.Cpu.LogicalCores == default ||
-						    val != 0 && val != information.Cpu.LogicalCores)
+							val != 0 && val != information.Cpu.LogicalCores)
 						{
 							information.Cpu.LogicalCores = val;
 						}
@@ -161,13 +162,15 @@ namespace HardwareInformation.Providers
 		{
 			if (machineInformation.Gpus.Count == 0)
 			{
+				var gpus = new List<GPU>();
+
 				try
 				{
 					var p = Util.StartProcess("lspci", "");
 					using var sr = p.StandardOutput;
 					p.WaitForExit();
 
-					var lines = sr.ReadToEnd().Trim().Split(new[] {Environment.NewLine},
+					var lines = sr.ReadToEnd().Trim().Split(new[] { Environment.NewLine },
 						StringSplitOptions.RemoveEmptyEntries);
 
 					foreach (var line in lines)
@@ -187,7 +190,7 @@ namespace HardwareInformation.Providers
 										vendor = "Intel Corporation";
 									}
 									else if (relevant.Contains("AMD") ||
-									         relevant.Contains("Advanced Micro Devices") || relevant.Contains("ATI"))
+											 relevant.Contains("Advanced Micro Devices") || relevant.Contains("ATI"))
 									{
 										vendor = "Advanced Micro Devices, Inc.";
 									}
@@ -198,9 +201,9 @@ namespace HardwareInformation.Providers
 
 									var name = relevant.Replace(vendor, "").Replace("[AMD/ATI]", "");
 
-									var gpu = new GPU {Description = relevant, Vendor = vendor, Name = name};
+									var gpu = new GPU { Description = relevant, Vendor = vendor, Name = name };
 
-									machineInformation.Gpus.Add(gpu);
+									gpus.Add(gpu);
 								}
 							}
 							catch
@@ -214,6 +217,10 @@ namespace HardwareInformation.Providers
 				{
 					// Intentionally left blank
 				}
+				finally
+				{
+					machineInformation.Gpus = gpus.AsReadOnly();
+				}
 			}
 		}
 
@@ -221,13 +228,15 @@ namespace HardwareInformation.Providers
 		{
 			if (machineInformation.Disks.Count == 0)
 			{
+				var disks = new List<Disk>();
+
 				try
 				{
 					var p = Util.StartProcess("lshw", "-class disk");
 					var sr = p.StandardOutput;
 					p.WaitForExit();
 					var lines = sr.ReadToEnd()
-						.Split(new[] {Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries);
+						.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
 
 					Disk disk = null;
 
@@ -237,7 +246,7 @@ namespace HardwareInformation.Providers
 						{
 							if (disk != null)
 							{
-								machineInformation.Disks.Add(disk);
+								disks.Add(disk);
 							}
 
 							disk = null;
@@ -264,12 +273,16 @@ namespace HardwareInformation.Providers
 
 					if (disk != null)
 					{
-						machineInformation.Disks.Add(disk);
+						disks.Add(disk);
 					}
 				}
 				catch
 				{
 					// Intentionally left blank
+				}
+				finally
+				{
+					machineInformation.Disks = disks.AsReadOnly();
 				}
 			}
 		}
@@ -278,19 +291,21 @@ namespace HardwareInformation.Providers
 		{
 			if (machineInformation.RAMSticks.Count == 0)
 			{
+				var ramSticks = new List<RAM>();
+
 				try
 				{
 					var p = Util.StartProcess("lshw", "-short -C memory");
 					var sr = p.StandardOutput;
 					p.WaitForExit();
-					var lines = sr.ReadToEnd().Split(new[] {Environment.NewLine},
+					var lines = sr.ReadToEnd().Split(new[] { Environment.NewLine },
 						StringSplitOptions.RemoveEmptyEntries);
 
 					foreach (var line in lines)
 					{
 						try
 						{
-							var relevant = line.Split(new[] {"memory"}, StringSplitOptions.RemoveEmptyEntries)[1]
+							var relevant = line.Split(new[] { "memory" }, StringSplitOptions.RemoveEmptyEntries)[1]
 								.Trim();
 
 							if (relevant.Contains("DDR") || relevant.Contains("DIMM"))
@@ -307,7 +322,7 @@ namespace HardwareInformation.Providers
 									if (formFactor != null)
 									{
 										ram.FormFactor =
-											(RAM.FormFactors) Enum.Parse(typeof(RAM.FormFactors), formFactor);
+											(RAM.FormFactors)Enum.Parse(typeof(RAM.FormFactors), formFactor);
 									}
 									else if (new Regex("^[0-9]+$").IsMatch(part))
 									{
@@ -322,24 +337,24 @@ namespace HardwareInformation.Providers
 
 										if (exponent == "T")
 										{
-											rawNumber = (ulong) number * 1024uL * 1024uL * 1024uL * 1024uL;
+											rawNumber = (ulong)number * 1024uL * 1024uL * 1024uL * 1024uL;
 										}
 										else if (exponent == "G")
 										{
-											rawNumber = (ulong) number * 1024uL * 1024uL * 1024uL;
+											rawNumber = (ulong)number * 1024uL * 1024uL * 1024uL;
 										}
 										else if (exponent == "M")
 										{
-											rawNumber = (ulong) number * 1024uL * 1024uL;
+											rawNumber = (ulong)number * 1024uL * 1024uL;
 										}
 										else if (exponent == "K")
 										{
-											rawNumber = (ulong) number * 1024uL;
+											rawNumber = (ulong)number * 1024uL;
 										}
 										else
 										{
 											// Oof
-											rawNumber = (ulong) number;
+											rawNumber = (ulong)number;
 										}
 
 										ram.Capacity = rawNumber;
@@ -347,7 +362,7 @@ namespace HardwareInformation.Providers
 									}
 								}
 
-								machineInformation.RAMSticks.Add(ram);
+								ramSticks.Add(ram);
 							}
 						}
 						catch
@@ -359,6 +374,10 @@ namespace HardwareInformation.Providers
 				catch
 				{
 					// Intentionally left blank
+				}
+				finally
+				{
+					machineInformation.RAMSticks = ramSticks.AsReadOnly();
 				}
 			}
 		}
