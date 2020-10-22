@@ -12,26 +12,26 @@ using System.Threading.Tasks;
 
 namespace HardwareInformation
 {
-	internal static class Util
-	{
-		internal static byte[] ToByteArray(this string hex)
-		{
-			return Enumerable.Range(0, hex.Length)
-				.Where(x => x % 2 == 0)
-				.Select(x => Convert.ToByte(hex.Substring(x, 2), 16))
-				.ToArray();
-		}
+    internal static class Util
+    {
+        internal static byte[] ToByteArray(this string hex)
+        {
+            return Enumerable.Range(0, hex.Length)
+                .Where(x => x % 2 == 0)
+                .Select(x => Convert.ToByte(hex.Substring(x, 2), 16))
+                .ToArray();
+        }
 
-		internal static string HexStringToString(this string hexString)
-		{
-			if (hexString == null)
-			{
-				throw new ArgumentException();
-			}
+        internal static string HexStringToString(this string hexString)
+        {
+            if (hexString == null)
+            {
+                throw new ArgumentException();
+            }
 
-			var sb = new StringBuilder();
-			for (var i = 0; i < hexString.Length; i += 2)
-			{
+            var sb = new StringBuilder();
+            for (var i = 0; i < hexString.Length; i += 2)
+            {
                 string hexChar;
 
                 if (i == hexString.Length - 1)
@@ -43,7 +43,7 @@ namespace HardwareInformation
                     hexChar = hexString.Substring(i, 2);
                 }
 
-                var cha = (char)Convert.ToByte(hexChar, 16);
+                var cha = (char) Convert.ToByte(hexChar, 16);
 
                 if (cha == '\u0000')
                 {
@@ -53,109 +53,113 @@ namespace HardwareInformation
                 {
                     sb.Append(cha);
                 }
-			}
+            }
 
-			return sb.ToString();
-		}
+            return sb.ToString();
+        }
 
-		internal static Process StartProcess(string cmd, string args)
-		{
-			var psi = new ProcessStartInfo(cmd, args)
-			{
-				CreateNoWindow = true,
-				ErrorDialog = false,
-				RedirectStandardError = true,
-				RedirectStandardInput = true,
-				RedirectStandardOutput = true
-			};
+        internal static Process StartProcess(string cmd, string args)
+        {
+            var psi = new ProcessStartInfo(cmd, args)
+            {
+                CreateNoWindow = true,
+                ErrorDialog = false,
+                RedirectStandardError = true,
+                RedirectStandardInput = true,
+                RedirectStandardOutput = true
+            };
 
-			return Process.Start(psi);
-		}
+            return Process.Start(psi);
+        }
 
-		internal static double? Median<TColl, TValue>(
-			this IEnumerable<TColl> source,
-			Func<TColl, TValue> selector)
-		{
-			return source.Select(selector).Median();
-		}
+        internal static double? Median<TColl, TValue>(
+            this IEnumerable<TColl> source,
+            Func<TColl, TValue> selector)
+        {
+            return source.Select(selector).Median();
+        }
 
-		internal static double? Median<T>(
-			this IEnumerable<T> source)
-		{
-			if (Nullable.GetUnderlyingType(typeof(T)) != null)
-				source = source.Where(x => x != null);
+        internal static double? Median<T>(
+            this IEnumerable<T> source)
+        {
+            if (Nullable.GetUnderlyingType(typeof(T)) != null)
+            {
+                source = source.Where(x => x != null);
+            }
 
-			source = source.OrderBy(n => n);
+            source = source.OrderBy(n => n);
 
-			var enumerable = source as T[] ?? source.ToArray();
-			var count = enumerable.Count();
-			if (count == 0)
-				return null;
+            var enumerable = source as T[] ?? source.ToArray();
+            var count = enumerable.Count();
+            if (count == 0)
+            {
+                return null;
+            }
 
-			var midpoint = count / 2;
+            var midpoint = count / 2;
 
-			if (count % 2 == 0)
-			{
-				return (Convert.ToDouble(enumerable.ElementAt(midpoint - 1)) +
-				        Convert.ToDouble(enumerable.ElementAt(midpoint))) / 2.0;
-			}
+            if (count % 2 == 0)
+            {
+                return (Convert.ToDouble(enumerable.ElementAt(midpoint - 1)) +
+                        Convert.ToDouble(enumerable.ElementAt(midpoint))) / 2.0;
+            }
 
-			return Convert.ToDouble(enumerable.ElementAt(midpoint));
-		}
+            return Convert.ToDouble(enumerable.ElementAt(midpoint));
+        }
 
-		internal static Task RunAffinity(ulong affinity, Action action)
-		{
-			return Task.Run(() =>
-			{
-				var mask = 0xffffffffuL;
+        internal static Task RunAffinity(ulong affinity, Action action)
+        {
+            return Task.Run(() =>
+            {
+                var mask = 0xffffffffuL;
 
-				try
-				{
-					Thread.BeginThreadAffinity();
-					mask = ThreadAffinity.Set(affinity);
+                try
+                {
+                    Thread.BeginThreadAffinity();
+                    mask = ThreadAffinity.Set(affinity);
 
-					action();
-				}
-				finally
-				{
-					ThreadAffinity.Set(mask);
-					Thread.EndThreadAffinity();
-				}
-			});
-		}
+                    action();
+                }
+                finally
+                {
+                    ThreadAffinity.Set(mask);
+                    Thread.EndThreadAffinity();
+                }
+            });
+        }
 
-		internal static string FormatBytes(ulong bytes)
-		{
-			string[] Suffix = {"B", "KiB", "MiB", "GiB", "TiB", "PiB"};
-			int i;
-			double dblSByte = bytes;
-			for (i = 0; i < Suffix.Length && bytes >= 1024; i++, bytes /= 1024)
-			{
-				dblSByte = bytes / 1024.0;
-			}
+        internal static string FormatBytes(ulong bytes)
+        {
+            string[] Suffix = {"B", "KiB", "MiB", "GiB", "TiB", "PiB"};
+            int i;
+            double dblSByte = bytes;
+            for (i = 0; i < Suffix.Length && bytes >= 1024; i++, bytes /= 1024)
+            {
+                dblSByte = bytes / 1024.0;
+            }
 
-			return string.Format("{0:0.##} {1}", Math.Round(dblSByte, 2), Suffix[i]);
-		}
+            return string.Format("{0:0.##} {1}", Math.Round(dblSByte, 2), Suffix[i]);
+        }
 
-		internal static uint ExtractBits(uint number, int start, int end)
-		{
-			var numBits = end - start + 1;
-			var result = number >> start;
-			result &= CreateBitMask(numBits);
+        internal static uint ExtractBits(uint number, int start, int end)
+        {
+            var numBits = end - start + 1;
+            var result = number >> start;
+            result &= CreateBitMask(numBits);
 
-			return result;
-		}
+            return result;
+        }
 
-		internal static uint CreateBitMask(int width)
-		{
-			return (1u << width) - 1;
-		}
+        internal static uint CreateBitMask(int width)
+        {
+            return (1u << width) - 1;
+        }
 
-		internal static int GetNumberOfSetBits(int i)
-		{
-			i -= (i >> 1) & 0x55555555;
-			i = (i & 0x33333333) + ((i >> 2) & 0x33333333);
-			return (((i + (i >> 4)) & 0x0F0F0F0F) * 0x01010101) >> 24;
-		}
-	}
+        internal static int GetNumberOfSetBits(int i)
+        {
+            i -= (i >> 1) & 0x55555555;
+            i = (i & 0x33333333) + ((i >> 2) & 0x33333333);
+            return (((i + (i >> 4)) & 0x0F0F0F0F) * 0x01010101) >> 24;
+        }
+    }
 }

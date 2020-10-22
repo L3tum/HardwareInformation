@@ -12,82 +12,82 @@ namespace HardwareInformation
 	///     Holds all the information that the MachineInformationGatherer can gather
 	/// </summary>
 	public class MachineInformation
-	{
-		/// <summary>
-		///     Operating system enum
-		/// </summary>
-		public enum Platforms
-		{
-			/// <summary>
-			///     Unknwon
-			/// </summary>
-			Unknown,
+    {
+	    /// <summary>
+	    ///     Operating system enum
+	    /// </summary>
+	    public enum Platforms
+        {
+	        /// <summary>
+	        ///     Unknwon
+	        /// </summary>
+	        Unknown,
 
-			/// <summary>
-			///     Linux
-			/// </summary>
-			Linux,
+	        /// <summary>
+	        ///     Linux
+	        /// </summary>
+	        Linux,
 
-			/// <summary>
-			///     Windows
-			/// </summary>
-			Windows,
+	        /// <summary>
+	        ///     Windows
+	        /// </summary>
+	        Windows,
 
-			/// <summary>
-			///     OSX
-			/// </summary>
-			OSX
-		}
+	        /// <summary>
+	        ///     OSX
+	        /// </summary>
+	        OSX
+        }
 
-		/// <summary>
-		///     Creates and initializes a new MachineInformation object
-		/// </summary>
-		internal MachineInformation()
-		{
-			Cpu = new CPU();
-			SmBios = new SMBios();
-			Platform = Platforms.Unknown;
-		}
+	    /// <summary>
+	    ///     Creates and initializes a new MachineInformation object
+	    /// </summary>
+	    internal MachineInformation()
+        {
+            Cpu = new CPU();
+            SmBios = new SMBios();
+            Platform = Platforms.Unknown;
+        }
 
-		/// <summary>
-		///     The operating system installed. Version construct supplied by .NET
-		/// </summary>
-		public OperatingSystem OperatingSystem { get; internal set; }
+	    /// <summary>
+	    ///     The operating system installed. Version construct supplied by .NET
+	    /// </summary>
+	    public OperatingSystem OperatingSystem { get; internal set; }
 
-		/// <summary>
-		///     The OS platform .NET is running on. More reliable that OperatingSystem
-		/// </summary>
-		public Platforms Platform { get; internal set; }
+	    /// <summary>
+	    ///     The OS platform .NET is running on. More reliable that OperatingSystem
+	    /// </summary>
+	    public Platforms Platform { get; internal set; }
 
-		/// <summary>
-		///     The CPU that's installed. Can't handle multi-processor environments for now
-		/// </summary>
-		public CPU Cpu { get; internal set; }
+	    /// <summary>
+	    ///     The CPU that's installed. Can't handle multi-processor environments for now
+	    /// </summary>
+	    public CPU Cpu { get; internal set; }
 
-		/// <summary>
-		///     The SMBios information (mainly BIOS and Mainboard)
-		/// </summary>
-		public SMBios SmBios { get; internal set; }
+	    /// <summary>
+	    ///     The SMBios information (mainly BIOS and Mainboard)
+	    /// </summary>
+	    public SMBios SmBios { get; internal set; }
 
-		/// <summary>
-		///     All the individual RAM sticks installed
-		/// </summary>
-		public IReadOnlyList<RAM> RAMSticks { get; internal set; }
+	    /// <summary>
+	    ///     All the individual RAM sticks installed
+	    /// </summary>
+	    public IReadOnlyList<RAM> RAMSticks { get; internal set; }
 
-		/// <summary>
-		///     Disks installed
-		/// </summary>
-		public IReadOnlyList<Disk> Disks { get; internal set; }
+	    /// <summary>
+	    ///     Disks installed
+	    /// </summary>
+	    public IReadOnlyList<Disk> Disks { get; internal set; }
 
-		/// <summary>
-		///     GPUs installed
-		/// </summary>
-		public IReadOnlyList<GPU> Gpus { get; internal set; }
+	    /// <summary>
+	    ///     GPUs installed
+	    /// </summary>
+	    public IReadOnlyList<GPU> Gpus { get; internal set; }
 
 
-		/// <summary>
-		///     Displays connected
-		/// </summary>
-		public IReadOnlyList<Display> Displays { get; internal set; }
-	}
+	    /// <summary>
+	    ///     Displays connected
+	    /// </summary>
+	    public IReadOnlyList<Display> Displays { get; internal set; }
+    }
 }
