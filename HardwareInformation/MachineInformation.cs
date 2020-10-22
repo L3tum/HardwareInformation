@@ -72,22 +72,22 @@ namespace HardwareInformation
 	    /// <summary>
 	    ///     All the individual RAM sticks installed
 	    /// </summary>
-	    public IReadOnlyList<RAM> RAMSticks { get; internal set; }
+	    public IReadOnlyList<RAM> RAMSticks { get; internal set; } = new List<RAM>().AsReadOnly();
 
 	    /// <summary>
 	    ///     Disks installed
 	    /// </summary>
-	    public IReadOnlyList<Disk> Disks { get; internal set; }
+	    public IReadOnlyList<Disk> Disks { get; internal set; } = new List<Disk>().AsReadOnly();
 
 	    /// <summary>
 	    ///     GPUs installed
 	    /// </summary>
-	    public IReadOnlyList<GPU> Gpus { get; internal set; }
+	    public IReadOnlyList<GPU> Gpus { get; internal set; } = new List<GPU>().AsReadOnly();
 
 
 	    /// <summary>
 	    ///     Displays connected
 	    /// </summary>
-	    public IReadOnlyList<Display> Displays { get; internal set; }
+	    public IReadOnlyList<Display> Displays { get; internal set; } = new List<Display>().AsReadOnly();
     }
 }
