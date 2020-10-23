@@ -13,7 +13,7 @@
     <AssemblyOriginatorKeyFile>sgKey.snk</AssemblyOriginatorKeyFile>
     <Description>.NET Standard 2 Cross-Platform Hardware Information Gatherer</Description>
     <Configurations>Debug;Release</Configurations>
-    <Platforms>AnyCPU;X86</Platforms>
+    <Platforms>AnyCPU</Platforms>
   </PropertyGroup>
 
   <PropertyGroup>
