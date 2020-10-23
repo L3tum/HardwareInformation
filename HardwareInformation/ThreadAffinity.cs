@@ -18,7 +18,7 @@ namespace HardwareInformation
                 return 0;
             }
 
-            var x86Mask = (uint) mask;
+            var x86Mask = (int) mask;
 
             var returnMask = 0xffffffffuL;
 
@@ -58,7 +58,14 @@ namespace HardwareInformation
                 {
                     try
                     {
-                        processThread.ProcessorAffinity = (IntPtr) (Environment.Is64BitProcess ? mask : x86Mask);
+                        if (Environment.Is64BitProcess)
+                        {
+                            processThread.ProcessorAffinity = (IntPtr) mask;
+                        }
+                        else
+                        {
+                            processThread.ProcessorAffinity = (IntPtr) x86Mask;
+                        }
                     }
                     catch (Win32Exception)
                     {
