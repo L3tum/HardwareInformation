@@ -134,7 +134,16 @@ namespace HardwareInformation
             Rdtsc = Marshal.GetDelegateForFunctionPointer(
                 codeBuffer, typeof(RdtscDelegate)) as RdtscDelegate;
 
-            var cpuidAddress = (IntPtr) ((long) codeBuffer + rdtscCode.Length);
+            IntPtr cpuidAddress;
+            if (Environment.Is64BitProcess)
+            {
+                cpuidAddress = (IntPtr) ((long) codeBuffer + rdtscCode.Length);
+            }
+            else
+            {
+                cpuidAddress = (IntPtr) ((int) codeBuffer + rdtscCode.Length);
+            }
+
             Marshal.Copy(cpuidCode, 0, cpuidAddress, cpuidCode.Length);
 
             Cpuid = Marshal.GetDelegateForFunctionPointer(

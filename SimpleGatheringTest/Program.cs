@@ -1,6 +1,7 @@
 ﻿#region using
 
 using System;
+using System.Runtime.ExceptionServices;
 using HardwareInformation;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
@@ -19,12 +20,18 @@ namespace SimpleGatheringTest
 
         private static void Main(string[] args)
         {
+            AppDomain.CurrentDomain.FirstChanceException += CurrentDomainOnFirstChanceException;
             Console.WriteLine(
                 JsonConvert.SerializeObject(
                     MachineInformationGatherer.GatherInformation(logger: Logger),
                     new StringEnumConverter()
                 )
             );
+        }
+
+        private static void CurrentDomainOnFirstChanceException(object? sender, FirstChanceExceptionEventArgs e)
+        {
+	        Logger.LogError(e.Exception, "First Chance");
         }
     }
 }
