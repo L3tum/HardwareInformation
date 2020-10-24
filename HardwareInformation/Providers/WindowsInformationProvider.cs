@@ -6,6 +6,7 @@ using System.Linq;
 using System.Management;
 using System.Runtime.InteropServices;
 using System.Security;
+using System.Threading;
 using HardwareInformation.Information;
 
 #endregion
@@ -162,6 +163,9 @@ namespace HardwareInformation.Providers
 
     internal class WindowsInformationProvider : InformationProvider
     {
+        private string currentUsbDeviceId = "";
+        private int counter = 0;
+        
         public void GatherInformation(ref MachineInformation information)
         {
             var win10 = false;
@@ -246,6 +250,15 @@ namespace HardwareInformation.Providers
             {
                 // Intentionally left blank
             }
+
+            try
+            {
+                GatherPnpDevices(ref information, win10);
+            }
+            catch
+            {
+                // Intentionally left blank
+            }
         }
 
         public bool Available(MachineInformation information)
@@ -256,6 +269,153 @@ namespace HardwareInformation.Providers
         public void PostProviderUpdateInformation(ref MachineInformation information)
         {
             // Intentionally left blank
+        }
+
+        private void GatherPnpDevices(ref MachineInformation information, bool win10)
+        {
+            if (!win10)
+            {
+                return;
+            }
+
+            var usbDeviceIds = new List<string>();
+
+            var mos = new ManagementObjectSearcher("select PNPDeviceID from Win32_PnPEntity");
+
+            foreach (var managementBaseObject in mos.Get())
+            {
+                if (managementBaseObject?.Properties == null || managementBaseObject.Properties.Count == 0)
+                {
+                    continue;
+                }
+
+                foreach (var propertyData in managementBaseObject.Properties)
+                {
+                    if (propertyData?.Value == null)
+                    {
+                        continue;
+                    }
+
+                    if (propertyData.Name == "PNPDeviceID")
+                    {
+                        usbDeviceIds.Add(propertyData.Value.ToString());
+                    }
+                }
+            }
+
+            var workingSet = usbDeviceIds.Where(deviceId => deviceId.StartsWith("USB"))
+                .Select(deviceId => deviceId.Split('\\')).Where(parts => !parts[1].Contains("HUB"))
+                .GroupBy(parts => parts[2]).Select(grp => grp.First())
+                .Select(grp => string.Join("\\", grp)).ToList();
+
+            foreach (var usbDeviceId in workingSet)
+            {
+                Console.WriteLine(usbDeviceId);
+            }
+
+            using var p = Util.StartProcess("powershell.exe", "-noexit -nologo");
+            var hasLines = false;
+            var dataReceived = false;
+            var data = new Dictionary<string, string[]>();
+            p.OutputDataReceived += (sender, args) =>
+            {
+                if (args is null || args.Data is null)
+                {
+                    dataReceived = true;
+                    return;
+                }
+                if (hasLines)
+                {
+                    Console.WriteLine(args.Data);
+                    
+                    if (!data.ContainsKey(currentUsbDeviceId))
+                    {
+                        data.Add(currentUsbDeviceId, new string[4]);
+                    }
+
+                    data[currentUsbDeviceId][counter] = args.Data;
+                    counter++;
+                    hasLines = false;
+                    dataReceived = true;
+                }
+                else if (args.Data.StartsWith("-"))
+                {
+                    hasLines = true;
+                }
+                else if (string.IsNullOrWhiteSpace(args.Data))
+                {
+                    dataReceived = true;
+                    hasLines = false;
+                }
+            };
+            p.Start();
+            p.BeginOutputReadLine();
+
+            foreach (var usbDeviceId in workingSet)
+            {
+                currentUsbDeviceId = usbDeviceId;
+                counter = 0;
+                p.StandardInput.WriteLine(
+                    $"Get-PnPDeviceProperty -InstanceId '{usbDeviceId}' -KeyName 'DEVPKEY_Device_BusReportedDeviceDesc' | select Data");
+                while (!dataReceived)
+                {
+                    Thread.Sleep(10);
+                }
+
+                dataReceived = false;
+
+                p.StandardInput.WriteLine(
+                    $"Get-PnPDeviceProperty -InstanceId '{usbDeviceId}' -KeyName 'DEVPKEY_Device_DriverDesc' | select Data");
+                while (!dataReceived)
+                {
+                    Thread.Sleep(10);
+                }
+
+                dataReceived = false;
+
+                p.StandardInput.WriteLine(
+                    $"Get-PnPDeviceProperty -InstanceId '{usbDeviceId}' -KeyName 'DEVPKEY_Device_DriverDate' | select Data");
+                while (!dataReceived)
+                {
+                    Thread.Sleep(10);
+                }
+
+                dataReceived = false;
+                
+                p.StandardInput.WriteLine(
+                    $"Get-PnPDeviceProperty -InstanceId '{usbDeviceId}' -KeyName 'DEVPKEY_Device_DriverVersion' | select Data");
+                while (!dataReceived)
+                {
+                    Thread.Sleep(10);
+                }
+
+                dataReceived = false;
+            }
+
+            p.Kill();
+
+            foreach (var stringse in data)
+            {
+                Console.WriteLine($"{stringse.Key}: {string.Join(", ", stringse.Value)}");
+            }
+
+            // using var p = Util.StartProcess("powershell.exe", "Get-PnPDevice | where InstanceId -like \"USB*\" | ForEach-Object { Get-PnPDeviceProperty -InstanceId $_.InstanceId -KeyName 'DEVPKEY_Device_BusReportedDeviceDesc' | select KeyName, Type, Data } | where Type -ne 'Empty'");
+            // p.Start();
+            // var i = 0;
+            // p.OutputDataReceived += (sender, args) =>
+            // {
+            //     if (i < 20)
+            //     {
+            //         Console.WriteLine(args.Data);
+            //         i++;
+            //     }
+            //     else
+            //     {
+            //         p.Kill();
+            //     }
+            // };
+            // p.BeginOutputReadLine();
+            // p.WaitForExit(10000);
         }
 
         private void GatherWin32BaseBoard(ref MachineInformation information, bool win10)
