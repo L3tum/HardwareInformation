@@ -89,5 +89,10 @@ namespace HardwareInformation
 	    ///     Displays connected
 	    /// </summary>
 	    public IReadOnlyList<Display> Displays { get; internal set; } = new List<Display>().AsReadOnly();
+
+	    /// <summary>
+	    ///     USB Devices connected
+	    /// </summary>
+	    public IReadOnlyList<USBDevice> UsbDevices { get; internal set; } = new List<USBDevice>().AsReadOnly();
     }
 }

@@ -6,7 +6,6 @@ using System.Linq;
 using System.Management;
 using System.Runtime.InteropServices;
 using System.Security;
-using System.Threading;
 using HardwareInformation.Information;
 
 #endregion
@@ -163,9 +162,6 @@ namespace HardwareInformation.Providers
 
     internal class WindowsInformationProvider : InformationProvider
     {
-        private string currentUsbDeviceId = "";
-        private int counter = 0;
-        
         public void GatherInformation(ref MachineInformation information)
         {
             var win10 = false;
@@ -278,144 +274,149 @@ namespace HardwareInformation.Providers
                 return;
             }
 
-            var usbDeviceIds = new List<string>();
-
-            var mos = new ManagementObjectSearcher("select PNPDeviceID from Win32_PnPEntity");
+            var mos = new ManagementObjectSearcher("select * from Win32_PnPEntity");
+            var data = new Dictionary<string, string[]>();
 
             foreach (var managementBaseObject in mos.Get())
             {
-                if (managementBaseObject?.Properties == null || managementBaseObject.Properties.Count == 0)
+                var deviceId = managementBaseObject.Properties["DeviceID"].Value as string;
+
+                if (deviceId is null || !deviceId.StartsWith("USB") || deviceId.Split('\\')[1].Contains("HUB"))
                 {
                     continue;
                 }
 
-                foreach (var propertyData in managementBaseObject.Properties)
+                if (!data.ContainsKey(deviceId))
                 {
-                    if (propertyData?.Value == null)
-                    {
-                        continue;
-                    }
+                    data.Add(deviceId, new string[6]);
+                }
 
-                    if (propertyData.Name == "PNPDeviceID")
+                var mo = managementBaseObject as ManagementObject;
+                var inParams = mo.GetMethodParameters("GetDeviceProperties");
+                inParams["devicePropertyKeys"] = new[]
+                {
+                    "DEVPKEY_Device_BusReportedDeviceDesc", "DEVPKEY_Device_DriverDesc", "DEVPKEY_Device_DriverVersion",
+                    "DEVPKEY_Device_DriverDate", "DEVPKEY_Device_Class", "DEVPKEY_Device_DriverProvider"
+                };
+
+                var result = mo.InvokeMethod(
+                    "GetDeviceProperties",
+                    inParams,
+                    new InvokeMethodOptions()
+                );
+
+                if (result?.Properties["deviceProperties"].Value is null)
+                {
+                    continue;
+                }
+
+                foreach (var deviceProperties in result.Properties["deviceProperties"].Value as ManagementBaseObject[])
+                {
+                    var keyName = deviceProperties.Properties["KeyName"].Value as string;
+                    var value = deviceProperties.Properties["Data"].Value as string;
+
+                    switch (keyName)
                     {
-                        usbDeviceIds.Add(propertyData.Value.ToString());
+                        case "DEVPKEY_Device_BusReportedDeviceDesc":
+                        {
+                            data[deviceId][0] = value;
+                            break;
+                        }
+                        case "DEVPKEY_Device_DriverDesc":
+                        {
+                            data[deviceId][1] = value;
+                            break;
+                        }
+                        case "DEVPKEY_Device_DriverVersion":
+                        {
+                            data[deviceId][2] = value;
+                            break;
+                        }
+                        case "DEVPKEY_Device_DriverDate":
+                        {
+                            var year = int.Parse(value.Substring(0, 4));
+                            var month = int.Parse(value.Substring(4, 2));
+                            var day = int.Parse(value.Substring(6, 2));
+                            var hour = int.Parse(value.Substring(8, 2));
+                            var minute = int.Parse(value.Substring(10, 2));
+                            var second = int.Parse(value.Substring(12, 2));
+
+                            data[deviceId][3] = new DateTime(year, month, day, hour, minute, second).ToString();
+                            break;
+                        }
+                        case "DEVPKEY_Device_Class":
+                        {
+                            data[deviceId][4] = value;
+                            break;
+                        }
+                        case "DEVPKEY_Device_DriverProvider":
+                        {
+                            data[deviceId][5] = value;
+                            break;
+                        }
                     }
                 }
             }
 
-            var workingSet = usbDeviceIds.Where(deviceId => deviceId.StartsWith("USB"))
-                .Select(deviceId => deviceId.Split('\\')).Where(parts => !parts[1].Contains("HUB"))
-                .GroupBy(parts => parts[2]).Select(grp => grp.First())
-                .Select(grp => string.Join("\\", grp)).ToList();
-
-            foreach (var usbDeviceId in workingSet)
-            {
-                Console.WriteLine(usbDeviceId);
-            }
-
-            using var p = Util.StartProcess("powershell.exe", "-noexit -nologo");
-            var hasLines = false;
-            var dataReceived = false;
-            var data = new Dictionary<string, string[]>();
-            p.OutputDataReceived += (sender, args) =>
-            {
-                if (args is null || args.Data is null)
-                {
-                    dataReceived = true;
-                    return;
-                }
-                if (hasLines)
-                {
-                    Console.WriteLine(args.Data);
-                    
-                    if (!data.ContainsKey(currentUsbDeviceId))
-                    {
-                        data.Add(currentUsbDeviceId, new string[4]);
-                    }
-
-                    data[currentUsbDeviceId][counter] = args.Data;
-                    counter++;
-                    hasLines = false;
-                    dataReceived = true;
-                }
-                else if (args.Data.StartsWith("-"))
-                {
-                    hasLines = true;
-                }
-                else if (string.IsNullOrWhiteSpace(args.Data))
-                {
-                    dataReceived = true;
-                    hasLines = false;
-                }
-            };
-            p.Start();
-            p.BeginOutputReadLine();
-
-            foreach (var usbDeviceId in workingSet)
-            {
-                currentUsbDeviceId = usbDeviceId;
-                counter = 0;
-                p.StandardInput.WriteLine(
-                    $"Get-PnPDeviceProperty -InstanceId '{usbDeviceId}' -KeyName 'DEVPKEY_Device_BusReportedDeviceDesc' | select Data");
-                while (!dataReceived)
-                {
-                    Thread.Sleep(10);
-                }
-
-                dataReceived = false;
-
-                p.StandardInput.WriteLine(
-                    $"Get-PnPDeviceProperty -InstanceId '{usbDeviceId}' -KeyName 'DEVPKEY_Device_DriverDesc' | select Data");
-                while (!dataReceived)
-                {
-                    Thread.Sleep(10);
-                }
-
-                dataReceived = false;
-
-                p.StandardInput.WriteLine(
-                    $"Get-PnPDeviceProperty -InstanceId '{usbDeviceId}' -KeyName 'DEVPKEY_Device_DriverDate' | select Data");
-                while (!dataReceived)
-                {
-                    Thread.Sleep(10);
-                }
-
-                dataReceived = false;
-                
-                p.StandardInput.WriteLine(
-                    $"Get-PnPDeviceProperty -InstanceId '{usbDeviceId}' -KeyName 'DEVPKEY_Device_DriverVersion' | select Data");
-                while (!dataReceived)
-                {
-                    Thread.Sleep(10);
-                }
-
-                dataReceived = false;
-            }
-
-            p.Kill();
+            var realData = new Dictionary<string, USBDevice>();
 
             foreach (var stringse in data)
             {
-                Console.WriteLine($"{stringse.Key}: {string.Join(", ", stringse.Value)}");
+                var deviceDesc = stringse.Value[0];
+                var driverDesc = stringse.Value[1];
+
+
+                if (!realData.ContainsKey(deviceDesc))
+                {
+                    realData.Add(deviceDesc,
+                        new USBDevice
+                        {
+                            Name = deviceDesc, DriverName = driverDesc, DriverVersion = stringse.Value[2],
+                            DriverDate = DateTime.Parse(stringse.Value[3]), Class = stringse.Value[4],
+                            DriverProvider = stringse.Value[5]
+                        });
+                }
+                else
+                {
+                    var replace = false;
+                    
+                    // Prefer composite over solely input
+                    if (realData[deviceDesc].DriverName == "USB Input Device" && driverDesc == "USB Composite Device")
+                    {
+                        replace = true;
+                    }
+                    // Prefer composite over solely output
+                    else if (realData[deviceDesc].DriverName == "USB Output Device" &&
+                             driverDesc == "USB Composite Device")
+                    {
+                        replace = true;
+                    }
+                    // Prefer composite over solely audio
+                    else if (realData[deviceDesc].DriverName == "USB Audio Device" &&
+                             driverDesc == "USB Composite Device")
+                    {
+                        replace = true;
+                    }
+                    // Prefer custom description over windows-default
+                    else if (driverDesc is not "USB Input Device" and not "USB Composite Device" and not
+                        "USB Output Device" and not "USB Audio Device")
+                    {
+                        replace = true;
+                    }
+
+                    if (replace)
+                    {
+                        realData[deviceDesc] = new USBDevice
+                        {
+                            Name = deviceDesc, DriverName = driverDesc, DriverVersion = stringse.Value[2],
+                            DriverDate = DateTime.Parse(stringse.Value[3]), Class = stringse.Value[4],
+                            DriverProvider = stringse.Value[5]
+                        };
+                    }
+                }
             }
 
-            // using var p = Util.StartProcess("powershell.exe", "Get-PnPDevice | where InstanceId -like \"USB*\" | ForEach-Object { Get-PnPDeviceProperty -InstanceId $_.InstanceId -KeyName 'DEVPKEY_Device_BusReportedDeviceDesc' | select KeyName, Type, Data } | where Type -ne 'Empty'");
-            // p.Start();
-            // var i = 0;
-            // p.OutputDataReceived += (sender, args) =>
-            // {
-            //     if (i < 20)
-            //     {
-            //         Console.WriteLine(args.Data);
-            //         i++;
-            //     }
-            //     else
-            //     {
-            //         p.Kill();
-            //     }
-            // };
-            // p.BeginOutputReadLine();
-            // p.WaitForExit(10000);
+            information.UsbDevices = new List<USBDevice>(realData.Values).AsReadOnly();
         }
 
         private void GatherWin32BaseBoard(ref MachineInformation information, bool win10)
