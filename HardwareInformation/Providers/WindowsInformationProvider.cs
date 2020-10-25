@@ -1,7 +1,9 @@
 ﻿#region using
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Management;
 using System.Runtime.InteropServices;
@@ -15,111 +17,10 @@ namespace HardwareInformation.Providers
     #region Win32API
 
     // Taken from https://github.com/pruggitorg/detect-windows-version
-    internal enum ProductType : byte
-    {
-        /// <summary>
-        ///     The operating system is Windows 10, Windows 8, Windows 7,...
-        /// </summary>
-        /// <remarks>VER_NT_WORKSTATION</remarks>
-        Workstation = 0x0000001,
-
-        /// <summary>
-        ///     The system is a domain controller and the operating system is Windows Server.
-        /// </summary>
-        /// <remarks>VER_NT_DOMAIN_CONTROLLER</remarks>
-        DomainController = 0x0000002,
-
-        /// <summary>
-        ///     The operating system is Windows Server. Note that a server that is also a domain controller
-        ///     is reported as VER_NT_DOMAIN_CONTROLLER, not VER_NT_SERVER.
-        /// </summary>
-        /// <remarks>VER_NT_SERVER</remarks>
-        Server = 0x0000003
-    }
-
-
-    // Taken from https://github.com/pruggitorg/detect-windows-version
-    [Flags]
-    internal enum SuiteMask : ushort
-    {
-        /// <summary>
-        ///     Microsoft BackOffice components are installed.
-        /// </summary>
-        VER_SUITE_BACKOFFICE = 0x00000004,
-
-        /// <summary>
-        ///     Windows Server 2003, Web Edition is installed
-        /// </summary>
-        VER_SUITE_BLADE = 0x00000400,
-
-        /// <summary>
-        ///     Windows Server 2003, Compute Cluster Edition is installed.
-        /// </summary>
-        VER_SUITE_COMPUTE_SERVER = 0x00004000,
-
-        /// <summary>
-        ///     Windows Server 2008 Datacenter, Windows Server 2003, Datacenter Edition, or Windows 2000 Datacenter Server is
-        ///     installed.
-        /// </summary>
-        VER_SUITE_DATACENTER = 0x00000080,
-
-        /// <summary>
-        ///     Windows Server 2008 Enterprise, Windows Server 2003, Enterprise Edition, or Windows 2000 Advanced Server is
-        ///     installed.
-        ///     Refer to the Remarks section for more information about this bit flag.
-        /// </summary>
-        VER_SUITE_ENTERPRISE = 0x00000002,
-
-        /// <summary>
-        ///     Windows XP Embedded is installed.
-        /// </summary>
-        VER_SUITE_EMBEDDEDNT = 0x00000040,
-
-        /// <summary>
-        ///     Windows Vista Home Premium, Windows Vista Home Basic, or Windows XP Home Edition is installed.
-        /// </summary>
-        VER_SUITE_PERSONAL = 0x00000200,
-
-        /// <summary>
-        ///     Remote Desktop is supported, but only one interactive session is supported. This value is set unless the system is
-        ///     running in application server mode.
-        /// </summary>
-        VER_SUITE_SINGLEUSERTS = 0x00000100,
-
-        /// <summary>
-        ///     Microsoft Small Business Server was once installed on the system, but may have been upgraded to another version of
-        ///     Windows.
-        ///     Refer to the Remarks section for more information about this bit flag.
-        /// </summary>
-        VER_SUITE_SMALLBUSINESS = 0x00000001,
-
-        /// <summary>
-        ///     Microsoft Small Business Server is installed with the restrictive client license in force. Refer to the Remarks
-        ///     section for more information about this bit flag.
-        /// </summary>
-        VER_SUITE_SMALLBUSINESS_RESTRICTED = 0x00000020,
-
-        /// <summary>
-        ///     Windows Storage Server 2003 R2 or Windows Storage Server 2003is installed.
-        /// </summary>
-        VER_SUITE_STORAGE_SERVER = 0x00002000,
-
-        /// <summary>
-        ///     Terminal Services is installed. This value is always set.
-        ///     If VER_SUITE_TERMINAL is set but VER_SUITE_SINGLEUSERTS is not set, the system is running in application server
-        ///     mode.
-        /// </summary>
-        VER_SUITE_TERMINAL = 0x00000010,
-
-        /// <summary>
-        ///     Windows Home Server is installed.
-        /// </summary>
-        VER_SUITE_WH_SERVER = 0x00008000
-
-        //VER_SUITE_MULTIUSERTS = 0x00020000
-    }
-
-    // Taken from https://github.com/pruggitorg/detect-windows-version
+    // ReSharper disable InconsistentNaming
+    // ReSharper disable FieldCanBeMadeReadOnly.Global
+    // ReSharper disable MemberCanBePrivate.Global
+    // ReSharper disable IdentifierTypo
     internal enum NTSTATUS : uint
     {
         /// <summary>
@@ -144,8 +45,8 @@ namespace HardwareInformation.Providers
 
         public ushort ServicePackMajor;
         public ushort ServicePackMinor;
-        public SuiteMask SuiteMask;
-        public ProductType ProductType;
+        public ushort SuiteMask;
+        public byte ProductType;
         public byte Reserved;
     }
 
@@ -157,11 +58,19 @@ namespace HardwareInformation.Providers
         [DllImport(NTDLL, EntryPoint = "RtlGetVersion", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern NTSTATUS ntdll_RtlGetVersion(ref OSVERSIONINFOEX versionInfo);
     }
+    // ReSharper restore InconsistentNaming
+    // ReSharper restore FieldCanBeMadeReadOnly.Global
+    // ReSharper restore MemberCanBePrivate.Global
+    // ReSharper restore IdentifierTypo
 
     #endregion
 
     internal class WindowsInformationProvider : InformationProvider
     {
+        private long totalElapsedTime = 0L;
+        private List<long> elapsedTimes = new List<long>();
+        private Stopwatch stopwatch = new Stopwatch();
+        
         public void GatherInformation(ref MachineInformation information)
         {
             var win10 = false;
@@ -264,16 +173,25 @@ namespace HardwareInformation.Providers
 
         public void PostProviderUpdateInformation(ref MachineInformation information)
         {
-            // Intentionally left blank
+            Console.WriteLine(totalElapsedTime);
+            Console.WriteLine(elapsedTimes.Average());
         }
 
         private void GatherPnpDevices(ref MachineInformation information, bool win10)
         {
             using var mos = new ManagementObjectSearcher("select * from Win32_PnPEntity");
+            var mbos = new ArrayList(mos.Get());
             var data = new Dictionary<string, string[]>();
 
-            foreach (var managementBaseObject in mos.Get())
+            for (var i = 0; i < mbos.Count; i++)
             {
+                var managementBaseObject = mbos[i] as ManagementBaseObject;
+
+                if (managementBaseObject is null)
+                {
+                    continue;
+                }
+
                 var deviceId = managementBaseObject.Properties["DeviceID"].Value as string;
 
                 if (deviceId is null || !deviceId.StartsWith("USB") || deviceId.Split('\\')[1].Contains("HUB"))
@@ -283,16 +201,11 @@ namespace HardwareInformation.Providers
 
                 if (!data.ContainsKey(deviceId))
                 {
-                    data.Add(deviceId, new string[6]);
+                    data.Add(deviceId, new string[8]);
                 }
 
                 var mo = managementBaseObject as ManagementObject;
                 var inParams = mo.GetMethodParameters("GetDeviceProperties");
-                inParams["devicePropertyKeys"] = new[]
-                {
-                    "DEVPKEY_Device_BusReportedDeviceDesc", "DEVPKEY_Device_DriverDesc", "DEVPKEY_Device_DriverVersion",
-                    "DEVPKEY_Device_DriverDate", "DEVPKEY_Device_Class", "DEVPKEY_Device_DriverProvider"
-                };
 
                 var result = mo.InvokeMethod(
                     "GetDeviceProperties",
@@ -309,6 +222,14 @@ namespace HardwareInformation.Providers
                 {
                     var keyName = deviceProperties.Properties["KeyName"].Value as string;
                     var value = deviceProperties.Properties["Data"].Value as string;
+
+                    if (value is null || keyName is null)
+                    {
+                        continue;
+                    }
+
+                    // Cleanup (who the fuck makes typos in a driver)
+                    value = value.Replace("U SB", "USB").Replace("Micro soft", "Microsoft");
 
                     switch (keyName)
                     {
@@ -349,6 +270,39 @@ namespace HardwareInformation.Providers
                             data[deviceId][5] = value;
                             break;
                         }
+                        case "DEVPKEY_NAME":
+                        {
+                            data[deviceId][6] = value;
+                            break;
+                        }
+                        case "DEVPKEY_Device_Manufacturer":
+                        {
+                            data[deviceId][7] = value;
+                            break;
+                        }
+                        case "DEVPKEY_Device_Children":
+                        {
+                            var children = deviceProperties.Properties["DEVPKEY_Device_Children"];
+                            if (children.Value is not null)
+                            {
+                                if (children.IsArray)
+                                {
+                                    foreach (var child in children.Value as string[])
+                                    {
+                                        mos.Query = new ObjectQuery(
+                                            $"select * from Win32_PnPEntity where DeviceID = {child}");
+                                        var childs = mos.Get();
+
+                                        foreach (var child1 in childs)
+                                        {
+                                            mbos.Add(child1);
+                                        }
+                                    }
+                                }
+                            }
+
+                            break;
+                        }
                     }
                 }
             }
@@ -360,58 +314,106 @@ namespace HardwareInformation.Providers
                 var deviceDesc = stringse.Value[0];
                 var driverDesc = stringse.Value[1];
 
-
                 if (!realData.ContainsKey(deviceDesc))
                 {
+                    var vidPid = FetchProductAndVendor(stringse.Key);
+
                     realData.Add(deviceDesc,
                         new USBDevice
                         {
-                            Name = deviceDesc, DriverName = driverDesc, DriverVersion = stringse.Value[2],
-                            DriverDate = DateTime.Parse(stringse.Value[3]), Class = stringse.Value[4],
-                            DriverProvider = stringse.Value[5]
+                            Name = stringse.Value[6], BusReportedName = deviceDesc, DriverName = driverDesc,
+                            DriverVersion = stringse.Value[2], DriverDate = DateTime.Parse(stringse.Value[3]),
+                            Class = stringse.Value[4], DriverProvider = stringse.Value[5],
+                            Manufacturer = stringse.Value[7],
+                            DeviceID = stringse.Key, VendorID = vidPid.Item1, ProductID = vidPid.Item2,
+                            VendorName = vidPid.Item3, ProductName = vidPid.Item4
                         });
                 }
                 else
                 {
+                    var device = realData[deviceDesc];
                     var replace = false;
 
                     // Prefer composite over solely input
-                    if (realData[deviceDesc].DriverName == "USB Input Device" && driverDesc == "USB Composite Device")
+                    if (device.DriverName == "USB Input Device" && driverDesc == "USB Composite Device")
                     {
                         replace = true;
                     }
                     // Prefer composite over solely output
-                    else if (realData[deviceDesc].DriverName == "USB Output Device" &&
+                    else if (device.DriverName == "USB Output Device" &&
                              driverDesc == "USB Composite Device")
                     {
                         replace = true;
                     }
                     // Prefer composite over solely audio
-                    else if (realData[deviceDesc].DriverName == "USB Audio Device" &&
+                    else if (device.DriverName == "USB Audio Device" &&
                              driverDesc == "USB Composite Device")
+                    {
+                        replace = true;
+                    }
+                    // Prefer different DriverProvider over Microsoft (standard)
+                    else if (device.DriverProvider == "Microsoft" && stringse.Value[5] != "Microsoft")
+                    {
+                        replace = true;
+                    }
+                    // Prefer different (or any) Manufacturer over Microsoft
+                    else if (device.Manufacturer is null or "Microsoft" &&
+                             stringse.Value[7] is not null and not "Microsoft")
                     {
                         replace = true;
                     }
                     // Prefer custom description over windows-default
                     else if (driverDesc is not "USB Input Device" and not "USB Composite Device" and not
-                        "USB Output Device" and not "USB Audio Device")
+                                 "USB Output Device" and not "USB Audio Device" and not "USB Mass Storage Device"
+                                 and not "Disk Drive" and not "USB Attached SCSI (UAS) Mass Storage Device"
+                             && !driverDesc.StartsWith("Generic"))
                     {
                         replace = true;
                     }
 
                     if (replace)
                     {
-                        realData[deviceDesc].Name = deviceDesc;
-                        realData[deviceDesc].DriverName = driverDesc;
-                        realData[deviceDesc].DriverVersion = stringse.Value[2];
-                        realData[deviceDesc].DriverDate = DateTime.Parse(stringse.Value[3]);
-                        realData[deviceDesc].Class = stringse.Value[4];
-                        realData[deviceDesc].DriverProvider = stringse.Value[5];
+                        device.Name = stringse.Value[6];
+                        device.BusReportedName = deviceDesc;
+                        device.DriverName = driverDesc;
+                        device.DriverVersion = stringse.Value[2];
+                        device.DriverDate = DateTime.Parse(stringse.Value[3]);
+                        device.Class = stringse.Value[4];
+                        device.DriverProvider = stringse.Value[5];
+                        device.Manufacturer = stringse.Value[7];
+
+                        if (stringse.Key != device.DeviceID &&
+                            (device.ProductName is null || device.VendorName is null))
+                        {
+                            var vidPid = FetchProductAndVendor(stringse.Key);
+
+                            device.VendorID ??= vidPid.Item1;
+                            device.ProductID ??= vidPid.Item2;
+                            device.VendorName ??= vidPid.Item3;
+                            device.ProductName ??= vidPid.Item4;
+                        }
                     }
                 }
             }
 
             information.UsbDevices = new List<USBDevice>(realData.Values).AsReadOnly();
+        }
+
+        private Tuple<string, string, string, string> FetchProductAndVendor(string deviceId)
+        {
+            stopwatch.Restart();
+            var vidPid = deviceId.Split('\\')[1];
+            var vid = vidPid.StartsWith("VID_") ? vidPid.Split('&')[0].Replace("VID_", "") : null;
+            var pid = vidPid.StartsWith("VID_") ? vidPid.Split('&')[1].Replace("PID_", "") : null;
+            var vendorName = vid is not null ? USBVendorList.GetVendorName(vid) : null;
+            var productName = vid is not null && pid is not null
+                ? USBVendorList.GetProductName(vid, pid)
+                : null;
+            stopwatch.Stop();
+            elapsedTimes.Add(stopwatch.ElapsedMilliseconds);
+            totalElapsedTime += stopwatch.ElapsedMilliseconds;
+
+            return Tuple.Create(vid, pid, vendorName, productName);
         }
 
         private void GatherWin32BaseBoard(ref MachineInformation information, bool win10)

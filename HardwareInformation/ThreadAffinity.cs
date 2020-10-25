@@ -72,7 +72,7 @@ namespace HardwareInformation
                         //Console.WriteLine("{0} with mask {1}", e.Message, GetIntBinaryString(mask));
                         // Intentionally left blank
                     }
-                    catch (OverflowException e)
+                    catch (OverflowException)
                     {
 	                    // Intentionally left blank
                     }

@@ -1,0 +1,142 @@
+<#@ template language="C#" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Net" #>
+<#@ import namespace="System.Globalization" #>
+
+<#
+    var wc = new WebClient();
+    using var webData = wc.OpenRead("http://www.linux-usb.org/usb.ids");
+    using var sr = new StreamReader(webData);
+
+    var vendorIds = new Dictionary<int, string>();
+    var vendorProductIds = new Dictionary<int, Dictionary<int, string>>();
+    var currentManufacturer = 0;
+
+    while (!sr.EndOfStream)
+    {
+        var line = sr.ReadLine();
+
+        if (line is null)
+        {
+            break;
+        }
+
+        // Cutoff point
+        if (line is "# List of known device classes, subclasses and protocols")
+        {
+            break;
+        }
+
+        if (line.StartsWith("#") || string.IsNullOrWhiteSpace(line))
+        {
+            continue;
+        }
+
+        if (line.StartsWith("\t") && !line.StartsWith("\t\t"))
+        {
+            var parts = line.Split(new[] {" "}, 2, StringSplitOptions.RemoveEmptyEntries);
+            var id = int.Parse(parts[0].Trim(), NumberStyles.HexNumber);
+            var name = parts[1].Trim().Replace("\\", "\\\\").Replace("\"", "\\\"");
+
+            if (!vendorProductIds.ContainsKey(currentManufacturer))
+            {
+                vendorProductIds.Add(currentManufacturer, new Dictionary<int, string>());
+            }
+
+            if (vendorProductIds[currentManufacturer].ContainsKey(id))
+            {
+                Console.WriteLine($"{currentManufacturer} has multiple products under ID {id}");
+                continue;
+            }
+
+            vendorProductIds[currentManufacturer].Add(id, name);
+        }
+        else if (!line.StartsWith("\t"))
+        {
+            var parts = line.Split(new[] {" "}, 2, StringSplitOptions.RemoveEmptyEntries);
+            var id = int.Parse(parts[0].Trim(), NumberStyles.HexNumber);
+            var name = parts[1].Trim().Replace("\\", "\\\\").Replace("\"", "\\\"");
+
+            if (!vendorIds.ContainsKey(id))
+            {
+                vendorIds.Add(id, name);
+            }
+
+            currentManufacturer = id;
+
+            if (!vendorProductIds.ContainsKey(currentManufacturer))
+            {
+                vendorProductIds.Add(currentManufacturer, new Dictionary<int, string>());
+            }
+        }
+    }
+
+    sr.Close();
+#>
+
+namespace HardwareInformation.Providers {
+    using System.Collections.Generic;
+    using System.Globalization;
+
+    internal static class USBVendorList {
+        private static Dictionary<int, string> vendorIds = new Dictionary<int, string> {
+<#
+    foreach (var kvp in vendorIds)
+    {
+#>
+    { <#= kvp.Key #>, "<#= kvp.Value #>" },
+        <#
+    }
+#>
+        };
+
+        private static Dictionary<int, Dictionary<int, string>> vendorProductIds = new Dictionary<int, Dictionary<int, string>> {
+<#
+    foreach (var kvp in vendorProductIds)
+    {
+#>
+    { <#= kvp.Key #>, new Dictionary<int, string>(){ 
+    <#
+
+    foreach (var productIds in kvp.Value)
+    {
+#>
+{ <#= productIds.Key #>, "<#= productIds.Value #>" },
+<#
+    }
+
+#>
+ } },
+        <#
+    }
+#>
+        };
+
+    internal static string GetVendorName(string vendorId) {
+        return GetVendorName(int.Parse(vendorId, NumberStyles.HexNumber));
+    }
+
+    internal static string GetProductName(string vendorId, string productId) {
+        return GetProductName(int.Parse(vendorId, NumberStyles.HexNumber), int.Parse(productId, NumberStyles.HexNumber));
+    }
+
+    internal static string GetVendorName(int vendorId) {
+        if (vendorIds.TryGetValue(vendorId, out var vendorName)) {
+            return vendorName;
+        }    
+        return null;
+    }
+
+    internal static string GetProductName(int vendorId, int productId) {
+        if (vendorProductIds.TryGetValue(vendorId, out var vendorProducts)) {
+            if (vendorProducts.TryGetValue(productId, out var productName)) {
+                return productName;
+            }
+        }
+    
+        return null;
+    }
+
+    }
+}
