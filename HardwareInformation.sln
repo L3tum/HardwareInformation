@@ -14,6 +14,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HardwareInformation.Typings", "HardwareInformation.Typings\HardwareInformation.Typings.csproj", "{EBC32D50-4BF7-4EF9-BFB8-B1B85BF7E042}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HardwareInformation.Benchmarks", "HardwareInformation.Benchmarks\HardwareInformation.Benchmarks.csproj", "{AABBE14D-ABAE-46BF-8EBD-FFD85B358E69}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -46,6 +48,14 @@ Global
 		{EBC32D50-4BF7-4EF9-BFB8-B1B85BF7E042}.Release|Any CPU.Build.0 = Release|Any CPU
 		{EBC32D50-4BF7-4EF9-BFB8-B1B85BF7E042}.Release|X86.ActiveCfg = Release|x86
 		{EBC32D50-4BF7-4EF9-BFB8-B1B85BF7E042}.Release|X86.Build.0 = Release|x86
+		{AABBE14D-ABAE-46BF-8EBD-FFD85B358E69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AABBE14D-ABAE-46BF-8EBD-FFD85B358E69}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AABBE14D-ABAE-46BF-8EBD-FFD85B358E69}.Debug|X86.ActiveCfg = Debug|Any CPU
+		{AABBE14D-ABAE-46BF-8EBD-FFD85B358E69}.Debug|X86.Build.0 = Debug|Any CPU
+		{AABBE14D-ABAE-46BF-8EBD-FFD85B358E69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AABBE14D-ABAE-46BF-8EBD-FFD85B358E69}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AABBE14D-ABAE-46BF-8EBD-FFD85B358E69}.Release|X86.ActiveCfg = Release|Any CPU
+		{AABBE14D-ABAE-46BF-8EBD-FFD85B358E69}.Release|X86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

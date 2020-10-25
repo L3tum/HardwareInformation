@@ -28,12 +28,10 @@ namespace HardwareInformation.Typings
                 typeof(Disk),
                 typeof(Display),
                 typeof(GPU),
-                typeof(Vendors),
                 typeof(RAM),
                 typeof(SMBios),
                 typeof(Cache),
                 typeof(Core),
-                typeof(Information.Cpu.Vendors),
                 typeof(AMDFeatureFlags),
                 typeof(IntelFeatureFlags),
                 typeof(USBDevice)
@@ -42,6 +40,11 @@ namespace HardwareInformation.Typings
                 configBuilder.WithAllFields().WithAllMethods()
                     .WithAllProperties();
             });
+
+            builder.ExportAsClass<Vendors>().WithAllFields().WithAllMethods().WithAllProperties()
+                .OverrideName("CPUVendors");
+            builder.ExportAsClass<Information.Gpu.Vendors>().WithAllFields().WithAllMethods().WithAllProperties()
+                .OverrideName("GPUVendors");
 
             builder.ExportAsClass<OperatingSystem>().WithFields(field =>
                 field.Name is "Platform" or "ServicePack" or "Version" or "VersionString");
