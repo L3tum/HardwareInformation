@@ -155,7 +155,7 @@ namespace HardwareInformation.Providers
             {
                 GatherPnpDevices(ref information, win10);
             }
-            catch (Exception e)
+            catch
             {
                 // Intentionally left blank
             }
