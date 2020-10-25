@@ -3,3518 +3,119 @@
 namespace HardwareInformation.Providers {
     using System.Collections.Generic;
     using System.Globalization;
+    using System;
+    using System.Runtime.CompilerServices;
 
     internal static class USBVendorList {
-        private static Dictionary<int, string> vendorIds = new Dictionary<int, string> {
-    { 1, "Fry's Electronics" },
-            { 2, "Ingram" },
-            { 3, "Club Mac" },
-            { 4, "Nebraska Furniture Mart" },
-            { 17, "Unknown" },
-            { 83, "Planex" },
-            { 120, "Microntek" },
-            { 121, "DragonRise Inc." },
-            { 128, "Unknown" },
-            { 133, "Boeye Technology Co., Ltd." },
-            { 258, "miniSTREAK" },
-            { 261, "Trust International B.V." },
-            { 295, "IBP" },
-            { 325, "Unknown" },
-            { 380, "MLK" },
-            { 512, "TP-Link" },
-            { 516, "Chipsbank Microelectronics Co., Ltd" },
-            { 536, "Hangzhou Worlde" },
-            { 685, "HUMAX Co., Ltd." },
-            { 771, "Mini Automation Controller" },
-            { 804, "OCZ Technology Inc" },
-            { 805, "OCZ Technology Inc" },
-            { 902, "LTS" },
-            { 985, "Shenzhen Sinote Tech-Electron Co., Ltd" },
-            { 986, "Bernd Walter Computer Technology" },
-            { 999, "Intel" },
-            { 1000, "EndPoints, Inc." },
-            { 1001, "Thesys Microelectronics" },
-            { 1002, "Data Broadcasting Corp." },
-            { 1003, "Atmel Corp." },
-            { 1004, "Iwatsu America, Inc." },
-            { 1005, "Mitel Corp." },
-            { 1006, "Mitsumi" },
-            { 1008, "HP, Inc" },
-            { 1009, "Genoa Technology" },
-            { 1010, "Oak Technology, Inc." },
-            { 1011, "Adaptec, Inc." },
-            { 1012, "Diebold, Inc." },
-            { 1013, "Siemens Electromechanical" },
-            { 1016, "Epson Imaging Technology Center" },
-            { 1017, "KeyTronic Corp." },
-            { 1019, "OPTi, Inc." },
-            { 1020, "Elitegroup Computer Systems" },
-            { 1021, "Xilinx, Inc." },
-            { 1022, "Farallon Comunications" },
-            { 1024, "National Semiconductor Corp." },
-            { 1025, "National Registry, Inc." },
-            { 1026, "ALi Corp." },
-            { 1027, "Future Technology Devices International, Ltd" },
-            { 1028, "NCR Corp." },
-            { 1029, "Synopsys, Inc." },
-            { 1030, "Fujitsu-ICL Computers" },
-            { 1031, "Fujitsu Personal Systems, Inc." },
-            { 1032, "Quanta Computer, Inc." },
-            { 1033, "NEC Corp." },
-            { 1034, "Kodak Co." },
-            { 1035, "Weltrend Semiconductor" },
-            { 1036, "VTech Computers, Ltd" },
-            { 1037, "VIA Technologies, Inc." },
-            { 1038, "MCCI" },
-            { 1039, "Echo Speech Corp." },
-            { 1041, "BUFFALO INC. (formerly MelCo., Inc.)" },
-            { 1042, "Award Software International" },
-            { 1043, "Leadtek Research, Inc." },
-            { 1044, "Giga-Byte Technology Co., Ltd" },
-            { 1046, "Winbond Electronics Corp." },
-            { 1047, "Symbios Logic" },
-            { 1048, "AST Research" },
-            { 1049, "Samsung Info. Systems America, Inc." },
-            { 1050, "Phoenix Technologies, Ltd" },
-            { 1051, "d'TV" },
-            { 1053, "S3, Inc." },
-            { 1054, "Creative Technology, Ltd" },
-            { 1055, "LCS Telegraphics" },
-            { 1056, "Chips and Technologies" },
-            { 1057, "Nokia Mobile Phones" },
-            { 1058, "ADI Systems, Inc." },
-            { 1059, "Computer Access Technology Corp." },
-            { 1060, "Microchip Technology, Inc. (formerly SMSC)" },
-            { 1061, "Motorola Semiconductors HK, Ltd" },
-            { 1062, "Integrated Device Technology, Inc." },
-            { 1063, "Motorola Electronics Taiwan, Ltd" },
-            { 1064, "Advanced Gravis Computer Tech, Ltd" },
-            { 1065, "Cirrus Logic" },
-            { 1066, "Ericsson Austrian, AG" },
-            { 1067, "Intel Corp." },
-            { 1068, "Innovative Semiconductors, Inc." },
-            { 1069, "Micronics" },
-            { 1070, "Acer, Inc." },
-            { 1071, "Molex, Inc." },
-            { 1072, "Sun Microsystems, Inc." },
-            { 1073, "Itac Systems, Inc." },
-            { 1074, "Unisys Corp." },
-            { 1075, "Alps Electric, Inc." },
-            { 1076, "Samsung Info. Systems America, Inc." },
-            { 1077, "Hyundai Electronics America" },
-            { 1078, "Taugagreining HF" },
-            { 1079, "Framatome Connectors USA" },
-            { 1080, "Advanced Micro Devices, Inc." },
-            { 1081, "Voice Technologies Group" },
-            { 1085, "Lexmark International, Inc." },
-            { 1086, "LG Electronics USA, Inc." },
-            { 1087, "RadiSys Corp." },
-            { 1088, "Eizo Nanao Corp." },
-            { 1089, "Winbond Systems Lab." },
-            { 1090, "Ericsson, Inc." },
-            { 1091, "Gateway, Inc." },
-            { 1093, "Lucent Technologies, Inc." },
-            { 1094, "NMB Technologies Corp." },
-            { 1095, "Momentum Microsystems" },
-            { 1097, "Duta Multi Robotik" },
-            { 1098, "Shamrock Tech. Co., Ltd" },
-            { 1099, "WSI" },
-            { 1100, "CCL/ITRI" },
-            { 1101, "Siemens Nixdorf AG" },
-            { 1102, "Alps Electric Co., Ltd" },
-            { 1103, "ThrustMaster, Inc." },
-            { 1104, "DFI, Inc." },
-            { 1105, "Texas Instruments, Inc." },
-            { 1106, "Mitsubishi Electronics America, Inc." },
-            { 1107, "CMD Technology" },
-            { 1108, "Vobis Microcomputer AG" },
-            { 1109, "Telematics International, Inc." },
-            { 1110, "Analog Devices, Inc." },
-            { 1111, "Silicon Integrated Systems Corp." },
-            { 1112, "KYE Systems Corp. (Mouse Systems)" },
-            { 1113, "Adobe Systems, Inc." },
-            { 1114, "SONICblue, Inc." },
-            { 1115, "Hitachi, Ltd" },
-            { 1117, "Nortel Networks, Ltd" },
-            { 1118, "Microsoft Corp." },
-            { 1120, "Ace Cad Enterprise Co., Ltd" },
-            { 1121, "Primax Electronics, Ltd" },
-            { 1123, "MGE UPS Systems" },
-            { 1124, "AMP/Tycoelectronics Corp." },
-            { 1127, "AT&T Paradyne" },
-            { 1128, "Wieson Technologies Co., Ltd" },
-            { 1130, "Cherry GmbH" },
-            { 1131, "American Megatrends, Inc." },
-            { 1132, "Toshiba Corp., Digital Media Equipment" },
-            { 1133, "Logitech, Inc." },
-            { 1134, "Behavior Tech. Computer Corp." },
-            { 1135, "Crystal Semiconductor" },
-            { 1137, "Philips (or NXP)" },
-            { 1138, "Chicony Electronics Co., Ltd" },
-            { 1139, "Sanyo Information Business Co., Ltd" },
-            { 1140, "Sanyo Electric Co., Ltd" },
-            { 1141, "Relisys/Teco Information System" },
-            { 1142, "AESP" },
-            { 1143, "Seagate Technology, Inc." },
-            { 1144, "Connectix Corp." },
-            { 1145, "Advanced Peripheral Laboratories" },
-            { 1146, "Semtech Corp." },
-            { 1147, "Silitek Corp." },
-            { 1148, "Dell Computer Corp." },
-            { 1149, "Kensington" },
-            { 1150, "Agere Systems, Inc. (Lucent)" },
-            { 1151, "Plantronics, Inc." },
-            { 1152, "Toshiba America Inc" },
-            { 1153, "Zenith Data Systems" },
-            { 1154, "Kyocera Corp." },
-            { 1155, "STMicroelectronics" },
-            { 1156, "Specialix" },
-            { 1157, "Nokia Monitors" },
-            { 1158, "ASUS Computers, Inc." },
-            { 1159, "Stewart Connector" },
-            { 1160, "Cirque Corp." },
-            { 1161, "Foxconn / Hon Hai" },
-            { 1162, "S-MOS Systems, Inc." },
-            { 1164, "Alps Electric Ireland, Ltd" },
-            { 1165, "Integrated Technology Express, Inc." },
-            { 1167, "Eicon Tech." },
-            { 1168, "United Microelectronics Corp." },
-            { 1169, "Capetronic" },
-            { 1170, "Samsung SemiConductor, Inc." },
-            { 1171, "MAG Technology Co., Ltd" },
-            { 1173, "ESS Technology, Inc." },
-            { 1174, "Micron Electronics" },
-            { 1175, "Smile International" },
-            { 1176, "Capetronic (Kaohsiung) Corp." },
-            { 1177, "Yamaha Corp." },
-            { 1178, "Gandalf Technologies, Ltd" },
-            { 1179, "Curtis Computer Products" },
-            { 1180, "Acer Advanced Labs, Inc." },
-            { 1181, "VLSI Technology" },
-            { 1183, "Compaq Computer Corp." },
-            { 1184, "Digital Equipment Corp." },
-            { 1185, "SystemSoft Corp." },
-            { 1186, "FirePower Systems" },
-            { 1187, "Trident Microsystems, Inc." },
-            { 1188, "Hitachi, Ltd" },
-            { 1189, "Acer Peripherals Inc. (now BenQ Corp.)" },
-            { 1190, "Nokia Display Products" },
-            { 1191, "Visioneer" },
-            { 1192, "Multivideo Labs, Inc." },
-            { 1193, "Canon, Inc." },
-            { 1194, "DaeWoo Telecom, Ltd" },
-            { 1195, "Chromatic Research" },
-            { 1196, "Micro Audiometrics Corp." },
-            { 1197, "Dooin Electronics" },
-            { 1199, "Winnov L.P." },
-            { 1200, "Nikon Corp." },
-            { 1201, "Pan International" },
-            { 1203, "IBM Corp." },
-            { 1204, "Cypress Semiconductor Corp." },
-            { 1205, "ROHM LSI Systems USA, LLC" },
-            { 1206, "Hint Corp." },
-            { 1207, "Compal Electronics, Inc." },
-            { 1208, "Seiko Epson Corp." },
-            { 1209, "Rainbow Technologies, Inc." },
-            { 1210, "Toucan Systems, Ltd" },
-            { 1211, "I-O Data Device, Inc." },
-            { 1213, "Toshiba Electronics Taiwan Corp." },
-            { 1214, "Telia Research AB" },
-            { 1215, "TDK Corp." },
-            { 1217, "U.S. Robotics (3Com)" },
-            { 1218, "Methode Electronics Far East PTE, Ltd" },
-            { 1219, "Maxi Switch, Inc." },
-            { 1220, "Lockheed Martin Energy Research" },
-            { 1221, "Fujitsu, Ltd" },
-            { 1222, "Toshiba America Electronic Components" },
-            { 1223, "Micro Macro Technologies" },
-            { 1224, "Konica Corp." },
-            { 1226, "Lite-On Technology Corp." },
-            { 1227, "Fuji Photo Film Co., Ltd" },
-            { 1228, "ST-Ericsson" },
-            { 1229, "Tatung Co. Of America" },
-            { 1230, "ScanLogic Corp." },
-            { 1231, "Myson Century, Inc." },
-            { 1232, "Digi International" },
-            { 1233, "ITT Canon" },
-            { 1234, "Altec Lansing Technologies" },
-            { 1235, "VidUS, Inc." },
-            { 1236, "LSI Logic, Inc." },
-            { 1237, "Forte Technologies, Inc." },
-            { 1238, "Mentor Graphics" },
-            { 1239, "Oki Semiconductor" },
-            { 1240, "Microchip Technology, Inc." },
-            { 1241, "Holtek Semiconductor, Inc." },
-            { 1242, "Panasonic (Matsushita)" },
-            { 1243, "Hypertec Pty, Ltd" },
-            { 1244, "Huan Hsin Holdings, Ltd" },
-            { 1245, "Sharp Corp." },
-            { 1246, "MindShare, Inc." },
-            { 1247, "Interlink Electronics" },
-            { 1249, "Iiyama North America, Inc." },
-            { 1250, "Exar Corp." },
-            { 1251, "Zilog, Inc." },
-            { 1252, "ACC Microelectronics" },
-            { 1253, "Promise Technology" },
-            { 1254, "SCM Microsystems, Inc." },
-            { 1255, "Elo TouchSystems" },
-            { 1256, "Samsung Electronics Co., Ltd" },
-            { 1257, "PC-Tel, Inc." },
-            { 1258, "Brooktree Corp." },
-            { 1259, "Northstar Systems, Inc." },
-            { 1260, "Tokyo Electron Device, Ltd" },
-            { 1261, "Annabooks" },
-            { 1263, "Pacific Electronic International, Inc." },
-            { 1264, "Daewoo Electronics Co., Ltd" },
-            { 1265, "Victor Company of Japan, Ltd" },
-            { 1266, "Chicony Electronics Co., Ltd" },
-            { 1267, "Elan Microelectronics Corp." },
-            { 1268, "Harting Elektronik, Inc." },
-            { 1269, "Fujitsu-ICL Systems, Inc." },
-            { 1270, "Norand Corp." },
-            { 1271, "Newnex Technology Corp." },
-            { 1272, "FuturePlus Systems" },
-            { 1273, "Brother Industries, Ltd" },
-            { 1274, "Dallas Semiconductor" },
-            { 1275, "Biostar Microtech International Corp." },
-            { 1276, "Sunplus Technology Co., Ltd" },
-            { 1277, "Soliton Systems, K.K." },
-            { 1278, "PFU, Ltd" },
-            { 1279, "E-CMOS Corp." },
-            { 1280, "Siam United Hi-Tech" },
-            { 1281, "Fujikura DDK, Ltd" },
-            { 1282, "Acer, Inc." },
-            { 1283, "Hitachi America, Ltd" },
-            { 1284, "Hayes Microcomputer Products" },
-            { 1286, "3Com Corp." },
-            { 1287, "Hosiden Corp." },
-            { 1288, "Clarion Co., Ltd" },
-            { 1289, "Aztech Systems, Ltd" },
-            { 1290, "Cinch Connectors" },
-            { 1291, "Cable System International" },
-            { 1292, "InnoMedia, Inc." },
-            { 1293, "Belkin Components" },
-            { 1294, "Neon Technology, Inc." },
-            { 1295, "KC Technology, Inc." },
-            { 1296, "Sejin Electron, Inc." },
-            { 1297, "N'Able (DataBook) Technologies, Inc." },
-            { 1298, "Hualon Microelectronics Corp." },
-            { 1299, "digital-X, Inc." },
-            { 1300, "FCI Electronics" },
-            { 1301, "ACTC" },
-            { 1302, "Longwell Electronics" },
-            { 1303, "Butterfly Communications" },
-            { 1304, "EzKEY Corp." },
-            { 1305, "Star Micronics Co., Ltd" },
-            { 1306, "WYSE Technology" },
-            { 1307, "Silicon Graphics" },
-            { 1308, "Shuttle, Inc." },
-            { 1309, "American Power Conversion" },
-            { 1310, "Scientific Atlanta, Inc." },
-            { 1311, "IO Systems (Elite Electronics), Inc." },
-            { 1312, "Taiwan Semiconductor Manufacturing Co." },
-            { 1313, "Airborn Connectors" },
-            { 1314, "Advanced Connectek, Inc." },
-            { 1315, "ATEN GmbH" },
-            { 1316, "Sola Electronics" },
-            { 1317, "Netchip Technology, Inc." },
-            { 1318, "Temic MHS S.A." },
-            { 1319, "ALTRA" },
-            { 1320, "ATI Technologies, Inc." },
-            { 1321, "Aladdin Knowledge Systems" },
-            { 1322, "Crescent Heart Software" },
-            { 1323, "Tekom Technologies, Inc." },
-            { 1324, "Canon Information Systems, Inc." },
-            { 1325, "Avid Electronics Corp." },
-            { 1326, "Standard Microsystems Corp." },
-            { 1327, "Unicore Software, Inc." },
-            { 1328, "American Microsystems, Inc." },
-            { 1329, "Wacom Technology Corp." },
-            { 1330, "Systech Corp." },
-            { 1331, "Alcatel Mobile Phones" },
-            { 1332, "Motorola, Inc." },
-            { 1333, "LIH TZU Electric Co., Ltd" },
-            { 1334, "Hand Held Products (Welch Allyn, Inc.)" },
-            { 1335, "Inventec Corp." },
-            { 1336, "Caldera International, Inc. (SCO)" },
-            { 1337, "Shyh Shiun Terminals Co., Ltd" },
-            { 1338, "PrehKeyTec GmbH" },
-            { 1339, "Global Village Communication" },
-            { 1340, "Institut of Microelectronic & Mechatronic Systems" },
-            { 1341, "Silicon Architect" },
-            { 1342, "Mobility Electronics" },
-            { 1343, "Synopsys, Inc." },
-            { 1344, "UniAccess AB" },
-            { 1345, "Sirf Technology, Inc." },
-            { 1347, "ViewSonic Corp." },
-            { 1348, "Cristie Electronics, Ltd" },
-            { 1349, "Xirlink, Inc." },
-            { 1350, "Polaroid Corp." },
-            { 1351, "Anchor Chips, Inc." },
-            { 1352, "Tyan Computer Corp." },
-            { 1353, "Pixera Corp." },
-            { 1354, "Fujitsu Microelectronics, Inc." },
-            { 1355, "New Media Corp." },
-            { 1356, "Sony Corp." },
-            { 1357, "Try Corp." },
-            { 1358, "Proside Corp." },
-            { 1359, "WYSE Technology Taiwan" },
-            { 1360, "Fuji Xerox Co., Ltd" },
-            { 1361, "CompuTrend Systems, Inc." },
-            { 1362, "Philips Monitors" },
-            { 1363, "STMicroelectronics Imaging Division (VLSI Vision)" },
-            { 1364, "Dictaphone Corp." },
-            { 1365, "ANAM S&T Co., Ltd" },
-            { 1366, "Asahi Kasei Microsystems Co., Ltd" },
-            { 1367, "ATEN International Co., Ltd" },
-            { 1368, "Truevision, Inc." },
-            { 1369, "Cadence Design Systems, Inc." },
-            { 1370, "Kenwood USA" },
-            { 1371, "KnowledgeTek, Inc." },
-            { 1372, "Proton Electronic Ind." },
-            { 1373, "Samsung Electro-Mechanics Co." },
-            { 1374, "CTX Opto-Electronics Corp." },
-            { 1375, "Mustek Systems, Inc." },
-            { 1376, "Interface Corp." },
-            { 1377, "Oasis Design, Inc." },
-            { 1378, "Telex Communications, Inc." },
-            { 1379, "Immersion Corp." },
-            { 1380, "Kodak Digital Product Center, Japan Ltd. (formerly Chinon Industries Inc.)" },
-            { 1381, "Peracom Networks, Inc." },
-            { 1382, "Monterey International Corp." },
-            { 1383, "Xyratex International, Ltd" },
-            { 1384, "Quartz Ingenierie" },
-            { 1385, "SegaSoft" },
-            { 1386, "Wacom Co., Ltd" },
-            { 1387, "Decicon, Inc." },
-            { 1388, "eTEK Labs" },
-            { 1389, "EIZO Corp." },
-            { 1390, "Elecom Co., Ltd" },
-            { 1391, "Korea Data Systems Co., Ltd" },
-            { 1392, "Epson America" },
-            { 1393, "Interex, Inc." },
-            { 1394, "Conexant Systems (Rockwell), Inc." },
-            { 1395, "Zoran Co. Personal Media Division (Nogatech)" },
-            { 1396, "City University of Hong Kong" },
-            { 1397, "Philips Creative Display Solutions" },
-            { 1398, "BAFO/Quality Computer Accessories" },
-            { 1399, "ELSA" },
-            { 1400, "Intrinsix Corp." },
-            { 1401, "GVC Corp." },
-            { 1402, "Samsung Electronics America" },
-            { 1403, "Y-E Data, Inc." },
-            { 1404, "AVM GmbH" },
-            { 1405, "Shark Multimedia, Inc." },
-            { 1406, "Nintendo Co., Ltd" },
-            { 1407, "QuickShot, Ltd" },
-            { 1408, "Denron, Inc." },
-            { 1409, "Racal Data Group" },
-            { 1410, "Roland Corp." },
-            { 1411, "Padix Co., Ltd (Rockfire)" },
-            { 1412, "RATOC System, Inc." },
-            { 1413, "FlashPoint Technology, Inc." },
-            { 1414, "ZyXEL Communications Corp." },
-            { 1415, "America Kotobuki Electronics Industries, Inc." },
-            { 1416, "Sapien Design" },
-            { 1417, "Victron" },
-            { 1418, "Nohau Corp." },
-            { 1419, "Infineon Technologies" },
-            { 1420, "In Focus Systems" },
-            { 1421, "Micrel Semiconductor" },
-            { 1422, "Tripath Technology, Inc." },
-            { 1423, "Alcor Micro Corp." },
-            { 1424, "Omron Corp." },
-            { 1425, "Questra Consulting" },
-            { 1426, "Powerware Corp." },
-            { 1427, "Incite" },
-            { 1428, "Princeton Graphic Systems" },
-            { 1429, "Zoran Microelectronics, Ltd" },
-            { 1430, "MicroTouch Systems, Inc." },
-            { 1431, "Trisignal Communications" },
-            { 1432, "Niigata Canotec Co., Inc." },
-            { 1433, "Brilliance Semiconductor, Inc." },
-            { 1434, "Spectrum Signal Processing, Inc." },
-            { 1435, "Iomega Corp." },
-            { 1436, "A-Trend Technology Co., Ltd" },
-            { 1437, "Advanced Input Devices" },
-            { 1438, "Intelligent Instrumentation" },
-            { 1439, "LaCie, Ltd" },
-            { 1440, "Vetronix Corp." },
-            { 1441, "USC Corp." },
-            { 1442, "Fuji Film Microdevices Co., Ltd" },
-            { 1443, "ARC International" },
-            { 1444, "Ortek Technology, Inc." },
-            { 1445, "Sampo Technology Corp." },
-            { 1446, "Cisco Systems, Inc." },
-            { 1447, "Bose Corp." },
-            { 1448, "Spacetec IMC Corp." },
-            { 1449, "OmniVision Technologies, Inc." },
-            { 1450, "Utilux South China, Ltd" },
-            { 1451, "In-System Design" },
-            { 1452, "Apple, Inc." },
-            { 1453, "Y.C. Cable U.S.A., Inc." },
-            { 1454, "Synopsys, Inc." },
-            { 1455, "Jing-Mold Enterprise Co., Ltd" },
-            { 1456, "Fountain Technologies, Inc." },
-            { 1457, "First International Computer, Inc." },
-            { 1460, "LG Semicon Co., Ltd" },
-            { 1461, "Dialogic Corp." },
-            { 1462, "Proxima Corp." },
-            { 1463, "Medianix Semiconductor, Inc." },
-            { 1464, "SYSGRATION" },
-            { 1465, "Philips Research Laboratories" },
-            { 1466, "DigitalPersona, Inc." },
-            { 1467, "Grey Cell Systems" },
-            { 1468, "3G Green Green Globe Co., Ltd" },
-            { 1469, "RAFI GmbH & Co. KG" },
-            { 1470, "Tyco Electronics (Raychem)" },
-            { 1471, "S & S Research" },
-            { 1472, "Keil Software" },
-            { 1473, "Kawasaki Microelectronics, Inc." },
-            { 1474, "Media Phonics (Suisse) S.A." },
-            { 1477, "Digi International, Inc." },
-            { 1478, "Qualcomm, Inc." },
-            { 1479, "Qtronix Corp." },
-            { 1480, "Cheng Uei Precision Industry Co., Ltd (Foxlink)" },
-            { 1481, "Semtech Corp." },
-            { 1482, "Ricoh Co., Ltd" },
-            { 1483, "PowerVision Technologies, Inc." },
-            { 1484, "ELSA AG" },
-            { 1485, "Silicom, Ltd" },
-            { 1486, "sci-worx GmbH" },
-            { 1487, "Sung Forn Co., Ltd" },
-            { 1488, "GE Medical Systems Lunar" },
-            { 1489, "Brainboxes, Ltd" },
-            { 1490, "Wave Systems Corp." },
-            { 1491, "Tohoku Ricoh Co., Ltd" },
-            { 1493, "Super Gate Technology Co., Ltd" },
-            { 1494, "Philips Semiconductors, CICT" },
-            { 1495, "Thomas & Betts Corp." },
-            { 1496, "Ultima Electronics Corp." },
-            { 1497, "Axiohm Transaction Solutions" },
-            { 1498, "Microtek International, Inc." },
-            { 1499, "Sun Corp. (Suntac?)" },
-            { 1500, "Lexar Media, Inc." },
-            { 1501, "Delta Electronics, Inc." },
-            { 1503, "Silicon Vision, Inc." },
-            { 1504, "Symbol Technologies" },
-            { 1505, "Syntek Semiconductor Co., Ltd" },
-            { 1506, "ElecVision, Inc." },
-            { 1507, "Genesys Logic, Inc." },
-            { 1508, "Red Wing Corp." },
-            { 1509, "Fuji Electric Co., Ltd" },
-            { 1510, "Keithley Instruments" },
-            { 1512, "ICC, Inc." },
-            { 1513, "Kawasaki LSI" },
-            { 1515, "FFC, Ltd" },
-            { 1516, "COM21, Inc." },
-            { 1518, "Cytechinfo Inc." },
-            { 1519, "AVB, Inc. [anko?]" },
-            { 1520, "Canopus Co., Ltd" },
-            { 1521, "Compass Communications" },
-            { 1522, "Dexin Corp., Ltd" },
-            { 1523, "PI Engineering, Inc." },
-            { 1525, "Unixtar Technology, Inc." },
-            { 1526, "AOC International" },
-            { 1527, "RFC Distribution(s) PTE, Ltd" },
-            { 1529, "PSC Scanning, Inc." },
-            { 1530, "Siemens Telecommunications Systems, Ltd" },
-            { 1532, "Harman" },
-            { 1533, "InterAct, Inc." },
-            { 1534, "Chic Technology Corp." },
-            { 1535, "LeCroy Corp." },
-            { 1536, "Barco Display Systems" },
-            { 1537, "Jazz Hipster Corp." },
-            { 1538, "Vista Imaging, Inc." },
-            { 1539, "Novatek Microelectronics Corp." },
-            { 1540, "Jean Co., Ltd" },
-            { 1541, "Anchor C&C Co., Ltd" },
-            { 1542, "Royal Information Electronics Co., Ltd" },
-            { 1543, "Bridge Information Co., Ltd" },
-            { 1544, "Genrad Ads" },
-            { 1545, "SMK Manufacturing, Inc." },
-            { 1546, "Worthington Data Solutions, Inc." },
-            { 1547, "Solid Year" },
-            { 1548, "EEH Datalink GmbH" },
-            { 1549, "Auctor Corp." },
-            { 1550, "Transmonde Technologies, Inc." },
-            { 1551, "Joinsoon Electronics Mfg. Co., Ltd" },
-            { 1552, "Costar Electronics, Inc." },
-            { 1553, "Totoku Electric Co., Ltd" },
-            { 1555, "TransAct Technologies, Inc." },
-            { 1556, "Bio-Rad Laboratories" },
-            { 1557, "Quabbin Wire & Cable Co., Inc." },
-            { 1558, "Future Techno Designs PVT, Ltd" },
-            { 1559, "Swiss Federal Insitute of Technology" },
-            { 1560, "MacAlly" },
-            { 1561, "Seiko Instruments, Inc." },
-            { 1562, "Veridicom International, Inc." },
-            { 1563, "Promptus Communications, Inc." },
-            { 1564, "Act Labs, Ltd" },
-            { 1565, "Quatech, Inc." },
-            { 1566, "Nissei Electric Co." },
-            { 1568, "Alaris, Inc." },
-            { 1569, "ODU-Steckverbindungssysteme GmbH & Co. KG" },
-            { 1570, "Iotech, Inc." },
-            { 1571, "Littelfuse, Inc." },
-            { 1572, "Avocent Corp." },
-            { 1573, "TiMedia Technology Co., Ltd" },
-            { 1574, "Nippon Systems Development Co., Ltd" },
-            { 1575, "Adomax Technology Co., Ltd" },
-            { 1576, "Tasking Software, Inc." },
-            { 1577, "Zida Technologies, Ltd" },
-            { 1578, "MosArt Semiconductor Corp." },
-            { 1579, "Greatlink Electronics Taiwan, Ltd" },
-            { 1580, "Institute for Information Industry" },
-            { 1581, "Taiwan Tai-Hao Enterprises Co., Ltd" },
-            { 1582, "Mainsuper Enterprises Co., Ltd" },
-            { 1583, "Sin Sheng Terminal & Machine, Inc." },
-            { 1585, "JUJO Electronics Corp." },
-            { 1587, "Cyrix Corp." },
-            { 1588, "Micron Technology, Inc." },
-            { 1589, "Methode Electronics, Inc." },
-            { 1590, "Sierra Imaging, Inc." },
-            { 1592, "Avision, Inc." },
-            { 1593, "Chrontel, Inc." },
-            { 1594, "Techwin Corp." },
-            { 1595, "Taugagreining HF" },
-            { 1596, "Yamaichi Electronics Co., Ltd (Sakura)" },
-            { 1597, "Fong Kai Industrial Co., Ltd" },
-            { 1598, "RealMedia Technology, Inc." },
-            { 1599, "New Technology Cable, Ltd" },
-            { 1600, "Hitex Development Tools" },
-            { 1601, "Woods Industries, Inc." },
-            { 1602, "VIA Medical Corp." },
-            { 1604, "TEAC Corp." },
-            { 1605, "Who? Vision Systems, Inc." },
-            { 1606, "UMAX" },
-            { 1607, "Acton Research Corp." },
-            { 1608, "Inside Out Networks" },
-            { 1609, "Weli Science Co., Ltd" },
-            { 1611, "Analog Devices, Inc. (White Mountain DSP)" },
-            { 1612, "Ji-Haw Industrial Co., Ltd" },
-            { 1613, "TriTech Microelectronics, Ltd" },
-            { 1614, "Suyin Corp." },
-            { 1615, "WIBU-Systems AG" },
-            { 1616, "Dynapro Systems" },
-            { 1617, "Likom Technology Sdn. Bhd." },
-            { 1618, "Stargate Solutions, Inc." },
-            { 1619, "CNF, Inc." },
-            { 1620, "Granite Microsystems, Inc." },
-            { 1621, "Space Shuttle Hi-Tech Co., Ltd" },
-            { 1622, "Glory Mark Electronic, Ltd" },
-            { 1623, "Tekcon Electronics Corp." },
-            { 1624, "Sigma Designs, Inc." },
-            { 1625, "Aethra" },
-            { 1626, "Optoelectronics Co., Ltd" },
-            { 1627, "Tracewell Systems" },
-            { 1630, "Silicon Graphics" },
-            { 1631, "Good Way Technology Co., Ltd & GWC technology Inc." },
-            { 1632, "TSAY-E (BVI) International, Inc." },
-            { 1633, "Hamamatsu Photonics K.K." },
-            { 1634, "Kansai Electric Co., Ltd" },
-            { 1635, "Topmax Electronic Co., Ltd" },
-            { 1636, "ET&T Technology Co., Ltd." },
-            { 1637, "Cypress Semiconductor" },
-            { 1639, "Aiwa Co., Ltd" },
-            { 1640, "WordWand" },
-            { 1641, "Oce' Printing Systems GmbH" },
-            { 1642, "Total Technologies, Ltd" },
-            { 1643, "Linksys, Inc." },
-            { 1645, "Entrega, Inc." },
-            { 1646, "Acer Semiconductor America, Inc." },
-            { 1647, "SigmaTel, Inc." },
-            { 1648, "Sequel Imaging" },
-            { 1650, "Labtec, Inc." },
-            { 1651, "HCL" },
-            { 1652, "Key Mouse Electronic Enterprise Co., Ltd" },
-            { 1653, "DrayTek Corp." },
-            { 1654, "Teles AG" },
-            { 1655, "Aiwa Co., Ltd" },
-            { 1656, "ACard Technology Corp." },
-            { 1659, "Prolific Technology, Inc." },
-            { 1660, "Efficient Networks, Inc." },
-            { 1661, "Hohner Corp." },
-            { 1662, "Intermec Technologies Corp." },
-            { 1663, "Virata, Ltd" },
-            { 1664, "Realtek Semiconductor Corp., CPP Div. (Avance Logic)" },
-            { 1665, "Siemens Information and Communication Products" },
-            { 1666, "Victor Company of Japan, Ltd" },
-            { 1668, "Actiontec Electronics, Inc." },
-            { 1669, "ZD Incorporated" },
-            { 1670, "Minolta Co., Ltd" },
-            { 1674, "Pertech, Inc." },
-            { 1675, "Potrans International, Inc." },
-            { 1678, "CH Products, Inc." },
-            { 1679, "Nihon KOHDEN" },
-            { 1680, "Golden Bridge Electech, Inc." },
-            { 1683, "Hagiwara Sys-Com Co., Ltd" },
-            { 1684, "Lego Group" },
-            { 1688, "Chuntex (CTX)" },
-            { 1689, "Tektronix, Inc." },
-            { 1690, "Askey Computer Corp." },
-            { 1691, "Thomson, Inc." },
-            { 1693, "Hughes Network Systems (HNS)" },
-            { 1694, "Welcat Inc." },
-            { 1695, "Allied Data Technologies BV" },
-            { 1698, "Topro Technology, Inc." },
-            { 1699, "Saitek PLC" },
-            { 1700, "Xiamen Doowell Electron Co., Ltd" },
-            { 1701, "Divio" },
-            { 1703, "MicroStore, Inc." },
-            { 1704, "Topaz Systems, Inc." },
-            { 1705, "Westell" },
-            { 1706, "Sysgration, Ltd" },
-            { 1708, "Fujitsu Laboratories of America, Inc." },
-            { 1709, "Greatland Electronics Taiwan, Ltd" },
-            { 1710, "Professional Multimedia Testing Centre" },
-            { 1711, "Harting, Inc. of North America" },
-            { 1720, "Pixela Corp." },
-            { 1721, "Alcatel Telecom" },
-            { 1722, "Smooth Cord & Connector Co., Ltd" },
-            { 1723, "EDA, Inc." },
-            { 1724, "Oki Data Corp." },
-            { 1725, "AGFA-Gevaert NV" },
-            { 1726, "AME Optimedia Technology Co., Ltd" },
-            { 1727, "Leoco Corp." },
-            { 1730, "Phidgets Inc. (formerly GLAB)" },
-            { 1732, "Bizlink International Corp." },
-            { 1733, "Hagenuk, GmbH" },
-            { 1734, "Infowave Software, Inc." },
-            { 1736, "SIIG, Inc." },
-            { 1737, "Taxan (Europe), Ltd" },
-            { 1738, "Newer Technology, Inc." },
-            { 1739, "Synaptics, Inc." },
-            { 1740, "Terayon Communication Systems" },
-            { 1741, "Keyspan" },
-            { 1742, "Contec" },
-            { 1743, "SpheronVR AG" },
-            { 1744, "LapLink, Inc." },
-            { 1745, "Daewoo Electronics Co., Ltd" },
-            { 1747, "Mitsubishi Electric Corp." },
-            { 1748, "Cisco Systems" },
-            { 1749, "Toshiba" },
-            { 1750, "Aashima Technology B.V." },
-            { 1751, "Network Computing Devices (NCD)" },
-            { 1752, "Technical Marketing Research, Inc." },
-            { 1754, "Phoenixtec Power Co., Ltd" },
-            { 1755, "Paradyne" },
-            { 1756, "Foxlink Image Technology Co., Ltd" },
-            { 1758, "Heisei Electronics Co., Ltd" },
-            { 1760, "Multi-Tech Systems, Inc." },
-            { 1761, "ADS Technologies, Inc." },
-            { 1764, "Alcatel Microelectronics" },
-            { 1766, "Tiger Jet Network, Inc." },
-            { 1770, "Sirius Technologies" },
-            { 1771, "PC Expert Tech. Co., Ltd" },
-            { 1775, "I.A.C. Geometrische Ingenieurs B.V." },
-            { 1776, "T.N.C Industrial Co., Ltd" },
-            { 1777, "Opcode Systems, Inc." },
-            { 1778, "Emine Technology Co." },
-            { 1782, "Wintrend Technology Co., Ltd" },
-            { 1783, "Wailly Technology Ltd" },
-            { 1784, "Guillemot Corp." },
-            { 1785, "ASYST electronic d.o.o." },
-            { 1786, "HSD S.r.L" },
-            { 1788, "Motorola Semiconductor Products Sector" },
-            { 1789, "Boston Acoustics" },
-            { 1790, "Gallant Computer, Inc." },
-            { 1793, "Supercomal Wire & Cable SDN. BHD." },
-            { 1795, "Bvtech Industry, Inc." },
-            { 1797, "NKK Corp." },
-            { 1798, "Ariel Corp." },
-            { 1799, "Standard Microsystems Corp." },
-            { 1800, "Putercom Co., Ltd" },
-            { 1801, "Silicon Systems, Ltd (SSL)" },
-            { 1802, "Oki Electric Industry Co., Ltd" },
-            { 1805, "Comoss Electronic Co., Ltd" },
-            { 1806, "Excel Cell Electronic Co., Ltd" },
-            { 1808, "Connect Tech, Inc." },
-            { 1809, "Magic Control Technology Corp." },
-            { 1811, "Interval Research Corp." },
-            { 1812, "NewMotion, Inc." },
-            { 1815, "ZNK Corp." },
-            { 1816, "Imation Corp." },
-            { 1817, "Tremon Enterprises Co., Ltd" },
-            { 1819, "Domain Technologies, Inc." },
-            { 1820, "Xionics Document Technologies, Inc." },
-            { 1821, "Eicon Networks Corp." },
-            { 1822, "Ariston Technologies" },
-            { 1824, "Keyence Corp." },
-            { 1827, "Centillium Communications Corp." },
-            { 1830, "Vanguard International Semiconductor-America" },
-            { 1833, "Amitm" },
-            { 1838, "Sunix Co., Ltd" },
-            { 1839, "Advanced Card Systems, Ltd" },
-            { 1841, "Susteen, Inc." },
-            { 1842, "Goldfull Electronics & Telecommunications Corp." },
-            { 1843, "ViewQuest Technologies, Inc." },
-            { 1844, "Lasat Communications A/S" },
-            { 1845, "Asuscom Network" },
-            { 1846, "Lorom Industrial Co., Ltd" },
-            { 1848, "Mad Catz, Inc." },
-            { 1850, "Chaplet Systems, Inc." },
-            { 1851, "Suncom Technologies" },
-            { 1852, "Industrial Electronic Engineers, Inc." },
-            { 1853, "Eutron S.p.a." },
-            { 1854, "NEC, Inc." },
-            { 1858, "Stollmann" },
-            { 1861, "Syntech Information Co., Ltd" },
-            { 1862, "Onkyo Corp." },
-            { 1863, "Labway Corp." },
-            { 1864, "Strong Man Enterprise Co., Ltd" },
-            { 1865, "EVer Electronics Corp." },
-            { 1866, "Ming Fortune Industry Co., Ltd" },
-            { 1867, "Polestar Tech. Corp." },
-            { 1868, "C-C-C Group PLC" },
-            { 1869, "Micronas GmbH" },
-            { 1870, "Digital Stream Corp." },
-            { 1877, "Aureal Semiconductor" },
-            { 1879, "Network Technologies, Inc." },
-            { 1880, "Carl Zeiss Microscopy GmbH" },
-            { 1883, "Sophisticated Circuits, Inc." },
-            { 1891, "M-Audio" },
-            { 1892, "Cyber Power System, Inc." },
-            { 1893, "X-Rite, Inc." },
-            { 1894, "Jess-Link Products Co., Ltd" },
-            { 1895, "Tokheim Corp." },
-            { 1896, "Camtel Technology Corp." },
-            { 1897, "Surecom Technology Corp." },
-            { 1898, "Smart Technology Enablers, Inc." },
-            { 1899, "OmniKey AG" },
-            { 1900, "Partner Tech" },
-            { 1901, "Denso Corp." },
-            { 1902, "Kuan Tech Enterprise Co., Ltd" },
-            { 1903, "Jhen Vei Electronic Co., Ltd" },
-            { 1904, "Welch Allyn, Inc - Medical Division" },
-            { 1905, "Observator Instruments BV" },
-            { 1906, "Your data Our Care" },
-            { 1908, "AmTRAN Technology Co., Ltd" },
-            { 1909, "Longshine Electronics Corp." },
-            { 1910, "Inalways Corp." },
-            { 1911, "Comda Enterprise Corp." },
-            { 1912, "Volex, Inc." },
-            { 1913, "ON Semiconductor (formerly Fairchild)" },
-            { 1914, "Sankyo Seiki Mfg. Co., Ltd" },
-            { 1915, "Linksys" },
-            { 1916, "Forward Electronics Co., Ltd" },
-            { 1917, "Griffin Technology" },
-            { 1918, "Softing AG" },
-            { 1919, "Well Excellent & Most Corp." },
-            { 1920, "Sagem Monetel GmbH" },
-            { 1921, "SanDisk Corp." },
-            { 1922, "Trackerball" },
-            { 1923, "C3PO" },
-            { 1924, "Vivitar, Inc." },
-            { 1925, "NTT-ME" },
-            { 1929, "Logitec Corp." },
-            { 1931, "Happ Controls, Inc." },
-            { 1932, "GTCO/CalComp" },
-            { 1934, "Brincom, Inc." },
-            { 1936, "Pro-Image Manufacturing Co., Ltd" },
-            { 1937, "Copartner Wire and Cable Mfg. Corp." },
-            { 1938, "Axis Communications AB" },
-            { 1939, "Wha Yu Industrial Co., Ltd" },
-            { 1940, "ABL Electronics Corp." },
-            { 1941, "RealChip, Inc." },
-            { 1942, "Certicom Corp." },
-            { 1943, "Grandtech Semiconductor Corp." },
-            { 1944, "Optelec" },
-            { 1945, "Altera" },
-            { 1947, "Sagem" },
-            { 1949, "Alfadata Computer Corp." },
-            { 1953, "Digicom S.p.A." },
-            { 1954, "National Technical Systems" },
-            { 1955, "Onnto Corp." },
-            { 1956, "Be, Inc." },
-            { 1958, "ADMtek, Inc." },
-            { 1962, "Corega K.K." },
-            { 1963, "Freecom Technologies" },
-            { 1967, "Microtech" },
-            { 1968, "Trust Technologies" },
-            { 1969, "IMP, Inc." },
-            { 1970, "Motorola BCS, Inc." },
-            { 1971, "Plustek, Inc." },
-            { 1972, "Olympus Optical Co., Ltd" },
-            { 1973, "Mega World International, Ltd" },
-            { 1974, "Marubun Corp." },
-            { 1975, "TIME Interconnect, Ltd" },
-            { 1976, "AboCom Systems Inc" },
-            { 1980, "Canon Computer Systems, Inc." },
-            { 1981, "Webgear, Inc." },
-            { 1982, "Veridicom" },
-            { 1984, "Code Mercenaries Hard- und Software GmbH" },
-            { 1985, "Keisokugiken" },
-            { 1988, "Datafab Systems, Inc." },
-            { 1989, "APG Cash Drawer" },
-            { 1990, "ShareWave, Inc." },
-            { 1991, "Powertech Industrial Co., Ltd" },
-            { 1992, "B.U.G., Inc." },
-            { 1993, "Allied Telesyn International" },
-            { 1994, "AVerMedia Technologies, Inc." },
-            { 1995, "Kingmax Technology, Inc." },
-            { 1996, "Carry Computer Eng., Co., Ltd" },
-            { 1997, "Elektor" },
-            { 1998, "Nidec Copal" },
-            { 1999, "Casio Computer Co., Ltd" },
-            { 2000, "Dazzle" },
-            { 2001, "D-Link System" },
-            { 2002, "Aptio Products, Inc." },
-            { 2003, "Cyberdata Corp." },
-            { 2005, "Radiant Systems" },
-            { 2007, "GCC Technologies, Inc." },
-            { 2010, "Arasan Chip Systems" },
-            { 2014, "Diamond Multimedia" },
-            { 2015, "David Electronics Co., Ltd" },
-            { 2016, "NCP engineering GmbH" },
-            { 2017, "Ambient Technologies, Inc." },
-            { 2018, "Elmeg GmbH & Co., Ltd" },
-            { 2019, "Planex Communications, Inc." },
-            { 2020, "Movado Enterprise Co., Ltd" },
-            { 2021, "QPS, Inc." },
-            { 2022, "Allied Cable Corp." },
-            { 2023, "Mirvo Toys, Inc." },
-            { 2024, "Labsystems" },
-            { 2026, "Iwatsu Electric Co., Ltd" },
-            { 2027, "Double-H Technology Co., Ltd" },
-            { 2028, "Taiyo Electric Wire & Cable Co., Ltd" },
-            { 2030, "Torex Retail (formerly Logware)" },
-            { 2031, "STSN" },
-            { 2034, "Microcomputer Applications, Inc." },
-            { 2038, "Circuit Assembly Corp." },
-            { 2039, "Century Corp." },
-            { 2041, "Dotop Technology, Inc." },
-            { 2042, "DrayTek Corp." },
-            { 2044, "Thomann" },
-            { 2045, "Mark of the Unicorn" },
-            { 2047, "Unknown" },
-            { 2049, "MagTek" },
-            { 2050, "Mako Technologies, LLC" },
-            { 2051, "Zoom Telephonics, Inc." },
-            { 2057, "Genicom Technology, Inc." },
-            { 2058, "Evermuch Technology Co., Ltd" },
-            { 2059, "Cross Match Technologies" },
-            { 2060, "Datalogic S.p.A." },
-            { 2061, "Teco Image Systems Co., Ltd" },
-            { 2064, "Personal Communication Systems, Inc." },
-            { 2067, "Mattel, Inc." },
-            { 2073, "eLicenser" },
-            { 2074, "MG Logic" },
-            { 2075, "Indigita Corp." },
-            { 2076, "Mipsys" },
-            { 2078, "AlphaSmart, Inc." },
-            { 2079, "Manta" },
-            { 2082, "Reudo Corp." },
-            { 2085, "GC Protronics" },
-            { 2086, "Data Transit" },
-            { 2087, "BroadLogic, Inc." },
-            { 2088, "Sato Corp." },
-            { 2089, "DirecTV Broadband, Inc. (Telocity)" },
-            { 2093, "Handspring" },
-            { 2096, "Palm, Inc." },
-            { 2098, "Kouwell Electronics Corp." },
-            { 2099, "Sourcenext Corp." },
-            { 2101, "Action Star Enterprise Co., Ltd" },
-            { 2102, "TrekStor" },
-            { 2105, "Samsung Techwin Co., Ltd" },
-            { 2106, "Accton Technology Corp." },
-            { 2111, "Global Village" },
-            { 2112, "Argosy Research, Inc." },
-            { 2113, "Rioport.com, Inc." },
-            { 2116, "Welland Industrial Co., Ltd" },
-            { 2118, "NetGear, Inc." },
-            { 2125, "Minton Optic Industry Co., Inc." },
-            { 2126, "KB Gear" },
-            { 2127, "Empeg" },
-            { 2128, "Fast Point Technologies, Inc." },
-            { 2129, "Macronix International Co., Ltd" },
-            { 2130, "CSEM" },
-            { 2131, "Topre Corporation" },
-            { 2132, "ActiveWire, Inc." },
-            { 2134, "B&B Electronics" },
-            { 2136, "Hitachi Maxell, Ltd" },
-            { 2137, "Minolta Systems Laboratory, Inc." },
-            { 2138, "Xircom" },
-            { 2140, "ColorVision, Inc." },
-            { 2146, "Teletrol Systems, Inc." },
-            { 2147, "Filanet Corp." },
-            { 2148, "NetGear, Inc." },
-            { 2151, "Data Translation, Inc." },
-            { 2154, "Emagic Soft- und Hardware GmbH" },
-            { 2156, "DeTeWe - Deutsche Telephonwerke AG & Co." },
-            { 2158, "System TALKS, Inc." },
-            { 2159, "MEC IMEX, Inc." },
-            { 2160, "Metricom" },
-            { 2161, "SanDisk, Inc." },
-            { 2163, "Xpeed, Inc." },
-            { 2164, "A-Tec Subsystem, Inc." },
-            { 2169, "Comtrol Corp." },
-            { 2172, "Adesso/Kbtek America, Inc." },
-            { 2173, "Jaton Corp." },
-            { 2174, "Fujitsu Computer Products of America" },
-            { 2175, "QualCore Logic Inc." },
-            { 2176, "APT Technologies, Inc." },
-            { 2179, "Recording Industry Association of America (RIAA)" },
-            { 2181, "Boca Research, Inc." },
-            { 2182, "XAC Automation Corp." },
-            { 2183, "Hannstar Electronics Corp." },
-            { 2186, "TechTools" },
-            { 2187, "MassWorks, Inc." },
-            { 2188, "Swecoin AB" },
-            { 2190, "iLok" },
-            { 2194, "DioGraphy, Inc." },
-            { 2196, "TSI Incorporated" },
-            { 2199, "Lauterbach" },
-            { 2204, "United Technologies Research Cntr." },
-            { 2205, "Icron Technologies Corp." },
-            { 2206, "NST Co., Ltd" },
-            { 2207, "Primex Aerospace Co." },
-            { 2213, "e9, Inc." },
-            { 2214, "Toshiba TEC" },
-            { 2216, "Andrea Electronics" },
-            { 2217, "CWAV Inc." },
-            { 2220, "Macraigor Systems LLC" },
-            { 2222, "Macally (Mace Group, Inc.)" },
-            { 2224, "Metrohm" },
-            { 2228, "Sorenson Vision, Inc." },
-            { 2231, "NATSU" },
-            { 2232, "J. Gordon Electronic Design, Inc." },
-            { 2233, "RadioShack Corp. (Tandy)" },
-            { 2235, "Texas Instruments" },
-            { 2237, "Citizen Watch Co., Ltd" },
-            { 2243, "Precise Biometrics" },
-            { 2244, "Proxim, Inc." },
-            { 2247, "Key Nice Enterprise Co., Ltd" },
-            { 2248, "2Wire, Inc." },
-            { 2249, "Nippon Telegraph and Telephone Corp." },
-            { 2250, "Aiptek International, Inc." },
-            { 2253, "Jue Hsun Ind. Corp." },
-            { 2254, "Long Well Electronics Corp." },
-            { 2255, "Productivity Enhancement Products" },
-            { 2257, "smartBridges, Inc." },
-            { 2259, "Virtual Ink" },
-            { 2260, "Fujitsu Siemens Computers" },
-            { 2264, "IXXAT Automation GmbH" },
-            { 2265, "Increment P Corp." },
-            { 2269, "Billionton Systems, Inc." },
-            { 2270, "???" },
-            { 2271, "Spyrus, Inc." },
-            { 2275, "Olitec, Inc." },
-            { 2276, "Pioneer Corp." },
-            { 2277, "Litronic" },
-            { 2278, "Gemalto (was Gemplus)" },
-            { 2279, "Pan-International Wire & Cable" },
-            { 2280, "Integrated Memory Logic" },
-            { 2281, "Extended Systems, Inc." },
-            { 2282, "Ericsson, Inc., Blue Ridge Labs" },
-            { 2284, "M-Systems Flash Disk Pioneers" },
-            { 2285, "MediaTek Inc." },
-            { 2286, "CCSI/Hesso" },
-            { 2288, "Corex Technologies" },
-            { 2289, "CTI Electronics Corp." },
-            { 2290, "Gotop Information Inc." },
-            { 2293, "SysTec Co., Ltd" },
-            { 2294, "Logic 3 International, Ltd" },
-            { 2295, "Vernier" },
-            { 2296, "Keen Top International Enterprise Co., Ltd" },
-            { 2297, "Wipro Technologies" },
-            { 2298, "Caere" },
-            { 2299, "Socket Communications" },
-            { 2300, "Sicon Cable Technology Co., Ltd" },
-            { 2301, "Digianswer A/S" },
-            { 2303, "AuthenTec, Inc." },
-            { 2304, "Pinnacle Systems, Inc." },
-            { 2305, "VST Technologies" },
-            { 2310, "Faraday Technology Corp." },
-            { 2312, "Siemens AG" },
-            { 2313, "Audio-Technica Corp." },
-            { 2314, "Trumpion Microelectronics, Inc." },
-            { 2315, "Neurosmith" },
-            { 2316, "Silicon Motion, Inc. - Taiwan (formerly Feiya Technology Corp.)" },
-            { 2317, "Multiport Computer Vertriebs GmbH" },
-            { 2318, "Shining Technology, Inc." },
-            { 2319, "Fujitsu Devices, Inc." },
-            { 2320, "Alation Systems, Inc." },
-            { 2321, "Philips Speech Processing" },
-            { 2322, "Voquette, Inc." },
-            { 2325, "GlobeSpan, Inc." },
-            { 2327, "SmartDisk Corp." },
-            { 2329, "Tiger Electronics" },
-            { 2334, "Garmin International" },
-            { 2336, "Echelon Co." },
-            { 2337, "GoHubs, Inc." },
-            { 2338, "Dymo-CoStar Corp." },
-            { 2339, "IC Media Corp." },
-            { 2340, "Xerox" },
-            { 2341, "Lakeview Research" },
-            { 2343, "Summus, Ltd" },
-            { 2344, "PLX Technology, Inc. (formerly Oxford Semiconductor, Ltd)" },
-            { 2345, "American Biometric Co." },
-            { 2346, "Toshiba Information & Industrial Sys. And Services" },
-            { 2347, "Sena Technologies, Inc." },
-            { 2351, "Northern Embedded Science/CAVNEX" },
-            { 2352, "Toshiba Corp." },
-            { 2353, "Harmonic Data Systems, Ltd" },
-            { 2354, "Crescentec Corp." },
-            { 2355, "Quantum Corp." },
-            { 2356, "Spirent Communications" },
-            { 2358, "NuTesla" },
-            { 2361, "Lumberg, Inc." },
-            { 2362, "Pixart Imaging, Inc." },
-            { 2363, "Plextor Corp." },
-            { 2364, "Intrepid Control Systems, Inc." },
-            { 2365, "InnoSync, Inc." },
-            { 2366, "J.S.T. Mfg. Co., Ltd" },
-            { 2367, "Olympia Telecom Vertriebs GmbH" },
-            { 2368, "Japan Storage Battery Co., Ltd" },
-            { 2369, "Photobit Corp." },
-            { 2370, "i2Go.com, LLC" },
-            { 2371, "HCL Technologies India Private, Ltd" },
-            { 2372, "KORG, Inc." },
-            { 2373, "Pasco Scientific" },
-            { 2376, "Kronauer music in digital" },
-            { 2379, "Linkup Systems Corp." },
-            { 2381, "Cable Television Laboratories" },
-            { 2383, "Yano" },
-            { 2385, "Kingston Technology" },
-            { 2388, "RPM Systems Corp." },
-            { 2389, "NVIDIA Corp." },
-            { 2390, "BSquare Corp." },
-            { 2391, "Agilent Technologies, Inc." },
-            { 2392, "CompuLink Research, Inc." },
-            { 2393, "Cologne Chip AG" },
-            { 2394, "Portsmith" },
-            { 2395, "Medialogic Corp." },
-            { 2396, "K-Tec Electronics" },
-            { 2397, "Polycom, Inc." },
-            { 2404, "BITRAN" },
-            { 2407, "Acer NeWeb Corp." },
-            { 2408, "Catalyst Enterprises, Inc." },
-            { 2414, "Feitian Technologies, Inc." },
-            { 2417, "Gretag-Macbeth AG" },
-            { 2419, "Schlumberger" },
-            { 2420, "Datagraphix, a business unit of Anacomp" },
-            { 2421, "OL'E Communications, Inc." },
-            { 2422, "Adirondack Wire & Cable" },
-            { 2423, "Lightsurf Technologies" },
-            { 2424, "Beckhoff GmbH" },
-            { 2425, "Jeilin Technology Corp., Ltd" },
-            { 2426, "Minds At Work LLC" },
-            { 2427, "Knudsen Engineering, Ltd" },
-            { 2428, "Marunix Co., Ltd" },
-            { 2429, "Rosun Technologies, Inc." },
-            { 2430, "Biopac Systems Inc." },
-            { 2431, "Barun Electronics Co., Ltd" },
-            { 2433, "Oak Technology, Ltd" },
-            { 2436, "Apricorn" },
-            { 2437, "cab Produkttechnik GmbH & Co KG" },
-            { 2438, "Matsushita Electric Works, Ltd." },
-            { 2444, "Vitana Corp." },
-            { 2445, "INDesign" },
-            { 2446, "Integrated Intellectual Property, Inc." },
-            { 2447, "Kenwood TMI Corp." },
-            { 2451, "Gemstar eBook Group, Ltd" },
-            { 2454, "Integrated Telecom Express, Inc." },
-            { 2458, "Zippy Technology Corp." },
-            { 2462, "Trimble Navigation, Ltd" },
-            { 2467, "PairGain Technologies" },
-            { 2468, "Contech Research, Inc." },
-            { 2469, "VCON Telecommunications" },
-            { 2470, "Poinchips" },
-            { 2471, "Data Transmission Network Corp." },
-            { 2472, "Lin Shiung Enterprise Co., Ltd" },
-            { 2473, "Smart Card Technologies Co., Ltd" },
-            { 2474, "Intersil Corp." },
-            { 2475, "Japan Cash Machine Co., Ltd." },
-            { 2478, "Tripp Lite" },
-            { 2480, "Fargo" },
-            { 2482, "Franklin Electronic Publishers, Inc." },
-            { 2483, "Altius Solutions, Inc." },
-            { 2484, "MDS Telephone Systems" },
-            { 2485, "Celltrix Technology Co., Ltd" },
-            { 2492, "Grundig" },
-            { 2494, "MySmart.Com" },
-            { 2495, "Auerswald GmbH & Co. KG" },
-            { 2496, "Genpix Electronics, LLC" },
-            { 2497, "Arris Interactive LLC" },
-            { 2498, "Nisca Corp." },
-            { 2499, "HID Global" },
-            { 2500, "ACTiSYS Corp." },
-            { 2501, "Memory Corp." },
-            { 2506, "BMC Messsysteme GmbH" },
-            { 2507, "FLIR Systems" },
-            { 2508, "Workbit Corp." },
-            { 2509, "Psion Dacom Home Networks, Ltd" },
-            { 2510, "City Electronics, Ltd" },
-            { 2511, "Electronics Testing Center, Taiwan" },
-            { 2513, "NeoMagic, Inc." },
-            { 2514, "Vreelin Engineering, Inc." },
-            { 2515, "Com One" },
-            { 2519, "Hexagon NovAtel Inc." },
-            { 2520, "ELATEC GmbH" },
-            { 2521, "KRF Tech, Ltd" },
-            { 2522, "A4Tech Co., Ltd." },
-            { 2523, "Measurement Computing Corp." },
-            { 2524, "Aimex Corp." },
-            { 2525, "Fellowes, Inc." },
-            { 2527, "Addonics Technologies Corp." },
-            { 2529, "Intellon Corp." },
-            { 2533, "Jo-Dan International, Inc." },
-            { 2534, "Silutia, Inc." },
-            { 2535, "Real 3D, Inc." },
-            { 2536, "AKAI  Professional M.I. Corp." },
-            { 2537, "Chen-Source, Inc." },
-            { 2539, "IM Networks, Inc." },
-            { 2543, "Xitel" },
-            { 2547, "GoFlight, Inc." },
-            { 2549, "AresCom" },
-            { 2550, "RocketChips, Inc." },
-            { 2551, "Edu-Science (H.K.), Ltd" },
-            { 2552, "SoftConnex Technologies, Inc." },
-            { 2553, "Bay Associates" },
-            { 2554, "Mtek Vision" },
-            { 2555, "Altera" },
-            { 2559, "Gain Technology Corp." },
-            { 2560, "Liquid Audio" },
-            { 2561, "ViA, Inc." },
-            { 2565, "Unknown Manufacturer" },
-            { 2567, "Ontrak Control Systems Inc." },
-            { 2571, "Cybex Computer Products Co." },
-            { 2573, "Servergy, Inc" },
-            { 2577, "Xentec, Inc." },
-            { 2578, "Cambridge Silicon Radio, Ltd" },
-            { 2579, "Telebyte, Inc." },
-            { 2580, "Spacelabs Medical, Inc." },
-            { 2581, "Scalar Corp." },
-            { 2582, "Trek Technology (S) PTE, Ltd" },
-            { 2583, "Pentax Corp." },
-            { 2584, "Heidelberger Druckmaschinen AG" },
-            { 2585, "Hua Geng Technologies, Inc." },
-            { 2593, "Medtronic Physio Control Corp." },
-            { 2594, "Century Semiconductor USA, Inc." },
-            { 2599, "Datacard Group" },
-            { 2604, "AK-Modul-Bus Computer GmbH" },
-            { 2612, "TG3 Electronics, Inc." },
-            { 2613, "Radikal Technologies" },
-            { 2617, "Gilat Satellite Networks, Ltd" },
-            { 2618, "PentaMedia Co., Ltd" },
-            { 2620, "NTT DoCoMo, Inc." },
-            { 2621, "Varo Vision" },
-            { 2623, "Swissonic AG" },
-            { 2627, "Boca Systems, Inc." },
-            { 2630, "Davicom Semiconductor, Inc." },
-            { 2631, "Hirose Electric" },
-            { 2632, "I/O Interconnect" },
-            { 2634, "Ploytec GmbH" },
-            { 2635, "Fujitsu Media Devices, Ltd" },
-            { 2636, "Computex Co., Ltd" },
-            { 2637, "Evolution Electronics, Ltd" },
-            { 2638, "Steinberg Soft-und Hardware GmbH" },
-            { 2639, "Litton Systems, Inc." },
-            { 2640, "Mimaki Engineering Co., Ltd" },
-            { 2641, "Sony Electronics, Inc." },
-            { 2642, "Jebsee Electronics Co., Ltd" },
-            { 2643, "Portable Peripheral Co., Ltd" },
-            { 2650, "Electronics For Imaging, Inc." },
-            { 2651, "EAsics NV" },
-            { 2652, "Broadcom Corp." },
-            { 2653, "Diatrend Corp." },
-            { 2655, "Zebra" },
-            { 2658, "MPMan" },
-            { 2662, "ClearCube Technology" },
-            { 2663, "Medeli Electronics Co., Ltd" },
-            { 2664, "Comaide Corp." },
-            { 2665, "Chroma ate, Inc." },
-            { 2667, "Green House Co., Ltd" },
-            { 2668, "Integrated Circuit Systems, Inc." },
-            { 2669, "UPS Manufacturing" },
-            { 2670, "Benwin" },
-            { 2671, "Core Technology, Inc." },
-            { 2672, "International Game Technology" },
-            { 2673, "VIPColor Technologies USA, Inc." },
-            { 2674, "Sanwa Denshi" },
-            { 2675, "Mackie Designs" },
-            { 2685, "NSTL, Inc." },
-            { 2686, "Octagon Systems Corp." },
-            { 2688, "Rexon Technology Corp., Ltd" },
-            { 2689, "Chesen Electronics Corp." },
-            { 2690, "Syscan" },
-            { 2691, "NextComm, Inc." },
-            { 2692, "Maui Innovative Peripherals" },
-            { 2693, "Idexx Labs" },
-            { 2694, "NITGen Co., Ltd" },
-            { 2697, "Aktiv" },
-            { 2701, "Picturetel" },
-            { 2702, "Japan Aviation Electronics Industry, Ltd" },
-            { 2704, "Candy Technology Co., Ltd" },
-            { 2705, "Globlink Technology, Inc." },
-            { 2706, "EGO SYStems, Inc." },
-            { 2707, "C Technologies AB" },
-            { 2708, "Intersense" },
-            { 2723, "Lava Computer Mfg., Inc." },
-            { 2724, "Develco Elektronik" },
-            { 2725, "First International Digital" },
-            { 2726, "Perception Digital, Ltd" },
-            { 2727, "Wincor Nixdorf International GmbH" },
-            { 2728, "TriGem Computer, Inc." },
-            { 2729, "Baromtec Co." },
-            { 2730, "Japan CBM Corp." },
-            { 2731, "Vision Shape Europe SA" },
-            { 2732, "iCompression, Inc." },
-            { 2733, "Rohde & Schwarz GmbH & Co. KG" },
-            { 2734, "NEC infrontia Corp. (Nitsuko)" },
-            { 2735, "Digitalway Co., Ltd" },
-            { 2736, "Arrow Strong Electronics Co., Ltd" },
-            { 2737, "FEIG ELECTRONIC GmbH" },
-            { 2746, "Ellisys" },
-            { 2750, "Stereo-Link" },
-            { 2751, "Diolan" },
-            { 2755, "Sanyo Semiconductor Company Micro" },
-            { 2756, "Leco Corp." },
-            { 2757, "I & C Corp." },
-            { 2758, "Singing Electrons, Inc." },
-            { 2759, "Panwest Corp." },
-            { 2760, "Z-Star Microelectronics Corp." },
-            { 2761, "Micro Solutions, Inc." },
-            { 2762, "OPEN Networks Ltd" },
-            { 2764, "Koga Electronics Co." },
-            { 2765, "ID Tech" },
-            { 2766, "ZyDAS" },
-            { 2767, "Intoto, Inc." },
-            { 2768, "Intellix Corp." },
-            { 2769, "Remotec Technology, Ltd" },
-            { 2770, "Service & Quality Technology Co., Ltd" },
-            { 2778, "Data Encryption Systems Ltd." },
-            { 2787, "Allion Computer, Inc." },
-            { 2788, "Taito Corp." },
-            { 2791, "Neodym Systems, Inc." },
-            { 2792, "System Support Co., Ltd" },
-            { 2793, "North Shore Circuit Design L.L.P." },
-            { 2794, "SciEssence, LLC" },
-            { 2795, "TTP Communications, Ltd" },
-            { 2796, "Neodio Technologies Corp." },
-            { 2800, "Option" },
-            { 2806, "Silver I Co., Ltd" },
-            { 2807, "B2C2, Inc." },
-            { 2809, "Hama, Inc." },
-            { 2810, "DMC Co., Ltd." },
-            { 2812, "Zaptronix Ltd" },
-            { 2813, "Tateno Dennou, Inc." },
-            { 2814, "Cummins Engine Co." },
-            { 2815, "Jump Zone Network Products, Inc." },
-            { 2816, "INGENICO" },
-            { 2821, "ASUSTek Computer, Inc." },
-            { 2827, "Datamax-O'Neil" },
-            { 2828, "Todos AB" },
-            { 2829, "ProjectLab" },
-            { 2830, "GN Netcom" },
-            { 2831, "AVID Technology" },
-            { 2832, "Pcally" },
-            { 2833, "I Tech Solutions Co., Ltd" },
-            { 2846, "Electronic Warfare Assoc., Inc. (EWA)" },
-            { 2847, "Insyde Software Corp." },
-            { 2848, "TransDimension, Inc." },
-            { 2849, "Yokogawa Electric Corp." },
-            { 2850, "Japan System Development Co., Ltd" },
-            { 2851, "Pan-Asia Electronics Co., Ltd" },
-            { 2852, "Link Evolution Corp." },
-            { 2855, "Ritek Corp." },
-            { 2856, "Kenwood Corp." },
-            { 2860, "Village Center, Inc." },
-            { 2864, "PNY Technologies, Inc." },
-            { 2867, "Contour Design, Inc." },
-            { 2871, "Hitachi ULSI Systems Co., Ltd" },
-            { 2872, "Gear Head" },
-            { 2873, "Omnidirectional Control Technology, Inc." },
-            { 2874, "IPaxess" },
-            { 2875, "Tekram Technology Co., Ltd" },
-            { 2876, "Olivetti Techcenter" },
-            { 2878, "Kikusui Electronics Corp." },
-            { 2881, "Hal Corp." },
-            { 2883, "Play.com, Inc." },
-            { 2887, "Sportbug.com, Inc." },
-            { 2888, "TechnoTrend AG" },
-            { 2889, "ASCII Corp." },
-            { 2891, "Pine Corp. Ltd." },
-            { 2893, "Graphtec America, Inc." },
-            { 2894, "Musical Electronics, Ltd" },
-            { 2896, "Dumpries Co., Ltd" },
-            { 2897, "Comfort Keyboard Co." },
-            { 2898, "Colorado MicroDisplay, Inc." },
-            { 2900, "Sinbon Electronics Co., Ltd" },
-            { 2902, "TYI Systems, Ltd" },
-            { 2903, "Beijing HanwangTechnology Co., Ltd" },
-            { 2905, "Lake Communications, Ltd" },
-            { 2906, "Corel Corp." },
-            { 2911, "Green Electronics Co., Ltd" },
-            { 2912, "Nsine, Ltd" },
-            { 2913, "NEC Viewtechnology, Ltd" },
-            { 2914, "Orange Micro, Inc." },
-            { 2915, "ADLink Technology, Inc." },
-            { 2916, "Wonderful Wire Cable Co., Ltd" },
-            { 2917, "Expert Magnetics Corp." },
-            { 2918, "Cybiko Inc." },
-            { 2919, "Fairbanks Scales" },
-            { 2921, "CacheVision" },
-            { 2922, "Maxim Integrated Products" },
-            { 2927, "Nagano Japan Radio Co., Ltd" },
-            { 2928, "PortalPlayer, Inc." },
-            { 2929, "SHIN-EI Sangyo Co., Ltd" },
-            { 2930, "Embedded Wireless Technology Co., Ltd" },
-            { 2931, "Computone Corp." },
-            { 2933, "Roland DG Corp." },
-            { 2937, "Sunrise Telecom, Inc." },
-            { 2938, "Zeevo, Inc." },
-            { 2939, "Taiko Denki Co., Ltd" },
-            { 2940, "ITRAN Communications, Ltd" },
-            { 2941, "Astrodesign, Inc." },
-            { 2945, "id3 Technologies" },
-            { 2948, "Rextron Technology, Inc." },
-            { 2949, "Elkat Electronics, Sdn., Bhd." },
-            { 2950, "Exputer Systems, Inc." },
-            { 2951, "Plus-One I & T, Inc." },
-            { 2952, "Sigma Koki Co., Ltd, Technology Center" },
-            { 2953, "Advanced Digital Broadcast, Ltd" },
-            { 2956, "SMART Technologies Inc." },
-            { 2965, "ASIX Electronics Corp." },
-            { 2966, "Sewon Telecom" },
-            { 2967, "O2 Micro, Inc." },
-            { 2968, "Playmates Toys, Inc." },
-            { 2969, "Audio International, Inc." },
-            { 2971, "Dipl.-Ing. Stefan Kunde" },
-            { 2973, "Softprotec Co." },
-            { 2975, "Chippo Technologies" },
-            { 2991, "U.S. Robotics" },
-            { 2992, "Concord Camera Corp." },
-            { 2993, "Infinilink Corp." },
-            { 2994, "Ambit Microsystems Corp." },
-            { 2995, "Ofuji Technology" },
-            { 2996, "HTC (High Tech Computer Corp.)" },
-            { 2997, "Murata Manufacturing Co., Ltd" },
-            { 2998, "Network Alchemy" },
-            { 2999, "Joytech Computer Co., Ltd" },
-            { 3000, "Hitachi Semiconductor and Devices Sales Co., Ltd" },
-            { 3001, "Eiger M&C Co., Ltd" },
-            { 3002, "ZAccess Systems" },
-            { 3003, "General Meters Corp." },
-            { 3004, "Assistive Technology, Inc." },
-            { 3005, "System Connection, Inc." },
-            { 3008, "Knilink Technology, Inc." },
-            { 3009, "Fuw Yng Electronics Co., Ltd" },
-            { 3010, "Seagate RSS LLC" },
-            { 3011, "IPWireless, Inc." },
-            { 3012, "Microcube Corp." },
-            { 3013, "JCN Co., Ltd" },
-            { 3014, "ExWAY, Inc." },
-            { 3015, "X10 Wireless Technology, Inc." },
-            { 3016, "Telmax Communications" },
-            { 3017, "ECI Telecom, Ltd" },
-            { 3018, "Startek Engineering, Inc." },
-            { 3019, "Perfect Technic Enterprise Co., Ltd" },
-            { 3031, "Andrew Pargeter & Associates" },
-            { 3034, "Realtek Semiconductor Corp." },
-            { 3035, "Ericsson Business Mobile Networks BV" },
-            { 3036, "Y Media Corp." },
-            { 3037, "Orange PCS" },
-            { 3042, "Kanda Tsushin Kogyo Co., Ltd" },
-            { 3043, "TOYO Corp." },
-            { 3044, "Elka International, Ltd" },
-            { 3045, "DOME imaging systems, Inc." },
-            { 3046, "Dong Guan Humen Wonderful Wire Cable Factory" },
-            { 3053, "MEI" },
-            { 3054, "LTK Industries, Ltd" },
-            { 3055, "Way2Call Communications" },
-            { 3056, "Pace Micro Technology PLC" },
-            { 3057, "Intracom S.A." },
-            { 3058, "Konexx" },
-            { 3062, "Addonics Technologies, Inc." },
-            { 3063, "Sunny Giken, Inc." },
-            { 3064, "Fujitsu Siemens Computers" },
-            { 3067, "Grass Valley Group" },
-            { 3069, "Kvaser AB" },
-            { 3072, "FireFly Mouse Mat" },
-            { 3076, "MOTO Development Group, Inc." },
-            { 3077, "Appian Graphics" },
-            { 3078, "Hasbro Games, Inc." },
-            { 3079, "Infinite Data Storage, Ltd" },
-            { 3080, "Agate" },
-            { 3081, "Comjet Information System" },
-            { 3082, "Highpoint Technologies, Inc." },
-            { 3083, "Dura Micro, Inc. (Acomdata)" },
-            { 3090, "Zeroplus" },
-            { 3093, "Iris Graphics" },
-            { 3094, "Gyration, Inc." },
-            { 3095, "Cyberboard A/S" },
-            { 3096, "SynerTek Korea, Inc." },
-            { 3097, "cyberPIXIE, Inc." },
-            { 3098, "Silicon Motion, Inc." },
-            { 3099, "MIPS Technologies" },
-            { 3100, "Hang Zhou Silan Electronics Co., Ltd" },
-            { 3103, "Magicard" },
-            { 3106, "Tally Printer Corp." },
-            { 3107, "Lernout + Hauspie" },
-            { 3108, "Taiyo Yuden" },
-            { 3109, "Sampo Corp." },
-            { 3110, "Prolific Technology Inc." },
-            { 3111, "RFIDeas, Inc" },
-            { 3118, "Metrologic Instruments" },
-            { 3120, "Mutoh Industries Ltd" },
-            { 3125, "Eagletron, Inc." },
-            { 3126, "E Ink Corp." },
-            { 3127, "e.Digital" },
-            { 3128, "Der An Electric Wire & Cable Co., Ltd" },
-            { 3129, "IFR" },
-            { 3130, "Furui Precise Component (Kunshan) Co., Ltd" },
-            { 3131, "Komatsu, Ltd" },
-            { 3132, "Radius Co., Ltd" },
-            { 3133, "Innocom, Inc." },
-            { 3134, "Nextcell, Inc." },
-            { 3136, "ELMCU" },
-            { 3140, "Motorola iDEN" },
-            { 3141, "Microdia" },
-            { 3142, "WaveRider Communications, Inc." },
-            { 3146, "ALGE-TIMING GmbH" },
-            { 3147, "Reiner SCT Kartensysteme GmbH" },
-            { 3148, "Needham's Electronics" },
-            { 3154, "Sealevel Systems, Inc." },
-            { 3155, "ViewPLUS, Inc." },
-            { 3156, "Glory, Ltd" },
-            { 3157, "Spectrum Digital, Inc." },
-            { 3158, "Billion Bright, Ltd" },
-            { 3159, "Imaginative Design Operation Co., Ltd" },
-            { 3160, "Vidar Systems Corp." },
-            { 3161, "Dong Guan Shinko Wire Co., Ltd" },
-            { 3162, "TRS International Mfg., Inc." },
-            { 3166, "Xytronix Research & Design" },
-            { 3168, "Apogee Electronics Corp." },
-            { 3170, "Chant Sincere Co., Ltd" },
-            { 3171, "Toko, Inc." },
-            { 3172, "Signality System Engineering Co., Ltd" },
-            { 3173, "Eminence Enterprise Co., Ltd" },
-            { 3174, "Rexon Electronics Corp." },
-            { 3175, "Concept Telecom, Ltd" },
-            { 3178, "ACS" },
-            { 3180, "JETI Technische Instrumente GmbH" },
-            { 3184, "MCT Elektronikladen" },
-            { 3186, "PEAK System" },
-            { 3188, "Optronic Laboratories Inc." },
-            { 3190, "JMTek, LLC." },
-            { 3191, "Sipix Group, Ltd" },
-            { 3192, "Detto Corp." },
-            { 3193, "NuConnex Technologies Pte., Ltd" },
-            { 3194, "Wing-Span Enterprise Co., Ltd" },
-            { 3206, "NDA Technologies, Inc." },
-            { 3208, "Kyocera Wireless Corp." },
-            { 3209, "Honda Tsushin Kogyo Co., Ltd" },
-            { 3210, "Pathway Connectivity, Inc." },
-            { 3211, "Wavefly Corp." },
-            { 3212, "Coactive Networks" },
-            { 3213, "Tempo" },
-            { 3214, "Cesscom Co., Ltd" },
-            { 3215, "Applied Microsystems" },
-            { 3220, "Cryptera" },
-            { 3224, "Berkshire Products, Inc." },
-            { 3225, "Innochips Co., Ltd" },
-            { 3226, "Hanwool Robotics Corp." },
-            { 3227, "Jobin Yvon, Inc." },
-            { 3228, "Brand Innovators BV" },
-            { 3229, "SemTek" },
-            { 3234, "Zyfer" },
-            { 3235, "Sega Corp." },
-            { 3236, "ST&T Instrument Corp." },
-            { 3237, "BAE Systems Canada, Inc." },
-            { 3238, "Castles Technology Co., Ltd" },
-            { 3239, "Information Systems Laboratories" },
-            { 3242, "Allied Telesis KK." },
-            { 3245, "Motorola CGISS" },
-            { 3246, "Ascom Business Systems, Ltd" },
-            { 3247, "Buslink" },
-            { 3248, "Flying Pig Systems" },
-            { 3249, "Innovonics, Inc." },
-            { 3254, "Celestix Networks, Pte., Ltd" },
-            { 3255, "Singatron Enterprise Co., Ltd" },
-            { 3256, "Opticis Co., Ltd" },
-            { 3258, "Trust Electronic (Shanghai) Co., Ltd" },
-            { 3259, "Shanghai Darong Electronics Co., Ltd" },
-            { 3260, "Palmax Technology Co., Ltd" },
-            { 3261, "Pentel Co., Ltd (Electronics Equipment Div.)" },
-            { 3262, "Keryx Technologies, Inc." },
-            { 3263, "Union Genius Computer Co., Ltd" },
-            { 3264, "Kuon Yi Industrial Corp." },
-            { 3265, "Given Imaging, Ltd" },
-            { 3266, "Timex Corp." },
-            { 3267, "Rimage Corp." },
-            { 3268, "emsys GmbH" },
-            { 3269, "Sendo" },
-            { 3270, "Intermagic Corp." },
-            { 3272, "Technotools Corp." },
-            { 3273, "BroadMAX Technologies, Inc." },
-            { 3274, "Amphenol" },
-            { 3275, "SKNet Co., Ltd" },
-            { 3276, "Domex Technology Corp." },
-            { 3277, "TerraTec Electronic GmbH" },
-            { 3284, "Bang Olufsen" },
-            { 3285, "LabJack Corporation" },
-            { 3286, "Scheidt & Bachmann" },
-            { 3287, "NewChip S.r.l." },
-            { 3288, "JS Digitech, Inc." },
-            { 3289, "Hitachi Shin Din Cable, Ltd" },
-            { 3294, "Z-Com" },
-            { 3301, "Validation Technologies International" },
-            { 3305, "Pico Technology" },
-            { 3313, "e-Conn Electronic Co., Ltd" },
-            { 3314, "ENE Technology, Inc." },
-            { 3315, "Qualcomm Atheros Communications" },
-            { 3316, "Fomtex Corp." },
-            { 3317, "Cellink Co., Ltd" },
-            { 3318, "Compucable Corp." },
-            { 3319, "ishoni Networks" },
-            { 3320, "Clarisys, Inc." },
-            { 3321, "Central System Research Co., Ltd" },
-            { 3322, "Inviso, Inc." },
-            { 3324, "Minolta-QMS, Inc." },
-            { 3327, "SAFA MEDIA Co., Ltd." },
-            { 3334, "telos EDV Systementwicklung GmbH" },
-            { 3336, "UTStarcom" },
-            { 3339, "Contemporary Controls" },
-            { 3340, "Astron Electronics Co., Ltd" },
-            { 3341, "MKNet Corp." },
-            { 3342, "Hybrid Networks, Inc." },
-            { 3343, "Feng Shin Cable Co., Ltd" },
-            { 3344, "Elastic Networks" },
-            { 3345, "Maspro Denkoh Corp." },
-            { 3346, "Hansol Electronics, Inc." },
-            { 3347, "BMF Corp." },
-            { 3348, "Array Comm, Inc." },
-            { 3349, "OnStream b.v." },
-            { 3350, "Hi-Touch Imaging Technologies Co., Ltd" },
-            { 3351, "NALTEC, Inc." },
-            { 3352, "coaXmedia" },
-            { 3353, "Hank Connection Industrial Co., Ltd" },
-            { 3368, "NXP" },
-            { 3375, "Andamiro" },
-            { 3378, "Leo Hui Electric Wire & Cable Co., Ltd" },
-            { 3379, "AirSpeak, Inc." },
-            { 3380, "Rearden Steel Technologies" },
-            { 3381, "Dah Kun Co., Ltd" },
-            { 3386, "Posiflex Technologies, Inc." },
-            { 3388, "Sri Cable Technology, Ltd" },
-            { 3389, "Tangtop Technology Co., Ltd" },
-            { 3390, "Fitcom, inc." },
-            { 3391, "MTS Systems Corp." },
-            { 3392, "Ascor, Inc." },
-            { 3393, "Ta Yun Terminals Industrial Co., Ltd" },
-            { 3394, "Full Der Co., Ltd" },
-            { 3398, "Kobil Systems GmbH" },
-            { 3400, "Promethean Limited" },
-            { 3401, "Maxtor" },
-            { 3402, "NF Corp." },
-            { 3403, "Grape Systems, Inc." },
-            { 3404, "Tedas AG" },
-            { 3405, "Coherent, Inc." },
-            { 3406, "Agere Systems Netherland BV" },
-            { 3407, "EADS Airbus France" },
-            { 3408, "Cleware GmbH" },
-            { 3409, "Volex (Asia) Pte., Ltd" },
-            { 3411, "HMI Co., Ltd" },
-            { 3412, "Holon Corp." },
-            { 3413, "ASKA Technologies, Inc." },
-            { 3414, "AVLAB Technology, Inc." },
-            { 3415, "Solomon Microtech, Ltd" },
-            { 3417, "TRC Simulators b.v." },
-            { 3420, "SMC Networks, Inc." },
-            { 3422, "Myacom, Ltd" },
-            { 3423, "CSI, Inc." },
-            { 3424, "IVL Technologies, Ltd" },
-            { 3425, "Meilu Electronics (Shenzhen) Co., Ltd" },
-            { 3426, "Darfon Electronics Corp." },
-            { 3427, "Fritz Gegauf AG" },
-            { 3428, "DXG Technology Corp." },
-            { 3429, "KMJP Co., Ltd" },
-            { 3430, "TMT" },
-            { 3431, "Advanet, Inc." },
-            { 3432, "Super Link Electronics Co., Ltd" },
-            { 3433, "NSI" },
-            { 3434, "Megapower International Corp." },
-            { 3435, "And-Or Logic" },
-            { 3440, "Try Computer Co., Ltd" },
-            { 3441, "Hirakawa Hewtech Corp." },
-            { 3442, "Winmate Communication, Inc." },
-            { 3443, "Hit's Communications, Inc." },
-            { 3446, "MFP Korea, Inc." },
-            { 3447, "Power Sentry/Newpoint" },
-            { 3448, "Japan Distributor Corp." },
-            { 3450, "MARX Datentechnik GmbH" },
-            { 3451, "Wellco Technology Co., Ltd" },
-            { 3452, "Taiwan Line Tek Electronic Co., Ltd" },
-            { 3453, "Phison Electronics Corp." },
-            { 3454, "American Computer & Digital Components" },
-            { 3455, "Essential Reality LLC" },
-            { 3456, "H.R. Silvine Electronics, Inc." },
-            { 3457, "TechnoVision" },
-            { 3459, "Think Outside, Inc." },
-            { 3463, "Dolby Laboratories Inc." },
-            { 3465, "Oz Software" },
-            { 3466, "King Jim Co., Ltd" },
-            { 3467, "Ascom Telecommunications, Ltd" },
-            { 3468, "C-Media Electronics, Inc." },
-            { 3469, "Promotion & Display Technology, Ltd" },
-            { 3470, "Global Sun Technology, Inc." },
-            { 3471, "Pitney Bowes" },
-            { 3472, "Sure-Fire Electrical Corp." },
-            { 3478, "Skanhex Technology, Inc." },
-            { 3479, "Santa Barbara Instrument Group" },
-            { 3480, "Mars Semiconductor Corp." },
-            { 3481, "Trazer Technologies, Inc." },
-            { 3482, "RTX AS" },
-            { 3483, "Tat Shing Electrical Co." },
-            { 3484, "Chee Chen Hi-Technology Co., Ltd" },
-            { 3485, "Sanwa Supply, Inc." },
-            { 3486, "Avaya" },
-            { 3487, "Powercom Co., Ltd" },
-            { 3488, "Danger Research" },
-            { 3489, "Suzhou Peter's Precise Industrial Co., Ltd" },
-            { 3490, "Land Instruments International, Ltd" },
-            { 3491, "Nippon Electro-Sensory Devices Corp." },
-            { 3492, "Polar Electro Oy" },
-            { 3495, "IOGear, Inc." },
-            { 3496, "softDSP Co., Ltd" },
-            { 3499, "Cubig Group" },
-            { 3501, "Westover Scientific" },
-            { 3504, "Micro Star International" },
-            { 3505, "Wen Te Electronics Co., Ltd" },
-            { 3506, "Shian Hwi Plug Parts, Plastic Factory" },
-            { 3507, "Tekram Technology Co., Ltd" },
-            { 3508, "Chung Fu Chen Yeh Enterprise Corp." },
-            { 3509, "Access IS" },
-            { 3511, "ELCON Systemtechnik" },
-            { 3514, "Digidesign" },
-            { 3516, "A&D Medical" },
-            { 3518, "Jiuh Shiuh Precision Industry Co., Ltd" },
-            { 3519, "Jess-Link International" },
-            { 3520, "G7 Solutions (formerly Great Notions)" },
-            { 3521, "Tamagawa Seiki Co., Ltd" },
-            { 3523, "Athena Smartcard Solutions, Inc." },
-            { 3524, "inXtron, Inc." },
-            { 3525, "SDK Co., Ltd" },
-            { 3526, "Precision Squared Technology Corp." },
-            { 3527, "First Cable Line, Inc." },
-            { 3533, "NetworkFab Corp." },
-            { 3536, "Access Solutions" },
-            { 3537, "Contek Electronics Co., Ltd" },
-            { 3538, "Power Quotient International Co., Ltd" },
-            { 3539, "MediaQ" },
-            { 3540, "Custom Engineering SPA" },
-            { 3541, "California Micro Devices" },
-            { 3543, "Kocom Co., Ltd" },
-            { 3544, "Netac Technology Co., Ltd" },
-            { 3545, "HighSpeed Surfing" },
-            { 3546, "Integrated Circuit Solution, Inc." },
-            { 3547, "Tamarack, Inc." },
-            { 3549, "Datelink Technology Co., Ltd" },
-            { 3550, "Ubicom, Inc." },
-            { 3552, "BD Consumer Healthcare" },
-            { 3559, "USBmicro" },
-            { 3562, "UTECH Electronic (D.G.) Co., Ltd." },
-            { 3565, "Novasonics" },
-            { 3566, "Lifetime Memory Products" },
-            { 3567, "Full Rise Electronic Co., Ltd" },
-            { 3572, "NET&SYS" },
-            { 3574, "Sitecom Europe B.V." },
-            { 3575, "Mobile Action Technology, Inc." },
-            { 3578, "Toyo Communication Equipment Co., Ltd" },
-            { 3580, "GeneralTouch Technology Co., Ltd" },
-            { 3587, "Nippon Systemware Co., Ltd" },
-            { 3592, "Winbest Technology Co., Ltd" },
-            { 3595, "Amigo Technology Inc." },
-            { 3596, "Gesytec" },
-            { 3597, "PicoQuant GmbH" },
-            { 3599, "VMware, Inc." },
-            { 3606, "JMTek, LLC" },
-            { 3607, "Walex Electronic, Ltd" },
-            { 3610, "Unisys" },
-            { 3611, "Crewave" },
-            { 3614, "Green Hills Software" },
-            { 3616, "Pegasus Technologies Ltd." },
-            { 3617, "Cowon Systems, Inc." },
-            { 3618, "Symbian Ltd." },
-            { 3619, "Liou Yuane Enterprise Co., Ltd" },
-            { 3621, "VinChip Systems, Inc." },
-            { 3622, "J-Phone East Co., Ltd" },
-            { 3632, "HeartMath LLC" },
-            { 3636, "Micro Computer Control Corp." },
-            { 3637, "3Pea Technologies, Inc." },
-            { 3638, "TiePie engineering" },
-            { 3640, "Stratitec, Inc." },
-            { 3641, "Smart Modular Technologies, Inc." },
-            { 3642, "Neostar Technology Co., Ltd" },
-            { 3643, "Mansella, Ltd" },
-            { 3649, "Line6, Inc." },
-            { 3652, "Sun-Riseful Technology Co., Ltd." },
-            { 3656, "Julia Corp., Ltd" },
-            { 3658, "Shenzhen Bao Hing Electric Wire & Cable Mfr. Co." },
-            { 3660, "Radica Games, Ltd" },
-            { 3664, "TechnoData Interware" },
-            { 3669, "Speed Dragon Multimedia, Ltd" },
-            { 3670, "Kingston Technology Company, Inc." },
-            { 3674, "Active Co., Ltd" },
-            { 3675, "Union Power Information Industrial Co., Ltd" },
-            { 3676, "Bitland Information Technology Co., Ltd" },
-            { 3677, "Neltron Industrial Co., Ltd" },
-            { 3678, "Conwise Technology Co., Ltd." },
-            { 3686, "Hawking Technologies" },
-            { 3687, "Fossil, Inc." },
-            { 3690, "Megawin Technology Co., Ltd" },
-            { 3695, "Logic3" },
-            { 3696, "Tokyo Electronic Industry Co., Ltd" },
-            { 3698, "Hsi-Chin Electronics Co., Ltd" },
-            { 3701, "TVS Electronics, Ltd" },
-            { 3705, "Archos, Inc." },
-            { 3707, "On-Tech Industry Co., Ltd" },
-            { 3710, "Gmate, Inc." },
-            { 3714, "Ching Tai Electric Wire & Cable Co., Ltd" },
-            { 3715, "Shin An Wire & Cable Co." },
-            { 3724, "Well Force Electronic Co., Ltd" },
-            { 3725, "MediaTek Inc." },
-            { 3727, "GreenAsia Inc." },
-            { 3728, "WiebeTech, LLC" },
-            { 3729, "VTech Engineering Canada, Ltd" },
-            { 3730, "C's Glory Enterprise Co., Ltd" },
-            { 3731, "eM Technics Co., Ltd" },
-            { 3733, "Future Technology Co., Ltd" },
-            { 3734, "Aplux Communications, Ltd" },
-            { 3735, "Fingerworks, Inc." },
-            { 3736, "Advanced Analogic Technologies, Inc." },
-            { 3737, "Parallel Dice Co., Ltd" },
-            { 3738, "TA HSING Industries, Ltd" },
-            { 3739, "ADTEC Corp." },
-            { 3740, "Streamzap, Inc." },
-            { 3743, "Tamura Corp." },
-            { 3744, "Ours Technology, Inc." },
-            { 3750, "Nihon Computer Co., Ltd" },
-            { 3751, "MSL Enterprises Corp." },
-            { 3752, "CenDyne, Inc." },
-            { 3757, "Humax Co., Ltd" },
-            { 3760, "NovaTech" },
-            { 3761, "WIS Technologies, Inc." },
-            { 3762, "Y-S Electronic Co., Ltd" },
-            { 3763, "Saint Technology Corp." },
-            { 3767, "Endor AG" },
-            { 3768, "Mettler Toledo" },
-            { 3771, "Thermo Fisher Scientific" },
-            { 3774, "VWeb Corp." },
-            { 3775, "Omega Technology of Taiwan, Inc." },
-            { 3776, "LHI Technology (China) Co., Ltd" },
-            { 3777, "Abit Computer Corp." },
-            { 3778, "Sweetray Industrial, Ltd" },
-            { 3779, "Axell Co., Ltd" },
-            { 3780, "Ballracing Developments, Ltd" },
-            { 3781, "GT Information System Co., Ltd" },
-            { 3782, "InnoVISION Multimedia, Ltd" },
-            { 3783, "Theta Link Corp." },
-            { 3789, "Lite-On IT Corp." },
-            { 3790, "TaiSol Electronics Co., Ltd" },
-            { 3791, "Phogenix Imaging, LLC" },
-            { 3793, "WinMaxGroup" },
-            { 3794, "Kyoto Micro Computer Co., Ltd" },
-            { 3795, "Wing-Tech Enterprise Co., Ltd" },
-            { 3797, "Fiberbyte" },
-            { 3802, "Noriake Itron Corp." },
-            { 3807, "e-MDT Co., Ltd" },
-            { 3808, "Shima Seiki Mfg., Ltd" },
-            { 3809, "Sarotech Co., Ltd" },
-            { 3810, "AMI Semiconductor, Inc." },
-            { 3811, "ComTrue Technology Corp." },
-            { 3812, "Sunrich Technology, Ltd" },
-            { 3822, "Digital Stream Technology, Inc." },
-            { 3823, "D-WAV Scientific Co., Ltd" },
-            { 3824, "Hitachi Cable, Ltd" },
-            { 3825, "Aichi Micro Intelligent Corp." },
-            { 3826, "I/O Magic Corp." },
-            { 3827, "Lynn Products, Inc." },
-            { 3828, "DSI Datotech" },
-            { 3829, "PointChips" },
-            { 3830, "Yield Microelectronics Corp." },
-            { 3831, "SM Tech Co., Ltd (Tulip)" },
-            { 3837, "Oasis Semiconductor" },
-            { 3838, "Wem Technology, Inc." },
-            { 3843, "Unitek UPS Systems" },
-            { 3846, "Visual Frontier Enterprise Co., Ltd" },
-            { 3848, "CSL Wire & Plug (Shen Zhen) Co." },
-            { 3852, "CAS Corp." },
-            { 3853, "Hori Co., Ltd" },
-            { 3854, "Energy Full Corp." },
-            { 3855, "Silego Technology Inc" },
-            { 3857, "LD Didactic GmbH" },
-            { 3858, "Mars Engineering Corp." },
-            { 3859, "Acetek Technology Co., Ltd" },
-            { 3860, "Ingenico" },
-            { 3864, "Finger Lakes Instrumentation" },
-            { 3865, "Oracom Co., Ltd" },
-            { 3867, "Onset Computer Corp." },
-            { 3868, "Funai Electric Co., Ltd" },
-            { 3869, "Iwill Corp." },
-            { 3873, "IOI Technology Corp." },
-            { 3874, "Senior Industries, Inc." },
-            { 3875, "Leader Tech Manufacturer Co., Ltd" },
-            { 3876, "Flex-P Industries, Snd., Bhd." },
-            { 3885, "ViPower, Inc." },
-            { 3886, "Geniality Maple Technology Co., Ltd" },
-            { 3887, "Priva Design Services" },
-            { 3888, "Jess Technology Co., Ltd" },
-            { 3889, "Chrysalis Development" },
-            { 3890, "YFC-BonEagle Electric Co., Ltd" },
-            { 3895, "Kokuyo Co., Ltd" },
-            { 3896, "Nien-Yi Industrial Corp." },
-            { 3897, "TG3 Electronics" },
-            { 3901, "Airprime, Incorporated" },
-            { 3905, "RDC Semiconductor Co., Ltd" },
-            { 3906, "Nital Consulting Services, Inc." },
-            { 3908, "Polhemus" },
-            { 3913, "Evolis SA" },
-            { 3915, "St. John Technology Co., Ltd" },
-            { 3916, "WorldWide Cable Opto Corp." },
-            { 3917, "Microtune, Inc." },
-            { 3918, "Freedom Scientific" },
-            { 3922, "Wing Key Electrical Co., Ltd" },
-            { 3923, "Dongguan White Horse Cable Factory, Ltd" },
-            { 3924, "Kawai Musical Instruments Mfg. Co., Ltd" },
-            { 3925, "AmbiCom, Inc." },
-            { 3932, "Prairiecomm, Inc." },
-            { 3933, "NewAge International, LLC" },
-            { 3935, "Key Technology Corp." },
-            { 3936, "NTK, Ltd" },
-            { 3937, "Varian, Inc." },
-            { 3938, "Acrox Technologies Co., Ltd" },
-            { 3939, "LeapFrog Enterprises" },
-            { 3944, "Kobe Steel, Ltd" },
-            { 3945, "Dionex Corp." },
-            { 3946, "Vibren Technologies, Inc." },
-            { 3950, "INTELLIGENT SYSTEMS" },
-            { 3955, "DFI" },
-            { 3960, "Guntermann & Drunck GmbH" },
-            { 3964, "DQ Technology, Inc." },
-            { 3965, "NetBotz, Inc." },
-            { 3966, "Fluke Corp." },
-            { 3976, "VTech Holdings, Ltd" },
-            { 3979, "Yazaki Corp." },
-            { 3980, "Young Generation International Corp." },
-            { 3981, "Uniwill Computer Corp." },
-            { 3982, "Kingnet Technology Co., Ltd" },
-            { 3983, "Soma Networks" },
-            { 3991, "CviLux Corp." },
-            { 3992, "CyberBank Corp." },
-            { 3996, "Hyun Won, Inc." },
-            { 3998, "Lucent Technologies" },
-            { 4003, "Starconn Electronic Co., Ltd" },
-            { 4004, "ATL Technology" },
-            { 4005, "Sotec Co., Ltd" },
-            { 4007, "Epox Computer Co., Ltd" },
-            { 4008, "Logic Controls, Inc." },
-            { 4015, "Winpoint Electronic Corp." },
-            { 4016, "Haurtian Wire & Cable Co., Ltd" },
-            { 4017, "Inclose Design, Inc." },
-            { 4018, "Juan-Chern Industrial Co., Ltd" },
-            { 4022, "Heber Ltd" },
-            { 4024, "Wistron Corp." },
-            { 4025, "AACom Corp." },
-            { 4026, "San Shing Electronics Co., Ltd" },
-            { 4027, "Bitwise Systems, Inc." },
-            { 4033, "Mitac Internatinal Corp." },
-            { 4034, "Plug and Jack Industrial, Inc." },
-            { 4037, "Delcom Engineering" },
-            { 4038, "Dataplus Supplies, Inc." },
-            { 4042, "Research In Motion, Ltd." },
-            { 4046, "Sony Ericsson Mobile Communications AB" },
-            { 4047, "Dynastream Innovations, Inc." },
-            { 4048, "Tulip Computers B.V." },
-            { 4049, "Giant Electronics Ltd." },
-            { 4050, "Seac Banche" },
-            { 4052, "Tenovis GmbH & Co., KG" },
-            { 4053, "Direct Access Technology, Inc." },
-            { 4057, "Elgato Systems GmbH" },
-            { 4058, "Quantec Networks GmbH" },
-            { 4060, "Micro Plus" },
-            { 4062, "Oregon Scientific" },
-            { 4064, "Osterhout Design Group" },
-            { 4066, "Air Techniques" },
-            { 4068, "IN-Tech Electronics, Ltd" },
-            { 4069, "Greenconn (U.S.A.), Inc." },
-            { 4070, "ICS Advent" },
-            { 4073, "DVICO" },
-            { 4074, "United Computer Accessories" },
-            { 4075, "CRS Electronic Co., Ltd" },
-            { 4076, "UMC Electronics Co., Ltd" },
-            { 4077, "Access Co., Ltd" },
-            { 4078, "Xsido Corp." },
-            { 4079, "MJ Research, Inc." },
-            { 4086, "Core Valley Co., Ltd" },
-            { 4087, "CHI SHING Computer Accessories Co., Ltd" },
-            { 4092, "Clavia DMI AB" },
-            { 4093, "EarlySense" },
-            { 4095, "Aopen, Inc." },
-            { 4096, "Speed Tech Corp." },
-            { 4097, "Ritronics Components (S) Pte., Ltd" },
-            { 4099, "Sigma Corp." },
-            { 4100, "LG Electronics, Inc." },
-            { 4101, "Apacer Technology, Inc." },
-            { 4102, "iRiver, Ltd." },
-            { 4105, "Emuzed, Inc." },
-            { 4106, "AV Chaseway, Ltd" },
-            { 4107, "Chou Chin Industrial Co., Ltd" },
-            { 4109, "Netopia, Inc." },
-            { 4112, "Fukuda Denshi Co., Ltd" },
-            { 4113, "Mobile Media Tech." },
-            { 4114, "SDKM Fibres, Wires & Cables Berhad" },
-            { 4115, "TST-Touchless Sensor Technology AG" },
-            { 4116, "Densitron Technologies PLC" },
-            { 4117, "Softronics Pty., Ltd" },
-            { 4118, "Xiamen Hung's Enterprise Co., Ltd" },
-            { 4119, "Speedy Industrial Supplies, Pte., Ltd" },
-            { 4121, "Elitegroup Computer Systems (ECS)" },
-            { 4128, "Labtec" },
-            { 4130, "Shinko Shoji Co., Ltd" },
-            { 4133, "Hyper-Paltek" },
-            { 4134, "Newly Corp." },
-            { 4135, "Time Domain" },
-            { 4136, "Inovys Corp." },
-            { 4137, "Atlantic Coast Telesys" },
-            { 4138, "Ramos Technology Co., Ltd" },
-            { 4139, "Infotronic America, Inc." },
-            { 4140, "Etoms Electronics Corp." },
-            { 4141, "Winic Corp." },
-            { 4145, "Comax Technology, Inc." },
-            { 4146, "C-One Technology Corp." },
-            { 4147, "Nucam Corp." },
-            { 4152, "SteelSeries ApS" },
-            { 4153, "devolo AG" },
-            { 4154, "PSA" },
-            { 4157, "Stanton" },
-            { 4163, "iCreate Technologies Corp." },
-            { 4164, "Chu Yuen Enterprise Co., Ltd" },
-            { 4166, "Winbond Electronics Corp. [hex]" },
-            { 4168, "Targus Group International" },
-            { 4171, "Mylex / Buslogic" },
-            { 4172, "AMCO TEC International, Inc." },
-            { 4173, "Newport Corporation" },
-            { 4175, "WB Electronics" },
-            { 4176, "Yubico.com" },
-            { 4179, "Immanuel Electronics Co., Ltd" },
-            { 4180, "BMS International Beheer N.V." },
-            { 4181, "Complex Micro Interconnection Co., Ltd" },
-            { 4182, "Hsin Chen Ent Co., Ltd" },
-            { 4183, "ON Semiconductor" },
-            { 4184, "Western Digital Technologies, Inc." },
-            { 4185, "Giesecke & Devrient GmbH" },
-            { 4187, "Foxconn International, Inc." },
-            { 4188, "Hong Ji Electric Wire & Cable (Dongguan) Co., Ltd" },
-            { 4189, "Delkin Devices, Inc." },
-            { 4190, "Valence Semiconductor Design, Ltd" },
-            { 4191, "Chin Shong Enterprise Co., Ltd" },
-            { 4192, "Easthome Industrial Co., Ltd" },
-            { 4195, "Motorola Electronics Taiwan, Ltd [hex]" },
-            { 4197, "CCYU Technology" },
-            { 4200, "Micropi Elettronica" },
-            { 4202, "Loyal Legend, Ltd" },
-            { 4204, "Curitel Communications, Inc." },
-            { 4205, "San Chieh Manufacturing, Ltd" },
-            { 4206, "ConectL" },
-            { 4207, "Money Controls" },
-            { 4214, "GCT Semiconductor, Inc." },
-            { 4219, "Gateway, Inc." },
-            { 4221, "Arlec Australia, Ltd" },
-            { 4222, "Midoriya Electric Co., Ltd" },
-            { 4223, "KidzMouse, Inc." },
-            { 4226, "Shin-Etsukaken Co., Ltd" },
-            { 4227, "Canon Electronics, Inc." },
-            { 4228, "Pantech Co., Ltd" },
-            { 4234, "Chloride Power Protection" },
-            { 4235, "Grand-tek Technology Co., Ltd" },
-            { 4236, "Robert Bosch GmbH" },
-            { 4238, "Lotes Co., Ltd." },
-            { 4241, "Numerik Jena" },
-            { 4249, "Surface Optics Corp." },
-            { 4250, "DATASOFT Systems GmbH" },
-            { 4251, "Hisense" },
-            { 4255, "eSOL Co., Ltd" },
-            { 4256, "Hirotech, Inc." },
-            { 4259, "Mitsubishi Materials Corp." },
-            { 4265, "SK Teletech Co., Ltd" },
-            { 4266, "Cables To Go" },
-            { 4267, "USI Co., Ltd" },
-            { 4268, "Honeywell, Inc." },
-            { 4270, "Princeton Technology Corp." },
-            { 4271, "Liebert Corp." },
-            { 4277, "Comodo (PLX?)" },
-            { 4280, "DiBcom" },
-            { 4283, "TM Technology, Inc." },
-            { 4284, "Dinging Technology Co., Ltd" },
-            { 4285, "TMT Technology, Inc." },
-            { 4287, "SmartHome" },
-            { 4291, "Universal Laser Systems, Inc." },
-            { 4292, "Silicon Labs" },
-            { 4293, "Sanei Electric, Inc." },
-            { 4294, "Intec, Inc." },
-            { 4299, "Eratech" },
-            { 4300, "GBM Connector Co., Ltd" },
-            { 4301, "Kycon, Inc." },
-            { 4302, "Silicon Labs" },
-            { 4303, "Velleman Components, Inc." },
-            { 4305, "Hottinger Baldwin Measurement" },
-            { 4306, "RayComposer - R. Adams" },
-            { 4308, "Man Boon Manufactory, Ltd" },
-            { 4309, "Uni Class Technology Co., Ltd" },
-            { 4310, "Actions Semiconductor Co., Ltd" },
-            { 4318, "Authenex, Inc." },
-            { 4319, "In-Win Development, Inc." },
-            { 4320, "Post-Op Video, Inc." },
-            { 4321, "CablePlus, Ltd" },
-            { 4322, "Nada Electronics, Ltd" },
-            { 4332, "Vast Technologies, Inc." },
-            { 4336, "Nexio Co., Ltd" },
-            { 4337, "Importek" },
-            { 4341, "Turtle Beach" },
-            { 4344, "Cesys GmbH" },
-            { 4347, "Pictos Technologies, Inc." },
-            { 4349, "Anubis Electronics, Ltd" },
-            { 4350, "Thrane & Thrane" },
-            { 4352, "VirTouch, Ltd" },
-            { 4353, "EasyPass Industrial Co., Ltd" },
-            { 4360, "Brightcom Technologies, Ltd" },
-            { 4362, "Moxa Technologies Co., Ltd." },
-            { 4368, "Analog Devices Canada, Ltd (Allied Telesyn)" },
-            { 4369, "Pandora International Ltd." },
-            { 4370, "YM ELECTRIC CO., Ltd" },
-            { 4371, "Medion AG" },
-            { 4382, "VSO Electric Co., Ltd" },
-            { 4394, "RedRat" },
-            { 4398, "Master Hill Electric Wire and Cable Co., Ltd" },
-            { 4399, "Cellon International, Inc." },
-            { 4400, "Tenx Technology, Inc." },
-            { 4401, "Integrated System Solution Corp." },
-            { 4402, "Toshiba Corp., Digital Media Equipment [hex]" },
-            { 4406, "CTS Electronincs" },
-            { 4412, "Arin Tech Co., Ltd" },
-            { 4413, "Mapower Electronics Co., Ltd" },
-            { 4415, "Integrated Biometrics, LLC" },
-            { 4417, "V One Multimedia, Pte., Ltd" },
-            { 4418, "CyberScan Technologies, Inc." },
-            { 4421, "Japan Radio Company" },
-            { 4422, "Shimane SANYO Electric Co., Ltd." },
-            { 4423, "Ever Great Electric Wire and Cable Co., Ltd" },
-            { 4427, "Sphairon Access Systems GmbH" },
-            { 4428, "Tinius Olsen Testing Machine Co., Inc." },
-            { 4429, "Alpha Imaging Technology Corp." },
-            { 4431, "Wavecom" },
-            { 4443, "Salix Technology Co., Ltd." },
-            { 4450, "Secugen Corp." },
-            { 4451, "DeLorme Publishing, Inc." },
-            { 4452, "YUAN High-Tech Development Co., Ltd" },
-            { 4453, "Telson Electronics Co., Ltd" },
-            { 4454, "Bantam Interactive Technologies" },
-            { 4455, "Salient Systems Corp." },
-            { 4456, "BizConn International Corp." },
-            { 4462, "Gigastorage Corp." },
-            { 4463, "Silicon 10 Technology Corp." },
-            { 4469, "Shengyih Steel Mold Co., Ltd" },
-            { 4477, "Santa Electronic, Inc." },
-            { 4478, "JNC, Inc." },
-            { 4482, "Venture Corp., Ltd" },
-            { 4483, "Compaq Computer Corp. [hex] (Digital Dream ??)" },
-            { 4484, "Kyocera Elco Corp." },
-            { 4488, "Bloomberg L.P." },
-            { 4489, "Acer Communications & Multimedia" },
-            { 4495, "You Yang Technology Co., Ltd" },
-            { 4496, "Tripace" },
-            { 4497, "Loyalty Founder Enterprise Co., Ltd" },
-            { 4502, "Yankee Robotics, LLC" },
-            { 4503, "Technoimagia Co., Ltd" },
-            { 4504, "StarShine Technology Corp." },
-            { 4505, "Sierra Wireless, Inc." },
-            { 4506, "ZHAN QI Technology Co., Ltd" },
-            { 4507, "ruwido austria GmbH" },
-            { 4512, "Chipcon AS" },
-            { 4515, "Technovas Co., Ltd" },
-            { 4522, "GlobalMedia Group, LLC" },
-            { 4523, "Exito Electronics Co., Ltd" },
-            { 4524, "Nike" },
-            { 4528, "ATECH FLASH TECHNOLOGY" },
-            { 4542, "R&D International NV" },
-            { 4544, "Betop" },
-            { 4549, "Inmax" },
-            { 4553, "Nacon" },
-            { 4554, "VeriFone Inc" },
-            { 4571, "Topfield Co., Ltd." },
-            { 4582, "K.I. Technology Co. Ltd." },
-            { 4597, "Siemens AG" },
-            { 4598, "Prolific" },
-            { 4599, "Alcatel (?)" },
-            { 4611, "TSC Auto ID Technology Co., Ltd" },
-            { 4617, "Generic" },
-            { 4622, "Hudson Soft Co., Ltd" },
-            { 4623, "Magellan" },
-            { 4624, "DigiTech" },
-            { 4638, "Jungsoft Co., Ltd" },
-            { 4639, "Panini S.p.A." },
-            { 4640, "TC Electronic" },
-            { 4641, "Unknown manufacturer" },
-            { 4642, "TiPro" },
-            { 4643, "SKYCABLE ENTERPRISE. CO., LTD." },
-            { 4648, "Datapaq Limited" },
-            { 4656, "Chipidea-Microelectronica, S.A." },
-            { 4659, "Denver Electronics" },
-            { 4660, "Brain Actuated Technologies" },
-            { 4661, "Focusrite-Novation" },
-            { 4673, "Belkin" },
-            { 4675, "Holtek Semiconductor, Inc." },
-            { 4682, "AirVast" },
-            { 4683, "Nyko (Honey Bee)" },
-            { 4684, "MXI - Memory Experts International, Inc." },
-            { 4700, "Apogee Inc." },
-            { 4701, "JMicron" },
-            { 4703, "A-DATA Technology Co., Ltd." },
-            { 4704, "Standard Microsystems Corp." },
-            { 4708, "Covidien Energy-based Devices" },
-            { 4710, "Pirelli Broadband Solutions" },
-            { 4711, "Logic3 / SpectraVideo plc" },
-            { 4716, "Aristocrat Technologies" },
-            { 4717, "Bel Stewart" },
-            { 4718, "Strobe Data, Inc." },
-            { 4719, "TwinMOS" },
-            { 4724, "Ensoniq" },
-            { 4725, "Xaxero Marine Software Engineering, Ltd." },
-            { 4728, "Starlight Xpress" },
-            { 4739, "zebris Medical GmbH" },
-            { 4742, "Marvell Semiconductor, Inc." },
-            { 4753, "Qualcomm Flarion Technologies, Inc. / Leadtek Research, Inc." },
-            { 4754, "Innomedia" },
-            { 4755, "Belkin Components [hex]" },
-            { 4756, "RISO KAGAKU CORP." },
-            { 4759, "DekTec" },
-            { 4763, "CyberTAN Technology" },
-            { 4775, "Trendchip Technologies Corp." },
-            { 4779, "Honey Bee Electronic International Ltd." },
-            { 4792, "Zhejiang Xinya Electronic Technology Co., Ltd." },
-            { 4793, "E28" },
-            { 4794, "Licensed by Sony Computer Entertainment America" },
-            { 4797, "Gembird" },
-            { 4804, "Autocue Group Ltd" },
-            { 4815, "DEXIN" },
-            { 4817, "Huawei Technologies Co., Ltd." },
-            { 4818, "LINE TECH INDUSTRIAL CO., LTD." },
-            { 4819, "LINAK" },
-            { 4822, "EMS Dr. Thomas Wuensche" },
-            { 4823, "BETTER WIRE FACTORY CO., LTD." },
-            { 4824, "Araneus Information Systems Oy" },
-            { 4838, "Waldorf Music GmbH" },
-            { 4847, "Tapwave, Inc." },
-            { 4850, "ViewPlus Technologies, Inc." },
-            { 4853, "Dynamic System Electronics Corp." },
-            { 4855, "Memorex Products, Inc." },
-            { 4861, "AIN Comm. Technology Co., Ltd" },
-            { 4863, "Fascinating Electronics, Inc." },
-            { 4870, "FM20 Barcode Scanner" },
-            { 4871, "Transcend Information, Inc." },
-            { 4872, "Shuttle, Inc." },
-            { 4880, "Roper" },
-            { 4882, "ICS Electronics" },
-            { 4883, "ThorLabs" },
-            { 4893, "Natural Point" },
-            { 4901, "ams AG" },
-            { 4906, "Envara Inc." },
-            { 4907, "Konica Minolta" },
-            { 4926, "Kemper Digital GmbH" },
-            { 4930, "Mobility" },
-            { 4931, "Citizen Systems" },
-            { 4933, "Sino Lite Technology Corp." },
-            { 4935, "Moravian Instruments" },
-            { 4936, "Katsuragawa Electric Co., Ltd." },
-            { 4940, "PanJit International Inc." },
-            { 4942, "Digby's Bitpile, Inc. DBA D Bit" },
-            { 4951, "P&E Microcomputer Systems" },
-            { 4958, "Insta GmbH" },
-            { 4959, "Control Development Inc." },
-            { 4966, "SEGGER" },
-            { 4971, "STEC" },
-            { 4974, "Andor Technology Ltd." },
-            { 4976, "Swissbit" },
-            { 4977, "CNet Technology Inc." },
-            { 4982, "Vimtron Electronics Co., Ltd." },
-            { 4983, "Sennheiser electronic GmbH & Co. KG" },
-            { 4987, "SCAPS GmbH" },
-            { 4988, "YASKAWA ELECTRIC CORP." },
-            { 4997, "Netgear, Inc" },
-            { 5002, "Validity Sensors, Inc." },
-            { 5006, "Jungo LTD" },
-            { 5008, "TOMTOM B.V." },
-            { 5009, "IdealTEK, Inc." },
-            { 5013, "Sennheiser Communications" },
-            { 5015, "BEHRINGER International GmbH" },
-            { 5016, "Q-tec" },
-            { 5037, "Baltech" },
-            { 5040, "PerkinElmer Optoelectronics" },
-            { 5041, "Linksys" },
-            { 5042, "Alesis" },
-            { 5043, "Nippon Dics Co., Ltd." },
-            { 5050, "PCPlay" },
-            { 5054, "Ricoh Printing Systems, Ltd." },
-            { 5066, "JyeTai Precision Industrial Co., Ltd." },
-            { 5071, "Wisair Ltd." },
-            { 5072, "Techsan Electronics Co., Ltd." },
-            { 5073, "A-Max Technology Macao Commercial Offshore Co. Ltd." },
-            { 5074, "Shark Multimedia" },
-            { 5075, "IMC Networks" },
-            { 5079, "Guidance Software, Inc." },
-            { 5084, "ALEREON, INC." },
-            { 5085, "i.Tech Dynamic Limited" },
-            { 5089, "Kaibo Wire & Cable (Shenzhen) Co., Ltd." },
-            { 5093, "Rane" },
-            { 5094, "TechnoScope Co., Ltd." },
-            { 5098, "Hengstler" },
-            { 5100, "Zydacron" },
-            { 5102, "MosArt" },
-            { 5117, "Initio Corporation" },
-            { 5118, "Kingston Technology Company Inc." },
-            { 5120, "Axxion Group Corp." },
-            { 5122, "Bowe Bell & Howell" },
-            { 5123, "Sitronix" },
-            { 5124, "Fundamental Software, Inc." },
-            { 5129, "IDS Imaging Development Systems GmbH" },
-            { 5134, "Telechips, Inc." },
-            { 5136, "Novatel Wireless" },
-            { 5141, "Nam Tai E&E Products Ltd. or OmniVision Technologies, Inc." },
-            { 5145, "ABILITY ENTERPRISE CO., LTD." },
-            { 5153, "Sensor Technology" },
-            { 5156, "Posnet Polska S.A." },
-            { 5161, "Vega Technologies Industrial (Austria) Co." },
-            { 5162, "Thales E-Transactions" },
-            { 5163, "Arbiter Systems, Inc." },
-            { 5168, "RedOctane" },
-            { 5169, "Pertech Resources, Inc." },
-            { 5173, "Wistron NeWeb" },
-            { 5174, "Denali Software, Inc." },
-            { 5180, "Altek Corporation" },
-            { 5187, "Digilent" },
-            { 5190, "X.J.GROUP" },
-            { 5201, "Force Dimension" },
-            { 5202, "Dai Nippon Printing, Inc" },
-            { 5203, "Radio Shack" },
-            { 5206, "Extending Wire & Cable Co., Ltd." },
-            { 5207, "First International Computer, Inc." },
-            { 5215, "Trust" },
-            { 5216, "Tatung Co." },
-            { 5217, "Staccato Communications" },
-            { 5218, "Micro Star International" },
-            { 5227, "BigBen Interactive" },
-            { 5234, "Huawei-3Com" },
-            { 5242, "Formosa Industrial Computing, Inc." },
-            { 5246, "Upek" },
-            { 5247, "Hama GmbH & Co., KG" },
-            { 5250, "Vaillant" },
-            { 5252, "Elsa AG [hex]" },
-            { 5253, "Silicom" },
-            { 5255, "DSP Group, Ltd." },
-            { 5262, "EVATRONIX SA" },
-            { 5263, "Ralink Technology, Corp." },
-            { 5265, "Futronic Technology Co. Ltd." },
-            { 5267, "Suunto" },
-            { 5271, "Panstrong Company Ltd." },
-            { 5272, "Microtek International Inc." },
-            { 5274, "Imagination Technologies" },
-            { 5290, "WideView Technology Inc." },
-            { 5293, "CTK Corporation" },
-            { 5294, "Printronix Inc." },
-            { 5295, "ATP Electronics Inc." },
-            { 5296, "StarTech.com Ltd." },
-            { 5298, "Ralink Technology, Corp." },
-            { 5312, "Rockwell Automation, Inc." },
-            { 5314, "Gemlight Computer, Ltd" },
-            { 5320, "Zytronic" },
-            { 5325, "Super Top" },
-            { 5336, "JAMER INDUSTRIES CO., LTD." },
-            { 5341, "Raritan Computer, Inc." },
-            { 5344, "WiNRADiO Communications" },
-            { 5345, "Dialogue Technology Corp." },
-            { 5349, "SAIN Information & Communications Co., Ltd." },
-            { 5354, "Planex Communications" },
-            { 5357, "Shure Inc." },
-            { 5367, "TechniSat Digital GmbH" },
-            { 5376, "Ellisys" },
-            { 5377, "Pine-Tum Enterprise Co., Ltd." },
-            { 5380, "Bixolon CO LTD" },
-            { 5384, "Fibocom" },
-            { 5385, "First International Computer, Inc." },
-            { 5395, "medMobile" },
-            { 5396, "Actel" },
-            { 5398, "CompUSA" },
-            { 5400, "Cheshire Engineering Corp." },
-            { 5401, "Comneon" },
-            { 5407, "Opal Kelly Incorporated" },
-            { 5408, "Bitwire Corp." },
-            { 5412, "ENE Technology Inc" },
-            { 5415, "Silicon Portals" },
-            { 5417, "UBIQUAM Co., Ltd." },
-            { 5418, "Thesycon Systemsoftware & Consulting GmbH" },
-            { 5419, "MIR Srl" },
-            { 5421, "JMicron Technology Corp. / JMicron USA Technology Corp." },
-            { 5422, "LG (HLDS)" },
-            { 5426, "Razer USA, Ltd" },
-            { 5435, "TerraTec Electronic GmbH" },
-            { 5446, "U-Blox AG" },
-            { 5447, "SG Intec Ltd & Co KG" },
-            { 5450, "Celectronic GmbH" },
-            { 5451, "PNY" },
-            { 5453, "ConnectCounty Holdings Berhad" },
-            { 5454, "D&M Holdings, Inc. (Denon/Marantz)" },
-            { 5455, "SNBC CO., Ltd" },
-            { 5460, "Prolink Microsystems Corp." },
-            { 5463, "OQO" },
-            { 5480, "Sunf Pu Technology Co., Ltd" },
-            { 5487, "Quantum Corporation" },
-            { 5488, "ALLTOP TECHNOLOGY CO., LTD." },
-            { 5499, "Ketron SRL" },
-            { 5502, "TRENDnet" },
-            { 5506, "Fiberline" },
-            { 5511, "SMA Technologie AG" },
-            { 5517, "Oakley Inc." },
-            { 5518, "JDS Uniphase Corporation (JDSU)" },
-            { 5528, "Kunshan Guoji Electronics Co., Ltd." },
-            { 5538, "Freescale Semiconductor, Inc." },
-            { 5540, "Afatech Technologies, Inc." },
-            { 5544, "Teams Power Limited" },
-            { 5545, "Gemtek" },
-            { 5546, "Gearway Electronics (Dong Guan) Co., Ltd." },
-            { 5549, "VMware Inc." },
-            { 5562, "Olimex Ltd." },
-            { 5568, "XL Imaging" },
-            { 5570, "SoundGraph Inc." },
-            { 5573, "Advance Multimedia Internet Technology Inc. (AMIT)" },
-            { 5574, "Laboratoires MXM" },
-            { 5576, "KTF Technologies" },
-            { 5577, "D-Box Technologies" },
-            { 5578, "Textech International Ltd." },
-            { 5589, "Coulomb Electronics Ltd." },
-            { 5593, "Trust International B.V." },
-            { 5596, "Hynix Semiconductor Inc." },
-            { 5600, "Seong Ji Industrial Co., Ltd." },
-            { 5601, "RSA" },
-            { 5604, "Numark" },
-            { 5608, "SohoWare" },
-            { 5609, "Pacific Digital Corp." },
-            { 5612, "Belcarra Technologies Corp." },
-            { 5620, "HanfTek" },
-            { 5636, "Tascam" },
-            { 5637, "ACCES I/O Products, Inc." },
-            { 5638, "Umax" },
-            { 5640, "Inside Out Networks [hex]" },
-            { 5642, "VIA Technologies, Inc." },
-            { 5646, "INRO" },
-            { 5652, "Amoi Electronics" },
-            { 5655, "Sony Corp." },
-            { 5657, "L & K Precision Technology Co., Ltd." },
-            { 5660, "Digitech Systems" },
-            { 5665, "Wionics Research" },
-            { 5672, "Stonestreet One, Inc." },
-            { 5674, "Airgo Networks Inc." },
-            { 5679, "WiQuest Communications, Inc." },
-            { 5680, "2Wire, Inc." },
-            { 5681, "Good Way Technology" },
-            { 5683, "AIM GmbH" },
-            { 5701, "Entrega [hex]" },
-            { 5705, "SofTec Microsystems" },
-            { 5706, "ChipX" },
-            { 5708, "Matrix Vision GmbH" },
-            { 5719, "Struck Innovative Systeme GmbH" },
-            { 5723, "Frontier Design Group" },
-            { 5724, "Kondo Kagaku" },
-            { 5728, "Creatix Polymedia GmbH" },
-            { 5735, "GIGA-TMS INC." },
-            { 5736, "Actiontec Electronics, Inc. [hex]" },
-            { 5737, "PiKRON Ltd. [hex]" },
-            { 5738, "Clipsal" },
-            { 5751, "China Huada Integrated Circuit Design (Group) Co., Ltd. (CIDC Group)" },
-            { 5753, "Total Phase" },
-            { 5755, "Pure Digital Technologies, Inc." },
-            { 5760, "Golden Bridge Electech Inc." },
-            { 5761, "Prevo Technologies, Inc." },
-            { 5762, "Maxwise Production Enterprise Ltd." },
-            { 5764, "Godspeed Computer Corp." },
-            { 5765, "Delock" },
-            { 5766, "ZOOM Corporation" },
-            { 5767, "Kingmax Digital Inc." },
-            { 5768, "Saab AB" },
-            { 5769, "Razer USA, Ltd" },
-            { 5772, "Atheros Communications" },
-            { 5776, "Askey Computer Corp. [hex]" },
-            { 5782, "Hitachi Video and Information System, Inc." },
-            { 5783, "VTec Test, Inc." },
-            { 5797, "Shenzhen Zhengerya Cable Co., Ltd." },
-            { 5798, "Unigraf" },
-            { 5803, "Global Sun Technology" },
-            { 5804, "Dongguan ChingLung Wire & Cable Co., Ltd." },
-            { 5812, "iStation" },
-            { 5813, "Persentec, Inc." },
-            { 5824, "Van Ooijen Technische Informatica" },
-            { 5834, "Wireless Cables, Inc." },
-            { 5836, "silex technology, Inc." },
-            { 5840, "MCS" },
-            { 5841, "Suprema Inc." },
-            { 5843, "Frontline Test Equipment, Inc." },
-            { 5845, "AnyDATA Corporation" },
-            { 5846, "JABLOCOM s.r.o." },
-            { 5848, "CMOTECH Co., Ltd." },
-            { 5852, "Wiener, Plein & Baus" },
-            { 5854, "Telemecanique" },
-            { 5855, "King Billion Electronics Co., Ltd." },
-            { 5872, "GN Hearing A/S" },
-            { 5877, "Futurelogic Inc." },
-            { 5890, "FDI-MATELEC" },
-            { 5894, "BlueView Technologies, Inc." },
-            { 5895, "ARTIMI" },
-            { 5899, "Swissonic" },
-            { 5901, "Avnera" },
-            { 5905, "Leica Microsystems" },
-            { 5924, "Meyer Instruments (MIS)" },
-            { 5925, "Vitesse Semiconductor" },
-            { 5926, "Axesstel, Inc." },
-            { 5935, "Waltop International Corp." },
-            { 5939, "Cellink Technology Co., Ltd" },
-            { 5942, "CANON IMAGING SYSTEM TECHNOLOGIES INC." },
-            { 5943, "802.11g Adapter [Linksys WUSB54GC v3]" },
-            { 5946, "Roche" },
-            { 5949, "QSENN" },
-            { 5952, "Senao" },
-            { 5955, "General Atomics" },
-            { 5960, "MQP Electronics" },
-            { 5964, "ASMedia Technology Inc." },
-            { 5967, "Syntek" },
-            { 5971, "GERTEC Telecomunicacoes Ltda." },
-            { 5974, "ENENSYS Technologies" },
-            { 5977, "LucidPort Technology, Inc." },
-            { 5985, "ASUSTek Computer, Inc. (wrong ID)" },
-            { 6000, "MSI" },
-            { 6002, "System Level Solutions, Inc." },
-            { 6006, "Arowana" },
-            { 6007, "Microscan Systems, Inc." },
-            { 6015, "Sweex" },
-            { 6017, "Multiple Vendors" },
-            { 6018, "Spreadtrum Communications Inc." },
-            { 6020, "TopSeed Technology Corp." },
-            { 6023, "ATI AIB" },
-            { 6024, "ShenZhen Litkconn Technology Co., Ltd." },
-            { 6030, "ASUSTek Computer, Inc. (wrong ID)" },
-            { 6038, "Printrex, Inc." },
-            { 6039, "JALCO CO., LTD." },
-            { 6041, "Thales Norway A/S" },
-            { 6045, "Ricavision International, Inc." },
-            { 6048, "Samson Technologies Corp." },
-            { 6052, "Concept2" },
-            { 6053, "Advanced Connection Technology Inc." },
-            { 6055, "MICOMSOFT CO., LTD." },
-            { 6056, "Kamstrup A/S" },
-            { 6067, "Grey Innovation" },
-            { 6069, "Lunatone" },
-            { 6074, "SAURIS GmbH" },
-            { 6083, "Singim International Corp." },
-            { 6092, "Native Instruments" },
-            { 6095, "Hip Hing Cable & Plug Mfy. Ltd." },
-            { 6096, "Sanford L.P." },
-            { 6099, "Korea Techtron Co., Ltd." },
-            { 6121, "DisplayLink" },
-            { 6123, "Cornice, Inc." },
-            { 6127, "Lenovo" },
-            { 6132, "WaveSense" },
-            { 6133, "K.K. Rocky" },
-            { 6134, "Unicomp, Inc." },
-            { 6153, "Advantech" },
-            { 6178, "Twinhan" },
-            { 6193, "Gwo Jinn Industries Co., Ltd." },
-            { 6194, "Huizhou Shenghua Industrial Co., Ltd." },
-            { 6205, "VIVOphone" },
-            { 6211, "Vaisala" },
-            { 6217, "ASRock Incorporation" },
-            { 6223, "K2L GmbH" },
-            { 6226, "GYROCOM C&C Co., LTD" },
-            { 6228, "Memory Devices Ltd." },
-            { 6235, "Compro" },
-            { 6241, "Tech Technology Industrial Company" },
-            { 6242, "Teridian Semiconductor Corp." },
-            { 6256, "Nexio Co., Ltd" },
-            { 6257, "Aveo Technology Corp." },
-            { 6259, "Navilock" },
-            { 6268, "Alienware Corporation" },
-            { 6271, "Siano Mobile Silicon" },
-            { 6290, "Vast Technologies, Inc." },
-            { 6292, "Topseed" },
-            { 6295, "Evertop Wire Cable Co." },
-            { 6303, "3Shape A/S" },
-            { 6308, "CSSN" },
-            { 6309, "Verbatim, Ltd" },
-            { 6321, "Petalynx" },
-            { 6324, "e3C Technologies" },
-            { 6326, "Mikkon Technology Limited" },
-            { 6327, "Zotek Electronic Co., Ltd." },
-            { 6341, "AMIT Technology, Inc." },
-            { 6349, "Ecamm" },
-            { 6353, "Google Inc." },
-            { 6357, "Starline International Group Limited" },
-            { 6361, "Kaba" },
-            { 6364, "LKC Technologies, Inc." },
-            { 6365, "Planon System Solutions Inc." },
-            { 6371, "Fitipower Integrated Technology Inc" },
-            { 6376, "Qcom" },
-            { 6378, "Matrox Graphics, Inc." },
-            { 6380, "Arkmicro Technologies Inc." },
-            { 6383, "ELV Elektronik AG" },
-            { 6392, "[Maxxter]" },
-            { 6395, "Scriptel Corporation" },
-            { 6397, "FineArch Inc." },
-            { 6401, "GE Healthcare" },
-            { 6408, "GEMBIRD" },
-            { 6413, "Motorola GSG" },
-            { 6420, "Alco Digital Devices Limited" },
-            { 6421, "Nordic Semiconductor ASA" },
-            { 6428, "Innovative Technology LTD" },
-            { 6435, "FitLinxx" },
-            { 6438, "NextWindow" },
-            { 6440, "Proceq SA" },
-            { 6447, "Avago Technologies, Pte." },
-            { 6448, "Shenzhen Xianhe Technology Co., Ltd." },
-            { 6449, "Ningbo Broad Telecommunication Co., Ltd." },
-            { 6452, "Feature Integration Technology Inc. (Fintek)" },
-            { 6453, "Elektron Music Machines" },
-            { 6456, "Meinberg Funkuhren GmbH & Co. KG" },
-            { 6465, "Dream Link" },
-            { 6467, "Sensoray Co., Inc." },
-            { 6473, "Lab126, Inc." },
-            { 6479, "PreSonus Audio Electronics, Inc." },
-            { 6481, "Hyperstone AG" },
-            { 6483, "Ironkey Inc." },
-            { 6484, "Radiient Technologies" },
-            { 6493, "Itron Technology iONE" },
-            { 6499, "IK Multimedia" },
-            { 6501, "Uniden Corporation" },
-            { 6503, "CASIO HITACHI Mobile Communications Co., Ltd." },
-            { 6507, "Wispro Technology Inc." },
-            { 6512, "Dane-Elec Corp. USA" },
-            { 6515, "Spectralink Corporation" },
-            { 6517, "Dongguan Guneetal Wire & Cable Co., Ltd." },
-            { 6518, "Chipsbrand Microelectronics (HK) Co., Ltd." },
-            { 6519, "T-Logic" },
-            { 6525, "Leuze electronic" },
-            { 6528, "Storage Appliance Corporation" },
-            { 6537, "Nuconn Technology Corp." },
-            { 6543, "Beceem Communications Inc." },
-            { 6544, "Acron Precision Industrial Co., Ltd." },
-            { 6549, "Trillium Technology Pty. Ltd." },
-            { 6550, "PixeLINK" },
-            { 6551, "Shenzhen Riitek Technology Co., Ltd" },
-            { 6555, "MicroStrain, Inc." },
-            { 6558, "The Imaging Source Europe GmbH" },
-            { 6559, "Benica Corporation" },
-            { 6565, "HARRIS Corp." },
-            { 6568, "Biforst Technology Inc." },
-            { 6571, "Bodelin" },
-            { 6575, "S Life" },
-            { 6578, "Batronix" },
-            { 6580, "Celestron" },
-            { 6581, "B & W Group" },
-            { 6582, "Infotech Logistic, LLC" },
-            { 6585, "Data Robotics" },
-            { 6594, "Futuba" },
-            { 6602, "Mindtribe" },
-            { 6607, "Parrot SA" },
-            { 6609, "BYD" },
-            { 6610, "ZTE WCDMA Technologies MSM" },
-            { 6619, "KFI Printers" },
-            { 6625, "WeiDuan Electronic Accessory (S.Z.) Co., Ltd." },
-            { 6632, "Industrial Technology Research Institute" },
-            { 6639, "Pak Heng Technology (Shenzhen) Co., Ltd." },
-            { 6647, "RODE Microphones" },
-            { 6650, "Gampaq Co.Ltd" },
-            { 6653, "MTI Instruments Inc." },
-            { 6655, "Dynex" },
-            { 6664, "Bellwood International, Inc." },
-            { 6666, "USB-IF non-workshop" },
-            { 6674, "KES Co., Ltd." },
-            { 6685, "Veho" },
-            { 6693, "Amphenol East Asia Ltd." },
-            { 6698, "Seagate Branded Solutions" },
-            { 6700, "China Resource Semico Co., Ltd" },
-            { 6706, "Quanta Microsystems, Inc." },
-            { 6708, "ACRUX" },
-            { 6710, "Biwin Technology Ltd." },
-            { 6720, "Terminus Technology Inc." },
-            { 6721, "Action Electronics Co., Ltd." },
-            { 6724, "VASCO Data Security International" },
-            { 6730, "Silicon Image" },
-            { 6731, "SafeBoot International B.V." },
-            { 6746, "Tandberg Data" },
-            { 6753, "Abbott Diabetes Care" },
-            { 6756, "Mastervolt" },
-            { 6762, "Spansion Inc." },
-            { 6765, "SamYoung Electronics Co., Ltd" },
-            { 6766, "Global Unichip Corp." },
-            { 6767, "Sagem Orga GmbH" },
-            { 6770, "Physik Instrumente" },
-            { 6777, "Bayer Health Care LLC" },
-            { 6779, "Lumberg Connect  GmbH & Co. KG" },
-            { 6780, "Evoluent" },
-            { 6782, "Meltec Systementwicklung" },
-            { 6785, "Holtek Semiconductor, Inc." },
-            { 6790, "QinHeng Electronics" },
-            { 6793, "Dynalith Systems Co., Ltd." },
-            { 6795, "SGS Taiwan Ltd." },
-            { 6797, "BandRich, Inc." },
-            { 6808, "Leica Camera AG" },
-            { 6820, "Data Drive Thru, Inc." },
-            { 6821, "UBeacon Technologies, Inc." },
-            { 6822, "eFortune Technology Corp." },
-            { 6827, "Silvercreations Software AG" },
-            { 6829, "KeeTouch" },
-            { 6833, "Rigol Technologies" },
-            { 6834, "Allied Vision" },
-            { 6859, "Salcomp Plc" },
-            { 6860, "Midiplus Co, Ltd." },
-            { 6865, "Desay Wire Co., Ltd." },
-            { 6868, "APS" },
-            { 6875, "Schweitzer Engineering Laboratories, Inc" },
-            { 6884, "ic-design Reinhard Gottinger GmbH" },
-            { 6887, "X-TENSIONS" },
-            { 6893, "High Top Precision Electronic Co., Ltd." },
-            { 6895, "Conntech Electronic (Suzhou) Corporation" },
-            { 6897, "Connect One Ltd." },
-            { 6899, "Kingsis Technology Corporation" },
-            { 6910, "A. Eberle GmbH & Co. KG" },
-            { 6916, "Meilhaus Electronic GmbH" },
-            { 6926, "BLUTRONICS S.r.l." },
-            { 6930, "Eventide" },
-            { 6940, "Corsair" },
-            { 6942, "General Imaging / General Electric" },
-            { 6943, "eQ-3 Entwicklung GmbH" },
-            { 6944, "MStar Semiconductor, Inc." },
-            { 6946, "WiLinx Corp." },
-            { 6948, "Telegent Systems, Inc." },
-            { 6950, "Cellex Power Products, Inc." },
-            { 6951, "Current Electronics Inc." },
-            { 6952, "NAVIsis Inc." },
-            { 6962, "Ugobe Life Forms, Inc." },
-            { 6966, "ViXS Systems, Inc." },
-            { 6971, "iPassion Technology Inc." },
-            { 6975, "Generalplus Technology Inc." },
-            { 6983, "Energizer Holdings, Inc." },
-            { 6984, "Plastron Precision Co., Ltd." },
-            { 6994, "ARH Inc." },
-            { 7001, "K.S. Terminals Inc." },
-            { 7002, "Chao Zhou Kai Yuan Electric Co., Ltd." },
-            { 7013, "The Hong Kong Standards and Testing Centre Ltd." },
-            { 7025, "Fushicai" },
-            { 7026, "ATERGI TECHNOLOGY CO., LTD." },
-            { 7027, "Fresco Logic" },
-            { 7029, "Ovislink Corp." },
-            { 7030, "Legend Silicon Corp." },
-            { 7040, "Afatech" },
-            { 7046, "Dongguan Guanshang Electronics Co., Ltd." },
-            { 7048, "ShenMing Electron (Dong Guan) Co., Ltd." },
-            { 7052, "Altium Limited" },
-            { 7053, "e-MOVE Technology Co., Ltd." },
-            { 7054, "Amlogic, Inc." },
-            { 7055, "MA LABS, Inc." },
-            { 7062, "N-Trig" },
-            { 7064, "YMax Communications Corp." },
-            { 7065, "Shenzhen Yuanchuan Electronic" },
-            { 7073, "JINQ CHERN ENTERPRISE CO., LTD." },
-            { 7074, "Lite Metals & Plastic (Shenzhen) Co., Ltd." },
-            { 7076, "Ember Corporation" },
-            { 7078, "Abilis Systems" },
-            { 7080, "China Telecommunication Technology Labs" },
-            { 7085, "Harmonix Music" },
-            { 7086, "Vuzix Corporation" },
-            { 7099, "T & A Mobile Phones" },
-            { 7101, "Videology Imaging Solutions, Inc." },
-            { 7104, "Beijing Senseshield Technology Co.,Ltd." },
-            { 7108, "Ford Motor Co." },
-            { 7109, "AVIXE Technology (China) Ltd." },
-            { 7111, "Telit Wireless Solutions" },
-            { 7118, "Contac Cable Industrial Limited" },
-            { 7119, "Sunplus Innovation Technology Inc." },
-            { 7120, "Hangzhou Riyue Electronic Co., Ltd." },
-            { 7125, "BG Systems, Inc." },
-            { 7130, "University Of Southampton" },
-            { 7134, "P-TWO INDUSTRIES, INC." },
-            { 7151, "Shenzhen Tongyuan Network-Communication Cables Co., Ltd" },
-            { 7152, "RealVision Inc." },
-            { 7157, "Extranet Systems Inc." },
-            { 7158, "Orient Semiconductor Electronics, Ltd." },
-            { 7165, "TouchPack" },
-            { 7170, "Kreton Corporation" },
-            { 7172, "QNAP System Inc." },
-            { 7173, "Shenxhen Stager Electric" },
-            { 7180, "Ionics EMS, Inc." },
-            { 7181, "Relm Wireless" },
-            { 7184, "Lanterra Industrial Co., Ltd." },
-            { 7185, "Input Club Inc." },
-            { 7187, "ALECTRONIC LIMITED" },
-            { 7194, "Datel Electronics Ltd." },
-            { 7195, "Volkswagen of America, Inc." },
-            { 7199, "Goldvish S.A." },
-            { 7200, "Fuji Electric Device Technology Co., Ltd." },
-            { 7201, "ADDMM LLC" },
-            { 7202, "ZHONGSHAN CHIANG YU ELECTRIC CO., LTD." },
-            { 7206, "Shanghai Haiying Electronics Co., Ltd." },
-            { 7207, "HuiYang D & S Cable Co., Ltd." },
-            { 7208, "PMD Technologies" },
-            { 7209, "Elster GmbH" },
-            { 7217, "LS Cable Ltd." },
-            { 7220, "SpringCard" },
-            { 7223, "Authorizer Technologies, Inc." },
-            { 7229, "NONIN MEDICAL INC." },
-            { 7230, "Wep Peripherals" },
-            { 7232, "EZPrototypes" },
-            { 7241, "Cherng Weei Technology Corp." },
-            { 7243, "Geratherm Medical AG" },
-            { 7247, "SiGma Micro" },
-            { 7255, "Zalman Tech Co., Ltd." },
-            { 7275, "Philips & Lite-ON Digital Solutions Corporation" },
-            { 7276, "Skydigital Inc." },
-            { 7281, "Humanware Inc" },
-            { 7283, "AMT" },
-            { 7285, "Arturia" },
-            { 7287, "Kaetat Industrial Co., Ltd." },
-            { 7288, "Datascope Corp." },
-            { 7289, "Unigen Corporation" },
-            { 7290, "LighTuning Technology Inc." },
-            { 7291, "LUXSHARE PRECISION INDUSTRY (SHENZHEN) CO., LTD." },
-            { 7298, "Atracsys" },
-            { 7299, "Schomaecker GmbH" },
-            { 7303, "2N TELEKOMUNIKACE a.s." },
-            { 7304, "Somagic, Inc." },
-            { 7305, "HONGKONG WEIDIDA ELECTRON LIMITED" },
-            { 7310, "ASTRON INTERNATIONAL CORP." },
-            { 7320, "ALPINE ELECTRONICS, INC." },
-            { 7326, "OMEGA TECHNOLOGY" },
-            { 7328, "ACCARIO Inc." },
-            { 7329, "Symwave" },
-            { 7340, "Kinstone" },
-            { 7347, "Aces Electronic Co., Ltd." },
-            { 7348, "OPEX CORPORATION" },
-            { 7350, "IdeaCom Technology Inc." },
-            { 7358, "Luminary Micro Inc." },
-            { 7359, "FORTAT SKYMARK INDUSTRIAL COMPANY" },
-            { 7360, "PlantSense" },
-            { 7370, "NextWave Broadband Inc." },
-            { 7373, "Bodatong Technology (Shenzhen) Co., Ltd." },
-            { 7380, "adp corporation" },
-            { 7381, "Firecomms Ltd." },
-            { 7382, "Antonio Precise Products Manufactory Ltd." },
-            { 7390, "Telecommunications Technology Association (TTA)" },
-            { 7391, "WonTen Technology Co., Ltd." },
-            { 7392, "EDIMAX TECHNOLOGY CO., LTD." },
-            { 7393, "Amphenol KAE" },
-            { 7409, "Dresden Elektronik" },
-            { 7420, "ANDES TECHNOLOGY CORPORATION" },
-            { 7421, "Flextronics Digital Design Japan, LTD." },
-            { 7427, "iCON" },
-            { 7431, "Solid-Motion" },
-            { 7432, "NINGBO HENTEK DRAGON ELECTRONICS CO., LTD." },
-            { 7433, "TechFaith Wireless Technology Limited" },
-            { 7434, "Johnson Controls, Inc. The Automotive Business Unit" },
-            { 7435, "HAN HUA CABLE & WIRE TECHNOLOGY (J.X.) CO., LTD." },
-            { 7437, "TDKMedia" },
-            { 7439, "Sonix Technology Co., Ltd." },
-            { 7444, "ALPHA-SAT TECHNOLOGY LIMITED" },
-            { 7447, "C-Thru Music Ltd." },
-            { 7449, "Dexatek Technology Ltd." },
-            { 7455, "Diostech Co., Ltd." },
-            { 7456, "SAMTACK INC." },
-            { 7463, "ASUS" },
-            { 7476, "Dream Cheeky" },
-            { 7493, "Touch" },
-            { 7501, "PEGATRON CORPORATION" },
-            { 7504, "OpenMoko, Inc." },
-            { 7511, "Xenta" },
-            { 7515, "Smartronix, Inc." },
-            { 7516, "Fresco Logic" },
-            { 7531, "Linux Foundation" },
-            { 7560, "Mahr GmbH" },
-            { 7568, "Citizen" },
-            { 7581, "Sigma Sport" },
-            { 7634, "Leo Bodnar Electronics Ltd" },
-            { 7635, "Dajc Inc." },
-            { 7649, "Actions Microelectronics Co." },
-            { 7654, "MICRORISC s.r.o." },
-            { 7694, "Qualcomm / Option" },
-            { 7696, "Point Grey Research, Inc." },
-            { 7703, "Mirion Technologies Dosimetry Services Division" },
-            { 7709, "Kanguru Solutions" },
-            { 7711, "INVIA" },
-            { 7721, "Festo AG & Co. KG" },
-            { 7725, "Gemalto M2M GmbH" },
-            { 7741, "Chipsbank Microelectronics Co., Ltd" },
-            { 7745, "Cleverscope" },
-            { 7748, "SHIMANO INC." },
-            { 7758, "Cubeternet" },
-            { 7764, "TypeMatrix" },
-            { 7784, "TrekStor GmbH & Co. KG" },
-            { 7793, "NZXT" },
-            { 7796, "Coby Electronics Corporation" },
-            { 7803, "Zurich Instruments" },
-            { 7805, "ROCCAT" },
-            { 7822, "Airbus Defence and Space" },
-            { 7825, "Other World Computing" },
-            { 7847, "SHARKOON Technologies GmbH" },
-            { 7851, "Fujian Newland Computer Co., Ltd" },
-            { 7855, "Leaflabs" },
-            { 7864, "Modacom Co., Ltd." },
-            { 7867, "NuCORE Technology, Inc." },
-            { 7883, "AMTelecom" },
-            { 7896, "FENDER MUSICAL INSTRUMENTS CORPORATION" },
-            { 7898, "AirTies Wireless Networks" },
-            { 7899, "Blackmagic design" },
-            { 7912, "ONDA COMMUNICATION S.p.a." },
-            { 7926, "EADS Deutschland GmbH" },
-            { 7948, "CMX Systems" },
-            { 7976, "Cal-Comp" },
-            { 7994, "Allwinner Technology" },
-            { 8004, "The Neat Company" },
-            { 8008, "H-TRONIC GmbH" },
-            { 8013, "G-Tek Electronics Group" },
-            { 8018, "Systems & Electronic Development FZCO (SEDCO)" },
-            { 8047, "Aliph" },
-            { 8053, "Innostor Technology Corporation" },
-            { 8066, "TANDBERG" },
-            { 8068, "Alere, Inc." },
-            { 8071, "Stantum" },
-            { 8091, "Ubiquiti Networks, Inc." },
-            { 8107, "Samsung Opto-Electroncs Co., Ltd." },
-            { 8108, "Franklin Wireless" },
-            { 8110, "Lumidigm" },
-            { 8114, "Withings" },
-            { 8122, "DERMALOG Identification Systems GmbH" },
-            { 8125, "Delphin Technology AG" },
-            { 8137, "NXP Semiconductors" },
-            { 8158, "ILX Lightwave Corporation" },
-            { 8167, "Vertex Wireless Co., Ltd." },
-            { 8183, "CVT Electronics.Co.,Ltd" },
-            { 8187, "Pololu Corporation" },
-            { 8191, "Ideofy Inc." },
-            { 8192, "CMX Systems" },
-            { 8193, "D-Link Corp." },
-            { 8194, "DAP Technologies" },
-            { 8195, "detectomat" },
-            { 8198, "LenovoMobile" },
-            { 8201, "iStorage" },
-            { 8204, "Reloop" },
-            { 8211, "PCTV Systems" },
-            { 8216, "Deutsche Telekom AG" },
-            { 8217, "PLANEX" },
-            { 8222, "Haier" },
-            { 8250, "PARALLELS" },
-            { 8253, "Encore Electronics Inc." },
-            { 8256, "Hauppauge" },
-            { 8263, "Texas Instruments" },
-            { 8280, "Nano River Technology" },
-            { 8311, "Taicang T&W Electronics Co. Ltd" },
-            { 8320, "Barnes & Noble" },
-            { 8326, "SIMPASS" },
-            { 8327, "Cando" },
-            { 8352, "Clay Logic" },
-            { 8369, "XMOS Ltd" },
-            { 8371, "Hanvon" },
-            { 8375, "Qi Hardware" },
-            { 8380, "ShenZhen ShanWan Technology Co., Ltd." },
-            { 8398, "Minicircuits" },
-            { 8415, "Simtec Electronics" },
-            { 8432, "L3Harris Technologies" },
-            { 8433, "NET New Electronic Technology GmbH" },
-            { 8436, "TRENDnet" },
-            { 8439, "XIMEA" },
-            { 8448, "RT Systems" },
-            { 8449, "ActionStar" },
-            { 8452, "Tobii Technology AB" },
-            { 8455, "RDING TECH CO.,LTD" },
-            { 8457, "VIA Labs, Inc." },
-            { 8467, "Softkinetic" },
-            { 8470, "KT Tech" },
-            { 8479, "CELOT Corporation" },
-            { 8483, "Cheeky Dream" },
-            { 8485, "Fiberpro Inc." },
-            { 8499, "signotec GmbH" },
-            { 8521, "Advanced Silicon S.A." },
-            { 8523, "Huasheng Electronics" },
-            { 8526, "Swiftpoint" },
-            { 8546, "Broadxent (Creative Labs)" },
-            { 8550, "JVC Kenwood" },
-            { 8580, "GW Instek" },
-            { 8584, "No brand" },
-            { 8604, "Seal One AG" },
-            { 8609, "Emotiv Systems Pty. Ltd." },
-            { 8612, "Electronic Arts Inc." },
-            { 8617, "Saleae, Inc." },
-            { 8619, "Planeta Informatica" },
-            { 8628, "AudioQuest" },
-            { 8662, "Agecodagis SARL" },
-            { 8711, "Fuzhou Rockchip Electronics Company" },
-            { 8730, "ZTEX GmbH" },
-            { 8738, "MacAlly" },
-            { 8742, "Copper Mountain technologies" },
-            { 8743, "SAMWOO Enterprise" },
-            { 8746, "ILI Technology Corp." },
-            { 8752, "Plugable" },
-            { 8754, "Silicon Motion" },
-            { 8755, "RadioShack Corporation" },
-            { 8759, "Kobo Inc." },
-            { 8773, "Aspeed Technology, Inc." },
-            { 8783, "APDM" },
-            { 8790, "Faderfox" },
-            { 8797, "Morpho" },
-            { 8814, "DISPLAX" },
-            { 8845, "8D Technologies inc." },
-            { 8868, "VERZO Technology" },
-            { 8870, "Pie Digital, Inc." },
-            { 8871, "Fortinet Technologies" },
-            { 8881, "Secret Labs LLC" },
-            { 8888, "Motorola PCS" },
-            { 8889, "eTurboTouch Technology, Inc." },
-            { 8890, "Technology Innovation Holdings, Ltd" },
-            { 8905, "StepOver GmbH" },
-            { 8909, "Kinova Robotics Inc." },
-            { 8916, "Laview Technology" },
-            { 8921, "OPPO Electronics Corp." },
-            { 8923, "Phase One" },
-            { 8924, "Mellanox Technologies" },
-            { 8926, "WeTelecom Incorporated" },
-            { 8927, "Medicom MTD, Ltd" },
-            { 8928, "secunet Security Networks AG" },
-            { 8936, "Cambridge Audio" },
-            { 8964, "Pinnacle Systems, Inc." },
-            { 8973, "Teracom" },
-            { 8980, "INQ Mobile" },
-            { 8984, "Shining Technologies, Inc. [hex]" },
-            { 8985, "Tronsmart" },
-            { 9003, "Pantum Ltd." },
-            { 9006, "EA Elektro-Automatik GmbH & Co. KG" },
-            { 9024, "Teleepoch" },
-            { 9025, "Arduino SA" },
-            { 9033, "P2 Engineering Group, LLC" },
-            { 9035, "Free Software Initiative of Japan" },
-            { 9047, "TP-Link" },
-            { 9062, "Bitmanufaktur GmbH" },
-            { 9063, "Teenage Engineering" },
-            { 9064, "Peterson Electro-Musical Products Inc." },
-            { 9066, "SiBEAM" },
-            { 9075, "Pumatronix Ltda" },
-            { 9077, "Digit@lway, Inc." },
-            { 9080, "OnLive" },
-            { 9085, "Cradlepoint" },
-            { 9094, "Raydium Corporation" },
-            { 9099, "Hytera Communications" },
-            { 9114, "Adafruit" },
-            { 9120, "BIFIT" },
-            { 9126, "Tronical Components GmbH" },
-            { 9140, "Dental Wings Inc." },
-            { 9159, "Gemini" },
-            { 9212, "SesKion GmbH" },
-            { 9221, "Custom Computer Services, Inc" },
-            { 9222, "SANHO Digital Electronics Co., Ltd." },
-            { 9248, "IRiver" },
-            { 9262, "Vossloh-Schwabe Deutschland GmbH" },
-            { 9267, "ASETEK" },
-            { 9283, "Aessent Technology Ltd" },
-            { 9303, "Ocean Optics Inc." },
-            { 9304, "Bluegiga Technologies" },
-            { 9311, "Chord Electronics Limited" },
-            { 9316, "Nest" },
-            { 9318, "Fractal Audio Systems" },
-            { 9334, "YEI Technology" },
-            { 9336, "Tripp-Lite" },
-            { 9354, "Maxxter" },
-            { 9372, "M2Tech s.r.l." },
-            { 9380, "Primare AB" },
-            { 9390, "Shenzhen Rapoo Technology Co., Ltd." },
-            { 9408, "Chaney Instrument" },
-            { 9414, "ThrustMaster, Inc." },
-            { 9423, "Lytro, Inc." },
-            { 9436, "Aladdin R.D." },
-            { 9440, "Yoctopuce Sarl" },
-            { 9441, "Paratronic" },
-            { 9443, "K-Touch" },
-            { 9450, "Meva" },
-            { 9453, "Zen Group" },
-            { 9456, "Metadot" },
-            { 9471, "Acroname Inc." },
-            { 9472, "Ettus Research LLC" },
-            { 9494, "Cooler Master Co., Ltd." },
-            { 9504, "ANA-U GmbH" },
-            { 9511, "Software Bisque" },
-            { 9527, "Norelsys" },
-            { 9540, "Energy Micro AS" },
-            { 9542, "Ravensburger" },
-            { 9544, "Pulse-Eight" },
-            { 9550, "SHF Communication Technologies AG" },
-            { 9556, "ASSA ABLOY AB" },
-            { 9557, "Basis Science Inc." },
-            { 9566, "Beijing Bonxeon Technology Co., Ltd." },
-            { 9568, "e-con Systems" },
-            { 9571, "ShenZhen ShanWan Technology Co., Ltd." },
-            { 9579, "Perreaux Industries Ltd" },
-            { 9583, "3Dconnexion" },
-            { 9587, "ESI Audiotechnik GmbH" },
-            { 9588, "AVer Information, Inc." },
-            { 9589, "Weida Hi-Tech Co., Ltd." },
-            { 9590, "AFO Co., Ltd." },
-            { 9592, "Pluscom" },
-            { 9601, "Plug-up" },
-            { 9613, "Sequans Communications" },
-            { 9626, "TriQuint Semiconductor" },
-            { 9639, "Areson Technology Corp" },
-            { 9653, "FlatFrog" },
-            { 9659, "Brunner Elektronik AG" },
-            { 9663, "Elegant Invention" },
-            { 9668, "ARCAM" },
-            { 9670, "Vitus Audio (AVA Group A/S)" },
-            { 9672, "Visual Planet Ltd" },
-            { 9690, "Netatmo" },
-            { 9699, "Lumigon" },
-            { 9712, "ShanWan" },
-            { 9723, "Pentax Ricoh Imaging Co., Ltd" },
-            { 9732, "Tenda" },
-            { 9765, "MilDef AB" },
-            { 9766, "Aruba Networks" },
-            { 9770, "SAVITECH Corp." },
-            { 9778, "TwinMOS" },
-            { 9785, "Xsens" },
-            { 9802, "Thermaltake" },
-            { 9808, "Electronics For Imaging, Inc. [hex]" },
-            { 9817, "Sundtek" },
-            { 9826, "Moog Music Inc." },
-            { 9838, "Silicon Integrated Systems" },
-            { 9842, "GoPro" },
-            { 9846, "Basler AG" },
-            { 9861, "Cardo Peripheral Systems LTD" },
-            { 9863, "Fitbit Inc." },
-            { 9865, "StepOver International GmbH" },
-            { 9867, "Dimension Engineering" },
-            { 9897, "Research Industrial Systems Engineering" },
-            { 9898, "Yaesu Musen" },
-            { 9909, "Electrocompaniet" },
-            { 9917, "Integral Memory" },
-            { 9954, "Ingenieurbuero Dietzsch und Thiele, PartG" },
-            { 9970, "Micromega" },
-            { 9991, "Bardac Corporation" },
-            { 9997, "Rosand Technologies" },
-            { 10007, "Xiaomi Inc." },
-            { 10026, "StarLeaf Ltd." },
-            { 10028, "Signum Systems" },
-            { 10032, "Citizen" },
-            { 10037, "DigitalWay" },
-            { 10047, "Hughski Limited" },
-            { 10070, "Victor Hasselblad AB" },
-            { 10073, "Philip Morris Products S.A." },
-            { 10085, "Firstbeat Technologies, Ltd." },
-            { 10086, "LifeScan" },
-            { 10096, "NHJ, Ltd" },
-            { 10152, "Square, Inc." },
-            { 10168, "ThingM" },
-            { 10173, "Codethink Ltd." },
-            { 10176, "Cadwell Laboratories, Inc." },
-            { 10182, "Shenzhen Goodix Technology Co.,Ltd." },
-            { 10196, "Blackstar Amplification Limited" },
-            { 10205, "Mindeo" },
-            { 10226, "Softnautics LLP" },
-            { 10243, "StarLine LLC." },
-            { 10246, "SIMPASS" },
-            { 10263, "Signal Hound, Inc." },
-            { 10264, "Codex Digital Limited" },
-            { 10273, "ASUSTek Computer Inc." },
-            { 10274, "REFLEXdigital" },
-            { 10291, "Oculus VR, Inc." },
-            { 10294, "OUYA" },
-            { 10347, "STANEO SAS" },
-            { 10374, "Seeed Technology Co., Ltd." },
-            { 10384, "Teknic, Inc" },
-            { 10393, "Toptronic Industrial Co., Ltd" },
-            { 10395, "Dracal/Raphnet technologies" },
-            { 10397, "Seek Thermal, Inc." },
-            { 10429, "XP-Pen" },
-            { 10439, "Ultimaker B.V." },
-            { 10452, "Devialet" },
-            { 10462, "Valve Software" },
-            { 10464, "PT. Prasimax Inovasi Teknologi" },
-            { 10473, "GDMicroelectronics" },
-            { 10483, "Clover Network, Inc." },
-            { 10489, "Profitap HQ BV" },
-            { 10508, "R. Hamilton & Co. Ltd." },
-            { 10514, "Audioengine" },
-            { 10518, "Yota Devices" },
-            { 10545, "Jolla Oy" },
-            { 10553, "Zaber Technologies Inc." },
-            { 10583, "Obsidian Research Corporation" },
-            { 10593, "Miselu" },
-            { 10603, "Xacti Corporation" },
-            { 10610, "FiiO Electronics Technology" },
-            { 10637, "Next Biometrics" },
-            { 10685, "Silicon Works" },
-            { 10689, "Taztag" },
-            { 10690, "Lewitt GmbH" },
-            { 10691, "Noviga" },
-            { 10722, "Huatune Technology (Shanghai) Co., Ltd." },
-            { 10727, "Brunel University" },
-            { 10728, "4Links Limited" },
-            { 10730, "Kinesis Corporation" },
-            { 10737, "Canaan Creative Co., Ltd" },
-            { 10755, "dog hunter AG" },
-            { 10766, "Shenzhen DreamSource Technology Co., Ltd." },
-            { 10771, "Grabba International" },
-            { 10777, "Numato Systems Pvt. Ltd" },
-            { 10781, "Oxford Nanopore Technologies, Ltd" },
-            { 10807, "RTD Embedded Technologies, Inc." },
-            { 10809, "RME" },
-            { 10812, "Trinamic Motion Control GmbH & Co KG" },
-            { 10821, "Meizu Corp." },
-            { 10823, "Mundo Reader, S.L." },
-            { 10827, "EMULEX Corporation" },
-            { 10850, "Flymaster Avionics" },
-            { 10862, "Bare Conductive" },
-            { 10864, "OnePlus Technology (Shenzhen) Co., Ltd." },
-            { 10888, "DFU Technology Ltd" },
-            { 10893, "Keysight Technologies, Inc." },
-            { 10934, "T+A elektroakustik GmbH & Co KG, Germany" },
-            { 10951, "Ultrahaptics Ltd." },
-            { 10961, "Picotronic GmbH" },
-            { 10981, "Fairphone B.V." },
-            { 10988, "Ambiq Micro, Inc." },
-            { 10996, "ROLI Ltd." },
-            { 11011, "STEREOLABS" },
-            { 11022, "LeEco" },
-            { 11043, "Red Hat, Inc." },
-            { 11044, "KeepKey LLC" },
-            { 11070, "NewAE Technology Inc." },
-            { 11084, "ZUK" },
-            { 11205, "Orbbec 3D Technology International, Inc" },
-            { 11212, "InoTec GmbH Organisationssysteme" },
-            { 11222, "Coroware, Inc." },
-            { 11224, "ROPEX Industrie-Elektronik GmbH" },
-            { 11266, "Planex Communications" },
-            { 11290, "Dolphin Peripherals" },
-            { 11299, "Supermicro Computer Incorporated" },
-            { 11342, "Mercucys INC" },
-            { 11343, "Canon Electronic Business Machines Co., Ltd." },
-            { 11349, "Magic Leap, Inc." },
-            { 11388, "Quectel Wireless Solutions Co., Ltd." },
-            { 11415, "Ledger" },
-            { 11417, "Prusa" },
-            { 11420, "Vayyar Imaging Ltd." },
-            { 11421, "Nod Inc" },
-            { 11427, "DJI Technology Co., Ltd." },
-            { 11447, "Fibocom" },
-            { 11456, "Hangzhou Zero Zero Infinity Technology Co., Ltd." },
-            { 11458, "Lautsprecher Teufel GmbH" },
-            { 11471, "Hypersecu" },
-            { 11481, "Cambrionix Ltd" },
-            { 11484, "Sea & Sun Technology GmbH" },
-            { 11493, "InX8 Inc [AKiTiO]" },
-            { 11504, "Nuand LLC" },
-            { 11551, "Wacom Taiwan Information Co. Ltd." },
-            { 11557, "Kronegger GmbH." },
-            { 11565, "proxmark.org" },
-            { 11575, "Zhuhai Poskey Technology Co.,Ltd" },
-            { 11627, "NetUP Inc." },
-            { 11649, "Evollve Inc." },
-            { 11652, "Zhuhai Poskey Technology Co.,Ltd" },
-            { 11720, "8BitDo" },
-            { 11727, "Dialog Semiconductor" },
-            { 11759, "Kirale Technologies" },
-            { 11762, "LIPS Corporation" },
-            { 11780, "HMD Global" },
-            { 11790, "Hatteland Display AS" },
-            { 11812, "Hyperkin" },
-            { 11835, "uSens Inc." },
-            { 11863, "MEGWARE Computer Vertrieb und Service GmbH" },
-            { 11881, "Swift Navigation" },
-            { 11925, "SCUF Gaming" },
-            { 12150, "KeyXentic Inc." },
-            { 12205, "Definium Technologies" },
-            { 12208, "Infocrypt" },
-            { 12210, "Fujitsu, Ltd" },
-            { 12224, "Sensidyne, LP" },
-            { 12230, "Comtrue Inc." },
-            { 12256, "Xaptum, Inc." },
-            { 12259, "NordicSemiconductor" },
-            { 12263, "ELGIN S.A." },
-            { 12267, "Beijing Veikk E-Commerce Co., Ltd." },
-            { 12276, "Quixant Plc" },
-            { 12310, "Boundary Devices, LLC" },
-            { 12342, "Control iD" },
-            { 12343, "Beijing Chushifengmang Technology Development Co.,Ltd." },
-            { 12375, "Kingsis Corporation" },
-            { 12431, "Input Club" },
-            { 12452, "Blues Wireless" },
-            { 12482, "UNPARALLEL Innovation, Lda" },
-            { 12489, "Luxvisions Innotech Limited" },
-            { 12526, "Fujitsu Connected Technologies Limited" },
-            { 12530, "Varex Imaging" },
-            { 12561, "Hiperscan GmbH" },
-            { 12562, "Meteca SA" },
-            { 12581, "Eagletron" },
-            { 12598, "Navini Networks" },
-            { 12613, "SafeLogic Inc." },
-            { 12615, "Tanvas, Inc." },
-            { 12652, "SigmaSense, LLC" },
-            { 12653, "Purism, SPC" },
-            { 12654, "SPECINFOSYSTEMS" },
-            { 12657, "8086 Consultancy" },
-            { 12662, "Whanam Electronics Co., Ltd" },
-            { 12693, "Link Instruments" },
-            { 12745, "BeiJing LanXum Computer Technology Co., Ltd." },
-            { 12800, "Alcatel-Lucent Enterprise" },
-            { 12825, "Smak Tecnologia e Automacao LTDA" },
-            { 12828, "Premio, Inc." },
-            { 12876, "CUPRIS Ltd." },
-            { 12909, "Agile Display Solutions Co., Ltd" },
-            { 12917, "VidzMedia Pte Ltd" },
-            { 12947, "Unhuman Inc." },
-            { 12979, "TEXA" },
-            { 13107, "InLine" },
-            { 13108, "AEI" },
-            { 13120, "Yakumo" },
-            { 13124, "Leaguer Microelectronics (LME)" },
-            { 13455, "ISY" },
-            { 13572, "Micro Star" },
-            { 13624, "Power Quotient International Co., Ltd" },
-            { 13689, "DIVA" },
-            { 13693, "Sharkoon" },
-            { 13878, "InVibro" },
-            { 14183, "Fanatec" },
-            { 14392, "WEM" },
-            { 14627, "National Instruments Corp." },
-            { 16571, "I-O Data" },
-            { 16641, "i-rocks" },
-            { 16642, "iRiver, Ltd." },
-            { 16700, "Dell Computer Corp." },
-            { 16710, "USBest Technology" },
-            { 16744, "Targus" },
-            { 16962, "USB Design by Example" },
-            { 16981, "GoPro" },
-            { 17175, "Broadcom Corp." },
-            { 17224, "WinChipHead" },
-            { 17778, "Shuttle, Inc." },
-            { 17798, "Panram" },
-            { 18032, "EMS Production" },
-            { 18164, "QEMU" },
-            { 18258, "Miditech" },
-            { 18263, "GW Instek" },
-            { 18278, "Aceeca" },
-            { 18517, "Memorex" },
-            { 18801, "SimpleTech" },
-            { 19782, "Musical Fidelity" },
-            { 20530, "Grandtec" },
-            { 20674, "Averatec (?)" },
-            { 20785, "MSR" },
-            { 20851, "Sweex" },
-            { 21017, "I-Tetra" },
-            { 21298, "Clearly Superior Technologies, Inc." },
-            { 21317, "Owon" },
-            { 21324, "SatoshiLabs" },
-            { 21325, "MacroSilicon" },
-            { 21332, "Meyer Instruments (MIS)" },
-            { 21581, "Transmeta Corp." },
-            { 21827, "UC-Logic Technology Corp." },
-            { 21845, "Epiphan Systems Inc." },
-            { 21930, "OnSpec Electronic, Inc." },
-            { 22100, "Gotview" },
-            { 22102, "Uni-Trend Group Limited" },
-            { 22874, "IRTOUCHSYSTEMS Co. Ltd." },
-            { 22918, "Acer, Inc" },
-            { 23011, "Nonolith Labs" },
-            { 23127, "Zinwell" },
-            { 24576, "Beholder International Ltd." },
-            { 24602, "Ingenic Semiconductor Ltd." },
-            { 24610, "Xektek" },
-            { 24969, "Sitecom" },
-            { 25156, "LightingSoft AG" },
-            { 25171, "TwinHan Technology Co., Ltd" },
-            { 25452, "CoreLogic, Inc." },
-            { 25714, "Sony Corp." },
-            { 25927, "Arkmicro Technologies Inc." },
-            { 25943, "Emtec" },
-            { 26133, "IRTOUCHSYSTEMS Co. Ltd." },
-            { 26214, "Prototype product Vendor ID" },
-            { 26231, "WiseGroup, Ltd." },
-            { 26461, "Humanscale" },
-            { 26769, "3Com" },
-            { 26972, "Opera1" },
-            { 27027, "Yealink Network Technology Co., Ltd." },
-            { 27253, "Shanghai Jujo Electronics Co., Ltd" },
-            { 28932, "CME (Central Music Co.)" },
-            { 29292, "StackFoundry LLC" },
-            { 29442, "Solinftec" },
-            { 29516, "TBS Technologies China" },
-            { 29555, "Beijing STONE Technology Co. Ltd." },
-            { 29586, "Edimax Technology Co., Ltd" },
-            { 29656, "Progeny Dental Equipment Specialists" },
-            { 30313, "Venable Instruments" },
-            { 30757, "Other World Computing" },
-            { 32880, "ACCES I/O Products, Inc." },
-            { 32902, "Intel Corp." },
-            { 32903, "Intel Corp." },
-            { 33006, "VirtualBox" },
-            { 33410, "Keio" },
-            { 33537, "Hapurs" },
-            { 33601, "EGO Systems, Inc." },
-            { 34148, "Transcend Information, Inc." },
-            { 34372, "Intenso GmbG" },
-            { 36358, "CH Products, Inc." },
-            { 36515, "Doosl" },
-            { 36886, "Sitecom" },
-            { 36898, "TeVii Technology Ltd." },
-            { 37192, "GeoLab, Ltd" },
-            { 38166, "Studiologic" },
-            { 38672, "MosChip Semiconductor" },
-            { 38985, "Bestmedia CD Recordable GmbH & Co. KG" },
-            { 39046, "Astro Gaming" },
-            { 39321, "Odeon" },
-            { 39418, "Grandtec" },
-            { 39620, "J. Westhues" },
-            { 40584, "Marvell Semiconductor, Inc." },
-            { 40980, "Insignia (Best Buy)" },
-            { 41224, "Ingenic Semiconductor Co.,Ltd" },
-            { 41256, "AnMo Electronics Corp. / Dino-Lite (?)" },
-            { 41320, "AnMo Electronics Corporation" },
-            { 42086, "Haikou Xingong Electronics Co.,Ltd" },
-            { 42496, "ASIX s.r.o." },
-            { 42791, "3Com" },
-            { 43146, "Clas Ohlsson" },
-            { 43690, "MXT" },
-            { 43794, "aplic" },
-            { 43981, "LogiLink" },
-            { 46478, "Blue Microphones" },
-            { 47735, "Clockmaker" },
-            { 49686, "Card Device Expert Co., LTD" },
-            { 49745, "Keil Software, Inc." },
-            { 50434, "AGPTek" },
-            { 51918, "CACE Technologies Inc." },
-            { 52498, "SMART TECHNOLOGY INDUSTRIAL LTD." },
-            { 53768, "Ultimarc" },
-            { 53769, "Ultimarc" },
-            { 55556, "LogiLink" },
-            { 58039, "Jie Li" },
-            { 58596, "Xorcom Ltd." },
-            { 60163, "MakingThings" },
-            { 60186, "eMPIA Technology, Inc." },
-            { 60202, "KWorld" },
-            { 61208, "SMART TECHNOLOGY INDUSTRIAL LTD." },
-            { 61443, "Hewlett Packard" },
-            { 61447, "Teslong" },
-            { 61826, "Leap Motion" },
-            { 62448, "CCT, Inc" },
-            { 62700, "Atten Electronics / Siglent Technologies" },
-            { 62701, "Shenzhen Siglent Co., Ltd." },
-            { 63334, "Hama" },
-            { 64017, "DyingLight" },
-            { 64520, "Conrad Electronic SE" },
-            { 65280, "Power Delivery" },
-            { 65518, "FNK Tech" },
-                };
-
-        private static Dictionary<int, Dictionary<int, string>> vendorProductIds = new Dictionary<int, Dictionary<int, string>> {
-    { 1, new Dictionary<int, string>(){ 
-    { 30584, "Counterfeit flash drive [Kingston]" },
- } },
-            { 2, new Dictionary<int, string>(){ 
-    { 2, "passport00" },
- } },
-            { 3, new Dictionary<int, string>(){ 
-     } },
-            { 4, new Dictionary<int, string>(){ 
-     } },
-            { 17, new Dictionary<int, string>(){ 
-    { 30600, "counterfeit flash drive" },
- } },
-            { 83, new Dictionary<int, string>(){ 
-    { 21249, "GW-US54ZGL 802.11bg" },
- } },
-            { 120, new Dictionary<int, string>(){ 
-    { 6, "Joystick" },
- } },
-            { 121, new Dictionary<int, string>(){ 
-    { 6, "PC TWIN SHOCK Gamepad" },
+        private static Dictionary<int, Tuple<string, Dictionary<int, string>>> vendorAndProductIds = new Dictionary<int, Tuple<string, Dictionary<int, string>>> {
+    { 1, Tuple.Create("Fry's Electronics", new Dictionary<int, string>{
+{ 30584, "Counterfeit flash drive [Kingston]" },
+    })
+ },
+            { 2, Tuple.Create("Ingram", new Dictionary<int, string>{
+{ 2, "passport00" },
+    })
+ },
+            { 17, Tuple.Create("Unknown", new Dictionary<int, string>{
+{ 30600, "counterfeit flash drive" },
+    })
+ },
+            { 83, Tuple.Create("Planex", new Dictionary<int, string>{
+{ 21249, "GW-US54ZGL 802.11bg" },
+    })
+ },
+            { 120, Tuple.Create("Microntek", new Dictionary<int, string>{
+{ 6, "Joystick" },
+    })
+ },
+            { 121, Tuple.Create("DragonRise Inc.", new Dictionary<int, string>{
+{ 6, "PC TWIN SHOCK Gamepad" },
 { 17, "Gamepad" },
 { 6144, "Mayflash Wii U Pro Game Controller Adapter [DirectInput]" },
 { 6171, "Venom Arcade Joystick" },
 { 6211, "Mayflash GameCube Controller Adapter" },
 { 6212, "Mayflash GameCube Controller" },
- } },
-            { 128, new Dictionary<int, string>(){ 
-    { 40961, "JMS578 based SATA bridge" },
- } },
-            { 133, new Dictionary<int, string>(){ 
-    { 1536, "eBook Reader" },
- } },
-            { 258, new Dictionary<int, string>(){ 
-     } },
-            { 261, new Dictionary<int, string>(){ 
-    { 5215, "NW-3100 802.11b/g 54Mbps Wireless Network Adapter [zd1211]" },
- } },
-            { 295, new Dictionary<int, string>(){ 
-    { 2, "HDM Interface" },
+    })
+ },
+            { 128, Tuple.Create("Unknown", new Dictionary<int, string>{
+{ 40961, "JMS578 based SATA bridge" },
+    })
+ },
+            { 133, Tuple.Create("Boeye Technology Co., Ltd.", new Dictionary<int, string>{
+{ 1536, "eBook Reader" },
+    })
+ },
+            { 261, Tuple.Create("Trust International B.V.", new Dictionary<int, string>{
+{ 5215, "NW-3100 802.11b/g 54Mbps Wireless Network Adapter [zd1211]" },
+    })
+ },
+            { 295, Tuple.Create("IBP", new Dictionary<int, string>{
+{ 2, "HDM Interface" },
 { 295, "ibp" },
- } },
-            { 325, new Dictionary<int, string>(){ 
-    { 274, "Card Reader" },
- } },
-            { 380, new Dictionary<int, string>(){ 
-    { 5215, "Trust Deskset" },
- } },
-            { 512, new Dictionary<int, string>(){ 
-    { 513, "MA180 UMTS Modem" },
- } },
-            { 516, new Dictionary<int, string>(){ 
-    { 24613, "CBM2080 / CBM2090 Flash drive controller" },
+    })
+ },
+            { 325, Tuple.Create("Unknown", new Dictionary<int, string>{
+{ 274, "Card Reader" },
+    })
+ },
+            { 380, Tuple.Create("MLK", new Dictionary<int, string>{
+{ 5215, "Trust Deskset" },
+    })
+ },
+            { 512, Tuple.Create("TP-Link", new Dictionary<int, string>{
+{ 513, "MA180 UMTS Modem" },
+    })
+ },
+            { 516, Tuple.Create("Chipsbank Microelectronics Co., Ltd", new Dictionary<int, string>{
+{ 24613, "CBM2080 / CBM2090 Flash drive controller" },
 { 24614, "CBM1180 Flash drive controller" },
- } },
-            { 536, new Dictionary<int, string>(){ 
-    { 769, "MIDI Port" },
- } },
-            { 685, new Dictionary<int, string>(){ 
-    { 5004, "PVR Mass Storage" },
- } },
-            { 771, new Dictionary<int, string>(){ 
-     } },
-            { 804, new Dictionary<int, string>(){ 
-    { 48134, "OCZ ATV USB 2.0 Flash Drive" },
+    })
+ },
+            { 536, Tuple.Create("Hangzhou Worlde", new Dictionary<int, string>{
+{ 769, "MIDI Port" },
+    })
+ },
+            { 685, Tuple.Create("HUMAX Co., Ltd.", new Dictionary<int, string>{
+{ 5004, "PVR Mass Storage" },
+    })
+ },
+            { 804, Tuple.Create("OCZ Technology Inc", new Dictionary<int, string>{
+{ 48134, "OCZ ATV USB 2.0 Flash Drive" },
 { 48136, "OCZ Rally2/ATV USB 2.0 Flash Drive" },
- } },
-            { 805, new Dictionary<int, string>(){ 
-    { 44034, "ATV Turbo / Rally2 Dual Channel USB 2.0 Flash Drive" },
- } },
-            { 902, new Dictionary<int, string>(){ 
-    { 1, "PSX for USB Converter" },
- } },
-            { 985, new Dictionary<int, string>(){ 
-    { 1177, "SE340D PC Remote Control" },
- } },
-            { 986, new Dictionary<int, string>(){ 
-    { 2, "HD44780 LCD interface" },
- } },
-            { 999, new Dictionary<int, string>(){ 
-    { 8528, "Myriad VPU [Movidius Neural Compute Stick]" },
+    })
+ },
+            { 805, Tuple.Create("OCZ Technology Inc", new Dictionary<int, string>{
+{ 44034, "ATV Turbo / Rally2 Dual Channel USB 2.0 Flash Drive" },
+    })
+ },
+            { 902, Tuple.Create("LTS", new Dictionary<int, string>{
+{ 1, "PSX for USB Converter" },
+    })
+ },
+            { 985, Tuple.Create("Shenzhen Sinote Tech-Electron Co., Ltd", new Dictionary<int, string>{
+{ 1177, "SE340D PC Remote Control" },
+    })
+ },
+            { 986, Tuple.Create("Bernd Walter Computer Technology", new Dictionary<int, string>{
+{ 2, "HD44780 LCD interface" },
+    })
+ },
+            { 999, Tuple.Create("Intel", new Dictionary<int, string>{
+{ 8528, "Myriad VPU [Movidius Neural Compute Stick]" },
 { 9349, "Movidius MyriadX" },
 { 63035, "Myriad VPU [Movidius Neural Compute Stick]" },
- } },
-            { 1000, new Dictionary<int, string>(){ 
-    { 4, "SE401 Webcam" },
+    })
+ },
+            { 1000, Tuple.Create("EndPoints, Inc.", new Dictionary<int, string>{
+{ 4, "SE401 Webcam" },
 { 8, "101 Ethernet [klsi]" },
 { 21, "ATAPI Enclosure" },
 { 8483, "SiPix StyleCam Deluxe" },
 { 32772, "Aox 99001" },
- } },
-            { 1001, new Dictionary<int, string>(){ 
-     } },
-            { 1002, new Dictionary<int, string>(){ 
-     } },
-            { 1003, new Dictionary<int, string>(){ 
-    { 2306, "4-Port Hub" },
+    })
+ },
+            { 1003, Tuple.Create("Atmel Corp.", new Dictionary<int, string>{
+{ 2306, "4-Port Hub" },
 { 8194, "Mass Storage Device" },
 { 8213, "at90usbkey sample firmware (HID keyboard)" },
 { 8216, "at90usbkey sample firmware (CDC ACM)" },
@@ -3604,13 +205,10 @@ namespace HardwareInformation.Providers {
 { 65281, "WootingOne" },
 { 65282, "WootingTwo" },
 { 65287, "Tux Droid fish dongle" },
- } },
-            { 1004, new Dictionary<int, string>(){ 
-     } },
-            { 1005, new Dictionary<int, string>(){ 
-     } },
-            { 1006, new Dictionary<int, string>(){ 
-    { 0, "CD-R/RW Drive" },
+    })
+ },
+            { 1006, Tuple.Create("Mitsumi", new Dictionary<int, string>{
+{ 0, "CD-R/RW Drive" },
 { 9473, "eHome Infrared Receiver" },
 { 9474, "eHome Infrared Receiver" },
 { 22025, "Japanese Keyboard" },
@@ -3621,9 +219,10 @@ namespace HardwareInformation.Providers {
 { 26882, "Floppy Disk Drive" },
 { 29952, "CD-R/RW" },
 { 65535, "Dongle with BlueCore in DFU mode" },
- } },
-            { 1008, new Dictionary<int, string>(){ 
-    { 4, "DeskJet 895c" },
+    })
+ },
+            { 1008, Tuple.Create("HP, Inc", new Dictionary<int, string>{
+{ 4, "DeskJet 895c" },
 { 17, "OfficeJet G55" },
 { 18, "DeskJet 1125C Printer Port" },
 { 36, "KU-0316 Keyboard" },
@@ -4153,13 +752,10 @@ namespace HardwareInformation.Providers {
 { 61374, "NEC Picty900" },
 { 61630, "NEC Picty920" },
 { 61886, "NEC Picty800" },
- } },
-            { 1009, new Dictionary<int, string>(){ 
-     } },
-            { 1010, new Dictionary<int, string>(){ 
-     } },
-            { 1011, new Dictionary<int, string>(){ 
-    { 32, "AWN-8020 WLAN [Intersil PRISM 2.5]" },
+    })
+ },
+            { 1011, Tuple.Create("Adaptec, Inc.", new Dictionary<int, string>{
+{ 32, "AWN-8020 WLAN [Intersil PRISM 2.5]" },
 { 128, "AVC-1100 Audio Capture" },
 { 131, "AVC-2200 Device" },
 { 135, "AVC-2210 Loader" },
@@ -4174,30 +770,21 @@ namespace HardwareInformation.Providers {
 { 8195, "USB2-Xchange Adapter" },
 { 16384, "4-port hub" },
 { 44492, "Composite Device Support" },
- } },
-            { 1012, new Dictionary<int, string>(){ 
-     } },
-            { 1013, new Dictionary<int, string>(){ 
-     } },
-            { 1016, new Dictionary<int, string>(){ 
-     } },
-            { 1017, new Dictionary<int, string>(){ 
-    { 256, "KT-2001 Keyboard" },
+    })
+ },
+            { 1017, Tuple.Create("KeyTronic Corp.", new Dictionary<int, string>{
+{ 256, "KT-2001 Keyboard" },
 { 257, "Keyboard" },
 { 258, "Keyboard Mouse" },
- } },
-            { 1019, new Dictionary<int, string>(){ 
-     } },
-            { 1020, new Dictionary<int, string>(){ 
-     } },
-            { 1021, new Dictionary<int, string>(){ 
-    { 8, "Platform Cable USB II" },
+    })
+ },
+            { 1021, Tuple.Create("Xilinx, Inc.", new Dictionary<int, string>{
+{ 8, "Platform Cable USB II" },
 { 80, "dfu downloader" },
- } },
-            { 1022, new Dictionary<int, string>(){ 
-     } },
-            { 1024, new Dictionary<int, string>(){ 
-    { 1500, "Rigol Technologies DS1000USB Oscilloscope" },
+    })
+ },
+            { 1024, Tuple.Create("National Semiconductor Corp.", new Dictionary<int, string>{
+{ 1500, "Rigol Technologies DS1000USB Oscilloscope" },
 { 2055, "Bluetooth Dongle" },
 { 2058, "Bluetooth Device" },
 { 2500, "Rigol Technologies DG1022 Arbitrary Waveform Generator" },
@@ -4208,11 +795,10 @@ namespace HardwareInformation.Providers {
 { 50009, "Logitech Harmony" },
 { 50011, "Printing Support" },
 { 50525, "Rigol Technologies DS5000USB Oscilloscope" },
- } },
-            { 1025, new Dictionary<int, string>(){ 
-     } },
-            { 1026, new Dictionary<int, string>(){ 
-    { 21602, "M5462 IDE Controller" },
+    })
+ },
+            { 1026, Tuple.Create("ALi Corp.", new Dictionary<int, string>{
+{ 21602, "M5462 IDE Controller" },
 { 22018, "M5602 Video Camera Controller" },
 { 22019, "M5603 Video Camera Controller" },
 { 22022, "M5606 Video Camera Controller [UVC]" },
@@ -4227,9 +813,10 @@ namespace HardwareInformation.Providers {
 { 22113, "M5661 MP3 player" },
 { 22119, "M5667 MP3 player" },
 { 38501, "Gateway Webcam" },
- } },
-            { 1027, new Dictionary<int, string>(){ 
-    { 0, "H4SMK 7 Port Hub / Bricked Counterfeit FT232 Serial (UART) IC" },
+    })
+ },
+            { 1027, Tuple.Create("Future Technology Devices International, Ltd", new Dictionary<int, string>{
+{ 0, "H4SMK 7 Port Hub / Bricked Counterfeit FT232 Serial (UART) IC" },
 { 562, "Serial Converter" },
 { 4192, "JTAG adapter" },
 { 4660, "IronLogic RFID Adapter [Z-2 USB]" },
@@ -4395,9 +982,10 @@ namespace HardwareInformation.Providers {
 { 65309, "ScienceScope Logbook HS" },
 { 65310, "Logbook Bus" },
 { 65311, "Logbook Bus" },
- } },
-            { 1028, new Dictionary<int, string>(){ 
-    { 514, "78XX Scanner" },
+    })
+ },
+            { 1028, Tuple.Create("NCR Corp.", new Dictionary<int, string>{
+{ 514, "78XX Scanner" },
 { 515, "78XX Scanner - Embedded System" },
 { 784, "K590 Printer, Self-Service" },
 { 785, "7167 Printer, Receipt/Slip" },
@@ -4412,15 +1000,10 @@ namespace HardwareInformation.Providers {
 { 809, "K018: USB-MSR JIS 2-Track MSR: POS Standard" },
 { 810, "K016: USB-MSR ISO 3-Track MSR: HID Keyboard Mode" },
 { 811, "K016/K018: USB-MSR Flash-Recovery/Download" },
- } },
-            { 1029, new Dictionary<int, string>(){ 
-     } },
-            { 1030, new Dictionary<int, string>(){ 
-     } },
-            { 1031, new Dictionary<int, string>(){ 
-     } },
-            { 1032, new Dictionary<int, string>(){ 
-    { 259, "FV TouchCam N1 (Audio)" },
+    })
+ },
+            { 1032, Tuple.Create("Quanta Computer, Inc.", new Dictionary<int, string>{
+{ 259, "FV TouchCam N1 (Audio)" },
 { 780, "HP Webcam" },
 { 946, "HP Webcam" },
 { 1012, "HP Webcam" },
@@ -4429,9 +1012,10 @@ namespace HardwareInformation.Providers {
 { 12289, "Optical Touch Screen" },
 { 12296, "Optical Touch Screen" },
 { 41056, "HD Webcam" },
- } },
-            { 1033, new Dictionary<int, string>(){ 
-    { 17, "PC98 Series Layout Keyboard Mouse" },
+    })
+ },
+            { 1033, Tuple.Create("NEC Corp.", new Dictionary<int, string>{
+{ 17, "PC98 Series Layout Keyboard Mouse" },
 { 18, "ATerm IT75DSU ISDN TA" },
 { 20, "Japanese Keyboard" },
 { 25, "109 Japanese Keyboard with Bus-Powered Hub" },
@@ -4481,9 +1065,10 @@ namespace HardwareInformation.Providers {
 { 32785, "Intellibase Hub" },
 { 61374, "P!cty 900 [HP DJ]" },
 { 61630, "P!cty 920 [HP DJ 812c]" },
- } },
-            { 1034, new Dictionary<int, string>(){ 
-    { 1, "DVC-323" },
+    })
+ },
+            { 1034, Tuple.Create("Kodak Co.", new Dictionary<int, string>{
+{ 1, "DVC-323" },
 { 2, "DVC-325" },
 { 256, "DC-220" },
 { 272, "DC-260" },
@@ -4629,29 +1214,26 @@ namespace HardwareInformation.Providers {
 { 24581, "i80" },
 { 24617, "i900" },
 { 24618, "i900" },
- } },
-            { 1035, new Dictionary<int, string>(){ 
-    { 2664, "Func MS-3 gaming mouse [WT6573F MCU]" },
+    })
+ },
+            { 1035, Tuple.Create("Weltrend Semiconductor", new Dictionary<int, string>{
+{ 2664, "Func MS-3 gaming mouse [WT6573F MCU]" },
 { 8192, "wired Keyboard [Dynex DX-WRK1401]" },
 { 9063, "Human Interface Device [HP CalcPad 200 Calculator and Numeric Keypad]" },
 { 25872, "Weltrend Bar Code Reader" },
 { 25888, "Xploder Xbox Memory Unit (8MB)" },
 { 25907, "Speed-Link Competition Pro" },
 { 25923, "Manhattan Magnetic Card Strip Reader" },
- } },
-            { 1036, new Dictionary<int, string>(){ 
-     } },
-            { 1037, new Dictionary<int, string>(){ 
-    { 12676, "VNT VT6656 USB-802.11 Wireless LAN Adapter" },
+    })
+ },
+            { 1037, Tuple.Create("VIA Technologies, Inc.", new Dictionary<int, string>{
+{ 12676, "VNT VT6656 USB-802.11 Wireless LAN Adapter" },
 { 13327, "Audinst HUD-mx2" },
 { 25093, "USB 2.0 Card Reader" },
- } },
-            { 1038, new Dictionary<int, string>(){ 
-     } },
-            { 1039, new Dictionary<int, string>(){ 
-     } },
-            { 1041, new Dictionary<int, string>(){ 
-    { 1, "LUA-TX Ethernet [pegasus]" },
+    })
+ },
+            { 1041, Tuple.Create("BUFFALO INC. (formerly MelCo., Inc.)", new Dictionary<int, string>{
+{ 1, "LUA-TX Ethernet [pegasus]" },
 { 5, "LUA-TX Ethernet" },
 { 6, "WLI-USB-L11 Wireless LAN Adapter" },
 { 9, "LUA2-TX Ethernet" },
@@ -4712,11 +1294,10 @@ namespace HardwareInformation.Providers {
 { 497, "SATA Adapter [HD-LBU3]" },
 { 509, "WLI-UC-G450 Wireless LAN Adapter" },
 { 638, "HD-LCU3" },
- } },
-            { 1042, new Dictionary<int, string>(){ 
-     } },
-            { 1043, new Dictionary<int, string>(){ 
-    { 4880, "WinFast TV - NTSC + FM" },
+    })
+ },
+            { 1043, Tuple.Create("Leadtek Research, Inc.", new Dictionary<int, string>{
+{ 4880, "WinFast TV - NTSC + FM" },
 { 4881, "WinFast TV - NTSC + MTS + FM" },
 { 4882, "WinFast TV - PAL BG + FM" },
 { 4883, "WinFast TV - PAL BG+TXT + FM" },
@@ -4755,11 +1336,10 @@ namespace HardwareInformation.Providers {
 { 24870, "WinFast DTV Dongle BDA Driver" },
 { 27139, "RTL2832 [WinFast DTV Dongle Mini]" },
 { 28416, "WinFast DTV Dongle (STK7700P based)" },
- } },
-            { 1044, new Dictionary<int, string>(){ 
-     } },
-            { 1046, new Dictionary<int, string>(){ 
-    { 53, "W89C35 802.11bg WLAN Adapter" },
+    })
+ },
+            { 1046, Tuple.Create("Winbond Electronics Corp.", new Dictionary<int, string>{
+{ 53, "W89C35 802.11bg WLAN Adapter" },
 { 257, "Hub" },
 { 2401, "AVL Flash Card Reader" },
 { 14352, "Smart Card Controller" },
@@ -4788,13 +1368,10 @@ namespace HardwareInformation.Providers {
 { 30498, "Memory Stick Reader/Writer" },
 { 30499, "SD Card Reader" },
 { 49473, "Barcode Scanner" },
- } },
-            { 1047, new Dictionary<int, string>(){ 
-     } },
-            { 1048, new Dictionary<int, string>(){ 
-     } },
-            { 1049, new Dictionary<int, string>(){ 
-    { 1, "IrDA Remote Controller / Creative Cordless Mouse" },
+    })
+ },
+            { 1049, Tuple.Create("Samsung Info. Systems America, Inc.", new Dictionary<int, string>{
+{ 1, "IrDA Remote Controller / Creative Cordless Mouse" },
 { 1536, "Desktop Wireless 6000" },
 { 9876, "Laila" },
 { 12289, "Xerox P1202 Laser Printer" },
@@ -4809,15 +1386,10 @@ namespace HardwareInformation.Providers {
 { 32769, "Hub" },
 { 32770, "SyncMaster HID Monitor Control" },
 { 43523, "SDAS-3 MP3 Player" },
- } },
-            { 1050, new Dictionary<int, string>(){ 
-     } },
-            { 1051, new Dictionary<int, string>(){ 
-     } },
-            { 1053, new Dictionary<int, string>(){ 
-     } },
-            { 1054, new Dictionary<int, string>(){ 
-    { 1044, "HS-720 Headset" },
+    })
+ },
+            { 1054, Tuple.Create("Creative Technology, Ltd", new Dictionary<int, string>{
+{ 1044, "HS-720 Headset" },
 { 4098, "Nomad II" },
 { 4099, "Blaster GamePad Cobra" },
 { 4176, "GamePad Cobra" },
@@ -4955,14 +1527,14 @@ namespace HardwareInformation.Providers {
 { 20495, "Broadband Blaster 8012U-V" },
 { 20501, "TECOM Bluetooth Device" },
 { 65535, "Webcam Live! Ultra" },
- } },
-            { 1055, new Dictionary<int, string>(){ 
-     } },
-            { 1056, new Dictionary<int, string>(){ 
-    { 4871, "Celly SIM Card Reader" },
- } },
-            { 1057, new Dictionary<int, string>(){ 
-    { 1, "E61i (PC Suite mode)" },
+    })
+ },
+            { 1056, Tuple.Create("Chips and Technologies", new Dictionary<int, string>{
+{ 4871, "Celly SIM Card Reader" },
+    })
+ },
+            { 1057, Tuple.Create("Nokia Mobile Phones", new Dictionary<int, string>{
+{ 1, "E61i (PC Suite mode)" },
 { 24, "6288 GSM Smartphone" },
 { 25, "6288 GSM Smartphone (imaging mode)" },
 { 26, "6288 GSM Smartphone (file transfer mode)" },
@@ -5101,11 +1673,10 @@ namespace HardwareInformation.Providers {
 { 2048, "Connectivity Cable DKU-5" },
 { 2049, "Data Cable DKU-6" },
 { 2050, "CA-42 Phone Parent" },
- } },
-            { 1058, new Dictionary<int, string>(){ 
-     } },
-            { 1059, new Dictionary<int, string>(){ 
-    { 10, "NetMate Ethernet" },
+    })
+ },
+            { 1059, Tuple.Create("Computer Access Technology Corp.", new Dictionary<int, string>{
+{ 10, "NetMate Ethernet" },
 { 12, "NetMate2 Ethernet" },
 { 13, "USB Chief Analyzer" },
 { 256, "Generic Universal Protocol Analyzer" },
@@ -5116,9 +1687,10 @@ namespace HardwareInformation.Providers {
 { 769, "2500H Tracer Trainer" },
 { 778, "PETracer x1" },
 { 4663, "Andromeda Hub" },
- } },
-            { 1060, new Dictionary<int, string>(){ 
-    { 1, "Integrated Hub" },
+    })
+ },
+            { 1060, Tuple.Create("Microchip Technology, Inc. (formerly SMSC)", new Dictionary<int, string>{
+{ 1, "Integrated Hub" },
 { 320, "LPC47M14x hub" },
 { 2765, "Sitecom Internal Multi Memory reader/writer MD-005" },
 { 4060, "Floppy" },
@@ -5182,37 +1754,31 @@ namespace HardwareInformation.Providers {
 { 40448, "LAN9500A/LAN9500Ai" },
 { 42752, "2 Port Hub" },
 { 60416, "SMSC9512/9514 Fast Ethernet Adapter" },
- } },
-            { 1061, new Dictionary<int, string>(){ 
-    { 257, "G-Tech Wireless Mouse & Keyboard" },
+    })
+ },
+            { 1061, Tuple.Create("Motorola Semiconductors HK, Ltd", new Dictionary<int, string>{
+{ 257, "G-Tech Wireless Mouse & Keyboard" },
 { 61698, "G-Tech U+P Wireless Mouse" },
- } },
-            { 1062, new Dictionary<int, string>(){ 
-    { 1062, "WDM Driver" },
- } },
-            { 1063, new Dictionary<int, string>(){ 
-     } },
-            { 1064, new Dictionary<int, string>(){ 
-    { 16385, "GamePad Pro" },
- } },
-            { 1065, new Dictionary<int, string>(){ 
-     } },
-            { 1066, new Dictionary<int, string>(){ 
-     } },
-            { 1067, new Dictionary<int, string>(){ 
-    { 37654, "8x931Hx Customer Hub" },
- } },
-            { 1068, new Dictionary<int, string>(){ 
-     } },
-            { 1069, new Dictionary<int, string>(){ 
-     } },
-            { 1070, new Dictionary<int, string>(){ 
-    { 896, "MP3 Player" },
- } },
-            { 1071, new Dictionary<int, string>(){ 
-     } },
-            { 1072, new Dictionary<int, string>(){ 
-    { 2, "109 Keyboard" },
+    })
+ },
+            { 1062, Tuple.Create("Integrated Device Technology, Inc.", new Dictionary<int, string>{
+{ 1062, "WDM Driver" },
+    })
+ },
+            { 1064, Tuple.Create("Advanced Gravis Computer Tech, Ltd", new Dictionary<int, string>{
+{ 16385, "GamePad Pro" },
+    })
+ },
+            { 1067, Tuple.Create("Intel Corp.", new Dictionary<int, string>{
+{ 37654, "8x931Hx Customer Hub" },
+    })
+ },
+            { 1070, Tuple.Create("Acer, Inc.", new Dictionary<int, string>{
+{ 896, "MP3 Player" },
+    })
+ },
+            { 1072, Tuple.Create("Sun Microsystems, Inc.", new Dictionary<int, string>{
+{ 2, "109 Keyboard" },
 { 5, "Type 6 Keyboard" },
 { 10, "109 Japanese Keyboard" },
 { 11, "109 Japanese Keyboard" },
@@ -5231,33 +1797,31 @@ namespace HardwareInformation.Providers {
 { 41235, "remote storage for P4 chip" },
 { 42146, "Ethernet (RNDIS and CDC ethernet)" },
 { 52651, "Raritan KVM dongle" },
- } },
-            { 1073, new Dictionary<int, string>(){ 
-    { 256, "Mouse-Trak 3-button Track Ball" },
- } },
-            { 1074, new Dictionary<int, string>(){ 
-    { 49, "Document Processor" },
- } },
-            { 1075, new Dictionary<int, string>(){ 
-    { 4353, "IBM Game Controller" },
+    })
+ },
+            { 1073, Tuple.Create("Itac Systems, Inc.", new Dictionary<int, string>{
+{ 256, "Mouse-Trak 3-button Track Ball" },
+    })
+ },
+            { 1074, Tuple.Create("Unisys Corp.", new Dictionary<int, string>{
+{ 49, "Document Processor" },
+    })
+ },
+            { 1075, Tuple.Create("Alps Electric, Inc.", new Dictionary<int, string>{
+{ 4353, "IBM Game Controller" },
 { 43947, "Keyboard" },
- } },
-            { 1076, new Dictionary<int, string>(){ 
-     } },
-            { 1077, new Dictionary<int, string>(){ 
-     } },
-            { 1078, new Dictionary<int, string>(){ 
-    { 5, "CameraMate (DPCM_USB)" },
- } },
-            { 1079, new Dictionary<int, string>(){ 
-     } },
-            { 1080, new Dictionary<int, string>(){ 
-    { 30976, "Root Hub" },
- } },
-            { 1081, new Dictionary<int, string>(){ 
-     } },
-            { 1085, new Dictionary<int, string>(){ 
-    { 1, "Laser Printer" },
+    })
+ },
+            { 1078, Tuple.Create("Taugagreining HF", new Dictionary<int, string>{
+{ 5, "CameraMate (DPCM_USB)" },
+    })
+ },
+            { 1080, Tuple.Create("Advanced Micro Devices, Inc.", new Dictionary<int, string>{
+{ 30976, "Root Hub" },
+    })
+ },
+            { 1085, Tuple.Create("Lexmark International, Inc.", new Dictionary<int, string>{
+{ 1, "Laser Printer" },
 { 2, "Optra E310 Printer" },
 { 3, "Laser Printer" },
 { 4, "Laser Printer" },
@@ -5405,9 +1969,10 @@ namespace HardwareInformation.Providers {
 { 322, "X3650 (Printer, Scanner, Copier)" },
 { 506, "S310 series" },
 { 17155, "Xerox WorkCentre Pro 412" },
- } },
-            { 1086, new Dictionary<int, string>(){ 
-    { 12289, "AN-WF100 802.11abgn Wireless Adapter [Broadcom BCM4323]" },
+    })
+ },
+            { 1086, Tuple.Create("LG Electronics USA, Inc.", new Dictionary<int, string>{
+{ 12289, "AN-WF100 802.11abgn Wireless Adapter [Broadcom BCM4323]" },
 { 12292, "TWFM-B003D 802.11abgn Wireless Module [Broadcom BCM43236B]" },
 { 12297, "VC400" },
 { 12545, "AN-WF500 802.11abgn + BT Wireless Adapter [Broadcom BCM43242]" },
@@ -5424,44 +1989,34 @@ namespace HardwareInformation.Providers {
 { 38915, "eHome Infrared Receiver" },
 { 38916, "DMB Receiver Control" },
 { 39937, "LGE Sync" },
- } },
-            { 1087, new Dictionary<int, string>(){ 
-     } },
-            { 1088, new Dictionary<int, string>(){ 
-     } },
-            { 1089, new Dictionary<int, string>(){ 
-    { 5206, "Hub" },
- } },
-            { 1090, new Dictionary<int, string>(){ 
-    { 43962, "Bluetooth Device" },
- } },
-            { 1091, new Dictionary<int, string>(){ 
-    { 14, "Multimedia Keyboard" },
+    })
+ },
+            { 1089, Tuple.Create("Winbond Systems Lab.", new Dictionary<int, string>{
+{ 5206, "Hub" },
+    })
+ },
+            { 1090, Tuple.Create("Ericsson, Inc.", new Dictionary<int, string>{
+{ 43962, "Bluetooth Device" },
+    })
+ },
+            { 1091, Tuple.Create("Gateway, Inc.", new Dictionary<int, string>{
+{ 14, "Multimedia Keyboard" },
 { 46, "Millennium Keyboard" },
- } },
-            { 1093, new Dictionary<int, string>(){ 
-     } },
-            { 1094, new Dictionary<int, string>(){ 
-    { 26497, "Keyboard with PS/2 Mouse Port" },
+    })
+ },
+            { 1094, Tuple.Create("NMB Technologies Corp.", new Dictionary<int, string>{
+{ 26497, "Keyboard with PS/2 Mouse Port" },
 { 26498, "Keyboard" },
- } },
-            { 1095, new Dictionary<int, string>(){ 
-     } },
-            { 1097, new Dictionary<int, string>(){ 
-    { 296, "Menengah" },
+    })
+ },
+            { 1097, Tuple.Create("Duta Multi Robotik", new Dictionary<int, string>{
+{ 296, "Menengah" },
 { 528, "Dasar" },
 { 1554, "Lanjutan" },
- } },
-            { 1098, new Dictionary<int, string>(){ 
-     } },
-            { 1099, new Dictionary<int, string>(){ 
-     } },
-            { 1100, new Dictionary<int, string>(){ 
-     } },
-            { 1101, new Dictionary<int, string>(){ 
-     } },
-            { 1102, new Dictionary<int, string>(){ 
-    { 4356, "Japanese Keyboard" },
+    })
+ },
+            { 1102, Tuple.Create("Alps Electric Co., Ltd", new Dictionary<int, string>{
+{ 4356, "Japanese Keyboard" },
 { 8194, "MD-5500 Printer" },
 { 8212, "Bluetooth Device" },
 { 12289, "UGTZ4 Bluetooth" },
@@ -5476,9 +2031,10 @@ namespace HardwareInformation.Providers {
 { 12304, "Bluetooth Adapter" },
 { 12311, "BCM2046 Bluetooth Device" },
 { 65535, "Compaq Bluetooth Multiport Module" },
- } },
-            { 1103, new Dictionary<int, string>(){ 
-    { 1024, "HOTAS Cougar" },
+    })
+ },
+            { 1103, Tuple.Create("ThrustMaster, Inc.", new Dictionary<int, string>{
+{ 1024, "HOTAS Cougar" },
 { 1026, "HOTAS Warthog Joystick" },
 { 1028, "HOTAS Warthog Throttle" },
 { 1103, "GP XID" },
@@ -5518,11 +2074,10 @@ namespace HardwareInformation.Providers {
 { 46713, "T-Rudder" },
 { 46727, "TWCS Throttle" },
 { 46848, "Tacticalboard" },
- } },
-            { 1104, new Dictionary<int, string>(){ 
-     } },
-            { 1105, new Dictionary<int, string>(){ 
-    { 1058, "TUSB422 Port Controller with Power Delivery" },
+    })
+ },
+            { 1105, Tuple.Create("Texas Instruments, Inc.", new Dictionary<int, string>{
+{ 1058, "TUSB422 Port Controller with Power Delivery" },
 { 4660, "Bluetooth Device" },
 { 5160, "Hub" },
 { 5190, "TUSB2040/2070 Hub" },
@@ -5572,36 +2127,37 @@ namespace HardwareInformation.Providers {
 { 62512, "MSP-FET430UIF JTAG Tool" },
 { 62514, "eZ430 Development Tool" },
 { 65535, "Bluetooth Device" },
- } },
-            { 1106, new Dictionary<int, string>(){ 
-    { 33, "HID Monitor Controls" },
+    })
+ },
+            { 1106, Tuple.Create("Mitsubishi Electronics America, Inc.", new Dictionary<int, string>{
+{ 33, "HID Monitor Controls" },
 { 80, "Diamond Pro 900u CRT Monitor" },
 { 81, "Integrated Hub" },
 { 256, "Control Panel for Leica TCS SP5" },
- } },
-            { 1107, new Dictionary<int, string>(){ 
-    { 26497, "NMB Keyboard" },
+    })
+ },
+            { 1107, Tuple.Create("CMD Technology", new Dictionary<int, string>{
+{ 26497, "NMB Keyboard" },
 { 26499, "Chicony Composite Keyboard" },
- } },
-            { 1108, new Dictionary<int, string>(){ 
-     } },
-            { 1109, new Dictionary<int, string>(){ 
-     } },
-            { 1110, new Dictionary<int, string>(){ 
-    { 61440, "FT2232 JTAG ICE [gnICE]" },
+    })
+ },
+            { 1110, Tuple.Create("Analog Devices, Inc.", new Dictionary<int, string>{
+{ 61440, "FT2232 JTAG ICE [gnICE]" },
 { 61441, "FT2232H Hi-Speed JTAG ICE [gnICE+]" },
- } },
-            { 1111, new Dictionary<int, string>(){ 
-    { 336, "Super Talent 1GB Flash Drive" },
+    })
+ },
+            { 1111, Tuple.Create("Silicon Integrated Systems Corp.", new Dictionary<int, string>{
+{ 336, "Super Talent 1GB Flash Drive" },
 { 337, "Super Flash 1GB / GXT  64MB Flash Drive" },
 { 354, "SiS162 usb Wireless LAN Adapter" },
 { 355, "SiS163U 802.11 Wireless LAN Adapter" },
 { 2071, "SiS-184-ASUS-4352.17 touch panel" },
 { 4321, "HID Touch Controller" },
 { 21505, "Wireless Adapter RO80211GS-USB" },
- } },
-            { 1112, new Dictionary<int, string>(){ 
-    { 1, "Mouse" },
+    })
+ },
+            { 1112, Tuple.Create("KYE Systems Corp. (Mouse Systems)", new Dictionary<int, string>{
+{ 1, "Mouse" },
 { 2, "Genius NetMouse Pro" },
 { 3, "Genius NetScroll+" },
 { 6, "Easy Mouse+" },
@@ -5710,11 +2266,10 @@ namespace HardwareInformation.Providers {
 { 28808, "WideCam 1050" },
 { 28809, "Genius FaceCam 320" },
 { 28812, "Genius WideCam F100" },
- } },
-            { 1113, new Dictionary<int, string>(){ 
-     } },
-            { 1114, new Dictionary<int, string>(){ 
-    { 2010, "Supra Express 56K modem" },
+    })
+ },
+            { 1114, Tuple.Create("SONICblue, Inc.", new Dictionary<int, string>{
+{ 2010, "Supra Express 56K modem" },
 { 2890, "SupraMax 2890 56K Modem [Lucent Atlas]" },
 { 2920, "SupraMax 56K Modem" },
 { 20481, "Rio 600 MP3 Player" },
@@ -5739,15 +2294,15 @@ namespace HardwareInformation.Providers {
 { 21008, "Rio Karma Music Player" },
 { 21024, "Rio Nitrus MP3 Player" },
 { 21025, "Rio Eigen" },
- } },
-            { 1115, new Dictionary<int, string>(){ 
-    { 83, "RX610 RX-Stick" },
+    })
+ },
+            { 1115, Tuple.Create("Hitachi, Ltd", new Dictionary<int, string>{
+{ 83, "RX610 RX-Stick" },
 { 553, "mSATA Adapter [renkforce Pi-102]" },
- } },
-            { 1117, new Dictionary<int, string>(){ 
-     } },
-            { 1118, new Dictionary<int, string>(){ 
-    { 7, "SideWinder Game Pad" },
+    })
+ },
+            { 1118, Tuple.Create("Microsoft Corp.", new Dictionary<int, string>{
+{ 7, "SideWinder Game Pad" },
 { 8, "SideWinder Precision Pro" },
 { 9, "IntelliMouse" },
 { 11, "Natural Keyboard Elite" },
@@ -6060,14 +2615,16 @@ namespace HardwareInformation.Providers {
 { 65482, "Catalina" },
 { 65528, "Keyboard" },
 { 65535, "Windows CE Mass Storage" },
- } },
-            { 1120, new Dictionary<int, string>(){ 
-    { 4, "Tablet (5x3.75)" },
+    })
+ },
+            { 1120, Tuple.Create("Ace Cad Enterprise Co., Ltd", new Dictionary<int, string>{
+{ 4, "Tablet (5x3.75)" },
 { 6, "LCD Tablet (12x9)" },
 { 8, "Tablet (3x2.25)" },
- } },
-            { 1121, new Dictionary<int, string>(){ 
-    { 16, "HP PR1101U / Primax PMX-KPR1101U Keyboard" },
+    })
+ },
+            { 1121, Tuple.Create("Primax Electronics, Ltd", new Dictionary<int, string>{
+{ 16, "HP PR1101U / Primax PMX-KPR1101U Keyboard" },
 { 768, "G2-300 Scanner" },
 { 769, "G2E-300 Scanner" },
 { 770, "G2-300 #2 Scanner" },
@@ -6133,19 +2690,15 @@ namespace HardwareInformation.Providers {
 { 19972, "Lenovo Keyboard KB1021" },
 { 20002, "Dell Mouse, 2 Buttons, Modell: MS111-P" },
 { 20079, "Acer Wired Keyboard Model KBAY211" },
- } },
-            { 1123, new Dictionary<int, string>(){ 
-    { 1, "UPS" },
+    })
+ },
+            { 1123, Tuple.Create("MGE UPS Systems", new Dictionary<int, string>{
+{ 1, "UPS" },
 { 65535, "UPS" },
- } },
-            { 1124, new Dictionary<int, string>(){ 
-     } },
-            { 1127, new Dictionary<int, string>(){ 
-     } },
-            { 1128, new Dictionary<int, string>(){ 
-     } },
-            { 1130, new Dictionary<int, string>(){ 
-    { 1, "Keyboard" },
+    })
+ },
+            { 1130, Tuple.Create("Cherry GmbH", new Dictionary<int, string>{
+{ 1, "Keyboard" },
 { 3, "My3000 Hub" },
 { 4, "CyBoard Keyboard" },
 { 5, "XX33 SmartCard Reader Keyboard" },
@@ -6169,18 +2722,18 @@ namespace HardwareInformation.Providers {
 { 384, "Strait 3.0" },
 { 45200, "Keyboard" },
 { 45201, "Mouse" },
- } },
-            { 1131, new Dictionary<int, string>(){ 
-    { 1, "Keyboard" },
+    })
+ },
+            { 1131, Tuple.Create("American Megatrends, Inc.", new Dictionary<int, string>{
+{ 1, "Keyboard" },
 { 257, "PS/2 Keyboard, Mouse & Joystick Ports" },
 { 769, "USB 1.0 Hub" },
 { 1280, "Serial & Parallel Ports" },
 { 65296, "Virtual Keyboard and Mouse" },
- } },
-            { 1132, new Dictionary<int, string>(){ 
-     } },
-            { 1133, new Dictionary<int, string>(){ 
-    { 130, "Acer Aspire 5672 Webcam" },
+    })
+ },
+            { 1133, Tuple.Create("Logitech, Inc.", new Dictionary<int, string>{
+{ 130, "Acer Aspire 5672 Webcam" },
 { 512, "WingMan Extreme Joystick" },
 { 515, "M2452 Keyboard" },
 { 578, "Chillstream for Xbox 360" },
@@ -6596,9 +3149,10 @@ namespace HardwareInformation.Providers {
 { 51889, "Cordless Keyboard for Wii HID Receiver" },
 { 53249, "QuickCam Pro" },
 { 62209, "Controller" },
- } },
-            { 1134, new Dictionary<int, string>(){ 
-    { 256, "Keyboard" },
+    })
+ },
+            { 1134, Tuple.Create("Behavior Tech. Computer Corp.", new Dictionary<int, string>{
+{ 256, "Keyboard" },
 { 12289, "Mass Storage Device" },
 { 12290, "Mass Storage Device" },
 { 12291, "Mass Storage Device" },
@@ -6613,11 +3167,10 @@ namespace HardwareInformation.Providers {
 { 21840, "5 button optical mouse model M873U" },
 { 22304, "Smart Card Reader" },
 { 26498, "BTC 7932 mouse+keyboard" },
- } },
-            { 1135, new Dictionary<int, string>(){ 
-     } },
-            { 1137, new Dictionary<int, string>(){ 
-    { 257, "DSS350 Digital Speaker System" },
+    })
+ },
+            { 1137, Tuple.Create("Philips (or NXP)", new Dictionary<int, string>{
+{ 257, "DSS350 Digital Speaker System" },
 { 260, "DSS330 Digital Speaker System [uda1321]" },
 { 261, "UDA1321" },
 { 335, "GoGear SA9200" },
@@ -6721,16 +3274,16 @@ namespace HardwareInformation.Providers {
 { 10017, "PTA 317 TV Camera" },
 { 18525, "Senselock SenseIV v2.x" },
 { 57173, "LPCXpresso LPC-Link" },
- } },
-            { 1138, new Dictionary<int, string>(){ 
-    { 101, "PFU-65 Keyboard [Chicony]" },
+    })
+ },
+            { 1138, Tuple.Create("Chicony Electronics Co., Ltd", new Dictionary<int, string>{
+{ 101, "PFU-65 Keyboard [Chicony]" },
 { 45190, "Asus USB2.0 Webcam" },
 { 45201, "Webcam" },
- } },
-            { 1139, new Dictionary<int, string>(){ 
-     } },
-            { 1140, new Dictionary<int, string>(){ 
-    { 272, "Digital Voice Recorder R200" },
+    })
+ },
+            { 1140, Tuple.Create("Sanyo Electric Co., Ltd", new Dictionary<int, string>{
+{ 272, "Digital Voice Recorder R200" },
 { 535, "Xacti J2" },
 { 559, "C5 Digital Media Camera (mass storage mode)" },
 { 560, "C5 Digital Media Camera (PictBridge mode)" },
@@ -6739,28 +3292,26 @@ namespace HardwareInformation.Providers {
 { 1793, "SCP-4900 Cellphone" },
 { 1823, "Usb Com Port Enumerator" },
 { 1826, "W33SA Camera" },
- } },
-            { 1141, new Dictionary<int, string>(){ 
-    { 256, "NEC Petiscan" },
+    })
+ },
+            { 1141, Tuple.Create("Relisys/Teco Information System", new Dictionary<int, string>{
+{ 256, "NEC Petiscan" },
 { 259, "Eclipse 1200U/Episode" },
 { 528, "Scorpio Ultra 3" },
- } },
-            { 1142, new Dictionary<int, string>(){ 
-     } },
-            { 1143, new Dictionary<int, string>(){ 
-     } },
-            { 1144, new Dictionary<int, string>(){ 
-    { 1, "QuickCam" },
+    })
+ },
+            { 1144, Tuple.Create("Connectix Corp.", new Dictionary<int, string>{
+{ 1, "QuickCam" },
 { 2, "QuickClip" },
 { 3, "QuickCam Pro" },
- } },
-            { 1145, new Dictionary<int, string>(){ 
-     } },
-            { 1146, new Dictionary<int, string>(){ 
-    { 4, "ScreenCoder UR7HCTS2-USB" },
- } },
-            { 1147, new Dictionary<int, string>(){ 
-    { 1, "Keyboard" },
+    })
+ },
+            { 1146, Tuple.Create("Semtech Corp.", new Dictionary<int, string>{
+{ 4, "ScreenCoder UR7HCTS2-USB" },
+    })
+ },
+            { 1147, Tuple.Create("Silitek Corp.", new Dictionary<int, string>{
+{ 1, "Keyboard" },
 { 2, "Keyboard and Mouse" },
 { 17, "SK-1688U Keyboard" },
 { 249, "SK-1789u Keyboard" },
@@ -6769,12 +3320,14 @@ namespace HardwareInformation.Providers {
 { 1294, "Internet Compact Keyboard" },
 { 4096, "Trust Office Scan USB 19200" },
 { 4098, "HP ScanJet 4300c Parallel Port" },
- } },
-            { 1148, new Dictionary<int, string>(){ 
-    { 65535, "UPS Tower 500W LV" },
- } },
-            { 1149, new Dictionary<int, string>(){ 
-    { 4097, "Mouse*in*a*Box" },
+    })
+ },
+            { 1148, Tuple.Create("Dell Computer Corp.", new Dictionary<int, string>{
+{ 65535, "UPS Tower 500W LV" },
+    })
+ },
+            { 1149, Tuple.Create("Kensington", new Dictionary<int, string>{
+{ 4097, "Mouse*in*a*Box" },
 { 4098, "Expert Mouse Pro" },
 { 4099, "Orbit TrackBall" },
 { 4100, "MouseWorks" },
@@ -6850,16 +3403,18 @@ namespace HardwareInformation.Providers {
 { 20481, "Cabo I Camera" },
 { 20482, "VideoCam CABO II" },
 { 20483, "VideoCam" },
- } },
-            { 1150, new Dictionary<int, string>(){ 
-    { 768, "ORiNOCO Card" },
+    })
+ },
+            { 1150, Tuple.Create("Agere Systems, Inc. (Lucent)", new Dictionary<int, string>{
+{ 768, "ORiNOCO Card" },
 { 4097, "USS720 Parallel Port" },
 { 10386, "Systems Soft Modem" },
 { 47825, "Lucent 56k Modem" },
 { 61697, "Atlas Modem" },
- } },
-            { 1151, new Dictionary<int, string>(){ 
-    { 257, "Bulk Driver" },
+    })
+ },
+            { 1151, Tuple.Create("Plantronics, Inc.", new Dictionary<int, string>{
+{ 257, "Bulk Driver" },
 { 750, "BT600" },
 { 769, "Bulk Driver" },
 { 1041, "Savi Office Base Station" },
@@ -6873,9 +3428,10 @@ namespace HardwareInformation.Providers {
 { 49166, "Blackwire C310 headset" },
 { 49211, "HD1" },
 { 55904, "DA60" },
- } },
-            { 1152, new Dictionary<int, string>(){ 
-    { 1, "InTouch Module" },
+    })
+ },
+            { 1152, Tuple.Create("Toshiba America Inc", new Dictionary<int, string>{
+{ 1, "InTouch Module" },
 { 4, "InTouch Module" },
 { 17, "InTouch Module" },
 { 20, "InTouch Module" },
@@ -6897,11 +3453,10 @@ namespace HardwareInformation.Providers {
 { 53248, "External Disk 2TB Model DT01ABA200" },
 { 53264, "External Disk 3TB" },
 { 53265, "Canvio Desk" },
- } },
-            { 1153, new Dictionary<int, string>(){ 
-     } },
-            { 1154, new Dictionary<int, string>(){ 
-    { 14, "FS-1020D Printer" },
+    })
+ },
+            { 1154, Tuple.Create("Kyocera Corp.", new Dictionary<int, string>{
+{ 14, "FS-1020D Printer" },
 { 15, "FS-1920 Mono Printer" },
 { 21, "FS-1030D printer" },
 { 256, "Finecam S3x" },
@@ -6916,9 +3471,10 @@ namespace HardwareInformation.Providers {
 { 1032, "FS-1320D Printer" },
 { 1600, "ECOSYS M6026cdn" },
 { 1691, "ECOSYS M2635dn" },
- } },
-            { 1155, new Dictionary<int, string>(){ 
-    { 311, "BeWAN ADSL USB ST (blue or green)" },
+    })
+ },
+            { 1155, Tuple.Create("STMicroelectronics", new Dictionary<int, string>{
+{ 311, "BeWAN ADSL USB ST (blue or green)" },
 { 312, "Unicorn II (ST70138B + MTC-20174TQ chipset)" },
 { 2779, "Android Debug Bridge (ADB) device" },
 { 2811, "Android Fastboot device" },
@@ -6959,20 +3515,14 @@ namespace HardwareInformation.Providers {
 { 41696, "BMeasure instrument" },
 { 57105, "STM Device in DFU Mode" },
 { 65296, "Swann ST56 Modem" },
- } },
-            { 1156, new Dictionary<int, string>(){ 
-     } },
-            { 1157, new Dictionary<int, string>(){ 
-     } },
-            { 1158, new Dictionary<int, string>(){ 
-    { 389, "EeePC T91MT HID Touch Panel" },
- } },
-            { 1159, new Dictionary<int, string>(){ 
-     } },
-            { 1160, new Dictionary<int, string>(){ 
-     } },
-            { 1161, new Dictionary<int, string>(){ 
-    { 1282, "SmartMedia Card Reader Firmware Loader" },
+    })
+ },
+            { 1158, Tuple.Create("ASUS Computers, Inc.", new Dictionary<int, string>{
+{ 389, "EeePC T91MT HID Touch Panel" },
+    })
+ },
+            { 1161, Tuple.Create("Foxconn / Hon Hai", new Dictionary<int, string>{
+{ 1282, "SmartMedia Card Reader Firmware Loader" },
 { 1283, "SmartMedia Card Reader" },
 { 53260, "Rollei Compactline (Storage Mode)" },
 { 53262, "Rollei Compactline (Video Mode)" },
@@ -6987,13 +3537,10 @@ namespace HardwareInformation.Providers {
 { 57410, "Broadcom BCM20702 Bluetooth" },
 { 57421, "Atheros AR3012 Bluetooth" },
 { 57429, "BCM43142A0 broadcom bluetooth" },
- } },
-            { 1162, new Dictionary<int, string>(){ 
-     } },
-            { 1164, new Dictionary<int, string>(){ 
-     } },
-            { 1165, new Dictionary<int, string>(){ 
-    { 4453, "IT1165 Flash Controller" },
+    })
+ },
+            { 1165, Tuple.Create("Integrated Technology Express, Inc.", new Dictionary<int, string>{
+{ 4453, "IT1165 Flash Controller" },
 { 4466, "Flash Drive" },
 { 4660, "Chipsbank CBM2199 Flash Drive" },
 { 4918, "SD/MMC Cardreader" },
@@ -7007,31 +3554,23 @@ namespace HardwareInformation.Providers {
 { 38151, "ITE it9507 full featured DVB-T transmission chip [ccHDtv]" },
 { 39184, "IT9910 chipset based grabber" },
 { 65369, "Hdmi-CEC Bridge" },
- } },
-            { 1167, new Dictionary<int, string>(){ 
-     } },
-            { 1168, new Dictionary<int, string>(){ 
-     } },
-            { 1169, new Dictionary<int, string>(){ 
-    { 3, "Taxan Monitor Control" },
- } },
-            { 1170, new Dictionary<int, string>(){ 
-    { 320, "MP3 player" },
+    })
+ },
+            { 1169, Tuple.Create("Capetronic", new Dictionary<int, string>{
+{ 3, "Taxan Monitor Control" },
+    })
+ },
+            { 1170, Tuple.Create("Samsung SemiConductor, Inc.", new Dictionary<int, string>{
+{ 320, "MP3 player" },
 { 321, "MP3 Player" },
- } },
-            { 1171, new Dictionary<int, string>(){ 
-     } },
-            { 1173, new Dictionary<int, string>(){ 
-     } },
-            { 1174, new Dictionary<int, string>(){ 
-     } },
-            { 1175, new Dictionary<int, string>(){ 
-    { 49153, "Camera Device" },
- } },
-            { 1176, new Dictionary<int, string>(){ 
-     } },
-            { 1177, new Dictionary<int, string>(){ 
-    { 4096, "UX256 MIDI I/F" },
+    })
+ },
+            { 1175, Tuple.Create("Smile International", new Dictionary<int, string>{
+{ 49153, "Camera Device" },
+    })
+ },
+            { 1177, Tuple.Create("Yamaha Corp.", new Dictionary<int, string>{
+{ 4096, "UX256 MIDI I/F" },
 { 4097, "MU1000" },
 { 4098, "MU2000" },
 { 4099, "MU500" },
@@ -7110,18 +3649,14 @@ namespace HardwareInformation.Providers {
 { 24577, "CRW2200UX Lightspeed 2 External CD-RW Drive" },
 { 28672, "DTX" },
 { 28688, "UB99" },
- } },
-            { 1178, new Dictionary<int, string>(){ 
-     } },
-            { 1179, new Dictionary<int, string>(){ 
-     } },
-            { 1180, new Dictionary<int, string>(){ 
-    { 2, "Keyboard (???)" },
- } },
-            { 1181, new Dictionary<int, string>(){ 
-     } },
-            { 1183, new Dictionary<int, string>(){ 
-    { 2, "InkJet Color Printer" },
+    })
+ },
+            { 1180, Tuple.Create("Acer Advanced Labs, Inc.", new Dictionary<int, string>{
+{ 2, "Keyboard (???)" },
+    })
+ },
+            { 1183, Tuple.Create("Compaq Computer Corp.", new Dictionary<int, string>{
+{ 2, "InkJet Color Printer" },
 { 3, "iPAQ PocketPC" },
 { 14, "Internet Keyboard" },
 { 18, "InkJet Color Printer" },
@@ -7145,22 +3680,19 @@ namespace HardwareInformation.Providers {
 { 20554, "Personal Jukebox PJB100" },
 { 20570, "Linux-USB \"CDC Subset\" Device, or Itsy (experimental)" },
 { 34065, "iPAQ Networking 10/100 Ethernet [pegasus2]" },
- } },
-            { 1184, new Dictionary<int, string>(){ 
-     } },
-            { 1185, new Dictionary<int, string>(){ 
-    { 65520, "Telex Composite Device" },
- } },
-            { 1186, new Dictionary<int, string>(){ 
-     } },
-            { 1187, new Dictionary<int, string>(){ 
-     } },
-            { 1188, new Dictionary<int, string>(){ 
-    { 4, "DVD-CAM DZ-MV100A Camcorder" },
+    })
+ },
+            { 1185, Tuple.Create("SystemSoft Corp.", new Dictionary<int, string>{
+{ 65520, "Telex Composite Device" },
+    })
+ },
+            { 1188, Tuple.Create("Hitachi, Ltd", new Dictionary<int, string>{
+{ 4, "DVD-CAM DZ-MV100A Camcorder" },
 { 30, "DVDCAM USB HS Interface" },
- } },
-            { 1189, new Dictionary<int, string>(){ 
-    { 1, "Keyboard" },
+    })
+ },
+            { 1189, Tuple.Create("Acer Peripherals Inc. (now BenQ Corp.)", new Dictionary<int, string>{
+{ 1, "Keyboard" },
 { 2, "API Ergo K/B" },
 { 3, "API Generic K/B Mouse" },
 { 4774, "AcerScan C310U" },
@@ -7221,14 +3753,16 @@ namespace HardwareInformation.Providers {
 { 36864, "AWL300 Wireless Adapter" },
 { 36865, "AWL400 Wireless Adapter" },
 { 37395, "Kbd Hub" },
- } },
-            { 1190, new Dictionary<int, string>(){ 
-    { 185, "Audio" },
+    })
+ },
+            { 1190, Tuple.Create("Nokia Display Products", new Dictionary<int, string>{
+{ 185, "Audio" },
 { 384, "Hub Type P" },
 { 385, "HID Monitor Controls" },
- } },
-            { 1191, new Dictionary<int, string>(){ 
-    { 256, "StrobePro" },
+    })
+ },
+            { 1191, Tuple.Create("Visioneer", new Dictionary<int, string>{
+{ 256, "StrobePro" },
 { 257, "Strobe Pro Scanner (1.01)" },
 { 258, "StrobePro Scanner" },
 { 529, "OneTouch 7600 Scanner" },
@@ -7287,14 +3821,16 @@ namespace HardwareInformation.Providers {
 { 1196, "Xerox Travel Scanner 100" },
 { 1211, "strobe 400 scanner" },
 { 1229, "Xerox Travel Scanner 150" },
- } },
-            { 1192, new Dictionary<int, string>(){ 
-    { 257, "Hub" },
+    })
+ },
+            { 1192, Tuple.Create("Multivideo Labs, Inc.", new Dictionary<int, string>{
+{ 257, "Hub" },
 { 771, "Peripheral Switch" },
 { 1028, "Peripheral Switch" },
- } },
-            { 1193, new Dictionary<int, string>(){ 
-    { 4101, "BJ Printer Hub" },
+    })
+ },
+            { 1193, Tuple.Create("Canon, Inc.", new Dictionary<int, string>{
+{ 4101, "BJ Printer Hub" },
 { 4149, "PD Printer Storage" },
 { 4176, "BJC-8200" },
 { 4177, "BJC-3000 Color Printer" },
@@ -7965,20 +4501,14 @@ namespace HardwareInformation.Providers {
 { 13012, "Powershot ELPH 185 / IXUS 185 / IXY 200" },
 { 13013, "PowerShot SX430 IS" },
 { 13019, "SELPHY CP1300" },
- } },
-            { 1194, new Dictionary<int, string>(){ 
-     } },
-            { 1195, new Dictionary<int, string>(){ 
-     } },
-            { 1196, new Dictionary<int, string>(){ 
-     } },
-            { 1197, new Dictionary<int, string>(){ 
-    { 9473, "Bluetooth Device" },
- } },
-            { 1199, new Dictionary<int, string>(){ 
-     } },
-            { 1200, new Dictionary<int, string>(){ 
-    { 258, "Coolpix 990" },
+    })
+ },
+            { 1197, Tuple.Create("Dooin Electronics", new Dictionary<int, string>{
+{ 9473, "Bluetooth Device" },
+    })
+ },
+            { 1200, Tuple.Create("Nikon Corp.", new Dictionary<int, string>{
+{ 258, "Coolpix 990" },
 { 259, "Coolpix 880" },
 { 260, "Coolpix 995" },
 { 262, "Coolpix 775" },
@@ -8054,11 +4584,10 @@ namespace HardwareInformation.Providers {
 { 16384, "Coolscan LS 40 ED" },
 { 16385, "LS 50 ED/Coolscan V ED" },
 { 16386, "Super Coolscan LS-5000 ED" },
- } },
-            { 1201, new Dictionary<int, string>(){ 
-     } },
-            { 1203, new Dictionary<int, string>(){ 
-    { 12291, "Rapid Access III Keyboard" },
+    })
+ },
+            { 1203, Tuple.Create("IBM Corp.", new Dictionary<int, string>{
+{ 12291, "Rapid Access III Keyboard" },
 { 12292, "Media Access Pro Keyboard" },
 { 12298, "Rapid Access IIIe Keyboard" },
 { 12310, "UltraNav Keyboard Hub" },
@@ -8090,9 +4619,10 @@ namespace HardwareInformation.Providers {
 { 17793, "4800-2xx Hub w/ Cash Drawer" },
 { 17924, "Keyboard w/ Card Reader" },
 { 18033, "4820 LCD w/ MSR/KB" },
- } },
-            { 1204, new Dictionary<int, string>(){ 
-    { 1, "Mouse" },
+    })
+ },
+            { 1204, Tuple.Create("Cypress Semiconductor Corp.", new Dictionary<int, string>{
+{ 1, "Mouse" },
 { 2, "CY7C63x0x Thermometer" },
 { 51, "Mouse" },
 { 96, "Wireless optical mouse" },
@@ -8147,16 +4677,14 @@ namespace HardwareInformation.Providers {
 { 64784, "Gembird MSIS-PM" },
 { 64787, "Energenie EG-PMS" },
 { 64789, "Energenie EG-PMS2" },
- } },
-            { 1205, new Dictionary<int, string>(){ 
-    { 12388, "Hantek DSO-3064" },
- } },
-            { 1206, new Dictionary<int, string>(){ 
-     } },
-            { 1207, new Dictionary<int, string>(){ 
-     } },
-            { 1208, new Dictionary<int, string>(){ 
-    { 1, "Stylus Color 740 / Photo 750" },
+    })
+ },
+            { 1205, Tuple.Create("ROHM LSI Systems USA, LLC", new Dictionary<int, string>{
+{ 12388, "Hantek DSO-3064" },
+    })
+ },
+            { 1208, Tuple.Create("Seiko Epson Corp.", new Dictionary<int, string>{
+{ 1, "Stylus Color 740 / Photo 750" },
 { 2, "ISD Smart Cable for Mac" },
 { 3, "ISD Smart Cable" },
 { 4, "Printer" },
@@ -8337,9 +4865,10 @@ namespace HardwareInformation.Providers {
 { 3587, "Thermal Receipt Printer [TM-T20]" },
 { 4372, "XP-440 [Expression Home Small-in-One Printer]" },
 { 4393, "ET-4750 [WorkForce ET-4750 EcoTank All-in-One]" },
- } },
-            { 1209, new Dictionary<int, string>(){ 
-    { 768, "SafeNet USB SuperPro/UltraPro" },
+    })
+ },
+            { 1209, Tuple.Create("Rainbow Technologies, Inc.", new Dictionary<int, string>{
+{ 768, "SafeNet USB SuperPro/UltraPro" },
 { 4096, "iKey 1000 Token" },
 { 4097, "iKey 1200 Token" },
 { 4098, "iKey Token" },
@@ -8362,11 +4891,10 @@ namespace HardwareInformation.Providers {
 { 4869, "iKey Token" },
 { 4870, "iKey Token" },
 { 32768, "SafeNet Sentinel Hardware Key" },
- } },
-            { 1210, new Dictionary<int, string>(){ 
-     } },
-            { 1211, new Dictionary<int, string>(){ 
-    { 257, "USB2-IDE/ATAPI Bridge Adapter" },
+    })
+ },
+            { 1211, Tuple.Create("I-O Data Device, Inc.", new Dictionary<int, string>{
+{ 257, "USB2-IDE/ATAPI Bridge Adapter" },
 { 330, "HDCL-UT" },
 { 513, "USB2-IDE/ATAPI Bridge Adapter" },
 { 516, "DVD Multi-plus unit iU-CD2" },
@@ -8397,13 +4925,10 @@ namespace HardwareInformation.Providers {
 { 2567, "USB2-iCN Adapter" },
 { 2568, "USB2-iCN Adapter" },
 { 3073, "FM-10 Pro Disk" },
- } },
-            { 1213, new Dictionary<int, string>(){ 
-     } },
-            { 1214, new Dictionary<int, string>(){ 
-     } },
-            { 1215, new Dictionary<int, string>(){ 
-    { 256, "MediaReader CF" },
+    })
+ },
+            { 1215, Tuple.Create("TDK Corp.", new Dictionary<int, string>{
+{ 256, "MediaReader CF" },
 { 277, "USB-PDC Adapter UPA9664" },
 { 278, "USB-cdmaOne Adapter UCA1464" },
 { 279, "USB-PHS Adapter UHA6400" },
@@ -8422,9 +4947,10 @@ namespace HardwareInformation.Providers {
 { 800, "Bluetooth Adapter" },
 { 801, "Bluetooth Device" },
 { 2600, "INDI AV-IN Device" },
- } },
-            { 1217, new Dictionary<int, string>(){ 
-    { 32, "56K Voice Pro" },
+    })
+ },
+            { 1217, Tuple.Create("U.S. Robotics (3Com)", new Dictionary<int, string>{
+{ 32, "56K Voice Pro" },
 { 34, "56K Voice Pro" },
 { 126, "ISDN TA" },
 { 130, "OfficeConnect Analog Modem" },
@@ -8434,17 +4960,15 @@ namespace HardwareInformation.Providers {
 { 169, "ISDN Pro TA-U" },
 { 185, "HomeConnect IDSL Modem" },
 { 12321, "56k Voice FaxModem Pro" },
- } },
-            { 1218, new Dictionary<int, string>(){ 
-     } },
-            { 1219, new Dictionary<int, string>(){ 
-    { 4354, "Mouse" },
+    })
+ },
+            { 1219, Tuple.Create("Maxi Switch, Inc.", new Dictionary<int, string>{
+{ 4354, "Mouse" },
 { 8450, "Mouse" },
- } },
-            { 1220, new Dictionary<int, string>(){ 
-     } },
-            { 1221, new Dictionary<int, string>(){ 
-    { 4137, "fi-4010c Scanner" },
+    })
+ },
+            { 1221, Tuple.Create("Fujitsu, Ltd", new Dictionary<int, string>{
+{ 4137, "fi-4010c Scanner" },
 { 4147, "fi-4110CU" },
 { 4161, "fi-4120c Scanner" },
 { 4162, "fi-4220c Scanner" },
@@ -8468,13 +4992,10 @@ namespace HardwareInformation.Providers {
 { 8207, "Sigma DP2 (Mass Storage)" },
 { 8208, "Sigma DP2 (PictBridge)" },
 { 8221, "SATA 3.0 6Gbit/s Adaptor [GROOVY]" },
- } },
-            { 1222, new Dictionary<int, string>(){ 
-     } },
-            { 1223, new Dictionary<int, string>(){ 
-     } },
-            { 1224, new Dictionary<int, string>(){ 
-    { 1824, "Digital Color Camera" },
+    })
+ },
+            { 1224, Tuple.Create("Konica Corp.", new Dictionary<int, string>{
+{ 1824, "Digital Color Camera" },
 { 1825, "e-miniD Camera" },
 { 1826, "e-mini" },
 { 1827, "KD-200Z Camera" },
@@ -8483,9 +5004,10 @@ namespace HardwareInformation.Providers {
 { 1833, "Revio C2 Digital Camera" },
 { 1836, "Revio KD20M" },
 { 1837, "Revio KD410Z" },
- } },
-            { 1226, new Dictionary<int, string>(){ 
-    { 32, "USB Keyboard" },
+    })
+ },
+            { 1226, Tuple.Create("Lite-On Technology Corp.", new Dictionary<int, string>{
+{ 32, "USB Keyboard" },
 { 75, "Keyboard" },
 { 79, "SK-9020 keyboard" },
 { 138, "Acer Wired Mouse Model SM-9023" },
@@ -8504,9 +5026,10 @@ namespace HardwareInformation.Providers {
 { 28742, "TOSHIBA Web Camera - HD" },
 { 37636, "Hub" },
 { 61468, "TT1280DA DVB-T TV Tuner" },
- } },
-            { 1227, new Dictionary<int, string>(){ 
-    { 256, "FinePix 30i/40i/50i, A101/201, 1300/2200, 1400/2400/2600/2800/4500/4700/4800/4900/6800/6900 Zoom" },
+    })
+ },
+            { 1227, Tuple.Create("Fuji Photo Film Co., Ltd", new Dictionary<int, string>{
+{ 256, "FinePix 30i/40i/50i, A101/201, 1300/2200, 1400/2400/2600/2800/4500/4700/4800/4900/6800/6900 Zoom" },
 { 259, "FinePix NX-500/NX-700 printer" },
 { 260, "FinePix A101, 2600/2800/4800/6800 Zoom (PC CAM)" },
 { 264, "FinePix F601 Zoom (DSC)" },
@@ -8597,27 +5120,28 @@ namespace HardwareInformation.Providers {
 { 632, "FinePix JV300" },
 { 709, "FinePix S9900W Digital Camera (PTP)" },
 { 20486, "ASK-300" },
- } },
-            { 1228, new Dictionary<int, string>(){ 
-    { 4386, "Hub" },
+    })
+ },
+            { 1228, Tuple.Create("ST-Ericsson", new Dictionary<int, string>{
+{ 4386, "Hub" },
 { 5408, "USB 2.0 Hub (Avocent KVM)" },
 { 5409, "USB 2.0 Hub" },
 { 6754, "GW Instek GSP-830 Spectrum Analyzer (HID)" },
 { 8995, "Ux500 serial debug port" },
 { 9523, "NFC device (PN533)" },
 { 33046, "Camera" },
- } },
-            { 1229, new Dictionary<int, string>(){ 
-     } },
-            { 1230, new Dictionary<int, string>(){ 
-    { 2, "SL11R-IDE IDE Bridge" },
+    })
+ },
+            { 1230, Tuple.Create("ScanLogic Corp.", new Dictionary<int, string>{
+{ 2, "SL11R-IDE IDE Bridge" },
 { 256, "USB2PRN Printer Class" },
 { 768, "Phantom 336CX - C3 scanner" },
 { 1230, "SL11DEMO, VID: 0x4ce, PID: 0x4ce" },
 { 2001, "SL11R, VID: 0x4ce, PID: 0x07D1" },
- } },
-            { 1231, new Dictionary<int, string>(){ 
-    { 34, "OCZ Alchemy Series Elixir II Keyboard" },
+    })
+ },
+            { 1231, Tuple.Create("Myson Century, Inc.", new Dictionary<int, string>{
+{ 34, "OCZ Alchemy Series Elixir II Keyboard" },
 { 2048, "MTP800 Mass Storage Device" },
 { 34832, "CS8810 Mass Storage Device" },
 { 34833, "CS8811 Mass Storage Device" },
@@ -8625,33 +5149,24 @@ namespace HardwareInformation.Providers {
 { 34840, "USB2.0 to ATAPI Bridge Controller" },
 { 34841, "USB 2.0 SD/MMC Reader" },
 { 39200, "CS8819A2-114 Mass Storage Device" },
- } },
-            { 1232, new Dictionary<int, string>(){ 
-     } },
-            { 1233, new Dictionary<int, string>(){ 
-     } },
-            { 1234, new Dictionary<int, string>(){ 
-    { 112, "ADA70 Speakers" },
+    })
+ },
+            { 1234, Tuple.Create("Altec Lansing Technologies", new Dictionary<int, string>{
+{ 112, "ADA70 Speakers" },
 { 773, "Non-Compliant Audio Device" },
 { 785, "ADA-310 Speakers" },
 { 8288, "Claritel-i750 - vp" },
 { 65285, "ADA-305 Speakers" },
 { 65351, "Lansing HID Audio Controls" },
 { 65353, "Lansing HID Audio Controls" },
- } },
-            { 1235, new Dictionary<int, string>(){ 
-     } },
-            { 1236, new Dictionary<int, string>(){ 
-     } },
-            { 1237, new Dictionary<int, string>(){ 
-     } },
-            { 1238, new Dictionary<int, string>(){ 
-     } },
-            { 1239, new Dictionary<int, string>(){ 
-    { 7140, "Bluetooth Device" },
- } },
-            { 1240, new Dictionary<int, string>(){ 
-    { 2, "PicoLCD 20x2" },
+    })
+ },
+            { 1239, Tuple.Create("Oki Semiconductor", new Dictionary<int, string>{
+{ 7140, "Bluetooth Device" },
+    })
+ },
+            { 1240, Tuple.Create("Microchip Technology, Inc.", new Dictionary<int, string>{
+{ 2, "PicoLCD 20x2" },
 { 3, "PICkit 2 Microcontroller Programmer" },
 { 10, "CDC RS-232 Emulation Demo" },
 { 11, "PIC18F2550 (32K Flashable 10 Channel, 10 Bit A/D USB Microcontroller)" },
@@ -8694,9 +5209,10 @@ namespace HardwareInformation.Providers {
 { 64658, "Open Bench Logic Sniffer" },
 { 65518, "Devantech USB-ISS" },
 { 65519, "PICoPLC [APStech]" },
- } },
-            { 1241, new Dictionary<int, string>(){ 
-    { 6, "Wired Keyboard (78/79 key) [RPI Wired Keyboard 5]" },
+    })
+ },
+            { 1241, Tuple.Create("Holtek Semiconductor, Inc.", new Dictionary<int, string>{
+{ 6, "Wired Keyboard (78/79 key) [RPI Wired Keyboard 5]" },
 { 34, "Portable Keyboard" },
 { 840, "Keyboard" },
 { 1166, "Optical Mouse" },
@@ -8729,9 +5245,10 @@ namespace HardwareInformation.Providers {
 { 41631, "Microarray fingerprint reader" },
 { 46388, "LGT8F328P Microprocessor" },
 { 57346, "MCU" },
- } },
-            { 1242, new Dictionary<int, string>(){ 
-    { 2305, "LS-120 Camera" },
+    })
+ },
+            { 1242, Tuple.Create("Panasonic (Matsushita)", new Dictionary<int, string>{
+{ 2305, "LS-120 Camera" },
 { 2322, "SDR-S10" },
 { 2817, "CD-R/RW Drive" },
 { 2819, "SuperDisk 240MB" },
@@ -8769,13 +5286,10 @@ namespace HardwareInformation.Providers {
 { 14596, "N5HBZ0000055 802.11abgn Wireless Adapter [Atheros AR7010+AR9280]" },
 { 14600, "N5HBZ0000062 802.11abgn Wireless Adapter [Atheros AR9374v1.1]" },
 { 15364, "JT-P100MR-20 [ePassport Reader]" },
- } },
-            { 1243, new Dictionary<int, string>(){ 
-     } },
-            { 1244, new Dictionary<int, string>(){ 
-     } },
-            { 1245, new Dictionary<int, string>(){ 
-    { 5030, "MFC2000" },
+    })
+ },
+            { 1245, Tuple.Create("Sharp Corp.", new Dictionary<int, string>{
+{ 5030, "MFC2000" },
 { 24582, "AL-1216" },
 { 24583, "AL-1045" },
 { 24584, "AL-1255" },
@@ -8826,25 +5340,18 @@ namespace HardwareInformation.Providers {
 { 37155, "W-ZERO3 ES Smartphone" },
 { 37283, "922SH Internet Machine" },
 { 37786, "IS03" },
- } },
-            { 1246, new Dictionary<int, string>(){ 
-     } },
-            { 1247, new Dictionary<int, string>(){ 
-     } },
-            { 1249, new Dictionary<int, string>(){ 
-    { 513, "Monitor Hub" },
- } },
-            { 1250, new Dictionary<int, string>(){ 
-    { 5136, "XR21V1410 USB-UART IC" },
- } },
-            { 1251, new Dictionary<int, string>(){ 
-     } },
-            { 1252, new Dictionary<int, string>(){ 
-     } },
-            { 1253, new Dictionary<int, string>(){ 
-     } },
-            { 1254, new Dictionary<int, string>(){ 
-    { 1, "E-USB ATA Bridge" },
+    })
+ },
+            { 1249, Tuple.Create("Iiyama North America, Inc.", new Dictionary<int, string>{
+{ 513, "Monitor Hub" },
+    })
+ },
+            { 1250, Tuple.Create("Exar Corp.", new Dictionary<int, string>{
+{ 5136, "XR21V1410 USB-UART IC" },
+    })
+ },
+            { 1254, Tuple.Create("SCM Microsystems, Inc.", new Dictionary<int, string>{
+{ 1, "E-USB ATA Bridge" },
 { 2, "eUSCSI SCSI Bridge" },
 { 3, "eUSB SmartMedia Card Reader" },
 { 5, "eUSB SmartMedia/CompactFlash Card Reader" },
@@ -8903,9 +5410,10 @@ namespace HardwareInformation.Providers {
 { 57344, "SCRx31 Reader" },
 { 57345, "SCR331 SmartCard Reader" },
 { 57347, "SPR532 PinPad SmartCard Reader" },
- } },
-            { 1255, new Dictionary<int, string>(){ 
-    { 1, "TouchScreen" },
+    })
+ },
+            { 1255, Tuple.Create("Elo TouchSystems", new Dictionary<int, string>{
+{ 1, "TouchScreen" },
 { 2, "Touchmonitor Interface 2600 Rev 2" },
 { 4, "4000U CarrollTouch® Touchmonitor Interface" },
 { 7, "2500U IntelliTouch® Touchmonitor Interface" },
@@ -8924,9 +5432,10 @@ namespace HardwareInformation.Providers {
 { 129, "Touchmonitor Interface" },
 { 130, "Touchmonitor Interface" },
 { 255, "Touchmonitor Interface" },
- } },
-            { 1256, new Dictionary<int, string>(){ 
-    { 1, "Printer Bootloader" },
+    })
+ },
+            { 1256, Tuple.Create("Samsung Electronics Co., Ltd", new Dictionary<int, string>{
+{ 1, "Printer Bootloader" },
 { 256, "Kingston Flash Drive (128MB)" },
 { 272, "Connect3D Flash Drive" },
 { 273, "Connect3D Flash Drive" },
@@ -9157,24 +5666,14 @@ namespace HardwareInformation.Providers {
 { 57378, "SERI E02 SCOM 6200 Flash Load Disk" },
 { 61440, "Intensity 3 (Mass Storage Mode)" },
 { 65328, "SG_iMON" },
- } },
-            { 1257, new Dictionary<int, string>(){ 
-     } },
-            { 1258, new Dictionary<int, string>(){ 
-     } },
-            { 1259, new Dictionary<int, string>(){ 
-    { 57348, "eHome Infrared Transceiver" },
- } },
-            { 1260, new Dictionary<int, string>(){ 
-     } },
-            { 1261, new Dictionary<int, string>(){ 
-     } },
-            { 1263, new Dictionary<int, string>(){ 
-     } },
-            { 1264, new Dictionary<int, string>(){ 
-     } },
-            { 1265, new Dictionary<int, string>(){ 
-    { 1, "GC-QX3 Digital Still Camera" },
+    })
+ },
+            { 1259, Tuple.Create("Northstar Systems, Inc.", new Dictionary<int, string>{
+{ 57348, "eHome Infrared Transceiver" },
+    })
+ },
+            { 1265, Tuple.Create("Victor Company of Japan, Ltd", new Dictionary<int, string>{
+{ 1, "GC-QX3 Digital Still Camera" },
 { 4, "GR-DVL815U Digital Video Camera" },
 { 6, "DV Camera Storage" },
 { 8, "GZ-MG30AA/MC500E Digital Video Camera" },
@@ -9183,9 +5682,10 @@ namespace HardwareInformation.Providers {
 { 4097, "GC-A50 Camera Device" },
 { 12296, "MP-PRX1 Ethernet" },
 { 12297, "MP-XP7250 WLAN Adapter" },
- } },
-            { 1266, new Dictionary<int, string>(){ 
-    { 1, "KU-8933 Keyboard" },
+    })
+ },
+            { 1266, Tuple.Create("Chicony Electronics Co., Ltd", new Dictionary<int, string>{
+{ 1, "KU-8933 Keyboard" },
 { 2, "NT68P81 Keyboard" },
 { 272, "KU-2971 Keyboard" },
 { 273, "KU-9908 Keyboard" },
@@ -9290,9 +5790,10 @@ namespace HardwareInformation.Providers {
 { 46555, "HP Webcam" },
 { 46596, "Integrated Camera (1280x720@30)" },
 { 46721, "ThinkPad T490 Webcam" },
- } },
-            { 1267, new Dictionary<int, string>(){ 
-    { 10, "Touchscreen" },
+    })
+ },
+            { 1267, Tuple.Create("Elan Microelectronics Corp.", new Dictionary<int, string>{
+{ 10, "Touchscreen" },
 { 259, "ActiveJet K-2024 Multimedia Keyboard" },
 { 367, "Touchscreen" },
 { 420, "Wireless Keyboard" },
@@ -9308,19 +5809,10 @@ namespace HardwareInformation.Providers {
 { 897, "Touchscreen" },
 { 1184, "Dream Cheeky Stress/Panic Button" },
 { 8756, "Touchscreen" },
- } },
-            { 1268, new Dictionary<int, string>(){ 
-     } },
-            { 1269, new Dictionary<int, string>(){ 
-     } },
-            { 1270, new Dictionary<int, string>(){ 
-     } },
-            { 1271, new Dictionary<int, string>(){ 
-     } },
-            { 1272, new Dictionary<int, string>(){ 
-     } },
-            { 1273, new Dictionary<int, string>(){ 
-    { 2, "HL-1050 Laser Printer" },
+    })
+ },
+            { 1273, Tuple.Create("Brother Industries, Ltd", new Dictionary<int, string>{
+{ 2, "HL-1050 Laser Printer" },
 { 5, "Printer" },
 { 6, "HL-1240 Laser Printer" },
 { 7, "HL-1250 Laser Printer" },
@@ -9859,15 +6351,15 @@ namespace HardwareInformation.Providers {
 { 24743, "ADS-1100W" },
 { 24744, "ADS-1500W" },
 { 24745, "ADS-1600W" },
- } },
-            { 1274, new Dictionary<int, string>(){ 
-    { 9360, "DS1490F 2-in-1 Fob, 1-Wire adapter" },
+    })
+ },
+            { 1274, Tuple.Create("Dallas Semiconductor", new Dictionary<int, string>{
+{ 9360, "DS1490F 2-in-1 Fob, 1-Wire adapter" },
 { 16897, "DS4201 Audio DAC" },
- } },
-            { 1275, new Dictionary<int, string>(){ 
-     } },
-            { 1276, new Dictionary<int, string>(){ 
-    { 3, "CM1092 / Wintech CM-5098 Optical Mouse" },
+    })
+ },
+            { 1276, Tuple.Create("Sunplus Technology Co., Ltd", new Dictionary<int, string>{
+{ 3, "CM1092 / Wintech CM-5098 Optical Mouse" },
 { 5, "USB OpticalWheel Mouse" },
 { 19, "ViewMate Desktop Mouse CC2201" },
 { 21, "ViewMate Desktop Mouse CC2201" },
@@ -9896,23 +6388,23 @@ namespace HardwareInformation.Providers {
 { 29491, "Finet Technology Palmpix DC-85" },
 { 30074, "Aiptek, MP315 MP3 Player" },
 { 65535, "PureDigital Ritz Disposable" },
- } },
-            { 1277, new Dictionary<int, string>(){ 
-    { 3, "Smart Card Reader II" },
- } },
-            { 1278, new Dictionary<int, string>(){ 
-    { 6, "Happy Hacking Keyboard Lite2" },
- } },
-            { 1279, new Dictionary<int, string>(){ 
-     } },
-            { 1280, new Dictionary<int, string>(){ 
-    { 1, "DART Keyboard Mouse" },
+    })
+ },
+            { 1277, Tuple.Create("Soliton Systems, K.K.", new Dictionary<int, string>{
+{ 3, "Smart Card Reader II" },
+    })
+ },
+            { 1278, Tuple.Create("PFU, Ltd", new Dictionary<int, string>{
+{ 6, "Happy Hacking Keyboard Lite2" },
+    })
+ },
+            { 1280, Tuple.Create("Siam United Hi-Tech", new Dictionary<int, string>{
+{ 1, "DART Keyboard Mouse" },
 { 2, "DART-2 Keyboard" },
- } },
-            { 1281, new Dictionary<int, string>(){ 
-     } },
-            { 1282, new Dictionary<int, string>(){ 
-    { 1, "Handheld" },
+    })
+ },
+            { 1282, Tuple.Create("Acer, Inc.", new Dictionary<int, string>{
+{ 1, "Handheld" },
 { 1846, "Handheld" },
 { 5553, "PDA n311" },
 { 5681, "c10 Series" },
@@ -9932,13 +6424,10 @@ namespace HardwareInformation.Providers {
 { 13255, "Liquid Gallant Duo E350 (USB tethering)" },
 { 13256, "Liquid Gallant Duo E350 (debug mode, USB tethering)" },
 { 53249, "Divio NW801/DVC-V6+ Digital Camera" },
- } },
-            { 1283, new Dictionary<int, string>(){ 
-     } },
-            { 1284, new Dictionary<int, string>(){ 
-     } },
-            { 1286, new Dictionary<int, string>(){ 
-    { 157, "HomeConnect Camera" },
+    })
+ },
+            { 1286, Tuple.Create("3Com Corp.", new Dictionary<int, string>{
+{ 157, "HomeConnect Camera" },
 { 160, "3CREB96 Bluetooth Adapter" },
 { 161, "Bluetooth Device" },
 { 162, "Bluetooth Device" },
@@ -9954,27 +6443,22 @@ namespace HardwareInformation.Providers {
 { 61442, "3CP4218 ADSL Modem (pre-init)" },
 { 61443, "3CP4218 ADSL Modem" },
 { 61696, "3CP4218 ADSL Modem (pre-init)" },
- } },
-            { 1287, new Dictionary<int, string>(){ 
-    { 17, "Konami ParaParaParadise Controller" },
- } },
-            { 1288, new Dictionary<int, string>(){ 
-     } },
-            { 1289, new Dictionary<int, string>(){ 
-    { 2049, "ADSL Modem" },
+    })
+ },
+            { 1287, Tuple.Create("Hosiden Corp.", new Dictionary<int, string>{
+{ 17, "Konami ParaParaParadise Controller" },
+    })
+ },
+            { 1289, Tuple.Create("Aztech Systems, Ltd", new Dictionary<int, string>{
+{ 2049, "ADSL Modem" },
 { 2050, "ADSL Modem (RFC1483)" },
 { 2054, "DSL Modem" },
 { 2063, "Binatone ADSL500 Modem Network Interface" },
 { 2066, "Pirelli ADSL Modem Network Interface" },
- } },
-            { 1290, new Dictionary<int, string>(){ 
-     } },
-            { 1291, new Dictionary<int, string>(){ 
-     } },
-            { 1292, new Dictionary<int, string>(){ 
-     } },
-            { 1293, new Dictionary<int, string>(){ 
-    { 4, "Direct Connect" },
+    })
+ },
+            { 1293, Tuple.Create("Belkin Components", new Dictionary<int, string>{
+{ 4, "Direct Connect" },
 { 18, "F8T012 Bluetooth Adapter" },
 { 19, "F8T013 Bluetooth Adapter" },
 { 23, "B8T017 Bluetooth+EDR 2.1 / F4U017 USB 2.0 7-port Hub" },
@@ -10061,74 +6545,53 @@ namespace HardwareInformation.Providers {
 { 37978, "F7D1101 v1 Basic Wireless Adapter [Realtek RTL8188SU]" },
 { 37979, "F7D1101 v2 Basic Wireless Adapter [Ralink RT3370]" },
 { 54049, "Dynex DX-NUSB 802.11bgn Wireless Adapter [Broadcom BCM43231]" },
- } },
-            { 1294, new Dictionary<int, string>(){ 
-     } },
-            { 1295, new Dictionary<int, string>(){ 
-    { 1, "Hub" },
+    })
+ },
+            { 1295, Tuple.Create("KC Technology, Inc.", new Dictionary<int, string>{
+{ 1, "Hub" },
 { 3, "KC82C160S Hub" },
 { 384, "KC-180 IrDA Dongle" },
 { 400, "KC2190 USB Host-to-Host cable" },
- } },
-            { 1296, new Dictionary<int, string>(){ 
-    { 1, "Keyboard" },
+    })
+ },
+            { 1296, Tuple.Create("Sejin Electron, Inc.", new Dictionary<int, string>{
+{ 1, "Keyboard" },
 { 4096, "Keyboard with PS/2 Mouse Port" },
 { 57345, "Mouse" },
- } },
-            { 1297, new Dictionary<int, string>(){ 
-    { 43, "AOC DVB" },
- } },
-            { 1298, new Dictionary<int, string>(){ 
-     } },
-            { 1299, new Dictionary<int, string>(){ 
-     } },
-            { 1300, new Dictionary<int, string>(){ 
-     } },
-            { 1301, new Dictionary<int, string>(){ 
-     } },
-            { 1302, new Dictionary<int, string>(){ 
-     } },
-            { 1303, new Dictionary<int, string>(){ 
-     } },
-            { 1304, new Dictionary<int, string>(){ 
-    { 1, "USB to PS2 Adaptor v1.09" },
+    })
+ },
+            { 1297, Tuple.Create("N'Able (DataBook) Technologies, Inc.", new Dictionary<int, string>{
+{ 43, "AOC DVB" },
+    })
+ },
+            { 1304, Tuple.Create("EzKEY Corp.", new Dictionary<int, string>{
+{ 1, "USB to PS2 Adaptor v1.09" },
 { 2, "EZ-9900C Keyboard" },
- } },
-            { 1305, new Dictionary<int, string>(){ 
-    { 3, "TSP100ECO/TSP100II" },
+    })
+ },
+            { 1305, Tuple.Create("Star Micronics Co., Ltd", new Dictionary<int, string>{
+{ 3, "TSP100ECO/TSP100II" },
 { 49154, "Xlive Bluetooth XBM-100S MP3 Player" },
- } },
-            { 1306, new Dictionary<int, string>(){ 
-    { 40965, "Smart Display Version 9973" },
- } },
-            { 1307, new Dictionary<int, string>(){ 
-     } },
-            { 1308, new Dictionary<int, string>(){ 
-    { 5, "VFD Module" },
+    })
+ },
+            { 1306, Tuple.Create("WYSE Technology", new Dictionary<int, string>{
+{ 40965, "Smart Display Version 9973" },
+    })
+ },
+            { 1308, Tuple.Create("Shuttle, Inc.", new Dictionary<int, string>{
+{ 5, "VFD Module" },
 { 49153, "eHome Infrared Receiver" },
 { 49154, "eHome Infrared Receiver" },
- } },
-            { 1309, new Dictionary<int, string>(){ 
-    { 1, "UPS" },
+    })
+ },
+            { 1309, Tuple.Create("American Power Conversion", new Dictionary<int, string>{
+{ 1, "UPS" },
 { 2, "Uninterruptible Power Supply" },
 { 3, "UPS" },
- } },
-            { 1310, new Dictionary<int, string>(){ 
-     } },
-            { 1311, new Dictionary<int, string>(){ 
-     } },
-            { 1312, new Dictionary<int, string>(){ 
-     } },
-            { 1313, new Dictionary<int, string>(){ 
-     } },
-            { 1314, new Dictionary<int, string>(){ 
-     } },
-            { 1315, new Dictionary<int, string>(){ 
-     } },
-            { 1316, new Dictionary<int, string>(){ 
-     } },
-            { 1317, new Dictionary<int, string>(){ 
-    { 4109, "RFMD Bluetooth Device" },
+    })
+ },
+            { 1317, Tuple.Create("Netchip Technology, Inc.", new Dictionary<int, string>{
+{ 4109, "RFMD Bluetooth Device" },
 { 4224, "NET1080 USB-USB Bridge" },
 { 4608, "SSDC Adapter II" },
 { 4709, "File-backed Storage Gadget" },
@@ -10148,13 +6611,10 @@ namespace HardwareInformation.Providers {
 { 42152, "Linux-USB Printer Gadget" },
 { 42153, "Linux-USB OBEX Gadget" },
 { 42154, "Linux-USB CDC Composite Gadge (Ethernet and ACM)" },
- } },
-            { 1318, new Dictionary<int, string>(){ 
-     } },
-            { 1319, new Dictionary<int, string>(){ 
-     } },
-            { 1320, new Dictionary<int, string>(){ 
-    { 30049, "TV Wonder" },
+    })
+ },
+            { 1320, Tuple.Create("ATI Technologies, Inc.", new Dictionary<int, string>{
+{ 30049, "TV Wonder" },
 { 30050, "TV Wonder, Edition (FN5)" },
 { 30051, "TV Wonder, Edition (FI)" },
 { 30052, "TV Wonder, Edition (FQ)" },
@@ -10164,9 +6624,10 @@ namespace HardwareInformation.Providers {
 { 30056, "TV Wonder, Edition (FQ)" },
 { 30057, "Live! Pro (A)" },
 { 30058, "Live! Pro Audio (O)" },
- } },
-            { 1321, new Dictionary<int, string>(){ 
-    { 1, "HASP copy protection dongle" },
+    })
+ },
+            { 1321, Tuple.Create("Aladdin Knowledge Systems", new Dictionary<int, string>{
+{ 1, "HASP copy protection dongle" },
 { 779, "eToken R1 v3.1.3.x" },
 { 787, "eToken R1 v3.2.3.x" },
 { 795, "eToken R1 v3.3.3.x" },
@@ -10179,11 +6640,10 @@ namespace HardwareInformation.Providers {
 { 1300, "eToken Pro v4.2.5.4" },
 { 1536, "eToken Pro 64k (4.2)" },
 { 1568, "Token JC" },
- } },
-            { 1322, new Dictionary<int, string>(){ 
-     } },
-            { 1323, new Dictionary<int, string>(){ 
-    { 258, "Ca508A HP1020 Camera v.1.3.1.6" },
+    })
+ },
+            { 1323, Tuple.Create("Tekom Technologies, Inc.", new Dictionary<int, string>{
+{ 258, "Ca508A HP1020 Camera v.1.3.1.6" },
 { 2049, "Yakumo MegaImage 37" },
 { 5394, "Yakumo MegaImage IV" },
 { 5395, "Aosta CX100 Webcam" },
@@ -10194,57 +6654,23 @@ namespace HardwareInformation.Providers {
 { 8707, "Sound Vision Stream Driver" },
 { 14854, "DigiLife DDV-5120A" },
 { 53249, "P35U Camera Capture" },
- } },
-            { 1324, new Dictionary<int, string>(){ 
-     } },
-            { 1325, new Dictionary<int, string>(){ 
-     } },
-            { 1326, new Dictionary<int, string>(){ 
-     } },
-            { 1327, new Dictionary<int, string>(){ 
-     } },
-            { 1328, new Dictionary<int, string>(){ 
-     } },
-            { 1329, new Dictionary<int, string>(){ 
-     } },
-            { 1330, new Dictionary<int, string>(){ 
-     } },
-            { 1331, new Dictionary<int, string>(){ 
-     } },
-            { 1332, new Dictionary<int, string>(){ 
-     } },
-            { 1333, new Dictionary<int, string>(){ 
-     } },
-            { 1334, new Dictionary<int, string>(){ 
-    { 416, "PDT" },
- } },
-            { 1335, new Dictionary<int, string>(){ 
-     } },
-            { 1336, new Dictionary<int, string>(){ 
-     } },
-            { 1337, new Dictionary<int, string>(){ 
-     } },
-            { 1338, new Dictionary<int, string>(){ 
-    { 2816, "Hub" },
+    })
+ },
+            { 1334, Tuple.Create("Hand Held Products (Welch Allyn, Inc.)", new Dictionary<int, string>{
+{ 416, "PDT" },
+    })
+ },
+            { 1338, Tuple.Create("PrehKeyTec GmbH", new Dictionary<int, string>{
+{ 2816, "Hub" },
 { 2817, "Preh MCI 3100" },
- } },
-            { 1339, new Dictionary<int, string>(){ 
-     } },
-            { 1340, new Dictionary<int, string>(){ 
-     } },
-            { 1341, new Dictionary<int, string>(){ 
-     } },
-            { 1342, new Dictionary<int, string>(){ 
-     } },
-            { 1343, new Dictionary<int, string>(){ 
-     } },
-            { 1344, new Dictionary<int, string>(){ 
-    { 257, "Panache Surf ISDN TA" },
- } },
-            { 1345, new Dictionary<int, string>(){ 
-     } },
-            { 1347, new Dictionary<int, string>(){ 
-    { 254, "G773 Monitor Hub" },
+    })
+ },
+            { 1344, Tuple.Create("UniAccess AB", new Dictionary<int, string>{
+{ 257, "Panache Surf ISDN TA" },
+    })
+ },
+            { 1347, Tuple.Create("ViewSonic Corp.", new Dictionary<int, string>{
+{ 254, "G773 Monitor Hub" },
 { 255, "P815 Monitor Hub" },
 { 3058, "airpanel V150 Wireless Smart Display" },
 { 3059, "airpanel V110 Wireless Smart Display" },
@@ -10260,11 +6686,10 @@ namespace HardwareInformation.Providers {
 { 6673, "Wireless 802.11g Adapter" },
 { 7776, "TA310 - ATSC/NTSC/PAL Driver(PCM4)" },
 { 16723, "ViewSonic G773 Control (?)" },
- } },
-            { 1348, new Dictionary<int, string>(){ 
-     } },
-            { 1349, new Dictionary<int, string>(){ 
-    { 29491, "Trution Web Camera" },
+    })
+ },
+            { 1349, Tuple.Create("Xirlink, Inc.", new Dictionary<int, string>{
+{ 29491, "Trution Web Camera" },
 { 32770, "IBM NetCamera" },
 { 32777, "Veo PC Camera" },
 { 32780, "Veo Stingray" },
@@ -10283,9 +6708,10 @@ namespace HardwareInformation.Providers {
 { 33587, "Veo Stingray/Connect Web Camera" },
 { 34956, "eVision 123 digital camera" },
 { 34957, "eVision 123 digital camera" },
- } },
-            { 1350, new Dictionary<int, string>(){ 
-    { 3503, "PDC 2300Z" },
+    })
+ },
+            { 1350, Tuple.Create("Polaroid Corp.", new Dictionary<int, string>{
+{ 3503, "PDC 2300Z" },
 { 7149, "PDC 1320 Camera" },
 { 12439, "PDC 310" },
 { 12629, "PDC 3070 Camera" },
@@ -10294,9 +6720,10 @@ namespace HardwareInformation.Providers {
 { 12915, "PDC 2030 Camera" },
 { 13060, "a500 Digital Camera" },
 { 56527, "Sound Vision Stream Driver" },
- } },
-            { 1351, new Dictionary<int, string>(){ 
-    { 1, "ICSI Bluetooth Device" },
+    })
+ },
+            { 1351, Tuple.Create("Anchor Chips, Inc.", new Dictionary<int, string>{
+{ 1, "ICSI Bluetooth Device" },
 { 128, "I3SYSTEM HYUNY" },
 { 4098, "Python2 WDM Encoder" },
 { 4102, "Hantek DSO-2100 UF" },
@@ -10314,18 +6741,14 @@ namespace HardwareInformation.Providers {
 { 28672, "PowerSpec MCE460 Front Panel LED Display" },
 { 30583, "Bluetooth Device" },
 { 39321, "AN2131 uninitialized (?)" },
- } },
-            { 1352, new Dictionary<int, string>(){ 
-    { 4101, "EZ Cart II GameBoy Flash Programmer" },
- } },
-            { 1353, new Dictionary<int, string>(){ 
-     } },
-            { 1354, new Dictionary<int, string>(){ 
-     } },
-            { 1355, new Dictionary<int, string>(){ 
-     } },
-            { 1356, new Dictionary<int, string>(){ 
-    { 1, "HUB" },
+    })
+ },
+            { 1352, Tuple.Create("Tyan Computer Corp.", new Dictionary<int, string>{
+{ 4101, "EZ Cart II GameBoy Flash Programmer" },
+    })
+ },
+            { 1356, Tuple.Create("Sony Corp.", new Dictionary<int, string>{
+{ 1, "HUB" },
 { 2, "Standard HUB" },
 { 16, "Cyber-shot, Mavica (msc)" },
 { 20, "Nogatech USBVision (SY)" },
@@ -10532,27 +6955,19 @@ namespace HardwareInformation.Providers {
 { 3283, "WH-1000XM3 [Wireless Noise-Canceling Headphones]" },
 { 3290, "PlayStation Classic controller" },
 { 4096, "Wireless Buzz! Receiver" },
- } },
-            { 1357, new Dictionary<int, string>(){ 
-     } },
-            { 1358, new Dictionary<int, string>(){ 
-     } },
-            { 1359, new Dictionary<int, string>(){ 
-     } },
-            { 1360, new Dictionary<int, string>(){ 
-    { 2, "InkJet Color Printer" },
+    })
+ },
+            { 1360, Tuple.Create("Fuji Xerox Co., Ltd", new Dictionary<int, string>{
+{ 2, "InkJet Color Printer" },
 { 4, "InkJet Color Printer" },
 { 5, "InkJet Color Printer" },
 { 11, "Workcentre 24" },
 { 334, "CM215b Printer" },
 { 357, "DocuPrint M215b" },
- } },
-            { 1361, new Dictionary<int, string>(){ 
-     } },
-            { 1362, new Dictionary<int, string>(){ 
-     } },
-            { 1363, new Dictionary<int, string>(){ 
-    { 1, "TerraCAM" },
+    })
+ },
+            { 1363, Tuple.Create("STMicroelectronics Imaging Division (VLSI Vision)", new Dictionary<int, string>{
+{ 1, "TerraCAM" },
 { 2, "CPiA Webcam" },
 { 256, "STV0672 Camera" },
 { 320, "Video Camera" },
@@ -10564,16 +6979,14 @@ namespace HardwareInformation.Providers {
 { 1652, "Multi-mode Camera" },
 { 1657, "NMS Video Camera (Webcam)" },
 { 4098, "Che-ez! Splash" },
- } },
-            { 1364, new Dictionary<int, string>(){ 
-     } },
-            { 1365, new Dictionary<int, string>(){ 
-     } },
-            { 1366, new Dictionary<int, string>(){ 
-    { 1, "AK5370 I/F A/D Converter" },
- } },
-            { 1367, new Dictionary<int, string>(){ 
-    { 8193, "UC-1284 Printer Port" },
+    })
+ },
+            { 1366, Tuple.Create("Asahi Kasei Microsystems Co., Ltd", new Dictionary<int, string>{
+{ 1, "AK5370 I/F A/D Converter" },
+    })
+ },
+            { 1367, Tuple.Create("ATEN International Co., Ltd", new Dictionary<int, string>{
+{ 8193, "UC-1284 Printer Port" },
 { 8194, "10Mbps Ethernet [klsi]" },
 { 8196, "UC-100KM PS/2 Mouse and Keyboard adapter" },
 { 8198, "UC-1284B Printer Port" },
@@ -10592,22 +7005,16 @@ namespace HardwareInformation.Providers {
 { 28672, "Hub" },
 { 30752, "UC-2322 2xSerial Ports [mos7820]" },
 { 32801, "Hub" },
- } },
-            { 1368, new Dictionary<int, string>(){ 
-    { 4105, "GW Instek GDS-1000 Oscilloscope" },
+    })
+ },
+            { 1368, Tuple.Create("Truevision, Inc.", new Dictionary<int, string>{
+{ 4105, "GW Instek GDS-1000 Oscilloscope" },
 { 4106, "GW Instek GDS-1000A Oscilloscope" },
 { 8201, "GW Instek GDS-2000 Oscilloscope" },
- } },
-            { 1369, new Dictionary<int, string>(){ 
-     } },
-            { 1370, new Dictionary<int, string>(){ 
-     } },
-            { 1371, new Dictionary<int, string>(){ 
-     } },
-            { 1372, new Dictionary<int, string>(){ 
-     } },
-            { 1373, new Dictionary<int, string>(){ 
-    { 1, "Keyboard" },
+    })
+ },
+            { 1373, Tuple.Create("Samsung Electro-Mechanics Co.", new Dictionary<int, string>{
+{ 1, "Keyboard" },
 { 2993, "Bluetooth Device" },
 { 4144, "Optical Wheel Mouse (OMS3CB/OMGB30)" },
 { 4145, "Optical Wheel Mouse (OMA3CB/OMGI30)" },
@@ -10629,11 +7036,10 @@ namespace HardwareInformation.Providers {
 { 45056, "11Mbps WLAN Mini Adapter" },
 { 45616, "Netopia 802.11b WLAN Adapter" },
 { 45617, "LG Wireless LAN 11b Adapter" },
- } },
-            { 1374, new Dictionary<int, string>(){ 
-     } },
-            { 1375, new Dictionary<int, string>(){ 
-    { 1, "ScanExpress 1200 CU" },
+    })
+ },
+            { 1375, Tuple.Create("Mustek Systems, Inc.", new Dictionary<int, string>{
+{ 1, "ScanExpress 1200 CU" },
 { 2, "ScanExpress 600 CU" },
 { 3, "ScanExpress 1200 USB" },
 { 6, "ScanExpress 1200 UB" },
@@ -10679,28 +7085,23 @@ namespace HardwareInformation.Providers {
 { 53249, "WCam 300" },
 { 53251, "WCam 300A" },
 { 53252, "WCam 300AN" },
- } },
-            { 1376, new Dictionary<int, string>(){ 
-     } },
-            { 1377, new Dictionary<int, string>(){ 
-     } },
-            { 1378, new Dictionary<int, string>(){ 
-    { 1, "Enhanced Microphone" },
+    })
+ },
+            { 1378, Tuple.Create("Telex Communications, Inc.", new Dictionary<int, string>{
+{ 1, "Enhanced Microphone" },
 { 2, "Telex Microphone" },
- } },
-            { 1379, new Dictionary<int, string>(){ 
-     } },
-            { 1380, new Dictionary<int, string>(){ 
-     } },
-            { 1381, new Dictionary<int, string>(){ 
-    { 1, "Serial Port [etek]" },
+    })
+ },
+            { 1381, Tuple.Create("Peracom Networks, Inc.", new Dictionary<int, string>{
+{ 1, "Serial Port [etek]" },
 { 2, "Enet Ethernet [klsi]" },
 { 3, "@Home Networks Ethernet [klsi]" },
 { 5, "Enet2 Ethernet [klsi]" },
 { 65, "Peracom Remote NDIS Ethernet Adapter" },
- } },
-            { 1382, new Dictionary<int, string>(){ 
-    { 272, "ViewMate Desktop Mouse CC2201" },
+    })
+ },
+            { 1382, Tuple.Create("Monterey International Corp.", new Dictionary<int, string>{
+{ 272, "ViewMate Desktop Mouse CC2201" },
 { 4097, "ViewMate Desktop Mouse CC2201" },
 { 4098, "ViewMate Desktop Mouse CC2201" },
 { 4099, "ViewMate Desktop Mouse CC2201" },
@@ -10719,15 +7120,10 @@ namespace HardwareInformation.Providers {
 { 12551, "Keyboard" },
 { 12594, "Optical mouse M-DY4DR / M-DY6DR" },
 { 16390, "FID 638 Mouse (Sun Microsystems)" },
- } },
-            { 1383, new Dictionary<int, string>(){ 
-     } },
-            { 1384, new Dictionary<int, string>(){ 
-     } },
-            { 1385, new Dictionary<int, string>(){ 
-     } },
-            { 1386, new Dictionary<int, string>(){ 
-    { 0, "PenPartner" },
+    })
+ },
+            { 1386, Tuple.Create("Wacom Co., Ltd", new Dictionary<int, string>{
+{ 0, "PenPartner" },
 { 1, "PenPartner 4x5" },
 { 2, "PenPartner 6x8" },
 { 3, "PTU-600 [Cintiq Partner]" },
@@ -10924,24 +7320,25 @@ namespace HardwareInformation.Providers {
 { 20480, "TPC5000" },
 { 20482, "TPC5002" },
 { 20496, "TPC5010" },
- } },
-            { 1387, new Dictionary<int, string>(){ 
-     } },
-            { 1388, new Dictionary<int, string>(){ 
-    { 6, "KwikLink Host-Host Connector" },
+    })
+ },
+            { 1388, Tuple.Create("eTEK Labs", new Dictionary<int, string>{
+{ 6, "KwikLink Host-Host Connector" },
 { 32775, "Kwik232 Serial Port" },
 { 33024, "KwikLink Host-Host Connector" },
 { 33025, "KwikLink USB-USB Bridge" },
- } },
-            { 1389, new Dictionary<int, string>(){ 
-    { 0, "Hub" },
+    })
+ },
+            { 1389, Tuple.Create("EIZO Corp.", new Dictionary<int, string>{
+{ 0, "Hub" },
 { 1, "Monitor" },
 { 2, "HID Monitor Controls" },
 { 3, "Device Bay Controller" },
 { 16385, "Monitor" },
- } },
-            { 1390, new Dictionary<int, string>(){ 
-    { 2, "29UO Mouse" },
+    })
+ },
+            { 1390, Tuple.Create("Elecom Co., Ltd", new Dictionary<int, string>{
+{ 2, "29UO Mouse" },
 { 87, "Micro Grast Pop M-PGDL" },
 { 92, "Micro Grast Pop M-PG2DL" },
 { 93, "Micro Grast Fit M-FGDL" },
@@ -11063,17 +7460,18 @@ namespace HardwareInformation.Providers {
 { 20484, "UC-SGT" },
 { 24584, "Flash Disk" },
 { 43969, "LD-USB/TX" },
- } },
-            { 1391, new Dictionary<int, string>(){ 
-    { 52480, "CDM-751 CD organizer" },
- } },
-            { 1392, new Dictionary<int, string>(){ 
-     } },
-            { 1393, new Dictionary<int, string>(){ 
-    { 2, "echoFX InterView Lite" },
- } },
-            { 1394, new Dictionary<int, string>(){ 
-    { 1, "Ezcam II Webcam" },
+    })
+ },
+            { 1391, Tuple.Create("Korea Data Systems Co., Ltd", new Dictionary<int, string>{
+{ 52480, "CDM-751 CD organizer" },
+    })
+ },
+            { 1393, Tuple.Create("Interex, Inc.", new Dictionary<int, string>{
+{ 2, "echoFX InterView Lite" },
+    })
+ },
+            { 1394, Tuple.Create("Conexant Systems (Rockwell), Inc.", new Dictionary<int, string>{
+{ 1, "Ezcam II Webcam" },
 { 2, "Ezcam II Webcam" },
 { 64, "Wondereye CP-115 Webcam" },
 { 65, "Webcam Notebook" },
@@ -11103,9 +7501,10 @@ namespace HardwareInformation.Providers {
 { 51968, "ADSL Modem" },
 { 51969, "ADSL Modem" },
 { 51974, "StarModem Network Interface" },
- } },
-            { 1395, new Dictionary<int, string>(){ 
-    { 3, "USBGear USBG-V1" },
+    })
+ },
+            { 1395, Tuple.Create("Zoran Co. Personal Media Division (Nogatech)", new Dictionary<int, string>{
+{ 3, "USBGear USBG-V1" },
 { 1024, "D-Link V100" },
 { 1536, "Dazzle USBVision (1006)" },
 { 4864, "leadtek USBVision (1006)" },
@@ -11164,31 +7563,19 @@ namespace HardwareInformation.Providers {
 { 19766, "Hauppauge WinTV Pro (PAL B/G FM)" },
 { 19767, "Hauppauge WinTV-USB Model 40219 rev E189" },
 { 19768, "Hauppauge WinTV Pro (NTSC FM)" },
- } },
-            { 1396, new Dictionary<int, string>(){ 
-     } },
-            { 1397, new Dictionary<int, string>(){ 
-     } },
-            { 1398, new Dictionary<int, string>(){ 
-     } },
-            { 1399, new Dictionary<int, string>(){ 
-     } },
-            { 1400, new Dictionary<int, string>(){ 
-     } },
-            { 1401, new Dictionary<int, string>(){ 
-     } },
-            { 1402, new Dictionary<int, string>(){ 
-     } },
-            { 1403, new Dictionary<int, string>(){ 
-    { 0, "FlashBuster-U Floppy" },
+    })
+ },
+            { 1403, Tuple.Create("Y-E Data, Inc.", new Dictionary<int, string>{
+{ 0, "FlashBuster-U Floppy" },
 { 1, "Tri-Media Reader Floppy" },
 { 6, "Tri-Media Reader Card Reader" },
 { 16, "Memory Stick Reader Writer" },
 { 32, "HEXA Media Drive 6-in-1 Card Reader Writer" },
 { 48, "Memory Card Viewer (TV)" },
- } },
-            { 1404, new Dictionary<int, string>(){ 
-    { 2816, "ISDN-Controller B1 Family" },
+    })
+ },
+            { 1404, Tuple.Create("AVM GmbH", new Dictionary<int, string>{
+{ 2816, "ISDN-Controller B1 Family" },
 { 3072, "ISDN-Controller FRITZ!Card" },
 { 4096, "ISDN-Controller FRITZ!Card v2.0" },
 { 6400, "ISDN-Controller FRITZ!Card v2.1" },
@@ -11220,11 +7607,10 @@ namespace HardwareInformation.Providers {
 { 33795, "Fritz!WLAN N v2 [Atheros AR9271]" },
 { 34047, "AVM Fritz!WLAN USB N (in CD-ROM-mode)" },
 { 34049, "FRITZ WLAN N v2 [RT5572/rt2870.bin]" },
- } },
-            { 1405, new Dictionary<int, string>(){ 
-     } },
-            { 1406, new Dictionary<int, string>(){ 
-    { 768, "USB-EXI Adapter (GCP-2000)" },
+    })
+ },
+            { 1406, Tuple.Create("Nintendo Co., Ltd", new Dictionary<int, string>{
+{ 768, "USB-EXI Adapter (GCP-2000)" },
 { 772, "RVT-H Reader" },
 { 773, "Broadcom BCM2045A Bluetooth Radio [Nintendo Wii]" },
 { 774, "Wii Remote Controller RVL-003" },
@@ -11235,18 +7621,19 @@ namespace HardwareInformation.Providers {
 { 8201, "Switch Pro Controller" },
 { 8206, "Joy-Con Charging Grip" },
 { 12288, "SDK Debugger" },
- } },
-            { 1407, new Dictionary<int, string>(){ 
-    { 25144, "USB StrikePad" },
- } },
-            { 1408, new Dictionary<int, string>(){ 
-     } },
-            { 1409, new Dictionary<int, string>(){ 
-    { 263, "Tera Barcode Scanner 2.4 GHz Receiver" },
+    })
+ },
+            { 1407, Tuple.Create("QuickShot, Ltd", new Dictionary<int, string>{
+{ 25144, "USB StrikePad" },
+    })
+ },
+            { 1409, Tuple.Create("Racal Data Group", new Dictionary<int, string>{
+{ 263, "Tera Barcode Scanner 2.4 GHz Receiver" },
 { 524, "Tera 2D Barcode Scanner EVHK0012" },
- } },
-            { 1410, new Dictionary<int, string>(){ 
-    { 0, "UA-100(G)" },
+    })
+ },
+            { 1410, Tuple.Create("Roland Corp.", new Dictionary<int, string>{
+{ 0, "UA-100(G)" },
 { 2, "UM-4/MPU-64 MIDI Interface" },
 { 3, "SoundCanvas SC-8850" },
 { 4, "U-8" },
@@ -11415,9 +7802,10 @@ namespace HardwareInformation.Providers {
 { 481, "Rubix44" },
 { 495, "Go:KEYS MIDI" },
 { 1285, "EDIROL UA-101" },
- } },
-            { 1411, new Dictionary<int, string>(){ 
-    { 1, "4 Axis 12 button +POV" },
+    })
+ },
+            { 1411, Tuple.Create("Padix Co., Ltd (Rockfire)", new Dictionary<int, string>{
+{ 1, "4 Axis 12 button +POV" },
 { 2, "4 Axis 12 button +POV" },
 { 8240, "RM-203 USB Nest [mode 1]" },
 { 8241, "RM-203 USB Nest [mode 2]" },
@@ -11477,16 +7865,18 @@ namespace HardwareInformation.Providers {
 { 45078, "USB,5-Axis,10-Button with POV" },
 { 45080, "TW6 Wheel" },
 { 65376, "USB Wireless VibrationPad" },
- } },
-            { 1412, new Dictionary<int, string>(){ 
-    { 8, "Fujifilm MemoryCard ReaderWriter" },
+    })
+ },
+            { 1412, Tuple.Create("RATOC System, Inc.", new Dictionary<int, string>{
+{ 8, "Fujifilm MemoryCard ReaderWriter" },
 { 544, "U2SCX SCSI Converter" },
 { 772, "U2SCX-LVD (SCSI Converter)" },
 { 45056, "REX-USB60" },
 { 45088, "REX-USB60F" },
- } },
-            { 1413, new Dictionary<int, string>(){ 
-    { 1, "Digital Camera" },
+    })
+ },
+            { 1413, Tuple.Create("FlashPoint Technology, Inc.", new Dictionary<int, string>{
+{ 1, "Digital Camera" },
 { 2, "Digital Camera" },
 { 3, "Digital Camera" },
 { 4, "Digital Camera" },
@@ -11501,9 +7891,10 @@ namespace HardwareInformation.Providers {
 { 13, "Digital Camera" },
 { 14, "Digital Camera" },
 { 15, "Digital Camera" },
- } },
-            { 1414, new Dictionary<int, string>(){ 
-    { 37, "802.11b/g/n USB Wireless Network Adapter" },
+    })
+ },
+            { 1414, Tuple.Create("ZyXEL Communications Corp.", new Dictionary<int, string>{
+{ 37, "802.11b/g/n USB Wireless Network Adapter" },
 { 256, "omni.net" },
 { 258, "omni.net II ISDN TA [HFC-S]" },
 { 272, "omni.net Plus" },
@@ -11537,22 +7928,16 @@ namespace HardwareInformation.Providers {
 { 13343, "NWD2205 802.11n Wireless N Adapter [Realtek RTL8192CU]" },
 { 13349, "NWD6505 802.11a/b/g/n/ac Wireless Adapter [MediaTek MT7610U]" },
 { 13374, "N220 802.11bgn Wireless Adapter" },
- } },
-            { 1415, new Dictionary<int, string>(){ 
-     } },
-            { 1416, new Dictionary<int, string>(){ 
-     } },
-            { 1417, new Dictionary<int, string>(){ 
-     } },
-            { 1418, new Dictionary<int, string>(){ 
-     } },
-            { 1419, new Dictionary<int, string>(){ 
-    { 21, "Flash Loader utility" },
+    })
+ },
+            { 1419, Tuple.Create("Infineon Technologies", new Dictionary<int, string>{
+{ 21, "Flash Loader utility" },
 { 28, "Flash Drive" },
 { 65, "Flash Loader utility" },
- } },
-            { 1420, new Dictionary<int, string>(){ 
-    { 7, "Flash" },
+    })
+ },
+            { 1420, Tuple.Create("In Focus Systems", new Dictionary<int, string>{
+{ 7, "Flash" },
 { 8, "LP130" },
 { 10, "LP530" },
 { 16, "Projector" },
@@ -11573,13 +7958,10 @@ namespace HardwareInformation.Providers {
 { 31, "Projector" },
 { 65509, "IN34 Projector" },
 { 65515, "Projector IN76" },
- } },
-            { 1421, new Dictionary<int, string>(){ 
-     } },
-            { 1422, new Dictionary<int, string>(){ 
-     } },
-            { 1423, new Dictionary<int, string>(){ 
-    { 4660, "Flash Drive" },
+    })
+ },
+            { 1423, Tuple.Create("Alcor Micro Corp.", new Dictionary<int, string>{
+{ 4660, "Flash Drive" },
 { 6539, "Webcam (Gigatech P-09)" },
 { 9234, "SCard R/W CSR-145" },
 { 10242, "Monterey Keyboard" },
@@ -11625,43 +8007,34 @@ namespace HardwareInformation.Providers {
 { 38688, "USB-Serial Adapter" },
 { 40980, "Asus Integrated Webcam" },
 { 45058, "Acer Integrated Webcam" },
- } },
-            { 1424, new Dictionary<int, string>(){ 
-    { 4, "Cable Modem" },
+    })
+ },
+            { 1424, Tuple.Create("Omron Corp.", new Dictionary<int, string>{
+{ 4, "Cable Modem" },
 { 11, "MR56SVS" },
 { 40, "HJ-720IT / HEM-7080IT-E / HEM-790IT" },
 { 81, "FT232BM [E58CIFQ1 with FTDI USB2Serial Converter]" },
- } },
-            { 1425, new Dictionary<int, string>(){ 
-     } },
-            { 1426, new Dictionary<int, string>(){ 
-    { 2, "UPS (X-Slot)" },
- } },
-            { 1427, new Dictionary<int, string>(){ 
-     } },
-            { 1428, new Dictionary<int, string>(){ 
-     } },
-            { 1429, new Dictionary<int, string>(){ 
-    { 4097, "Digitrex DSC-1300/DSC-2100 (mass storage mode)" },
+    })
+ },
+            { 1426, Tuple.Create("Powerware Corp.", new Dictionary<int, string>{
+{ 2, "UPS (X-Slot)" },
+    })
+ },
+            { 1429, Tuple.Create("Zoran Microelectronics, Ltd", new Dictionary<int, string>{
+{ 4097, "Digitrex DSC-1300/DSC-2100 (mass storage mode)" },
 { 8194, "DIGITAL STILL CAMERA 6M 4X" },
 { 17219, "Digital Camera EX-20 DSC" },
- } },
-            { 1430, new Dictionary<int, string>(){ 
-    { 1, "Touchscreen" },
+    })
+ },
+            { 1430, Tuple.Create("MicroTouch Systems, Inc.", new Dictionary<int, string>{
+{ 1, "Touchscreen" },
 { 2, "Touch Screen Controller" },
 { 1280, "PCT Multitouch HID Controller" },
 { 1347, "DELL XPS touchscreen" },
- } },
-            { 1431, new Dictionary<int, string>(){ 
-     } },
-            { 1432, new Dictionary<int, string>(){ 
-     } },
-            { 1433, new Dictionary<int, string>(){ 
-     } },
-            { 1434, new Dictionary<int, string>(){ 
-     } },
-            { 1435, new Dictionary<int, string>(){ 
-    { 1, "Zip 100 (Type 1)" },
+    })
+ },
+            { 1435, Tuple.Create("Iomega Corp.", new Dictionary<int, string>{
+{ 1, "Zip 100 (Type 1)" },
 { 11, "Zip 100 (Type 2)" },
 { 33, "Win98 Disk Controller" },
 { 48, "Zip 250 (Ver 1)" },
@@ -11706,15 +8079,10 @@ namespace HardwareInformation.Providers {
 { 1393, "Prestige Portable Hard Drive" },
 { 1401, "eGo Portable Hard Drive" },
 { 4178, "DVD+RW External Drive" },
- } },
-            { 1436, new Dictionary<int, string>(){ 
-     } },
-            { 1437, new Dictionary<int, string>(){ 
-     } },
-            { 1438, new Dictionary<int, string>(){ 
-     } },
-            { 1439, new Dictionary<int, string>(){ 
-    { 513, "StudioDrive USB2" },
+    })
+ },
+            { 1439, Tuple.Create("LaCie, Ltd", new Dictionary<int, string>{
+{ 513, "StudioDrive USB2" },
 { 514, "StudioDrive USB2" },
 { 515, "StudioDrive USB2" },
 { 529, "PocketDrive" },
@@ -11748,23 +8116,19 @@ namespace HardwareInformation.Providers {
 { 4245, "Rugged" },
 { 42497, "HardDrive" },
 { 42498, "CD R/W" },
- } },
-            { 1440, new Dictionary<int, string>(){ 
-     } },
-            { 1441, new Dictionary<int, string>(){ 
-     } },
-            { 1442, new Dictionary<int, string>(){ 
-     } },
-            { 1443, new Dictionary<int, string>(){ 
-    { 33672, "Marvell 88W8388 802.11a/b/g WLAN" },
+    })
+ },
+            { 1443, Tuple.Create("ARC International", new Dictionary<int, string>{
+{ 33672, "Marvell 88W8388 802.11a/b/g WLAN" },
 { 37424, "Camera" },
 { 37664, "Camera" },
 { 37681, "Camera" },
 { 37922, "Camera" },
 { 38176, "Camera" },
- } },
-            { 1444, new Dictionary<int, string>(){ 
-    { 4096, "WKB-1000S Wireless Ergo Keyboard with Touchpad" },
+    })
+ },
+            { 1444, Tuple.Create("Ortek Technology, Inc.", new Dictionary<int, string>{
+{ 4096, "WKB-1000S Wireless Ergo Keyboard with Touchpad" },
 { 8192, "WKB-2000 Wireless Keyboard with Touchpad" },
 { 38688, "Keyboard Mouse" },
 { 38690, "Keyboard" },
@@ -11773,11 +8137,10 @@ namespace HardwareInformation.Providers {
 { 38967, "Targus Number Keypad" },
 { 39010, "Targus Number Keypad (Composite Device)" },
 { 39041, "IR receiver [VRC-1100 Vista MCE Remote Control]" },
- } },
-            { 1445, new Dictionary<int, string>(){ 
-     } },
-            { 1446, new Dictionary<int, string>(){ 
-    { 1, "CVA124 Cable Voice Adapter (WDM)" },
+    })
+ },
+            { 1446, Tuple.Create("Cisco Systems, Inc.", new Dictionary<int, string>{
+{ 1, "CVA124 Cable Voice Adapter (WDM)" },
 { 2, "CVA122 Cable Voice Adapter (WDM)" },
 { 3, "CVA124E Cable Voice Adapter (WDM)" },
 { 4, "CVA122E Cable Voice Adapter (WDM)" },
@@ -11786,9 +8149,10 @@ namespace HardwareInformation.Providers {
 { 2561, "Virtual Keyboard/Mouse" },
 { 2562, "Virtual Mass Storage" },
 { 2563, "Virtual Ethernet/RNDIS" },
- } },
-            { 1447, new Dictionary<int, string>(){ 
-    { 16384, "Bluetooth Headset" },
+    })
+ },
+            { 1447, Tuple.Create("Bose Corp.", new Dictionary<int, string>{
+{ 16384, "Bluetooth Headset" },
 { 16385, "Bluetooth Headset in DFU mode" },
 { 16386, "Bluetooth Headset Series 2" },
 { 16387, "Bluetooth Headset Series 2 in DFU mode" },
@@ -11796,11 +8160,10 @@ namespace HardwareInformation.Providers {
 { 16638, "SoundLink Color II speaker" },
 { 48208, "SoundLink Wireless Mobile speaker" },
 { 48209, "SoundLink Wireless Mobile speaker in DFU mode" },
- } },
-            { 1448, new Dictionary<int, string>(){ 
-     } },
-            { 1449, new Dictionary<int, string>(){ 
-    { 1297, "OV511 Webcam" },
+    })
+ },
+            { 1449, Tuple.Create("OmniVision Technologies, Inc.", new Dictionary<int, string>{
+{ 1297, "OV511 Webcam" },
 { 1304, "OV518 Webcam" },
 { 1305, "OV519 Microphone" },
 { 5456, "VEHO Filmscanner" },
@@ -11815,11 +8178,10 @@ namespace HardwareInformation.Providers {
 { 34073, "OV519 Webcam" },
 { 42257, "OV511+ Webcam" },
 { 42264, "D-Link DSB-C310 Webcam" },
- } },
-            { 1450, new Dictionary<int, string>(){ 
-     } },
-            { 1451, new Dictionary<int, string>(){ 
-    { 2, "Parallel Port" },
+    })
+ },
+            { 1451, Tuple.Create("In-System Design", new Dictionary<int, string>{
+{ 2, "Parallel Port" },
 { 48, "Storage Adapter V2 (TPP)" },
 { 49, "ATA Bridge" },
 { 96, "USB 2.0 ATA Bridge" },
@@ -11841,9 +8203,10 @@ namespace HardwareInformation.Providers {
 { 22785, "Smart Board (TPP)" },
 { 23041, "ATI Storage Adapter (TPP)" },
 { 23809, "DataBook Adapter (TPP)" },
- } },
-            { 1452, new Dictionary<int, string>(){ 
-    { 513, "USB Keyboard [Alps or Logitech, M2452]" },
+    })
+ },
+            { 1452, Tuple.Create("Apple, Inc.", new Dictionary<int, string>{
+{ 513, "USB Keyboard [Alps or Logitech, M2452]" },
 { 514, "Keyboard [ALPS]" },
 { 517, "Extended Keyboard [Mitsumi]" },
 { 518, "Extended Keyboard [Mitsumi]" },
@@ -12034,70 +8397,50 @@ namespace HardwareInformation.Providers {
 { 37415, "Thunderbolt Display" },
 { 37426, "Cinema HD Display 30\"" },
 { 65535, "Bluetooth in DFU mode - Driver" },
- } },
-            { 1453, new Dictionary<int, string>(){ 
-     } },
-            { 1454, new Dictionary<int, string>(){ 
-     } },
-            { 1455, new Dictionary<int, string>(){ 
-    { 2054, "HP SK806A Keyboard" },
+    })
+ },
+            { 1455, Tuple.Create("Jing-Mold Enterprise Co., Ltd", new Dictionary<int, string>{
+{ 2054, "HP SK806A Keyboard" },
 { 2057, "Wireless Keyboard and Mouse" },
 { 2081, "IDE to" },
 { 12386, "Cordless Keyboard" },
 { 37223, "KB 9151B - 678" },
 { 37479, "KB 9251B - 678 Mouse" },
- } },
-            { 1456, new Dictionary<int, string>(){ 
-     } },
-            { 1457, new Dictionary<int, string>(){ 
-    { 5001, "Bluetooth Wireless Adapter" },
- } },
-            { 1460, new Dictionary<int, string>(){ 
-    { 18519, "M-Any DAH-210" },
+    })
+ },
+            { 1457, Tuple.Create("First International Computer, Inc.", new Dictionary<int, string>{
+{ 5001, "Bluetooth Wireless Adapter" },
+    })
+ },
+            { 1460, Tuple.Create("LG Semicon Co., Ltd", new Dictionary<int, string>{
+{ 18519, "M-Any DAH-210" },
 { 24577, "HYUNDAI GDS30C6001 SSFDC / MMC I/F Controller" },
- } },
-            { 1461, new Dictionary<int, string>(){ 
-     } },
-            { 1462, new Dictionary<int, string>(){ 
-     } },
-            { 1463, new Dictionary<int, string>(){ 
-     } },
-            { 1464, new Dictionary<int, string>(){ 
-    { 12290, "Scroll Mouse" },
+    })
+ },
+            { 1464, Tuple.Create("SYSGRATION", new Dictionary<int, string>{
+{ 12290, "Scroll Mouse" },
 { 12582, "APT-905 Wireless presenter" },
 { 12835, "ISY Wireless Presenter" },
- } },
-            { 1465, new Dictionary<int, string>(){ 
-     } },
-            { 1466, new Dictionary<int, string>(){ 
-    { 7, "Fingerprint Reader" },
+    })
+ },
+            { 1466, Tuple.Create("DigitalPersona, Inc.", new Dictionary<int, string>{
+{ 7, "Fingerprint Reader" },
 { 8, "Fingerprint Reader" },
 { 10, "Fingerprint Reader" },
- } },
-            { 1467, new Dictionary<int, string>(){ 
-     } },
-            { 1468, new Dictionary<int, string>(){ 
-    { 4, "Trackball" },
- } },
-            { 1469, new Dictionary<int, string>(){ 
-     } },
-            { 1470, new Dictionary<int, string>(){ 
-     } },
-            { 1471, new Dictionary<int, string>(){ 
-     } },
-            { 1472, new Dictionary<int, string>(){ 
-     } },
-            { 1473, new Dictionary<int, string>(){ 
-     } },
-            { 1474, new Dictionary<int, string>(){ 
-     } },
-            { 1477, new Dictionary<int, string>(){ 
-    { 2, "AccelePort USB 2" },
+    })
+ },
+            { 1468, Tuple.Create("3G Green Green Globe Co., Ltd", new Dictionary<int, string>{
+{ 4, "Trackball" },
+    })
+ },
+            { 1477, Tuple.Create("Digi International, Inc.", new Dictionary<int, string>{
+{ 2, "AccelePort USB 2" },
 { 4, "AccelePort USB 4" },
 { 8, "AccelePort USB 8" },
- } },
-            { 1478, new Dictionary<int, string>(){ 
-    { 276, "Select RW-200 CDMA Wireless Modem" },
+    })
+ },
+            { 1478, Tuple.Create("Qualcomm, Inc.", new Dictionary<int, string>{
+{ 276, "Select RW-200 CDMA Wireless Modem" },
 { 2562, "Jolla Device Developer Mode" },
 { 2567, "Jolla Device MTP" },
 { 2814, "Jolla Device Charging Only" },
@@ -12144,16 +8487,18 @@ namespace HardwareInformation.Providers {
 { 37492, "iRex Technologies Gobi 2000 Wireless Modem (QDL mode)" },
 { 37493, "iRex Technologies Gobi 2000 Wireless Modem" },
 { 61443, "Nokia 8110 4G" },
- } },
-            { 1479, new Dictionary<int, string>(){ 
-    { 275, "PC Line Mouse" },
+    })
+ },
+            { 1479, Tuple.Create("Qtronix Corp.", new Dictionary<int, string>{
+{ 275, "PC Line Mouse" },
 { 4097, "Lynx Mouse" },
 { 8193, "Keyboard" },
 { 8209, "SCorpius Keyboard" },
 { 24577, "Ten-Keypad" },
- } },
-            { 1480, new Dictionary<int, string>(){ 
-    { 259, "FO13FF-65 PC-CAM" },
+    })
+ },
+            { 1480, Tuple.Create("Cheng Uei Precision Industry Co., Ltd (Foxlink)", new Dictionary<int, string>{
+{ 259, "FO13FF-65 PC-CAM" },
 { 267, "Webcam (UVC)" },
 { 538, "HP Webcam" },
 { 563, "HP Webcam" },
@@ -12168,11 +8513,10 @@ namespace HardwareInformation.Providers {
 { 971, "HP Wide Vision HD Integrated Webcam" },
 { 1027, "Webcam" },
 { 1051, "HP 2.0MP High Definition Webcam" },
- } },
-            { 1481, new Dictionary<int, string>(){ 
-     } },
-            { 1482, new Dictionary<int, string>(){ 
-    { 257, "RDC-5300 Camera" },
+    })
+ },
+            { 1482, Tuple.Create("Ricoh Co., Ltd", new Dictionary<int, string>{
+{ 257, "RDC-5300 Camera" },
 { 805, "Caplio GX (ptp)" },
 { 813, "Caplio GX 8 (ptp)" },
 { 815, "Caplio R3 (ptp)" },
@@ -12230,12 +8574,14 @@ namespace HardwareInformation.Providers {
 { 8725, "DSC 725" },
 { 8726, "Caplio R3" },
 { 8738, "RDC-i500" },
- } },
-            { 1483, new Dictionary<int, string>(){ 
-    { 5251, "PV8630 interface (scanners, webcams)" },
- } },
-            { 1484, new Dictionary<int, string>(){ 
-    { 8448, "MicroLink ISDN Office" },
+    })
+ },
+            { 1483, Tuple.Create("PowerVision Technologies, Inc.", new Dictionary<int, string>{
+{ 5251, "PV8630 interface (scanners, webcams)" },
+    })
+ },
+            { 1484, Tuple.Create("ELSA AG", new Dictionary<int, string>{
+{ 8448, "MicroLink ISDN Office" },
 { 8729, "MicroLink ISDN" },
 { 8805, "MicroLink 56k" },
 { 8807, "MicroLink 56k (V.250)" },
@@ -12243,31 +8589,18 @@ namespace HardwareInformation.Providers {
 { 12288, "Micolink USB2Ethernet [pegasus]" },
 { 12544, "AirLancer USB-11" },
 { 13155, "MicroLink ADSL Fun" },
- } },
-            { 1485, new Dictionary<int, string>(){ 
-     } },
-            { 1486, new Dictionary<int, string>(){ 
-     } },
-            { 1487, new Dictionary<int, string>(){ 
-     } },
-            { 1488, new Dictionary<int, string>(){ 
-     } },
-            { 1489, new Dictionary<int, string>(){ 
-    { 3, "Bluetooth Adapter BL-554" },
- } },
-            { 1490, new Dictionary<int, string>(){ 
-     } },
-            { 1491, new Dictionary<int, string>(){ 
-     } },
-            { 1493, new Dictionary<int, string>(){ 
-     } },
-            { 1494, new Dictionary<int, string>(){ 
-     } },
-            { 1495, new Dictionary<int, string>(){ 
-    { 153, "10Mbps Ethernet [klsi]" },
- } },
-            { 1496, new Dictionary<int, string>(){ 
-    { 16385, "Artec Ultima 2000" },
+    })
+ },
+            { 1489, Tuple.Create("Brainboxes, Ltd", new Dictionary<int, string>{
+{ 3, "Bluetooth Adapter BL-554" },
+    })
+ },
+            { 1495, Tuple.Create("Thomas & Betts Corp.", new Dictionary<int, string>{
+{ 153, "10Mbps Ethernet [klsi]" },
+    })
+ },
+            { 1496, Tuple.Create("Ultima Electronics Corp.", new Dictionary<int, string>{
+{ 16385, "Artec Ultima 2000" },
 { 16386, "Artec Ultima 2000 (GT6801 based)/Lifetec LT9385/ScanMagic 1200 UB Plus Scanner" },
 { 16387, "Artec E+ 48U" },
 { 16388, "Artec E+ Pro" },
@@ -12282,14 +8615,16 @@ namespace HardwareInformation.Providers {
 { 33031, "Artec T1 USB TVBOX with AN2235 (cold)" },
 { 33032, "Artec T1 USB TVBOX with AN2235 (warm)" },
 { 33033, "Artec T1 USB2.0 TVBOX (cold" },
- } },
-            { 1497, new Dictionary<int, string>(){ 
-    { 41509, "A225 Printer" },
+    })
+ },
+            { 1497, Tuple.Create("Axiohm Transaction Solutions", new Dictionary<int, string>{
+{ 41509, "A225 Printer" },
 { 42840, "A758 Printer" },
 { 42900, "A794 Printer" },
- } },
-            { 1498, new Dictionary<int, string>(){ 
-    { 145, "ScanMaker X6u" },
+    })
+ },
+            { 1498, Tuple.Create("Microtek International, Inc.", new Dictionary<int, string>{
+{ 145, "ScanMaker X6u" },
 { 147, "ScanMaker V6USL" },
 { 148, "Phantom 336CX/C3" },
 { 153, "ScanMaker X6/X6U" },
@@ -12374,17 +8709,19 @@ namespace HardwareInformation.Providers {
 { 24690, "XT-3500 A4 HD Scanner" },
 { 32931, "ScanMaker V6USL (#2)" },
 { 32940, "ScanMaker V6UL/SpicyU" },
- } },
-            { 1499, new Dictionary<int, string>(){ 
-    { 3, "SUNTAC U-Cable type D2" },
+    })
+ },
+            { 1499, Tuple.Create("Sun Corp. (Suntac?)", new Dictionary<int, string>{
+{ 3, "SUNTAC U-Cable type D2" },
 { 5, "SUNTAC U-Cable type P1" },
 { 9, "SUNTAC Slipper U" },
 { 10, "SUNTAC Ir-Trinity" },
 { 11, "SUNTAC U-Cable type A3" },
 { 17, "SUNTAC U-Cable type A4" },
- } },
-            { 1500, new Dictionary<int, string>(){ 
-    { 1, "jumpSHOT CompactFlash Reader" },
+    })
+ },
+            { 1500, Tuple.Create("Lexar Media, Inc.", new Dictionary<int, string>{
+{ 1, "jumpSHOT CompactFlash Reader" },
 { 2, "JumpShot" },
 { 3, "JumpShot" },
 { 128, "Jumpdrive Secure 64MB" },
@@ -12479,27 +8816,28 @@ namespace HardwareInformation.Providers {
 { 47626, "Workflow DD512" },
 { 51027, "JumpDrive TwistTurn" },
 { 51036, "JumpDrive V10" },
- } },
-            { 1501, new Dictionary<int, string>(){ 
-    { 40977, "HID UPS Battery" },
+    })
+ },
+            { 1501, Tuple.Create("Delta Electronics, Inc.", new Dictionary<int, string>{
+{ 40977, "HID UPS Battery" },
 { 65329, "AWU-120" },
 { 65330, "FriendlyNET AeroLAN AL2011" },
 { 65333, "PCW 100 - Wireless 802.11b Adapter" },
 { 65425, "2Wire PC Port Phoneline 10Mbps Adapter" },
- } },
-            { 1503, new Dictionary<int, string>(){ 
-     } },
-            { 1504, new Dictionary<int, string>(){ 
-    { 1792, "Bar Code Scanner (CS1504)" },
+    })
+ },
+            { 1504, Tuple.Create("Symbol Technologies", new Dictionary<int, string>{
+{ 1792, "Bar Code Scanner (CS1504)" },
 { 2048, "Spectrum24 Wireless LAN Adapter" },
 { 4608, "Bar Code Scanner" },
 { 5889, "Bar Code Scanner (CDC)" },
 { 6400, "SNAPI Imaging Device" },
 { 8192, "MC3090 Rugged Mobile Computer" },
 { 8205, "MC70 Rugged Mobile Computer" },
- } },
-            { 1505, new Dictionary<int, string>(){ 
-    { 256, "802.11g + Bluetooth Wireless Adapter" },
+    })
+ },
+            { 1505, Tuple.Create("Syntek Semiconductor Co., Ltd", new Dictionary<int, string>{
+{ 256, "802.11g + Bluetooth Wireless Adapter" },
 { 1032, "STK1160 Video Capture Device" },
 { 1280, "DC-112X Webcam" },
 { 1281, "DC-1125 Webcam" },
@@ -12508,11 +8846,10 @@ namespace HardwareInformation.Providers {
 { 2197, "STK016 Camera" },
 { 2198, "STK017 Camera" },
 { 8208, "ARCTIC Sound P261 Headphones" },
- } },
-            { 1506, new Dictionary<int, string>(){ 
-     } },
-            { 1507, new Dictionary<int, string>(){ 
-    { 10, "Keyboard with PS/2 Port" },
+    })
+ },
+            { 1507, Tuple.Create("Genesys Logic, Inc.", new Dictionary<int, string>{
+{ 10, "Keyboard with PS/2 Port" },
 { 11, "Mouse" },
 { 256, "Nintendo Game Boy Advance SP" },
 { 288, "Pacific Image Electronics PrimeFilm 1800u slide/negative scanner" },
@@ -12590,45 +8927,34 @@ namespace HardwareInformation.Providers {
 { 61700, "VX7012 TV Box" },
 { 64801, "3M TL20 Temperature Logger" },
 { 65024, "Razer Mouse" },
- } },
-            { 1508, new Dictionary<int, string>(){ 
-     } },
-            { 1509, new Dictionary<int, string>(){ 
-     } },
-            { 1510, new Dictionary<int, string>(){ 
-     } },
-            { 1512, new Dictionary<int, string>(){ 
-     } },
-            { 1513, new Dictionary<int, string>(){ 
-    { 8, "KL5KUSB101B Ethernet [klsi]" },
+    })
+ },
+            { 1513, Tuple.Create("Kawasaki LSI", new Dictionary<int, string>{
+{ 8, "KL5KUSB101B Ethernet [klsi]" },
 { 9, "Sony 10Mbps Ethernet [pegasus]" },
 { 12, "USB-to-RS-232" },
 { 13, "USB-to-RS-232" },
 { 20, "RS-232 J104" },
 { 64, "Ethernet Adapter" },
 { 8200, "Ethernet Adapter" },
- } },
-            { 1515, new Dictionary<int, string>(){ 
-     } },
-            { 1516, new Dictionary<int, string>(){ 
-     } },
-            { 1518, new Dictionary<int, string>(){ 
-     } },
-            { 1519, new Dictionary<int, string>(){ 
-    { 522, "Top Shot Pegasus Joystick" },
+    })
+ },
+            { 1519, Tuple.Create("AVB, Inc. [anko?]", new Dictionary<int, string>{
+{ 522, "Top Shot Pegasus Joystick" },
 { 34948, "Mag Turbo Force Wheel" },
 { 34952, "Top Shot Force Feedback Racing Wheel" },
- } },
-            { 1520, new Dictionary<int, string>(){ 
-    { 257, "DA-Port DAC" },
- } },
-            { 1521, new Dictionary<int, string>(){ 
-     } },
-            { 1522, new Dictionary<int, string>(){ 
-    { 16, "AQ Mouse" },
- } },
-            { 1523, new Dictionary<int, string>(){ 
-    { 7, "Kinesis Advantage PRO MPC/USB Keyboard" },
+    })
+ },
+            { 1520, Tuple.Create("Canopus Co., Ltd", new Dictionary<int, string>{
+{ 257, "DA-Port DAC" },
+    })
+ },
+            { 1522, Tuple.Create("Dexin Corp., Ltd", new Dictionary<int, string>{
+{ 16, "AQ Mouse" },
+    })
+ },
+            { 1523, Tuple.Create("PI Engineering, Inc.", new Dictionary<int, string>{
+{ 7, "Kinesis Advantage PRO MPC/USB Keyboard" },
 { 129, "Kinesis Integrated Hub" },
 { 255, "VEC Footpedal" },
 { 515, "Y-mouse Keyboard & Mouse Adapter" },
@@ -12636,15 +8962,10 @@ namespace HardwareInformation.Providers {
 { 562, "X-Keys Switch Interface, Programming Mode" },
 { 609, "X-Keys Switch Interface, SPLAT Mode" },
 { 612, "X-Keys Switch Interface, Composite Mode" },
- } },
-            { 1525, new Dictionary<int, string>(){ 
-     } },
-            { 1526, new Dictionary<int, string>(){ 
-     } },
-            { 1527, new Dictionary<int, string>(){ 
-     } },
-            { 1529, new Dictionary<int, string>(){ 
-    { 4356, "Magellan 2200VS" },
+    })
+ },
+            { 1529, Tuple.Create("PSC Scanning, Inc.", new Dictionary<int, string>{
+{ 4356, "Magellan 2200VS" },
 { 4614, "Gryphon series (OEM mode)" },
 { 4620, "Gryphon GD4430-BK" },
 { 8706, "Point of Sale Handheld Scanner" },
@@ -12654,19 +8975,22 @@ namespace HardwareInformation.Providers {
 { 9730, "Datalogic Magellan 1100i Barcode Scanner" },
 { 16900, "Gryphon series (RS-232 emulation mode)" },
 { 20996, "Datalogic Gryphon GFS4170 (config mode)" },
- } },
-            { 1530, new Dictionary<int, string>(){ 
-    { 13057, "Keyboard with PS/2 Mouse Port" },
+    })
+ },
+            { 1530, Tuple.Create("Siemens Telecommunications Systems, Ltd", new Dictionary<int, string>{
+{ 13057, "Keyboard with PS/2 Mouse Port" },
 { 13058, "Keyboard" },
 { 13059, "Keyboard with PS/2 Mouse Port" },
- } },
-            { 1532, new Dictionary<int, string>(){ 
-    { 1, "Soundcraft Si Multi Digital Card" },
+    })
+ },
+            { 1532, Tuple.Create("Harman", new Dictionary<int, string>{
+{ 1, "Soundcraft Si Multi Digital Card" },
 { 16, "Soundcraft Si MADI combo card" },
 { 30793, "Harman/Kardon SoundSticks" },
- } },
-            { 1533, new Dictionary<int, string>(){ 
-    { 569, "SV-239 HammerHead Digital" },
+    })
+ },
+            { 1533, Tuple.Create("InterAct, Inc.", new Dictionary<int, string>{
+{ 569, "SV-239 HammerHead Digital" },
 { 593, "Raider Pro" },
 { 595, "ProPad 8 Digital" },
 { 646, "SV-286 Cyclone Digital" },
@@ -12676,9 +9000,10 @@ namespace HardwareInformation.Providers {
 { 9775, "HammerHead Fx" },
 { 55982, "Game Shark" },
 { 56238, "Datel XBoxMC" },
- } },
-            { 1534, new Dictionary<int, string>(){ 
-    { 1, "Mouse" },
+    })
+ },
+            { 1534, Tuple.Create("Chic Technology Corp.", new Dictionary<int, string>{
+{ 1, "Mouse" },
 { 3, "Cypress USB Mouse" },
 { 5, "Viewmaster 4D Browser Mouse" },
 { 7, "Twinhead Mouse" },
@@ -12689,44 +9014,33 @@ namespace HardwareInformation.Providers {
 { 8193, "Microsoft Wireless Receiver 700" },
 { 12336, "Controller" },
 { 12337, "Controller" },
- } },
-            { 1535, new Dictionary<int, string>(){ 
-     } },
-            { 1536, new Dictionary<int, string>(){ 
-     } },
-            { 1537, new Dictionary<int, string>(){ 
-    { 3, "Internet Security Co., Ltd. SecureKey" },
- } },
-            { 1538, new Dictionary<int, string>(){ 
-    { 4097, "ViCam Webcam" },
- } },
-            { 1539, new Dictionary<int, string>(){ 
-    { 2, "Sino Wealth keyboard/mouse 2.4 GHz receiver" },
+    })
+ },
+            { 1537, Tuple.Create("Jazz Hipster Corp.", new Dictionary<int, string>{
+{ 3, "Internet Security Co., Ltd. SecureKey" },
+    })
+ },
+            { 1538, Tuple.Create("Vista Imaging, Inc.", new Dictionary<int, string>{
+{ 4097, "ViCam Webcam" },
+    })
+ },
+            { 1539, Tuple.Create("Novatek Microelectronics Corp.", new Dictionary<int, string>{
+{ 2, "Sino Wealth keyboard/mouse 2.4 GHz receiver" },
 { 241, "Keyboard (Labtec Ultra Flat Keyboard)" },
 { 242, "Keyboard (Labtec Ultra Flat Keyboard)" },
 { 26737, "Mouse" },
 { 34321, "NTK96550 based camera" },
- } },
-            { 1540, new Dictionary<int, string>(){ 
-     } },
-            { 1541, new Dictionary<int, string>(){ 
-     } },
-            { 1542, new Dictionary<int, string>(){ 
-     } },
-            { 1543, new Dictionary<int, string>(){ 
-     } },
-            { 1544, new Dictionary<int, string>(){ 
-     } },
-            { 1545, new Dictionary<int, string>(){ 
-    { 797, "eHome Infrared Receiver" },
+    })
+ },
+            { 1545, Tuple.Create("SMK Manufacturing, Inc.", new Dictionary<int, string>{
+{ 797, "eHome Infrared Receiver" },
 { 802, "eHome Infrared Receiver" },
 { 820, "eHome Infrared Receiver" },
 { 65298, "SMK Bluetooth Device" },
- } },
-            { 1546, new Dictionary<int, string>(){ 
-     } },
-            { 1547, new Dictionary<int, string>(){ 
-    { 1, "MacAlly Keyboard" },
+    })
+ },
+            { 1547, Tuple.Create("Solid Year", new Dictionary<int, string>{
+{ 1, "MacAlly Keyboard" },
 { 560, "KSK-8003 UX Keyboard" },
 { 1344, "DeltaCo TB-106U Keyboard" },
 { 4102, "Japanese Keyboard - 260U" },
@@ -12743,74 +9057,52 @@ namespace HardwareInformation.Providers {
 { 25137, "Thermaltake eSPORTS Meka Keyboard" },
 { 32775, "P-W1G1F12 VER:1 [Macally MegaCam]" },
 { 40961, "Maxwell Compact Pc PM3" },
- } },
-            { 1548, new Dictionary<int, string>(){ 
-     } },
-            { 1549, new Dictionary<int, string>(){ 
-     } },
-            { 1550, new Dictionary<int, string>(){ 
-     } },
-            { 1551, new Dictionary<int, string>(){ 
-     } },
-            { 1552, new Dictionary<int, string>(){ 
-     } },
-            { 1553, new Dictionary<int, string>(){ 
-     } },
-            { 1555, new Dictionary<int, string>(){ 
-     } },
-            { 1556, new Dictionary<int, string>(){ 
-     } },
-            { 1557, new Dictionary<int, string>(){ 
-     } },
-            { 1558, new Dictionary<int, string>(){ 
-     } },
-            { 1559, new Dictionary<int, string>(){ 
-    { 10, "Thymio-II" },
+    })
+ },
+            { 1559, Tuple.Create("Swiss Federal Insitute of Technology", new Dictionary<int, string>{
+{ 10, "Thymio-II" },
 { 12, "Thymio-II Wireless" },
- } },
-            { 1560, new Dictionary<int, string>(){ 
-    { 257, "Mouse" },
- } },
-            { 1561, new Dictionary<int, string>(){ 
-    { 257, "SLP-100 Driver" },
+    })
+ },
+            { 1560, Tuple.Create("MacAlly", new Dictionary<int, string>{
+{ 257, "Mouse" },
+    })
+ },
+            { 1561, Tuple.Create("Seiko Instruments, Inc.", new Dictionary<int, string>{
+{ 257, "SLP-100 Driver" },
 { 258, "SLP-200 Driver" },
 { 259, "SLP-100N Driver" },
 { 260, "SLP-200N Driver" },
 { 261, "SLP-240 Driver" },
 { 1281, "SLP-440 Driver" },
 { 1282, "SLP-450 Driver" },
- } },
-            { 1562, new Dictionary<int, string>(){ 
-    { 272, "5thSense Fingerprint Sensor" },
+    })
+ },
+            { 1562, Tuple.Create("Veridicom International, Inc.", new Dictionary<int, string>{
+{ 272, "5thSense Fingerprint Sensor" },
 { 512, "FPS200 Fingerprint Sensor" },
 { 33280, "VKI-A Fingerprint Sensor/Flash Storage (dumb)" },
 { 37376, "VKI-B Fingerprint Sensor/Flash Storage (smart)" },
- } },
-            { 1563, new Dictionary<int, string>(){ 
-     } },
-            { 1564, new Dictionary<int, string>(){ 
-     } },
-            { 1565, new Dictionary<int, string>(){ 
-    { 49184, "SSU-100" },
- } },
-            { 1566, new Dictionary<int, string>(){ 
-    { 1, "nissei 128DE-USB -" },
+    })
+ },
+            { 1565, Tuple.Create("Quatech, Inc.", new Dictionary<int, string>{
+{ 49184, "SSU-100" },
+    })
+ },
+            { 1566, Tuple.Create("Nissei Electric Co.", new Dictionary<int, string>{
+{ 1, "nissei 128DE-USB -" },
 { 16, "nissei 128DE-PNA -" },
- } },
-            { 1568, new Dictionary<int, string>(){ 
-    { 4, "QuickVideo weeCam" },
+    })
+ },
+            { 1568, Tuple.Create("Alaris, Inc.", new Dictionary<int, string>{
+{ 4, "QuickVideo weeCam" },
 { 7, "QuickVideo weeCam" },
 { 10, "QuickVideo weeCam" },
 { 11, "QuickVideo weeCam" },
- } },
-            { 1569, new Dictionary<int, string>(){ 
-     } },
-            { 1570, new Dictionary<int, string>(){ 
-     } },
-            { 1571, new Dictionary<int, string>(){ 
-     } },
-            { 1572, new Dictionary<int, string>(){ 
-    { 19, "SC Secure KVM" },
+    })
+ },
+            { 1572, Tuple.Create("Avocent Corp.", new Dictionary<int, string>{
+{ 19, "SC Secure KVM" },
 { 584, "Virtual Hub" },
 { 585, "Virtual Keyboard/Mouse" },
 { 593, "Virtual Mass Storage" },
@@ -12819,19 +9111,10 @@ namespace HardwareInformation.Providers {
 { 1026, "Cisco Virtual Keyboard and Mouse" },
 { 1027, "Cisco Virtual Mass Storage" },
 { 6004, "Cybex SC985" },
- } },
-            { 1573, new Dictionary<int, string>(){ 
-     } },
-            { 1574, new Dictionary<int, string>(){ 
-     } },
-            { 1575, new Dictionary<int, string>(){ 
-     } },
-            { 1576, new Dictionary<int, string>(){ 
-     } },
-            { 1577, new Dictionary<int, string>(){ 
-     } },
-            { 1578, new Dictionary<int, string>(){ 
-    { 0, "Optical mouse" },
+    })
+ },
+            { 1578, Tuple.Create("MosArt Semiconductor Corp.", new Dictionary<int, string>{
+{ 0, "Optical mouse" },
 { 1, "Notebook Optical Mouse" },
 { 32, "Logic3 Gamepad" },
 { 51, "Competition Pro Steering Wheel" },
@@ -12847,31 +9130,18 @@ namespace HardwareInformation.Providers {
 { 25345, "Trust Wireless Optical Mouse MI-4150K" },
 { 36867, "VoIP Conference Hub (A16GH)" },
 { 36868, "USR9602 USB Internet Mini Phone" },
- } },
-            { 1579, new Dictionary<int, string>(){ 
-     } },
-            { 1580, new Dictionary<int, string>(){ 
-     } },
-            { 1581, new Dictionary<int, string>(){ 
-     } },
-            { 1582, new Dictionary<int, string>(){ 
-     } },
-            { 1583, new Dictionary<int, string>(){ 
-     } },
-            { 1585, new Dictionary<int, string>(){ 
-     } },
-            { 1587, new Dictionary<int, string>(){ 
-     } },
-            { 1588, new Dictionary<int, string>(){ 
-    { 1621, "Embedded Mass Storage Drive [RealSSD]" },
- } },
-            { 1589, new Dictionary<int, string>(){ 
-     } },
-            { 1590, new Dictionary<int, string>(){ 
-    { 3, "Vivicam 35Xx" },
- } },
-            { 1592, new Dictionary<int, string>(){ 
-    { 616, "iVina 1200U Scanner" },
+    })
+ },
+            { 1588, Tuple.Create("Micron Technology, Inc.", new Dictionary<int, string>{
+{ 1621, "Embedded Mass Storage Drive [RealSSD]" },
+    })
+ },
+            { 1590, Tuple.Create("Sierra Imaging, Inc.", new Dictionary<int, string>{
+{ 3, "Vivicam 35Xx" },
+    })
+ },
+            { 1592, Tuple.Create("Avision, Inc.", new Dictionary<int, string>{
+{ 616, "iVina 1200U Scanner" },
 { 618, "Minolta Dimage Scan Dual II AF-2820U (2886)" },
 { 2576, "iVina FB1600/UMAX Astra 4500" },
 { 2579, "AV600U" },
@@ -12882,30 +9152,14 @@ namespace HardwareInformation.Providers {
 { 2625, "Avision AM3000/MF3000 Series" },
 { 3841, "fi-4010CU" },
 { 16388, "Minolta Dimage Scan Elite II AF-2920 (2888)" },
- } },
-            { 1593, new Dictionary<int, string>(){ 
-     } },
-            { 1594, new Dictionary<int, string>(){ 
-     } },
-            { 1595, new Dictionary<int, string>(){ 
-     } },
-            { 1596, new Dictionary<int, string>(){ 
-     } },
-            { 1597, new Dictionary<int, string>(){ 
-     } },
-            { 1598, new Dictionary<int, string>(){ 
-     } },
-            { 1599, new Dictionary<int, string>(){ 
-     } },
-            { 1600, new Dictionary<int, string>(){ 
-    { 38, "LPC-Stick" },
- } },
-            { 1601, new Dictionary<int, string>(){ 
-     } },
-            { 1602, new Dictionary<int, string>(){ 
-     } },
-            { 1604, new Dictionary<int, string>(){ 
-    { 0, "Floppy" },
+    })
+ },
+            { 1600, Tuple.Create("Hitex Development Tools", new Dictionary<int, string>{
+{ 38, "LPC-Stick" },
+    })
+ },
+            { 1604, Tuple.Create("TEAC Corp.", new Dictionary<int, string>{
+{ 0, "Floppy" },
 { 512, "All-In-One Multi-Card Reader CA200/B/S" },
 { 4096, "CD-ROM Drive" },
 { 32781, "TASCAM Portastudio DP-01FX" },
@@ -12915,13 +9169,10 @@ namespace HardwareInformation.Providers {
 { 53249, "CD-R/RW Unit" },
 { 53250, "CD-R/RW Unit" },
 { 53264, "CD-RW/DVD Unit" },
- } },
-            { 1605, new Dictionary<int, string>(){ 
-     } },
-            { 1606, new Dictionary<int, string>(){ 
-     } },
-            { 1607, new Dictionary<int, string>(){ 
-    { 256, "ARC SpectraPro UV/VIS/IR Monochromator/Spectrograph" },
+    })
+ },
+            { 1607, Tuple.Create("Acton Research Corp.", new Dictionary<int, string>{
+{ 256, "ARC SpectraPro UV/VIS/IR Monochromator/Spectrograph" },
 { 257, "ARC AM-VM Mono Airpath/Vacuum Monochromator/Spectrograph" },
 { 258, "ARC Inspectrum Mono" },
 { 259, "ARC Filterwheel" },
@@ -12929,20 +9180,14 @@ namespace HardwareInformation.Providers {
 { 1002, "Inspectrum 256x1024 F VIS Spectrograph" },
 { 1003, "Inspectrum 128x1024 B VIS Spectrograph" },
 { 1004, "Inspectrum 256x1024 B VIS Spectrograph" },
- } },
-            { 1608, new Dictionary<int, string>(){ 
-     } },
-            { 1609, new Dictionary<int, string>(){ 
-     } },
-            { 1611, new Dictionary<int, string>(){ 
-    { 357, "Blackfin 535 [ADZS HPUSB ICE]" },
- } },
-            { 1612, new Dictionary<int, string>(){ 
-     } },
-            { 1613, new Dictionary<int, string>(){ 
-     } },
-            { 1614, new Dictionary<int, string>(){ 
-    { 8448, "Sony Visual Communication Camera" },
+    })
+ },
+            { 1611, Tuple.Create("Analog Devices, Inc. (White Mountain DSP)", new Dictionary<int, string>{
+{ 357, "Blackfin 535 [ADZS HPUSB ICE]" },
+    })
+ },
+            { 1614, Tuple.Create("Suyin Corp.", new Dictionary<int, string>{
+{ 8448, "Sony Visual Communication Camera" },
 { 13328, "RGBIR Camera" },
 { 38656, "Asus Integrated Webcam" },
 { 41216, "Acer OrbiCam" },
@@ -12969,9 +9214,10 @@ namespace HardwareInformation.Providers {
 { 61959, "Lenovo EasyCamera Integrated Webcam" },
 { 61961, "HP Webcam" },
 { 62208, "UVC 0.3M Webcam" },
- } },
-            { 1615, new Dictionary<int, string>(){ 
-    { 1001, "CmStick (MSD, article no. 1001-xx-xxx)" },
+    })
+ },
+            { 1615, Tuple.Create("WIBU-Systems AG", new Dictionary<int, string>{
+{ 1001, "CmStick (MSD, article no. 1001-xx-xxx)" },
 { 1010, "CmStick/M (MSD, article no. 1010-xx-xxx)" },
 { 1011, "CmStick/M (MSD, article no. 1011-xx-xxx)" },
 { 3031, "Wibu-Box/U (article no. 3031-xx-xxx)" },
@@ -12979,53 +9225,30 @@ namespace HardwareInformation.Providers {
 { 11001, "CmStick (HID, article no. 1001-xx-xxx)" },
 { 11011, "CmStick/M (HID, article no. 1011-xx-xxx)" },
 { 21011, "CmStick/M (COMPOSITE, article no. 1011-xx-xxx)" },
- } },
-            { 1616, new Dictionary<int, string>(){ 
-     } },
-            { 1617, new Dictionary<int, string>(){ 
-     } },
-            { 1618, new Dictionary<int, string>(){ 
-     } },
-            { 1619, new Dictionary<int, string>(){ 
-     } },
-            { 1620, new Dictionary<int, string>(){ 
-    { 5, "Device Bay Controller" },
+    })
+ },
+            { 1620, Tuple.Create("Granite Microsystems, Inc.", new Dictionary<int, string>{
+{ 5, "Device Bay Controller" },
 { 6, "Hub" },
 { 7, "Device Bay Controller" },
 { 22, "Hub" },
- } },
-            { 1621, new Dictionary<int, string>(){ 
-     } },
-            { 1622, new Dictionary<int, string>(){ 
-     } },
-            { 1623, new Dictionary<int, string>(){ 
-     } },
-            { 1624, new Dictionary<int, string>(){ 
-    { 512, "Aeotec Z-Stick Gen5 (ZW090) - UZB" },
- } },
-            { 1625, new Dictionary<int, string>(){ 
-     } },
-            { 1626, new Dictionary<int, string>(){ 
-    { 1, "Opticon OPR-2001 / NLV-1001 (keyboard mode)" },
+    })
+ },
+            { 1624, Tuple.Create("Sigma Designs, Inc.", new Dictionary<int, string>{
+{ 512, "Aeotec Z-Stick Gen5 (ZW090) - UZB" },
+    })
+ },
+            { 1626, Tuple.Create("Optoelectronics Co., Ltd", new Dictionary<int, string>{
+{ 1, "Opticon OPR-2001 / NLV-1001 (keyboard mode)" },
 { 9, "NLV-1001 (serial mode) / OPN-2001 [Opticon]" },
- } },
-            { 1627, new Dictionary<int, string>(){ 
-     } },
-            { 1630, new Dictionary<int, string>(){ 
-     } },
-            { 1631, new Dictionary<int, string>(){ 
-     } },
-            { 1632, new Dictionary<int, string>(){ 
-     } },
-            { 1633, new Dictionary<int, string>(){ 
-     } },
-            { 1634, new Dictionary<int, string>(){ 
-     } },
-            { 1635, new Dictionary<int, string>(){ 
-    { 259, "CobraPad" },
- } },
-            { 1636, new Dictionary<int, string>(){ 
-    { 769, "Groovy Technology Corp. GTouch Touch Screen" },
+    })
+ },
+            { 1635, Tuple.Create("Topmax Electronic Co., Ltd", new Dictionary<int, string>{
+{ 259, "CobraPad" },
+    })
+ },
+            { 1636, Tuple.Create("ET&T Technology Co., Ltd.", new Dictionary<int, string>{
+{ 769, "Groovy Technology Corp. GTouch Touch Screen" },
 { 770, "Groovy Technology Corp. GTouch Touch Screen" },
 { 771, "Groovy Technology Corp. GTouch Touch Screen" },
 { 772, "Groovy Technology Corp. GTouch Touch Screen" },
@@ -13033,21 +9256,18 @@ namespace HardwareInformation.Providers {
 { 774, "Groovy Technology Corp. GTouch Touch Screen" },
 { 775, "Groovy Technology Corp. GTouch Touch Screen" },
 { 777, "Groovy Technology Corp. GTouch Touch Screen" },
- } },
-            { 1637, new Dictionary<int, string>(){ 
-    { 20833, "USB to Serial" },
- } },
-            { 1639, new Dictionary<int, string>(){ 
-    { 4001, "TD-U8000 Tape Drive" },
- } },
-            { 1640, new Dictionary<int, string>(){ 
-     } },
-            { 1641, new Dictionary<int, string>(){ 
-     } },
-            { 1642, new Dictionary<int, string>(){ 
-     } },
-            { 1643, new Dictionary<int, string>(){ 
-    { 261, "SCM eUSB SmartMedia Card Reader" },
+    })
+ },
+            { 1637, Tuple.Create("Cypress Semiconductor", new Dictionary<int, string>{
+{ 20833, "USB to Serial" },
+    })
+ },
+            { 1639, Tuple.Create("Aiwa Co., Ltd", new Dictionary<int, string>{
+{ 4001, "TD-U8000 Tape Drive" },
+    })
+ },
+            { 1643, Tuple.Create("Linksys, Inc.", new Dictionary<int, string>{
+{ 261, "SCM eUSB SmartMedia Card Reader" },
 { 266, "Melco MCR-U2 SmartMedia / CompactFlash Reader" },
 { 8204, "USB10TX" },
 { 8706, "USB10TX Ethernet [pegasus]" },
@@ -13060,13 +9280,10 @@ namespace HardwareInformation.Providers {
 { 8723, "WUSB12v1.1 802.11b Adapter" },
 { 8729, "Instant Wireless Network Adapter" },
 { 16395, "USB10TX" },
- } },
-            { 1645, new Dictionary<int, string>(){ 
-     } },
-            { 1646, new Dictionary<int, string>(){ 
-     } },
-            { 1647, new Dictionary<int, string>(){ 
-    { 59, "MP3 Player" },
+    })
+ },
+            { 1647, Tuple.Create("SigmaTel, Inc.", new Dictionary<int, string>{
+{ 59, "MP3 Player" },
 { 62, "MP3 Player" },
 { 63, "MP3 Player" },
 { 64, "MP3 Player" },
@@ -13175,37 +9392,37 @@ namespace HardwareInformation.Providers {
 { 36864, "MP3 Player" },
 { 36865, "MP3 Player" },
 { 36866, "MP3 Player" },
- } },
-            { 1648, new Dictionary<int, string>(){ 
-    { 1, "Calibrator" },
+    })
+ },
+            { 1648, Tuple.Create("Sequel Imaging", new Dictionary<int, string>{
+{ 1, "Calibrator" },
 { 5, "Enable Cable" },
- } },
-            { 1650, new Dictionary<int, string>(){ 
-    { 4161, "LCS1040 Speaker System" },
+    })
+ },
+            { 1650, Tuple.Create("Labtec, Inc.", new Dictionary<int, string>{
+{ 4161, "LCS1040 Speaker System" },
 { 20480, "SpaceBall 4000 FLX" },
- } },
-            { 1651, new Dictionary<int, string>(){ 
-    { 20480, "Keyboard" },
- } },
-            { 1652, new Dictionary<int, string>(){ 
-     } },
-            { 1653, new Dictionary<int, string>(){ 
-    { 272, "Vigor 128 ISDN TA" },
+    })
+ },
+            { 1651, Tuple.Create("HCL", new Dictionary<int, string>{
+{ 20480, "Keyboard" },
+    })
+ },
+            { 1653, Tuple.Create("DrayTek Corp.", new Dictionary<int, string>{
+{ 272, "Vigor 128 ISDN TA" },
 { 1328, "Vigor530 IEEE 802.11G Adapter (ISL3880+NET2280)" },
 { 1360, "Vigor550" },
 { 5768, "miniVigor 128 ISDN TA [HFC-S]" },
 { 26260, "miniVigor 128 ISDN TA" },
- } },
-            { 1654, new Dictionary<int, string>(){ 
-     } },
-            { 1655, new Dictionary<int, string>(){ 
-    { 2005, "TM-ED1285(USB)" },
+    })
+ },
+            { 1655, Tuple.Create("Aiwa Co., Ltd", new Dictionary<int, string>{
+{ 2005, "TM-ED1285(USB)" },
 { 4001, "TD-U8000 Tape Drive" },
- } },
-            { 1656, new Dictionary<int, string>(){ 
-     } },
-            { 1659, new Dictionary<int, string>(){ 
-    { 0, "PL2301 USB-USB Bridge" },
+    })
+ },
+            { 1659, Tuple.Create("Prolific Technology, Inc.", new Dictionary<int, string>{
+{ 0, "PL2301 USB-USB Bridge" },
 { 1, "PL2302 USB-USB Bridge" },
 { 775, "Motorola Serial Adapter" },
 { 1211, "PL2303 Serial (IODATA USB-RSAQ2)" },
@@ -13236,9 +9453,10 @@ namespace HardwareInformation.Providers {
 { 43680, "Prolific Pharos" },
 { 43682, "PL2303 Serial Adapter (IODATA USB-RSAQ3)" },
 { 43683, "PL2303x Serial Adapter" },
- } },
-            { 1660, new Dictionary<int, string>(){ 
-    { 4097, "Siemens SpeedStream 100MBps Ethernet" },
+    })
+ },
+            { 1660, Tuple.Create("Efficient Networks, Inc.", new Dictionary<int, string>{
+{ 4097, "Siemens SpeedStream 100MBps Ethernet" },
 { 4130, "Siemens SpeedStream 1022 802.11b Adapter" },
 { 4131, "SpeedStream Wireless" },
 { 16416, "SpeedStream 4020 ATM/ADSL Installer" },
@@ -13255,26 +9473,28 @@ namespace HardwareInformation.Providers {
 { 54887, "Efficient Networks Virtual Bus for ADSL Modem" },
 { 57920, "Speedstream Ethernet Adapter E240" },
 { 58688, "Speedstream Ethernet Adapter E240" },
- } },
-            { 1661, new Dictionary<int, string>(){ 
-     } },
-            { 1662, new Dictionary<int, string>(){ 
-    { 2049, "HID Keyboard, Barcode scanner" },
+    })
+ },
+            { 1662, Tuple.Create("Intermec Technologies Corp.", new Dictionary<int, string>{
+{ 2049, "HID Keyboard, Barcode scanner" },
 { 2051, "VCP, Barcode scanner" },
 { 2053, "VCP + UVC, Barcode scanner" },
 { 4097, "Mobile Computer" },
- } },
-            { 1663, new Dictionary<int, string>(){ 
-    { 17746, "DSL-200 ADSL Modem" },
+    })
+ },
+            { 1663, Tuple.Create("Virata, Ltd", new Dictionary<int, string>{
+{ 17746, "DSL-200 ADSL Modem" },
 { 25922, "DSL Modem" },
 { 25929, "DSL Modem" },
 { 30017, "DSL Modem" },
- } },
-            { 1664, new Dictionary<int, string>(){ 
-    { 2, "Arowana Optical Wheel Mouse MSOP-01" },
- } },
-            { 1665, new Dictionary<int, string>(){ 
-    { 1, "Dect Base" },
+    })
+ },
+            { 1664, Tuple.Create("Realtek Semiconductor Corp., CPP Div. (Avance Logic)", new Dictionary<int, string>{
+{ 2, "Arowana Optical Wheel Mouse MSOP-01" },
+    })
+ },
+            { 1665, Tuple.Create("Siemens Information and Communication Products", new Dictionary<int, string>{
+{ 1, "Dect Base" },
 { 2, "Gigaset 3075 Passive ISDN" },
 { 5, "ID-Mouse with Fingerprint Reader" },
 { 18, "I-Gate 802.11b Adapter" },
@@ -13286,16 +9506,14 @@ namespace HardwareInformation.Providers {
 { 46, "ADSL Router_S-141" },
 { 52, "GSM module MC35/ES75 USB Modem" },
 { 15366, "54g USB Network Adapter" },
- } },
-            { 1666, new Dictionary<int, string>(){ 
-     } },
-            { 1668, new Dictionary<int, string>(){ 
-     } },
-            { 1669, new Dictionary<int, string>(){ 
-    { 28672, "HSDPA Modem" },
- } },
-            { 1670, new Dictionary<int, string>(){ 
-    { 8193, "PagePro 4110W" },
+    })
+ },
+            { 1669, Tuple.Create("ZD Incorporated", new Dictionary<int, string>{
+{ 28672, "HSDPA Modem" },
+    })
+ },
+            { 1670, Tuple.Create("Minolta Co., Ltd", new Dictionary<int, string>{
+{ 8193, "PagePro 4110W" },
 { 8196, "PagePro 1200W" },
 { 8197, "Magicolor 2300 DL" },
 { 12289, "PagePro 4100" },
@@ -13334,13 +9552,10 @@ namespace HardwareInformation.Providers {
 { 16410, "Dimage A1 Camera [storage]" },
 { 16412, "Dimage X20 Camera" },
 { 16414, "Dimage E323 Camera" },
- } },
-            { 1674, new Dictionary<int, string>(){ 
-     } },
-            { 1675, new Dictionary<int, string>(){ 
-     } },
-            { 1678, new Dictionary<int, string>(){ 
-    { 211, "OEM 3 axis 5 button joystick" },
+    })
+ },
+            { 1678, Tuple.Create("CH Products, Inc.", new Dictionary<int, string>{
+{ 211, "OEM 3 axis 5 button joystick" },
 { 226, "HFX OEM Joystick" },
 { 240, "Multi-Function Panel" },
 { 241, "Pro Throttle" },
@@ -13352,38 +9567,42 @@ namespace HardwareInformation.Providers {
 { 1280, "GameStick 3D" },
 { 1281, "CH Pro Pedals" },
 { 1284, "F-16 Combat Stick" },
- } },
-            { 1679, new Dictionary<int, string>(){ 
-    { 49165, "MEK-6500" },
- } },
-            { 1680, new Dictionary<int, string>(){ 
-     } },
-            { 1683, new Dictionary<int, string>(){ 
-    { 2, "FlashGate SmartMedia Card Reader" },
+    })
+ },
+            { 1679, Tuple.Create("Nihon KOHDEN", new Dictionary<int, string>{
+{ 49165, "MEK-6500" },
+    })
+ },
+            { 1683, Tuple.Create("Hagiwara Sys-Com Co., Ltd", new Dictionary<int, string>{
+{ 2, "FlashGate SmartMedia Card Reader" },
 { 3, "FlashGate CompactFlash Card Reader" },
 { 5, "FlashGate" },
 { 6, "SM PCCard R/W and SPD" },
 { 7, "FlashGate ME (Authenticated)" },
 { 10, "SDCard/MMC Reader/Writer" },
- } },
-            { 1684, new Dictionary<int, string>(){ 
-    { 1, "Mindstorms Tower" },
+    })
+ },
+            { 1684, Tuple.Create("Lego Group", new Dictionary<int, string>{
+{ 1, "Mindstorms Tower" },
 { 2, "Mindstorms NXT" },
 { 5, "Mindstorms EV3" },
 { 6, "Mindstorms EV3 Firmware Update" },
- } },
-            { 1688, new Dictionary<int, string>(){ 
-    { 6022, "1300ex Monitor" },
+    })
+ },
+            { 1688, Tuple.Create("Chuntex (CTX)", new Dictionary<int, string>{
+{ 6022, "1300ex Monitor" },
 { 8195, "CTX M730V built in Camera" },
 { 39321, "VLxxxx Monitor+Hub" },
- } },
-            { 1689, new Dictionary<int, string>(){ 
-    { 839, "AFG 3022B" },
+    })
+ },
+            { 1689, Tuple.Create("Tektronix, Inc.", new Dictionary<int, string>{
+{ 839, "AFG 3022B" },
 { 869, "TDS 2004B" },
 { 874, "TDS 2024B" },
- } },
-            { 1690, new Dictionary<int, string>(){ 
-    { 1, "VC010 Webcam [pwc]" },
+    })
+ },
+            { 1690, Tuple.Create("Askey Computer Corp.", new Dictionary<int, string>{
+{ 1, "VC010 Webcam [pwc]" },
 { 771, "Cable Modem" },
 { 785, "ADSL Router Remote NDIS Device" },
 { 792, "Remote NDIS Device" },
@@ -13396,9 +9615,10 @@ namespace HardwareInformation.Providers {
 { 17410, "Scientific Atlanta WebSTAR 2000 series Cable Modem" },
 { 17411, "Scientific Atlanta WebSTAR 300 series Cable Modem" },
 { 17665, "Scientific-Atlanta WebSTAR 2000 series Cable Modem" },
- } },
-            { 1691, new Dictionary<int, string>(){ 
-    { 1796, "DCM245 Cable Modem" },
+    })
+ },
+            { 1691, Tuple.Create("Thomson, Inc.", new Dictionary<int, string>{
+{ 1796, "DCM245 Cable Modem" },
 { 1797, "THG540K Cable Modem" },
 { 1801, "Lyra PDP2424" },
 { 1804, "MP3 Player" },
@@ -13413,25 +9633,30 @@ namespace HardwareInformation.Providers {
 { 12306, "MP3 Player" },
 { 12307, "MP3 Player" },
 { 21847, "RCA CDS6300" },
- } },
-            { 1693, new Dictionary<int, string>(){ 
-    { 1, "Satellite Receiver Device" },
+    })
+ },
+            { 1693, Tuple.Create("Hughes Network Systems (HNS)", new Dictionary<int, string>{
+{ 1, "Satellite Receiver Device" },
 { 2, "Satellite Device" },
- } },
-            { 1694, new Dictionary<int, string>(){ 
-    { 5, "Marx CryptoBox v1.2" },
- } },
-            { 1695, new Dictionary<int, string>(){ 
-    { 16, "Tornado Speakerphone FaxModem 56.0" },
+    })
+ },
+            { 1694, Tuple.Create("Welcat Inc.", new Dictionary<int, string>{
+{ 5, "Marx CryptoBox v1.2" },
+    })
+ },
+            { 1695, Tuple.Create("Allied Data Technologies BV", new Dictionary<int, string>{
+{ 16, "Tornado Speakerphone FaxModem 56.0" },
 { 17, "Tornado Speakerphone FaxModem 56.0" },
 { 4096, "ADT VvBus for CopperJet" },
 { 4100, "CopperJet 821 RouterPlus" },
- } },
-            { 1698, new Dictionary<int, string>(){ 
-    { 51, "USB Mouse" },
- } },
-            { 1699, new Dictionary<int, string>(){ 
-    { 6, "Cyborg Gold Joystick" },
+    })
+ },
+            { 1698, Tuple.Create("Topro Technology, Inc.", new Dictionary<int, string>{
+{ 51, "USB Mouse" },
+    })
+ },
+            { 1699, Tuple.Create("Saitek PLC", new Dictionary<int, string>{
+{ 6, "Cyborg Gold Joystick" },
 { 265, "P880 Pad" },
 { 352, "ST290 Pro" },
 { 512, "Racing Wheel" },
@@ -13499,54 +9724,39 @@ namespace HardwareInformation.Providers {
 { 65303, "ST 330 Rumble Force Stick" },
 { 65362, "Cyborg 3D Rumble Force Joystick" },
 { 65461, "Cyborg Evo Force Joystick" },
- } },
-            { 1700, new Dictionary<int, string>(){ 
-     } },
-            { 1701, new Dictionary<int, string>(){ 
-    { 0, "Typhoon Webcam 100k [nw8000]" },
+    })
+ },
+            { 1701, Tuple.Create("Divio", new Dictionary<int, string>{
+{ 0, "Typhoon Webcam 100k [nw8000]" },
 { 53249, "ProLink DS3303u Webcam" },
 { 55296, "Chicony TwinkleCam" },
 { 55328, "Wize Media 1000" },
- } },
-            { 1703, new Dictionary<int, string>(){ 
-     } },
-            { 1704, new Dictionary<int, string>(){ 
-    { 66, "SignatureGem 1X5 Pad" },
+    })
+ },
+            { 1704, Tuple.Create("Topaz Systems, Inc.", new Dictionary<int, string>{
+{ 66, "SignatureGem 1X5 Pad" },
 { 67, "SignatureGem 1X5-HID Pad" },
- } },
-            { 1705, new Dictionary<int, string>(){ 
-    { 5, "WireSpeed Dual Connect Modem" },
+    })
+ },
+            { 1705, Tuple.Create("Westell", new Dictionary<int, string>{
+{ 5, "WireSpeed Dual Connect Modem" },
 { 6, "WireSpeed Dual Connect Modem" },
 { 10, "WireSpeed Dual Connect Modem" },
 { 11, "WireSpeed Dual Connect Modem" },
 { 14, "A90-211WG-01 802.11g Adapter [Intersil ISL3887]" },
- } },
-            { 1706, new Dictionary<int, string>(){ 
-     } },
-            { 1708, new Dictionary<int, string>(){ 
-     } },
-            { 1709, new Dictionary<int, string>(){ 
-     } },
-            { 1710, new Dictionary<int, string>(){ 
-     } },
-            { 1711, new Dictionary<int, string>(){ 
-     } },
-            { 1720, new Dictionary<int, string>(){ 
-     } },
-            { 1721, new Dictionary<int, string>(){ 
-    { 288, "SpeedTouch 120g 802.11g Wireless Adapter [Intersil ISL3886]" },
+    })
+ },
+            { 1721, Tuple.Create("Alcatel Telecom", new Dictionary<int, string>{
+{ 288, "SpeedTouch 120g 802.11g Wireless Adapter [Intersil ISL3886]" },
 { 289, "SpeedTouch 121g Wireless Dongle" },
 { 8193, "SPEED TOUCH Card" },
 { 16481, "SpeedTouch ISDN or ADSL Modem" },
 { 16482, "SpeedTouch ISDN or ADSL router" },
 { 42405, "DynaMiTe Modem" },
- } },
-            { 1722, new Dictionary<int, string>(){ 
-     } },
-            { 1723, new Dictionary<int, string>(){ 
-     } },
-            { 1724, new Dictionary<int, string>(){ 
-    { 11, "Okipage 14ex Printer" },
+    })
+ },
+            { 1724, Tuple.Create("Oki Data Corp.", new Dictionary<int, string>{
+{ 11, "Okipage 14ex Printer" },
 { 39, "Okipage 14e" },
 { 247, "OKI B4600 Mono Printer" },
 { 350, "OKIPOS 411/412 POS Printer" },
@@ -13556,9 +9766,10 @@ namespace HardwareInformation.Providers {
 { 899, "MC563 Multifunction Printer" },
 { 2705, "B2500MFP (printer+scanner)" },
 { 14337, "B6100 Laser Printer" },
- } },
-            { 1725, new Dictionary<int, string>(){ 
-    { 1, "SnapScan 1212U" },
+    })
+ },
+            { 1725, Tuple.Create("AGFA-Gevaert NV", new Dictionary<int, string>{
+{ 1, "SnapScan 1212U" },
 { 2, "SnapScan 1236U" },
 { 256, "SnapScan Touch" },
 { 257, "SNAPSCAN ELITE" },
@@ -13577,16 +9788,16 @@ namespace HardwareInformation.Providers {
 { 8343, "SnapScan e26" },
 { 8445, "SnapScan e52" },
 { 8447, "SnapScan e42" },
- } },
-            { 1726, new Dictionary<int, string>(){ 
-    { 2048, "Optimedia Camera" },
+    })
+ },
+            { 1726, Tuple.Create("AME Optimedia Technology Co., Ltd", new Dictionary<int, string>{
+{ 2048, "Optimedia Camera" },
 { 4101, "Dazzle DPVM! (1005)" },
 { 53249, "P35U Camera Capture" },
- } },
-            { 1727, new Dictionary<int, string>(){ 
-     } },
-            { 1730, new Dictionary<int, string>(){ 
-    { 48, "PhidgetRFID" },
+    })
+ },
+            { 1730, Tuple.Create("Phidgets Inc. (formerly GLAB)", new Dictionary<int, string>{
+{ 48, "PhidgetRFID" },
 { 49, "RFID reader" },
 { 56, "4-Motor PhidgetServo v3.0" },
 { 57, "1-Motor PhidgetServo v3.0" },
@@ -13608,25 +9819,20 @@ namespace HardwareInformation.Providers {
 { 115, "PhidgetHumiditySensor" },
 { 116, "PhidgetPHSensor" },
 { 117, "PhidgetGyroscope" },
- } },
-            { 1732, new Dictionary<int, string>(){ 
-     } },
-            { 1733, new Dictionary<int, string>(){ 
-     } },
-            { 1734, new Dictionary<int, string>(){ 
-     } },
-            { 1736, new Dictionary<int, string>(){ 
-     } },
-            { 1737, new Dictionary<int, string>(){ 
-    { 5, "Monitor Control" },
+    })
+ },
+            { 1737, Tuple.Create("Taxan (Europe), Ltd", new Dictionary<int, string>{
+{ 5, "Monitor Control" },
 { 7, "Monitor Control" },
 { 9, "Monitor Control" },
- } },
-            { 1738, new Dictionary<int, string>(){ 
-    { 8195, "uSCSI" },
- } },
-            { 1739, new Dictionary<int, string>(){ 
-    { 1, "TouchPad" },
+    })
+ },
+            { 1738, Tuple.Create("Newer Technology, Inc.", new Dictionary<int, string>{
+{ 8195, "uSCSI" },
+    })
+ },
+            { 1739, Tuple.Create("Synaptics, Inc.", new Dictionary<int, string>{
+{ 1, "TouchPad" },
 { 2, "Integrated TouchPad" },
 { 3, "cPad" },
 { 5, "Touchpad/FPS" },
@@ -13641,16 +9847,18 @@ namespace HardwareInformation.Providers {
 { 162, "Metallica MOH Touch Fingerprint Reader" },
 { 189, "Prometheus MIS Touch Fingerprint Reader" },
 { 10608, "touchpad" },
- } },
-            { 1740, new Dictionary<int, string>(){ 
-    { 257, "Cable Modem" },
+    })
+ },
+            { 1740, Tuple.Create("Terayon Communication Systems", new Dictionary<int, string>{
+{ 257, "Cable Modem" },
 { 258, "Cable Modem" },
 { 259, "Cable Modem" },
 { 260, "Cable Modem" },
 { 772, "Cable Modem" },
- } },
-            { 1741, new Dictionary<int, string>(){ 
-    { 257, "USA-28 PDA [no firmware]" },
+    })
+ },
+            { 1741, Tuple.Create("Keyspan", new Dictionary<int, string>{
+{ 257, "USA-28 PDA [no firmware]" },
 { 258, "USA-28X PDA [no firmware]" },
 { 259, "USA-19 PDA [no firmware]" },
 { 260, "PDA [prerenum]" },
@@ -13684,21 +9892,23 @@ namespace HardwareInformation.Providers {
 { 298, "USA-49Wlc serial adapter" },
 { 513, "UIA-10 Digital Media Remote [Cypress AN2131SC]" },
 { 514, "UIA-11 Digital Media Remote" },
- } },
-            { 1742, new Dictionary<int, string>(){ 
-    { 33553, "COM-1(USB)H" },
- } },
-            { 1743, new Dictionary<int, string>(){ 
-    { 4112, "PanoCam 10" },
+    })
+ },
+            { 1742, Tuple.Create("Contec", new Dictionary<int, string>{
+{ 33553, "COM-1(USB)H" },
+    })
+ },
+            { 1743, Tuple.Create("SpheronVR AG", new Dictionary<int, string>{
+{ 4112, "PanoCam 10" },
 { 4114, "PanoCam 12/12X" },
- } },
-            { 1744, new Dictionary<int, string>(){ 
-    { 1570, "LapLink Gold USB-USB Bridge [net1080]" },
- } },
-            { 1745, new Dictionary<int, string>(){ 
-     } },
-            { 1747, new Dictionary<int, string>(){ 
-    { 644, "FX-USB-AW/-BD RS482 Converters" },
+    })
+ },
+            { 1744, Tuple.Create("LapLink, Inc.", new Dictionary<int, string>{
+{ 1570, "LapLink Gold USB-USB Bridge [net1080]" },
+    })
+ },
+            { 1747, Tuple.Create("Mitsubishi Electric Corp.", new Dictionary<int, string>{
+{ 644, "FX-USB-AW/-BD RS482 Converters" },
 { 896, "CP8000D Port" },
 { 897, "CP770D Port" },
 { 901, "CP900D Port" },
@@ -13723,14 +9933,14 @@ namespace HardwareInformation.Providers {
 { 15184, "CP-W5000DW" },
 { 15200, "CP-D90DW" },
 { 15232, "CP-M1" },
- } },
-            { 1748, new Dictionary<int, string>(){ 
-     } },
-            { 1749, new Dictionary<int, string>(){ 
-    { 16384, "Japanese Keyboard" },
- } },
-            { 1750, new Dictionary<int, string>(){ 
-    { 37, "Gamepad" },
+    })
+ },
+            { 1749, Tuple.Create("Toshiba", new Dictionary<int, string>{
+{ 16384, "Japanese Keyboard" },
+    })
+ },
+            { 1750, Tuple.Create("Aashima Technology B.V.", new Dictionary<int, string>{
+{ 37, "Gamepad" },
 { 38, "Predator TH 400 Gamepad" },
 { 45, "Trust PowerC@m 350FT" },
 { 46, "Trust PowerC@m 350FS" },
@@ -13745,33 +9955,29 @@ namespace HardwareInformation.Providers {
 { 102, "TRUST Digital PCTV and Movie Editor" },
 { 103, "Trust 350FS POWERC@M FLASH" },
 { 107, "TRUST AUDIO VIDEO EDITOR" },
- } },
-            { 1751, new Dictionary<int, string>(){ 
-     } },
-            { 1752, new Dictionary<int, string>(){ 
-     } },
-            { 1754, new Dictionary<int, string>(){ 
-    { 2, "UPS" },
+    })
+ },
+            { 1754, Tuple.Create("Phoenixtec Power Co., Ltd", new Dictionary<int, string>{
+{ 2, "UPS" },
 { 3, "1300VA UPS" },
- } },
-            { 1755, new Dictionary<int, string>(){ 
-     } },
-            { 1756, new Dictionary<int, string>(){ 
-    { 18, "Scan 1200c Scanner" },
+    })
+ },
+            { 1756, Tuple.Create("Foxlink Image Technology Co., Ltd", new Dictionary<int, string>{
+{ 18, "Scan 1200c Scanner" },
 { 20, "Prolink Winscan Pro 2448U" },
- } },
-            { 1758, new Dictionary<int, string>(){ 
-     } },
-            { 1760, new Dictionary<int, string>(){ 
-    { 793, "MT9234ZBA-USB MultiModem ZBA" },
+    })
+ },
+            { 1760, Tuple.Create("Multi-Tech Systems, Inc.", new Dictionary<int, string>{
+{ 793, "MT9234ZBA-USB MultiModem ZBA" },
 { 61697, "MT5634ZBA-USB MultiModemUSB (old firmware)" },
 { 61699, "MT5634MU MultiMobileUSB" },
 { 61700, "MT5634ZBA-USB MultiModemUSB (new firmware)" },
 { 61703, "MT5634ZBA-USB-V92 MultiModemUSB" },
 { 61728, "MT9234ZBA-USB-CDC-ACM-XR MultiModem ZBA CDC-ACM-XR" },
- } },
-            { 1761, new Dictionary<int, string>(){ 
-    { 8, "UBS-10BT Ethernet [klsi]" },
+    })
+ },
+            { 1761, Tuple.Create("ADS Technologies, Inc.", new Dictionary<int, string>{
+{ 8, "UBS-10BT Ethernet [klsi]" },
 { 9, "UBS-10BT Ethernet" },
 { 2099, "Mass Storage Device" },
 { 41301, "FM Radio Receiver/Instant FM Music (RDX-155-EF)" },
@@ -13784,11 +9990,10 @@ namespace HardwareInformation.Providers {
 { 42760, "saa7114H video input card (Instant VideoMPX)" },
 { 45879, "Mini DigitalTV" },
 { 46849, "DVD Xpress B" },
- } },
-            { 1764, new Dictionary<int, string>(){ 
-     } },
-            { 1766, new Dictionary<int, string>(){ 
-    { 512, "Internet Phone" },
+    })
+ },
+            { 1766, Tuple.Create("Tiger Jet Network, Inc.", new Dictionary<int, string>{
+{ 512, "Internet Phone" },
 { 513, "Internet Phone" },
 { 514, "Composite Device" },
 { 515, "Internet Phone" },
@@ -13873,33 +10078,33 @@ namespace HardwareInformation.Providers {
 { 62034, "Internet Phone" },
 { 62224, "Internet Phone" },
 { 62288, "Composite Device" },
- } },
-            { 1770, new Dictionary<int, string>(){ 
-    { 1, "NetCom Roadster II 56k" },
+    })
+ },
+            { 1770, Tuple.Create("Sirius Technologies", new Dictionary<int, string>{
+{ 1, "NetCom Roadster II 56k" },
 { 2, "Roadster II 56k" },
- } },
-            { 1771, new Dictionary<int, string>(){ 
-     } },
-            { 1775, new Dictionary<int, string>(){ 
-     } },
-            { 1776, new Dictionary<int, string>(){ 
-    { 56833, "DualCam Video Camera" },
+    })
+ },
+            { 1776, Tuple.Create("T.N.C Industrial Co., Ltd", new Dictionary<int, string>{
+{ 56833, "DualCam Video Camera" },
 { 56834, "DualCam Still Camera" },
- } },
-            { 1777, new Dictionary<int, string>(){ 
-    { 40977, "SonicPort" },
+    })
+ },
+            { 1777, Tuple.Create("Opcode Systems, Inc.", new Dictionary<int, string>{
+{ 40977, "SonicPort" },
 { 40993, "SonicPort Optical" },
- } },
-            { 1778, new Dictionary<int, string>(){ 
-    { 17, "KVM Switch Keyboard" },
- } },
-            { 1782, new Dictionary<int, string>(){ 
-     } },
-            { 1783, new Dictionary<int, string>(){ 
-    { 3, "USB->Din 4 Adaptor" },
- } },
-            { 1784, new Dictionary<int, string>(){ 
-    { 12290, "Hercules Blog Webcam" },
+    })
+ },
+            { 1778, Tuple.Create("Emine Technology Co.", new Dictionary<int, string>{
+{ 17, "KVM Switch Keyboard" },
+    })
+ },
+            { 1783, Tuple.Create("Wailly Technology Ltd", new Dictionary<int, string>{
+{ 3, "USB->Din 4 Adaptor" },
+    })
+ },
+            { 1784, Tuple.Create("Guillemot Corp.", new Dictionary<int, string>{
+{ 12290, "Hercules Blog Webcam" },
 { 12292, "Hercules Classic Silver" },
 { 12293, "Hercules Dualpix Exchange" },
 { 12295, "Hercules Dualpix Chat and Show" },
@@ -13915,55 +10120,39 @@ namespace HardwareInformation.Providers {
 { 57393, "Hercules HWNUm-300 Wireless N mini [Realtek RTL8191SU]" },
 { 57394, "HWGUm-54 [Hercules Wireless G Ultra Mini Key]" },
 { 57395, "Hercules HWNUp-150 802.11n Wireless N Pico [Realtek RTL8188CUS]" },
- } },
-            { 1785, new Dictionary<int, string>(){ 
-     } },
-            { 1786, new Dictionary<int, string>(){ 
-     } },
-            { 1788, new Dictionary<int, string>(){ 
-     } },
-            { 1789, new Dictionary<int, string>(){ 
-    { 257, "Audio Device" },
+    })
+ },
+            { 1789, Tuple.Create("Boston Acoustics", new Dictionary<int, string>{
+{ 257, "Audio Device" },
 { 258, "Audio Device" },
 { 513, "2-piece Audio Device" },
- } },
-            { 1790, new Dictionary<int, string>(){ 
-     } },
-            { 1793, new Dictionary<int, string>(){ 
-     } },
-            { 1795, new Dictionary<int, string>(){ 
-     } },
-            { 1797, new Dictionary<int, string>(){ 
-     } },
-            { 1798, new Dictionary<int, string>(){ 
-     } },
-            { 1799, new Dictionary<int, string>(){ 
-    { 256, "2202 Ethernet [klsi]" },
+    })
+ },
+            { 1799, Tuple.Create("Standard Microsystems Corp.", new Dictionary<int, string>{
+{ 256, "2202 Ethernet [klsi]" },
 { 512, "2202 Ethernet [pegasus]" },
 { 513, "EZ Connect USB Ethernet" },
 { 60932, "SMCWUSB32 802.11b Wireless LAN Card" },
 { 60934, "SMC2862W-G v1 EZ Connect 802.11g Adapter [Intersil ISL3886]" },
 { 60947, "SMC2862W-G v2 EZ Connect 802.11g Adapter [Intersil ISL3887]" },
- } },
-            { 1800, new Dictionary<int, string>(){ 
-    { 1150, "USB-1284 BRIDGE" },
- } },
-            { 1801, new Dictionary<int, string>(){ 
-     } },
-            { 1802, new Dictionary<int, string>(){ 
-    { 16386, "Bluetooth Device" },
+    })
+ },
+            { 1800, Tuple.Create("Putercom Co., Ltd", new Dictionary<int, string>{
+{ 1150, "USB-1284 BRIDGE" },
+    })
+ },
+            { 1802, Tuple.Create("Oki Electric Industry Co., Ltd", new Dictionary<int, string>{
+{ 16386, "Bluetooth Device" },
 { 16387, "Bluetooth Device" },
- } },
-            { 1805, new Dictionary<int, string>(){ 
-     } },
-            { 1806, new Dictionary<int, string>(){ 
-     } },
-            { 1808, new Dictionary<int, string>(){ 
-    { 1, "WhiteHeat (fake ID)" },
+    })
+ },
+            { 1808, Tuple.Create("Connect Tech, Inc.", new Dictionary<int, string>{
+{ 1, "WhiteHeat (fake ID)" },
 { 32769, "WhiteHeat" },
- } },
-            { 1809, new Dictionary<int, string>(){ 
-    { 256, "Hub" },
+    })
+ },
+            { 1809, Tuple.Create("Magic Control Technology Corp.", new Dictionary<int, string>{
+{ 256, "Hub" },
 { 384, "IRXpress Infrared Device" },
 { 385, "IRXpress Infrared Device" },
 { 512, "BAY-3U1S1P Serial Port" },
@@ -13978,16 +10167,14 @@ namespace HardwareInformation.Providers {
 { 2304, "SVGA Adapter" },
 { 20481, "Trigger UV-002BD[Startech USBVGAE]" },
 { 20736, "Magic Control Technology Corp. (USB2VGA dongle)" },
- } },
-            { 1811, new Dictionary<int, string>(){ 
-     } },
-            { 1812, new Dictionary<int, string>(){ 
-    { 3, "ADB converter" },
- } },
-            { 1815, new Dictionary<int, string>(){ 
-     } },
-            { 1816, new Dictionary<int, string>(){ 
-    { 2, "SuperDisk 120MB" },
+    })
+ },
+            { 1812, Tuple.Create("NewMotion, Inc.", new Dictionary<int, string>{
+{ 3, "ADB converter" },
+    })
+ },
+            { 1816, Tuple.Create("Imation Corp.", new Dictionary<int, string>{
+{ 2, "SuperDisk 120MB" },
 { 3, "SuperDisk 120MB (Authenticated)" },
 { 96, "Flash Drive" },
 { 97, "Flash Drive" },
@@ -14006,43 +10193,39 @@ namespace HardwareInformation.Providers {
 { 4384, "RDX External dock (redbud)" },
 { 16390, "8x Slim DVD Multi-Format Recorder External" },
 { 53248, "Disc Stakka CD/DVD Manager" },
- } },
-            { 1817, new Dictionary<int, string>(){ 
-     } },
-            { 1819, new Dictionary<int, string>(){ 
-    { 2, "DTI-56362-USB Digital Interface Unit" },
+    })
+ },
+            { 1819, Tuple.Create("Domain Technologies, Inc.", new Dictionary<int, string>{
+{ 2, "DTI-56362-USB Digital Interface Unit" },
 { 257, "Audio4-USB DSP Data Acquisition Unit" },
 { 388, "Archos 2 8GB EM184RB" },
 { 513, "Audio4-5410 DSP Data Acquisition Unit" },
 { 769, "SB-USB JTAG Emulator" },
 { 12803, "Rockchip Media Player" },
 { 12987, "Music Mediatouch" },
- } },
-            { 1820, new Dictionary<int, string>(){ 
-     } },
-            { 1821, new Dictionary<int, string>(){ 
-    { 4096, "Diva 2.01 S/T [PSB2115F]" },
+    })
+ },
+            { 1821, Tuple.Create("Eicon Networks Corp.", new Dictionary<int, string>{
+{ 4096, "Diva 2.01 S/T [PSB2115F]" },
 { 4099, "Diva ISDN 2.0" },
 { 4101, "Diva ISDN 4.0 [HFC-S]" },
 { 8192, "Teledat Surf" },
- } },
-            { 1822, new Dictionary<int, string>(){ 
-     } },
-            { 1824, new Dictionary<int, string>(){ 
-    { 32769, "LJ-V7001" },
- } },
-            { 1827, new Dictionary<int, string>(){ 
-    { 2, "Palladia 300/400 Adsl Modem" },
- } },
-            { 1830, new Dictionary<int, string>(){ 
-     } },
-            { 1833, new Dictionary<int, string>(){ 
-    { 4096, "USC-1000 Serial Port" },
- } },
-            { 1838, new Dictionary<int, string>(){ 
-     } },
-            { 1839, new Dictionary<int, string>(){ 
-    { 1, "AC1030-based SmartCard Reader" },
+    })
+ },
+            { 1824, Tuple.Create("Keyence Corp.", new Dictionary<int, string>{
+{ 32769, "LJ-V7001" },
+    })
+ },
+            { 1827, Tuple.Create("Centillium Communications Corp.", new Dictionary<int, string>{
+{ 2, "Palladia 300/400 Adsl Modem" },
+    })
+ },
+            { 1833, Tuple.Create("Amitm", new Dictionary<int, string>{
+{ 4096, "USC-1000 Serial Port" },
+    })
+ },
+            { 1839, Tuple.Create("Advanced Card Systems, Ltd", new Dictionary<int, string>{
+{ 1, "AC1030-based SmartCard Reader" },
 { 8, "ACR 80 Smart Card Reader" },
 { 256, "AET65" },
 { 257, "AET65" },
@@ -14093,14 +10276,14 @@ namespace HardwareInformation.Providers {
 { 45318, "ACOS5T2" },
 { 45568, "ACOS5T1" },
 { 45825, "ACR32-A1" },
- } },
-            { 1841, new Dictionary<int, string>(){ 
-    { 1320, "SonyEricsson DCU-11 Cable" },
- } },
-            { 1842, new Dictionary<int, string>(){ 
-     } },
-            { 1843, new Dictionary<int, string>(){ 
-    { 257, "Digital Video Camera" },
+    })
+ },
+            { 1841, Tuple.Create("Susteen, Inc.", new Dictionary<int, string>{
+{ 1320, "SonyEricsson DCU-11 Cable" },
+    })
+ },
+            { 1843, Tuple.Create("ViewQuest Technologies, Inc.", new Dictionary<int, string>{
+{ 257, "Digital Video Camera" },
 { 272, "VQ110 Video Camera" },
 { 1025, "CS330 Webcam" },
 { 1026, "M-318B Webcam" },
@@ -14115,23 +10298,24 @@ namespace HardwareInformation.Providers {
 { 8737, "Mercury Digital Pro 3.1p" },
 { 12897, "Concord 3045 spca536a Camera" },
 { 12929, "Cyberpix S550V" },
- } },
-            { 1844, new Dictionary<int, string>(){ 
-    { 1, "560V Modem" },
+    })
+ },
+            { 1844, Tuple.Create("Lasat Communications A/S", new Dictionary<int, string>{
+{ 1, "560V Modem" },
 { 2, "Lasat 560V Modem" },
 { 1082, "DVS Audio" },
 { 1083, "3DeMon USB Capture" },
- } },
-            { 1845, new Dictionary<int, string>(){ 
-    { 8448, "ISDN Adapter" },
+    })
+ },
+            { 1845, Tuple.Create("Asuscom Network", new Dictionary<int, string>{
+{ 8448, "ISDN Adapter" },
 { 8449, "ISDN Adapter" },
 { 26260, "ISDNlink 128K" },
 { 50497, "ISDN TA 280" },
- } },
-            { 1846, new Dictionary<int, string>(){ 
-     } },
-            { 1848, new Dictionary<int, string>(){ 
-    { 8725, "X-55 Rhino Stick" },
+    })
+ },
+            { 1848, Tuple.Create("Mad Catz, Inc.", new Dictionary<int, string>{
+{ 8725, "X-55 Rhino Stick" },
 { 8759, "V.1 Stick" },
 { 17670, "Wireless Controller" },
 { 17671, "XBox Device" },
@@ -14171,14 +10355,14 @@ namespace HardwareInformation.Providers {
 { 51971, "Saitek P3200 Rumble Pad" },
 { 52009, "Saitek Aviator Stick AV8R02" },
 { 63288, "Super Street Fighter IV FightStick TE S for Xbox 360" },
- } },
-            { 1850, new Dictionary<int, string>(){ 
-    { 8752, "infrared dongle for remote" },
- } },
-            { 1851, new Dictionary<int, string>(){ 
-     } },
-            { 1852, new Dictionary<int, string>(){ 
-    { 773, "Pole Display (PC305-3415  2 x 20 Line Display)" },
+    })
+ },
+            { 1850, Tuple.Create("Chaplet Systems, Inc.", new Dictionary<int, string>{
+{ 8752, "infrared dongle for remote" },
+    })
+ },
+            { 1852, Tuple.Create("Industrial Electronic Engineers, Inc.", new Dictionary<int, string>{
+{ 773, "Pole Display (PC305-3415  2 x 20 Line Display)" },
 { 802, "Pole Display (PC322-3415  2 x 20 Line Display)" },
 { 804, "Pole Display (LB324-USB   4 x 20 Line Display)" },
 { 816, "Pole Display (P330-3415   2 x 20 Line Display)" },
@@ -14187,62 +10371,53 @@ namespace HardwareInformation.Providers {
 { 1285, "Pole Display (SPC505-3415 2 x 20 Line Display)" },
 { 1314, "Pole Display (SPC522-3415 2 x 20 Line Display)" },
 { 1572, "Pole Display (SP324-3415  4 x 20 Line Display)" },
- } },
-            { 1853, new Dictionary<int, string>(){ 
-    { 0, "SmartKey" },
+    })
+ },
+            { 1853, Tuple.Create("Eutron S.p.a.", new Dictionary<int, string>{
+{ 0, "SmartKey" },
 { 5, "Crypto Token" },
 { 7, "CryptoIdentity CCID" },
 { 37, "SmartKey 3" },
 { 3072, "Pocket Reader" },
 { 3328, "StarSign Bio Token 3.0 EU" },
- } },
-            { 1854, new Dictionary<int, string>(){ 
-    { 769, "Game Pad" },
- } },
-            { 1858, new Dictionary<int, string>(){ 
-    { 8200, "ISDN TA [HFC-S]" },
+    })
+ },
+            { 1854, Tuple.Create("NEC, Inc.", new Dictionary<int, string>{
+{ 769, "Game Pad" },
+    })
+ },
+            { 1858, Tuple.Create("Stollmann", new Dictionary<int, string>{
+{ 8200, "ISDN TA [HFC-S]" },
 { 8201, "ISDN TA [HFC-S]" },
 { 8202, "ISDN TA [HFC-S]" },
- } },
-            { 1861, new Dictionary<int, string>(){ 
-     } },
-            { 1862, new Dictionary<int, string>(){ 
-    { 18176, "Integra MZA-4.7" },
+    })
+ },
+            { 1862, Tuple.Create("Onkyo Corp.", new Dictionary<int, string>{
+{ 18176, "Integra MZA-4.7" },
 { 21760, "SE-U55 Audio Device" },
- } },
-            { 1863, new Dictionary<int, string>(){ 
-     } },
-            { 1864, new Dictionary<int, string>(){ 
-     } },
-            { 1865, new Dictionary<int, string>(){ 
-     } },
-            { 1866, new Dictionary<int, string>(){ 
-     } },
-            { 1867, new Dictionary<int, string>(){ 
-     } },
-            { 1868, new Dictionary<int, string>(){ 
-     } },
-            { 1869, new Dictionary<int, string>(){ 
-    { 13651, "Composite USB-Device" },
+    })
+ },
+            { 1869, Tuple.Create("Micronas GmbH", new Dictionary<int, string>{
+{ 13651, "Composite USB-Device" },
 { 13652, "Composite USB-Device" },
 { 13654, "Composite USB-Device" },
- } },
-            { 1870, new Dictionary<int, string>(){ 
-    { 1, "PS/2 Adapter" },
+    })
+ },
+            { 1870, Tuple.Create("Digital Stream Corp.", new Dictionary<int, string>{
+{ 1, "PS/2 Adapter" },
 { 2, "PS/2 Adapter" },
- } },
-            { 1877, new Dictionary<int, string>(){ 
-     } },
-            { 1879, new Dictionary<int, string>(){ 
-    { 2560, "SUN Adapter" },
- } },
-            { 1880, new Dictionary<int, string>(){ 
-     } },
-            { 1883, new Dictionary<int, string>(){ 
-    { 1, "Kick-off! Watchdog" },
- } },
-            { 1891, new Dictionary<int, string>(){ 
-    { 277, "O2 / KeyRig 25" },
+    })
+ },
+            { 1879, Tuple.Create("Network Technologies, Inc.", new Dictionary<int, string>{
+{ 2560, "SUN Adapter" },
+    })
+ },
+            { 1883, Tuple.Create("Sophisticated Circuits, Inc.", new Dictionary<int, string>{
+{ 1, "Kick-off! Watchdog" },
+    })
+ },
+            { 1891, Tuple.Create("M-Audio", new Dictionary<int, string>{
+{ 277, "O2 / KeyRig 25" },
 { 279, "Trigger Finger" },
 { 281, "MidAir" },
 { 336, "M-Audio Uno" },
@@ -14302,40 +10477,42 @@ namespace HardwareInformation.Providers {
 { 10267, "M-Audio DFU" },
 { 10368, "M-Audio DFU" },
 { 10369, "M-Audio DFU" },
- } },
-            { 1892, new Dictionary<int, string>(){ 
-    { 5, "Cyber Power UPS" },
+    })
+ },
+            { 1892, Tuple.Create("Cyber Power System, Inc.", new Dictionary<int, string>{
+{ 5, "Cyber Power UPS" },
 { 1281, "CP1500 AVR UPS" },
 { 1537, "PR1500LCDRT2U UPS" },
- } },
-            { 1893, new Dictionary<int, string>(){ 
-    { 20481, "Huey PRO Colorimeter" },
+    })
+ },
+            { 1893, Tuple.Create("X-Rite, Inc.", new Dictionary<int, string>{
+{ 20481, "Huey PRO Colorimeter" },
 { 20496, "X-Rite Pantone Color Sensor" },
 { 20512, "i1 Display Pro" },
 { 24579, "ColorMunki Smile" },
 { 53396, "X-Rite DTP94 [Quato Silver Haze Pro]" },
- } },
-            { 1894, new Dictionary<int, string>(){ 
-    { 23, "Packard Bell Carbon" },
+    })
+ },
+            { 1894, Tuple.Create("Jess-Link Products Co., Ltd", new Dictionary<int, string>{
+{ 23, "Packard Bell Carbon" },
 { 27, "Packard Bell Go" },
 { 516, "TopSpeed Cyberlink Remote Control" },
- } },
-            { 1895, new Dictionary<int, string>(){ 
-     } },
-            { 1896, new Dictionary<int, string>(){ 
-    { 6, "Camtel Technology USB TV Genie Pro FM Model TVB330" },
+    })
+ },
+            { 1896, Tuple.Create("Camtel Technology Corp.", new Dictionary<int, string>{
+{ 6, "Camtel Technology USB TV Genie Pro FM Model TVB330" },
 { 35, "eHome Infrared Receiver" },
- } },
-            { 1897, new Dictionary<int, string>(){ 
-    { 4594, "EP-9001-g 802.11g 54M WLAN Adapter" },
+    })
+ },
+            { 1897, Tuple.Create("Surecom Technology Corp.", new Dictionary<int, string>{
+{ 4594, "EP-9001-g 802.11g 54M WLAN Adapter" },
 { 4595, "RT2570" },
 { 4599, "802.11g 54M WLAN Adapter" },
 { 12787, "RT2573" },
- } },
-            { 1898, new Dictionary<int, string>(){ 
-     } },
-            { 1899, new Dictionary<int, string>(){ 
-    { 1430, "CardMan 2020" },
+    })
+ },
+            { 1899, Tuple.Create("OmniKey AG", new Dictionary<int, string>{
+{ 1430, "CardMan 2020" },
 { 4129, "CardMan 1021" },
 { 4641, "CardMan 1221" },
 { 6020, "CardMan 6020" },
@@ -14355,52 +10532,36 @@ namespace HardwareInformation.Providers {
 { 40994, "CardMan Smart@Link" },
 { 49152, "CardMan 3x21 CS" },
 { 49153, "CardMan 5121 CS" },
- } },
-            { 1900, new Dictionary<int, string>(){ 
-    { 516, "CD7220 Communications Port" },
+    })
+ },
+            { 1900, Tuple.Create("Partner Tech", new Dictionary<int, string>{
+{ 516, "CD7220 Communications Port" },
 { 770, "RP-600" },
- } },
-            { 1901, new Dictionary<int, string>(){ 
-     } },
-            { 1902, new Dictionary<int, string>(){ 
-     } },
-            { 1903, new Dictionary<int, string>(){ 
-     } },
-            { 1904, new Dictionary<int, string>(){ 
-     } },
-            { 1905, new Dictionary<int, string>(){ 
-    { 17493, "OMC45III" },
+    })
+ },
+            { 1905, Tuple.Create("Observator Instruments BV", new Dictionary<int, string>{
+{ 17493, "OMC45III" },
 { 44559, "OMC45III" },
- } },
-            { 1906, new Dictionary<int, string>(){ 
-     } },
-            { 1908, new Dictionary<int, string>(){ 
-     } },
-            { 1909, new Dictionary<int, string>(){ 
-     } },
-            { 1910, new Dictionary<int, string>(){ 
-     } },
-            { 1911, new Dictionary<int, string>(){ 
-     } },
-            { 1912, new Dictionary<int, string>(){ 
-     } },
-            { 1913, new Dictionary<int, string>(){ 
-    { 307, "FUSB307B" },
+    })
+ },
+            { 1913, Tuple.Create("ON Semiconductor (formerly Fairchild)", new Dictionary<int, string>{
+{ 307, "FUSB307B" },
 { 308, "FUSB308B" },
- } },
-            { 1914, new Dictionary<int, string>(){ 
-     } },
-            { 1915, new Dictionary<int, string>(){ 
-    { 2238, "BEFCMU10 v4 Cable Modem" },
+    })
+ },
+            { 1915, Tuple.Create("Linksys", new Dictionary<int, string>{
+{ 2238, "BEFCMU10 v4 Cable Modem" },
 { 8729, "WUSB11 V2.6 802.11b Adapter" },
 { 8742, "USB200M 100baseTX Adapter" },
 { 8743, "Network Everywhere NWU11B" },
- } },
-            { 1916, new Dictionary<int, string>(){ 
-    { 5, "NEC Keyboard" },
- } },
-            { 1917, new Dictionary<int, string>(){ 
-    { 547, "IMic Audio In/Out" },
+    })
+ },
+            { 1916, Tuple.Create("Forward Electronics Co., Ltd", new Dictionary<int, string>{
+{ 5, "NEC Keyboard" },
+    })
+ },
+            { 1917, Tuple.Create("Griffin Technology", new Dictionary<int, string>{
+{ 547, "IMic Audio In/Out" },
 { 1029, "iMate, ADB Adapter" },
 { 1040, "PowerMate" },
 { 1050, "PowerWave" },
@@ -14408,22 +10569,23 @@ namespace HardwareInformation.Providers {
 { 1967, "iMic" },
 { 4118, "AirClick" },
 { 25210, "Radio SHARK" },
- } },
-            { 1918, new Dictionary<int, string>(){ 
-    { 138, "NetLink Compact MPI/Profibus adapter" },
+    })
+ },
+            { 1918, Tuple.Create("Softing AG", new Dictionary<int, string>{
+{ 138, "NetLink Compact MPI/Profibus adapter" },
 { 352, "EDICblue" },
 { 544, "VAS5054A" },
- } },
-            { 1919, new Dictionary<int, string>(){ 
-     } },
-            { 1920, new Dictionary<int, string>(){ 
-    { 4610, "ORGA 900 Smart Card Terminal Virtual Com Port" },
+    })
+ },
+            { 1920, Tuple.Create("Sagem Monetel GmbH", new Dictionary<int, string>{
+{ 4610, "ORGA 900 Smart Card Terminal Virtual Com Port" },
 { 4866, "ORGA 6000 Smart Card Terminal Virtual Com Port" },
 { 4867, "ORGA 6000 Smart Card Terminal USB RNDIS" },
 { 57173, "ORGA 900/6000 Smart Card Terminal DFU" },
- } },
-            { 1921, new Dictionary<int, string>(){ 
-    { 1, "SDDR-05a ImageMate CompactFlash Reader" },
+    })
+ },
+            { 1921, Tuple.Create("SanDisk Corp.", new Dictionary<int, string>{
+{ 1, "SDDR-05a ImageMate CompactFlash Reader" },
 { 2, "SDDR-31 ImageMate II CompactFlash Reader" },
 { 5, "SDDR-05b (CF II) ImageMate CompactFlash Reader" },
 { 256, "ImageMate SDDR-12" },
@@ -14526,17 +10688,17 @@ namespace HardwareInformation.Providers {
 { 46775, "SDDR-99 V4 ImageMate 5-in-1 Reader" },
 { 46778, "CF SDDR-289" },
 { 53193, "SDDR-489 ImageMate Pro Reader" },
- } },
-            { 1922, new Dictionary<int, string>(){ 
-     } },
-            { 1923, new Dictionary<int, string>(){ 
-    { 3, "LTC31 SmartCard Reader" },
+    })
+ },
+            { 1923, Tuple.Create("C3PO", new Dictionary<int, string>{
+{ 3, "LTC31 SmartCard Reader" },
 { 6, "LTC31v2" },
 { 9, "KBR36" },
 { 16, "LTC32" },
- } },
-            { 1924, new Dictionary<int, string>(){ 
-    { 256, "Vivicam 2655" },
+    })
+ },
+            { 1924, Tuple.Create("Vivitar, Inc.", new Dictionary<int, string>{
+{ 256, "Vivicam 2655" },
 { 4880, "Vivicam 3305" },
 { 5768, "Vivicam 3665" },
 { 5769, "Gateway DC-M42/Labtec DC-505/Vivitar Vivicam 3705" },
@@ -14546,13 +10708,15 @@ namespace HardwareInformation.Providers {
 { 17152, "Traveler D1" },
 { 21088, "Werlisa Sport PX 100 / JVC GC-A33 Camera" },
 { 21248, "Pretec dc530" },
- } },
-            { 1925, new Dictionary<int, string>(){ 
-    { 1, "MN128mini-V ISDN TA" },
+    })
+ },
+            { 1925, Tuple.Create("NTT-ME", new Dictionary<int, string>{
+{ 1, "MN128mini-V ISDN TA" },
 { 3, "MN128mini-J ISDN TA" },
- } },
-            { 1929, new Dictionary<int, string>(){ 
-    { 38, "LHD Device" },
+    })
+ },
+            { 1929, Tuple.Create("Logitec Corp.", new Dictionary<int, string>{
+{ 38, "LHD Device" },
 { 51, "DVD Multi-plus unit LDR-H443SU2" },
 { 99, "LDR Device" },
 { 100, "LDR-R Device" },
@@ -14567,37 +10731,24 @@ namespace HardwareInformation.Providers {
 { 358, "LAN-W300N/U2 Wireless LAN Adapter" },
 { 360, "LAN-W150N/U2 Wireless LAN Adapter" },
 { 368, "LAN-W300AN/U2 Wireless LAN Adapter" },
- } },
-            { 1931, new Dictionary<int, string>(){ 
-    { 16, "Driving UGCI" },
+    })
+ },
+            { 1931, Tuple.Create("Happ Controls, Inc.", new Dictionary<int, string>{
+{ 16, "Driving UGCI" },
 { 32, "Flying UGCI" },
 { 48, "Fighting UGCI" },
- } },
-            { 1932, new Dictionary<int, string>(){ 
-    { 144, "Tablet Adapter" },
+    })
+ },
+            { 1932, Tuple.Create("GTCO/CalComp", new Dictionary<int, string>{
+{ 144, "Tablet Adapter" },
 { 256, "Tablet Adapter" },
 { 512, "Tablet Adapter" },
 { 768, "Tablet Adapter" },
 { 1024, "Digitizer (Whiteboard)" },
- } },
-            { 1934, new Dictionary<int, string>(){ 
-     } },
-            { 1936, new Dictionary<int, string>(){ 
-     } },
-            { 1937, new Dictionary<int, string>(){ 
-     } },
-            { 1938, new Dictionary<int, string>(){ 
-     } },
-            { 1939, new Dictionary<int, string>(){ 
-     } },
-            { 1940, new Dictionary<int, string>(){ 
-     } },
-            { 1941, new Dictionary<int, string>(){ 
-     } },
-            { 1942, new Dictionary<int, string>(){ 
-     } },
-            { 1943, new Dictionary<int, string>(){ 
-    { 26625, "Flatbed Scanner" },
+    })
+ },
+            { 1943, Tuple.Create("Grandtech Semiconductor Corp.", new Dictionary<int, string>{
+{ 26625, "Flatbed Scanner" },
 { 26626, "InkJet Color Printer" },
 { 32769, "SmartCam" },
 { 32794, "Typhoon StyloCam" },
@@ -14605,17 +10756,20 @@ namespace HardwareInformation.Providers {
 { 35073, "ScanHex SX-35a" },
 { 35081, "ScanHex SX-35b" },
 { 35089, "ScanHex SX-35c" },
- } },
-            { 1944, new Dictionary<int, string>(){ 
-    { 1, "Braille Voyager" },
+    })
+ },
+            { 1944, Tuple.Create("Optelec", new Dictionary<int, string>{
+{ 1, "Braille Voyager" },
 { 1600, "BC640" },
 { 1664, "BC680" },
- } },
-            { 1945, new Dictionary<int, string>(){ 
-    { 30289, "Programming Unit" },
- } },
-            { 1947, new Dictionary<int, string>(){ 
-    { 36, "MSO300/MSO301 Fingerprint Sensor" },
+    })
+ },
+            { 1945, Tuple.Create("Altera", new Dictionary<int, string>{
+{ 30289, "Programming Unit" },
+    })
+ },
+            { 1947, Tuple.Create("Sagem", new Dictionary<int, string>{
+{ 36, "MSO300/MSO301 Fingerprint Sensor" },
 { 38, "MSO350/MSO351 Fingerprint Sensor & SmartCard Reader" },
 { 39, "USB-Serial Controller" },
 { 47, "Mobile" },
@@ -14629,29 +10783,27 @@ namespace HardwareInformation.Providers {
 { 93, "Mobile Mass Storage" },
 { 98, "XG-76NA 802.11bg" },
 { 120, "Laser Pro Monochrome MFP" },
- } },
-            { 1949, new Dictionary<int, string>(){ 
-    { 513, "GamePort Adapter" },
- } },
-            { 1953, new Dictionary<int, string>(){ 
-    { 55634, "Palladio USB V.92 Modem" },
- } },
-            { 1954, new Dictionary<int, string>(){ 
-     } },
-            { 1955, new Dictionary<int, string>(){ 
-     } },
-            { 1956, new Dictionary<int, string>(){ 
-     } },
-            { 1958, new Dictionary<int, string>(){ 
-    { 1986, "AN986A Ethernet" },
+    })
+ },
+            { 1949, Tuple.Create("Alfadata Computer Corp.", new Dictionary<int, string>{
+{ 513, "GamePort Adapter" },
+    })
+ },
+            { 1953, Tuple.Create("Digicom S.p.A.", new Dictionary<int, string>{
+{ 55634, "Palladio USB V.92 Modem" },
+    })
+ },
+            { 1958, Tuple.Create("ADMtek, Inc.", new Dictionary<int, string>{
+{ 1986, "AN986A Ethernet" },
 { 2438, "AN986 Pegasus Ethernet" },
 { 33382, "Infineon WildCard-USB Wireless LAN Adapter" },
 { 34065, "ADM8511 Pegasus II Ethernet" },
 { 34067, "ADM8513 Pegasus II Ethernet" },
 { 34069, "ADM8515 Pegasus II Ethernet" },
- } },
-            { 1962, new Dictionary<int, string>(){ 
-    { 1, "Ether USB-T Ethernet [klsi]" },
+    })
+ },
+            { 1962, Tuple.Create("Corega K.K.", new Dictionary<int, string>{
+{ 1, "Ether USB-T Ethernet [klsi]" },
 { 4, "FEther USB-TX Ethernet [pegasus]" },
 { 12, "WirelessLAN USB-11" },
 { 13, "FEther USB-TXS" },
@@ -14674,9 +10826,10 @@ namespace HardwareInformation.Providers {
 { 81, "CG-WLUSB300NM" },
 { 30227, "Stick-11 V2 802.11b Adapter" },
 { 38401, "FEther USB-TXC" },
- } },
-            { 1963, new Dictionary<int, string>(){ 
-    { 64513, "IDE bridge" },
+    })
+ },
+            { 1963, Tuple.Create("Freecom Technologies", new Dictionary<int, string>{
+{ 64513, "IDE bridge" },
 { 64514, "Cable II USB-2" },
 { 64515, "USB2-IDE IDE bridge" },
 { 64631, "Quattro 3.0" },
@@ -14684,26 +10837,27 @@ namespace HardwareInformation.Providers {
 { 64758, "DataBar" },
 { 64760, "Freecom Classic SL Network Drive" },
 { 64766, "Hard Drive 80GB" },
- } },
-            { 1967, new Dictionary<int, string>(){ 
-    { 4, "SCSI-DB25 SCSI Bridge [shuttle]" },
+    })
+ },
+            { 1967, Tuple.Create("Microtech", new Dictionary<int, string>{
+{ 4, "SCSI-DB25 SCSI Bridge [shuttle]" },
 { 5, "SCSI-HD50 SCSI Bridge [shuttle]" },
 { 6, "CameraMate SmartMedia and CompactFlash Card Reader [eusb/shuttle]" },
 { 64513, "Freecom USB-IDE" },
- } },
-            { 1968, new Dictionary<int, string>(){ 
-    { 1, "ISDN TA" },
+    })
+ },
+            { 1968, Tuple.Create("Trust Technologies", new Dictionary<int, string>{
+{ 1, "ISDN TA" },
 { 2, "ISDN TA128 Plus" },
 { 3, "ISDN TA128 Deluxe" },
 { 5, "ISDN TA128 SE" },
 { 6, "ISDN TA 128 [HFC-S]" },
 { 7, "ISDN TA [HFC-S]" },
 { 8, "ISDN TA" },
- } },
-            { 1969, new Dictionary<int, string>(){ 
-     } },
-            { 1970, new Dictionary<int, string>(){ 
-    { 256, "SURFboard Voice over IP Cable Modem" },
+    })
+ },
+            { 1970, Tuple.Create("Motorola BCS, Inc.", new Dictionary<int, string>{
+{ 256, "SURFboard Voice over IP Cable Modem" },
 { 2304, "SURFboard Gateway" },
 { 2384, "SURFboard SBG950 Gateway" },
 { 4096, "SURFboard SBG1000 Gateway" },
@@ -14720,9 +10874,10 @@ namespace HardwareInformation.Providers {
 { 20769, "Surfboard 5121 Cable Modem" },
 { 24578, "MTR7000 Cable Tuning Adapter" },
 { 28720, "WU830G 802.11bg Wireless Adapter [Envara WiND512]" },
- } },
-            { 1971, new Dictionary<int, string>(){ 
-    { 1, "OpticPro 1212U Scanner" },
+    })
+ },
+            { 1971, Tuple.Create("Plustek, Inc.", new Dictionary<int, string>{
+{ 1, "OpticPro 1212U Scanner" },
 { 3, "Scanner" },
 { 16, "OpticPro U12 Scanner" },
 { 17, "OpticPro U24 Scanner" },
@@ -14757,9 +10912,10 @@ namespace HardwareInformation.Providers {
 { 4864, "OpticBook 3800 Scanner" },
 { 4865, "OpticBook 4800 Scanner" },
 { 4879, "Bookreader v200" },
- } },
-            { 1972, new Dictionary<int, string>(){ 
-    { 256, "Camedia C-2100/C-3000 Ultra Zoom Camera" },
+    })
+ },
+            { 1972, Tuple.Create("Olympus Optical Co., Ltd", new Dictionary<int, string>{
+{ 256, "Camedia C-2100/C-3000 Ultra Zoom Camera" },
 { 258, "Camedia E-10/C-220/C-50 Camera" },
 { 261, "Camedia C-310Z/C-700/C-750UZ/C-755/C-765UZ/C-3040/C-4000/C-5050Z/D-560/C-3020Z Zoom Camera" },
 { 265, "C-370Z/C-500Z/D-535Z/X-450" },
@@ -14784,19 +10940,17 @@ namespace HardwareInformation.Providers {
 { 591, "Digital Voice Recorder DS-7000" },
 { 640, "m:robe 100" },
 { 661, "Digital Voice Recorder VN-541PC" },
- } },
-            { 1973, new Dictionary<int, string>(){ 
-    { 23, "Joystick" },
+    })
+ },
+            { 1973, Tuple.Create("Mega World International, Ltd", new Dictionary<int, string>{
+{ 23, "Joystick" },
 { 531, "Thrustmaster Firestorm Digital 3 Gamepad" },
 { 786, "Gamepad" },
 { 39170, "GamePad" },
- } },
-            { 1974, new Dictionary<int, string>(){ 
-     } },
-            { 1975, new Dictionary<int, string>(){ 
-     } },
-            { 1976, new Dictionary<int, string>(){ 
-    { 4364, "XX1" },
+    })
+ },
+            { 1976, Tuple.Create("AboCom Systems Inc", new Dictionary<int, string>{
+{ 4364, "XX1" },
 { 4609, "IEEE 802.11b Adapter" },
 { 8204, "XX2" },
 { 9587, "Wireless LAN Card" },
@@ -14850,16 +11004,14 @@ namespace HardwareInformation.Providers {
 { 57354, "Mass Storage Device" },
 { 58608, "Card Reader Driver" },
 { 61697, "DSB-560 Modem [atlas]" },
- } },
-            { 1980, new Dictionary<int, string>(){ 
-     } },
-            { 1981, new Dictionary<int, string>(){ 
-     } },
-            { 1982, new Dictionary<int, string>(){ 
-    { 6453, "Elektron Music Machines" },
- } },
-            { 1984, new Dictionary<int, string>(){ 
-    { 4371, "JoyWarrior24F8" },
+    })
+ },
+            { 1982, Tuple.Create("Veridicom", new Dictionary<int, string>{
+{ 6453, "Elektron Music Machines" },
+    })
+ },
+            { 1984, Tuple.Create("Code Mercenaries Hard- und Software GmbH", new Dictionary<int, string>{
+{ 4371, "JoyWarrior24F8" },
 { 4374, "JoyWarrior24F14" },
 { 4385, "The Claw" },
 { 5376, "IO-Warrior 40" },
@@ -14868,12 +11020,14 @@ namespace HardwareInformation.Providers {
 { 5379, "IO-Warrior 28" },
 { 5393, "IO-Warrior 24 Power Vampire" },
 { 5394, "IO-Warrior 24 Power Vampire" },
- } },
-            { 1985, new Dictionary<int, string>(){ 
-    { 104, "HKS-0200 USBDAQ" },
- } },
-            { 1988, new Dictionary<int, string>(){ 
-    { 258, "USB to LS120" },
+    })
+ },
+            { 1985, Tuple.Create("Keisokugiken", new Dictionary<int, string>{
+{ 104, "HKS-0200 USBDAQ" },
+    })
+ },
+            { 1988, Tuple.Create("Datafab Systems, Inc.", new Dictionary<int, string>{
+{ 258, "USB to LS120" },
 { 259, "USB to IDE" },
 { 4660, "USB to ATAPI" },
 { 40960, "CompactFlash Card Reader" },
@@ -14902,24 +11056,27 @@ namespace HardwareInformation.Providers {
 { 45066, "USB to CF+SD Drive(LC1)" },
 { 45067, "USB to Memory Stick(LC1)" },
 { 49168, "Kingston FCR-HS2/ATA Card Reader" },
- } },
-            { 1989, new Dictionary<int, string>(){ 
-    { 1280, "Cash Drawer" },
- } },
-            { 1990, new Dictionary<int, string>(){ 
-    { 2, "Bodega Wireless Access Point" },
+    })
+ },
+            { 1989, Tuple.Create("APG Cash Drawer", new Dictionary<int, string>{
+{ 1280, "Cash Drawer" },
+    })
+ },
+            { 1990, Tuple.Create("ShareWave, Inc.", new Dictionary<int, string>{
+{ 2, "Bodega Wireless Access Point" },
 { 3, "Bodega Wireless Network Adapter" },
- } },
-            { 1991, new Dictionary<int, string>(){ 
-     } },
-            { 1992, new Dictionary<int, string>(){ 
-    { 514, "MN128-SOHO PAL" },
- } },
-            { 1993, new Dictionary<int, string>(){ 
-    { 45312, "AT-USB100" },
- } },
-            { 1994, new Dictionary<int, string>(){ 
-    { 2, "AVerTV PVR USB/EZMaker Pro Device" },
+    })
+ },
+            { 1992, Tuple.Create("B.U.G., Inc.", new Dictionary<int, string>{
+{ 514, "MN128-SOHO PAL" },
+    })
+ },
+            { 1993, Tuple.Create("Allied Telesyn International", new Dictionary<int, string>{
+{ 45312, "AT-USB100" },
+    })
+ },
+            { 1994, Tuple.Create("AVerMedia Technologies, Inc.", new Dictionary<int, string>{
+{ 2, "AVerTV PVR USB/EZMaker Pro Device" },
 { 38, "AVerTV" },
 { 823, "A867 DVB-T dongle" },
 { 2103, "H837 Hybrid ATSC/QAM" },
@@ -14938,11 +11095,10 @@ namespace HardwareInformation.Providers {
 { 47104, "MR800 FM Radio" },
 { 59520, "MPEG-2 Capture Device (E880)" },
 { 59522, "MPEG-2 Capture Device (E882)" },
- } },
-            { 1995, new Dictionary<int, string>(){ 
-     } },
-            { 1996, new Dictionary<int, string>(){ 
-    { 0, "CF Card Reader" },
+    })
+ },
+            { 1996, Tuple.Create("Carry Computer Eng., Co., Ltd", new Dictionary<int, string>{
+{ 0, "CF Card Reader" },
 { 1, "Reader (UICSE)" },
 { 2, "Reader (UIS)" },
 { 3, "SM Card Reader" },
@@ -15000,17 +11156,20 @@ namespace HardwareInformation.Providers {
 { 848, "9-in-1 Card Reader" },
 { 1280, "Mass Storage" },
 { 1281, "Mass Storage" },
- } },
-            { 1997, new Dictionary<int, string>(){ 
-    { 1, "USBuart Serial Port" },
- } },
-            { 1998, new Dictionary<int, string>(){ 
-    { 49159, "DPB-4000" },
+    })
+ },
+            { 1997, Tuple.Create("Elektor", new Dictionary<int, string>{
+{ 1, "USBuart Serial Port" },
+    })
+ },
+            { 1998, Tuple.Create("Nidec Copal", new Dictionary<int, string>{
+{ 49159, "DPB-4000" },
 { 49161, "DPB-6000" },
 { 49168, "CPB-7000" },
- } },
-            { 1999, new Dictionary<int, string>(){ 
-    { 4097, "QV-8000SX/5700/3000EX Digicam; Exilim EX-M20" },
+    })
+ },
+            { 1999, Tuple.Create("Casio Computer Co., Ltd", new Dictionary<int, string>{
+{ 4097, "QV-8000SX/5700/3000EX Digicam; Exilim EX-M20" },
 { 4099, "Exilim EX-S500" },
 { 4100, "Exilim EX-Z120" },
 { 4113, "USB-CASIO PC CAMERA" },
@@ -15031,9 +11190,10 @@ namespace HardwareInformation.Providers {
 { 26625, "PL-40R" },
 { 26626, "MIDI Keyboard" },
 { 26627, "CTK-3500 (MIDI keyboard)" },
- } },
-            { 2000, new Dictionary<int, string>(){ 
-    { 1, "Digital Video Creator I" },
+    })
+ },
+            { 2000, Tuple.Create("Dazzle", new Dictionary<int, string>{
+{ 1, "Digital Video Creator I" },
 { 2, "Global Village VideoFX Grabber" },
 { 3, "Fusion Model DVC-50 Rev 1 (NTSC)" },
 { 4, "DVC-800 (PAL) Grabber" },
@@ -15054,9 +11214,10 @@ namespace HardwareInformation.Providers {
 { 16640, "Kingsun SF-620 Infrared Adapter" },
 { 16641, "Connectivity Cable (CA-42 clone)" },
 { 18777, "Kingsun KS-959 Infrared Adapter" },
- } },
-            { 2001, new Dictionary<int, string>(){ 
-    { 5100, "VvBus for Helium 2xx" },
+    })
+ },
+            { 2001, Tuple.Create("D-Link System", new Dictionary<int, string>{
+{ 5100, "VvBus for Helium 2xx" },
 { 5101, "VvBus for Helium 2xx" },
 { 5105, "DSL-302G Modem" },
 { 5106, "DSL-502G Router" },
@@ -15094,101 +11255,82 @@ namespace HardwareInformation.Providers {
 { 43008, "DWM-152 3.75G HSUPA Adapter" },
 { 61697, "DBT-122 Bluetooth" },
 { 64513, "DBT-120 Bluetooth Adapter" },
- } },
-            { 2002, new Dictionary<int, string>(){ 
-     } },
-            { 2003, new Dictionary<int, string>(){ 
-     } },
-            { 2005, new Dictionary<int, string>(){ 
-     } },
-            { 2007, new Dictionary<int, string>(){ 
-     } },
-            { 2010, new Dictionary<int, string>(){ 
-     } },
-            { 2014, new Dictionary<int, string>(){ 
-    { 10272, "VC500 Video Capture Dongle" },
- } },
-            { 2015, new Dictionary<int, string>(){ 
-     } },
-            { 2016, new Dictionary<int, string>(){ 
-    { 18242, "VPN GovNet Box" },
- } },
-            { 2017, new Dictionary<int, string>(){ 
-    { 20993, "V.90 Modem" },
- } },
-            { 2018, new Dictionary<int, string>(){ 
-     } },
-            { 2019, new Dictionary<int, string>(){ 
-     } },
-            { 2020, new Dictionary<int, string>(){ 
-    { 2407, "SCard R/W CSR-145" },
+    })
+ },
+            { 2014, Tuple.Create("Diamond Multimedia", new Dictionary<int, string>{
+{ 10272, "VC500 Video Capture Dongle" },
+    })
+ },
+            { 2016, Tuple.Create("NCP engineering GmbH", new Dictionary<int, string>{
+{ 18242, "VPN GovNet Box" },
+    })
+ },
+            { 2017, Tuple.Create("Ambient Technologies, Inc.", new Dictionary<int, string>{
+{ 20993, "V.90 Modem" },
+    })
+ },
+            { 2020, Tuple.Create("Movado Enterprise Co., Ltd", new Dictionary<int, string>{
+{ 2407, "SCard R/W CSR-145" },
 { 2408, "SCard R/W CSR-145" },
- } },
-            { 2021, new Dictionary<int, string>(){ 
-    { 1474, "IDE-to-USB2.0 PCA" },
+    })
+ },
+            { 2021, Tuple.Create("QPS, Inc.", new Dictionary<int, string>{
+{ 1474, "IDE-to-USB2.0 PCA" },
 { 23553, "Que! CDRW" },
- } },
-            { 2022, new Dictionary<int, string>(){ 
-     } },
-            { 2023, new Dictionary<int, string>(){ 
-     } },
-            { 2024, new Dictionary<int, string>(){ 
-     } },
-            { 2026, new Dictionary<int, string>(){ 
-     } },
-            { 2027, new Dictionary<int, string>(){ 
-     } },
-            { 2028, new Dictionary<int, string>(){ 
-     } },
-            { 2030, new Dictionary<int, string>(){ 
-    { 2, "Cash Drawer I/F" },
- } },
-            { 2031, new Dictionary<int, string>(){ 
-    { 1, "Internet Access Device" },
- } },
-            { 2034, new Dictionary<int, string>(){ 
-    { 1, "KEYLOK II" },
- } },
-            { 2038, new Dictionary<int, string>(){ 
-     } },
-            { 2039, new Dictionary<int, string>(){ 
-    { 5, "ScanLogic/Century Corporation uATA" },
+    })
+ },
+            { 2030, Tuple.Create("Torex Retail (formerly Logware)", new Dictionary<int, string>{
+{ 2, "Cash Drawer I/F" },
+    })
+ },
+            { 2031, Tuple.Create("STSN", new Dictionary<int, string>{
+{ 1, "Internet Access Device" },
+    })
+ },
+            { 2034, Tuple.Create("Microcomputer Applications, Inc.", new Dictionary<int, string>{
+{ 1, "KEYLOK II" },
+    })
+ },
+            { 2039, Tuple.Create("Century Corp.", new Dictionary<int, string>{
+{ 5, "ScanLogic/Century Corporation uATA" },
 { 286, "Century USB Disk Enclosure" },
- } },
-            { 2041, new Dictionary<int, string>(){ 
-     } },
-            { 2042, new Dictionary<int, string>(){ 
-    { 1912, "miniVigor 128 ISDN TA" },
+    })
+ },
+            { 2042, Tuple.Create("DrayTek Corp.", new Dictionary<int, string>{
+{ 1912, "miniVigor 128 ISDN TA" },
 { 2118, "ISDN TA [HFC-S]" },
 { 2119, "ISDN TA [HFC-S]" },
 { 4114, "BeWAN ADSL USB ST (grey)" },
 { 4502, "BWIFI-USB54AR 802.11bg" },
 { 43268, "BeWAN ADSL" },
 { 43269, "BeWAN ADSL ST" },
- } },
-            { 2044, new Dictionary<int, string>(){ 
-    { 4371, "SWISSONIC EasyKeys61 Midikeyboard" },
- } },
-            { 2045, new Dictionary<int, string>(){ 
-    { 0, "FastLane MIDI Interface" },
+    })
+ },
+            { 2044, Tuple.Create("Thomann", new Dictionary<int, string>{
+{ 4371, "SWISSONIC EasyKeys61 Midikeyboard" },
+    })
+ },
+            { 2045, Tuple.Create("Mark of the Unicorn", new Dictionary<int, string>{
+{ 0, "FastLane MIDI Interface" },
 { 1, "MIDI Interface" },
 { 2, "MOTU Audio for 64 bit" },
 { 4, "MicroBook" },
 { 8, "M Series" },
- } },
-            { 2047, new Dictionary<int, string>(){ 
-    { 255, "Portable Hard Drive" },
+    })
+ },
+            { 2047, Tuple.Create("Unknown", new Dictionary<int, string>{
+{ 255, "Portable Hard Drive" },
 { 65535, "Mad Catz Gamepad" },
- } },
-            { 2049, new Dictionary<int, string>(){ 
-    { 1, "Mini Swipe Reader (Keyboard Emulation)" },
+    })
+ },
+            { 2049, Tuple.Create("MagTek", new Dictionary<int, string>{
+{ 1, "Mini Swipe Reader (Keyboard Emulation)" },
 { 2, "Mini Swipe Reader" },
 { 3, "Magstripe Insert Reader" },
- } },
-            { 2050, new Dictionary<int, string>(){ 
-     } },
-            { 2051, new Dictionary<int, string>(){ 
-    { 4864, "V92 Faxmodem" },
+    })
+ },
+            { 2051, Tuple.Create("Zoom Telephonics, Inc.", new Dictionary<int, string>{
+{ 4864, "V92 Faxmodem" },
 { 12437, "V.92 56K Mini External Modem Model 3095" },
 { 17168, "4410a Wireless-G Adapter [Intersil ISL3887]" },
 { 17424, "4410b Wireless-G Adapter [ZyDAS ZD1211B]" },
@@ -15197,78 +11339,75 @@ namespace HardwareInformation.Providers {
 { 38656, "2986L FaxModem" },
 { 38912, "Cable Modem" },
 { 41746, "Wireless-G" },
- } },
-            { 2057, new Dictionary<int, string>(){ 
-     } },
-            { 2058, new Dictionary<int, string>(){ 
-     } },
-            { 2059, new Dictionary<int, string>(){ 
-    { 2, "Fingerprint Scanner (After ReNumeration)" },
+    })
+ },
+            { 2059, Tuple.Create("Cross Match Technologies", new Dictionary<int, string>{
+{ 2, "Fingerprint Scanner (After ReNumeration)" },
 { 16, "300LC Series Fingerprint Scanner (Before ReNumeration)" },
- } },
-            { 2060, new Dictionary<int, string>(){ 
-    { 768, "Gryphon D120 Barcode Scanner" },
+    })
+ },
+            { 2060, Tuple.Create("Datalogic S.p.A.", new Dictionary<int, string>{
+{ 768, "Gryphon D120 Barcode Scanner" },
 { 1024, "Gryphon D120 Barcode Scanner" },
 { 1280, "Gryphon D120 Barcode Scanner" },
 { 1536, "Gryphon M100 Barcode Scanner" },
- } },
-            { 2061, new Dictionary<int, string>(){ 
-    { 258, "Hercules Scan@home 48" },
+    })
+ },
+            { 2061, Tuple.Create("Teco Image Systems Co., Ltd", new Dictionary<int, string>{
+{ 258, "Hercules Scan@home 48" },
 { 260, "3.2Slim" },
 { 272, "UMAX AstraSlim 1200 Scanner" },
- } },
-            { 2064, new Dictionary<int, string>(){ 
-    { 1, "Dual PSX Adaptor" },
+    })
+ },
+            { 2064, Tuple.Create("Personal Communication Systems, Inc.", new Dictionary<int, string>{
+{ 1, "Dual PSX Adaptor" },
 { 2, "Dual PCS Adaptor" },
 { 3, "PlayStation Gamepad" },
 { 57345, "Twin controller" },
 { 58625, "SNES Gamepad" },
- } },
-            { 2067, new Dictionary<int, string>(){ 
-    { 1, "Intel Play QX3 Microscope" },
+    })
+ },
+            { 2067, Tuple.Create("Mattel, Inc.", new Dictionary<int, string>{
+{ 1, "Intel Play QX3 Microscope" },
 { 2, "Dual Mode Camera Plus" },
- } },
-            { 2073, new Dictionary<int, string>(){ 
-    { 257, "License Management and Copy Protection" },
- } },
-            { 2074, new Dictionary<int, string>(){ 
-    { 4096, "Duo Pen Tablet" },
- } },
-            { 2075, new Dictionary<int, string>(){ 
-    { 1536, "Storage Adapter" },
+    })
+ },
+            { 2073, Tuple.Create("eLicenser", new Dictionary<int, string>{
+{ 257, "License Management and Copy Protection" },
+    })
+ },
+            { 2074, Tuple.Create("MG Logic", new Dictionary<int, string>{
+{ 4096, "Duo Pen Tablet" },
+    })
+ },
+            { 2075, Tuple.Create("Indigita Corp.", new Dictionary<int, string>{
+{ 1536, "Storage Adapter" },
 { 1537, "Storage Adapter" },
- } },
-            { 2076, new Dictionary<int, string>(){ 
-     } },
-            { 2078, new Dictionary<int, string>(){ 
-    { 57088, "Handheld" },
- } },
-            { 2079, new Dictionary<int, string>(){ 
-    { 58369, "MM812" },
- } },
-            { 2082, new Dictionary<int, string>(){ 
-    { 8193, "IRXpress Infrared Device" },
- } },
-            { 2085, new Dictionary<int, string>(){ 
-     } },
-            { 2086, new Dictionary<int, string>(){ 
-     } },
-            { 2087, new Dictionary<int, string>(){ 
-     } },
-            { 2088, new Dictionary<int, string>(){ 
-     } },
-            { 2089, new Dictionary<int, string>(){ 
-     } },
-            { 2093, new Dictionary<int, string>(){ 
-    { 256, "Visor" },
+    })
+ },
+            { 2078, Tuple.Create("AlphaSmart, Inc.", new Dictionary<int, string>{
+{ 57088, "Handheld" },
+    })
+ },
+            { 2079, Tuple.Create("Manta", new Dictionary<int, string>{
+{ 58369, "MM812" },
+    })
+ },
+            { 2082, Tuple.Create("Reudo Corp.", new Dictionary<int, string>{
+{ 8193, "IRXpress Infrared Device" },
+    })
+ },
+            { 2093, Tuple.Create("Handspring", new Dictionary<int, string>{
+{ 256, "Visor" },
 { 512, "Treo" },
 { 768, "Treo 600" },
 { 1024, "Handheld" },
 { 1280, "Handheld" },
 { 1536, "Handheld" },
- } },
-            { 2096, new Dictionary<int, string>(){ 
-    { 1, "m500" },
+    })
+ },
+            { 2096, Tuple.Create("Palm, Inc.", new Dictionary<int, string>{
+{ 1, "m500" },
 { 2, "m505" },
 { 3, "m515" },
 { 4, "Handheld" },
@@ -15312,21 +11451,23 @@ namespace HardwareInformation.Providers {
 { 130, "Handheld" },
 { 160, "Treo 800w" },
 { 257, "Pre" },
- } },
-            { 2098, new Dictionary<int, string>(){ 
-    { 22608, "Cable" },
- } },
-            { 2099, new Dictionary<int, string>(){ 
-    { 302, "KeikaiDenwa 8 with charger" },
+    })
+ },
+            { 2098, Tuple.Create("Kouwell Electronics Corp.", new Dictionary<int, string>{
+{ 22608, "Cable" },
+    })
+ },
+            { 2099, Tuple.Create("Sourcenext Corp.", new Dictionary<int, string>{
+{ 302, "KeikaiDenwa 8 with charger" },
 { 927, "KeikaiDenwa 8" },
- } },
-            { 2101, new Dictionary<int, string>(){ 
-     } },
-            { 2102, new Dictionary<int, string>(){ 
-    { 10294, "i.Beat mood" },
- } },
-            { 2105, new Dictionary<int, string>(){ 
-    { 5, "Digimax Camera" },
+    })
+ },
+            { 2102, Tuple.Create("TrekStor", new Dictionary<int, string>{
+{ 10294, "i.Beat mood" },
+    })
+ },
+            { 2105, Tuple.Create("Samsung Techwin Co., Ltd", new Dictionary<int, string>{
+{ 5, "Digimax Camera" },
 { 8, "Digimax 230 Camera" },
 { 9, "Digimax 340" },
 { 10, "Digimax 410" },
@@ -15341,9 +11482,10 @@ namespace HardwareInformation.Providers {
 { 4196, "Digimax D830 Camera" },
 { 5442, "Digimax 50 Duo" },
 { 12288, "Digimax 35 MP3" },
- } },
-            { 2106, new Dictionary<int, string>(){ 
-    { 4166, "10/100 Ethernet [pegasus]" },
+    })
+ },
+            { 2106, Tuple.Create("Accton Technology Corp.", new Dictionary<int, string>{
+{ 4166, "10/100 Ethernet [pegasus]" },
 { 4192, "HomeLine Adapter" },
 { 8013, "SMC8013WG Broadband Remote NDIS Device" },
 { 12358, "10/100 Series Adapter" },
@@ -15382,20 +11524,22 @@ namespace HardwareInformation.Providers {
 { 62721, "802.11g Wireless Adapter" },
 { 62722, "802.11g Wireless Adapter" },
 { 62754, "Arcadyan WN7512 802.11n" },
- } },
-            { 2111, new Dictionary<int, string>(){ 
-    { 45312, "TelePort V.90 Fax/Modem" },
- } },
-            { 2112, new Dictionary<int, string>(){ 
-    { 96, "Storage Adapter Bridge Module" },
- } },
-            { 2113, new Dictionary<int, string>(){ 
-    { 1, "Rio 500" },
- } },
-            { 2116, new Dictionary<int, string>(){ 
-     } },
-            { 2118, new Dictionary<int, string>(){ 
-    { 4097, "EA101 10 Mbps 10BASE-T Ethernet [Kawasaki LSI KL5KLUSB101B]" },
+    })
+ },
+            { 2111, Tuple.Create("Global Village", new Dictionary<int, string>{
+{ 45312, "TelePort V.90 Fax/Modem" },
+    })
+ },
+            { 2112, Tuple.Create("Argosy Research, Inc.", new Dictionary<int, string>{
+{ 96, "Storage Adapter Bridge Module" },
+    })
+ },
+            { 2113, Tuple.Create("Rioport.com, Inc.", new Dictionary<int, string>{
+{ 1, "Rio 500" },
+    })
+ },
+            { 2118, Tuple.Create("NetGear, Inc.", new Dictionary<int, string>{
+{ 4097, "EA101 10 Mbps 10BASE-T Ethernet [Kawasaki LSI KL5KLUSB101B]" },
 { 4098, "Ethernet" },
 { 4128, "FA101 Fast Ethernet USB 1.1" },
 { 4160, "FA120 Fast Ethernet USB 2.0 [Asix AX88172 / AX8817x]" },
@@ -15433,53 +11577,56 @@ namespace HardwareInformation.Providers {
 { 36948, "Nighthawk A7000 802.11ac Wireless Adapter AC1900 [Realtek 8814AU]" },
 { 40961, "PA101 10 Mbps HPNA Home Phoneline RJ-1" },
 { 61441, "On Networks N300MA 802.11bgn [Realtek RTL8192CU]" },
- } },
-            { 2125, new Dictionary<int, string>(){ 
-    { 1, "Jenoptik JD800i" },
+    })
+ },
+            { 2125, Tuple.Create("Minton Optic Industry Co., Inc.", new Dictionary<int, string>{
+{ 1, "Jenoptik JD800i" },
 { 3, "S-Cam F5/D-Link DSC-350 Digital Camera" },
 { 17, "Argus DC3500 Digital Camera" },
 { 20, "Praktica DC 32" },
 { 25, "Praktica DPix3000" },
 { 37, "Praktica DC 60" },
 { 4097, "ScanHex SX-35d" },
- } },
-            { 2126, new Dictionary<int, string>(){ 
-    { 1, "JamCam Camera" },
+    })
+ },
+            { 2126, Tuple.Create("KB Gear", new Dictionary<int, string>{
+{ 1, "JamCam Camera" },
 { 4097, "Jam Studio Tablet" },
 { 4098, "Pablo Tablet" },
- } },
-            { 2127, new Dictionary<int, string>(){ 
-    { 1, "Empeg-Car Mark I/II Player" },
- } },
-            { 2128, new Dictionary<int, string>(){ 
-     } },
-            { 2129, new Dictionary<int, string>(){ 
-    { 5442, "SiPix Blink" },
+    })
+ },
+            { 2127, Tuple.Create("Empeg", new Dictionary<int, string>{
+{ 1, "Empeg-Car Mark I/II Player" },
+    })
+ },
+            { 2129, Tuple.Create("Macronix International Co., Ltd", new Dictionary<int, string>{
+{ 5442, "SiPix Blink" },
 { 5443, "Maxell WS30 Slim Digital Camera, or Pandigital PI8004W01 digital photo frame" },
 { 41320, "MXIC" },
- } },
-            { 2130, new Dictionary<int, string>(){ 
-     } },
-            { 2131, new Dictionary<int, string>(){ 
-    { 256, "HHKB Professional" },
+    })
+ },
+            { 2131, Tuple.Create("Topre Corporation", new Dictionary<int, string>{
+{ 256, "HHKB Professional" },
 { 281, "RealForce 105UB" },
 { 512, "RealForce Compact Keyboard" },
- } },
-            { 2132, new Dictionary<int, string>(){ 
-    { 256, "I/O Board" },
+    })
+ },
+            { 2132, Tuple.Create("ActiveWire, Inc.", new Dictionary<int, string>{
+{ 256, "I/O Board" },
 { 257, "I/O Board, rev1" },
- } },
-            { 2134, new Dictionary<int, string>(){ 
-    { 44033, "uLinks USOTL4 RS422/485 Adapter" },
- } },
-            { 2136, new Dictionary<int, string>(){ 
-    { 12546, "Bluetooth Device" },
+    })
+ },
+            { 2134, Tuple.Create("B&B Electronics", new Dictionary<int, string>{
+{ 44033, "uLinks USOTL4 RS422/485 Adapter" },
+    })
+ },
+            { 2136, Tuple.Create("Hitachi Maxell, Ltd", new Dictionary<int, string>{
+{ 12546, "Bluetooth Device" },
 { 65535, "Maxell module with BlueCore in DFU mode" },
- } },
-            { 2137, new Dictionary<int, string>(){ 
-     } },
-            { 2138, new Dictionary<int, string>(){ 
-    { 1, "Portstation Dual Serial Port" },
+    })
+ },
+            { 2138, Tuple.Create("Xircom", new Dictionary<int, string>{
+{ 1, "Portstation Dual Serial Port" },
 { 3, "Portstation Paraller Port" },
 { 8, "Ethernet" },
 { 9, "Ethernet" },
@@ -15497,33 +11644,34 @@ namespace HardwareInformation.Providers {
 { 32801, "1 port to Serial" },
 { 32803, "2 port to Serial" },
 { 32807, "PGSDB9 Serial Port" },
- } },
-            { 2140, new Dictionary<int, string>(){ 
-    { 256, "Spyder 1" },
+    })
+ },
+            { 2140, Tuple.Create("ColorVision, Inc.", new Dictionary<int, string>{
+{ 256, "Spyder 1" },
 { 512, "Spyder 2" },
 { 768, "Spyder 3" },
 { 1024, "Spyder 4" },
- } },
-            { 2146, new Dictionary<int, string>(){ 
-     } },
-            { 2147, new Dictionary<int, string>(){ 
-     } },
-            { 2148, new Dictionary<int, string>(){ 
-    { 16640, "MA101 802.11b Adapter" },
+    })
+ },
+            { 2148, Tuple.Create("NetGear, Inc.", new Dictionary<int, string>{
+{ 16640, "MA101 802.11b Adapter" },
 { 16642, "MA101 802.11b Adapter" },
- } },
-            { 2151, new Dictionary<int, string>(){ 
-    { 38930, "ECON Data acquisition unit" },
+    })
+ },
+            { 2151, Tuple.Create("Data Translation, Inc.", new Dictionary<int, string>{
+{ 38930, "ECON Data acquisition unit" },
 { 38934, "DT9816 ECON data acquisition module" },
 { 38966, "DT9836 data acquisition card" },
- } },
-            { 2154, new Dictionary<int, string>(){ 
-    { 1, "Unitor8" },
+    })
+ },
+            { 2154, Tuple.Create("Emagic Soft- und Hardware GmbH", new Dictionary<int, string>{
+{ 1, "Unitor8" },
 { 2, "AMT8" },
 { 3, "MT4" },
- } },
-            { 2156, new Dictionary<int, string>(){ 
-    { 4097, "Eumex 504PC ISDN TA" },
+    })
+ },
+            { 2156, Tuple.Create("DeTeWe - Deutsche Telephonwerke AG & Co.", new Dictionary<int, string>{
+{ 4097, "Eumex 504PC ISDN TA" },
 { 4098, "Eumex 504PC (FlashLoad)" },
 { 4099, "TA33 ISDN TA" },
 { 4100, "TA33 (FlashLoad)" },
@@ -15559,115 +11707,94 @@ namespace HardwareInformation.Providers {
 { 4181, "Eumex 220 Version 2 ISDN TA" },
 { 4182, "Eumex 220 Version 2 ISDN TA (Flash-Mode)" },
 { 8192, "OpenCom 1000" },
- } },
-            { 2158, new Dictionary<int, string>(){ 
-    { 6432, "SGC-X2UL" },
- } },
-            { 2159, new Dictionary<int, string>(){ 
-     } },
-            { 2160, new Dictionary<int, string>(){ 
-    { 1, "Ricochet GS" },
- } },
-            { 2161, new Dictionary<int, string>(){ 
-    { 1, "SDDR-01 Compact Flash Reader" },
+    })
+ },
+            { 2158, Tuple.Create("System TALKS, Inc.", new Dictionary<int, string>{
+{ 6432, "SGC-X2UL" },
+    })
+ },
+            { 2160, Tuple.Create("Metricom", new Dictionary<int, string>{
+{ 1, "Ricochet GS" },
+    })
+ },
+            { 2161, Tuple.Create("SanDisk, Inc.", new Dictionary<int, string>{
+{ 1, "SDDR-01 Compact Flash Reader" },
 { 2, "SDDR-31 Compact Flash Reader" },
 { 5, "SDDR-05 Compact Flash Reader" },
- } },
-            { 2163, new Dictionary<int, string>(){ 
-     } },
-            { 2164, new Dictionary<int, string>(){ 
-     } },
-            { 2169, new Dictionary<int, string>(){ 
-     } },
-            { 2172, new Dictionary<int, string>(){ 
-     } },
-            { 2173, new Dictionary<int, string>(){ 
-    { 22276, "Ethernet" },
- } },
-            { 2174, new Dictionary<int, string>(){ 
-     } },
-            { 2175, new Dictionary<int, string>(){ 
-     } },
-            { 2176, new Dictionary<int, string>(){ 
-     } },
-            { 2179, new Dictionary<int, string>(){ 
-     } },
-            { 2181, new Dictionary<int, string>(){ 
-     } },
-            { 2182, new Dictionary<int, string>(){ 
-    { 1584, "Intel PC Camera CS630" },
- } },
-            { 2183, new Dictionary<int, string>(){ 
-     } },
-            { 2186, new Dictionary<int, string>(){ 
-    { 4098, "DigiView DV3100" },
- } },
-            { 2187, new Dictionary<int, string>(){ 
-    { 18756, "MassWorks ID-75 TouchScreen" },
- } },
-            { 2188, new Dictionary<int, string>(){ 
-    { 8240, "Ticket Printer TTP 2030" },
- } },
-            { 2190, new Dictionary<int, string>(){ 
-    { 20534, "Portable secure storage for software licenses" },
- } },
-            { 2194, new Dictionary<int, string>(){ 
-    { 257, "Smartdio Reader/Writer" },
- } },
-            { 2196, new Dictionary<int, string>(){ 
-    { 16, "Remote NDIS Network Device" },
- } },
-            { 2199, new Dictionary<int, string>(){ 
-    { 1, "ICE In-Circuit Emulator" },
+    })
+ },
+            { 2173, Tuple.Create("Jaton Corp.", new Dictionary<int, string>{
+{ 22276, "Ethernet" },
+    })
+ },
+            { 2182, Tuple.Create("XAC Automation Corp.", new Dictionary<int, string>{
+{ 1584, "Intel PC Camera CS630" },
+    })
+ },
+            { 2186, Tuple.Create("TechTools", new Dictionary<int, string>{
+{ 4098, "DigiView DV3100" },
+    })
+ },
+            { 2187, Tuple.Create("MassWorks, Inc.", new Dictionary<int, string>{
+{ 18756, "MassWorks ID-75 TouchScreen" },
+    })
+ },
+            { 2188, Tuple.Create("Swecoin AB", new Dictionary<int, string>{
+{ 8240, "Ticket Printer TTP 2030" },
+    })
+ },
+            { 2190, Tuple.Create("iLok", new Dictionary<int, string>{
+{ 20534, "Portable secure storage for software licenses" },
+    })
+ },
+            { 2194, Tuple.Create("DioGraphy, Inc.", new Dictionary<int, string>{
+{ 257, "Smartdio Reader/Writer" },
+    })
+ },
+            { 2196, Tuple.Create("TSI Incorporated", new Dictionary<int, string>{
+{ 16, "Remote NDIS Network Device" },
+    })
+ },
+            { 2199, Tuple.Create("Lauterbach", new Dictionary<int, string>{
+{ 1, "ICE In-Circuit Emulator" },
 { 2, "Power Debug/Power Debug II" },
 { 4, "PowerDebug" },
 { 5, "PowerDebug PRO" },
- } },
-            { 2204, new Dictionary<int, string>(){ 
-     } },
-            { 2205, new Dictionary<int, string>(){ 
-     } },
-            { 2206, new Dictionary<int, string>(){ 
-     } },
-            { 2207, new Dictionary<int, string>(){ 
-     } },
-            { 2213, new Dictionary<int, string>(){ 
-     } },
-            { 2214, new Dictionary<int, string>(){ 
-    { 81, "B-SV4" },
- } },
-            { 2216, new Dictionary<int, string>(){ 
-     } },
-            { 2217, new Dictionary<int, string>(){ 
-    { 5, "USBee ZX" },
+    })
+ },
+            { 2214, Tuple.Create("Toshiba TEC", new Dictionary<int, string>{
+{ 81, "B-SV4" },
+    })
+ },
+            { 2217, Tuple.Create("CWAV Inc.", new Dictionary<int, string>{
+{ 5, "USBee ZX" },
 { 9, "USBee SX" },
 { 18, "USBee AX-Standard" },
 { 19, "USBee AX-Plus" },
 { 20, "USBee AX-Pro" },
 { 21, "USBee DX" },
- } },
-            { 2220, new Dictionary<int, string>(){ 
-    { 8228, "usbWiggler" },
- } },
-            { 2222, new Dictionary<int, string>(){ 
-     } },
-            { 2224, new Dictionary<int, string>(){ 
-    { 6, "814 Sample Processor" },
+    })
+ },
+            { 2220, Tuple.Create("Macraigor Systems LLC", new Dictionary<int, string>{
+{ 8228, "usbWiggler" },
+    })
+ },
+            { 2224, Tuple.Create("Metrohm", new Dictionary<int, string>{
+{ 6, "814 Sample Processor" },
 { 21, "857 Titrando" },
 { 26, "852 Titrando" },
- } },
-            { 2228, new Dictionary<int, string>(){ 
-     } },
-            { 2231, new Dictionary<int, string>(){ 
-    { 1, "Playstation adapter" },
- } },
-            { 2232, new Dictionary<int, string>(){ 
-    { 500, "USBSIMM1" },
- } },
-            { 2233, new Dictionary<int, string>(){ 
-     } },
-            { 2235, new Dictionary<int, string>(){ 
-    { 9986, "PCM2702 16-bit stereo audio DAC" },
+    })
+ },
+            { 2231, Tuple.Create("NATSU", new Dictionary<int, string>{
+{ 1, "Playstation adapter" },
+    })
+ },
+            { 2232, Tuple.Create("J. Gordon Electronic Design, Inc.", new Dictionary<int, string>{
+{ 500, "USBSIMM1" },
+    })
+ },
+            { 2235, Tuple.Create("Texas Instruments", new Dictionary<int, string>{
+{ 9986, "PCM2702 16-bit stereo audio DAC" },
 { 9988, "PCM2704 16-bit stereo audio DAC" },
 { 9989, "PCM2705 stereo audio DAC" },
 { 9990, "PCM2706 stereo audio DAC" },
@@ -15690,13 +11817,15 @@ namespace HardwareInformation.Providers {
 { 10690, "PCM2902C Audio CODEC" },
 { 10691, "PCM2903C Audio CODEC" },
 { 10694, "PCM2906C Audio CODEC" },
- } },
-            { 2237, new Dictionary<int, string>(){ 
-    { 520, "CLP-521 Label Printer" },
+    })
+ },
+            { 2237, Tuple.Create("Citizen Watch Co., Ltd", new Dictionary<int, string>{
+{ 520, "CLP-521 Label Printer" },
 { 4352, "X1-USB Floppy" },
- } },
-            { 2243, new Dictionary<int, string>(){ 
-    { 1, "100 SC" },
+    })
+ },
+            { 2243, Tuple.Create("Precise Biometrics", new Dictionary<int, string>{
+{ 1, "100 SC" },
 { 2, "100 A" },
 { 3, "100 SC BioKeyboard" },
 { 6, "100 A BioKeyboard" },
@@ -15709,19 +11838,15 @@ namespace HardwareInformation.Providers {
 { 1028, "100 SC Upgrade" },
 { 1029, "150 MC Upgrade" },
 { 1030, "100 MC Upgrade" },
- } },
-            { 2244, new Dictionary<int, string>(){ 
-    { 256, "Skyline 802.11b Wireless Adapter" },
+    })
+ },
+            { 2244, Tuple.Create("Proxim, Inc.", new Dictionary<int, string>{
+{ 256, "Skyline 802.11b Wireless Adapter" },
 { 754, "Farallon Home Phoneline Adapter" },
- } },
-            { 2247, new Dictionary<int, string>(){ 
-     } },
-            { 2248, new Dictionary<int, string>(){ 
-     } },
-            { 2249, new Dictionary<int, string>(){ 
-     } },
-            { 2250, new Dictionary<int, string>(){ 
-    { 1, "Tablet" },
+    })
+ },
+            { 2250, Tuple.Create("Aiptek International, Inc.", new Dictionary<int, string>{
+{ 1, "Tablet" },
 { 16, "Tablet" },
 { 32, "APT-6000U Tablet" },
 { 33, "APT-2 Tablet" },
@@ -15752,31 +11877,25 @@ namespace HardwareInformation.Providers {
 { 8258, "Pocket DV5100M Composite Device" },
 { 8259, "Pocket DV5100M (Disk)" },
 { 8288, "Pocket DV5300" },
- } },
-            { 2253, new Dictionary<int, string>(){ 
-     } },
-            { 2254, new Dictionary<int, string>(){ 
-     } },
-            { 2255, new Dictionary<int, string>(){ 
-     } },
-            { 2257, new Dictionary<int, string>(){ 
-    { 1, "smartNIC Ethernet [catc]" },
+    })
+ },
+            { 2257, Tuple.Create("smartBridges, Inc.", new Dictionary<int, string>{
+{ 1, "smartNIC Ethernet [catc]" },
 { 3, "smartNIC 2 PnP Ethernet" },
- } },
-            { 2259, new Dictionary<int, string>(){ 
-     } },
-            { 2260, new Dictionary<int, string>(){ 
-    { 9, "SCR SmartCard Reader" },
- } },
-            { 2264, new Dictionary<int, string>(){ 
-    { 2, "USB-to-CAN compact" },
+    })
+ },
+            { 2260, Tuple.Create("Fujitsu Siemens Computers", new Dictionary<int, string>{
+{ 9, "SCR SmartCard Reader" },
+    })
+ },
+            { 2264, Tuple.Create("IXXAT Automation GmbH", new Dictionary<int, string>{
+{ 2, "USB-to-CAN compact" },
 { 3, "USB-to-CAN II" },
 { 256, "USB-to-CAN" },
- } },
-            { 2265, new Dictionary<int, string>(){ 
-     } },
-            { 2269, new Dictionary<int, string>(){ 
-    { 274, "Wireless LAN Adapter" },
+    })
+ },
+            { 2269, Tuple.Create("Billionton Systems, Inc.", new Dictionary<int, string>{
+{ 274, "Wireless LAN Adapter" },
 { 275, "Wireless LAN Adapter" },
 { 2438, "USB-100N Ethernet [pegasus]" },
 { 2439, "USBLP-100 HomePNA Ethernet [pegasus]" },
@@ -15785,31 +11904,34 @@ namespace HardwareInformation.Providers {
 { 8451, "DVB-T TV-Tuner Card-R" },
 { 34065, "USBE-100 Ethernet [pegasus2]" },
 { 37119, "USB2AR Ethernet" },
- } },
-            { 2270, new Dictionary<int, string>(){ 
-    { 31233, "802.11b Adapter" },
- } },
-            { 2271, new Dictionary<int, string>(){ 
-    { 1, "Rosetta Token V1" },
+    })
+ },
+            { 2270, Tuple.Create("???", new Dictionary<int, string>{
+{ 31233, "802.11b Adapter" },
+    })
+ },
+            { 2271, Tuple.Create("Spyrus, Inc.", new Dictionary<int, string>{
+{ 1, "Rosetta Token V1" },
 { 2, "Rosetta Token V2" },
 { 3, "Rosetta Token V3" },
 { 2560, "Lynks Interface" },
- } },
-            { 2275, new Dictionary<int, string>(){ 
-    { 2, "USB-RS232 Bridge" },
+    })
+ },
+            { 2275, Tuple.Create("Olitec, Inc.", new Dictionary<int, string>{
+{ 2, "USB-RS232 Bridge" },
 { 256, "Interface ADSL" },
 { 257, "Interface ADSL" },
 { 258, "ADSL" },
 { 769, "RNIS ISDN TA [HFC-S]" },
- } },
-            { 2276, new Dictionary<int, string>(){ 
-    { 388, "DDJ-WeGO" },
+    })
+ },
+            { 2276, Tuple.Create("Pioneer Corp.", new Dictionary<int, string>{
+{ 388, "DDJ-WeGO" },
 { 389, "DDJ-WeGO2" },
- } },
-            { 2277, new Dictionary<int, string>(){ 
-     } },
-            { 2278, new Dictionary<int, string>(){ 
-    { 1, "GemPC-Touch 430" },
+    })
+ },
+            { 2278, Tuple.Create("Gemalto (was Gemplus)", new Dictionary<int, string>{
+{ 1, "GemPC-Touch 430" },
 { 1072, "GemPC430 SmartCard Reader" },
 { 1074, "GemPC432 SmartCard Reader" },
 { 1077, "GemPC435 SmartCard Reader" },
@@ -15824,23 +11946,22 @@ namespace HardwareInformation.Providers {
 { 21761, "GemProx-PU Contactless Smart Card Reader" },
 { 21763, "Prox-DU Contactless Interface" },
 { 44256, "UA HYBRID TOKEN" },
- } },
-            { 2279, new Dictionary<int, string>(){ 
-     } },
-            { 2280, new Dictionary<int, string>(){ 
-     } },
-            { 2281, new Dictionary<int, string>(){ 
-    { 256, "XTNDAccess IrDA Dongle" },
- } },
-            { 2282, new Dictionary<int, string>(){ 
-    { 201, "ADSL Modem HM120dp Loader" },
+    })
+ },
+            { 2281, Tuple.Create("Extended Systems, Inc.", new Dictionary<int, string>{
+{ 256, "XTNDAccess IrDA Dongle" },
+    })
+ },
+            { 2282, Tuple.Create("Ericsson, Inc., Blue Ridge Labs", new Dictionary<int, string>{
+{ 201, "ADSL Modem HM120dp Loader" },
 { 202, "ADSL WAN Modem HM120dp" },
 { 206, "HM230d Virtual Bus for Helium" },
 { 43962, "USB Driver for Bluetooth Wireless Technology" },
 { 43963, "Bluetooth Device in DFU State" },
- } },
-            { 2284, new Dictionary<int, string>(){ 
-    { 1, "TravelDrive 2C" },
+    })
+ },
+            { 2284, Tuple.Create("M-Systems Flash Disk Pioneers", new Dictionary<int, string>{
+{ 1, "TravelDrive 2C" },
 { 2, "TravelDrive 2C" },
 { 5, "TravelDrive 2C" },
 { 8, "TravelDrive 2C" },
@@ -15872,45 +11993,33 @@ namespace HardwareInformation.Providers {
 { 8249, "TravelDrive" },
 { 8266, "TravelDrive" },
 { 8267, "TravelDrive" },
- } },
-            { 2285, new Dictionary<int, string>(){ 
-    { 2, "CECT M800 memory card" },
- } },
-            { 2286, new Dictionary<int, string>(){ 
-     } },
-            { 2288, new Dictionary<int, string>(){ 
-    { 5, "CardScan 800c" },
- } },
-            { 2289, new Dictionary<int, string>(){ 
-     } },
-            { 2290, new Dictionary<int, string>(){ 
-    { 127, "Super Q2 Tablet" },
- } },
-            { 2293, new Dictionary<int, string>(){ 
-     } },
-            { 2294, new Dictionary<int, string>(){ 
-     } },
-            { 2295, new Dictionary<int, string>(){ 
-    { 1, "LabPro" },
+    })
+ },
+            { 2285, Tuple.Create("MediaTek Inc.", new Dictionary<int, string>{
+{ 2, "CECT M800 memory card" },
+    })
+ },
+            { 2288, Tuple.Create("Corex Technologies", new Dictionary<int, string>{
+{ 5, "CardScan 800c" },
+    })
+ },
+            { 2290, Tuple.Create("Gotop Information Inc.", new Dictionary<int, string>{
+{ 127, "Super Q2 Tablet" },
+    })
+ },
+            { 2295, Tuple.Create("Vernier", new Dictionary<int, string>{
+{ 1, "LabPro" },
 { 2, "EasyTemp/Go!Temp" },
 { 3, "Go!Link" },
 { 4, "Go!Motion" },
- } },
-            { 2296, new Dictionary<int, string>(){ 
-     } },
-            { 2297, new Dictionary<int, string>(){ 
-     } },
-            { 2298, new Dictionary<int, string>(){ 
-     } },
-            { 2299, new Dictionary<int, string>(){ 
-     } },
-            { 2300, new Dictionary<int, string>(){ 
-     } },
-            { 2301, new Dictionary<int, string>(){ 
-    { 1, "Bluetooth Device" },
- } },
-            { 2303, new Dictionary<int, string>(){ 
-    { 5632, "AES1600" },
+    })
+ },
+            { 2301, Tuple.Create("Digianswer A/S", new Dictionary<int, string>{
+{ 1, "Bluetooth Device" },
+    })
+ },
+            { 2303, Tuple.Create("AuthenTec, Inc.", new Dictionary<int, string>{
+{ 5632, "AES1600" },
 { 5648, "AES1600" },
 { 5728, "AES1660 Fingerprint Sensor" },
 { 5760, "AES1660 Fingerprint Sensor" },
@@ -15992,36 +12101,32 @@ namespace HardwareInformation.Providers {
 { 45030, "FingerLoc Sensor Module (Anchor)" },
 { 65533, "AES2510 Sensor (USB Emulator)" },
 { 65535, "Sensor (Emulator)" },
- } },
-            { 2304, new Dictionary<int, string>(){ 
-     } },
-            { 2305, new Dictionary<int, string>(){ 
-    { 1, "Hard Drive Adapter (TPP)" },
+    })
+ },
+            { 2305, Tuple.Create("VST Technologies", new Dictionary<int, string>{
+{ 1, "Hard Drive Adapter (TPP)" },
 { 2, "SigmaDrive Adapter (TPP)" },
- } },
-            { 2310, new Dictionary<int, string>(){ 
-     } },
-            { 2312, new Dictionary<int, string>(){ 
-    { 500, "SIMATIC NET CP 5711" },
+    })
+ },
+            { 2312, Tuple.Create("Siemens AG", new Dictionary<int, string>{
+{ 500, "SIMATIC NET CP 5711" },
 { 510, "SIMATIC NET PC Adapter A2" },
 { 1201, "MediSET" },
 { 1202, "NC interface" },
 { 1203, "keyboard front panel Cockpit" },
 { 1204, "SCR_CCID" },
 { 9985, "ShenZhen SANZHAI Technology Co.,Ltd Spy Pen VGA" },
- } },
-            { 2313, new Dictionary<int, string>(){ 
-     } },
-            { 2314, new Dictionary<int, string>(){ 
-    { 4097, "T33520 Flash Card Controller" },
+    })
+ },
+            { 2314, Tuple.Create("Trumpion Microelectronics, Inc.", new Dictionary<int, string>{
+{ 4097, "T33520 Flash Card Controller" },
 { 4352, "Comotron C3310 MP3 player" },
 { 4608, "MP3 player" },
 { 5440, "Digitex Container Flash Disk" },
- } },
-            { 2315, new Dictionary<int, string>(){ 
-     } },
-            { 2316, new Dictionary<int, string>(){ 
-    { 881, "Silicon Motion SM371 Camera" },
+    })
+ },
+            { 2316, Tuple.Create("Silicon Motion, Inc. - Taiwan (formerly Feiya Technology Corp.)", new Dictionary<int, string>{
+{ 881, "Silicon Motion SM371 Camera" },
 { 883, "Silicon Motion Camera" },
 { 890, "Silicon Motion Camera" },
 { 891, "Silicon Motion Camera" },
@@ -16041,24 +12146,16 @@ namespace HardwareInformation.Providers {
 { 45936, "Silicon Motion SM370 Camera" },
 { 45937, "Silicon Motion SM371 Camera" },
 { 62333, "Endoscope camera" },
- } },
-            { 2317, new Dictionary<int, string>(){ 
-     } },
-            { 2318, new Dictionary<int, string>(){ 
-     } },
-            { 2319, new Dictionary<int, string>(){ 
-     } },
-            { 2320, new Dictionary<int, string>(){ 
-     } },
-            { 2321, new Dictionary<int, string>(){ 
-    { 3100, "SpeechMike III" },
+    })
+ },
+            { 2321, Tuple.Create("Philips Speech Processing", new Dictionary<int, string>{
+{ 3100, "SpeechMike III" },
 { 5274, "SpeechMike II Pro Plus LFH5276" },
 { 9490, "SpeechMike Pro" },
- } },
-            { 2322, new Dictionary<int, string>(){ 
-     } },
-            { 2325, new Dictionary<int, string>(){ 
-    { 1, "DSL Modem" },
+    })
+ },
+            { 2325, Tuple.Create("GlobeSpan, Inc.", new Dictionary<int, string>{
+{ 1, "DSL Modem" },
 { 2, "ADSL ATM Modem" },
 { 5, "LAN Modem" },
 { 8192, "802.11 Adapter" },
@@ -16074,9 +12171,10 @@ namespace HardwareInformation.Providers {
 { 33794, "DSL Modem" },
 { 34048, "DSL Modem" },
 { 34049, "DSL Modem" },
- } },
-            { 2327, new Dictionary<int, string>(){ 
-    { 1, "eFilm Reader-11 SM/CF" },
+    })
+ },
+            { 2327, Tuple.Create("SmartDisk Corp.", new Dictionary<int, string>{
+{ 1, "eFilm Reader-11 SM/CF" },
 { 2, "eFilm Reader-11 SM" },
 { 3, "eFilm Reader-11 CF" },
 { 512, "FireFly" },
@@ -16089,12 +12187,14 @@ namespace HardwareInformation.Providers {
 { 527, "STORAGE ADAPTER (FireLite)" },
 { 55809, "eFilm Reader-11 Test" },
 { 65535, "eFilm Reader-11 (Class/PDR)" },
- } },
-            { 2329, new Dictionary<int, string>(){ 
-    { 256, "Fast Flicks Digital Camera" },
- } },
-            { 2334, new Dictionary<int, string>(){ 
-    { 3, "GPS (various models)" },
+    })
+ },
+            { 2329, Tuple.Create("Tiger Electronics", new Dictionary<int, string>{
+{ 256, "Fast Flicks Digital Camera" },
+    })
+ },
+            { 2334, Tuple.Create("Garmin International", new Dictionary<int, string>{
+{ 3, "GPS (various models)" },
 { 4, "iQue 3600" },
 { 512, "Data Card Programmer (install)" },
 { 2158, "Forerunner 735XT" },
@@ -16122,15 +12222,18 @@ namespace HardwareInformation.Providers {
 { 10459, "Drive 5" },
 { 18427, "nuviCam" },
 { 19675, "Fenix 6" },
- } },
-            { 2336, new Dictionary<int, string>(){ 
-    { 29952, "Network Interface" },
- } },
-            { 2337, new Dictionary<int, string>(){ 
-    { 4097, "GoCOM232 Serial" },
- } },
-            { 2338, new Dictionary<int, string>(){ 
-    { 7, "LabelWriter 330" },
+    })
+ },
+            { 2336, Tuple.Create("Echelon Co.", new Dictionary<int, string>{
+{ 29952, "Network Interface" },
+    })
+ },
+            { 2337, Tuple.Create("GoHubs, Inc.", new Dictionary<int, string>{
+{ 4097, "GoCOM232 Serial" },
+    })
+ },
+            { 2338, Tuple.Create("Dymo-CoStar Corp.", new Dictionary<int, string>{
+{ 7, "LabelWriter 330" },
 { 9, "LabelWriter 310" },
 { 19, "LabelManager 400" },
 { 25, "LabelWriter 400" },
@@ -16141,12 +12244,14 @@ namespace HardwareInformation.Providers {
 { 32771, "M10 Digital Postal Scale" },
 { 32772, "M25 Digital Postal Scale" },
 { 32777, "S250 Digital Postal Scale" },
- } },
-            { 2339, new Dictionary<int, string>(){ 
-    { 271, "SIIG MobileCam" },
- } },
-            { 2340, new Dictionary<int, string>(){ 
-    { 9181, "DocuPrint M760 (X760_USB)" },
+    })
+ },
+            { 2339, Tuple.Create("IC Media Corp.", new Dictionary<int, string>{
+{ 271, "SIIG MobileCam" },
+    })
+ },
+            { 2340, Tuple.Create("Xerox", new Dictionary<int, string>{
+{ 9181, "DocuPrint M760 (X760_USB)" },
 { 15592, "Phaser 3428 Printer" },
 { 15594, "Phaser 3125" },
 { 15596, "Phaser 3250" },
@@ -16158,9 +12263,10 @@ namespace HardwareInformation.Providers {
 { 17012, "Xerox Phaser 3635MFPX" },
 { 65519, "WorkCenter M15" },
 { 65531, "DocuPrint M750 (X750_USB)" },
- } },
-            { 2341, new Dictionary<int, string>(){ 
-    { 5, "Gamtec.,Ltd SmartJoy PLUS Adapter" },
+    })
+ },
+            { 2341, Tuple.Create("Lakeview Research", new Dictionary<int, string>{
+{ 5, "Gamtec.,Ltd SmartJoy PLUS Adapter" },
 { 1000, "Wii Classic Controller Adapter" },
 { 4145, "WiseGroup Ltd, Gameport Controller" },
 { 5888, "PS/SS/N64 Joypad" },
@@ -16169,26 +12275,24 @@ namespace HardwareInformation.Providers {
 { 33028, "Phidgets, Inc., 4-Motor PhidgetServo v2.0" },
 { 34816, "WiseGroup Ltd, MP-8800 Quad Joypad" },
 { 34918, "WiseGroup Ltd, MP-8866 Dual Joypad" },
- } },
-            { 2343, new Dictionary<int, string>(){ 
-     } },
-            { 2344, new Dictionary<int, string>(){ 
-    { 32768, "Firmware uploader" },
+    })
+ },
+            { 2344, Tuple.Create("PLX Technology, Inc. (formerly Oxford Semiconductor, Ltd)", new Dictionary<int, string>{
+{ 32768, "Firmware uploader" },
 { 65535, "Blank Oxford Device" },
- } },
-            { 2345, new Dictionary<int, string>(){ 
-     } },
-            { 2346, new Dictionary<int, string>(){ 
-     } },
-            { 2347, new Dictionary<int, string>(){ 
-    { 16912, "20S - Bluetooth Motorcycle headset & universal intercom" },
- } },
-            { 2351, new Dictionary<int, string>(){ 
-    { 4, "JTAG-4" },
+    })
+ },
+            { 2347, Tuple.Create("Sena Technologies, Inc.", new Dictionary<int, string>{
+{ 16912, "20S - Bluetooth Motorcycle headset & universal intercom" },
+    })
+ },
+            { 2351, Tuple.Create("Northern Embedded Science/CAVNEX", new Dictionary<int, string>{
+{ 4, "JTAG-4" },
 { 5, "JTAG-5" },
- } },
-            { 2352, new Dictionary<int, string>(){ 
-    { 9, "Gigabeat F/X (HDD audio player)" },
+    })
+ },
+            { 2352, Tuple.Create("Toshiba Corp.", new Dictionary<int, string>{
+{ 9, "Gigabeat F/X (HDD audio player)" },
 { 12, "Gigabeat F (mtp)" },
 { 16, "Gigabeat S (mtp)" },
 { 447, "2.5\"External Hard Disk" },
@@ -16274,24 +12378,20 @@ namespace HardwareInformation.Providers {
 { 25924, "TransMemory-Mini / Kingston DataTraveler 2.0 Stick" },
 { 25925, "Kingston DataTraveler 102/2.0 / HEMA Flash Drive 2 GB / PNY Attache 4GB Stick" },
 { 40962, "SunplusIT SATA bridge" },
- } },
-            { 2353, new Dictionary<int, string>(){ 
-     } },
-            { 2354, new Dictionary<int, string>(){ 
-    { 768, "VideoAdvantage" },
+    })
+ },
+            { 2354, Tuple.Create("Crescentec Corp.", new Dictionary<int, string>{
+{ 768, "VideoAdvantage" },
 { 770, "Syntek DC-112X" },
 { 800, "VideoAdvantage" },
 { 1154, "USB2.0 TVBOX" },
 { 4352, "DC-1100 Video Enhamcement Device" },
 { 4370, "Veo Web Camera" },
 { 41745, "Video Enhancement Device" },
- } },
-            { 2355, new Dictionary<int, string>(){ 
-     } },
-            { 2356, new Dictionary<int, string>(){ 
-     } },
-            { 2358, new Dictionary<int, string>(){ 
-    { 10, "Moebius" },
+    })
+ },
+            { 2358, Tuple.Create("NuTesla", new Dictionary<int, string>{
+{ 10, "Moebius" },
 { 11, "iMoebius" },
 { 12, "Rhythmedics 6 BioData Integrator" },
 { 13, "Hypurius" },
@@ -16299,13 +12399,15 @@ namespace HardwareInformation.Providers {
 { 15, "Purius" },
 { 48, "Composite Device, Mass Storage Device (Flash Drive) amd HID" },
 { 60, "Rhythmedics HID Bootloader" },
- } },
-            { 2361, new Dictionary<int, string>(){ 
-    { 2837, "Toshiba Stor.E Alu 2" },
+    })
+ },
+            { 2361, Tuple.Create("Lumberg, Inc.", new Dictionary<int, string>{
+{ 2837, "Toshiba Stor.E Alu 2" },
 { 2838, "Toshiba StorE HDD" },
- } },
-            { 2362, new Dictionary<int, string>(){ 
-    { 7, "CMOS 100K-R Rev. 1.90" },
+    })
+ },
+            { 2362, Tuple.Create("Pixart Imaging, Inc.", new Dictionary<int, string>{
+{ 7, "CMOS 100K-R Rev. 1.90" },
 { 270, "Digital camera, CD302N/Elta Medi@ digi-cam/HE-501A" },
 { 271, "Argus DC-1610/DC-1620/Emprex PCD3600/Philips P44417B keychain camera/Precision Mini,Model HA513A/Vivitar Vivicam 55" },
 { 527, "Bullet Line Photo Viewer" },
@@ -16328,9 +12430,10 @@ namespace HardwareInformation.Providers {
 { 9764, "Webcam" },
 { 9768, "Webcam Genius iLook 300" },
 { 9984, "GE 1.3 MP MiniCam Pro" },
- } },
-            { 2363, new Dictionary<int, string>(){ 
-    { 16, "Storage Adapter" },
+    })
+ },
+            { 2363, Tuple.Create("Plextor Corp.", new Dictionary<int, string>{
+{ 16, "Storage Adapter" },
 { 17, "PlexWriter 40/12/40U" },
 { 18, "PlexWriter 48/24/48U" },
 { 65, "PX-708A DVD RW" },
@@ -16341,27 +12444,15 @@ namespace HardwareInformation.Providers {
 { 40965, "ConvertX TV100U A/V Capture" },
 { 41218, "ConvertX M402U A/V Capture" },
 { 41220, "ConvertX PX-TV402U/NA" },
- } },
-            { 2364, new Dictionary<int, string>(){ 
-    { 1537, "ValueCAN" },
+    })
+ },
+            { 2364, Tuple.Create("Intrepid Control Systems, Inc.", new Dictionary<int, string>{
+{ 1537, "ValueCAN" },
 { 1793, "NeoVI Blue vehicle bus interface" },
- } },
-            { 2365, new Dictionary<int, string>(){ 
-     } },
-            { 2366, new Dictionary<int, string>(){ 
-     } },
-            { 2367, new Dictionary<int, string>(){ 
-     } },
-            { 2368, new Dictionary<int, string>(){ 
-     } },
-            { 2369, new Dictionary<int, string>(){ 
-     } },
-            { 2370, new Dictionary<int, string>(){ 
-     } },
-            { 2371, new Dictionary<int, string>(){ 
-     } },
-            { 2372, new Dictionary<int, string>(){ 
-    { 1, "PXR4 4-Track Digital Recorder" },
+    })
+ },
+            { 2372, Tuple.Create("KORG, Inc.", new Dictionary<int, string>{
+{ 1, "PXR4 4-Track Digital Recorder" },
 { 32, "KAOSS Pad KP3 Dynamic Effect/Sampler" },
 { 35, "KAOSSILATOR PRO Dynamic Phrase Synthesizer" },
 { 269, "nanoKEY MIDI keyboard" },
@@ -16369,27 +12460,27 @@ namespace HardwareInformation.Providers {
 { 271, "nanoKONTROL studio controller" },
 { 279, "nanoKONTROL2 MIDI Controller" },
 { 3843, "K-Series K61P MIDI studio controller" },
- } },
-            { 2373, new Dictionary<int, string>(){ 
-     } },
-            { 2376, new Dictionary<int, string>(){ 
-    { 769, "USB Pro (24/48)" },
+    })
+ },
+            { 2376, Tuple.Create("Kronauer music in digital", new Dictionary<int, string>{
+{ 769, "USB Pro (24/48)" },
 { 770, "USB Pro (24/96 playback)" },
 { 771, "USB Pro (24/96 record)" },
 { 772, "USB Pro (16/48)" },
 { 4357, "USB One" },
- } },
-            { 2379, new Dictionary<int, string>(){ 
-    { 1, "neonode N2" },
- } },
-            { 2381, new Dictionary<int, string>(){ 
-     } },
-            { 2383, new Dictionary<int, string>(){ 
-    { 257, "U640MO-03" },
+    })
+ },
+            { 2379, Tuple.Create("Linkup Systems Corp.", new Dictionary<int, string>{
+{ 1, "neonode N2" },
+    })
+ },
+            { 2383, Tuple.Create("Yano", new Dictionary<int, string>{
+{ 257, "U640MO-03" },
 { 1532, "METALWEAR-HDD" },
- } },
-            { 2385, new Dictionary<int, string>(){ 
-    { 8, "Ethernet" },
+    })
+ },
+            { 2385, Tuple.Create("Kingston Technology", new Dictionary<int, string>{
+{ 8, "Ethernet" },
 { 10, "KNU101TX 100baseTX Ethernet" },
 { 5433, "Iron Key D300 (Virtual CD-ROM and USB Stick)" },
 { 5632, "DataTraveler II Pen Drive" },
@@ -16428,11 +12519,10 @@ namespace HardwareInformation.Providers {
 { 5845, "DataTraveler Elite G2" },
 { 5855, "HyperX QuadCast" },
 { 5860, "HyperX Pulsefire Raid" },
- } },
-            { 2388, new Dictionary<int, string>(){ 
-     } },
-            { 2389, new Dictionary<int, string>(){ 
-    { 28677, "Bootloader" },
+    })
+ },
+            { 2389, Tuple.Create("NVIDIA Corp.", new Dictionary<int, string>{
+{ 28677, "Bootloader" },
 { 28696, "T186 [Tegra Parker]" },
 { 28698, "U-Boot running on Tegra" },
 { 28704, "L4T (Linux for Tegra) running on Tegra" },
@@ -16451,11 +12541,10 @@ namespace HardwareInformation.Providers {
 { 52999, "SHIELD Tablet" },
 { 53000, "SHIELD Tablet" },
 { 53001, "SHIELD Tablet" },
- } },
-            { 2390, new Dictionary<int, string>(){ 
-     } },
-            { 2391, new Dictionary<int, string>(){ 
-    { 512, "E-Video DC-350 Camera" },
+    })
+ },
+            { 2391, Tuple.Create("Agilent Technologies, Inc.", new Dictionary<int, string>{
+{ 512, "E-Video DC-350 Camera" },
 { 514, "E-Video DC-350 Camera" },
 { 1031, "33220A Waveform Generator" },
 { 1304, "82357B GPIB Interface" },
@@ -16465,31 +12554,26 @@ namespace HardwareInformation.Providers {
 { 7937, "N5181A MXG Analog Signal Generator" },
 { 10520, "U2702A oscilloscope" },
 { 64280, "LC Device" },
- } },
-            { 2392, new Dictionary<int, string>(){ 
-     } },
-            { 2393, new Dictionary<int, string>(){ 
-    { 11216, "Intelligent ISDN (Ver. 3.60.04) [HFC-S]" },
- } },
-            { 2394, new Dictionary<int, string>(){ 
-    { 12291, "Express Ethernet" },
- } },
-            { 2395, new Dictionary<int, string>(){ 
-     } },
-            { 2396, new Dictionary<int, string>(){ 
-     } },
-            { 2397, new Dictionary<int, string>(){ 
-    { 1, "Polycom ViaVideo" },
- } },
-            { 2404, new Dictionary<int, string>(){ 
-     } },
-            { 2407, new Dictionary<int, string>(){ 
-    { 516, "WarpLink 802.11b Adapter" },
- } },
-            { 2408, new Dictionary<int, string>(){ 
-     } },
-            { 2414, new Dictionary<int, string>(){ 
-    { 5, "ePass2000" },
+    })
+ },
+            { 2393, Tuple.Create("Cologne Chip AG", new Dictionary<int, string>{
+{ 11216, "Intelligent ISDN (Ver. 3.60.04) [HFC-S]" },
+    })
+ },
+            { 2394, Tuple.Create("Portsmith", new Dictionary<int, string>{
+{ 12291, "Express Ethernet" },
+    })
+ },
+            { 2397, Tuple.Create("Polycom, Inc.", new Dictionary<int, string>{
+{ 1, "Polycom ViaVideo" },
+    })
+ },
+            { 2407, Tuple.Create("Acer NeWeb Corp.", new Dictionary<int, string>{
+{ 516, "WarpLink 802.11b Adapter" },
+    })
+ },
+            { 2414, Tuple.Create("Feitian Technologies, Inc.", new Dictionary<int, string>{
+{ 5, "ePass2000" },
 { 6, "HID Dongle (for OEMs - manufacturer string is \"OEM\")" },
 { 288, "Microcosm Ltd Dinkey" },
 { 773, "ePass2000Auto" },
@@ -16501,128 +12585,91 @@ namespace HardwareInformation.Providers {
 { 1795, "ePass3003Auto" },
 { 2050, "ePass2000 (G&D STARCOS SPK 2.4)" },
 { 2055, "ePass2003" },
- } },
-            { 2417, new Dictionary<int, string>(){ 
-    { 8192, "i1 Pro" },
+    })
+ },
+            { 2417, Tuple.Create("Gretag-Macbeth AG", new Dictionary<int, string>{
+{ 8192, "i1 Pro" },
 { 8193, "i1 Monitor" },
 { 8195, "Eye-One display" },
 { 8197, "Huey" },
 { 8199, "ColorMunki Photo" },
- } },
-            { 2419, new Dictionary<int, string>(){ 
-    { 1, "e-gate Smart Card" },
- } },
-            { 2420, new Dictionary<int, string>(){ 
-     } },
-            { 2421, new Dictionary<int, string>(){ 
-     } },
-            { 2422, new Dictionary<int, string>(){ 
-     } },
-            { 2423, new Dictionary<int, string>(){ 
-     } },
-            { 2424, new Dictionary<int, string>(){ 
-     } },
-            { 2425, new Dictionary<int, string>(){ 
-    { 546, "Keychain Display" },
+    })
+ },
+            { 2419, Tuple.Create("Schlumberger", new Dictionary<int, string>{
+{ 1, "e-gate Smart Card" },
+    })
+ },
+            { 2425, Tuple.Create("Jeilin Technology Corp., Ltd", new Dictionary<int, string>{
+{ 546, "Keychain Display" },
 { 548, "JL2005A Toy Camera" },
 { 550, "JL2005A Toy Camera" },
 { 551, "JL2005B/C/D Toy Camera" },
- } },
-            { 2426, new Dictionary<int, string>(){ 
-    { 1, "Digital Wallet" },
- } },
-            { 2427, new Dictionary<int, string>(){ 
-     } },
-            { 2428, new Dictionary<int, string>(){ 
-     } },
-            { 2429, new Dictionary<int, string>(){ 
-     } },
-            { 2430, new Dictionary<int, string>(){ 
-    { 53, "MP35 v1.0" },
- } },
-            { 2431, new Dictionary<int, string>(){ 
-     } },
-            { 2433, new Dictionary<int, string>(){ 
-     } },
-            { 2436, new Dictionary<int, string>(){ 
-    { 64, "SATA Wire (2.5\")" },
+    })
+ },
+            { 2426, Tuple.Create("Minds At Work LLC", new Dictionary<int, string>{
+{ 1, "Digital Wallet" },
+    })
+ },
+            { 2430, Tuple.Create("Biopac Systems Inc.", new Dictionary<int, string>{
+{ 53, "MP35 v1.0" },
+    })
+ },
+            { 2436, Tuple.Create("Apricorn", new Dictionary<int, string>{
+{ 64, "SATA Wire (2.5\")" },
 { 512, "Hard Drive Storage (TPP)" },
 { 5127, "Secure Key 3.0" },
- } },
-            { 2437, new Dictionary<int, string>(){ 
-    { 69, "Mach4/200 Label Printer" },
+    })
+ },
+            { 2437, Tuple.Create("cab Produkttechnik GmbH & Co KG", new Dictionary<int, string>{
+{ 69, "Mach4/200 Label Printer" },
 { 163, "A3/200 or A3/300 Label Printer" },
- } },
-            { 2438, new Dictionary<int, string>(){ 
-     } },
-            { 2444, new Dictionary<int, string>(){ 
-     } },
-            { 2445, new Dictionary<int, string>(){ 
-     } },
-            { 2446, new Dictionary<int, string>(){ 
-     } },
-            { 2447, new Dictionary<int, string>(){ 
-     } },
-            { 2451, new Dictionary<int, string>(){ 
-    { 1, "REB1100 eBook Reader" },
+    })
+ },
+            { 2451, Tuple.Create("Gemstar eBook Group, Ltd", new Dictionary<int, string>{
+{ 1, "REB1100 eBook Reader" },
 { 2, "eBook" },
- } },
-            { 2454, new Dictionary<int, string>(){ 
-     } },
-            { 2458, new Dictionary<int, string>(){ 
-    { 1592, "Sanwa Supply Inc. Small Keyboard" },
+    })
+ },
+            { 2458, Tuple.Create("Zippy Technology Corp.", new Dictionary<int, string>{
+{ 1592, "Sanwa Supply Inc. Small Keyboard" },
 { 9760, "Graphics tablet [Polostar PT1001, Zeniq PT1001, Leogics PT1001]" },
 { 24844, "EL-610 Super Mini Electron luminescent Keyboard" },
 { 25392, "SANWA Supply Inc. Slim Keyboard" },
 { 28986, "WK-713 Multimedia Keyboard" },
 { 29024, "Hyper Slim Keyboard" },
- } },
-            { 2462, new Dictionary<int, string>(){ 
-     } },
-            { 2467, new Dictionary<int, string>(){ 
-     } },
-            { 2468, new Dictionary<int, string>(){ 
-     } },
-            { 2469, new Dictionary<int, string>(){ 
-     } },
-            { 2470, new Dictionary<int, string>(){ 
-    { 32769, "Mass Storage Device" },
- } },
-            { 2471, new Dictionary<int, string>(){ 
-     } },
-            { 2472, new Dictionary<int, string>(){ 
-     } },
-            { 2473, new Dictionary<int, string>(){ 
-     } },
-            { 2474, new Dictionary<int, string>(){ 
-    { 4096, "Prism GT 802.11b/g Adapter" },
+    })
+ },
+            { 2470, Tuple.Create("Poinchips", new Dictionary<int, string>{
+{ 32769, "Mass Storage Device" },
+    })
+ },
+            { 2474, Tuple.Create("Intersil Corp.", new Dictionary<int, string>{
+{ 4096, "Prism GT 802.11b/g Adapter" },
 { 13890, "Prism 2.x 802.11b Adapter" },
- } },
-            { 2475, new Dictionary<int, string>(){ 
-     } },
-            { 2478, new Dictionary<int, string>(){ 
-    { 2, "Any Device (see discussion)" },
- } },
-            { 2480, new Dictionary<int, string>(){ 
-    { 9216, "HDP5000" },
- } },
-            { 2482, new Dictionary<int, string>(){ 
-    { 1, "eBookman Palm Computer" },
- } },
-            { 2483, new Dictionary<int, string>(){ 
-     } },
-            { 2484, new Dictionary<int, string>(){ 
-     } },
-            { 2485, new Dictionary<int, string>(){ 
-     } },
-            { 2492, new Dictionary<int, string>(){ 
-    { 2, "MPaxx MP150 MP3 Player" },
- } },
-            { 2494, new Dictionary<int, string>(){ 
-    { 1, "MySmartPad" },
- } },
-            { 2495, new Dictionary<int, string>(){ 
-    { 192, "COMpact 2104 ISDN PBX" },
+    })
+ },
+            { 2478, Tuple.Create("Tripp Lite", new Dictionary<int, string>{
+{ 2, "Any Device (see discussion)" },
+    })
+ },
+            { 2480, Tuple.Create("Fargo", new Dictionary<int, string>{
+{ 9216, "HDP5000" },
+    })
+ },
+            { 2482, Tuple.Create("Franklin Electronic Publishers, Inc.", new Dictionary<int, string>{
+{ 1, "eBookman Palm Computer" },
+    })
+ },
+            { 2492, Tuple.Create("Grundig", new Dictionary<int, string>{
+{ 2, "MPaxx MP150 MP3 Player" },
+    })
+ },
+            { 2494, Tuple.Create("MySmart.Com", new Dictionary<int, string>{
+{ 1, "MySmartPad" },
+    })
+ },
+            { 2495, Tuple.Create("Auerswald GmbH & Co. KG", new Dictionary<int, string>{
+{ 192, "COMpact 2104 ISDN PBX" },
 { 219, "COMpact 4410/2206 ISDN" },
 { 220, "COMpact 4406 DSL (PBX)" },
 { 221, "COMpact 2204 (PBX)" },
@@ -16636,22 +12683,23 @@ namespace HardwareInformation.Providers {
 { 32769, "COMpact 4406 DSL (DSL modem)" },
 { 32770, "Analog/ISDN Converter (Line converter)" },
 { 32773, "WG-640 (Automatic event dialer)" },
- } },
-            { 2496, new Dictionary<int, string>(){ 
-    { 310, "Axon CNS, MultiClamp 700B" },
+    })
+ },
+            { 2496, Tuple.Create("Genpix Electronics, LLC", new Dictionary<int, string>{
+{ 310, "Axon CNS, MultiClamp 700B" },
 { 514, "8PSK DVB-S tuner" },
 { 515, "Skywalker-1 DVB-S tuner" },
 { 516, "Skywalker-CW3K DVB-S tuner" },
 { 517, "Skywalker-CW3K DVB-S tuner" },
 { 518, "Skywalker-2 DVB-S tuner" },
- } },
-            { 2497, new Dictionary<int, string>(){ 
-    { 4919, "TOUCHSTONE DEVICE" },
- } },
-            { 2498, new Dictionary<int, string>(){ 
-     } },
-            { 2499, new Dictionary<int, string>(){ 
-    { 7, "Reader V2" },
+    })
+ },
+            { 2497, Tuple.Create("Arris Interactive LLC", new Dictionary<int, string>{
+{ 4919, "TOUCHSTONE DEVICE" },
+    })
+ },
+            { 2499, Tuple.Create("HID Global", new Dictionary<int, string>{
+{ 7, "Reader V2" },
 { 8, "ZFG-9800-AC SmartCard Reader" },
 { 20, "ActivIdentity ActivKey SIM USB Token" },
 { 40, "Crescendo Key" },
@@ -16660,17 +12708,18 @@ namespace HardwareInformation.Providers {
 { 43, "Crescendo Key" },
 { 44, "Crescendo Key" },
 { 46, "Crescendo Key" },
- } },
-            { 2500, new Dictionary<int, string>(){ 
-    { 17, "ACT-IR2000U IrDA Dongle" },
- } },
-            { 2501, new Dictionary<int, string>(){ 
-     } },
-            { 2506, new Dictionary<int, string>(){ 
-    { 21828, "PIO" },
- } },
-            { 2507, new Dictionary<int, string>(){ 
-    { 4097, "Network Adapter" },
+    })
+ },
+            { 2500, Tuple.Create("ACTiSYS Corp.", new Dictionary<int, string>{
+{ 17, "ACT-IR2000U IrDA Dongle" },
+    })
+ },
+            { 2506, Tuple.Create("BMC Messsysteme GmbH", new Dictionary<int, string>{
+{ 21828, "PIO" },
+    })
+ },
+            { 2507, Tuple.Create("FLIR Systems", new Dictionary<int, string>{
+{ 4097, "Network Adapter" },
 { 4098, "Ex-Series RNDIS interface" },
 { 4100, "Ex-Series UVC interface" },
 { 4101, "Ex-Series RNDIS and UVC interface" },
@@ -16679,36 +12728,32 @@ namespace HardwareInformation.Providers {
 { 4104, "Serial Port" },
 { 6550, "FLIR ONE Camera" },
 { 16391, "Breach" },
- } },
-            { 2508, new Dictionary<int, string>(){ 
-    { 1028, "BAFO USB-ATA/ATAPI Bridge Controller" },
- } },
-            { 2509, new Dictionary<int, string>(){ 
-    { 8193, "Psion WaveFinder DAB radio receiver" },
- } },
-            { 2510, new Dictionary<int, string>(){ 
-     } },
-            { 2511, new Dictionary<int, string>(){ 
-     } },
-            { 2513, new Dictionary<int, string>(){ 
-     } },
-            { 2514, new Dictionary<int, string>(){ 
-     } },
-            { 2515, new Dictionary<int, string>(){ 
-    { 1, "ISDN TA / Light Rider 128K" },
+    })
+ },
+            { 2508, Tuple.Create("Workbit Corp.", new Dictionary<int, string>{
+{ 1028, "BAFO USB-ATA/ATAPI Bridge Controller" },
+    })
+ },
+            { 2509, Tuple.Create("Psion Dacom Home Networks, Ltd", new Dictionary<int, string>{
+{ 8193, "Psion WaveFinder DAB radio receiver" },
+    })
+ },
+            { 2515, Tuple.Create("Com One", new Dictionary<int, string>{
+{ 1, "ISDN TA / Light Rider 128K" },
 { 11, "Bluetooth Adapter class 2" },
- } },
-            { 2519, new Dictionary<int, string>(){ 
-    { 256, "GPS/GNSS/SPAN sensor" },
- } },
-            { 2520, new Dictionary<int, string>(){ 
-    { 800, "TWN3 Multi125" },
+    })
+ },
+            { 2519, Tuple.Create("Hexagon NovAtel Inc.", new Dictionary<int, string>{
+{ 256, "GPS/GNSS/SPAN sensor" },
+    })
+ },
+            { 2520, Tuple.Create("ELATEC GmbH", new Dictionary<int, string>{
+{ 800, "TWN3 Multi125" },
 { 1030, "TWN4 MIFARE NFC" },
- } },
-            { 2521, new Dictionary<int, string>(){ 
-     } },
-            { 2522, new Dictionary<int, string>(){ 
-    { 6, "Optical Mouse WOP-35 / Trust 450L Optical Mouse" },
+    })
+ },
+            { 2522, Tuple.Create("A4Tech Co., Ltd.", new Dictionary<int, string>{
+{ 6, "Optical Mouse WOP-35 / Trust 450L Optical Mouse" },
 { 10, "Optical Mouse Opto 510D / OP-620D" },
 { 14, "X-F710F Optical Mouse 3xFire Gaming Mouse" },
 { 24, "Trust Human Interface Device" },
@@ -16727,97 +12772,75 @@ namespace HardwareInformation.Providers {
 { 36966, "F3 V-Track Gaming Mouse" },
 { 37008, "XL-730K / XL-750BK / XL-755BK Mice" },
 { 62995, "Bloody V7M Mouse" },
- } },
-            { 2523, new Dictionary<int, string>(){ 
-    { 117, "MiniLab 1008" },
+    })
+ },
+            { 2523, Tuple.Create("Measurement Computing Corp.", new Dictionary<int, string>{
+{ 117, "MiniLab 1008" },
 { 118, "PMD-1024" },
 { 122, "PMD-1208LS" },
 { 129, "USB-1616FS" },
 { 130, "USB-1208FS" },
 { 136, "USB-1616FS internal hub" },
- } },
-            { 2524, new Dictionary<int, string>(){ 
-     } },
-            { 2525, new Dictionary<int, string>(){ 
-     } },
-            { 2527, new Dictionary<int, string>(){ 
-     } },
-            { 2529, new Dictionary<int, string>(){ 
-    { 20769, "MicroLink dLAN" },
- } },
-            { 2533, new Dictionary<int, string>(){ 
-     } },
-            { 2534, new Dictionary<int, string>(){ 
-     } },
-            { 2535, new Dictionary<int, string>(){ 
-     } },
-            { 2536, new Dictionary<int, string>(){ 
-    { 69, "MPK Mini Mk II MIDI Controller" },
+    })
+ },
+            { 2529, Tuple.Create("Intellon Corp.", new Dictionary<int, string>{
+{ 20769, "MicroLink dLAN" },
+    })
+ },
+            { 2536, Tuple.Create("AKAI  Professional M.I. Corp.", new Dictionary<int, string>{
+{ 69, "MPK Mini Mk II MIDI Controller" },
 { 98, "MPD16 MIDI Pad Controller Unit" },
 { 109, "EWI electronic wind instrument" },
 { 113, "MPK25 MIDI Keyboard" },
 { 118, "LPK25 MIDI Keyboard" },
- } },
-            { 2537, new Dictionary<int, string>(){ 
-     } },
-            { 2539, new Dictionary<int, string>(){ 
-    { 17201, "iRhythm Tuner Remote" },
- } },
-            { 2543, new Dictionary<int, string>(){ 
-    { 257, "MD-Port DG2 MiniDisc Interface" },
- } },
-            { 2547, new Dictionary<int, string>(){ 
-    { 24, "GF-46 Multi-Mode Display Module" },
+    })
+ },
+            { 2539, Tuple.Create("IM Networks, Inc.", new Dictionary<int, string>{
+{ 17201, "iRhythm Tuner Remote" },
+    })
+ },
+            { 2543, Tuple.Create("Xitel", new Dictionary<int, string>{
+{ 257, "MD-Port DG2 MiniDisc Interface" },
+    })
+ },
+            { 2547, Tuple.Create("GoFlight, Inc.", new Dictionary<int, string>{
+{ 24, "GF-46 Multi-Mode Display Module" },
 { 40, "RP-48 Combination Pushbutton-Rotary Module" },
 { 72, "LGTII - Landing Gear and Trim Control Module" },
 { 100, "MCPPro - Airliner Mode Control Panel (Autopilot)" },
 { 768, "EFIS - Electronic Flight Information System" },
- } },
-            { 2549, new Dictionary<int, string>(){ 
-    { 360, "Network Adapter" },
+    })
+ },
+            { 2549, Tuple.Create("AresCom", new Dictionary<int, string>{
+{ 360, "Network Adapter" },
 { 392, "LAN Adapter" },
 { 2128, "Adapter" },
- } },
-            { 2550, new Dictionary<int, string>(){ 
-     } },
-            { 2551, new Dictionary<int, string>(){ 
-     } },
-            { 2552, new Dictionary<int, string>(){ 
-     } },
-            { 2553, new Dictionary<int, string>(){ 
-     } },
-            { 2554, new Dictionary<int, string>(){ 
-     } },
-            { 2555, new Dictionary<int, string>(){ 
-    { 24577, "Blaster" },
- } },
-            { 2559, new Dictionary<int, string>(){ 
-     } },
-            { 2560, new Dictionary<int, string>(){ 
-     } },
-            { 2561, new Dictionary<int, string>(){ 
-     } },
-            { 2565, new Dictionary<int, string>(){ 
-    { 1, "Hub" },
+    })
+ },
+            { 2555, Tuple.Create("Altera", new Dictionary<int, string>{
+{ 24577, "Blaster" },
+    })
+ },
+            { 2565, Tuple.Create("Unknown Manufacturer", new Dictionary<int, string>{
+{ 1, "Hub" },
 { 29201, "hub" },
- } },
-            { 2567, new Dictionary<int, string>(){ 
-    { 100, "ADU100 Data Acquisition Interface" },
+    })
+ },
+            { 2567, Tuple.Create("Ontrak Control Systems Inc.", new Dictionary<int, string>{
+{ 100, "ADU100 Data Acquisition Interface" },
 { 120, "ADU120 Data Acquisition Interface" },
 { 130, "ADU130 Data Acquisition Interface" },
 { 200, "ADU200 Relay I/O Interface" },
 { 208, "ADU208 Relay I/O Interface" },
 { 218, "ADU218 Solid-State Relay I/O Interface" },
- } },
-            { 2571, new Dictionary<int, string>(){ 
-     } },
-            { 2573, new Dictionary<int, string>(){ 
-    { 9492, "CTS-1000 Internal Hub" },
- } },
-            { 2577, new Dictionary<int, string>(){ 
-     } },
-            { 2578, new Dictionary<int, string>(){ 
-    { 1, "Bluetooth Dongle (HCI mode)" },
+    })
+ },
+            { 2573, Tuple.Create("Servergy, Inc", new Dictionary<int, string>{
+{ 9492, "CTS-1000 Internal Hub" },
+    })
+ },
+            { 2578, Tuple.Create("Cambridge Silicon Radio, Ltd", new Dictionary<int, string>{
+{ 1, "Bluetooth Dongle (HCI mode)" },
 { 2, "Frontline Test Equipment Bluetooth Device" },
 { 3, "Nanosira" },
 { 4, "Nanosira WHQL Reference Radio" },
@@ -16841,20 +12864,16 @@ namespace HardwareInformation.Providers {
 { 4113, "Bluetooth Device" },
 { 4114, "Bluetooth Device" },
 { 65535, "USB Bluetooth Device in DFU State" },
- } },
-            { 2579, new Dictionary<int, string>(){ 
-     } },
-            { 2580, new Dictionary<int, string>(){ 
-     } },
-            { 2581, new Dictionary<int, string>(){ 
-     } },
-            { 2582, new Dictionary<int, string>(){ 
-    { 4369, "ThumbDrive" },
+    })
+ },
+            { 2582, Tuple.Create("Trek Technology (S) PTE, Ltd", new Dictionary<int, string>{
+{ 4369, "ThumbDrive" },
 { 34952, "IBM USB Memory Key" },
 { 39304, "Trek2000 TD-G2" },
- } },
-            { 2583, new Dictionary<int, string>(){ 
-    { 4, "Optio 330" },
+    })
+ },
+            { 2583, Tuple.Create("Pentax Corp.", new Dictionary<int, string>{
+{ 4, "Optio 330" },
 { 6, "Optio S / S4" },
 { 7, "Optio 550" },
 { 9, "Optio 33WR" },
@@ -16873,54 +12892,44 @@ namespace HardwareInformation.Providers {
 { 147, "K200D" },
 { 167, "Optio E50" },
 { 4097, "EI2000 Camera powered by Digita!" },
- } },
-            { 2584, new Dictionary<int, string>(){ 
-     } },
-            { 2585, new Dictionary<int, string>(){ 
-     } },
-            { 2593, new Dictionary<int, string>(){ 
-    { 32769, "MMT-7305WW [Medtronic Minimed CareLink]" },
- } },
-            { 2594, new Dictionary<int, string>(){ 
-     } },
-            { 2599, new Dictionary<int, string>(){ 
-    { 258, "SP35" },
- } },
-            { 2604, new Dictionary<int, string>(){ 
-    { 8, "GPIO Ports" },
- } },
-            { 2612, new Dictionary<int, string>(){ 
-    { 257, "TG82tp" },
+    })
+ },
+            { 2593, Tuple.Create("Medtronic Physio Control Corp.", new Dictionary<int, string>{
+{ 32769, "MMT-7305WW [Medtronic Minimed CareLink]" },
+    })
+ },
+            { 2599, Tuple.Create("Datacard Group", new Dictionary<int, string>{
+{ 258, "SP35" },
+    })
+ },
+            { 2604, Tuple.Create("AK-Modul-Bus Computer GmbH", new Dictionary<int, string>{
+{ 8, "GPIO Ports" },
+    })
+ },
+            { 2612, Tuple.Create("TG3 Electronics, Inc.", new Dictionary<int, string>{
+{ 257, "TG82tp" },
 { 272, "Deck 82-key backlit keyboard" },
- } },
-            { 2613, new Dictionary<int, string>(){ 
-    { 42, "SAC - Software Assigned Controller" },
+    })
+ },
+            { 2613, Tuple.Create("Radikal Technologies", new Dictionary<int, string>{
+{ 42, "SAC - Software Assigned Controller" },
 { 138, "SAC Hub" },
- } },
-            { 2617, new Dictionary<int, string>(){ 
-     } },
-            { 2618, new Dictionary<int, string>(){ 
-    { 355, "KN-W510U 1.0 Wireless LAN Adapter" },
- } },
-            { 2620, new Dictionary<int, string>(){ 
-     } },
-            { 2621, new Dictionary<int, string>(){ 
-     } },
-            { 2623, new Dictionary<int, string>(){ 
-     } },
-            { 2627, new Dictionary<int, string>(){ 
-     } },
-            { 2630, new Dictionary<int, string>(){ 
-    { 616, "ST268" },
+    })
+ },
+            { 2618, Tuple.Create("PentaMedia Co., Ltd", new Dictionary<int, string>{
+{ 355, "KN-W510U 1.0 Wireless LAN Adapter" },
+    })
+ },
+            { 2630, Tuple.Create("Davicom Semiconductor, Inc.", new Dictionary<int, string>{
+{ 616, "ST268" },
 { 26248, "ZT6688 Fast Ethernet Adapter" },
 { 34069, "ADMtek ADM8515 NIC" },
 { 36864, "DM9000E Fast Ethernet Adapter" },
 { 38401, "DM9601 Fast Ethernet Adapter" },
- } },
-            { 2631, new Dictionary<int, string>(){ 
-     } },
-            { 2632, new Dictionary<int, string>(){ 
-    { 12851, "Multimedia Card Reader" },
+    })
+ },
+            { 2632, Tuple.Create("I/O Interconnect", new Dictionary<int, string>{
+{ 12851, "Multimedia Card Reader" },
 { 12857, "Multimedia Card Reader" },
 { 12888, "Dane Elec zMate SD Reader" },
 { 12889, "Dane Elec zMate CF Reader" },
@@ -16936,17 +12945,18 @@ namespace HardwareInformation.Providers {
 { 20515, "Mass Storage Device" },
 { 20516, "Mass Storage Device" },
 { 20517, "Mass Storage Device" },
- } },
-            { 2634, new Dictionary<int, string>(){ 
-    { 41984, "AUDIO JUNCTION 2.0" },
- } },
-            { 2635, new Dictionary<int, string>(){ 
-     } },
-            { 2636, new Dictionary<int, string>(){ 
-    { 5593, "OPTICAL MOUSE" },
- } },
-            { 2637, new Dictionary<int, string>(){ 
-    { 100, "MK-225 Driver" },
+    })
+ },
+            { 2634, Tuple.Create("Ploytec GmbH", new Dictionary<int, string>{
+{ 41984, "AUDIO JUNCTION 2.0" },
+    })
+ },
+            { 2636, Tuple.Create("Computex Co., Ltd", new Dictionary<int, string>{
+{ 5593, "OPTICAL MOUSE" },
+    })
+ },
+            { 2637, Tuple.Create("Evolution Electronics, Ltd", new Dictionary<int, string>{
+{ 100, "MK-225 Driver" },
 { 101, "MK-225C Driver" },
 { 102, "MK-225C Driver" },
 { 103, "MK-425C Driver" },
@@ -16968,19 +12978,10 @@ namespace HardwareInformation.Providers {
 { 240, "UC-16 Driver" },
 { 241, "X-Session Driver" },
 { 245, "UC-33e MIDI Controller" },
- } },
-            { 2638, new Dictionary<int, string>(){ 
-     } },
-            { 2639, new Dictionary<int, string>(){ 
-     } },
-            { 2640, new Dictionary<int, string>(){ 
-     } },
-            { 2641, new Dictionary<int, string>(){ 
-     } },
-            { 2642, new Dictionary<int, string>(){ 
-     } },
-            { 2643, new Dictionary<int, string>(){ 
-    { 4096, "Scanner" },
+    })
+ },
+            { 2643, Tuple.Create("Portable Peripheral Co., Ltd", new Dictionary<int, string>{
+{ 4096, "Scanner" },
 { 8192, "Q-Scan A6 Scanner" },
 { 8193, "Q-Scan A6 Scanner" },
 { 8211, "Media Drive A6 Scanner" },
@@ -16993,13 +12994,10 @@ namespace HardwareInformation.Providers {
 { 12309, "BizCardReader 300G" },
 { 12330, "LM9832 - PA570 Mini Business Card Scanner [Targus]" },
 { 20481, "BizCardReader 900C" },
- } },
-            { 2650, new Dictionary<int, string>(){ 
-     } },
-            { 2651, new Dictionary<int, string>(){ 
-     } },
-            { 2652, new Dictionary<int, string>(){ 
-    { 513, "iLine10(tm) Network Adapter" },
+    })
+ },
+            { 2652, Tuple.Create("Broadcom Corp.", new Dictionary<int, string>{
+{ 513, "iLine10(tm) Network Adapter" },
 { 3036, "802.11a/b/g/n/ac Wireless Adapter" },
 { 8192, "Bluetooth Device" },
 { 8193, "Bluetooth Device" },
@@ -17076,11 +13074,10 @@ namespace HardwareInformation.Providers {
 { 48414, "BCM43143 802.11bgn (1x1) Wireless Adapter" },
 { 48415, "BCM43242 802.11abgn Wireless Adapter" },
 { 53531, "Eminent EM4045 [Broadcom 4320 USB]" },
- } },
-            { 2653, new Dictionary<int, string>(){ 
-     } },
-            { 2655, new Dictionary<int, string>(){ 
-    { 9, "LP2844 Printer" },
+    })
+ },
+            { 2655, Tuple.Create("Zebra", new Dictionary<int, string>{
+{ 9, "LP2844 Printer" },
 { 80, "P120i / WM120i" },
 { 128, "GK420d Label Printer" },
 { 129, "GK420t Label Printer" },
@@ -17090,69 +13087,45 @@ namespace HardwareInformation.Providers {
 { 209, "Zebra GC420d Label Printer" },
 { 272, "ZD500 Desktop Label Printer" },
 { 37642, "Printer" },
- } },
-            { 2658, new Dictionary<int, string>(){ 
-    { 16, "MPMan MP-F40 MP3 Player" },
- } },
-            { 2662, new Dictionary<int, string>(){ 
-     } },
-            { 2663, new Dictionary<int, string>(){ 
-     } },
-            { 2664, new Dictionary<int, string>(){ 
-     } },
-            { 2665, new Dictionary<int, string>(){ 
-     } },
-            { 2667, new Dictionary<int, string>(){ 
-    { 1, "Compact Flash R/W with MP3 player" },
+    })
+ },
+            { 2658, Tuple.Create("MPMan", new Dictionary<int, string>{
+{ 16, "MPMan MP-F40 MP3 Player" },
+    })
+ },
+            { 2667, Tuple.Create("Green House Co., Ltd", new Dictionary<int, string>{
+{ 1, "Compact Flash R/W with MP3 player" },
 { 15, "FlashDisk" },
- } },
-            { 2668, new Dictionary<int, string>(){ 
-     } },
-            { 2669, new Dictionary<int, string>(){ 
-     } },
-            { 2670, new Dictionary<int, string>(){ 
-     } },
-            { 2671, new Dictionary<int, string>(){ 
-    { 1024, "Xanboo" },
- } },
-            { 2672, new Dictionary<int, string>(){ 
-     } },
-            { 2673, new Dictionary<int, string>(){ 
-    { 1, "VP485 Printer" },
- } },
-            { 2674, new Dictionary<int, string>(){ 
-     } },
-            { 2675, new Dictionary<int, string>(){ 
-    { 2, "XD-2 [Spike]" },
- } },
-            { 2685, new Dictionary<int, string>(){ 
-     } },
-            { 2686, new Dictionary<int, string>(){ 
-     } },
-            { 2688, new Dictionary<int, string>(){ 
-     } },
-            { 2689, new Dictionary<int, string>(){ 
-    { 257, "Keyboard" },
+    })
+ },
+            { 2671, Tuple.Create("Core Technology, Inc.", new Dictionary<int, string>{
+{ 1024, "Xanboo" },
+    })
+ },
+            { 2673, Tuple.Create("VIPColor Technologies USA, Inc.", new Dictionary<int, string>{
+{ 1, "VP485 Printer" },
+    })
+ },
+            { 2675, Tuple.Create("Mackie Designs", new Dictionary<int, string>{
+{ 2, "XD-2 [Spike]" },
+    })
+ },
+            { 2689, Tuple.Create("Chesen Electronics Corp.", new Dictionary<int, string>{
+{ 257, "Keyboard" },
 { 259, "Keyboard" },
 { 515, "Mouse" },
 { 517, "PS/2 Keyboard+Mouse Adapter" },
 { 1793, "USB Missile Launcher" },
 { 65281, "Wireless Missile Launcher" },
- } },
-            { 2690, new Dictionary<int, string>(){ 
-    { 17920, "TravelScan 460/464" },
+    })
+ },
+            { 2690, Tuple.Create("Syscan", new Dictionary<int, string>{
+{ 17920, "TravelScan 460/464" },
 { 26117, "ScanShell 800N" },
- } },
-            { 2691, new Dictionary<int, string>(){ 
-     } },
-            { 2692, new Dictionary<int, string>(){ 
-     } },
-            { 2693, new Dictionary<int, string>(){ 
-     } },
-            { 2694, new Dictionary<int, string>(){ 
-     } },
-            { 2697, new Dictionary<int, string>(){ 
-    { 1, "Guardant Stealth/Net" },
+    })
+ },
+            { 2697, Tuple.Create("Aktiv", new Dictionary<int, string>{
+{ 1, "Guardant Stealth/Net" },
 { 2, "Guardant ID" },
 { 3, "Guardant Stealth 2" },
 { 4, "Rutoken" },
@@ -17179,19 +13152,18 @@ namespace HardwareInformation.Providers {
 { 128, "Rutoken PinPad Ex" },
 { 129, "Rutoken PinPad In" },
 { 130, "Rutoken PinPad 2" },
- } },
-            { 2701, new Dictionary<int, string>(){ 
-     } },
-            { 2702, new Dictionary<int, string>(){ 
-    { 8209, "Filter Driver For JAE XMC R/W" },
- } },
-            { 2704, new Dictionary<int, string>(){ 
-     } },
-            { 2705, new Dictionary<int, string>(){ 
-    { 14337, "Targus PAKP003 Mouse" },
- } },
-            { 2706, new Dictionary<int, string>(){ 
-    { 17, "SYS WaveTerminal U2A" },
+    })
+ },
+            { 2702, Tuple.Create("Japan Aviation Electronics Industry, Ltd", new Dictionary<int, string>{
+{ 8209, "Filter Driver For JAE XMC R/W" },
+    })
+ },
+            { 2705, Tuple.Create("Globlink Technology, Inc.", new Dictionary<int, string>{
+{ 14337, "Targus PAKP003 Mouse" },
+    })
+ },
+            { 2706, Tuple.Create("EGO SYStems, Inc.", new Dictionary<int, string>{
+{ 17, "SYS WaveTerminal U2A" },
 { 33, "GIGAPort" },
 { 49, "GIGAPortAG" },
 { 83, "AudioTrak Optoplay" },
@@ -17205,30 +13177,28 @@ namespace HardwareInformation.Providers {
 { 4144, "M8U" },
 { 4240, "KeyControl49" },
 { 4256, "KeyControl25" },
- } },
-            { 2707, new Dictionary<int, string>(){ 
-    { 2, "C-Pen 10" },
+    })
+ },
+            { 2707, Tuple.Create("C Technologies AB", new Dictionary<int, string>{
+{ 2, "C-Pen 10" },
 { 5, "MyPen Light" },
 { 13, "Input Pen" },
 { 16, "C-Pen 20" },
 { 2707, "PayPen" },
- } },
-            { 2708, new Dictionary<int, string>(){ 
-     } },
-            { 2723, new Dictionary<int, string>(){ 
-     } },
-            { 2724, new Dictionary<int, string>(){ 
-     } },
-            { 2725, new Dictionary<int, string>(){ 
-    { 2, "irock! 500 Series" },
+    })
+ },
+            { 2725, Tuple.Create("First International Digital", new Dictionary<int, string>{
+{ 2, "irock! 500 Series" },
 { 2049, "MP3 Player" },
- } },
-            { 2726, new Dictionary<int, string>(){ 
-    { 257, "Hercules Jukebox" },
+    })
+ },
+            { 2726, Tuple.Create("Perception Digital, Ltd", new Dictionary<int, string>{
+{ 257, "Hercules Jukebox" },
 { 5377, "Store 'n' Go HD Drive" },
- } },
-            { 2727, new Dictionary<int, string>(){ 
-    { 256, "POS Keyboard, TA58P-USB" },
+    })
+ },
+            { 2727, Tuple.Create("Wincor Nixdorf International GmbH", new Dictionary<int, string>{
+{ 256, "POS Keyboard, TA58P-USB" },
 { 257, "POS Keyboard, TA85P-USB" },
 { 258, "POS Keyboard, TA59-USB" },
 { 259, "POS Keyboard, TA60-USB" },
@@ -17258,9 +13228,10 @@ namespace HardwareInformation.Providers {
 { 17156, "Banking Printer TP07" },
 { 17157, "Banking Printer TP07c" },
 { 17664, "WN Central Special Electronics" },
- } },
-            { 2728, new Dictionary<int, string>(){ 
-    { 96, "TG 11Mbps WLAN Mini Adapter" },
+    })
+ },
+            { 2728, Tuple.Create("TriGem Computer, Inc.", new Dictionary<int, string>{
+{ 96, "TG 11Mbps WLAN Mini Adapter" },
 { 4097, "DreamComboM4100" },
 { 12290, "InkJet Color Printer" },
 { 32769, "TG_iMON" },
@@ -17268,18 +13239,14 @@ namespace HardwareInformation.Providers {
 { 40961, "TG_X2" },
 { 40962, "TGVFD_KLOSS" },
 { 65498, "iMON_VFD" },
- } },
-            { 2729, new Dictionary<int, string>(){ 
-    { 61467, "Medion MD 6242 MP3 Player" },
- } },
-            { 2730, new Dictionary<int, string>(){ 
-     } },
-            { 2731, new Dictionary<int, string>(){ 
-     } },
-            { 2732, new Dictionary<int, string>(){ 
-     } },
-            { 2733, new Dictionary<int, string>(){ 
-    { 3, "NRP-Z21" },
+    })
+ },
+            { 2729, Tuple.Create("Baromtec Co.", new Dictionary<int, string>{
+{ 61467, "Medion MD 6242 MP3 Player" },
+    })
+ },
+            { 2733, Tuple.Create("Rohde & Schwarz GmbH & Co. KG", new Dictionary<int, string>{
+{ 3, "NRP-Z21" },
 { 12, "NRP-Z11" },
 { 19, "NRP-Z22" },
 { 20, "NRP-Z23" },
@@ -17302,39 +13269,28 @@ namespace HardwareInformation.Providers {
 { 279, "HMF / HMP / HMS-X / HMO series Oscilloscopes" },
 { 280, "HMF / HMP / HMS-X / HMO series Oscilloscopes" },
 { 281, "HMF / HMP / HMS-X / HMO series Oscilloscopes" },
- } },
-            { 2734, new Dictionary<int, string>(){ 
-     } },
-            { 2735, new Dictionary<int, string>(){ 
-     } },
-            { 2736, new Dictionary<int, string>(){ 
-     } },
-            { 2737, new Dictionary<int, string>(){ 
-    { 2, "OBID RFID-Reader" },
+    })
+ },
+            { 2737, Tuple.Create("FEIG ELECTRONIC GmbH", new Dictionary<int, string>{
+{ 2, "OBID RFID-Reader" },
 { 4, "OBID classic-pro" },
- } },
-            { 2746, new Dictionary<int, string>(){ 
-    { 32769, "Tracker 110 Protocol Analyzer" },
+    })
+ },
+            { 2746, Tuple.Create("Ellisys", new Dictionary<int, string>{
+{ 32769, "Tracker 110 Protocol Analyzer" },
 { 32770, "Explorer 200 Protocol Analyzer" },
- } },
-            { 2750, new Dictionary<int, string>(){ 
-    { 257, "SL1200 DAC" },
- } },
-            { 2751, new Dictionary<int, string>(){ 
-    { 13168, "I2C/SPI Adapter - U2C-12" },
- } },
-            { 2755, new Dictionary<int, string>(){ 
-     } },
-            { 2756, new Dictionary<int, string>(){ 
-     } },
-            { 2757, new Dictionary<int, string>(){ 
-     } },
-            { 2758, new Dictionary<int, string>(){ 
-     } },
-            { 2759, new Dictionary<int, string>(){ 
-     } },
-            { 2760, new Dictionary<int, string>(){ 
-    { 769, "Web Camera" },
+    })
+ },
+            { 2750, Tuple.Create("Stereo-Link", new Dictionary<int, string>{
+{ 257, "SL1200 DAC" },
+    })
+ },
+            { 2751, Tuple.Create("Diolan", new Dictionary<int, string>{
+{ 13168, "I2C/SPI Adapter - U2C-12" },
+    })
+ },
+            { 2760, Tuple.Create("Z-Star Microelectronics Corp.", new Dictionary<int, string>{
+{ 769, "Web Camera" },
 { 770, "ZC0302 Webcam" },
 { 801, "Vimicro generic vc0321 Camera" },
 { 803, "Luxya WC-1200 USB 2.0 Webcam" },
@@ -17357,31 +13313,33 @@ namespace HardwareInformation.Providers {
 { 50194, "Lenovo IdeaCentre Web Camera" },
 { 50217, "Lenovo ThinkCentre Web Camera" },
 { 50221, "Lenovo IdeaCentre Web Camera" },
- } },
-            { 2761, new Dictionary<int, string>(){ 
-    { 0, "Backpack CD-ReWriter" },
+    })
+ },
+            { 2761, Tuple.Create("Micro Solutions, Inc.", new Dictionary<int, string>{
+{ 0, "Backpack CD-ReWriter" },
 { 1, "BACKPACK  2 Cable" },
 { 16, "BACKPACK" },
 { 17, "Backpack 40GB Hard Drive" },
 { 272, "BACKPACK" },
 { 273, "BackPack" },
 { 4660, "BACKPACK" },
- } },
-            { 2762, new Dictionary<int, string>(){ 
-    { 4192, "OPEN NT1 Plus II" },
- } },
-            { 2764, new Dictionary<int, string>(){ 
-     } },
-            { 2765, new Dictionary<int, string>(){ 
-    { 768, "IDT1221U RS-232 Adapter" },
+    })
+ },
+            { 2762, Tuple.Create("OPEN Networks Ltd", new Dictionary<int, string>{
+{ 4192, "OPEN NT1 Plus II" },
+    })
+ },
+            { 2765, Tuple.Create("ID Tech", new Dictionary<int, string>{
+{ 768, "IDT1221U RS-232 Adapter" },
 { 1025, "Spectrum III Hybrid Smartcard Reader" },
 { 1584, "Spectrum III Mag-Only Insert Reader (SPT3-355 Series) USB-CDC" },
 { 2064, "SecurePIN (IDPA-506100Y) PIN Pad" },
 { 8240, "ValueMag Magnetic Stripe Reader" },
 { 14096, "ViVOpay Kiosk III" },
- } },
-            { 2766, new Dictionary<int, string>(){ 
-    { 4609, "ZD1201 802.11b" },
+    })
+ },
+            { 2766, Tuple.Create("ZyDAS", new Dictionary<int, string>{
+{ 4609, "ZD1201 802.11b" },
 { 4625, "ZD1211 802.11g" },
 { 4629, "ZD1211B 802.11g" },
 { 4641, "ZD1221 802.11n" },
@@ -17392,34 +13350,14 @@ namespace HardwareInformation.Providers {
 { 8447, "Virtual media for 802.11bg" },
 { 41489, "ZD1211 802.11b/g Wireless Adapter" },
 { 45589, "802.11bg" },
- } },
-            { 2767, new Dictionary<int, string>(){ 
-     } },
-            { 2768, new Dictionary<int, string>(){ 
-     } },
-            { 2769, new Dictionary<int, string>(){ 
-     } },
-            { 2770, new Dictionary<int, string>(){ 
-     } },
-            { 2778, new Dictionary<int, string>(){ 
-    { 5, "DK2" },
- } },
-            { 2787, new Dictionary<int, string>(){ 
-     } },
-            { 2788, new Dictionary<int, string>(){ 
-     } },
-            { 2791, new Dictionary<int, string>(){ 
-     } },
-            { 2792, new Dictionary<int, string>(){ 
-     } },
-            { 2793, new Dictionary<int, string>(){ 
-     } },
-            { 2794, new Dictionary<int, string>(){ 
-     } },
-            { 2795, new Dictionary<int, string>(){ 
-     } },
-            { 2796, new Dictionary<int, string>(){ 
-    { 8449, "SmartMedia Card Reader" },
+    })
+ },
+            { 2778, Tuple.Create("Data Encryption Systems Ltd.", new Dictionary<int, string>{
+{ 5, "DK2" },
+    })
+ },
+            { 2796, Tuple.Create("Neodio Technologies Corp.", new Dictionary<int, string>{
+{ 8449, "SmartMedia Card Reader" },
 { 8450, "CompactFlash Card Reader" },
 { 8451, "MMC/SD Card Reader" },
 { 8452, "MemoryStick Card Reader" },
@@ -17442,9 +13380,10 @@ namespace HardwareInformation.Providers {
 { 12822, "HS Card Reader" },
 { 12896, "7-in-1 Card Reader" },
 { 20496, "ND5010 Card Reader" },
- } },
-            { 2800, new Dictionary<int, string>(){ 
-    { 20480, "UMTS Card" },
+    })
+ },
+            { 2800, Tuple.Create("Option", new Dictionary<int, string>{
+{ 20480, "UMTS Card" },
 { 24576, "GlobeTrotter 3G datacard" },
 { 25344, "GT 3G Quad UMTS/GPRS Card" },
 { 26112, "GlobeTrotter 3G+ datacard" },
@@ -17455,31 +13394,23 @@ namespace HardwareInformation.Providers {
 { 30209, "Globetrotter MO40x 3G Modem (GTM 382)" },
 { 30465, "Globetrotter HSUPA Modem (aka icon 451)" },
 { 53333, "Globetrotter GI0505 [iCON 505]" },
- } },
-            { 2806, new Dictionary<int, string>(){ 
-     } },
-            { 2807, new Dictionary<int, string>(){ 
-    { 257, "Digital TV USB Receiver (DVB-S/T/C / ATSC)" },
- } },
-            { 2809, new Dictionary<int, string>(){ 
-    { 16, "USB SightCam 100" },
+    })
+ },
+            { 2807, Tuple.Create("B2C2, Inc.", new Dictionary<int, string>{
+{ 257, "Digital TV USB Receiver (DVB-S/T/C / ATSC)" },
+    })
+ },
+            { 2809, Tuple.Create("Hama, Inc.", new Dictionary<int, string>{
+{ 16, "USB SightCam 100" },
 { 17, "Micro Innovations IC50C Webcam" },
- } },
-            { 2810, new Dictionary<int, string>(){ 
-    { 2002, "Controller Board for Projected Capacitive Touch Screen DUS3000" },
- } },
-            { 2812, new Dictionary<int, string>(){ 
-     } },
-            { 2813, new Dictionary<int, string>(){ 
-     } },
-            { 2814, new Dictionary<int, string>(){ 
-     } },
-            { 2815, new Dictionary<int, string>(){ 
-     } },
-            { 2816, new Dictionary<int, string>(){ 
-     } },
-            { 2821, new Dictionary<int, string>(){ 
-    { 1, "MeMO Pad HD 7 (CD-ROM mode)" },
+    })
+ },
+            { 2810, Tuple.Create("DMC Co., Ltd.", new Dictionary<int, string>{
+{ 2002, "Controller Board for Projected Capacitive Touch Screen DUS3000" },
+    })
+ },
+            { 2821, Tuple.Create("ASUSTek Computer, Inc.", new Dictionary<int, string>{
+{ 1, "MeMO Pad HD 7 (CD-ROM mode)" },
 { 769, "MyPal A696 GPS PDA" },
 { 4353, "Mass Storage (UISDMC4S)" },
 { 5894, "WL-167G v1 802.11g Adapter [Ralink RT2571]" },
@@ -17561,22 +13492,26 @@ namespace HardwareInformation.Providers {
 { 30582, "Zenfone GO (ZB500KL) (PTP mode)" },
 { 30583, "Zenfone GO (ZB500KL) (Debug, PTP mode)" },
 { 46848, "Broadcom Bluetooth 2.1" },
- } },
-            { 2827, new Dictionary<int, string>(){ 
-    { 4206, "Datamax E-4304" },
- } },
-            { 2828, new Dictionary<int, string>(){ 
-    { 9, "Todos Argos Mini II Smart Card Reader" },
+    })
+ },
+            { 2827, Tuple.Create("Datamax-O'Neil", new Dictionary<int, string>{
+{ 4206, "Datamax E-4304" },
+    })
+ },
+            { 2828, Tuple.Create("Todos AB", new Dictionary<int, string>{
+{ 9, "Todos Argos Mini II Smart Card Reader" },
 { 30, "e.dentifier2 (ABN AMRO electronic banking card reader NL)" },
 { 46, "C200 smartcard controller (Nordea card reader)" },
 { 63, "Todos C400 smartcard controller (Handelsbanken card reader)" },
 { 80, "Argos Mini II Smart Card Reader (CCID)" },
- } },
-            { 2829, new Dictionary<int, string>(){ 
-    { 0, "CenturyCD" },
- } },
-            { 2830, new Dictionary<int, string>(){ 
-    { 773, "Jabra EVOLVE Link MS" },
+    })
+ },
+            { 2829, Tuple.Create("ProjectLab", new Dictionary<int, string>{
+{ 0, "CenturyCD" },
+    })
+ },
+            { 2830, Tuple.Create("GN Netcom", new Dictionary<int, string>{
+{ 773, "Jabra EVOLVE Link MS" },
 { 785, "Jabra EVOLVE 65" },
 { 786, "enc060:Buttons Volume up/down/mute + phone [Jabra]" },
 { 835, "Jabra UC VOICE 150a" },
@@ -17599,65 +13534,46 @@ namespace HardwareInformation.Providers {
 { 37680, "Jabra GN9330 Headset" },
 { 41798, "Jabra Engage 75 Stereo" },
 { 42250, "Alienware Wireless Gaming Headset AW988" },
- } },
-            { 2831, new Dictionary<int, string>(){ 
-    { 1024, "DNxID" },
- } },
-            { 2832, new Dictionary<int, string>(){ 
-     } },
-            { 2833, new Dictionary<int, string>(){ 
-     } },
-            { 2846, new Dictionary<int, string>(){ 
-    { 32775, "Blackhawk USB560-BP JTAG Emulator" },
- } },
-            { 2847, new Dictionary<int, string>(){ 
-     } },
-            { 2848, new Dictionary<int, string>(){ 
-     } },
-            { 2849, new Dictionary<int, string>(){ 
-     } },
-            { 2850, new Dictionary<int, string>(){ 
-     } },
-            { 2851, new Dictionary<int, string>(){ 
-     } },
-            { 2852, new Dictionary<int, string>(){ 
-     } },
-            { 2855, new Dictionary<int, string>(){ 
-     } },
-            { 2856, new Dictionary<int, string>(){ 
-     } },
-            { 2860, new Dictionary<int, string>(){ 
-     } },
-            { 2864, new Dictionary<int, string>(){ 
-    { 6, "SM Media-Shuttle Card Reader" },
- } },
-            { 2867, new Dictionary<int, string>(){ 
-    { 32, "ShuttleXpress" },
+    })
+ },
+            { 2831, Tuple.Create("AVID Technology", new Dictionary<int, string>{
+{ 1024, "DNxID" },
+    })
+ },
+            { 2846, Tuple.Create("Electronic Warfare Assoc., Inc. (EWA)", new Dictionary<int, string>{
+{ 32775, "Blackhawk USB560-BP JTAG Emulator" },
+    })
+ },
+            { 2864, Tuple.Create("PNY Technologies, Inc.", new Dictionary<int, string>{
+{ 6, "SM Media-Shuttle Card Reader" },
+    })
+ },
+            { 2867, Tuple.Create("Contour Design, Inc.", new Dictionary<int, string>{
+{ 32, "ShuttleXpress" },
 { 48, "ShuttlePro v2" },
 { 1025, "RollerMouse Free 2" },
 { 1792, "RollerMouse Pro" },
 { 2208, "Perfit Mouse" },
 { 4096, "RollerMouse Red" },
 { 4112, "Vidamic Technomouse IQ" },
- } },
-            { 2871, new Dictionary<int, string>(){ 
-     } },
-            { 2872, new Dictionary<int, string>(){ 
-    { 3, "Keyboard" },
+    })
+ },
+            { 2872, Tuple.Create("Gear Head", new Dictionary<int, string>{
+{ 3, "Keyboard" },
 { 16, "107-Key Keyboard" },
- } },
-            { 2873, new Dictionary<int, string>(){ 
-    { 1, "Composite USB PS2 Converter" },
+    })
+ },
+            { 2873, Tuple.Create("Omnidirectional Control Technology, Inc.", new Dictionary<int, string>{
+{ 1, "Composite USB PS2 Converter" },
 { 265, "USB TO Ethernet" },
 { 1057, "Serial" },
 { 2049, "USB-Parallel Bridge" },
 { 2305, "OCT To Fast Ethernet Converter" },
 { 3075, "LAN DOCK Serial Converter" },
- } },
-            { 2874, new Dictionary<int, string>(){ 
-     } },
-            { 2875, new Dictionary<int, string>(){ 
-    { 355, "TL-WN320G 1.0 WLAN Adapter" },
+    })
+ },
+            { 2875, Tuple.Create("Tekram Technology Co., Ltd", new Dictionary<int, string>{
+{ 355, "TL-WN320G 1.0 WLAN Adapter" },
 { 5633, "Allnet 0193 802.11b Adapter" },
 { 5634, "ZyXEL ZyAIR B200 802.11b Adapter" },
 { 5650, "AIR.Mate 2@net 802.11b Adapter" },
@@ -17666,25 +13582,25 @@ namespace HardwareInformation.Providers {
 { 5680, "QuickWLAN 802.11bg" },
 { 22064, "802.11bg" },
 { 26160, "ZD1211" },
- } },
-            { 2876, new Dictionary<int, string>(){ 
-    { 40976, "Simple_Way Printer/Scanner/Copier" },
+    })
+ },
+            { 2876, Tuple.Create("Olivetti Techcenter", new Dictionary<int, string>{
+{ 40976, "Simple_Way Printer/Scanner/Copier" },
 { 49152, "Olicard 100" },
 { 50944, "Olicard 100 (Mass Storage mode)" },
- } },
-            { 2878, new Dictionary<int, string>(){ 
-     } },
-            { 2881, new Dictionary<int, string>(){ 
-    { 17, "Crossam2+USB IR commander" },
- } },
-            { 2883, new Dictionary<int, string>(){ 
-    { 3, "PS2 Controller Converter" },
+    })
+ },
+            { 2881, Tuple.Create("Hal Corp.", new Dictionary<int, string>{
+{ 17, "Crossam2+USB IR commander" },
+    })
+ },
+            { 2883, Tuple.Create("Play.com, Inc.", new Dictionary<int, string>{
+{ 3, "PS2 Controller Converter" },
 { 5, "GameCube Adaptor" },
- } },
-            { 2887, new Dictionary<int, string>(){ 
-     } },
-            { 2888, new Dictionary<int, string>(){ 
-    { 4099, "Technotrend/Hauppauge USB-Nova" },
+    })
+ },
+            { 2888, Tuple.Create("TechnoTrend AG", new Dictionary<int, string>{
+{ 4099, "Technotrend/Hauppauge USB-Nova" },
 { 4100, "TT-PCline" },
 { 4101, "Technotrend/Hauppauge USB-Nova" },
 { 4102, "Technotrend/Hauppauge DEC3000-s" },
@@ -17710,92 +13626,58 @@ namespace HardwareInformation.Providers {
 { 12308, "TT-TVStick CT2-4400" },
 { 12309, "TT-connect CT2-4650 CI" },
 { 12311, "TT-connect S2-4650 CI" },
- } },
-            { 2889, new Dictionary<int, string>(){ 
-    { 1615, "Trance Vibrator" },
- } },
-            { 2891, new Dictionary<int, string>(){ 
-    { 256, "D'music MP3 Player" },
- } },
-            { 2893, new Dictionary<int, string>(){ 
-    { 4362, "Graphtec CC200-20" },
+    })
+ },
+            { 2889, Tuple.Create("ASCII Corp.", new Dictionary<int, string>{
+{ 1615, "Trance Vibrator" },
+    })
+ },
+            { 2891, Tuple.Create("Pine Corp. Ltd.", new Dictionary<int, string>{
+{ 256, "D'music MP3 Player" },
+    })
+ },
+            { 2893, Tuple.Create("Graphtec America, Inc.", new Dictionary<int, string>{
+{ 4362, "Graphtec CC200-20" },
 { 4387, "Electronic Cutting Tool [Silhouette Portrait]" },
- } },
-            { 2894, new Dictionary<int, string>(){ 
-    { 25856, "MP3 Player" },
+    })
+ },
+            { 2894, Tuple.Create("Musical Electronics, Ltd", new Dictionary<int, string>{
+{ 25856, "MP3 Player" },
 { 32808, "MP3 Player" },
 { 35104, "MP3 Player" },
- } },
-            { 2896, new Dictionary<int, string>(){ 
-     } },
-            { 2897, new Dictionary<int, string>(){ 
-    { 32, "Comfort Keyboard" },
- } },
-            { 2898, new Dictionary<int, string>(){ 
-     } },
-            { 2900, new Dictionary<int, string>(){ 
-     } },
-            { 2902, new Dictionary<int, string>(){ 
-     } },
-            { 2903, new Dictionary<int, string>(){ 
-     } },
-            { 2905, new Dictionary<int, string>(){ 
-     } },
-            { 2906, new Dictionary<int, string>(){ 
-     } },
-            { 2911, new Dictionary<int, string>(){ 
-     } },
-            { 2912, new Dictionary<int, string>(){ 
-     } },
-            { 2913, new Dictionary<int, string>(){ 
-     } },
-            { 2914, new Dictionary<int, string>(){ 
-    { 11, "Bluetooth Device" },
+    })
+ },
+            { 2897, Tuple.Create("Comfort Keyboard Co.", new Dictionary<int, string>{
+{ 32, "Comfort Keyboard" },
+    })
+ },
+            { 2914, Tuple.Create("Orange Micro, Inc.", new Dictionary<int, string>{
+{ 11, "Bluetooth Device" },
 { 89, "iBOT2 Webcam" },
- } },
-            { 2915, new Dictionary<int, string>(){ 
-     } },
-            { 2916, new Dictionary<int, string>(){ 
-     } },
-            { 2917, new Dictionary<int, string>(){ 
-     } },
-            { 2918, new Dictionary<int, string>(){ 
-    { 65, "Xtreme" },
- } },
-            { 2919, new Dictionary<int, string>(){ 
-    { 21854, "SCB-R9000" },
- } },
-            { 2921, new Dictionary<int, string>(){ 
-     } },
-            { 2922, new Dictionary<int, string>(){ 
-    { 41266, "WUP-005 [Nintendo Wii U Pro Controller]" },
- } },
-            { 2927, new Dictionary<int, string>(){ 
-     } },
-            { 2928, new Dictionary<int, string>(){ 
-    { 186, "iRiver H10 20GB" },
- } },
-            { 2929, new Dictionary<int, string>(){ 
-     } },
-            { 2930, new Dictionary<int, string>(){ 
-     } },
-            { 2931, new Dictionary<int, string>(){ 
-     } },
-            { 2933, new Dictionary<int, string>(){ 
-     } },
-            { 2937, new Dictionary<int, string>(){ 
-     } },
-            { 2938, new Dictionary<int, string>(){ 
-    { 2000, "Bluetooth Dongle" },
- } },
-            { 2939, new Dictionary<int, string>(){ 
-     } },
-            { 2940, new Dictionary<int, string>(){ 
-     } },
-            { 2941, new Dictionary<int, string>(){ 
-     } },
-            { 2945, new Dictionary<int, string>(){ 
-    { 1, "Biothentic II smartcard reader with fingerprint sensor" },
+    })
+ },
+            { 2918, Tuple.Create("Cybiko Inc.", new Dictionary<int, string>{
+{ 65, "Xtreme" },
+    })
+ },
+            { 2919, Tuple.Create("Fairbanks Scales", new Dictionary<int, string>{
+{ 21854, "SCB-R9000" },
+    })
+ },
+            { 2922, Tuple.Create("Maxim Integrated Products", new Dictionary<int, string>{
+{ 41266, "WUP-005 [Nintendo Wii U Pro Controller]" },
+    })
+ },
+            { 2928, Tuple.Create("PortalPlayer, Inc.", new Dictionary<int, string>{
+{ 186, "iRiver H10 20GB" },
+    })
+ },
+            { 2938, Tuple.Create("Zeevo, Inc.", new Dictionary<int, string>{
+{ 2000, "Bluetooth Dongle" },
+    })
+ },
+            { 2945, Tuple.Create("id3 Technologies", new Dictionary<int, string>{
+{ 1, "Biothentic II smartcard reader with fingerprint sensor" },
 { 2, "DFU-Enabled Devices (DFU)" },
 { 18, "BioPAD biometric module (DFU + CDC)" },
 { 258, "Certis V1 fingerprint reader" },
@@ -17804,32 +13686,25 @@ namespace HardwareInformation.Providers {
 { 513, "CL1356T / CL1356T5 / CL1356A smartcard readers (DFU + CCID)" },
 { 544, "CL1356A FFPJP smartcard reader (CCID + HID)" },
 { 545, "CL1356A smartcard reader (DFU + CCID + HID)" },
- } },
-            { 2948, new Dictionary<int, string>(){ 
-     } },
-            { 2949, new Dictionary<int, string>(){ 
-     } },
-            { 2950, new Dictionary<int, string>(){ 
-    { 20736, "XMC5100 Zippy Drive" },
+    })
+ },
+            { 2950, Tuple.Create("Exputer Systems, Inc.", new Dictionary<int, string>{
+{ 20736, "XMC5100 Zippy Drive" },
 { 20752, "XMC5110 Flash Drive" },
 { 20992, "XMC5200 Zippy Drive" },
 { 20993, "XMC5200 Zippy Drive" },
 { 20994, "XMC5200 Zippy Drive" },
 { 21120, "XMC5280 Storage Drive" },
 { 65520, "ISP5200 Debugger" },
- } },
-            { 2951, new Dictionary<int, string>(){ 
-     } },
-            { 2952, new Dictionary<int, string>(){ 
-     } },
-            { 2953, new Dictionary<int, string>(){ 
-     } },
-            { 2956, new Dictionary<int, string>(){ 
-    { 1, "Interactive Whiteboard Controller (SB6) (HID)" },
+    })
+ },
+            { 2956, Tuple.Create("SMART Technologies Inc.", new Dictionary<int, string>{
+{ 1, "Interactive Whiteboard Controller (SB6) (HID)" },
 { 195, "Sympodium ID350" },
- } },
-            { 2965, new Dictionary<int, string>(){ 
-    { 5920, "10/100 Ethernet" },
+    })
+ },
+            { 2965, Tuple.Create("ASIX Electronics Corp.", new Dictionary<int, string>{
+{ 5920, "10/100 Ethernet" },
 { 6016, "AX88178" },
 { 6032, "AX88179 Gigabit Ethernet" },
 { 26626, "AX68002 KVM Switch SoC" },
@@ -17837,28 +13712,21 @@ namespace HardwareInformation.Providers {
 { 30506, "AX88772A Fast Ethernet" },
 { 30507, "AX88772B" },
 { 32299, "AX88772B Fast Ethernet Controller" },
- } },
-            { 2966, new Dictionary<int, string>(){ 
-     } },
-            { 2967, new Dictionary<int, string>(){ 
-    { 30514, "Smart Card Reader" },
+    })
+ },
+            { 2967, Tuple.Create("O2 Micro, Inc.", new Dictionary<int, string>{
+{ 30514, "Smart Card Reader" },
 { 30561, "Oz776 1.1 Hub" },
 { 30562, "Oz776 SmartCard Reader" },
 { 30578, "OZ776 CCID Smartcard Reader" },
- } },
-            { 2968, new Dictionary<int, string>(){ 
-     } },
-            { 2969, new Dictionary<int, string>(){ 
-     } },
-            { 2971, new Dictionary<int, string>(){ 
-    { 16402, "Reflex RC-controller Interface" },
- } },
-            { 2973, new Dictionary<int, string>(){ 
-     } },
-            { 2975, new Dictionary<int, string>(){ 
-     } },
-            { 2991, new Dictionary<int, string>(){ 
-    { 229, "USR6000" },
+    })
+ },
+            { 2971, Tuple.Create("Dipl.-Ing. Stefan Kunde", new Dictionary<int, string>{
+{ 16402, "Reflex RC-controller Interface" },
+    })
+ },
+            { 2991, Tuple.Create("U.S. Robotics", new Dictionary<int, string>{
+{ 229, "USR6000" },
 { 235, "USR1120 802.11b Adapter" },
 { 236, "56K Faxmodem" },
 { 241, "SureConnect ADSL ATM Adapter" },
@@ -17876,21 +13744,20 @@ namespace HardwareInformation.Providers {
 { 289, "USR5423 802.11bg Wireless Adapter [ZyDAS ZD1211B]" },
 { 771, "USR5637 56K Faxmodem" },
 { 24850, "FaxModem Model 5633" },
- } },
-            { 2992, new Dictionary<int, string>(){ 
-    { 256, "Sound Vision Stream" },
+    })
+ },
+            { 2992, Tuple.Create("Concord Camera Corp.", new Dictionary<int, string>{
+{ 256, "Sound Vision Stream" },
 { 20487, "3340z/Rollei DC3100" },
- } },
-            { 2993, new Dictionary<int, string>(){ 
-     } },
-            { 2994, new Dictionary<int, string>(){ 
-    { 770, "U10H010 802.11b Wireless Adapter [Intersil PRISM 3]" },
+    })
+ },
+            { 2994, Tuple.Create("Ambit Microsystems Corp.", new Dictionary<int, string>{
+{ 770, "U10H010 802.11b Wireless Adapter [Intersil PRISM 3]" },
 { 24728, "USB Cable Modem" },
- } },
-            { 2995, new Dictionary<int, string>(){ 
-     } },
-            { 2996, new Dictionary<int, string>(){ 
-    { 1, "Android Phone via mass storage [Wiko Cink Peax 2]" },
+    })
+ },
+            { 2996, Tuple.Create("HTC (High Tech Computer Corp.)", new Dictionary<int, string>{
+{ 1, "Android Phone via mass storage [Wiko Cink Peax 2]" },
 { 206, "mmO2 XDA GSM/GPRS Pocket PC" },
 { 207, "SPV C500 Smart Phone" },
 { 774, "Vive Hub Bluetooth 4.1 (Broadcom BCM920703)" },
@@ -18096,31 +13963,10 @@ namespace HardwareInformation.Providers {
 { 8500, "Vive Hub (SMSC USB2137B)" },
 { 10052, "Vive Hub (HTC CB USB2)" },
 { 11399, "Vive" },
- } },
-            { 2997, new Dictionary<int, string>(){ 
-     } },
-            { 2998, new Dictionary<int, string>(){ 
-     } },
-            { 2999, new Dictionary<int, string>(){ 
-     } },
-            { 3000, new Dictionary<int, string>(){ 
-     } },
-            { 3001, new Dictionary<int, string>(){ 
-     } },
-            { 3002, new Dictionary<int, string>(){ 
-     } },
-            { 3003, new Dictionary<int, string>(){ 
-     } },
-            { 3004, new Dictionary<int, string>(){ 
-     } },
-            { 3005, new Dictionary<int, string>(){ 
-     } },
-            { 3008, new Dictionary<int, string>(){ 
-     } },
-            { 3009, new Dictionary<int, string>(){ 
-     } },
-            { 3010, new Dictionary<int, string>(){ 
-    { 1282, "ST3300601CB-RK 300 GB External Hard Drive" },
+    })
+ },
+            { 3010, Tuple.Create("Seagate RSS LLC", new Dictionary<int, string>{
+{ 1282, "ST3300601CB-RK 300 GB External Hard Drive" },
 { 1283, "ST3250824A [Barracuda 7200.9]" },
 { 8192, "Storage Adapter V3 (TPP)" },
 { 8448, "FreeAgent Go" },
@@ -18174,18 +14020,14 @@ namespace HardwareInformation.Providers {
 { 43832, "Backup Plus Hub (Mass Storage)" },
 { 43844, "Backup Plus Hub" },
 { 44064, "Backup Plus Slim 2TB" },
- } },
-            { 3011, new Dictionary<int, string>(){ 
-    { 1, "UMTS-TDD (TD-CDMA) modem" },
- } },
-            { 3012, new Dictionary<int, string>(){ 
-     } },
-            { 3013, new Dictionary<int, string>(){ 
-     } },
-            { 3014, new Dictionary<int, string>(){ 
-     } },
-            { 3015, new Dictionary<int, string>(){ 
-    { 1, "ActiveHome (ACPI-compliant)" },
+    })
+ },
+            { 3011, Tuple.Create("IPWireless, Inc.", new Dictionary<int, string>{
+{ 1, "UMTS-TDD (TD-CDMA) modem" },
+    })
+ },
+            { 3015, Tuple.Create("X10 Wireless Technology, Inc.", new Dictionary<int, string>{
+{ 1, "ActiveHome (ACPI-compliant)" },
 { 2, "Firecracker Interface (ACPI-compliant)" },
 { 3, "VGA Video Sender (ACPI-compliant)" },
 { 4, "X10 Receiver" },
@@ -18200,20 +14042,14 @@ namespace HardwareInformation.Providers {
 { 13, "Transceiver (ACPI-compliant)" },
 { 14, "Transceiver (ACPI-compliant)" },
 { 15, "Transceiver (ACPI-compliant)" },
- } },
-            { 3016, new Dictionary<int, string>(){ 
-     } },
-            { 3017, new Dictionary<int, string>(){ 
-     } },
-            { 3018, new Dictionary<int, string>(){ 
-     } },
-            { 3019, new Dictionary<int, string>(){ 
-     } },
-            { 3031, new Dictionary<int, string>(){ 
-    { 40993, "Amptek DP4 multichannel signal analyzer" },
- } },
-            { 3034, new Dictionary<int, string>(){ 
-    { 259, "USB 2.0 Card Reader" },
+    })
+ },
+            { 3031, Tuple.Create("Andrew Pargeter & Associates", new Dictionary<int, string>{
+{ 40993, "Amptek DP4 multichannel signal analyzer" },
+    })
+ },
+            { 3034, Tuple.Create("Realtek Semiconductor Corp.", new Dictionary<int, string>{
+{ 259, "USB 2.0 Card Reader" },
 { 260, "Mass Storage Device" },
 { 262, "Mass Storage Device" },
 { 263, "Mass Storage Device" },
@@ -18308,9 +14144,10 @@ namespace HardwareInformation.Providers {
 { 46890, "RTL8723B Bluetooth" },
 { 47122, "RTL88x2bu [AC1200 Techkey]" },
 { 61817, "RTL8188FTV 802.11b/g/n 1T1R 2.4G WLAN Adapter" },
- } },
-            { 3035, new Dictionary<int, string>(){ 
-    { 4096, "BV Bluetooth Device" },
+    })
+ },
+            { 3035, Tuple.Create("Ericsson Business Mobile Networks BV", new Dictionary<int, string>{
+{ 4096, "BV Bluetooth Device" },
 { 4098, "Bluetooth Device 1.2" },
 { 4169, "C3607w Mobile Broadband Module" },
 { 6400, "F3507g Mobile Broadband Module" },
@@ -18322,50 +14159,33 @@ namespace HardwareInformation.Providers {
 { 6410, "F3307 Mobile Broadband Module" },
 { 6411, "C3607w v2 Mobile Broadband Module" },
 { 6438, "H5321 gw Mobile Broadband Module" },
- } },
-            { 3036, new Dictionary<int, string>(){ 
-     } },
-            { 3037, new Dictionary<int, string>(){ 
-     } },
-            { 3042, new Dictionary<int, string>(){ 
-     } },
-            { 3043, new Dictionary<int, string>(){ 
-     } },
-            { 3044, new Dictionary<int, string>(){ 
-     } },
-            { 3045, new Dictionary<int, string>(){ 
-     } },
-            { 3046, new Dictionary<int, string>(){ 
-     } },
-            { 3053, new Dictionary<int, string>(){ 
-    { 4352, "CASHFLOW SC" },
+    })
+ },
+            { 3053, Tuple.Create("MEI", new Dictionary<int, string>{
+{ 4352, "CASHFLOW SC" },
 { 4353, "Series 2000 Combo Acceptor" },
- } },
-            { 3054, new Dictionary<int, string>(){ 
-     } },
-            { 3055, new Dictionary<int, string>(){ 
-     } },
-            { 3056, new Dictionary<int, string>(){ 
-    { 49168, "EHD100SD" },
- } },
-            { 3057, new Dictionary<int, string>(){ 
-    { 1, "netMod Driver Ver 2.4.17 (CAPI)" },
+    })
+ },
+            { 3056, Tuple.Create("Pace Micro Technology PLC", new Dictionary<int, string>{
+{ 49168, "EHD100SD" },
+    })
+ },
+            { 3057, Tuple.Create("Intracom S.A.", new Dictionary<int, string>{
+{ 1, "netMod Driver Ver 2.4.17 (CAPI)" },
 { 2, "netMod Driver Ver 2.4 (CAPI)" },
 { 3, "netMod Driver Ver 2.4 (CAPI)" },
- } },
-            { 3058, new Dictionary<int, string>(){ 
-     } },
-            { 3062, new Dictionary<int, string>(){ 
-    { 259, "Storage Device" },
+    })
+ },
+            { 3062, Tuple.Create("Addonics Technologies, Inc.", new Dictionary<int, string>{
+{ 259, "Storage Device" },
 { 4660, "Storage Device" },
 { 40960, "Cable 205 (TPP)" },
 { 40961, "Cable 205" },
 { 40962, "IDE Bridge" },
- } },
-            { 3063, new Dictionary<int, string>(){ 
-     } },
-            { 3064, new Dictionary<int, string>(){ 
-    { 4097, "Fujitsu Pocket Loox 600 PDA" },
+    })
+ },
+            { 3064, Tuple.Create("Fujitsu Siemens Computers", new Dictionary<int, string>{
+{ 4097, "Fujitsu Pocket Loox 600 PDA" },
 { 4102, "SmartCard Reader 2A" },
 { 4103, "Connect2Air E-5400 802.11g Wireless Adapter" },
 { 4105, "Connect2Air E-5400 D1700 802.11g Wireless Adapter [Intersil ISL3887]" },
@@ -18373,37 +14193,36 @@ namespace HardwareInformation.Providers {
 { 4111, "miniCard D2301 802.11bg Wireless Module [SiS 163U]" },
 { 4119, "Keyboard KB SCR" },
 { 4127, "Fujitsu Full HD Pro Webcam" },
- } },
-            { 3067, new Dictionary<int, string>(){ 
-    { 512, "TURBO iDDR Front Panel" },
- } },
-            { 3069, new Dictionary<int, string>(){ 
-    { 4, "USBcan II" },
+    })
+ },
+            { 3067, Tuple.Create("Grass Valley Group", new Dictionary<int, string>{
+{ 512, "TURBO iDDR Front Panel" },
+    })
+ },
+            { 3069, Tuple.Create("Kvaser AB", new Dictionary<int, string>{
+{ 4, "USBcan II" },
 { 11, "Leaf Light HS" },
 { 14, "Leaf SemiPro HS" },
- } },
-            { 3072, new Dictionary<int, string>(){ 
-    { 5639, "Apex M500" },
- } },
-            { 3076, new Dictionary<int, string>(){ 
-     } },
-            { 3077, new Dictionary<int, string>(){ 
-     } },
-            { 3078, new Dictionary<int, string>(){ 
-     } },
-            { 3079, new Dictionary<int, string>(){ 
-     } },
-            { 3080, new Dictionary<int, string>(){ 
-    { 888, "Q 16MB Storage Device" },
- } },
-            { 3081, new Dictionary<int, string>(){ 
-    { 42405, "Litto Version USB2.0" },
- } },
-            { 3082, new Dictionary<int, string>(){ 
-    { 24868, "RocketStor 6124V" },
- } },
-            { 3083, new Dictionary<int, string>(){ 
-    { 10187, "6-in-1 Flash Reader and Writer" },
+    })
+ },
+            { 3072, Tuple.Create("FireFly Mouse Mat", new Dictionary<int, string>{
+{ 5639, "Apex M500" },
+    })
+ },
+            { 3080, Tuple.Create("Agate", new Dictionary<int, string>{
+{ 888, "Q 16MB Storage Device" },
+    })
+ },
+            { 3081, Tuple.Create("Comjet Information System", new Dictionary<int, string>{
+{ 42405, "Litto Version USB2.0" },
+    })
+ },
+            { 3082, Tuple.Create("Highpoint Technologies, Inc.", new Dictionary<int, string>{
+{ 24868, "RocketStor 6124V" },
+    })
+ },
+            { 3083, Tuple.Create("Dura Micro, Inc. (Acomdata)", new Dictionary<int, string>{
+{ 10187, "6-in-1 Flash Reader and Writer" },
 { 10199, "Multi Memory reader/writer MD-005" },
 { 10202, "Multi Memory reader/writer MD-005" },
 { 10204, "Multi Memory reader/writer MD-005" },
@@ -18417,9 +14236,10 @@ namespace HardwareInformation.Providers {
 { 41228, "SD/MS Reader and Writer" },
 { 45057, "USB 2.0 Mass Storage IDE adapter" },
 { 45060, "MMC/SD Reader and Writer" },
- } },
-            { 3090, new Dictionary<int, string>(){ 
-    { 5, "PSX Vibration Feedback Converter / Intec Wireless Controller for Xbox" },
+    })
+ },
+            { 3090, Tuple.Create("Zeroplus", new Dictionary<int, string>{
+{ 5, "PSX Vibration Feedback Converter / Intec Wireless Controller for Xbox" },
 { 48, "PSX Vibration Feedback Converter" },
 { 28686, "Logic Analyzer (LAP-C-16032)" },
 { 34817, "Nyko Xbox Controller" },
@@ -18428,37 +14248,22 @@ namespace HardwareInformation.Providers {
 { 34826, "Pelican Eclipse PL-2023" },
 { 34832, "Xbox Controller" },
 { 39170, "VibraX" },
- } },
-            { 3093, new Dictionary<int, string>(){ 
-     } },
-            { 3094, new Dictionary<int, string>(){ 
-    { 2, "RF Technology Receiver" },
+    })
+ },
+            { 3094, Tuple.Create("Gyration, Inc.", new Dictionary<int, string>{
+{ 2, "RF Technology Receiver" },
 { 3, "RF Technology Receiver" },
 { 8, "RF Technology Receiver" },
 { 128, "eHome Infrared Receiver" },
 { 129, "eHome Infrared Receiver" },
- } },
-            { 3095, new Dictionary<int, string>(){ 
-     } },
-            { 3096, new Dictionary<int, string>(){ 
-     } },
-            { 3097, new Dictionary<int, string>(){ 
-     } },
-            { 3098, new Dictionary<int, string>(){ 
-     } },
-            { 3099, new Dictionary<int, string>(){ 
-     } },
-            { 3100, new Dictionary<int, string>(){ 
-     } },
-            { 3103, new Dictionary<int, string>(){ 
-    { 6144, "Tango 2E" },
- } },
-            { 3106, new Dictionary<int, string>(){ 
-     } },
-            { 3107, new Dictionary<int, string>(){ 
-     } },
-            { 3108, new Dictionary<int, string>(){ 
-    { 1, "Bluetooth Adaptor" },
+    })
+ },
+            { 3103, Tuple.Create("Magicard", new Dictionary<int, string>{
+{ 6144, "Tango 2E" },
+    })
+ },
+            { 3108, Tuple.Create("Taiyo Yuden", new Dictionary<int, string>{
+{ 1, "Bluetooth Adaptor" },
 { 2, "Bluetooth Device2" },
 { 5, "Bluetooth Device(BC04-External)" },
 { 11, "Bluetooth Device(BC04-External)" },
@@ -18472,20 +14277,24 @@ namespace HardwareInformation.Providers {
 { 33, "Bluetooth Device (V2.1+EDR)" },
 { 3108, "Bluetooth Device(SAMPLE)" },
 { 65535, "Bluetooth module with BlueCore in DFU mode" },
- } },
-            { 3109, new Dictionary<int, string>(){ 
-    { 784, "Scream Cam" },
- } },
-            { 3110, new Dictionary<int, string>(){ 
-    { 24, "USB-Serial Controller [Icom Inc. OPC-478UC]" },
+    })
+ },
+            { 3109, Tuple.Create("Sampo Corp.", new Dictionary<int, string>{
+{ 784, "Scream Cam" },
+    })
+ },
+            { 3110, Tuple.Create("Prolific Technology Inc.", new Dictionary<int, string>{
+{ 24, "USB-Serial Controller [Icom Inc. OPC-478UC]" },
 { 43, "Icom Inc. IC-R30" },
- } },
-            { 3111, new Dictionary<int, string>(){ 
-    { 9002, "pcProx Plus RFID Reader (CDC serial)" },
+    })
+ },
+            { 3111, Tuple.Create("RFIDeas, Inc", new Dictionary<int, string>{
+{ 9002, "pcProx Plus RFID Reader (CDC serial)" },
 { 15354, "pcProx Card Reader" },
- } },
-            { 3118, new Dictionary<int, string>(){ 
-    { 7, "Metrologic MS7120 Barcode Scanner (IBM SurePOS mode)" },
+    })
+ },
+            { 3118, Tuple.Create("Metrologic Instruments", new Dictionary<int, string>{
+{ 7, "Metrologic MS7120 Barcode Scanner (IBM SurePOS mode)" },
 { 512, "MS7120 Barcode Scanner" },
 { 516, "Metrologic MS7120 Barcode Scanner (keyboard mode)" },
 { 518, "Metrologic MS4980 Barcode Scanner" },
@@ -18495,41 +14304,25 @@ namespace HardwareInformation.Providers {
 { 2913, "Vuquest 3310g" },
 { 2922, "Vuquest 3310 Area-Imaging Scanner" },
 { 2945, "Barcode scanner Voyager 1400g Series" },
- } },
-            { 3120, new Dictionary<int, string>(){ 
-    { 24592, "Kona 1400 Cutting Plotter" },
- } },
-            { 3125, new Dictionary<int, string>(){ 
-     } },
-            { 3126, new Dictionary<int, string>(){ 
-     } },
-            { 3127, new Dictionary<int, string>(){ 
-     } },
-            { 3128, new Dictionary<int, string>(){ 
-     } },
-            { 3129, new Dictionary<int, string>(){ 
-     } },
-            { 3130, new Dictionary<int, string>(){ 
-     } },
-            { 3131, new Dictionary<int, string>(){ 
-     } },
-            { 3132, new Dictionary<int, string>(){ 
-     } },
-            { 3133, new Dictionary<int, string>(){ 
-     } },
-            { 3134, new Dictionary<int, string>(){ 
-     } },
-            { 3136, new Dictionary<int, string>(){ 
-    { 32768, "2.4GHz receiver" },
- } },
-            { 3140, new Dictionary<int, string>(){ 
-    { 33, "iDEN P2k0 Device" },
+    })
+ },
+            { 3120, Tuple.Create("Mutoh Industries Ltd", new Dictionary<int, string>{
+{ 24592, "Kona 1400 Cutting Plotter" },
+    })
+ },
+            { 3136, Tuple.Create("ELMCU", new Dictionary<int, string>{
+{ 32768, "2.4GHz receiver" },
+    })
+ },
+            { 3140, Tuple.Create("Motorola iDEN", new Dictionary<int, string>{
+{ 33, "iDEN P2k0 Device" },
 { 34, "iDEN P2k1 Device" },
 { 930, "iDEN Smartphone" },
 { 16857, "i1 phone" },
- } },
-            { 3141, new Dictionary<int, string>(){ 
-    { 17, "EBUDDY" },
+    })
+ },
+            { 3141, Tuple.Create("Microdia", new Dictionary<int, string>{
+{ 17, "EBUDDY" },
 { 1312, "MaxTrack Wireless Mouse" },
 { 4120, "Compact Flash storage memory card reader" },
 { 4128, "Mass Storage Reader" },
@@ -18689,15 +14482,15 @@ namespace HardwareInformation.Providers {
 { 32768, "DC31VC" },
 { 32774, "Dual Mode Camera (8006 VGA)" },
 { 32778, "Vivitar Vivicam3350B" },
- } },
-            { 3142, new Dictionary<int, string>(){ 
-     } },
-            { 3146, new Dictionary<int, string>(){ 
-    { 2185, "Timy" },
+    })
+ },
+            { 3146, Tuple.Create("ALGE-TIMING GmbH", new Dictionary<int, string>{
+{ 2185, "Timy" },
 { 2186, "Timy 2" },
- } },
-            { 3147, new Dictionary<int, string>(){ 
-    { 256, "cyberJack e-com/pinpad" },
+    })
+ },
+            { 3147, Tuple.Create("Reiner SCT Kartensysteme GmbH", new Dictionary<int, string>{
+{ 256, "cyberJack e-com/pinpad" },
 { 768, "cyberJack pinpad(a)" },
 { 1024, "cyberJack e-com(a)" },
 { 1025, "cyberJack pinpad(a2)" },
@@ -18707,12 +14500,14 @@ namespace HardwareInformation.Providers {
 { 1284, "cyberJack go / go plus" },
 { 1285, "cyberJack wave" },
 { 37122, "cyberJack RFID basis contactless smartcard reader" },
- } },
-            { 3148, new Dictionary<int, string>(){ 
-    { 33, "EMP-21 Universal Programmer" },
- } },
-            { 3154, new Dictionary<int, string>(){ 
-    { 8449, "SeaLINK+232" },
+    })
+ },
+            { 3148, Tuple.Create("Needham's Electronics", new Dictionary<int, string>{
+{ 33, "EMP-21 Universal Programmer" },
+    })
+ },
+            { 3154, Tuple.Create("Sealevel Systems, Inc.", new Dictionary<int, string>{
+{ 8449, "SeaLINK+232" },
 { 8450, "SeaLINK+485" },
 { 8451, "SeaLINK+232I" },
 { 8452, "SeaLINK+485I" },
@@ -18763,31 +14558,17 @@ namespace HardwareInformation.Providers {
 { 41003, "SeaLINK+8 (Port 3+4)" },
 { 41004, "SeaLINK+8 (Port 5+6)" },
 { 41005, "SeaLINK+8 (Port 7+8)" },
- } },
-            { 3155, new Dictionary<int, string>(){ 
-     } },
-            { 3156, new Dictionary<int, string>(){ 
-     } },
-            { 3157, new Dictionary<int, string>(){ 
-    { 1296, "Spectrum Digital XDS510 JTAG Debugger" },
+    })
+ },
+            { 3157, Tuple.Create("Spectrum Digital, Inc.", new Dictionary<int, string>{
+{ 1296, "Spectrum Digital XDS510 JTAG Debugger" },
 { 1344, "SPI540" },
 { 21526, "TMS320C5416 DSK" },
 { 25622, "TMS320C6416 DDB" },
- } },
-            { 3158, new Dictionary<int, string>(){ 
-     } },
-            { 3159, new Dictionary<int, string>(){ 
-     } },
-            { 3160, new Dictionary<int, string>(){ 
-     } },
-            { 3161, new Dictionary<int, string>(){ 
-     } },
-            { 3162, new Dictionary<int, string>(){ 
-     } },
-            { 3166, new Dictionary<int, string>(){ 
-     } },
-            { 3168, new Dictionary<int, string>(){ 
-    { 1, "MiniMe" },
+    })
+ },
+            { 3168, Tuple.Create("Apogee Electronics Corp.", new Dictionary<int, string>{
+{ 1, "MiniMe" },
 { 2, "MiniDAC" },
 { 3, "ONE" },
 { 4, "GiO" },
@@ -18797,38 +14578,32 @@ namespace HardwareInformation.Providers {
 { 11, "MiC" },
 { 12, "MiC Bootloader" },
 { 32775, "Duet DFU Mode" },
- } },
-            { 3170, new Dictionary<int, string>(){ 
-     } },
-            { 3171, new Dictionary<int, string>(){ 
-     } },
-            { 3172, new Dictionary<int, string>(){ 
-     } },
-            { 3173, new Dictionary<int, string>(){ 
-     } },
-            { 3174, new Dictionary<int, string>(){ 
-     } },
-            { 3175, new Dictionary<int, string>(){ 
-     } },
-            { 3178, new Dictionary<int, string>(){ 
-    { 5, "Color 320 x 240 LCD Display Terminal with Touchscreen" },
- } },
-            { 3180, new Dictionary<int, string>(){ 
-    { 1202, "Specbos 1201" },
- } },
-            { 3184, new Dictionary<int, string>(){ 
-    { 0, "USB08 Development board" },
+    })
+ },
+            { 3178, Tuple.Create("ACS", new Dictionary<int, string>{
+{ 5, "Color 320 x 240 LCD Display Terminal with Touchscreen" },
+    })
+ },
+            { 3180, Tuple.Create("JETI Technische Instrumente GmbH", new Dictionary<int, string>{
+{ 1202, "Specbos 1201" },
+    })
+ },
+            { 3184, Tuple.Create("MCT Elektronikladen", new Dictionary<int, string>{
+{ 0, "USB08 Development board" },
 { 1863, "Eye Movement Recorder [Visagraph]/[ReadAlyzer]" },
- } },
-            { 3186, new Dictionary<int, string>(){ 
-    { 12, "PCAN-USB" },
+    })
+ },
+            { 3186, Tuple.Create("PEAK System", new Dictionary<int, string>{
+{ 12, "PCAN-USB" },
 { 13, "PCAN Pro" },
- } },
-            { 3188, new Dictionary<int, string>(){ 
-    { 2, "OL 700-30 Goniometer" },
- } },
-            { 3190, new Dictionary<int, string>(){ 
-    { 1, "Mass Storage Controller" },
+    })
+ },
+            { 3188, Tuple.Create("Optronic Laboratories Inc.", new Dictionary<int, string>{
+{ 2, "OL 700-30 Goniometer" },
+    })
+ },
+            { 3190, Tuple.Create("JMTek, LLC.", new Dictionary<int, string>{
+{ 1, "Mass Storage Controller" },
 { 2, "Mass Storage Controller" },
 { 3, "USBdisk" },
 { 4, "Mass Storage Controller" },
@@ -18839,95 +14614,68 @@ namespace HardwareInformation.Providers {
 { 5637, "SSS Headphone Set" },
 { 5639, "audio controller" },
 { 22115, "Audio Device" },
- } },
-            { 3191, new Dictionary<int, string>(){ 
-    { 4097, "SiPix Web2" },
+    })
+ },
+            { 3191, Tuple.Create("Sipix Group, Ltd", new Dictionary<int, string>{
+{ 4097, "SiPix Web2" },
 { 4098, "SiPix SC2100" },
 { 4112, "SiPix Snap" },
 { 4113, "SiPix Blink 2" },
 { 4117, "SiPix CAMeleon" },
- } },
-            { 3192, new Dictionary<int, string>(){ 
-     } },
-            { 3193, new Dictionary<int, string>(){ 
-     } },
-            { 3194, new Dictionary<int, string>(){ 
-     } },
-            { 3206, new Dictionary<int, string>(){ 
-     } },
-            { 3208, new Dictionary<int, string>(){ 
-    { 33, "Handheld" },
+    })
+ },
+            { 3208, Tuple.Create("Kyocera Wireless Corp.", new Dictionary<int, string>{
+{ 33, "Handheld" },
 { 6106, "Qualcomm Kyocera CDMA Technologies MSM" },
- } },
-            { 3209, new Dictionary<int, string>(){ 
-     } },
-            { 3210, new Dictionary<int, string>(){ 
-     } },
-            { 3211, new Dictionary<int, string>(){ 
-     } },
-            { 3212, new Dictionary<int, string>(){ 
-     } },
-            { 3213, new Dictionary<int, string>(){ 
-     } },
-            { 3214, new Dictionary<int, string>(){ 
-    { 24576, "Luxian Series" },
- } },
-            { 3215, new Dictionary<int, string>(){ 
-     } },
-            { 3220, new Dictionary<int, string>(){ 
-    { 40960, "EPP 1217" },
- } },
-            { 3224, new Dictionary<int, string>(){ 
-    { 4416, "USB PC Watchdog" },
- } },
-            { 3225, new Dictionary<int, string>(){ 
-     } },
-            { 3226, new Dictionary<int, string>(){ 
-     } },
-            { 3227, new Dictionary<int, string>(){ 
-     } },
-            { 3228, new Dictionary<int, string>(){ 
-    { 5393, "BI-1511 Laser Simulator" },
+    })
+ },
+            { 3214, Tuple.Create("Cesscom Co., Ltd", new Dictionary<int, string>{
+{ 24576, "Luxian Series" },
+    })
+ },
+            { 3220, Tuple.Create("Cryptera", new Dictionary<int, string>{
+{ 40960, "EPP 1217" },
+    })
+ },
+            { 3224, Tuple.Create("Berkshire Products, Inc.", new Dictionary<int, string>{
+{ 4416, "USB PC Watchdog" },
+    })
+ },
+            { 3228, Tuple.Create("Brand Innovators BV", new Dictionary<int, string>{
+{ 5393, "BI-1511 Laser Simulator" },
 { 5394, "BI-1512 Syncbus Monitor" },
 { 5396, "BI-1514 HPC" },
 { 5426, "BI-1532 GPC" },
- } },
-            { 3229, new Dictionary<int, string>(){ 
-    { 368, "3873 Manual Insert card reader" },
- } },
-            { 3234, new Dictionary<int, string>(){ 
-     } },
-            { 3235, new Dictionary<int, string>(){ 
-     } },
-            { 3236, new Dictionary<int, string>(){ 
-     } },
-            { 3237, new Dictionary<int, string>(){ 
-     } },
-            { 3238, new Dictionary<int, string>(){ 
-    { 16, "EZUSB PC/SC Smart Card Reader" },
+    })
+ },
+            { 3229, Tuple.Create("SemTek", new Dictionary<int, string>{
+{ 368, "3873 Manual Insert card reader" },
+    })
+ },
+            { 3238, Tuple.Create("Castles Technology Co., Ltd", new Dictionary<int, string>{
+{ 16, "EZUSB PC/SC Smart Card Reader" },
 { 80, "EZ220PU Reader Controller" },
 { 4215, "Bludrive Family Smart Card Reader" },
 { 4222, "Reader Controller" },
 { 8208, "myPad110 PC/SC Smart Card Reader" },
 { 12368, "EZ710 Smart Card Reader" },
- } },
-            { 3239, new Dictionary<int, string>(){ 
-     } },
-            { 3242, new Dictionary<int, string>(){ 
-    { 12289, "AT-VT-Kit3 Serial Adapter" },
- } },
-            { 3245, new Dictionary<int, string>(){ 
-    { 4103, "APX Series Consolette" },
+    })
+ },
+            { 3242, Tuple.Create("Allied Telesis KK.", new Dictionary<int, string>{
+{ 12289, "AT-VT-Kit3 Serial Adapter" },
+    })
+ },
+            { 3245, Tuple.Create("Motorola CGISS", new Dictionary<int, string>{
+{ 4103, "APX Series Consolette" },
 { 4128, "MOTOTRBO Series Radio (Portable)" },
 { 4144, "APX Series Radio (Portable)" },
 { 4145, "APX Series Radio (Mobile)" },
 { 5634, "IMPRES Battery Data Reader" },
 { 36865, "PowerPad Pocket PC Device" },
- } },
-            { 3246, new Dictionary<int, string>(){ 
-     } },
-            { 3247, new Dictionary<int, string>(){ 
-    { 9479, "Hi-Speed USB-to-IDE Bridge Controller" },
+    })
+ },
+            { 3247, Tuple.Create("Buslink", new Dictionary<int, string>{
+{ 9479, "Hi-Speed USB-to-IDE Bridge Controller" },
 { 9493, "Flash Disk Embedded Hub" },
 { 9494, "Flash Disk Security Device" },
 { 9495, "Flash Disk Mass Storage Device" },
@@ -18935,59 +14683,17 @@ namespace HardwareInformation.Providers {
 { 14848, "Hard Drive" },
 { 14880, "Mass Storage Device" },
 { 15053, "Mass Storage Device" },
- } },
-            { 3248, new Dictionary<int, string>(){ 
-     } },
-            { 3249, new Dictionary<int, string>(){ 
-     } },
-            { 3254, new Dictionary<int, string>(){ 
-     } },
-            { 3255, new Dictionary<int, string>(){ 
-     } },
-            { 3256, new Dictionary<int, string>(){ 
-     } },
-            { 3258, new Dictionary<int, string>(){ 
-     } },
-            { 3259, new Dictionary<int, string>(){ 
-     } },
-            { 3260, new Dictionary<int, string>(){ 
-    { 257, "Pocket PC P6C" },
+    })
+ },
+            { 3260, Tuple.Create("Palmax Technology Co., Ltd", new Dictionary<int, string>{
+{ 257, "Pocket PC P6C" },
 { 513, "Personal Digital Assistant" },
 { 769, "Personal Digital Assistant P6M+" },
 { 1025, "Pocket PC" },
- } },
-            { 3261, new Dictionary<int, string>(){ 
-     } },
-            { 3262, new Dictionary<int, string>(){ 
-     } },
-            { 3263, new Dictionary<int, string>(){ 
-     } },
-            { 3264, new Dictionary<int, string>(){ 
-     } },
-            { 3265, new Dictionary<int, string>(){ 
-     } },
-            { 3266, new Dictionary<int, string>(){ 
-     } },
-            { 3267, new Dictionary<int, string>(){ 
-     } },
-            { 3268, new Dictionary<int, string>(){ 
-     } },
-            { 3269, new Dictionary<int, string>(){ 
-     } },
-            { 3270, new Dictionary<int, string>(){ 
-     } },
-            { 3272, new Dictionary<int, string>(){ 
-     } },
-            { 3273, new Dictionary<int, string>(){ 
-     } },
-            { 3274, new Dictionary<int, string>(){ 
-     } },
-            { 3275, new Dictionary<int, string>(){ 
-     } },
-            { 3276, new Dictionary<int, string>(){ 
-     } },
-            { 3277, new Dictionary<int, string>(){ 
-    { 18, "PHASE 26" },
+    })
+ },
+            { 3277, Tuple.Create("TerraTec Electronic GmbH", new Dictionary<int, string>{
+{ 18, "PHASE 26" },
 { 19, "PHASE 26" },
 { 20, "PHASE 26" },
 { 21, "Flash Update for TerraTec PHASE 26" },
@@ -19027,28 +14733,29 @@ namespace HardwareInformation.Providers {
 { 261, "Cinergy S2 Box" },
 { 4263, "TerraTec G3" },
 { 4269, "Cinergy H5 Rev. 2" },
- } },
-            { 3284, new Dictionary<int, string>(){ 
-    { 257, "BeolinkPC2" },
- } },
-            { 3285, new Dictionary<int, string>(){ 
-    { 3, "U3" },
+    })
+ },
+            { 3284, Tuple.Create("Bang Olufsen", new Dictionary<int, string>{
+{ 257, "BeolinkPC2" },
+    })
+ },
+            { 3285, Tuple.Create("LabJack Corporation", new Dictionary<int, string>{
+{ 3, "U3" },
 { 9, "UE9" },
- } },
-            { 3286, new Dictionary<int, string>(){ 
-    { 12, "S&B TPU" },
+    })
+ },
+            { 3286, Tuple.Create("Scheidt & Bachmann", new Dictionary<int, string>{
+{ 12, "S&B TPU" },
 { 14, "S&B BKV" },
 { 17, "Money Coin Unit" },
- } },
-            { 3287, new Dictionary<int, string>(){ 
-     } },
-            { 3288, new Dictionary<int, string>(){ 
-    { 8199, "Smart Card Reader/JSTU-9700" },
- } },
-            { 3289, new Dictionary<int, string>(){ 
-     } },
-            { 3294, new Dictionary<int, string>(){ 
-    { 1, "XI-750 802.11b Wireless Adapter [Atmel AT76C503A]" },
+    })
+ },
+            { 3288, Tuple.Create("JS Digitech, Inc.", new Dictionary<int, string>{
+{ 8199, "Smart Card Reader/JSTU-9700" },
+    })
+ },
+            { 3294, Tuple.Create("Z-Com", new Dictionary<int, string>{
+{ 1, "XI-750 802.11b Wireless Adapter [Atmel AT76C503A]" },
 { 2, "XI-725/726 Prism2.5 802.11b Adapter" },
 { 3, "Sagem 802.11b Dongle" },
 { 4, "Sagem 802.11b Dongle" },
@@ -19071,12 +14778,14 @@ namespace HardwareInformation.Providers {
 { 37, "802.11b/g/n USB Wireless Network Adapter" },
 { 38, "UB82 802.11abgn" },
 { 39, "Sphairon Homelink 1202 802.11n Wireless Adapter [Atheros AR9170]" },
- } },
-            { 3301, new Dictionary<int, string>(){ 
-    { 3, "Matrix" },
- } },
-            { 3305, new Dictionary<int, string>(){ 
-    { 4097, "PicoScope3000 series PC Oscilloscope" },
+    })
+ },
+            { 3301, Tuple.Create("Validation Technologies International", new Dictionary<int, string>{
+{ 3, "Matrix" },
+    })
+ },
+            { 3305, Tuple.Create("Pico Technology", new Dictionary<int, string>{
+{ 4097, "PicoScope3000 series PC Oscilloscope" },
 { 4103, "PicoScope 2000 series PC Oscilloscope" },
 { 4104, "PicoScope 5000 series PC Oscilloscope" },
 { 4105, "PicoScope 4000 series PC Oscilloscope" },
@@ -19091,17 +14800,17 @@ namespace HardwareInformation.Providers {
 { 4612, "PicoScope 6000 series PC Oscilloscope" },
 { 4625, "PicoScope 3000 series PC Oscilloscope" },
 { 4626, "PicoScope 4000 series PC Oscilloscope" },
- } },
-            { 3313, new Dictionary<int, string>(){ 
-     } },
-            { 3314, new Dictionary<int, string>(){ 
-    { 25120, "SD Card Reader (SG361)" },
+    })
+ },
+            { 3314, Tuple.Create("ENE Technology, Inc.", new Dictionary<int, string>{
+{ 25120, "SD Card Reader (SG361)" },
 { 25125, "SD card reader (UB6225)" },
 { 25136, "SD Card Reader (UB623X)" },
 { 25168, "SD card reader (UB6250)" },
- } },
-            { 3315, new Dictionary<int, string>(){ 
-    { 1, "AR5523" },
+    })
+ },
+            { 3315, Tuple.Create("Qualcomm Atheros Communications", new Dictionary<int, string>{
+{ 1, "AR5523" },
 { 2, "AR5523 (no firmware)" },
 { 3, "AR5523" },
 { 4, "AR5523 (no firmware)" },
@@ -19129,62 +14838,34 @@ namespace HardwareInformation.Providers {
 { 45059, "Ubiquiti WiFiStationEXT 802.11n [Atheros AR9271]" },
 { 57350, "Dell Wireless 1802 Bluetooth 4.0 LE" },
 { 58112, "QCA61x4 Bluetooth 4.0" },
- } },
-            { 3316, new Dictionary<int, string>(){ 
-     } },
-            { 3317, new Dictionary<int, string>(){ 
-     } },
-            { 3318, new Dictionary<int, string>(){ 
-     } },
-            { 3319, new Dictionary<int, string>(){ 
-     } },
-            { 3320, new Dictionary<int, string>(){ 
-    { 1872, "Claritel-i750 - vp" },
- } },
-            { 3321, new Dictionary<int, string>(){ 
-     } },
-            { 3322, new Dictionary<int, string>(){ 
-     } },
-            { 3324, new Dictionary<int, string>(){ 
-    { 8961, "Magicolor 2300 DL" },
+    })
+ },
+            { 3320, Tuple.Create("Clarisys, Inc.", new Dictionary<int, string>{
+{ 1872, "Claritel-i750 - vp" },
+    })
+ },
+            { 3324, Tuple.Create("Minolta-QMS, Inc.", new Dictionary<int, string>{
+{ 8961, "Magicolor 2300 DL" },
 { 9040, "Magicolor 2350EN/3300" },
 { 12544, "Magicolor 3100" },
 { 29440, "Magicolor 5450/5550" },
- } },
-            { 3327, new Dictionary<int, string>(){ 
-    { 800, "SR-380N" },
- } },
-            { 3334, new Dictionary<int, string>(){ 
-     } },
-            { 3336, new Dictionary<int, string>(){ 
-    { 1538, "DV007 [serial]" },
+    })
+ },
+            { 3327, Tuple.Create("SAFA MEDIA Co., Ltd.", new Dictionary<int, string>{
+{ 800, "SR-380N" },
+    })
+ },
+            { 3336, Tuple.Create("UTStarcom", new Dictionary<int, string>{
+{ 1538, "DV007 [serial]" },
 { 1539, "DV007 [storage]" },
- } },
-            { 3339, new Dictionary<int, string>(){ 
-     } },
-            { 3340, new Dictionary<int, string>(){ 
-     } },
-            { 3341, new Dictionary<int, string>(){ 
-     } },
-            { 3342, new Dictionary<int, string>(){ 
-     } },
-            { 3343, new Dictionary<int, string>(){ 
-     } },
-            { 3344, new Dictionary<int, string>(){ 
-    { 1, "StormPort (WDM)" },
- } },
-            { 3345, new Dictionary<int, string>(){ 
-     } },
-            { 3346, new Dictionary<int, string>(){ 
-     } },
-            { 3347, new Dictionary<int, string>(){ 
-     } },
-            { 3348, new Dictionary<int, string>(){ 
-     } },
-            { 3349, new Dictionary<int, string>(){ 
-     } },
-            { 3350, new Dictionary<int, string>(){ 
-    { 1, "PhotoShuttle" },
+    })
+ },
+            { 3344, Tuple.Create("Elastic Networks", new Dictionary<int, string>{
+{ 1, "StormPort (WDM)" },
+    })
+ },
+            { 3350, Tuple.Create("Hi-Touch Imaging Technologies Co., Ltd", new Dictionary<int, string>{
+{ 1, "PhotoShuttle" },
 { 2, "Photo Printer 730 series" },
 { 4, "Photo Printer 63xPL/PS" },
 { 7, "P510K" },
@@ -19212,63 +14893,44 @@ namespace HardwareInformation.Providers {
 { 1290, "P310W" },
 { 1295, "P530D" },
 { 2048, "X610" },
- } },
-            { 3351, new Dictionary<int, string>(){ 
-     } },
-            { 3352, new Dictionary<int, string>(){ 
-     } },
-            { 3353, new Dictionary<int, string>(){ 
-     } },
-            { 3368, new Dictionary<int, string>(){ 
-    { 516, "ARM mbed" },
- } },
-            { 3375, new Dictionary<int, string>(){ 
-    { 2, "Pump It Up Pad" },
- } },
-            { 3378, new Dictionary<int, string>(){ 
-     } },
-            { 3379, new Dictionary<int, string>(){ 
-     } },
-            { 3380, new Dictionary<int, string>(){ 
-     } },
-            { 3381, new Dictionary<int, string>(){ 
-     } },
-            { 3386, new Dictionary<int, string>(){ 
-    { 518, "Series 3xxx Cash Drawer" },
+    })
+ },
+            { 3368, Tuple.Create("NXP", new Dictionary<int, string>{
+{ 516, "ARM mbed" },
+    })
+ },
+            { 3375, Tuple.Create("Andamiro", new Dictionary<int, string>{
+{ 2, "Pump It Up Pad" },
+    })
+ },
+            { 3386, Tuple.Create("Posiflex Technologies, Inc.", new Dictionary<int, string>{
+{ 518, "Series 3xxx Cash Drawer" },
 { 519, "Series 3xxx Cash Drawer" },
 { 1280, "Magnetic Stripe Reader" },
- } },
-            { 3388, new Dictionary<int, string>(){ 
-     } },
-            { 3389, new Dictionary<int, string>(){ 
-    { 1, "HID Keyboard" },
+    })
+ },
+            { 3389, Tuple.Create("Tangtop Technology Co., Ltd", new Dictionary<int, string>{
+{ 1, "HID Keyboard" },
 { 64, "PS/2 Adapter" },
- } },
-            { 3390, new Dictionary<int, string>(){ 
-     } },
-            { 3391, new Dictionary<int, string>(){ 
-     } },
-            { 3392, new Dictionary<int, string>(){ 
-     } },
-            { 3393, new Dictionary<int, string>(){ 
-     } },
-            { 3394, new Dictionary<int, string>(){ 
-     } },
-            { 3398, new Dictionary<int, string>(){ 
-    { 8210, "KAAN Standard Plus (Smartcard reader)" },
+    })
+ },
+            { 3398, Tuple.Create("Kobil Systems GmbH", new Dictionary<int, string>{
+{ 8210, "KAAN Standard Plus (Smartcard reader)" },
 { 12291, "mIDentity Light / KAAN SIM III" },
 { 12308, "Smart Token" },
 { 16384, "mIDentity (mass storage)" },
 { 16385, "mIDentity Basic/Classic (composite device)" },
 { 16513, "mIDentity Basic/Classic (installationless)" },
- } },
-            { 3400, new Dictionary<int, string>(){ 
-    { 1, "ACTIVboard" },
+    })
+ },
+            { 3400, Tuple.Create("Promethean Limited", new Dictionary<int, string>{
+{ 1, "ACTIVboard" },
 { 4, "ACTIVboard" },
 { 256, "Audio" },
- } },
-            { 3401, new Dictionary<int, string>(){ 
-    { 12288, "Drive" },
+    })
+ },
+            { 3401, Tuple.Create("Maxtor", new Dictionary<int, string>{
+{ 12288, "Drive" },
 { 12293, "Personal Storage 3000LS" },
 { 12304, "3000LE Drive" },
 { 12544, "Hi-Speed USB-IDE Bridge Controller" },
@@ -19282,57 +14944,35 @@ namespace HardwareInformation.Providers {
 { 29456, "OneTouch 4" },
 { 29712, "Mobile Hard Disk Drive (1TB)" },
 { 29776, "Basics Portable USB Device" },
- } },
-            { 3402, new Dictionary<int, string>(){ 
-     } },
-            { 3403, new Dictionary<int, string>(){ 
-     } },
-            { 3404, new Dictionary<int, string>(){ 
-     } },
-            { 3405, new Dictionary<int, string>(){ 
-     } },
-            { 3406, new Dictionary<int, string>(){ 
-    { 1146, "WLAN Card" },
+    })
+ },
+            { 3406, Tuple.Create("Agere Systems Netherland BV", new Dictionary<int, string>{
+{ 1146, "WLAN Card" },
 { 4096, "Wireless Card Model 0801" },
 { 4097, "Wireless Card Model 0802" },
- } },
-            { 3407, new Dictionary<int, string>(){ 
-     } },
-            { 3408, new Dictionary<int, string>(){ 
-    { 17, "USB-Temp2 Thermometer" },
+    })
+ },
+            { 3408, Tuple.Create("Cleware GmbH", new Dictionary<int, string>{
+{ 17, "USB-Temp2 Thermometer" },
 { 48, "Multiplexer" },
 { 64, "F4 foot switch" },
- } },
-            { 3409, new Dictionary<int, string>(){ 
-     } },
-            { 3411, new Dictionary<int, string>(){ 
-     } },
-            { 3412, new Dictionary<int, string>(){ 
-     } },
-            { 3413, new Dictionary<int, string>(){ 
-     } },
-            { 3414, new Dictionary<int, string>(){ 
-     } },
-            { 3415, new Dictionary<int, string>(){ 
-     } },
-            { 3417, new Dictionary<int, string>(){ 
-    { 680, "Digital Clock" },
- } },
-            { 3420, new Dictionary<int, string>(){ 
-    { 40961, "SMC2662W (v1) EZ Connect 802.11b Wireless Adapter [Atmel AT76C503A]" },
+    })
+ },
+            { 3417, Tuple.Create("TRC Simulators b.v.", new Dictionary<int, string>{
+{ 680, "Digital Clock" },
+    })
+ },
+            { 3420, Tuple.Create("SMC Networks, Inc.", new Dictionary<int, string>{
+{ 40961, "SMC2662W (v1) EZ Connect 802.11b Wireless Adapter [Atmel AT76C503A]" },
 { 40962, "SMC2662W v2 / SMC2662W-AR / Belkin F5D6050 [Atmel at76c503a]" },
- } },
-            { 3422, new Dictionary<int, string>(){ 
-    { 9030, "BT Digital Access adapter" },
- } },
-            { 3423, new Dictionary<int, string>(){ 
-     } },
-            { 3424, new Dictionary<int, string>(){ 
-     } },
-            { 3425, new Dictionary<int, string>(){ 
-     } },
-            { 3426, new Dictionary<int, string>(){ 
-    { 3, "Smartcard Reader" },
+    })
+ },
+            { 3422, Tuple.Create("Myacom, Ltd", new Dictionary<int, string>{
+{ 9030, "BT Digital Access adapter" },
+    })
+ },
+            { 3426, Tuple.Create("Darfon Electronics Corp.", new Dictionary<int, string>{
+{ 3, "Smartcard Reader" },
 { 4, "Keyboard" },
 { 27, "Keyboard" },
 { 28, "Benq X120 Internet Keyboard Pro" },
@@ -19344,11 +14984,10 @@ namespace HardwareInformation.Providers {
 { 8454, "Dell L20U Multimedia Keyboard" },
 { 37134, "HP Business Slim Keyboard" },
 { 41216, "Optical Mouse" },
- } },
-            { 3427, new Dictionary<int, string>(){ 
-     } },
-            { 3428, new Dictionary<int, string>(){ 
-    { 261, "Dual Mode Digital Camera 1.3M" },
+    })
+ },
+            { 3428, Tuple.Create("DXG Technology Corp.", new Dictionary<int, string>{
+{ 261, "Dual Mode Digital Camera 1.3M" },
 { 263, "Horus MT-409 Camera" },
 { 264, "Dual Mode Digital Camera" },
 { 514, "Dual Mode Video Camera Device" },
@@ -19362,44 +15001,14 @@ namespace HardwareInformation.Providers {
 { 12549, "Dual Mode Digital Camera Disk" },
 { 12552, "Digicam Mass Storage Device" },
 { 21862, "Contour Roam Model 1600" },
- } },
-            { 3429, new Dictionary<int, string>(){ 
-     } },
-            { 3430, new Dictionary<int, string>(){ 
-     } },
-            { 3431, new Dictionary<int, string>(){ 
-     } },
-            { 3432, new Dictionary<int, string>(){ 
-     } },
-            { 3433, new Dictionary<int, string>(){ 
-     } },
-            { 3434, new Dictionary<int, string>(){ 
-     } },
-            { 3435, new Dictionary<int, string>(){ 
-     } },
-            { 3440, new Dictionary<int, string>(){ 
-     } },
-            { 3441, new Dictionary<int, string>(){ 
-     } },
-            { 3442, new Dictionary<int, string>(){ 
-     } },
-            { 3443, new Dictionary<int, string>(){ 
-     } },
-            { 3446, new Dictionary<int, string>(){ 
-     } },
-            { 3447, new Dictionary<int, string>(){ 
-     } },
-            { 3448, new Dictionary<int, string>(){ 
-     } },
-            { 3450, new Dictionary<int, string>(){ 
-    { 1, "CrypToken" },
- } },
-            { 3451, new Dictionary<int, string>(){ 
-     } },
-            { 3452, new Dictionary<int, string>(){ 
-     } },
-            { 3453, new Dictionary<int, string>(){ 
-    { 256, "PS1001/1011/1006/1026 Flash Disk" },
+    })
+ },
+            { 3450, Tuple.Create("MARX Datentechnik GmbH", new Dictionary<int, string>{
+{ 1, "CrypToken" },
+    })
+ },
+            { 3453, Tuple.Create("Phison Electronics Corp.", new Dictionary<int, string>{
+{ 256, "PS1001/1011/1006/1026 Flash Disk" },
 { 272, "Gigabyte FlexDrive" },
 { 288, "Disk Pro 64MB" },
 { 292, "GIGABYTE Disk" },
@@ -19414,32 +15023,24 @@ namespace HardwareInformation.Providers {
 { 5232, "Vosonic X's-Drive II+ VP2160" },
 { 5664, "USB Disk Pro" },
 { 6400, "USB Thumb Drive" },
- } },
-            { 3454, new Dictionary<int, string>(){ 
-    { 9479, "Hi-Speed USB-to-IDE Bridge Controller" },
+    })
+ },
+            { 3454, Tuple.Create("American Computer & Digital Components", new Dictionary<int, string>{
+{ 9479, "Hi-Speed USB-to-IDE Bridge Controller" },
 { 9495, "Hi-Speed Mass Storage Device" },
 { 9671, "Hi-Speed USB-to-IDE Bridge Controller" },
- } },
-            { 3455, new Dictionary<int, string>(){ 
-    { 256, "P5 Glove glove controller" },
- } },
-            { 3456, new Dictionary<int, string>(){ 
-     } },
-            { 3457, new Dictionary<int, string>(){ 
-     } },
-            { 3459, new Dictionary<int, string>(){ 
-     } },
-            { 3463, new Dictionary<int, string>(){ 
-     } },
-            { 3465, new Dictionary<int, string>(){ 
-     } },
-            { 3466, new Dictionary<int, string>(){ 
-    { 257, "TEPRA PRO" },
- } },
-            { 3467, new Dictionary<int, string>(){ 
-     } },
-            { 3468, new Dictionary<int, string>(){ 
-    { 1, "Audio Device" },
+    })
+ },
+            { 3455, Tuple.Create("Essential Reality LLC", new Dictionary<int, string>{
+{ 256, "P5 Glove glove controller" },
+    })
+ },
+            { 3466, Tuple.Create("King Jim Co., Ltd", new Dictionary<int, string>{
+{ 257, "TEPRA PRO" },
+    })
+ },
+            { 3468, Tuple.Create("C-Media Electronics, Inc.", new Dictionary<int, string>{
+{ 1, "Audio Device" },
 { 2, "Composite Device" },
 { 3, "Sound Device" },
 { 4, "CM6631A Audio Processor" },
@@ -19463,9 +15064,10 @@ namespace HardwareInformation.Providers {
 { 20480, "Mass Storage Controller" },
 { 20992, "Mass Storage Controller(0D8C,5200)" },
 { 45587, "USB Phone CM109 (aka CT2000,VPT1000)" },
- } },
-            { 3469, new Dictionary<int, string>(){ 
-    { 564, "V-234 Composite Device" },
+    })
+ },
+            { 3469, Tuple.Create("Promotion & Display Technology, Ltd", new Dictionary<int, string>{
+{ 564, "V-234 Composite Device" },
 { 1360, "V-550 Composite Device" },
 { 1361, "V-551 Composite Device" },
 { 1362, "V-552 Composite Device" },
@@ -19496,9 +15098,10 @@ namespace HardwareInformation.Providers {
 { 47877, "Bloomberg Composite Device" },
 { 65534, "Global Tuner Composite Device" },
 { 65535, "Voyager DMP Composite Device" },
- } },
-            { 3470, new Dictionary<int, string>(){ 
-    { 355, "802.11g 54 Mbps Wireless Dongle" },
+    })
+ },
+            { 3470, Tuple.Create("Global Sun Technology, Inc.", new Dictionary<int, string>{
+{ 355, "802.11g 54 Mbps Wireless Dongle" },
 { 5665, "802.11b Wireless Adapter" },
 { 14178, "Cohiba 802.11g Wireless Mini adapter [Intersil ISL3887]" },
 { 14179, "802.11g Wireless dongle" },
@@ -19510,76 +15113,62 @@ namespace HardwareInformation.Providers {
 { 30737, "AR5523" },
 { 30738, "AR5523 (no firmware)" },
 { 31233, "PRISM25 802.11b Adapter" },
- } },
-            { 3471, new Dictionary<int, string>(){ 
-     } },
-            { 3472, new Dictionary<int, string>(){ 
-     } },
-            { 3478, new Dictionary<int, string>(){ 
-    { 0, "Jenoptik JD350 video" },
+    })
+ },
+            { 3478, Tuple.Create("Skanhex Technology, Inc.", new Dictionary<int, string>{
+{ 0, "Jenoptik JD350 video" },
 { 13056, "SX330z Camera" },
 { 16640, "SX410z Camera" },
 { 16642, "MD 9700 Camera" },
 { 16644, "Jenoptik JD-4100z3s" },
 { 16650, "Medion 9801/Novatech SX-410z" },
 { 20992, "SX-520z Camera" },
- } },
-            { 3479, new Dictionary<int, string>(){ 
-    { 1, "SBIG Astronomy Camera (without firmware)" },
+    })
+ },
+            { 3479, Tuple.Create("Santa Barbara Instrument Group", new Dictionary<int, string>{
+{ 1, "SBIG Astronomy Camera (without firmware)" },
 { 257, "SBIG Astronomy Camera (with firmware)" },
- } },
-            { 3480, new Dictionary<int, string>(){ 
-    { 768, "Avaya Wireless Card" },
+    })
+ },
+            { 3480, Tuple.Create("Mars Semiconductor Corp.", new Dictionary<int, string>{
+{ 768, "Avaya Wireless Card" },
 { 4103, "Discovery Kids Digital Camera" },
- } },
-            { 3481, new Dictionary<int, string>(){ 
-     } },
-            { 3482, new Dictionary<int, string>(){ 
-    { 1, "Bluetooth Device" },
- } },
-            { 3483, new Dictionary<int, string>(){ 
-     } },
-            { 3484, new Dictionary<int, string>(){ 
-     } },
-            { 3485, new Dictionary<int, string>(){ 
-     } },
-            { 3486, new Dictionary<int, string>(){ 
-    { 768, "Wireless Card" },
- } },
-            { 3487, new Dictionary<int, string>(){ 
-    { 1, "Uninterruptible Power Supply" },
+    })
+ },
+            { 3482, Tuple.Create("RTX AS", new Dictionary<int, string>{
+{ 1, "Bluetooth Device" },
+    })
+ },
+            { 3486, Tuple.Create("Avaya", new Dictionary<int, string>{
+{ 768, "Wireless Card" },
+    })
+ },
+            { 3487, Tuple.Create("Powercom Co., Ltd", new Dictionary<int, string>{
+{ 1, "Uninterruptible Power Supply" },
 { 2, "Black Knight PRO / WOW Uninterruptible Power Supply (Cypress HID->COM RS232)" },
 { 162, "Imperial Uninterruptible Power Supply (HID PDC)" },
 { 163, "Smart King PRO Uninterruptible Power Supply (HID PDC)" },
 { 164, "WOW Uninterruptible Power Supply (HID PDC)" },
 { 165, "Vanguard Uninterruptible Power Supply (HID PDC)" },
 { 166, "Black Knight PRO Uninterruptible Power Supply (HID PDC)" },
- } },
-            { 3488, new Dictionary<int, string>(){ 
-     } },
-            { 3489, new Dictionary<int, string>(){ 
-     } },
-            { 3490, new Dictionary<int, string>(){ 
-     } },
-            { 3491, new Dictionary<int, string>(){ 
-     } },
-            { 3492, new Dictionary<int, string>(){ 
-    { 1, "Interface" },
+    })
+ },
+            { 3492, Tuple.Create("Polar Electro Oy", new Dictionary<int, string>{
+{ 1, "Interface" },
 { 3, "FlowLink" },
 { 8, "Loop" },
- } },
-            { 3495, new Dictionary<int, string>(){ 
-     } },
-            { 3496, new Dictionary<int, string>(){ 
-    { 1, "SDS 200A Oscilloscope" },
- } },
-            { 3499, new Dictionary<int, string>(){ 
-    { 256, "DVR/CVR-M140 MP3 Player" },
- } },
-            { 3501, new Dictionary<int, string>(){ 
-     } },
-            { 3504, new Dictionary<int, string>(){ 
-    { 4128, "PC2PC WLAN Card" },
+    })
+ },
+            { 3496, Tuple.Create("softDSP Co., Ltd", new Dictionary<int, string>{
+{ 1, "SDS 200A Oscilloscope" },
+    })
+ },
+            { 3499, Tuple.Create("Cubig Group", new Dictionary<int, string>{
+{ 256, "DVR/CVR-M140 MP3 Player" },
+    })
+ },
+            { 3504, Tuple.Create("Micro Star International", new Dictionary<int, string>{
+{ 4128, "PC2PC WLAN Card" },
 { 6503, "Bluetooth Dongle" },
 { 14099, "Primo 73" },
 { 14337, "Motorola Bluetooth 2.1+EDR Device" },
@@ -19616,102 +15205,88 @@ namespace HardwareInformation.Providers {
 { 47472, "Bluetooth EDR Device" },
 { 47482, "Bluetooth EDR Device" },
 { 65535, "Bluetooth Adapter in DFU mode" },
- } },
-            { 3505, new Dictionary<int, string>(){ 
-     } },
-            { 3506, new Dictionary<int, string>(){ 
-     } },
-            { 3507, new Dictionary<int, string>(){ 
-     } },
-            { 3508, new Dictionary<int, string>(){ 
-     } },
-            { 3509, new Dictionary<int, string>(){ 
-    { 313, "Barcode Module - CDC serial" },
+    })
+ },
+            { 3509, Tuple.Create("Access IS", new Dictionary<int, string>{
+{ 313, "Barcode Module - CDC serial" },
 { 314, "Barcode Module - Virtual Keyboard" },
 { 315, "Barcode Module - HID" },
 { 352, "NFC and Smartcard Module (NSM)" },
 { 356, "NFC and Smartcard Module (NSM)with 4 SAM slots" },
- } },
-            { 3511, new Dictionary<int, string>(){ 
-    { 2, "Goldpfeil P-LAN" },
- } },
-            { 3514, new Dictionary<int, string>(){ 
-    { 4096, "Mbox 1 [Mbox]" },
+    })
+ },
+            { 3511, Tuple.Create("ELCON Systemtechnik", new Dictionary<int, string>{
+{ 2, "Goldpfeil P-LAN" },
+    })
+ },
+            { 3514, Tuple.Create("Digidesign", new Dictionary<int, string>{
+{ 4096, "Mbox 1 [Mbox]" },
 { 12288, "Mbox 2" },
 { 45073, "Eleven Rack" },
- } },
-            { 3516, new Dictionary<int, string>(){ 
-    { 3, "AND Serial Cable [AND Smart Cable]" },
- } },
-            { 3518, new Dictionary<int, string>(){ 
-     } },
-            { 3519, new Dictionary<int, string>(){ 
-    { 2, "SmartDongle Security Key" },
+    })
+ },
+            { 3516, Tuple.Create("A&D Medical", new Dictionary<int, string>{
+{ 3, "AND Serial Cable [AND Smart Cable]" },
+    })
+ },
+            { 3519, Tuple.Create("Jess-Link International", new Dictionary<int, string>{
+{ 2, "SmartDongle Security Key" },
 { 512, "HDD Storage Solution" },
 { 539, "USB-2.0 IDE Adapter" },
 { 768, "Storage Adapter" },
 { 819, "Storage Adapter" },
 { 1282, "FSC Storagebird XL hard disk" },
 { 1799, "ZIV Drive" },
- } },
-            { 3520, new Dictionary<int, string>(){ 
-     } },
-            { 3521, new Dictionary<int, string>(){ 
-     } },
-            { 3523, new Dictionary<int, string>(){ 
-    { 2049, "ASEDrive III" },
+    })
+ },
+            { 3523, Tuple.Create("Athena Smartcard Solutions, Inc.", new Dictionary<int, string>{
+{ 2049, "ASEDrive III" },
 { 2050, "ASEDrive IIIe" },
 { 4356, "ASEDrive IIIe KB" },
 { 5889, "ASEKey" },
 { 5890, "ASEKey" },
- } },
-            { 3524, new Dictionary<int, string>(){ 
-    { 64, "Mass Storage Device" },
+    })
+ },
+            { 3524, Tuple.Create("inXtron, Inc.", new Dictionary<int, string>{
+{ 64, "Mass Storage Device" },
 { 65, "Mass Storage Device" },
 { 66, "Mass Storage Device" },
 { 257, "Hi-Speed Mass Storage Device" },
 { 521, "SK-3500 S2" },
 { 522, "Oyen Digital MiniPro 2.5\" hard drive enclosure" },
 { 656, "Mass Storage Device [NT2 U3.1]" },
- } },
-            { 3525, new Dictionary<int, string>(){ 
-     } },
-            { 3526, new Dictionary<int, string>(){ 
-    { 8961, "Wireless Touchpad Keyboard" },
- } },
-            { 3527, new Dictionary<int, string>(){ 
-     } },
-            { 3533, new Dictionary<int, string>(){ 
-    { 1, "Remote Interface Adapter" },
+    })
+ },
+            { 3526, Tuple.Create("Precision Squared Technology Corp.", new Dictionary<int, string>{
+{ 8961, "Wireless Touchpad Keyboard" },
+    })
+ },
+            { 3533, Tuple.Create("NetworkFab Corp.", new Dictionary<int, string>{
+{ 1, "Remote Interface Adapter" },
 { 2, "High Bandwidth Codec" },
- } },
-            { 3536, new Dictionary<int, string>(){ 
-    { 4098, "Triple Talk Speech Synthesizer" },
- } },
-            { 3537, new Dictionary<int, string>(){ 
-     } },
-            { 3538, new Dictionary<int, string>(){ 
-    { 3, "Mass Storage (P)" },
- } },
-            { 3539, new Dictionary<int, string>(){ 
-     } },
-            { 3540, new Dictionary<int, string>(){ 
-    { 567, "K80 80mm Thermal Printer" },
- } },
-            { 3541, new Dictionary<int, string>(){ 
-     } },
-            { 3543, new Dictionary<int, string>(){ 
-     } },
-            { 3544, new Dictionary<int, string>(){ 
-    { 1378, "Netac Portable SSD Z6s" },
+    })
+ },
+            { 3536, Tuple.Create("Access Solutions", new Dictionary<int, string>{
+{ 4098, "Triple Talk Speech Synthesizer" },
+    })
+ },
+            { 3538, Tuple.Create("Power Quotient International Co., Ltd", new Dictionary<int, string>{
+{ 3, "Mass Storage (P)" },
+    })
+ },
+            { 3540, Tuple.Create("Custom Engineering SPA", new Dictionary<int, string>{
+{ 567, "K80 80mm Thermal Printer" },
+    })
+ },
+            { 3544, Tuple.Create("Netac Technology Co., Ltd", new Dictionary<int, string>{
+{ 1378, "Netac Portable SSD Z6s" },
 { 4192, "USB-CF-Card" },
 { 57351, "OnlyDisk U222 Pendrive" },
 { 62983, "OnlyDisk U210 1G flash drive [U-SAFE]" },
- } },
-            { 3545, new Dictionary<int, string>(){ 
-     } },
-            { 3546, new Dictionary<int, string>(){ 
-    { 1, "Multi-Card Reader 6in1" },
+    })
+ },
+            { 3546, Tuple.Create("Integrated Circuit Solution, Inc.", new Dictionary<int, string>{
+{ 1, "Multi-Card Reader 6in1" },
 { 2, "Multi-Card Reader 7in1" },
 { 3, "Flash Disk" },
 { 5, "Internal Multi-Card Reader 6in1" },
@@ -19740,34 +15315,24 @@ namespace HardwareInformation.Providers {
 { 8981, "UFD MP3 player (model 2)" },
 { 8984, "UFD MP3 player (model 1)" },
 { 8993, "UFD MP3 player" },
- } },
-            { 3547, new Dictionary<int, string>(){ 
-     } },
-            { 3549, new Dictionary<int, string>(){ 
-     } },
-            { 3550, new Dictionary<int, string>(){ 
-     } },
-            { 3552, new Dictionary<int, string>(){ 
-     } },
-            { 3559, new Dictionary<int, string>(){ 
-    { 401, "U401 Interface card" },
+    })
+ },
+            { 3559, Tuple.Create("USBmicro", new Dictionary<int, string>{
+{ 401, "U401 Interface card" },
 { 421, "U421 interface card" },
 { 451, "U451 relay interface card" },
- } },
-            { 3562, new Dictionary<int, string>(){ 
-     } },
-            { 3565, new Dictionary<int, string>(){ 
-     } },
-            { 3566, new Dictionary<int, string>(){ 
-    { 16400, "Storage Adapter" },
- } },
-            { 3567, new Dictionary<int, string>(){ 
-     } },
-            { 3572, new Dictionary<int, string>(){ 
-    { 513, "MNG-2005" },
- } },
-            { 3574, new Dictionary<int, string>(){ 
-    { 1, "C-Media VOIP Device" },
+    })
+ },
+            { 3566, Tuple.Create("Lifetime Memory Products", new Dictionary<int, string>{
+{ 16400, "Storage Adapter" },
+    })
+ },
+            { 3572, Tuple.Create("NET&SYS", new Dictionary<int, string>{
+{ 513, "MNG-2005" },
+    })
+ },
+            { 3574, Tuple.Create("Sitecom Europe B.V.", new Dictionary<int, string>{
+{ 1, "C-Media VOIP Device" },
 { 4, "Bluetooth 2.0 Adapter 100m" },
 { 7, "Bluetooth 2.0 Adapter 10m" },
 { 11, "Bluetooth 2.0 Adapter DFU" },
@@ -19813,9 +15378,10 @@ namespace HardwareInformation.Providers {
 { 36981, "WL-117 Hi-Speed USB Adapter" },
 { 37036, "WL-172 Wireless Network USB Adapter 54g Turbo" },
 { 38674, "WL-113 rev 2 Wireless Network USB Adapter" },
- } },
-            { 3575, new Dictionary<int, string>(){ 
-    { 1568, "MA-620 Infrared Adapter" },
+    })
+ },
+            { 3575, Tuple.Create("Mobile Action Technology, Inc.", new Dictionary<int, string>{
+{ 1568, "MA-620 Infrared Adapter" },
 { 1792, "MA-700 Bluetooth Adapter" },
 { 1824, "MA-720 Bluetooth Adapter" },
 { 1826, "Bluetooth Dongle" },
@@ -19825,31 +15391,30 @@ namespace HardwareInformation.Providers {
 { 2304, "MA i-gotU Travel Logger GPS" },
 { 6144, "Generic Card Reader" },
 { 6146, "Card Reader" },
- } },
-            { 3578, new Dictionary<int, string>(){ 
-     } },
-            { 3580, new Dictionary<int, string>(){ 
-    { 1, "Touchscreen" },
+    })
+ },
+            { 3580, Tuple.Create("GeneralTouch Technology Co., Ltd", new Dictionary<int, string>{
+{ 1, "Touchscreen" },
 { 3, "MultiTouch TouchScreen(Dualtouch)" },
 { 257, "5-point Touch Screen" },
 { 53511, "MultiTouch TouchScreen" },
- } },
-            { 3587, new Dictionary<int, string>(){ 
-     } },
-            { 3592, new Dictionary<int, string>(){ 
-     } },
-            { 3595, new Dictionary<int, string>(){ 
-    { 36913, "802.11n Wireless USB Card" },
+    })
+ },
+            { 3595, Tuple.Create("Amigo Technology Inc.", new Dictionary<int, string>{
+{ 36913, "802.11n Wireless USB Card" },
 { 36929, "802.11n Wireless USB Card" },
- } },
-            { 3596, new Dictionary<int, string>(){ 
-    { 257, "LonUSB LonTalk Network Adapter" },
- } },
-            { 3597, new Dictionary<int, string>(){ 
-    { 3, "PicoHarp 300" },
- } },
-            { 3599, new Dictionary<int, string>(){ 
-    { 1, "Device" },
+    })
+ },
+            { 3596, Tuple.Create("Gesytec", new Dictionary<int, string>{
+{ 257, "LonUSB LonTalk Network Adapter" },
+    })
+ },
+            { 3597, Tuple.Create("PicoQuant GmbH", new Dictionary<int, string>{
+{ 3, "PicoHarp 300" },
+    })
+ },
+            { 3599, Tuple.Create("VMware, Inc.", new Dictionary<int, string>{
+{ 1, "Device" },
 { 2, "Virtual USB Hub" },
 { 3, "Virtual Mouse" },
 { 4, "Virtual CCID" },
@@ -19860,23 +15425,15 @@ namespace HardwareInformation.Providers {
 { 32770, "Root Hub" },
 { 32771, "Root Hub" },
 { 63498, "Smoker FX2" },
- } },
-            { 3606, new Dictionary<int, string>(){ 
-     } },
-            { 3607, new Dictionary<int, string>(){ 
-     } },
-            { 3610, new Dictionary<int, string>(){ 
-     } },
-            { 3611, new Dictionary<int, string>(){ 
-     } },
-            { 3614, new Dictionary<int, string>(){ 
-     } },
-            { 3616, new Dictionary<int, string>(){ 
-    { 257, "NoteTaker" },
+    })
+ },
+            { 3616, Tuple.Create("Pegasus Technologies Ltd.", new Dictionary<int, string>{
+{ 257, "NoteTaker" },
 { 512, "Seiko Instruments InkLink Handwriting System" },
- } },
-            { 3617, new Dictionary<int, string>(){ 
-    { 768, "iAudio CW200" },
+    })
+ },
+            { 3617, Tuple.Create("Cowon Systems, Inc.", new Dictionary<int, string>{
+{ 768, "iAudio CW200" },
 { 1024, "MP3 Player" },
 { 1280, "iAudio M3" },
 { 1296, "iAudio X5, subpack USB port" },
@@ -19891,23 +15448,10 @@ namespace HardwareInformation.Providers {
 { 2049, "Cowon D2 (MTP mode)" },
 { 2320, "iAUDIO 9" },
 { 2336, "J3" },
- } },
-            { 3618, new Dictionary<int, string>(){ 
-     } },
-            { 3619, new Dictionary<int, string>(){ 
-     } },
-            { 3621, new Dictionary<int, string>(){ 
-     } },
-            { 3622, new Dictionary<int, string>(){ 
-     } },
-            { 3632, new Dictionary<int, string>(){ 
-     } },
-            { 3636, new Dictionary<int, string>(){ 
-     } },
-            { 3637, new Dictionary<int, string>(){ 
-     } },
-            { 3638, new Dictionary<int, string>(){ 
-    { 9, "Handyscope HS3" },
+    })
+ },
+            { 3638, Tuple.Create("TiePie engineering", new Dictionary<int, string>{
+{ 9, "Handyscope HS3" },
 { 11, "Handyscope HS4" },
 { 15, "Handyscope HS4-DIFF (br)" },
 { 16, "Handyscope HS2" },
@@ -19920,19 +15464,18 @@ namespace HardwareInformation.Providers {
 { 66, "TiePieSCOPE HS801" },
 { 253, "USB To Parallel adapter" },
 { 254, "USB To Parallel adapter" },
- } },
-            { 3640, new Dictionary<int, string>(){ 
-     } },
-            { 3641, new Dictionary<int, string>(){ 
-    { 311, "Bluetooth Device" },
- } },
-            { 3642, new Dictionary<int, string>(){ 
-    { 4352, "CW-1100 Wireless Network Adapter" },
- } },
-            { 3643, new Dictionary<int, string>(){ 
-     } },
-            { 3649, new Dictionary<int, string>(){ 
-    { 16711, "TonePort GX" },
+    })
+ },
+            { 3641, Tuple.Create("Smart Modular Technologies, Inc.", new Dictionary<int, string>{
+{ 311, "Bluetooth Device" },
+    })
+ },
+            { 3642, Tuple.Create("Neostar Technology Co., Ltd", new Dictionary<int, string>{
+{ 4352, "CW-1100 Wireless Network Adapter" },
+    })
+ },
+            { 3649, Tuple.Create("Line6, Inc.", new Dictionary<int, string>{
+{ 16711, "TonePort GX" },
 { 16717, "Pod HD500" },
 { 16726, "POD HD Desktop" },
 { 16976, "BassPODxt" },
@@ -19943,48 +15486,46 @@ namespace HardwareInformation.Providers {
 { 20548, "PODxt" },
 { 20560, "PODxt Pro" },
 { 21325, "SeaMonkey" },
- } },
-            { 3652, new Dictionary<int, string>(){ 
-     } },
-            { 3656, new Dictionary<int, string>(){ 
-    { 256, "CardPro SmartCard Reader" },
- } },
-            { 3658, new Dictionary<int, string>(){ 
-     } },
-            { 3660, new Dictionary<int, string>(){ 
-    { 4247, "Gamester Controller" },
+    })
+ },
+            { 3656, Tuple.Create("Julia Corp., Ltd", new Dictionary<int, string>{
+{ 256, "CardPro SmartCard Reader" },
+    })
+ },
+            { 3660, Tuple.Create("Radica Games, Ltd", new Dictionary<int, string>{
+{ 4247, "Gamester Controller" },
 { 4355, "Gamester Reflex" },
 { 9104, "Jtech Controller" },
 { 13584, "Gamester for Xbox" },
 { 29320, "funkey reader" },
- } },
-            { 3664, new Dictionary<int, string>(){ 
-    { 1, "Matrix USB-Key" },
+    })
+ },
+            { 3664, Tuple.Create("TechnoData Interware", new Dictionary<int, string>{
+{ 1, "Matrix USB-Key" },
 { 2, "Matrixlock Dongle (HID)" },
- } },
-            { 3669, new Dictionary<int, string>(){ 
-    { 4362, "Tanic S110-SG1 + ISSC IS1002N [Slow Infra-Red (SIR) & Bluetooth 1.2 (Class 2) Adapter]" },
+    })
+ },
+            { 3669, Tuple.Create("Speed Dragon Multimedia, Ltd", new Dictionary<int, string>{
+{ 4362, "Tanic S110-SG1 + ISSC IS1002N [Slow Infra-Red (SIR) & Bluetooth 1.2 (Class 2) Adapter]" },
 { 4363, "MS3303H USB-to-Serial Bridge" },
- } },
-            { 3670, new Dictionary<int, string>(){ 
-    { 24609, "K-PEX 100" },
- } },
-            { 3674, new Dictionary<int, string>(){ 
-     } },
-            { 3675, new Dictionary<int, string>(){ 
-     } },
-            { 3676, new Dictionary<int, string>(){ 
-    { 24856, "LCD Device" },
+    })
+ },
+            { 3670, Tuple.Create("Kingston Technology Company, Inc.", new Dictionary<int, string>{
+{ 24609, "K-PEX 100" },
+    })
+ },
+            { 3676, Tuple.Create("Bitland Information Technology Co., Ltd", new Dictionary<int, string>{
+{ 24856, "LCD Device" },
 { 24857, "remote receive and control device" },
 { 25665, "C-Media Sound Device" },
- } },
-            { 3677, new Dictionary<int, string>(){ 
-     } },
-            { 3678, new Dictionary<int, string>(){ 
-    { 26146, "CW6622" },
- } },
-            { 3686, new Dictionary<int, string>(){ 
-    { 1, "HWUN1 Hi-Gain Wireless-300N Adapter w/ Upgradable Antenna [Ralink RT2870]" },
+    })
+ },
+            { 3678, Tuple.Create("Conwise Technology Co., Ltd.", new Dictionary<int, string>{
+{ 26146, "CW6622" },
+    })
+ },
+            { 3686, Tuple.Create("Hawking Technologies", new Dictionary<int, string>{
+{ 1, "HWUN1 Hi-Gain Wireless-300N Adapter w/ Upgradable Antenna [Ralink RT2870]" },
 { 3, "HWDN1 Hi-Gain Wireless-300N Dish Adapter [Ralink RT2870]" },
 { 9, "HWUN2 Hi-Gain Wireless-150N Adapter w/ Upgradable Antenna [Ralink RT2770]" },
 { 11, "HWDN2 Hi-Gain Wireless-150N Dish Adapter [Ralink RT2770]" },
@@ -19994,20 +15535,23 @@ namespace HardwareInformation.Providers {
 { 24, "Wireless-N Network Adapter [Ralink RT2870]" },
 { 16395, "UF100 10/100 Network Adapter" },
 { 16396, "UF100 Ethernet [pegasus2]" },
- } },
-            { 3687, new Dictionary<int, string>(){ 
-    { 2, "Wrist PDA" },
- } },
-            { 3690, new Dictionary<int, string>(){ 
-    { 257, "MA100 [USB-UART Bridge IC]" },
+    })
+ },
+            { 3687, Tuple.Create("Fossil, Inc.", new Dictionary<int, string>{
+{ 2, "Wrist PDA" },
+    })
+ },
+            { 3690, Tuple.Create("Megawin Technology Co., Ltd", new Dictionary<int, string>{
+{ 257, "MA100 [USB-UART Bridge IC]" },
 { 704, "Defender Gaming Keyboard" },
 { 779, "Truly Ergonomic Computer Keyboard (Device Firmware Update mode)" },
 { 780, "Truly Ergonomic Computer Keyboard" },
 { 24577, "GEMBIRD Flexible keyboard KB-109F-B-DE" },
 { 32604, "BPF-015 Key Chain Photo Frame" },
- } },
-            { 3695, new Dictionary<int, string>(){ 
-    { 3, "Freebird wireless Controller" },
+    })
+ },
+            { 3695, Tuple.Create("Logic3", new Dictionary<int, string>{
+{ 3, "Freebird wireless Controller" },
 { 5, "Eclipse wireless Controller" },
 { 6, "Edge wireless Controller" },
 { 8, "After Glow Pro Controller" },
@@ -20038,15 +15582,10 @@ namespace HardwareInformation.Providers {
 { 1281, "Wired Controller" },
 { 62721, "Hi-TEC Essentials Wired Gamepad" },
 { 63744, "Afterglow AX.1" },
- } },
-            { 3696, new Dictionary<int, string>(){ 
-     } },
-            { 3698, new Dictionary<int, string>(){ 
-     } },
-            { 3701, new Dictionary<int, string>(){ 
-     } },
-            { 3705, new Dictionary<int, string>(){ 
-    { 4358, "Pocket Media Assistant - PMA400" },
+    })
+ },
+            { 3705, Tuple.Create("Archos, Inc.", new Dictionary<int, string>{
+{ 4358, "Pocket Media Assistant - PMA400" },
 { 4612, "Gmini XS 200" },
 { 4870, "504 Portable Multimedia Player" },
 { 4912, "5 Tablet" },
@@ -20056,21 +15595,15 @@ namespace HardwareInformation.Providers {
 { 5293, "97 Titanium HD" },
 { 5390, "80 G9" },
 { 12289, "40 Titanium" },
- } },
-            { 3707, new Dictionary<int, string>(){ 
-     } },
-            { 3710, new Dictionary<int, string>(){ 
-    { 1, "Yopy 3000 PDA" },
+    })
+ },
+            { 3710, Tuple.Create("Gmate, Inc.", new Dictionary<int, string>{
+{ 1, "Yopy 3000 PDA" },
 { 4097, "YP3X00 PDA" },
- } },
-            { 3714, new Dictionary<int, string>(){ 
-     } },
-            { 3715, new Dictionary<int, string>(){ 
-     } },
-            { 3724, new Dictionary<int, string>(){ 
-     } },
-            { 3725, new Dictionary<int, string>(){ 
-    { 2, "phone (mass storage mode) [Doro Primo 413]" },
+    })
+ },
+            { 3725, Tuple.Create("MediaTek Inc.", new Dictionary<int, string>{
+{ 2, "phone (mass storage mode) [Doro Primo 413]" },
 { 3, "MT6227 phone" },
 { 4, "MT6227 phone" },
 { 35, "S103 / Powertel M6200" },
@@ -20085,9 +15618,10 @@ namespace HardwareInformation.Providers {
 { 30226, "MT7612U 802.11a/b/g/n/ac Wireless Adapter" },
 { 30270, "MT7630e Bluetooth Adapter" },
 { 30312, "MT7668 2x2 Dual Band Dual Concurrent 802.11a/b/g/n/ac WiFi with MU-MIMO and Bluetooth 5.0 Radios" },
- } },
-            { 3727, new Dictionary<int, string>(){ 
-    { 3, "MaxFire Blaze2" },
+    })
+ },
+            { 3727, Tuple.Create("GreenAsia Inc.", new Dictionary<int, string>{
+{ 3, "MaxFire Blaze2" },
 { 18, "Joystick/Gamepad" },
 { 22, "4 port USB 1.1 hub UH-174" },
 { 32, "USB to PS/2 Adapter" },
@@ -20096,39 +15630,26 @@ namespace HardwareInformation.Providers {
 { 513, "SmartJoy Frag Xpad/PS2 adaptor" },
 { 12296, "Xbox Controller" },
 { 12298, "steering Wheel" },
- } },
-            { 3728, new Dictionary<int, string>(){ 
-    { 256, "Storage Adapter V1" },
- } },
-            { 3729, new Dictionary<int, string>(){ 
-     } },
-            { 3730, new Dictionary<int, string>(){ 
-     } },
-            { 3731, new Dictionary<int, string>(){ 
-     } },
-            { 3733, new Dictionary<int, string>(){ 
-     } },
-            { 3734, new Dictionary<int, string>(){ 
-    { 49153, "TRUST 380 USB2 SPACEC@M" },
- } },
-            { 3735, new Dictionary<int, string>(){ 
-    { 2312, "Composite HID (Keyboard and Mouse)" },
- } },
-            { 3736, new Dictionary<int, string>(){ 
-     } },
-            { 3737, new Dictionary<int, string>(){ 
-     } },
-            { 3738, new Dictionary<int, string>(){ 
-     } },
-            { 3739, new Dictionary<int, string>(){ 
-     } },
-            { 3740, new Dictionary<int, string>(){ 
-    { 0, "Streamzap Remote Control" },
- } },
-            { 3743, new Dictionary<int, string>(){ 
-     } },
-            { 3744, new Dictionary<int, string>(){ 
-    { 8486, "7-in-1 Card Reader" },
+    })
+ },
+            { 3728, Tuple.Create("WiebeTech, LLC", new Dictionary<int, string>{
+{ 256, "Storage Adapter V1" },
+    })
+ },
+            { 3734, Tuple.Create("Aplux Communications, Ltd", new Dictionary<int, string>{
+{ 49153, "TRUST 380 USB2 SPACEC@M" },
+    })
+ },
+            { 3735, Tuple.Create("Fingerworks, Inc.", new Dictionary<int, string>{
+{ 2312, "Composite HID (Keyboard and Mouse)" },
+    })
+ },
+            { 3740, Tuple.Create("Streamzap, Inc.", new Dictionary<int, string>{
+{ 0, "Streamzap Remote Control" },
+    })
+ },
+            { 3744, Tuple.Create("Ours Technology, Inc.", new Dictionary<int, string>{
+{ 8486, "7-in-1 Card Reader" },
 { 8531, "SD Card Reader Key" },
 { 8552, "Transcend JetFlash 2.0 / Astone USB Drive / Intellegent Stick 2.0" },
 { 8723, "WinDroid N287 AH7N2502.013317" },
@@ -20136,142 +15657,86 @@ namespace HardwareInformation.Providers {
 { 26632, "OTI-6808 Flash Disk" },
 { 26664, "OTI-6828 Flash Disk" },
 { 26712, "OTi-6858 serial adapter" },
- } },
-            { 3750, new Dictionary<int, string>(){ 
-     } },
-            { 3751, new Dictionary<int, string>(){ 
-     } },
-            { 3752, new Dictionary<int, string>(){ 
-     } },
-            { 3757, new Dictionary<int, string>(){ 
-     } },
-            { 3760, new Dictionary<int, string>(){ 
-    { 36896, "NovaTech NV-902W" },
+    })
+ },
+            { 3760, Tuple.Create("NovaTech", new Dictionary<int, string>{
+{ 36896, "NovaTech NV-902W" },
 { 36897, "RT2573" },
- } },
-            { 3761, new Dictionary<int, string>(){ 
-    { 26214, "WinFast WalkieTV TV Loader" },
+    })
+ },
+            { 3761, Tuple.Create("WIS Technologies, Inc.", new Dictionary<int, string>{
+{ 26214, "WinFast WalkieTV TV Loader" },
 { 26216, "WinFast WalkieTV TV Loader" },
 { 28679, "WinFast WalkieTV WDM Capture" },
- } },
-            { 3762, new Dictionary<int, string>(){ 
-     } },
-            { 3763, new Dictionary<int, string>(){ 
-     } },
-            { 3767, new Dictionary<int, string>(){ 
-     } },
-            { 3768, new Dictionary<int, string>(){ 
-    { 8704, "Ariva Scale" },
+    })
+ },
+            { 3768, Tuple.Create("Mettler Toledo", new Dictionary<int, string>{
+{ 8704, "Ariva Scale" },
 { 61440, "BC60 Scale" },
- } },
-            { 3771, new Dictionary<int, string>(){ 
-    { 2, "FT-IR Spectrometer" },
- } },
-            { 3774, new Dictionary<int, string>(){ 
-     } },
-            { 3775, new Dictionary<int, string>(){ 
-     } },
-            { 3776, new Dictionary<int, string>(){ 
-     } },
-            { 3777, new Dictionary<int, string>(){ 
-     } },
-            { 3778, new Dictionary<int, string>(){ 
-     } },
-            { 3779, new Dictionary<int, string>(){ 
-     } },
-            { 3780, new Dictionary<int, string>(){ 
-     } },
-            { 3781, new Dictionary<int, string>(){ 
-     } },
-            { 3782, new Dictionary<int, string>(){ 
-     } },
-            { 3783, new Dictionary<int, string>(){ 
-    { 4104, "So., Show 301 Digital Camera" },
- } },
-            { 3789, new Dictionary<int, string>(){ 
-    { 5120, "CD\\RW 40X" },
+    })
+ },
+            { 3771, Tuple.Create("Thermo Fisher Scientific", new Dictionary<int, string>{
+{ 2, "FT-IR Spectrometer" },
+    })
+ },
+            { 3783, Tuple.Create("Theta Link Corp.", new Dictionary<int, string>{
+{ 4104, "So., Show 301 Digital Camera" },
+    })
+ },
+            { 3789, Tuple.Create("Lite-On IT Corp.", new Dictionary<int, string>{
+{ 5120, "CD\\RW 40X" },
 { 41216, "LDW-411SX DVD/CD Rewritable Drive" },
- } },
-            { 3790, new Dictionary<int, string>(){ 
-     } },
-            { 3791, new Dictionary<int, string>(){ 
-     } },
-            { 3793, new Dictionary<int, string>(){ 
-    { 26208, "Flash Disk 64M-C" },
+    })
+ },
+            { 3793, Tuple.Create("WinMaxGroup", new Dictionary<int, string>{
+{ 26208, "Flash Disk 64M-C" },
 { 26240, "Flash Disk 64M-B" },
 { 30260, "MP3 Player" },
- } },
-            { 3794, new Dictionary<int, string>(){ 
-     } },
-            { 3795, new Dictionary<int, string>(){ 
-     } },
-            { 3797, new Dictionary<int, string>(){ 
-    { 57344, "USB-inSync Device" },
+    })
+ },
+            { 3797, Tuple.Create("Fiberbyte", new Dictionary<int, string>{
+{ 57344, "USB-inSync Device" },
 { 61440, "Fiberbyte USB-inSync Device" },
 { 61953, "Fiberbyte USB-inSync DAQ-2500X" },
- } },
-            { 3802, new Dictionary<int, string>(){ 
-     } },
-            { 3807, new Dictionary<int, string>(){ 
-    { 8288, "FID irock! 100 Series" },
- } },
-            { 3808, new Dictionary<int, string>(){ 
-     } },
-            { 3809, new Dictionary<int, string>(){ 
-     } },
-            { 3810, new Dictionary<int, string>(){ 
-     } },
-            { 3811, new Dictionary<int, string>(){ 
-    { 4096, "Image Tank 1.5" },
- } },
-            { 3812, new Dictionary<int, string>(){ 
-    { 1680, "SATA 3 Adapter" },
- } },
-            { 3822, new Dictionary<int, string>(){ 
-    { 34832, "Mass Storage Drive" },
- } },
-            { 3823, new Dictionary<int, string>(){ 
-    { 1, "Titan6001 Surface Acoustic Wave Touchscreen Controller [eGalax]" },
+    })
+ },
+            { 3807, Tuple.Create("e-MDT Co., Ltd", new Dictionary<int, string>{
+{ 8288, "FID irock! 100 Series" },
+    })
+ },
+            { 3811, Tuple.Create("ComTrue Technology Corp.", new Dictionary<int, string>{
+{ 4096, "Image Tank 1.5" },
+    })
+ },
+            { 3812, Tuple.Create("Sunrich Technology, Ltd", new Dictionary<int, string>{
+{ 1680, "SATA 3 Adapter" },
+    })
+ },
+            { 3822, Tuple.Create("Digital Stream Technology, Inc.", new Dictionary<int, string>{
+{ 34832, "Mass Storage Drive" },
+    })
+ },
+            { 3823, Tuple.Create("D-WAV Scientific Co., Ltd", new Dictionary<int, string>{
+{ 1, "Titan6001 Surface Acoustic Wave Touchscreen Controller [eGalax]" },
 { 2, "Touchscreen Controller(Professional)" },
 { 29184, "Touchscreen Controller" },
 { 30980, "Multitouch Capacitive Touchscreen eGalaxTouch EXC7904-21v00_T13 [IIyama Prolite T1932-MSC]" },
 { 43010, "eGalaxTouch EXC7920" },
 { 45326, "eGalaxTouch EXC3000" },
 { 49152, "Multitouch Capacitive Touchscreen eGalaxTouch EXC3188-4643-08.00.00.00 Sirius_4643 PCAP3188UR Series [IIyama Prolite PLT1932MSC]" },
- } },
-            { 3824, new Dictionary<int, string>(){ 
-     } },
-            { 3825, new Dictionary<int, string>(){ 
-     } },
-            { 3826, new Dictionary<int, string>(){ 
-     } },
-            { 3827, new Dictionary<int, string>(){ 
-     } },
-            { 3828, new Dictionary<int, string>(){ 
-     } },
-            { 3829, new Dictionary<int, string>(){ 
-    { 8706, "Flash Disk" },
+    })
+ },
+            { 3829, Tuple.Create("PointChips", new Dictionary<int, string>{
+{ 8706, "Flash Disk" },
 { 9062, "Flash Disk" },
- } },
-            { 3830, new Dictionary<int, string>(){ 
-     } },
-            { 3831, new Dictionary<int, string>(){ 
-     } },
-            { 3837, new Dictionary<int, string>(){ 
-     } },
-            { 3838, new Dictionary<int, string>(){ 
-     } },
-            { 3843, new Dictionary<int, string>(){ 
-    { 1, "Alpha 1200Sx" },
- } },
-            { 3846, new Dictionary<int, string>(){ 
-     } },
-            { 3848, new Dictionary<int, string>(){ 
-     } },
-            { 3852, new Dictionary<int, string>(){ 
-     } },
-            { 3853, new Dictionary<int, string>(){ 
-    { 10, "Dead or Alive 4 FightStick for Xbox 360" },
+    })
+ },
+            { 3843, Tuple.Create("Unitek UPS Systems", new Dictionary<int, string>{
+{ 1, "Alpha 1200Sx" },
+    })
+ },
+            { 3853, Tuple.Create("Hori Co., Ltd", new Dictionary<int, string>{
+{ 10, "Dead or Alive 4 FightStick for Xbox 360" },
 { 12, "Horipad EX Turbo for Xbox 360" },
 { 13, "Fighting Stick EX2 for Xbox 360" },
 { 17, "Real Arcade Pro 3" },
@@ -20282,15 +15747,15 @@ namespace HardwareInformation.Providers {
 { 120, "Real Arcade Pro V Kai for Xbox One / Xbox 360" },
 { 144, "Horipad Ultimate" },
 { 193, "HORIPAD for Nintendo Switch" },
- } },
-            { 3854, new Dictionary<int, string>(){ 
-     } },
-            { 3855, new Dictionary<int, string>(){ 
-    { 6, "GreenPak Universal Dev Board (Active Mode)" },
+    })
+ },
+            { 3855, Tuple.Create("Silego Technology Inc", new Dictionary<int, string>{
+{ 6, "GreenPak Universal Dev Board (Active Mode)" },
 { 32774, "GreenPak Universal Dev Board (Reset Mode)" },
- } },
-            { 3857, new Dictionary<int, string>(){ 
-    { 4096, "CASSY-S" },
+    })
+ },
+            { 3857, Tuple.Create("LD Didactic GmbH", new Dictionary<int, string>{
+{ 4096, "CASSY-S" },
 { 4112, "Pocket-CASSY" },
 { 4128, "Mobile-CASSY" },
 { 4224, "Joule and Wattmeter" },
@@ -20304,118 +15769,72 @@ namespace HardwareInformation.Providers {
 { 8224, "Network Analyser" },
 { 8240, "Converter Control Unit" },
 { 8256, "Machine Test System" },
- } },
-            { 3858, new Dictionary<int, string>(){ 
-     } },
-            { 3859, new Dictionary<int, string>(){ 
-     } },
-            { 3860, new Dictionary<int, string>(){ 
-    { 18, "Vital'Act 3S" },
+    })
+ },
+            { 3860, Tuple.Create("Ingenico", new Dictionary<int, string>{
+{ 18, "Vital'Act 3S" },
 { 56, "XIRING Smart Card Terminal LEO V2" },
- } },
-            { 3864, new Dictionary<int, string>(){ 
-    { 2, "CCD" },
+    })
+ },
+            { 3864, Tuple.Create("Finger Lakes Instrumentation", new Dictionary<int, string>{
+{ 2, "CCD" },
 { 6, "Focuser" },
 { 7, "Filter Wheel" },
 { 10, "ProLine CCD" },
 { 11, "Color Filter Wheel 4" },
 { 12, "PDF2" },
 { 13, "Guider" },
- } },
-            { 3865, new Dictionary<int, string>(){ 
-     } },
-            { 3867, new Dictionary<int, string>(){ 
-     } },
-            { 3868, new Dictionary<int, string>(){ 
-     } },
-            { 3869, new Dictionary<int, string>(){ 
-     } },
-            { 3873, new Dictionary<int, string>(){ 
-     } },
-            { 3874, new Dictionary<int, string>(){ 
-     } },
-            { 3875, new Dictionary<int, string>(){ 
-     } },
-            { 3876, new Dictionary<int, string>(){ 
-     } },
-            { 3885, new Dictionary<int, string>(){ 
-     } },
-            { 3886, new Dictionary<int, string>(){ 
-     } },
-            { 3887, new Dictionary<int, string>(){ 
-     } },
-            { 3888, new Dictionary<int, string>(){ 
-    { 28, "PS3 Guitar Controller Dongle" },
+    })
+ },
+            { 3888, Tuple.Create("Jess Technology Co., Ltd", new Dictionary<int, string>{
+{ 28, "PS3 Guitar Controller Dongle" },
 { 267, "Philips Recoil" },
 { 272, "Dual Analog Rumble Pad" },
 { 273, "Colour Rumble Pad" },
 { 514, "Joytech Advanced Controller" },
 { 520, "Xbox & PC Gamepad" },
 { 34952, "BigBen XBMiniPad Controller" },
- } },
-            { 3889, new Dictionary<int, string>(){ 
-     } },
-            { 3890, new Dictionary<int, string>(){ 
-     } },
-            { 3895, new Dictionary<int, string>(){ 
-     } },
-            { 3896, new Dictionary<int, string>(){ 
-     } },
-            { 3897, new Dictionary<int, string>(){ 
-    { 1028, "Recreated ZX Spectrum Keyboard" },
+    })
+ },
+            { 3897, Tuple.Create("TG3 Electronics", new Dictionary<int, string>{
+{ 1028, "Recreated ZX Spectrum Keyboard" },
 { 2166, "Keyboard [87 Francium Pro]" },
 { 4230, "DK2108SZ Keyboard [Ducky Zero]" },
- } },
-            { 3901, new Dictionary<int, string>(){ 
-    { 274, "CDMA 1xEVDO PC Card, PC 5220" },
- } },
-            { 3905, new Dictionary<int, string>(){ 
-     } },
-            { 3906, new Dictionary<int, string>(){ 
-     } },
-            { 3908, new Dictionary<int, string>(){ 
-    { 61201, "Patriot (firmware not loaded)" },
+    })
+ },
+            { 3901, Tuple.Create("Airprime, Incorporated", new Dictionary<int, string>{
+{ 274, "CDMA 1xEVDO PC Card, PC 5220" },
+    })
+ },
+            { 3908, Tuple.Create("Polhemus", new Dictionary<int, string>{
+{ 61201, "Patriot (firmware not loaded)" },
 { 61202, "Patriot" },
 { 65297, "Liberty (firmware not loaded)" },
 { 65298, "Liberty" },
- } },
-            { 3913, new Dictionary<int, string>(){ 
-    { 2560, "Zenius" },
- } },
-            { 3915, new Dictionary<int, string>(){ 
-     } },
-            { 3916, new Dictionary<int, string>(){ 
-     } },
-            { 3917, new Dictionary<int, string>(){ 
-    { 4096, "Bluetooth Dongle" },
- } },
-            { 3918, new Dictionary<int, string>(){ 
-     } },
-            { 3922, new Dictionary<int, string>(){ 
-     } },
-            { 3923, new Dictionary<int, string>(){ 
-     } },
-            { 3924, new Dictionary<int, string>(){ 
-    { 257, "MP6 Stage Piano" },
- } },
-            { 3925, new Dictionary<int, string>(){ 
-     } },
-            { 3932, new Dictionary<int, string>(){ 
-     } },
-            { 3933, new Dictionary<int, string>(){ 
-    { 37973, "Compact Drive" },
- } },
-            { 3935, new Dictionary<int, string>(){ 
-     } },
-            { 3936, new Dictionary<int, string>(){ 
-     } },
-            { 3937, new Dictionary<int, string>(){ 
-     } },
-            { 3938, new Dictionary<int, string>(){ 
-    { 4097, "Targus Mini Trackball Optical Mouse" },
- } },
-            { 3939, new Dictionary<int, string>(){ 
-    { 16, "Leapster Explorer" },
+    })
+ },
+            { 3913, Tuple.Create("Evolis SA", new Dictionary<int, string>{
+{ 2560, "Zenius" },
+    })
+ },
+            { 3917, Tuple.Create("Microtune, Inc.", new Dictionary<int, string>{
+{ 4096, "Bluetooth Dongle" },
+    })
+ },
+            { 3924, Tuple.Create("Kawai Musical Instruments Mfg. Co., Ltd", new Dictionary<int, string>{
+{ 257, "MP6 Stage Piano" },
+    })
+ },
+            { 3933, Tuple.Create("NewAge International, LLC", new Dictionary<int, string>{
+{ 37973, "Compact Drive" },
+    })
+ },
+            { 3938, Tuple.Create("Acrox Technologies Co., Ltd", new Dictionary<int, string>{
+{ 4097, "Targus Mini Trackball Optical Mouse" },
+    })
+ },
+            { 3939, Tuple.Create("LeapFrog Enterprises", new Dictionary<int, string>{
+{ 16, "Leapster Explorer" },
 { 34, "Leap Reader" },
 { 1280, "Fly Fusion" },
 { 1536, "Leap Port Turbo" },
@@ -20432,15 +15851,10 @@ namespace HardwareInformation.Providers {
 { 4352, "Leapster L2x" },
 { 4369, "Fly Fusion" },
 { 4864, "Didj UK/France (Leapster Advance)" },
- } },
-            { 3944, new Dictionary<int, string>(){ 
-     } },
-            { 3945, new Dictionary<int, string>(){ 
-     } },
-            { 3946, new Dictionary<int, string>(){ 
-     } },
-            { 3950, new Dictionary<int, string>(){ 
-    { 256, "IS-CGB-EMULATOR" },
+    })
+ },
+            { 3950, Tuple.Create("INTELLIGENT SYSTEMS", new Dictionary<int, string>{
+{ 256, "IS-CGB-EMULATOR" },
 { 513, "GameBoy Advance Flash Gang Writer" },
 { 514, "IS-AGB-CAPTURE" },
 { 768, "IS-DOL-VIEWER" },
@@ -20451,83 +15865,33 @@ namespace HardwareInformation.Providers {
 { 1028, "IS-NITRO-EMULATOR (DS Lite)" },
 { 1280, "IS-TWL-DEBUGGER" },
 { 1281, "IS-TWL-CAPTURE" },
- } },
-            { 3955, new Dictionary<int, string>(){ 
-     } },
-            { 3960, new Dictionary<int, string>(){ 
-     } },
-            { 3964, new Dictionary<int, string>(){ 
-     } },
-            { 3965, new Dictionary<int, string>(){ 
-     } },
-            { 3966, new Dictionary<int, string>(){ 
-     } },
-            { 3976, new Dictionary<int, string>(){ 
-    { 12306, "RT2570" },
+    })
+ },
+            { 3976, Tuple.Create("VTech Holdings, Ltd", new Dictionary<int, string>{
+{ 12306, "RT2570" },
 { 12308, "ZD1211B" },
- } },
-            { 3979, new Dictionary<int, string>(){ 
-     } },
-            { 3980, new Dictionary<int, string>(){ 
-     } },
-            { 3981, new Dictionary<int, string>(){ 
-     } },
-            { 3982, new Dictionary<int, string>(){ 
-     } },
-            { 3983, new Dictionary<int, string>(){ 
-     } },
-            { 3991, new Dictionary<int, string>(){ 
-     } },
-            { 3992, new Dictionary<int, string>(){ 
-     } },
-            { 3996, new Dictionary<int, string>(){ 
-    { 769, "M-Any Premium DAH-610 MP3/WMA Player" },
+    })
+ },
+            { 3996, Tuple.Create("Hyun Won, Inc.", new Dictionary<int, string>{
+{ 769, "M-Any Premium DAH-610 MP3/WMA Player" },
 { 818, "mobiBLU DAH-1200 MP3/Ogg Player" },
- } },
-            { 3998, new Dictionary<int, string>(){ 
-     } },
-            { 4003, new Dictionary<int, string>(){ 
-     } },
-            { 4004, new Dictionary<int, string>(){ 
-     } },
-            { 4005, new Dictionary<int, string>(){ 
-     } },
-            { 4007, new Dictionary<int, string>(){ 
-     } },
-            { 4008, new Dictionary<int, string>(){ 
-     } },
-            { 4015, new Dictionary<int, string>(){ 
-     } },
-            { 4016, new Dictionary<int, string>(){ 
-     } },
-            { 4017, new Dictionary<int, string>(){ 
-     } },
-            { 4018, new Dictionary<int, string>(){ 
-     } },
-            { 4022, new Dictionary<int, string>(){ 
-    { 16323, "Firefly X10i I/O Board (with firmware)" },
+    })
+ },
+            { 4022, Tuple.Create("Heber Ltd", new Dictionary<int, string>{
+{ 16323, "Firefly X10i I/O Board (with firmware)" },
 { 16324, "Firefly X10i I/O Board (without firmware)" },
- } },
-            { 4024, new Dictionary<int, string>(){ 
-    { 2, "eHome Infrared Receiver" },
- } },
-            { 4025, new Dictionary<int, string>(){ 
-     } },
-            { 4026, new Dictionary<int, string>(){ 
-     } },
-            { 4027, new Dictionary<int, string>(){ 
-     } },
-            { 4033, new Dictionary<int, string>(){ 
-     } },
-            { 4034, new Dictionary<int, string>(){ 
-     } },
-            { 4037, new Dictionary<int, string>(){ 
-    { 4642, "I/O Development Board" },
- } },
-            { 4038, new Dictionary<int, string>(){ 
-     } },
-            { 4042, new Dictionary<int, string>(){ 
-    { 1, "Blackberry Handheld" },
+    })
+ },
+            { 4024, Tuple.Create("Wistron Corp.", new Dictionary<int, string>{
+{ 2, "eHome Infrared Receiver" },
+    })
+ },
+            { 4037, Tuple.Create("Delcom Engineering", new Dictionary<int, string>{
+{ 4642, "I/O Development Board" },
+    })
+ },
+            { 4042, Tuple.Create("Research In Motion, Ltd.", new Dictionary<int, string>{
+{ 1, "Blackberry Handheld" },
 { 4, "Blackberry Handheld" },
 { 6, "Blackberry Pearl" },
 { 8, "Blackberry Pearl" },
@@ -20539,9 +15903,10 @@ namespace HardwareInformation.Providers {
 { 32788, "Blackberry Handheld Z30" },
 { 32800, "Blackberry Playbook (CD-Rom mode)" },
 { 32823, "Blackberry PRIV" },
- } },
-            { 4046, new Dictionary<int, string>(){ 
-    { 118, "W910i (Multimedia mode)" },
+    })
+ },
+            { 4046, Tuple.Create("Sony Ericsson Mobile Communications AB", new Dictionary<int, string>{
+{ 118, "W910i (Multimedia mode)" },
 { 175, "V640i Phone [PTP Camera]" },
 { 212, "C902 [MTP]" },
 { 217, "C702 Phone" },
@@ -20656,27 +16021,22 @@ namespace HardwareInformation.Providers {
 { 57801, "E6553" },
 { 57807, "SGP771" },
 { 61690, "MN800 / Smartwatch 2 (DFU mode)" },
- } },
-            { 4047, new Dictionary<int, string>(){ 
-    { 4099, "ANT Development Board" },
+    })
+ },
+            { 4047, Tuple.Create("Dynastream Innovations, Inc.", new Dictionary<int, string>{
+{ 4099, "ANT Development Board" },
 { 4100, "ANTUSB Stick" },
 { 4102, "ANT Development Board" },
 { 4104, "ANTUSB2 Stick" },
 { 4105, "ANTUSB-m Stick" },
- } },
-            { 4048, new Dictionary<int, string>(){ 
-     } },
-            { 4049, new Dictionary<int, string>(){ 
-     } },
-            { 4050, new Dictionary<int, string>(){ 
-    { 1, "RDS 6000" },
- } },
-            { 4052, new Dictionary<int, string>(){ 
-     } },
-            { 4053, new Dictionary<int, string>(){ 
-     } },
-            { 4057, new Dictionary<int, string>(){ 
-    { 17, "EyeTV Diversity" },
+    })
+ },
+            { 4050, Tuple.Create("Seac Banche", new Dictionary<int, string>{
+{ 1, "RDS 6000" },
+    })
+ },
+            { 4057, Tuple.Create("Elgato Systems GmbH", new Dictionary<int, string>{
+{ 17, "EyeTV Diversity" },
 { 24, "EyeTV Hybrid" },
 { 32, "EyeTV DTT Deluxe" },
 { 33, "EyeTV DTT" },
@@ -20688,79 +16048,61 @@ namespace HardwareInformation.Providers {
 { 99, "Stream Deck Mini" },
 { 108, "Stream Deck XL" },
 { 109, "Stream Deck original V2" },
- } },
-            { 4058, new Dictionary<int, string>(){ 
-    { 256, "quanton flight control" },
- } },
-            { 4060, new Dictionary<int, string>(){ 
-     } },
-            { 4062, new Dictionary<int, string>(){ 
-    { 51713, "WMRS200 weather station" },
+    })
+ },
+            { 4058, Tuple.Create("Quantec Networks GmbH", new Dictionary<int, string>{
+{ 256, "quanton flight control" },
+    })
+ },
+            { 4062, Tuple.Create("Oregon Scientific", new Dictionary<int, string>{
+{ 51713, "WMRS200 weather station" },
 { 51717, "CM160" },
 { 51720, "WMR300 Professional Weather System" },
- } },
-            { 4064, new Dictionary<int, string>(){ 
-    { 256, "Bluetooth Mouse" },
+    })
+ },
+            { 4064, Tuple.Create("Osterhout Design Group", new Dictionary<int, string>{
+{ 256, "Bluetooth Mouse" },
 { 257, "Bluetooth IMU" },
 { 512, "Bluetooth Keypad" },
- } },
-            { 4066, new Dictionary<int, string>(){ 
-     } },
-            { 4068, new Dictionary<int, string>(){ 
-     } },
-            { 4069, new Dictionary<int, string>(){ 
-     } },
-            { 4070, new Dictionary<int, string>(){ 
-    { 33025, "DM9601 Fast Ethernet Adapter" },
+    })
+ },
+            { 4070, Tuple.Create("ICS Advent", new Dictionary<int, string>{
+{ 33025, "DM9601 Fast Ethernet Adapter" },
 { 33054, "Parallel Adapter" },
 { 38656, "DM9601 Fast Ethernet Adapter" },
- } },
-            { 4073, new Dictionary<int, string>(){ 
-    { 16416, "TViX M-6500" },
+    })
+ },
+            { 4073, Tuple.Create("DVICO", new Dictionary<int, string>{
+{ 16416, "TViX M-6500" },
 { 36880, "FusionRemote IR receiver" },
 { 56064, "FusionHDTV DVB-T (MT352+LgZ201) (uninitialized)" },
 { 56065, "FusionHDTV DVB-T (MT352+LgZ201) (initialized)" },
 { 56080, "FusionHDTV DVB-T (MT352+Thomson7579) (uninitialized)" },
 { 56081, "FusionHDTV DVB-T (MT352+Thomson7579) (initialized)" },
 { 56184, "FusionHDTV DVB-T Dual Digital 4 (ZL10353+xc2028/xc3028) (initialized)" },
- } },
-            { 4074, new Dictionary<int, string>(){ 
-     } },
-            { 4075, new Dictionary<int, string>(){ 
-     } },
-            { 4076, new Dictionary<int, string>(){ 
-     } },
-            { 4077, new Dictionary<int, string>(){ 
-     } },
-            { 4078, new Dictionary<int, string>(){ 
-     } },
-            { 4079, new Dictionary<int, string>(){ 
-     } },
-            { 4086, new Dictionary<int, string>(){ 
-     } },
-            { 4087, new Dictionary<int, string>(){ 
-     } },
-            { 4092, new Dictionary<int, string>(){ 
-    { 33, "Nord Stage 2" },
+    })
+ },
+            { 4092, Tuple.Create("Clavia DMI AB", new Dictionary<int, string>{
+{ 33, "Nord Stage 2" },
 { 42, "Nord Piano 4" },
- } },
-            { 4093, new Dictionary<int, string>(){ 
-    { 65280, "OEM" },
- } },
-            { 4095, new Dictionary<int, string>(){ 
-     } },
-            { 4096, new Dictionary<int, string>(){ 
-    { 5435, "TerraTec Electronic GmbH" },
- } },
-            { 4097, new Dictionary<int, string>(){ 
-     } },
-            { 4099, new Dictionary<int, string>(){ 
-    { 3, "SD14" },
+    })
+ },
+            { 4093, Tuple.Create("EarlySense", new Dictionary<int, string>{
+{ 65280, "OEM" },
+    })
+ },
+            { 4096, Tuple.Create("Speed Tech Corp.", new Dictionary<int, string>{
+{ 5435, "TerraTec Electronic GmbH" },
+    })
+ },
+            { 4099, Tuple.Create("Sigma Corp.", new Dictionary<int, string>{
+{ 3, "SD14" },
 { 256, "SD9/SD10" },
 { 34689, "Dock UD-01" },
- } },
-            { 4100, new Dictionary<int, string>(){ 
-    { 8110, "U8120 3G Cellphone" },
+    })
+ },
+            { 4100, Tuple.Create("LG Electronics, Inc.", new Dictionary<int, string>{
+{ 8110, "U8120 3G Cellphone" },
 { 24576, "Various Mobile Phones" },
 { 24581, "T5100" },
 { 24600, "GM360/GD510/GW520/KP501" },
@@ -20789,131 +16131,115 @@ namespace HardwareInformation.Providers {
 { 28672, "LG LDP-7024D(LD)USB" },
 { 37320, "P880 / USB tethering" },
 { 41984, "Renoir (KC910)" },
- } },
-            { 4101, new Dictionary<int, string>(){ 
-    { 4097, "MP3 Player" },
+    })
+ },
+            { 4101, Tuple.Create("Apacer Technology, Inc.", new Dictionary<int, string>{
+{ 4097, "MP3 Player" },
 { 4100, "MP3 Player" },
 { 4102, "MP3 Player" },
 { 45331, "Handy Steno/AH123 / Handy Steno 2.0/HT203" },
 { 45397, "Disk Module" },
 { 45603, "CD-RW + 6in1 Card Reader Digital Storage / Converter" },
- } },
-            { 4102, new Dictionary<int, string>(){ 
-    { 12289, "iHP-100" },
+    })
+ },
+            { 4102, Tuple.Create("iRiver, Ltd.", new Dictionary<int, string>{
+{ 12289, "iHP-100" },
 { 12290, "iHP-120/140 MP3 Player" },
 { 12291, "H320/H340" },
 { 12292, "H340 (mtp)" },
- } },
-            { 4105, new Dictionary<int, string>(){ 
-    { 14, "eHome Infrared Receiver" },
+    })
+ },
+            { 4105, Tuple.Create("Emuzed, Inc.", new Dictionary<int, string>{
+{ 14, "eHome Infrared Receiver" },
 { 19, "Angel MPEG Device" },
 { 21, "Lumanate Wave PAL SECAM DVBT Device" },
 { 22, "Lumanate Wave NTSC/ATSC Combo Device" },
- } },
-            { 4106, new Dictionary<int, string>(){ 
-    { 9218, "MP3 Player" },
+    })
+ },
+            { 4106, Tuple.Create("AV Chaseway, Ltd", new Dictionary<int, string>{
+{ 9218, "MP3 Player" },
 { 9220, "MP3 Player" },
 { 9221, "MP3 Player" },
 { 9222, "MP3 Player" },
 { 41152, "MP3 Player" },
- } },
-            { 4107, new Dictionary<int, string>(){ 
-     } },
-            { 4109, new Dictionary<int, string>(){ 
-    { 13122, "Cayman 3352 DSL Modem" },
+    })
+ },
+            { 4109, Tuple.Create("Netopia, Inc.", new Dictionary<int, string>{
+{ 13122, "Cayman 3352 DSL Modem" },
 { 13186, "3380 Series Network Interface" },
 { 24690, "DSL Modem" },
 { 36913, "Motorola 802.11n Dualband USB Wireless Adapter" },
 { 36914, "Motorola 802.11n 5G USB Wireless Adapter" },
 { 51969, "Cayman 3341 Ethernet DSL Router" },
- } },
-            { 4112, new Dictionary<int, string>(){ 
-     } },
-            { 4113, new Dictionary<int, string>(){ 
-    { 1, "AccFast Mp3" },
- } },
-            { 4114, new Dictionary<int, string>(){ 
-     } },
-            { 4115, new Dictionary<int, string>(){ 
-     } },
-            { 4116, new Dictionary<int, string>(){ 
-     } },
-            { 4117, new Dictionary<int, string>(){ 
-     } },
-            { 4118, new Dictionary<int, string>(){ 
-     } },
-            { 4119, new Dictionary<int, string>(){ 
-    { 36885, "M625 [Vendor: DELUX]" },
- } },
-            { 4121, new Dictionary<int, string>(){ 
-    { 3157, "Flash Reader, Desknote UCR-61S2B" },
+    })
+ },
+            { 4113, Tuple.Create("Mobile Media Tech.", new Dictionary<int, string>{
+{ 1, "AccFast Mp3" },
+    })
+ },
+            { 4119, Tuple.Create("Speedy Industrial Supplies, Pte., Ltd", new Dictionary<int, string>{
+{ 36885, "M625 [Vendor: DELUX]" },
+    })
+ },
+            { 4121, Tuple.Create("Elitegroup Computer Systems (ECS)", new Dictionary<int, string>{
+{ 3157, "Flash Reader, Desknote UCR-61S2B" },
 { 3896, "Infrared Receiver" },
- } },
-            { 4128, new Dictionary<int, string>(){ 
-    { 6, "Wireless Keyboard" },
+    })
+ },
+            { 4128, Tuple.Create("Labtec", new Dictionary<int, string>{
+{ 6, "Wireless Keyboard" },
 { 10, "Wireless Optical Mouse" },
 { 262, "Wireless Optical Mouse/Keyboard" },
- } },
-            { 4130, new Dictionary<int, string>(){ 
-     } },
-            { 4133, new Dictionary<int, string>(){ 
-    { 94, "USB DVB-T device" },
+    })
+ },
+            { 4133, Tuple.Create("Hyper-Paltek", new Dictionary<int, string>{
+{ 94, "USB DVB-T device" },
 { 95, "USB DVB-T device" },
 { 768, "MP3 Player" },
 { 848, "MP3 Player" },
- } },
-            { 4134, new Dictionary<int, string>(){ 
-     } },
-            { 4135, new Dictionary<int, string>(){ 
-     } },
-            { 4136, new Dictionary<int, string>(){ 
-     } },
-            { 4137, new Dictionary<int, string>(){ 
-     } },
-            { 4138, new Dictionary<int, string>(){ 
-     } },
-            { 4139, new Dictionary<int, string>(){ 
-     } },
-            { 4140, new Dictionary<int, string>(){ 
-    { 24913, "Q-Cam Sangha CIF" },
+    })
+ },
+            { 4140, Tuple.Create("Etoms Electronics Corp.", new Dictionary<int, string>{
+{ 24913, "Q-Cam Sangha CIF" },
 { 25169, "Q-Cam VGA" },
 { 65292, "Joytech Wireless Advanced Controller" },
- } },
-            { 4141, new Dictionary<int, string>(){ 
-     } },
-            { 4145, new Dictionary<int, string>(){ 
-     } },
-            { 4146, new Dictionary<int, string>(){ 
-     } },
-            { 4147, new Dictionary<int, string>(){ 
-    { 104, "3,5'' HDD case MD-231" },
- } },
-            { 4152, new Dictionary<int, string>(){ 
-    { 256, "Ideazon Zboard" },
+    })
+ },
+            { 4147, Tuple.Create("Nucam Corp.", new Dictionary<int, string>{
+{ 104, "3,5'' HDD case MD-231" },
+    })
+ },
+            { 4152, Tuple.Create("SteelSeries ApS", new Dictionary<int, string>{
+{ 256, "Ideazon Zboard" },
 { 4704, "Arctis 7 wireless adapter" },
 { 4961, "Ideazon Sensei" },
 { 5136, "SRW-S1 [Simraceway Steering Wheel]" },
 { 5920, "Mouse" },
- } },
-            { 4153, new Dictionary<int, string>(){ 
-    { 2084, "1866 802.11bg [Texas Instruments TNETW1450]" },
+    })
+ },
+            { 4153, Tuple.Create("devolo AG", new Dictionary<int, string>{
+{ 2084, "1866 802.11bg [Texas Instruments TNETW1450]" },
 { 8512, "dsl+ 1100 duo" },
- } },
-            { 4154, new Dictionary<int, string>(){ 
-    { 61440, "Actia Evo XS" },
- } },
-            { 4157, new Dictionary<int, string>(){ 
-    { 256, "ScratchAmp" },
+    })
+ },
+            { 4154, Tuple.Create("PSA", new Dictionary<int, string>{
+{ 61440, "Actia Evo XS" },
+    })
+ },
+            { 4157, Tuple.Create("Stanton", new Dictionary<int, string>{
+{ 256, "ScratchAmp" },
 { 257, "ScratchAmp" },
- } },
-            { 4163, new Dictionary<int, string>(){ 
-    { 5647, "Wireless Network Adapter" },
+    })
+ },
+            { 4163, Tuple.Create("iCreate Technologies Corp.", new Dictionary<int, string>{
+{ 5647, "Wireless Network Adapter" },
 { 18689, "AV-836 Video Capture Device" },
 { 32774, "Flash Disk 32-256 MB" },
 { 32786, "Flash Disk 256 MB" },
- } },
-            { 4164, new Dictionary<int, string>(){ 
-    { 28673, "Gigabyte U7000 DVB-T tuner" },
+    })
+ },
+            { 4164, Tuple.Create("Chu Yuen Enterprise Co., Ltd", new Dictionary<int, string>{
+{ 28673, "Gigabyte U7000 DVB-T tuner" },
 { 28674, "Gigabyte U8000 DVB-T tuner" },
 { 28676, "Gigabyte U7100 DVB-T tuner" },
 { 28677, "Gigabyte U7200 DVB-T tuner [AF9035]" },
@@ -20930,25 +16256,25 @@ namespace HardwareInformation.Providers {
 { 32779, "GN-WB30N 802.11n WLAN Card" },
 { 32780, "GN-WB31N 802.11n USB WLAN Card" },
 { 32781, "GN-WB32L 802.11n USB WLAN Card" },
- } },
-            { 4166, new Dictionary<int, string>(){ 
-    { 26260, "Generic W6694 USB" },
+    })
+ },
+            { 4166, Tuple.Create("Winbond Electronics Corp. [hex]", new Dictionary<int, string>{
+{ 26260, "Generic W6694 USB" },
 { 35073, "Bluetooth Device" },
 { 39271, "W9967CF/W9968CF Webcam IC" },
- } },
-            { 4168, new Dictionary<int, string>(){ 
-    { 8208, "4-Port hub" },
- } },
-            { 4171, new Dictionary<int, string>(){ 
-     } },
-            { 4172, new Dictionary<int, string>(){ 
-     } },
-            { 4173, new Dictionary<int, string>(){ 
-    { 4099, "Model-52 LED Light Source Power Supply and Driver" },
+    })
+ },
+            { 4168, Tuple.Create("Targus Group International", new Dictionary<int, string>{
+{ 8208, "4-Port hub" },
+    })
+ },
+            { 4173, Tuple.Create("Newport Corporation", new Dictionary<int, string>{
+{ 4099, "Model-52 LED Light Source Power Supply and Driver" },
 { 12289, "ESP301 3 Axis Motion Controller" },
- } },
-            { 4175, new Dictionary<int, string>(){ 
-    { 1, "Infinity Phoenix" },
+    })
+ },
+            { 4175, Tuple.Create("WB Electronics", new Dictionary<int, string>{
+{ 1, "Infinity Phoenix" },
 { 2, "Smartmouse" },
 { 3, "FunProgrammer" },
 { 4, "Infinity Unlimited" },
@@ -20956,9 +16282,10 @@ namespace HardwareInformation.Providers {
 { 7, "Infinity Smart module" },
 { 8, "Infinity CryptoKey" },
 { 9, "RE-BL PlayStation 3 IR-to-Bluetooth converter" },
- } },
-            { 4176, new Dictionary<int, string>(){ 
-    { 16, "Yubikey (v1 or v2)" },
+    })
+ },
+            { 4176, Tuple.Create("Yubico.com", new Dictionary<int, string>{
+{ 16, "Yubikey (v1 or v2)" },
 { 272, "Yubikey NEO(-N) OTP" },
 { 273, "Yubikey NEO(-N) OTP+CCID" },
 { 274, "Yubikey NEO(-N) CCID" },
@@ -20977,21 +16304,15 @@ namespace HardwareInformation.Providers {
 { 1030, "Yubikey 4/5 U2F+CCID" },
 { 1031, "Yubikey 4/5 OTP+U2F+CCID" },
 { 1040, "Yubikey plus OTP+U2F" },
- } },
-            { 4179, new Dictionary<int, string>(){ 
-     } },
-            { 4180, new Dictionary<int, string>(){ 
-    { 20484, "DSL 7420 Loader" },
+    })
+ },
+            { 4180, Tuple.Create("BMS International Beheer N.V.", new Dictionary<int, string>{
+{ 20484, "DSL 7420 Loader" },
 { 20485, "DSL 7420 LAN Modem" },
- } },
-            { 4181, new Dictionary<int, string>(){ 
-     } },
-            { 4182, new Dictionary<int, string>(){ 
-     } },
-            { 4183, new Dictionary<int, string>(){ 
-     } },
-            { 4184, new Dictionary<int, string>(){ 
-    { 512, "FireWire USB Combo" },
+    })
+ },
+            { 4184, Tuple.Create("Western Digital Technologies, Inc.", new Dictionary<int, string>{
+{ 512, "FireWire USB Combo" },
 { 1024, "External HDD" },
 { 1280, "hub" },
 { 1793, "WD Passport (WDXMS)" },
@@ -21068,38 +16389,32 @@ namespace HardwareInformation.Providers {
 { 9764, "easystore Portable 5TB (WDBKUZ0050)" },
 { 9766, "My Passport (WDBPKJ)" },
 { 12448, "SATA adapter cable" },
- } },
-            { 4185, new Dictionary<int, string>(){ 
-    { 11, "StarSign Bio Token 3.0" },
- } },
-            { 4187, new Dictionary<int, string>(){ 
-    { 57445, "BCM43142A0 Bluetooth module" },
- } },
-            { 4188, new Dictionary<int, string>(){ 
-     } },
-            { 4189, new Dictionary<int, string>(){ 
-     } },
-            { 4190, new Dictionary<int, string>(){ 
-     } },
-            { 4191, new Dictionary<int, string>(){ 
-     } },
-            { 4192, new Dictionary<int, string>(){ 
-     } },
-            { 4195, new Dictionary<int, string>(){ 
-    { 5461, "MC141555 Hub" },
+    })
+ },
+            { 4185, Tuple.Create("Giesecke & Devrient GmbH", new Dictionary<int, string>{
+{ 11, "StarSign Bio Token 3.0" },
+    })
+ },
+            { 4187, Tuple.Create("Foxconn International, Inc.", new Dictionary<int, string>{
+{ 57445, "BCM43142A0 Bluetooth module" },
+    })
+ },
+            { 4195, Tuple.Create("Motorola Electronics Taiwan, Ltd [hex]", new Dictionary<int, string>{
+{ 5461, "MC141555 Hub" },
 { 16640, "SB4100 USB Cable Modem" },
- } },
-            { 4197, new Dictionary<int, string>(){ 
-    { 32, "USB-DVR2 Dev Board" },
+    })
+ },
+            { 4197, Tuple.Create("CCYU Technology", new Dictionary<int, string>{
+{ 32, "USB-DVR2 Dev Board" },
 { 8502, "EasyDisk ED1064" },
- } },
-            { 4200, new Dictionary<int, string>(){ 
-    { 1, "CPUSB - V 1.8 - software-rights management key" },
- } },
-            { 4202, new Dictionary<int, string>(){ 
-     } },
-            { 4204, new Dictionary<int, string>(){ 
-    { 4353, "CDMA 2000 1xRTT USB modem (HX-550C)" },
+    })
+ },
+            { 4200, Tuple.Create("Micropi Elettronica", new Dictionary<int, string>{
+{ 1, "CPUSB - V 1.8 - software-rights management key" },
+    })
+ },
+            { 4204, Tuple.Create("Curitel Communications, Inc.", new Dictionary<int, string>{
+{ 4353, "CDMA 2000 1xRTT USB modem (HX-550C)" },
 { 4354, "Packet Service" },
 { 4355, "Packet Service Diagnostic Serial Port (WDM)" },
 { 4356, "Packet Service Diagnostic Serial Port (WDM)" },
@@ -21168,36 +16483,28 @@ namespace HardwareInformation.Providers {
 { 49664, "Packet Service" },
 { 50432, "Packet Service Diagnostic Serial Port (WDM)" },
 { 57856, "Packet Service" },
- } },
-            { 4205, new Dictionary<int, string>(){ 
-     } },
-            { 4206, new Dictionary<int, string>(){ 
-     } },
-            { 4207, new Dictionary<int, string>(){ 
-    { 9, "CT10x Coin Transaction" },
+    })
+ },
+            { 4207, Tuple.Create("Money Controls", new Dictionary<int, string>{
+{ 9, "CT10x Coin Transaction" },
 { 10, "CR10x Coin Recycler" },
 { 12, "Xchange" },
- } },
-            { 4214, new Dictionary<int, string>(){ 
-    { 49, "Bluetooth Device" },
+    })
+ },
+            { 4214, Tuple.Create("GCT Semiconductor, Inc.", new Dictionary<int, string>{
+{ 49, "Bluetooth Device" },
 { 50, "Bluetooth Device" },
 { 32770, "LU150 LTE Modem [Yota LU150]" },
- } },
-            { 4219, new Dictionary<int, string>(){ 
-    { 12297, "eHome Infrared Transceiver" },
+    })
+ },
+            { 4219, Tuple.Create("Gateway, Inc.", new Dictionary<int, string>{
+{ 12297, "eHome Infrared Transceiver" },
 { 21938, "WBU-110 802.11b Wireless Adapter [Intersil PRISM 3]" },
 { 22002, "WGU-210 802.11g Adapter [Intersil ISL3886]" },
- } },
-            { 4221, new Dictionary<int, string>(){ 
-     } },
-            { 4222, new Dictionary<int, string>(){ 
-     } },
-            { 4223, new Dictionary<int, string>(){ 
-     } },
-            { 4226, new Dictionary<int, string>(){ 
-     } },
-            { 4227, new Dictionary<int, string>(){ 
-    { 5644, "CR-55" },
+    })
+ },
+            { 4227, Tuple.Create("Canon Electronics, Inc.", new Dictionary<int, string>{
+{ 5644, "CR-55" },
 { 5647, "DR-1210C" },
 { 5652, "DR-4010C" },
 { 5655, "DR-2510C" },
@@ -21228,42 +16535,34 @@ namespace HardwareInformation.Providers {
 { 5720, "DR-C225" },
 { 5721, "DR-P215II" },
 { 5725, "DR-P208II" },
- } },
-            { 4228, new Dictionary<int, string>(){ 
-     } },
-            { 4234, new Dictionary<int, string>(){ 
-     } },
-            { 4235, new Dictionary<int, string>(){ 
-    { 5, "HID Keyboard/Mouse PS/2 Translator" },
- } },
-            { 4236, new Dictionary<int, string>(){ 
-    { 382, "GTC 400 C" },
- } },
-            { 4238, new Dictionary<int, string>(){ 
-     } },
-            { 4241, new Dictionary<int, string>(){ 
-    { 33025, "Absoflex" },
- } },
-            { 4249, new Dictionary<int, string>(){ 
-     } },
-            { 4250, new Dictionary<int, string>(){ 
-     } },
-            { 4251, new Dictionary<int, string>(){ 
-    { 37129, "CROSSCALL Trekker-M1 Core (MTP-Mode)" },
+    })
+ },
+            { 4235, Tuple.Create("Grand-tek Technology Co., Ltd", new Dictionary<int, string>{
+{ 5, "HID Keyboard/Mouse PS/2 Translator" },
+    })
+ },
+            { 4236, Tuple.Create("Robert Bosch GmbH", new Dictionary<int, string>{
+{ 382, "GTC 400 C" },
+    })
+ },
+            { 4241, Tuple.Create("Numerik Jena", new Dictionary<int, string>{
+{ 33025, "Absoflex" },
+    })
+ },
+            { 4251, Tuple.Create("Hisense", new Dictionary<int, string>{
+{ 37129, "CROSSCALL Trekker-M1 Core (MTP-Mode)" },
 { 37144, "Medion P4013 Mobile" },
 { 37145, "CROSSCALL Trekker-M1 Core (PTP-Mode)" },
 { 61449, "CROSSCALL Trekker-M1 Core (CD-ROM-Mode)" },
- } },
-            { 4255, new Dictionary<int, string>(){ 
-    { 12643, "Trigem Mobile SmartDisplay84" },
+    })
+ },
+            { 4255, Tuple.Create("eSOL Co., Ltd", new Dictionary<int, string>{
+{ 12643, "Trigem Mobile SmartDisplay84" },
 { 12644, "Trigem Mobile SmartDisplay121" },
- } },
-            { 4256, new Dictionary<int, string>(){ 
-     } },
-            { 4259, new Dictionary<int, string>(){ 
-     } },
-            { 4265, new Dictionary<int, string>(){ 
-    { 4354, "Sky Love Actually IM-U460K" },
+    })
+ },
+            { 4265, Tuple.Create("SK Teletech Co., Ltd", new Dictionary<int, string>{
+{ 4354, "Sky Love Actually IM-U460K" },
 { 4356, "Sky Vega IM-A650S" },
 { 4357, "VEGA Android composite" },
 { 4358, "VEGA Android composite" },
@@ -21297,22 +16596,18 @@ namespace HardwareInformation.Providers {
 { 28725, "Pantech Android composite" },
 { 28726, "Pantech Android composite" },
 { 28727, "Pantech Android composite" },
- } },
-            { 4266, new Dictionary<int, string>(){ 
-     } },
-            { 4267, new Dictionary<int, string>(){ 
-    { 4098, "Bluetooth Device" },
+    })
+ },
+            { 4267, Tuple.Create("USI Co., Ltd", new Dictionary<int, string>{
+{ 4098, "Bluetooth Device" },
 { 4099, "BC02-EXT in DFU" },
 { 4101, "Bluetooth Adptr" },
 { 4102, "BC04-EXT in DFU" },
 { 4293, "Sony-Ericsson / Samsung DataCable" },
- } },
-            { 4268, new Dictionary<int, string>(){ 
-     } },
-            { 4270, new Dictionary<int, string>(){ 
-     } },
-            { 4271, new Dictionary<int, string>(){ 
-    { 0, "UPS" },
+    })
+ },
+            { 4271, Tuple.Create("Liebert Corp.", new Dictionary<int, string>{
+{ 0, "UPS" },
 { 1, "PowerSure PSA UPS" },
 { 2, "PowerSure PST UPS" },
 { 3, "PowerSure PSP UPS" },
@@ -21321,32 +16616,34 @@ namespace HardwareInformation.Providers {
 { 6, "UPStation GXT UPS" },
 { 7, "Nfinity Power Systems UPS" },
 { 8, "PowerSure Interactive UPS" },
- } },
-            { 4277, new Dictionary<int, string>(){ 
-    { 36960, "Test Board" },
- } },
-            { 4280, new Dictionary<int, string>(){ 
-    { 3000, "DVB-T reference design (MOD300) (cold)" },
+    })
+ },
+            { 4277, Tuple.Create("Comodo (PLX?)", new Dictionary<int, string>{
+{ 36960, "Test Board" },
+    })
+ },
+            { 4280, Tuple.Create("DiBcom", new Dictionary<int, string>{
+{ 3000, "DVB-T reference design (MOD300) (cold)" },
 { 3001, "DVB-T reference design (MOD300) (warm)" },
 { 3014, "DVB-T reference design (MOD3000P) (cold)" },
 { 3015, "DVB-T reference design (MOD3000P) (warm)" },
- } },
-            { 4283, new Dictionary<int, string>(){ 
-     } },
-            { 4284, new Dictionary<int, string>(){ 
-     } },
-            { 4285, new Dictionary<int, string>(){ 
-    { 5159, "Ethernet" },
- } },
-            { 4287, new Dictionary<int, string>(){ 
-    { 1, "SmartHome PowerLinc" },
- } },
-            { 4291, new Dictionary<int, string>(){ 
-    { 164, "ULS PLS Series Laser Engraver Firmware Loader" },
+    })
+ },
+            { 4285, Tuple.Create("TMT Technology, Inc.", new Dictionary<int, string>{
+{ 5159, "Ethernet" },
+    })
+ },
+            { 4287, Tuple.Create("SmartHome", new Dictionary<int, string>{
+{ 1, "SmartHome PowerLinc" },
+    })
+ },
+            { 4291, Tuple.Create("Universal Laser Systems, Inc.", new Dictionary<int, string>{
+{ 164, "ULS PLS Series Laser Engraver Firmware Loader" },
 { 165, "ULS Print Support" },
- } },
-            { 4292, new Dictionary<int, string>(){ 
-    { 2, "F32x USBXpress Device" },
+    })
+ },
+            { 4292, Tuple.Create("Silicon Labs", new Dictionary<int, string>{
+{ 2, "F32x USBXpress Device" },
 { 3, "CommandIR" },
 { 32778, "SPORTident" },
 { 32779, "AES" },
@@ -21407,21 +16704,18 @@ namespace HardwareInformation.Providers {
 { 60105, "EFM8UB1 Bootloader" },
 { 60106, "EFM8UB2 Bootloader" },
 { 60107, "EFM8UB3 Bootloader" },
- } },
-            { 4293, new Dictionary<int, string>(){ 
-    { 33178, "FM Radio" },
- } },
-            { 4294, new Dictionary<int, string>(){ 
-     } },
-            { 4299, new Dictionary<int, string>(){ 
-     } },
-            { 4300, new Dictionary<int, string>(){ 
-    { 4353, "MP3 Player" },
- } },
-            { 4301, new Dictionary<int, string>(){ 
-     } },
-            { 4302, new Dictionary<int, string>(){ 
-    { 7, "Shinko/Sinfonia CHC-S1245" },
+    })
+ },
+            { 4293, Tuple.Create("Sanei Electric, Inc.", new Dictionary<int, string>{
+{ 33178, "FM Radio" },
+    })
+ },
+            { 4300, Tuple.Create("GBM Connector Co., Ltd", new Dictionary<int, string>{
+{ 4353, "MP3 Player" },
+    })
+ },
+            { 4302, Tuple.Create("Silicon Labs", new Dictionary<int, string>{
+{ 7, "Shinko/Sinfonia CHC-S1245" },
 { 14, "Shinko/Sinfonia CHC-S2145" },
 { 25, "Shinko/Sinfonia CHC-S6145" },
 { 29, "Shinko/Sinfonia CHC-S6245" },
@@ -21429,32 +16723,35 @@ namespace HardwareInformation.Providers {
 { 57, "Sinfonia CHC-S2245" },
 { 4302, "Sinfonia CHC-S2245" },
 { 60010, "MobiData EDGE USB Modem" },
- } },
-            { 4303, new Dictionary<int, string>(){ 
-    { 8209, "R-Engine MPEG2 encoder/decoder" },
+    })
+ },
+            { 4303, Tuple.Create("Velleman Components, Inc.", new Dictionary<int, string>{
+{ 8209, "R-Engine MPEG2 encoder/decoder" },
 { 21760, "8055 Experiment Interface Board (address=0)" },
 { 21761, "8055 Experiment Interface Board (address=1)" },
 { 21762, "8055 Experiment Interface Board (address=2)" },
 { 21763, "8055 Experiment Interface Board (address=3)" },
- } },
-            { 4305, new Dictionary<int, string>(){ 
-    { 257, "USB-Module for Spider8, CP32" },
+    })
+ },
+            { 4305, Tuple.Create("Hottinger Baldwin Measurement", new Dictionary<int, string>{
+{ 257, "USB-Module for Spider8, CP32" },
 { 514, "CP22 - Communication Processor" },
 { 769, "CP42 - Communication Processor" },
- } },
-            { 4306, new Dictionary<int, string>(){ 
-    { 21059, "RayComposer" },
- } },
-            { 4308, new Dictionary<int, string>(){ 
-     } },
-            { 4309, new Dictionary<int, string>(){ 
-    { 4, "PS/2 Converter" },
+    })
+ },
+            { 4306, Tuple.Create("RayComposer - R. Adams", new Dictionary<int, string>{
+{ 21059, "RayComposer" },
+    })
+ },
+            { 4309, Tuple.Create("Uni Class Technology Co., Ltd", new Dictionary<int, string>{
+{ 4, "PS/2 Converter" },
 { 21842, "KVM Human Interface Composite Device (Keyboard/Mouse ports)" },
 { 21922, "2Port KVMSwitcher" },
 { 23048, "Dual Bay Docking Station" },
- } },
-            { 4310, new Dictionary<int, string>(){ 
-    { 3074, "BioniQ 1001 Tablet" },
+    })
+ },
+            { 4310, Tuple.Create("Actions Semiconductor Co., Ltd", new Dictionary<int, string>{
+{ 3074, "BioniQ 1001 Tablet" },
 { 4096, "MP3 Player" },
 { 4352, "MPMan MP-Ki 128 MP3 Player/Recorder" },
 { 4353, "D-Wave 2GB MP4 Player / AK1025 MP3/MP4 Player" },
@@ -21463,36 +16760,31 @@ namespace HardwareInformation.Providers {
 { 65361, "ADFU Device" },
 { 65377, "MP4 Player" },
 { 65382, "Craig 2GB MP3/Video Player" },
- } },
-            { 4318, new Dictionary<int, string>(){ 
-     } },
-            { 4319, new Dictionary<int, string>(){ 
-    { 1280, "iAPP CR-e500 Card reader" },
- } },
-            { 4320, new Dictionary<int, string>(){ 
-     } },
-            { 4321, new Dictionary<int, string>(){ 
-     } },
-            { 4322, new Dictionary<int, string>(){ 
-     } },
-            { 4332, new Dictionary<int, string>(){ 
-     } },
-            { 4336, new Dictionary<int, string>(){ 
-    { 8194, "iNexio Touchscreen controller" },
- } },
-            { 4337, new Dictionary<int, string>(){ 
-    { 6664, "Internal Webcam" },
+    })
+ },
+            { 4319, Tuple.Create("In-Win Development, Inc.", new Dictionary<int, string>{
+{ 1280, "iAPP CR-e500 Card reader" },
+    })
+ },
+            { 4336, Tuple.Create("Nexio Co., Ltd", new Dictionary<int, string>{
+{ 8194, "iNexio Touchscreen controller" },
+    })
+ },
+            { 4337, Tuple.Create("Importek", new Dictionary<int, string>{
+{ 6664, "Internal Webcam" },
 { 6686, "Laptop Integrated Webcam 1.3M" },
 { 6698, "Laptop Integrated Webcam" },
 { 6702, "HP Truevision HD Integrated Webcam" },
- } },
-            { 4341, new Dictionary<int, string>(){ 
-    { 512, "Audio Advantage Roadie" },
+    })
+ },
+            { 4341, Tuple.Create("Turtle Beach", new Dictionary<int, string>{
+{ 512, "Audio Advantage Roadie" },
 { 561, "Ear Force P11 Headset" },
 { 4341, "EarForce PX21 Gaming Headset" },
- } },
-            { 4344, new Dictionary<int, string>(){ 
-    { 12801, "CeboLC" },
+    })
+ },
+            { 4344, Tuple.Create("Cesys GmbH", new Dictionary<int, string>{
+{ 12801, "CeboLC" },
 { 12802, "CeboStick" },
 { 12803, "CeboMSA64" },
 { 12804, "CeboDFN" },
@@ -21517,28 +16809,29 @@ namespace HardwareInformation.Providers {
 { 50561, "EFM02" },
 { 50562, "EFM02/B" },
 { 50563, "EFM03" },
- } },
-            { 4347, new Dictionary<int, string>(){ 
-     } },
-            { 4349, new Dictionary<int, string>(){ 
-    { 32336, "FlyCam Usb 100" },
+    })
+ },
+            { 4349, Tuple.Create("Anubis Electronics, Ltd", new Dictionary<int, string>{
+{ 32336, "FlyCam Usb 100" },
 { 32845, "Typhoon Webshot II Webcam [zc0301]" },
 { 32848, "FlyCAM-USB 300 XP2" },
 { 56832, "WinFast WalkieTV WDM Capture Driver." },
- } },
-            { 4350, new Dictionary<int, string>(){ 
-    { 12, "TT-3750 BGAN-XL Radio Module" },
- } },
-            { 4352, new Dictionary<int, string>(){ 
-    { 1, "VTPlayer VTP-1 Braille Mouse" },
- } },
-            { 4353, new Dictionary<int, string>(){ 
-    { 1, "FSK Electronics Super GSM Reader" },
- } },
-            { 4360, new Dictionary<int, string>(){ 
-     } },
-            { 4362, new Dictionary<int, string>(){ 
-    { 4368, "UPort 1110" },
+    })
+ },
+            { 4350, Tuple.Create("Thrane & Thrane", new Dictionary<int, string>{
+{ 12, "TT-3750 BGAN-XL Radio Module" },
+    })
+ },
+            { 4352, Tuple.Create("VirTouch, Ltd", new Dictionary<int, string>{
+{ 1, "VTPlayer VTP-1 Braille Mouse" },
+    })
+ },
+            { 4353, Tuple.Create("EasyPass Industrial Co., Ltd", new Dictionary<int, string>{
+{ 1, "FSK Electronics Super GSM Reader" },
+    })
+ },
+            { 4362, Tuple.Create("Moxa Technologies Co., Ltd.", new Dictionary<int, string>{
+{ 4368, "UPort 1110" },
 { 4432, "UPort 1150 1-Port RS-232/422/485" },
 { 4688, "UPort 1250 2-Port RS-232/422/485" },
 { 4689, "UPort 1250I 2-Port RS-232/422/485 with Isolation" },
@@ -21549,9 +16842,10 @@ namespace HardwareInformation.Providers {
 { 5656, "UPort 1610-8 8-Port RS-232" },
 { 5715, "UPort 1650-16 16-Port RS-232/422/485" },
 { 5720, "UPort 1650-8 8-Port RS-232/422/485" },
- } },
-            { 4368, new Dictionary<int, string>(){ 
-    { 23553, "Huawei MT-882 Remote NDIS Network Device" },
+    })
+ },
+            { 4368, Tuple.Create("Analog Devices Canada, Ltd (Allied Telesyn)", new Dictionary<int, string>{
+{ 23553, "Huawei MT-882 Remote NDIS Network Device" },
 { 25737, "ADSL ETH/USB RTR" },
 { 36864, "ADSL LAN Adapter" },
 { 36865, "ADSL Loader" },
@@ -21563,27 +16857,23 @@ namespace HardwareInformation.Providers {
 { 36900, "ADSL Loader" },
 { 36913, "ADSL LAN Adapter" },
 { 36914, "ADSL Loader" },
- } },
-            { 4369, new Dictionary<int, string>(){ 
-    { 34952, "Evolution Device" },
- } },
-            { 4370, new Dictionary<int, string>(){ 
-     } },
-            { 4371, new Dictionary<int, string>(){ 
-    { 41122, "Active Sync device" },
- } },
-            { 4382, new Dictionary<int, string>(){ 
-     } },
-            { 4394, new Dictionary<int, string>(){ 
-    { 1, "RedRat3 IR Transceiver" },
+    })
+ },
+            { 4369, Tuple.Create("Pandora International Ltd.", new Dictionary<int, string>{
+{ 34952, "Evolution Device" },
+    })
+ },
+            { 4371, Tuple.Create("Medion AG", new Dictionary<int, string>{
+{ 41122, "Active Sync device" },
+    })
+ },
+            { 4394, Tuple.Create("RedRat", new Dictionary<int, string>{
+{ 1, "RedRat3 IR Transceiver" },
 { 5, "RedRat3II IR Transceiver" },
- } },
-            { 4398, new Dictionary<int, string>(){ 
-     } },
-            { 4399, new Dictionary<int, string>(){ 
-     } },
-            { 4400, new Dictionary<int, string>(){ 
-    { 1, "BlyncLight" },
+    })
+ },
+            { 4400, Tuple.Create("Tenx Technology, Inc.", new Dictionary<int, string>{
+{ 1, "BlyncLight" },
 { 2, "iBuddy" },
 { 4, "iBuddy Twins" },
 { 514, "Rocket Launcher" },
@@ -21594,125 +16884,90 @@ namespace HardwareInformation.Providers {
 { 26630, "Keychain photo frame" },
 { 49921, "Digital Photo viewer [Wallet Pix]" },
 { 61969, "TP6911 Audio Headset" },
- } },
-            { 4401, new Dictionary<int, string>(){ 
-    { 4097, "KY-BT100 Bluetooth Adapter" },
+    })
+ },
+            { 4401, Tuple.Create("Integrated System Solution Corp.", new Dictionary<int, string>{
+{ 4097, "KY-BT100 Bluetooth Adapter" },
 { 4098, "Bluetooth Device" },
 { 4099, "Bluetooth Device" },
 { 4100, "Bluetooth Device" },
- } },
-            { 4402, new Dictionary<int, string>(){ 
-    { 17201, "PDR-M4/M5/M70 Digital Camera" },
+    })
+ },
+            { 4402, Tuple.Create("Toshiba Corp., Digital Media Equipment [hex]", new Dictionary<int, string>{
+{ 17201, "PDR-M4/M5/M70 Digital Camera" },
 { 17202, "PDR-M60 Digital Camera" },
 { 17203, "PDR-M2300/PDR-M700" },
 { 17204, "PDR-M65" },
 { 17205, "PDR-M61" },
 { 17207, "PDR-M11" },
 { 17208, "PDR-M25" },
- } },
-            { 4406, new Dictionary<int, string>(){ 
-    { 12593, "CTS LS515" },
- } },
-            { 4412, new Dictionary<int, string>(){ 
-     } },
-            { 4413, new Dictionary<int, string>(){ 
-     } },
-            { 4415, new Dictionary<int, string>(){ 
-    { 4128, "Watson Two-Finger Roll Scanner" },
+    })
+ },
+            { 4406, Tuple.Create("CTS Electronincs", new Dictionary<int, string>{
+{ 12593, "CTS LS515" },
+    })
+ },
+            { 4415, Tuple.Create("Integrated Biometrics, LLC", new Dictionary<int, string>{
+{ 4128, "Watson Two-Finger Roll Scanner" },
 { 4352, "Columbo Single-Finger Scanner" },
- } },
-            { 4417, new Dictionary<int, string>(){ 
-     } },
-            { 4418, new Dictionary<int, string>(){ 
-    { 1801, "Cyberview High Speed Scanner" },
- } },
-            { 4421, new Dictionary<int, string>(){ 
-    { 1, "AirH PHONE AH-J3001V/J3002V" },
- } },
-            { 4422, new Dictionary<int, string>(){ 
-     } },
-            { 4423, new Dictionary<int, string>(){ 
-     } },
-            { 4427, new Dictionary<int, string>(){ 
-    { 272, "Turbolink UB801R WLAN Adapter" },
+    })
+ },
+            { 4418, Tuple.Create("CyberScan Technologies, Inc.", new Dictionary<int, string>{
+{ 1801, "Cyberview High Speed Scanner" },
+    })
+ },
+            { 4421, Tuple.Create("Japan Radio Company", new Dictionary<int, string>{
+{ 1, "AirH PHONE AH-J3001V/J3002V" },
+    })
+ },
+            { 4427, Tuple.Create("Sphairon Access Systems GmbH", new Dictionary<int, string>{
+{ 272, "Turbolink UB801R WLAN Adapter" },
 { 336, "Turbolink UB801RE Wireless 802.11g 54Mbps Network Adapter [RTL8187]" },
- } },
-            { 4428, new Dictionary<int, string>(){ 
-     } },
-            { 4429, new Dictionary<int, string>(){ 
-     } },
-            { 4431, new Dictionary<int, string>(){ 
-    { 4660, "Fastrack Xtend FXT001 Modem" },
- } },
-            { 4443, new Dictionary<int, string>(){ 
-     } },
-            { 4450, new Dictionary<int, string>(){ 
-     } },
-            { 4451, new Dictionary<int, string>(){ 
-    { 256, "Earthmate GPS (orig)" },
+    })
+ },
+            { 4431, Tuple.Create("Wavecom", new Dictionary<int, string>{
+{ 4660, "Fastrack Xtend FXT001 Modem" },
+    })
+ },
+            { 4451, Tuple.Create("DeLorme Publishing, Inc.", new Dictionary<int, string>{
+{ 256, "Earthmate GPS (orig)" },
 { 512, "Earthmate GPS (LT-20, LT-40)" },
 { 8224, "Earthmate GPS (PN-40)" },
- } },
-            { 4452, new Dictionary<int, string>(){ 
-    { 768, "ELSAVISION 460D" },
+    })
+ },
+            { 4452, Tuple.Create("YUAN High-Tech Development Co., Ltd", new Dictionary<int, string>{
+{ 768, "ELSAVISION 460D" },
 { 1537, "Analog TV Tuner" },
 { 2304, "TigerBird BMP837 USB2.0 WDM Encoder" },
 { 3015, "Digital TV Tuner" },
 { 21019, "MC521A mini Card ATSC Tuner" },
 { 26113, "Digital TV Tuner Card [RTL2832U]" },
- } },
-            { 4453, new Dictionary<int, string>(){ 
-     } },
-            { 4454, new Dictionary<int, string>(){ 
-     } },
-            { 4455, new Dictionary<int, string>(){ 
-     } },
-            { 4456, new Dictionary<int, string>(){ 
-     } },
-            { 4462, new Dictionary<int, string>(){ 
-     } },
-            { 4463, new Dictionary<int, string>(){ 
-    { 5, "Flash Card Reader" },
+    })
+ },
+            { 4463, Tuple.Create("Silicon 10 Technology Corp.", new Dictionary<int, string>{
+{ 5, "Flash Card Reader" },
 { 49416, "Flash Card Reader" },
 { 49417, "Flash Card Reader" },
- } },
-            { 4469, new Dictionary<int, string>(){ 
-     } },
-            { 4477, new Dictionary<int, string>(){ 
-     } },
-            { 4478, new Dictionary<int, string>(){ 
-     } },
-            { 4482, new Dictionary<int, string>(){ 
-     } },
-            { 4483, new Dictionary<int, string>(){ 
-    { 1, "DigitalDream l'espion XS" },
+    })
+ },
+            { 4483, Tuple.Create("Compaq Computer Corp. [hex] (Digital Dream ??)", new Dictionary<int, string>{
+{ 1, "DigitalDream l'espion XS" },
 { 6599, "ISDN TA" },
 { 16392, "56k FaxModem" },
 { 20554, "PJB-100 Personal Jukebox" },
- } },
-            { 4484, new Dictionary<int, string>(){ 
-     } },
-            { 4488, new Dictionary<int, string>(){ 
-     } },
-            { 4489, new Dictionary<int, string>(){ 
-    { 2195, "EP-1427X-2 Ethernet Adapter [Acer]" },
- } },
-            { 4495, new Dictionary<int, string>(){ 
-     } },
-            { 4496, new Dictionary<int, string>(){ 
-     } },
-            { 4497, new Dictionary<int, string>(){ 
-     } },
-            { 4502, new Dictionary<int, string>(){ 
-    { 16, "Trifid Camera without code" },
+    })
+ },
+            { 4489, Tuple.Create("Acer Communications & Multimedia", new Dictionary<int, string>{
+{ 2195, "EP-1427X-2 Ethernet Adapter [Acer]" },
+    })
+ },
+            { 4502, Tuple.Create("Yankee Robotics, LLC", new Dictionary<int, string>{
+{ 16, "Trifid Camera without code" },
 { 17, "Trifid Camera" },
- } },
-            { 4503, new Dictionary<int, string>(){ 
-     } },
-            { 4504, new Dictionary<int, string>(){ 
-     } },
-            { 4505, new Dictionary<int, string>(){ 
-    { 25, "AC595U" },
+    })
+ },
+            { 4505, Tuple.Create("Sierra Wireless, Inc.", new Dictionary<int, string>{
+{ 25, "AC595U" },
 { 33, "AC597E" },
 { 36, "MC5727 CDMA modem" },
 { 272, "Composite Device" },
@@ -21761,73 +17016,84 @@ namespace HardwareInformation.Providers {
 { 36951, "Gobi 9x15 Multimode 3G/4G LTE Modem (IP passthrough mode)" },
 { 36977, "AirPrime MC7455 3G/4G LTE Modem" },
 { 36985, "EM7455" },
- } },
-            { 4506, new Dictionary<int, string>(){ 
-     } },
-            { 4507, new Dictionary<int, string>(){ 
-    { 1024, "Infrared Keyboard V2.01" },
- } },
-            { 4512, new Dictionary<int, string>(){ 
-    { 60177, "CC2400EB 2.0 ZigBee Sniffer" },
- } },
-            { 4515, new Dictionary<int, string>(){ 
-    { 32817, "MP3 Player" },
+    })
+ },
+            { 4507, Tuple.Create("ruwido austria GmbH", new Dictionary<int, string>{
+{ 1024, "Infrared Keyboard V2.01" },
+    })
+ },
+            { 4512, Tuple.Create("Chipcon AS", new Dictionary<int, string>{
+{ 60177, "CC2400EB 2.0 ZigBee Sniffer" },
+    })
+ },
+            { 4515, Tuple.Create("Technovas Co., Ltd", new Dictionary<int, string>{
+{ 32817, "MP3 Player" },
 { 32818, "MP3 Player" },
- } },
-            { 4522, new Dictionary<int, string>(){ 
-    { 5400, "iREZ K2" },
- } },
-            { 4523, new Dictionary<int, string>(){ 
-     } },
-            { 4524, new Dictionary<int, string>(){ 
-    { 25957, "FuelBand" },
- } },
-            { 4528, new Dictionary<int, string>(){ 
-    { 25096, "PRO-28U" },
+    })
+ },
+            { 4522, Tuple.Create("GlobalMedia Group, LLC", new Dictionary<int, string>{
+{ 5400, "iREZ K2" },
+    })
+ },
+            { 4524, Tuple.Create("Nike", new Dictionary<int, string>{
+{ 25957, "FuelBand" },
+    })
+ },
+            { 4528, Tuple.Create("ATECH FLASH TECHNOLOGY", new Dictionary<int, string>{
+{ 25096, "PRO-28U" },
 { 25240, "Kingston SNA-DC/U" },
- } },
-            { 4542, new Dictionary<int, string>(){ 
-    { 61600, "Martin Maxxyz DMX" },
- } },
-            { 4544, new Dictionary<int, string>(){ 
-    { 21766, "Gamepad" },
- } },
-            { 4549, new Dictionary<int, string>(){ 
-    { 1313, "IMT-0521 Smartcard Reader" },
- } },
-            { 4553, new Dictionary<int, string>(){ 
-    { 22000, "GC-100XF" },
- } },
-            { 4554, new Dictionary<int, string>(){ 
-    { 513, "MX870/MX880" },
+    })
+ },
+            { 4542, Tuple.Create("R&D International NV", new Dictionary<int, string>{
+{ 61600, "Martin Maxxyz DMX" },
+    })
+ },
+            { 4544, Tuple.Create("Betop", new Dictionary<int, string>{
+{ 21766, "Gamepad" },
+    })
+ },
+            { 4549, Tuple.Create("Inmax", new Dictionary<int, string>{
+{ 1313, "IMT-0521 Smartcard Reader" },
+    })
+ },
+            { 4553, Tuple.Create("Nacon", new Dictionary<int, string>{
+{ 22000, "GC-100XF" },
+    })
+ },
+            { 4554, Tuple.Create("VeriFone Inc", new Dictionary<int, string>{
+{ 513, "MX870/MX880" },
 { 519, "PIN Pad VX 810" },
 { 544, "PIN Pad VX 805" },
- } },
-            { 4571, new Dictionary<int, string>(){ 
-    { 4096, "PVR" },
+    })
+ },
+            { 4571, Tuple.Create("Topfield Co., Ltd.", new Dictionary<int, string>{
+{ 4096, "PVR" },
 { 4352, "PVR" },
- } },
-            { 4582, new Dictionary<int, string>(){ 
-     } },
-            { 4597, new Dictionary<int, string>(){ 
-    { 1, "SX1" },
+    })
+ },
+            { 4597, Tuple.Create("Siemens AG", new Dictionary<int, string>{
+{ 1, "SX1" },
 { 3, "Mobile phone USB cable" },
 { 4, "X75" },
 { 5, "SXG75/EF81" },
 { 8, "UMTS/HSDPA Data Card" },
 { 257, "RCU Connect" },
- } },
-            { 4598, new Dictionary<int, string>(){ 
-    { 8193, "Willcom WSIM" },
- } },
-            { 4599, new Dictionary<int, string>(){ 
-    { 735, "Serial cable (v2) for TD-10 Mobile Phone" },
- } },
-            { 4611, new Dictionary<int, string>(){ 
-    { 320, "TTP-245C" },
- } },
-            { 4617, new Dictionary<int, string>(){ 
-    { 1, "pid.codes Test PID" },
+    })
+ },
+            { 4598, Tuple.Create("Prolific", new Dictionary<int, string>{
+{ 8193, "Willcom WSIM" },
+    })
+ },
+            { 4599, Tuple.Create("Alcatel (?)", new Dictionary<int, string>{
+{ 735, "Serial cable (v2) for TD-10 Mobile Phone" },
+    })
+ },
+            { 4611, Tuple.Create("TSC Auto ID Technology Co., Ltd", new Dictionary<int, string>{
+{ 320, "TTP-245C" },
+    })
+ },
+            { 4617, Tuple.Create("Generic", new Dictionary<int, string>{
+{ 1, "pid.codes Test PID" },
 { 2, "pid.codes Test PID" },
 { 3, "pid.codes Test PID" },
 { 4, "pid.codes Test PID" },
@@ -22096,24 +17362,26 @@ namespace HardwareInformation.Providers {
 { 64222, "Open Collector dude" },
 { 65261, "ProgramGyar AVR-IR Sender" },
 { 65535, "Life2Device Smart House" },
- } },
-            { 4622, new Dictionary<int, string>(){ 
-     } },
-            { 4623, new Dictionary<int, string>(){ 
-    { 21070, "RoadMate 1475T" },
+    })
+ },
+            { 4623, Tuple.Create("Magellan", new Dictionary<int, string>{
+{ 21070, "RoadMate 1475T" },
 { 21088, "Triton Handheld GPS Receiver (300/400/500/1500/2000)" },
- } },
-            { 4624, new Dictionary<int, string>(){ 
-    { 13, "RP250 Guitar Multi-Effects Processor" },
+    })
+ },
+            { 4624, Tuple.Create("DigiTech", new Dictionary<int, string>{
+{ 13, "RP250 Guitar Multi-Effects Processor" },
 { 22, "RP500 Guitar Multi-Effects Processor" },
 { 27, "RP155 Guitar Multi-Effects Processor" },
 { 28, "RP255 Guitar Multi-Effects Processor" },
- } },
-            { 4638, new Dictionary<int, string>(){ 
-    { 13315, "Muzio JM250 Audio Player" },
- } },
-            { 4639, new Dictionary<int, string>(){ 
-    { 1, "VisionX without Firmware" },
+    })
+ },
+            { 4638, Tuple.Create("Jungsoft Co., Ltd", new Dictionary<int, string>{
+{ 13315, "Muzio JM250 Audio Player" },
+    })
+ },
+            { 4639, Tuple.Create("Panini S.p.A.", new Dictionary<int, string>{
+{ 1, "VisionX without Firmware" },
 { 2, "VisionX with Firmware" },
 { 16, "I-Deal" },
 { 32, "wI-Deal" },
@@ -22121,38 +17389,41 @@ namespace HardwareInformation.Providers {
 { 48, "VisionNext" },
 { 64, "mI:Deal Check Scanner" },
 { 65, "EverNext Check Scanner" },
- } },
-            { 4640, new Dictionary<int, string>(){ 
-    { 10, "Hall of Fame Reverb" },
+    })
+ },
+            { 4640, Tuple.Create("TC Electronic", new Dictionary<int, string>{
+{ 10, "Hall of Fame Reverb" },
 { 42, "Polytune" },
 { 50, "Ditto X2 Looper" },
 { 57, "Alter Ego X4 Vintage Echo" },
- } },
-            { 4641, new Dictionary<int, string>(){ 
-    { 12852, "Disk (Thumb drive)" },
- } },
-            { 4642, new Dictionary<int, string>(){ 
-    { 64202, "programmable keyboard" },
- } },
-            { 4643, new Dictionary<int, string>(){ 
-     } },
-            { 4648, new Dictionary<int, string>(){ 
-    { 18, "Q18 Data Logger" },
+    })
+ },
+            { 4641, Tuple.Create("Unknown manufacturer", new Dictionary<int, string>{
+{ 12852, "Disk (Thumb drive)" },
+    })
+ },
+            { 4642, Tuple.Create("TiPro", new Dictionary<int, string>{
+{ 64202, "programmable keyboard" },
+    })
+ },
+            { 4648, Tuple.Create("Datapaq Limited", new Dictionary<int, string>{
+{ 18, "Q18 Data Logger" },
 { 21, "TPaq21/MPaq21 Datalogger" },
 { 22604, "XL2 Logger" },
- } },
-            { 4656, new Dictionary<int, string>(){ 
-     } },
-            { 4659, new Dictionary<int, string>(){ 
-    { 22135, "FUSB200 mp3 player" },
- } },
-            { 4660, new Dictionary<int, string>(){ 
-    { 0, "Neural Impulse Actuator Prototype 1.0 [NIA]" },
+    })
+ },
+            { 4659, Tuple.Create("Denver Electronics", new Dictionary<int, string>{
+{ 22135, "FUSB200 mp3 player" },
+    })
+ },
+            { 4660, Tuple.Create("Brain Actuated Technologies", new Dictionary<int, string>{
+{ 0, "Neural Impulse Actuator Prototype 1.0 [NIA]" },
 { 17185, "Human Interface Device" },
 { 60674, "Emotiv EPOC Developer Headset Wireless Dongle" },
- } },
-            { 4661, new Dictionary<int, string>(){ 
-    { 1, "ReMOTE Audio/XStation First Edition" },
+    })
+ },
+            { 4661, Tuple.Create("Focusrite-Novation", new Dictionary<int, string>{
+{ 1, "ReMOTE Audio/XStation First Edition" },
 { 2, "Speedio" },
 { 3, "RemoteSL + ZeroSL" },
 { 4, "ReMOTE LE" },
@@ -22198,9 +17469,10 @@ namespace HardwareInformation.Providers {
 { 33297, "Scarlett Solo (3rd Gen.)" },
 { 33300, "Scarlett 18i8 3rd Gen" },
 { 33301, "Scarlett 18i20 3rd Gen" },
- } },
-            { 4673, new Dictionary<int, string>(){ 
-    { 1284, "Wireless Trackball Keyboard" },
+    })
+ },
+            { 4673, Tuple.Create("Belkin", new Dictionary<int, string>{
+{ 1284, "Wireless Trackball Keyboard" },
 { 4369, "Mouse" },
 { 4386, "Typhoon Stream Optical Mouse USB+PS/2" },
 { 4437, "Memorex Optical ScrollPro Mouse SE MX4600" },
@@ -22209,30 +17481,37 @@ namespace HardwareInformation.Providers {
 { 5379, "Keyboard" },
 { 5635, "Keyboard" },
 { 63335, "Keyboard" },
- } },
-            { 4675, new Dictionary<int, string>(){ 
-    { 57344, "Unique NFC/RFID reader (keyboard emulation)" },
- } },
-            { 4682, new Dictionary<int, string>(){ 
-    { 5771, "PRISM3 WLAN Adapter" },
+    })
+ },
+            { 4675, Tuple.Create("Holtek Semiconductor, Inc.", new Dictionary<int, string>{
+{ 57344, "Unique NFC/RFID reader (keyboard emulation)" },
+    })
+ },
+            { 4682, Tuple.Create("AirVast", new Dictionary<int, string>{
+{ 5771, "PRISM3 WLAN Adapter" },
 { 16407, "PC-Chips 802.11b Adapter" },
 { 16419, "WM168g 802.11bg Wireless Adapter [Intersil ISL3886]" },
 { 16421, "IOGear GWU513 v2 802.11bg Wireless Adapter [Intersil ISL3887]" },
- } },
-            { 4683, new Dictionary<int, string>(){ 
-    { 19713, "Airflo EX Joystick" },
- } },
-            { 4684, new Dictionary<int, string>(){ 
-    { 12800, "Stealth MXP 1GB" },
- } },
-            { 4700, new Dictionary<int, string>(){ 
-    { 16, "Alta series CCD" },
- } },
-            { 4701, new Dictionary<int, string>(){ 
-    { 1408, "JM580" },
- } },
-            { 4703, new Dictionary<int, string>(){ 
-    { 12586, "Superior S102" },
+    })
+ },
+            { 4683, Tuple.Create("Nyko (Honey Bee)", new Dictionary<int, string>{
+{ 19713, "Airflo EX Joystick" },
+    })
+ },
+            { 4684, Tuple.Create("MXI - Memory Experts International, Inc.", new Dictionary<int, string>{
+{ 12800, "Stealth MXP 1GB" },
+    })
+ },
+            { 4700, Tuple.Create("Apogee Inc.", new Dictionary<int, string>{
+{ 16, "Alta series CCD" },
+    })
+ },
+            { 4701, Tuple.Create("JMicron", new Dictionary<int, string>{
+{ 1408, "JM580" },
+    })
+ },
+            { 4703, Tuple.Create("A-DATA Technology Co., Ltd.", new Dictionary<int, string>{
+{ 12586, "Superior S102" },
 { 12587, "Superior S102 Pro" },
 { 41306, "DashDrive Durable HD710 portable HDD various size" },
 { 41514, "DashDrive Elite HE720 500GB" },
@@ -22244,43 +17523,39 @@ namespace HardwareInformation.Providers {
 { 51562, "C906 Flash Drive" },
 { 51984, "Dash Drive UV100" },
 { 52000, "DashDrive UV110" },
- } },
-            { 4704, new Dictionary<int, string>(){ 
-    { 60962, "SMC2862W-G v3 EZ Connect 802.11g Adapter [Intersil ISL3887]" },
- } },
-            { 4708, new Dictionary<int, string>(){ 
-     } },
-            { 4710, new Dictionary<int, string>(){ 
-    { 25346, "Fastweb DRG A226M ADSL Router" },
- } },
-            { 4711, new Dictionary<int, string>(){ 
-    { 259, "G-720 Keyboard" },
+    })
+ },
+            { 4704, Tuple.Create("Standard Microsystems Corp.", new Dictionary<int, string>{
+{ 60962, "SMC2862W-G v3 EZ Connect 802.11g Adapter [Intersil ISL3887]" },
+    })
+ },
+            { 4710, Tuple.Create("Pirelli Broadband Solutions", new Dictionary<int, string>{
+{ 25346, "Fastweb DRG A226M ADSL Router" },
+    })
+ },
+            { 4711, Tuple.Create("Logic3 / SpectraVideo plc", new Dictionary<int, string>{
+{ 259, "G-720 Keyboard" },
 { 513, "Mouse" },
 { 528, "LG Optical Mouse 3D-310" },
 { 40961, "JP260 PC Game Pad" },
 { 49154, "Wireless Optical Mouse" },
- } },
-            { 4716, new Dictionary<int, string>(){ 
-     } },
-            { 4717, new Dictionary<int, string>(){ 
-     } },
-            { 4718, new Dictionary<int, string>(){ 
-     } },
-            { 4719, new Dictionary<int, string>(){ 
-    { 355, "Storage device (2gB thumb drive)" },
+    })
+ },
+            { 4719, Tuple.Create("TwinMOS", new Dictionary<int, string>{
+{ 355, "Storage device (2gB thumb drive)" },
 { 4901, "Mobile Disk" },
 { 8552, "Mobile Disk III" },
 { 40966, "G240 802.11bg" },
- } },
-            { 4724, new Dictionary<int, string>(){ 
-     } },
-            { 4725, new Dictionary<int, string>(){ 
-    { 2, "WeatherFax 2000 Demodulator" },
+    })
+ },
+            { 4725, Tuple.Create("Xaxero Marine Software Engineering, Ltd.", new Dictionary<int, string>{
+{ 2, "WeatherFax 2000 Demodulator" },
 { 128, "SkyEye Weather Satellite Receiver" },
 { 144, "WeatherFax 2000 Demodulator" },
- } },
-            { 4728, new Dictionary<int, string>(){ 
-    { 261, "SXV-M5" },
+    })
+ },
+            { 4728, Tuple.Create("Starlight Xpress", new Dictionary<int, string>{
+{ 261, "SXV-M5" },
 { 263, "SXV-M7" },
 { 265, "SXV-M9" },
 { 272, "SXVF-H16" },
@@ -22296,9 +17571,10 @@ namespace HardwareInformation.Providers {
 { 806, "SXVR-M26C" },
 { 1287, "Lodestar autoguider" },
 { 1303, "CoStar" },
- } },
-            { 4739, new Dictionary<int, string>(){ 
-    { 256, "USB-RS232 Adaptor" },
+    })
+ },
+            { 4739, Tuple.Create("zebris Medical GmbH", new Dictionary<int, string>{
+{ 256, "USB-RS232 Adaptor" },
 { 272, "CMS20" },
 { 273, "CMS 10" },
 { 274, "CMS 05" },
@@ -22309,76 +17585,83 @@ namespace HardwareInformation.Providers {
 { 289, "emed-AT" },
 { 304, "PDM" },
 { 336, "CMS10GI (Golf)" },
- } },
-            { 4742, new Dictionary<int, string>(){ 
-    { 188, "Marvell JTAG Probe" },
+    })
+ },
+            { 4742, Tuple.Create("Marvell Semiconductor, Inc.", new Dictionary<int, string>{
+{ 188, "Marvell JTAG Probe" },
 { 8107, "88W8338 [Libertas] 802.11g" },
 { 8193, "88W8388 802.11a/b/g WLAN" },
 { 8198, "88W8362 802.11n WLAN" },
 { 8252, "K30326 802.11bgn Wireless Module [Marvell 88W8786U]" },
 { 8268, "Bluetooth and Wireless LAN Composite" },
 { 32769, "BLOB boot loader firmware" },
- } },
-            { 4753, new Dictionary<int, string>(){ 
-    { 16, "FDM 2xxx Flash-OFDM modem" },
+    })
+ },
+            { 4753, Tuple.Create("Qualcomm Flarion Technologies, Inc. / Leadtek Research, Inc.", new Dictionary<int, string>{
+{ 16, "FDM 2xxx Flash-OFDM modem" },
 { 17, "LR7F06/LR7F14 Flash-OFDM modem" },
- } },
-            { 4754, new Dictionary<int, string>(){ 
-    { 600, "Creative Labs VoIP Blaster" },
+    })
+ },
+            { 4754, Tuple.Create("Innomedia", new Dictionary<int, string>{
+{ 600, "Creative Labs VoIP Blaster" },
 { 16724, "Retro Link Atari cable" },
- } },
-            { 4755, new Dictionary<int, string>(){ 
-    { 2, "F5U002 Parallel Port [uss720]" },
+    })
+ },
+            { 4755, Tuple.Create("Belkin Components [hex]", new Dictionary<int, string>{
+{ 2, "F5U002 Parallel Port [uss720]" },
 { 8449, "104-key keyboard" },
- } },
-            { 4756, new Dictionary<int, string>(){ 
-    { 4896, "Webmail Notifier" },
- } },
-            { 4759, new Dictionary<int, string>(){ 
-    { 527, "DTU-215 Multi-Standard Modulator" },
- } },
-            { 4763, new Dictionary<int, string>(){ 
-    { 5643, "Siemens S30853-S1031-R351 802.11g Wireless Adapter [Atheros AR5523]" },
+    })
+ },
+            { 4756, Tuple.Create("RISO KAGAKU CORP.", new Dictionary<int, string>{
+{ 4896, "Webmail Notifier" },
+    })
+ },
+            { 4759, Tuple.Create("DekTec", new Dictionary<int, string>{
+{ 527, "DTU-215 Multi-Standard Modulator" },
+    })
+ },
+            { 4763, Tuple.Create("CyberTAN Technology", new Dictionary<int, string>{
+{ 5643, "Siemens S30853-S1031-R351 802.11g Wireless Adapter [Atheros AR5523]" },
 { 5644, "Siemens S30853-S1038-R351 802.11g Wireless Adapter [Atheros AR5523]" },
 { 5734, "TG54USB 802.11bg" },
 { 5735, "802.11bg" },
 { 6184, "Gigaset USB Adapter 300" },
- } },
-            { 4775, new Dictionary<int, string>(){ 
-     } },
-            { 4779, new Dictionary<int, string>(){ 
-    { 4, "Dance Pad for Xbox 360" },
+    })
+ },
+            { 4779, Tuple.Create("Honey Bee Electronic International Ltd.", new Dictionary<int, string>{
+{ 4, "Dance Pad for Xbox 360" },
 { 769, "Afterglow Wired Controller for Xbox 360" },
 { 771, "Mortal Kombat Klassic FightStick for Xbox 360" },
 { 34825, "Dance Dance Revolution Dance Pad" },
- } },
-            { 4792, new Dictionary<int, string>(){ 
-     } },
-            { 4793, new Dictionary<int, string>(){ 
-     } },
-            { 4794, new Dictionary<int, string>(){ 
-    { 50, "Wireless Stereo Headset" },
+    })
+ },
+            { 4794, Tuple.Create("Licensed by Sony Computer Entertainment America", new Dictionary<int, string>{
+{ 50, "Wireless Stereo Headset" },
 { 66, "Wireless Stereo Headset" },
 { 255, "Rocksmith Guitar Adapter" },
 { 256, "RedOctane Guitar for PlayStation(R)3" },
 { 288, "RedOctane Drum Kit for PlayStation(R)3" },
 { 512, "Harmonix Guitar for PlayStation(R)3" },
 { 528, "Harmonix Drum Kit for PlayStation(R)3" },
- } },
-            { 4797, new Dictionary<int, string>(){ 
-    { 53266, "JPD Shockforce gamepad" },
+    })
+ },
+            { 4797, Tuple.Create("Gembird", new Dictionary<int, string>{
+{ 53266, "JPD Shockforce gamepad" },
 { 53269, "Generic 4-button NES USB Controller" },
- } },
-            { 4804, new Dictionary<int, string>(){ 
-    { 6, "Teleprompter Two-button Hand Control (v1)" },
+    })
+ },
+            { 4804, Tuple.Create("Autocue Group Ltd", new Dictionary<int, string>{
+{ 6, "Teleprompter Two-button Hand Control (v1)" },
 { 8, "Teleprompter Foot Control (v1)" },
- } },
-            { 4815, new Dictionary<int, string>(){ 
-    { 368, "Tt eSPORTS BLACK Gaming mouse" },
+    })
+ },
+            { 4815, Tuple.Create("DEXIN", new Dictionary<int, string>{
+{ 368, "Tt eSPORTS BLACK Gaming mouse" },
 { 24587, "Cougar 600M Gaming Mouse" },
- } },
-            { 4817, new Dictionary<int, string>(){ 
-    { 4097, "E161/E169/E620/E800 HSDPA Modem" },
+    })
+ },
+            { 4817, Tuple.Create("Huawei Technologies Co., Ltd.", new Dictionary<int, string>{
+{ 4097, "E161/E169/E620/E800 HSDPA Modem" },
 { 4099, "E220 HSDPA Modem / E230/E270/E870 HSDPA/HSUPA Modem" },
 { 4100, "E220 (bis)" },
 { 4105, "U120" },
@@ -22432,46 +17715,48 @@ namespace HardwareInformation.Providers {
 { 7958, "K5150 LTE modem (Mass Storage Mode)" },
 { 13838, "Y330-U01 (MTP Mode)" },
 { 14347, "WiMAX USB modem(s)" },
- } },
-            { 4818, new Dictionary<int, string>(){ 
-     } },
-            { 4819, new Dictionary<int, string>(){ 
-    { 2, "DeskLine CBD Control Box" },
- } },
-            { 4822, new Dictionary<int, string>(){ 
-    { 1092, "CPC-USB/ARM7" },
+    })
+ },
+            { 4819, Tuple.Create("LINAK", new Dictionary<int, string>{
+{ 2, "DeskLine CBD Control Box" },
+    })
+ },
+            { 4822, Tuple.Create("EMS Dr. Thomas Wuensche", new Dictionary<int, string>{
+{ 1092, "CPC-USB/ARM7" },
 { 2184, "CPC-USB/M16C" },
- } },
-            { 4823, new Dictionary<int, string>(){ 
-     } },
-            { 4824, new Dictionary<int, string>(){ 
-    { 1, "Alea I True Random Number Generator" },
- } },
-            { 4838, new Dictionary<int, string>(){ 
-    { 19, "Blofeld" },
- } },
-            { 4847, new Dictionary<int, string>(){ 
-    { 256, "Tapwave Handheld [Tapwave Zodiac]" },
- } },
-            { 4850, new Dictionary<int, string>(){ 
-    { 10, "Braille embosser [SpotDot Emprint]" },
- } },
-            { 4853, new Dictionary<int, string>(){ 
-     } },
-            { 4855, new Dictionary<int, string>(){ 
-    { 6656, "TD Classic 003B" },
+    })
+ },
+            { 4824, Tuple.Create("Araneus Information Systems Oy", new Dictionary<int, string>{
+{ 1, "Alea I True Random Number Generator" },
+    })
+ },
+            { 4838, Tuple.Create("Waldorf Music GmbH", new Dictionary<int, string>{
+{ 19, "Blofeld" },
+    })
+ },
+            { 4847, Tuple.Create("Tapwave, Inc.", new Dictionary<int, string>{
+{ 256, "Tapwave Handheld [Tapwave Zodiac]" },
+    })
+ },
+            { 4850, Tuple.Create("ViewPlus Technologies, Inc.", new Dictionary<int, string>{
+{ 10, "Braille embosser [SpotDot Emprint]" },
+    })
+ },
+            { 4855, Tuple.Create("Memorex Products, Inc.", new Dictionary<int, string>{
+{ 6656, "TD Classic 003B" },
 { 7715, "TravelDrive 2007 Flash Drive" },
- } },
-            { 4861, new Dictionary<int, string>(){ 
-    { 4097, "AWU2000b 802.11b Stick" },
- } },
-            { 4863, new Dictionary<int, string>(){ 
-    { 257, "Advanced RC Servo Controller" },
- } },
-            { 4870, new Dictionary<int, string>(){ 
-     } },
-            { 4871, new Dictionary<int, string>(){ 
-    { 355, "256MB/512MB/1GB Flash Drive" },
+    })
+ },
+            { 4861, Tuple.Create("AIN Comm. Technology Co., Ltd", new Dictionary<int, string>{
+{ 4097, "AWU2000b 802.11b Stick" },
+    })
+ },
+            { 4863, Tuple.Create("Fascinating Electronics, Inc.", new Dictionary<int, string>{
+{ 257, "Advanced RC Servo Controller" },
+    })
+ },
+            { 4871, Tuple.Create("Transcend Information, Inc.", new Dictionary<int, string>{
+{ 355, "256MB/512MB/1GB Flash Drive" },
 { 357, "2GB/4GB/8GB Flash Drive" },
 { 400, "Ut190 8 GB Flash Drive with MicroSD reader" },
 { 784, "SD/MicroSD CardReader [hama]/IT1327E [Basic Line flash drive]" },
@@ -22479,18 +17764,19 @@ namespace HardwareInformation.Providers {
 { 865, "CR-75: 51-in-1 Card Reader/Writer [Sakar]" },
 { 4457, "TS2GJF210 JetFlash 210 2GB" },
 { 4465, "Fingerprint Reader" },
- } },
-            { 4872, new Dictionary<int, string>(){ 
-    { 3, "VFD Module" },
+    })
+ },
+            { 4872, Tuple.Create("Shuttle, Inc.", new Dictionary<int, string>{
+{ 3, "VFD Module" },
 { 49153, "eHome Infrared Transceiver" },
- } },
-            { 4880, new Dictionary<int, string>(){ 
-    { 1, "Class 1 Bluetooth Dongle" },
- } },
-            { 4882, new Dictionary<int, string>(){ 
-     } },
-            { 4883, new Dictionary<int, string>(){ 
-    { 16, "LC1 Linear Camera (Jungo)" },
+    })
+ },
+            { 4880, Tuple.Create("Roper", new Dictionary<int, string>{
+{ 1, "Class 1 Bluetooth Dongle" },
+    })
+ },
+            { 4883, Tuple.Create("ThorLabs", new Dictionary<int, string>{
+{ 16, "LC1 Linear Camera (Jungo)" },
 { 17, "SP1 Spectrometer (Jungo)" },
 { 18, "SP2 Spectrometer (Jungo)" },
 { 272, "LC1 Linear Camera (VISA)" },
@@ -22541,22 +17827,26 @@ namespace HardwareInformation.Providers {
 { 33009, "M2SET Dongle" },
 { 33152, "OCT Probe Controller (OCTH-1300)" },
 { 33153, "OCT Device" },
- } },
-            { 4893, new Dictionary<int, string>(){ 
-    { 341, "TrackIR 3 Pro Head Tracker" },
+    })
+ },
+            { 4893, Tuple.Create("Natural Point", new Dictionary<int, string>{
+{ 341, "TrackIR 3 Pro Head Tracker" },
 { 342, "TrackIR 4 Pro Head Tracker" },
 { 344, "TrackIR 5 Pro Head Tracker" },
- } },
-            { 4901, new Dictionary<int, string>(){ 
-    { 214, "I2C/SPI InterfaceBoard" },
+    })
+ },
+            { 4901, Tuple.Create("ams AG", new Dictionary<int, string>{
+{ 214, "I2C/SPI InterfaceBoard" },
 { 3080, "Embedded Linux Sensor Bridge" },
 { 16386, "I2C Dongle" },
- } },
-            { 4906, new Dictionary<int, string>(){ 
-    { 5378, "WiND 802.11abg / 802.11bg WLAN" },
- } },
-            { 4907, new Dictionary<int, string>(){ 
-    { 0, "Dimage A2 Camera" },
+    })
+ },
+            { 4906, Tuple.Create("Envara Inc.", new Dictionary<int, string>{
+{ 5378, "WiND 802.11abg / 802.11bg WLAN" },
+    })
+ },
+            { 4907, Tuple.Create("Konica Minolta", new Dictionary<int, string>{
+{ 0, "Dimage A2 Camera" },
 { 1, "Minolta DiMAGE A2 (ptp)" },
 { 3, "Dimage Xg Camera" },
 { 6, "Dimage Z2 Camera" },
@@ -22585,20 +17875,23 @@ namespace HardwareInformation.Providers {
 { 8259, "Magicolor 2530DL" },
 { 8261, "Magicolor 2500W" },
 { 8265, "Magicolor 2490MF" },
- } },
-            { 4926, new Dictionary<int, string>(){ 
-    { 2069, "Virus TI Desktop" },
- } },
-            { 4930, new Dictionary<int, string>(){ 
-    { 512, "EasiDock 200 Hub" },
+    })
+ },
+            { 4926, Tuple.Create("Kemper Digital GmbH", new Dictionary<int, string>{
+{ 2069, "Virus TI Desktop" },
+    })
+ },
+            { 4930, Tuple.Create("Mobility", new Dictionary<int, string>{
+{ 512, "EasiDock 200 Hub" },
 { 513, "EasiDock 200 Keyboard and Mouse Port" },
 { 514, "EasiDock 200 Serial Port" },
 { 515, "EasiDock 200 Printer Port" },
 { 516, "Ethernet" },
 { 772, "EasiDock Ethernet" },
- } },
-            { 4931, new Dictionary<int, string>(){ 
-    { 2, "CW-01" },
+    })
+ },
+            { 4931, Tuple.Create("Citizen Systems", new Dictionary<int, string>{
+{ 2, "CW-01" },
 { 3, "CX / DNP DS40" },
 { 4, "CX-W / DNP DS80 / Mitsubishi CP3800" },
 { 5, "CY / DNP DSRX1" },
@@ -22607,13 +17900,15 @@ namespace HardwareInformation.Providers {
 { 8, "DNP DS620 (old)" },
 { 10, "CX-02" },
 { 11, "CX-02W" },
- } },
-            { 4933, new Dictionary<int, string>(){ 
-    { 28, "Xbox Controller Hub" },
+    })
+ },
+            { 4933, Tuple.Create("Sino Lite Technology Corp.", new Dictionary<int, string>{
+{ 28, "Xbox Controller Hub" },
 { 24582, "Defender Wireless Controller" },
- } },
-            { 4935, new Dictionary<int, string>(){ 
-    { 1024, "G2CCD USB 1.1 obsolete" },
+    })
+ },
+            { 4935, Tuple.Create("Moravian Instruments", new Dictionary<int, string>{
+{ 1024, "G2CCD USB 1.1 obsolete" },
 { 1025, "G2CCD-S with Sony ICX285 CCD" },
 { 1026, "G2CCD2" },
 { 1027, "G2/G3CCD-I KAI CCD" },
@@ -22628,54 +17923,56 @@ namespace HardwareInformation.Providers {
 { 1045, "G1-1200 CCD" },
 { 1200, "Gx CCD-B CCD" },
 { 1201, "Gx CCD-BI CCD" },
- } },
-            { 4936, new Dictionary<int, string>(){ 
-     } },
-            { 4940, new Dictionary<int, string>(){ 
-    { 1, "Touch Panel Controller" },
+    })
+ },
+            { 4940, Tuple.Create("PanJit International Inc.", new Dictionary<int, string>{
+{ 1, "Touch Panel Controller" },
 { 2, "Touch Panel Controller" },
 { 3, "Touch Panel Controller" },
 { 4, "Touch Panel Controller" },
- } },
-            { 4942, new Dictionary<int, string>(){ 
-     } },
-            { 4951, new Dictionary<int, string>(){ 
-    { 137, "OpenSDA - CDC Serial Port" },
+    })
+ },
+            { 4951, Tuple.Create("P&E Microcomputer Systems", new Dictionary<int, string>{
+{ 137, "OpenSDA - CDC Serial Port" },
 { 1283, "USB-ML-12 HCS08/HCS12 Multilink" },
 { 1284, "DEMOJM" },
 { 4096, "Smart Control Touchpad" },
- } },
-            { 4958, new Dictionary<int, string>(){ 
-    { 33, "Berker KNX Data Interface" },
+    })
+ },
+            { 4958, Tuple.Create("Insta GmbH", new Dictionary<int, string>{
+{ 33, "Berker KNX Data Interface" },
 { 34, "Gira KNX Data Interface" },
 { 35, "JUNG KNX Data Interface" },
 { 36, "Merten/Schneider Electric KNX Data Interface" },
 { 37, "Hager KNX Data Interface" },
 { 38, "Feller KNX Data Interface" },
- } },
-            { 4959, new Dictionary<int, string>(){ 
-    { 272, "Linear Spectrograph" },
+    })
+ },
+            { 4959, Tuple.Create("Control Development Inc.", new Dictionary<int, string>{
+{ 272, "Linear Spectrograph" },
 { 273, "Spectrograph - Renumerated" },
 { 512, "Linear Spectrograph" },
 { 513, "Spectrograph - Renumerated" },
 { 576, "MPP Spectrograph" },
- } },
-            { 4966, new Dictionary<int, string>(){ 
-    { 257, "J-Link PLUS" },
+    })
+ },
+            { 4966, Tuple.Create("SEGGER", new Dictionary<int, string>{
+{ 257, "J-Link PLUS" },
 { 4117, "J-Link" },
- } },
-            { 4971, new Dictionary<int, string>(){ 
-     } },
-            { 4974, new Dictionary<int, string>(){ 
-    { 18, "iXon Ultra CCD" },
+    })
+ },
+            { 4974, Tuple.Create("Andor Technology Ltd.", new Dictionary<int, string>{
+{ 18, "iXon Ultra CCD" },
 { 20, "Zyla 5.5 sCMOS camera" },
- } },
-            { 4976, new Dictionary<int, string>(){ 
-    { 803, "Swissmemory cirrusWHITE" },
+    })
+ },
+            { 4976, Tuple.Create("Swissbit", new Dictionary<int, string>{
+{ 803, "Swissmemory cirrusWHITE" },
 { 26664, "Victorinox Flash Drive" },
- } },
-            { 4977, new Dictionary<int, string>(){ 
-    { 1, "CNUSB-611AR Wireless Adapter-G [AT76C503]" },
+    })
+ },
+            { 4977, Tuple.Create("CNet Technology Inc.", new Dictionary<int, string>{
+{ 1, "CNUSB-611AR Wireless Adapter-G [AT76C503]" },
 { 2, "CNUSB-611AR Wireless Adapter-G [AT76C503] (FiberLine WL-240U)" },
 { 19, "CNUSB-611 Wireless Adapter [AT76C505]" },
 { 20, "CNUSB-611 Wireless Adapter [AT76C505] (FiberLine WL-240U)" },
@@ -22683,30 +17980,33 @@ namespace HardwareInformation.Providers {
 { 36898, "CWD-854 [RT2573]" },
 { 36914, "CWD-854 rev F" },
 { 37889, "CWD-854 Wireless 802.11g 54Mbps Network Adapter [RTL8187]" },
- } },
-            { 4982, new Dictionary<int, string>(){ 
-     } },
-            { 4983, new Dictionary<int, string>(){ 
-    { 16384, "HDVD800" },
- } },
-            { 4987, new Dictionary<int, string>(){ 
-    { 2, "SCAPS USC-2 Scanner Controller" },
- } },
-            { 4988, new Dictionary<int, string>(){ 
-    { 544, "MP Series" },
+    })
+ },
+            { 4983, Tuple.Create("Sennheiser electronic GmbH & Co. KG", new Dictionary<int, string>{
+{ 16384, "HDVD800" },
+    })
+ },
+            { 4987, Tuple.Create("SCAPS GmbH", new Dictionary<int, string>{
+{ 2, "SCAPS USC-2 Scanner Controller" },
+    })
+ },
+            { 4988, Tuple.Create("YASKAWA ELECTRIC CORP.", new Dictionary<int, string>{
+{ 544, "MP Series" },
 { 592, "SIGMA Series" },
 { 1025, "AC Drive" },
- } },
-            { 4997, new Dictionary<int, string>(){ 
-    { 16976, "WG111T" },
+    })
+ },
+            { 4997, Tuple.Create("Netgear, Inc", new Dictionary<int, string>{
+{ 16976, "WG111T" },
 { 16977, "WG111T (no firmware)" },
 { 24320, "WPN111 RangeMax(TM) Wireless USB 2.0 Adapter" },
 { 24321, "WPN111 (no firmware)" },
 { 24322, "WPN111 (no firmware)" },
 { 28160, "WPNT121 802.11g 240Mbps Wireless Adapter [Airgo AGN300]" },
- } },
-            { 5002, new Dictionary<int, string>(){ 
-    { 1, "VFS101 Fingerprint Reader" },
+    })
+ },
+            { 5002, Tuple.Create("Validity Sensors, Inc.", new Dictionary<int, string>{
+{ 1, "VFS101 Fingerprint Reader" },
 { 5, "VFS301 Fingerprint Reader" },
 { 7, "VFS451 Fingerprint Reader" },
 { 8, "VFS300 Fingerprint Reader" },
@@ -22721,21 +18021,25 @@ namespace HardwareInformation.Providers {
 { 80, "Swipe Fingerprint Sensor" },
 { 144, "VFS7500 Touch Fingerprint Sensor" },
 { 145, "VFS7552 Touch Fingerprint Sensor" },
- } },
-            { 5006, new Dictionary<int, string>(){ 
-    { 36864, "Raisonance S.A. STM32 ARM evaluation board / RLink dongle" },
- } },
-            { 5008, new Dictionary<int, string>(){ 
-    { 1, "GO 520 T / GO 630 / ONE / ONE XL" },
+    })
+ },
+            { 5006, Tuple.Create("Jungo LTD", new Dictionary<int, string>{
+{ 36864, "Raisonance S.A. STM32 ARM evaluation board / RLink dongle" },
+    })
+ },
+            { 5008, Tuple.Create("TOMTOM B.V.", new Dictionary<int, string>{
+{ 1, "GO 520 T / GO 630 / ONE / ONE XL" },
 { 21588, "Blue & Me 2" },
 { 29812, "GPS Sport Watch [Runner, Multi-Sport]" },
 { 40961, "Bandit Action Camera Batt-Stick" },
- } },
-            { 5009, new Dictionary<int, string>(){ 
-    { 4096, "URTC-1000" },
- } },
-            { 5013, new Dictionary<int, string>(){ 
-    { 37, "Headset [PC 8]" },
+    })
+ },
+            { 5009, Tuple.Create("IdealTEK, Inc.", new Dictionary<int, string>{
+{ 4096, "URTC-1000" },
+    })
+ },
+            { 5013, Tuple.Create("Sennheiser Communications", new Dictionary<int, string>{
+{ 37, "Headset [PC 8]" },
 { 38, "SC230" },
 { 39, "SC260" },
 { 40, "SC230 CTRL" },
@@ -22779,22 +18083,27 @@ namespace HardwareInformation.Providers {
 { 107, "SC5x5 MS" },
 { 114, "Headset" },
 { 13654, "USB Headset" },
- } },
-            { 5015, new Dictionary<int, string>(){ 
-    { 4, "FCA1616" },
+    })
+ },
+            { 5015, Tuple.Create("BEHRINGER International GmbH", new Dictionary<int, string>{
+{ 4, "FCA1616" },
 { 188, "BCF2000" },
- } },
-            { 5016, new Dictionary<int, string>(){ 
-    { 8451, "USB 2.0 Storage Device" },
- } },
-            { 5037, new Dictionary<int, string>(){ 
-    { 39321, "Card reader" },
- } },
-            { 5040, new Dictionary<int, string>(){ 
-    { 10, "Alesis Photon X25 MIDI Controller" },
- } },
-            { 5041, new Dictionary<int, string>(){ 
-    { 10, "WUSB54G v2 802.11g Adapter [Intersil ISL3887]" },
+    })
+ },
+            { 5016, Tuple.Create("Q-tec", new Dictionary<int, string>{
+{ 8451, "USB 2.0 Storage Device" },
+    })
+ },
+            { 5037, Tuple.Create("Baltech", new Dictionary<int, string>{
+{ 39321, "Card reader" },
+    })
+ },
+            { 5040, Tuple.Create("PerkinElmer Optoelectronics", new Dictionary<int, string>{
+{ 10, "Alesis Photon X25 MIDI Controller" },
+    })
+ },
+            { 5041, Tuple.Create("Linksys", new Dictionary<int, string>{
+{ 10, "WUSB54G v2 802.11g Adapter [Intersil ISL3887]" },
 { 11, "WUSB11 v4.0 802.11b Adapter [ALi M4301]" },
 { 12, "WUSB54AG 802.11a/g Adapter [Intersil ISL3887]" },
 { 13, "WUSB54G v4 802.11g Adapter [Ralink RT2500USB]" },
@@ -22821,36 +18130,37 @@ namespace HardwareInformation.Providers {
 { 65, "Gigabit Ethernet Adapter" },
 { 66, "WUSB6100M 802.11a/b/g/n/ac Wireless Adapter" },
 { 5041, "WUSB200: Wireless-G Business Network Adapter with Rangebooster" },
- } },
-            { 5042, new Dictionary<int, string>(){ 
-    { 48, "Multimix 8" },
- } },
-            { 5043, new Dictionary<int, string>(){ 
-     } },
-            { 5050, new Dictionary<int, string>(){ 
-    { 1, "Konig Electronic CMP-KEYPAD12 Numeric Keypad" },
+    })
+ },
+            { 5042, Tuple.Create("Alesis", new Dictionary<int, string>{
+{ 48, "Multimix 8" },
+    })
+ },
+            { 5050, Tuple.Create("PCPlay", new Dictionary<int, string>{
+{ 1, "Konig Electronic CMP-KEYPAD12 Numeric Keypad" },
 { 23, "PS/2 Keyboard+Mouse Adapter" },
 { 24, "Barcode PCP-BCG4209" },
- } },
-            { 5054, new Dictionary<int, string>(){ 
-     } },
-            { 5066, new Dictionary<int, string>(){ 
-     } },
-            { 5071, new Dictionary<int, string>(){ 
-    { 4608, "Olidata Wireless Multimedia Adapter" },
- } },
-            { 5072, new Dictionary<int, string>(){ 
-    { 8834, "TechniSat DVB-PC TV Star 2" },
- } },
-            { 5073, new Dictionary<int, string>(){ 
-    { 28697, "MD 82288" },
+    })
+ },
+            { 5071, Tuple.Create("Wisair Ltd.", new Dictionary<int, string>{
+{ 4608, "Olidata Wireless Multimedia Adapter" },
+    })
+ },
+            { 5072, Tuple.Create("Techsan Electronics Co., Ltd.", new Dictionary<int, string>{
+{ 8834, "TechniSat DVB-PC TV Star 2" },
+    })
+ },
+            { 5073, Tuple.Create("A-Max Technology Macao Commercial Offshore Co. Ltd.", new Dictionary<int, string>{
+{ 28697, "MD 82288" },
 { 44006, "Wireless 802.11g 54Mbps Network Adapter [RTL8187]" },
- } },
-            { 5074, new Dictionary<int, string>(){ 
-    { 1024, "Pocket Ethernet [klsi]" },
- } },
-            { 5075, new Dictionary<int, string>(){ 
-    { 12801, "VisionDTV USB-Ter/HAMA USB DVB-T device cold" },
+    })
+ },
+            { 5074, Tuple.Create("Shark Multimedia", new Dictionary<int, string>{
+{ 1024, "Pocket Ethernet [klsi]" },
+    })
+ },
+            { 5075, Tuple.Create("IMC Networks", new Dictionary<int, string>{
+{ 12801, "VisionDTV USB-Ter/HAMA USB DVB-T device cold" },
 { 12802, "VisionDTV USB-Ter/HAMA USB DVB-T device warm" },
 { 12803, "DTV-DVB UDST7020BDA DVB-S Box(DVBS for MCE2005)" },
 { 12804, "DTV-DVB UDST7020BDA DVB-S Box(DVBS for MCE2005)" },
@@ -22916,35 +18226,33 @@ namespace HardwareInformation.Providers {
 { 28704, "DTV-DVB UDST7020BDA DVB-S Box(DVBS for MCE2005)" },
 { 28706, "DTV-DVB UDST7022BDA DVB-S Box(Without HID)" },
 { 30795, "XHC Camera" },
- } },
-            { 5079, new Dictionary<int, string>(){ 
-    { 1, "T5 PATA forensic bridge" },
+    })
+ },
+            { 5079, Tuple.Create("Guidance Software, Inc.", new Dictionary<int, string>{
+{ 1, "T5 PATA forensic bridge" },
 { 12, "T8-R2 forensic bridge" },
- } },
-            { 5084, new Dictionary<int, string>(){ 
-     } },
-            { 5085, new Dictionary<int, string>(){ 
-     } },
-            { 5089, new Dictionary<int, string>(){ 
-     } },
-            { 5093, new Dictionary<int, string>(){ 
-    { 1, "SL-1" },
+    })
+ },
+            { 5093, Tuple.Create("Rane", new Dictionary<int, string>{
+{ 1, "SL-1" },
 { 3, "TTM 57SL" },
- } },
-            { 5094, new Dictionary<int, string>(){ 
-     } },
-            { 5098, new Dictionary<int, string>(){ 
-    { 1, "C-56 Thermal Printer" },
- } },
-            { 5100, new Dictionary<int, string>(){ 
-    { 6, "HID Remote Control" },
- } },
-            { 5102, new Dictionary<int, string>(){ 
-    { 1, "Optical Mouse" },
+    })
+ },
+            { 5098, Tuple.Create("Hengstler", new Dictionary<int, string>{
+{ 1, "C-56 Thermal Printer" },
+    })
+ },
+            { 5100, Tuple.Create("Zydacron", new Dictionary<int, string>{
+{ 6, "HID Remote Control" },
+    })
+ },
+            { 5102, Tuple.Create("MosArt", new Dictionary<int, string>{
+{ 1, "Optical Mouse" },
 { 3, "Optical Mouse" },
- } },
-            { 5117, new Dictionary<int, string>(){ 
-    { 1360, "INIC-1530 PATA Bridge" },
+    })
+ },
+            { 5117, Tuple.Create("Initio Corporation", new Dictionary<int, string>{
+{ 1360, "INIC-1530 PATA Bridge" },
 { 2112, "INIC-1618L SATA" },
 { 2113, "Samsung SE-T084M DVD-RW" },
 { 2368, "ASUS SBW-06D2X-U" },
@@ -22960,9 +18268,10 @@ namespace HardwareInformation.Providers {
 { 14656, "external DVD burner ECD819-SU3" },
 { 14688, "INIC-3639" },
 { 15936, "ZALMAN ZM-VE350" },
- } },
-            { 5118, new Dictionary<int, string>(){ 
-    { 6656, "512MB/1GB Flash Drive" },
+    })
+ },
+            { 5118, Tuple.Create("Kingston Technology Company Inc.", new Dictionary<int, string>{
+{ 6656, "512MB/1GB Flash Drive" },
 { 6691, "512MB Flash Drive" },
 { 7424, "DataTraveler 2.0 1GB/4GB Flash Drive / Patriot Xporter 4GB Flash Drive" },
 { 7680, "Flash Drive 2 GB [ICIDU 2 GB]" },
@@ -22984,29 +18293,30 @@ namespace HardwareInformation.Providers {
 { 20992, "DataTraveler R3.0" },
 { 21760, "Flash drive" },
 { 25344, "SP Mobile C31 (64GB)" },
- } },
-            { 5120, new Dictionary<int, string>(){ 
-     } },
-            { 5122, new Dictionary<int, string>(){ 
-     } },
-            { 5123, new Dictionary<int, string>(){ 
-    { 1, "Digital Photo Frame" },
+    })
+ },
+            { 5123, Tuple.Create("Sitronix", new Dictionary<int, string>{
+{ 1, "Digital Photo Frame" },
 { 3, "Digital Photo Frame (DPF-1104)" },
- } },
-            { 5124, new Dictionary<int, string>(){ 
-    { 52700, "Dongle" },
- } },
-            { 5129, new Dictionary<int, string>(){ 
-    { 4096, "generic (firmware not loaded yet)" },
+    })
+ },
+            { 5124, Tuple.Create("Fundamental Software, Inc.", new Dictionary<int, string>{
+{ 52700, "Dongle" },
+    })
+ },
+            { 5129, Tuple.Create("IDS Imaging Development Systems GmbH", new Dictionary<int, string>{
+{ 4096, "generic (firmware not loaded yet)" },
 { 5253, "uEye UI1485" },
 { 12864, "uEye UI3240" },
- } },
-            { 5134, new Dictionary<int, string>(){ 
-    { 45073, "TCC780X-based player (USB Boot mode)" },
+    })
+ },
+            { 5134, Tuple.Create("Telechips, Inc.", new Dictionary<int, string>{
+{ 45073, "TCC780X-based player (USB Boot mode)" },
 { 45089, "TCC77X-based players (USB Boot mode)" },
- } },
-            { 5136, new Dictionary<int, string>(){ 
-    { 4368, "Merlin S620" },
+    })
+ },
+            { 5136, Tuple.Create("Novatel Wireless", new Dictionary<int, string>{
+{ 4368, "Merlin S620" },
 { 4384, "Merlin EX720" },
 { 4400, "Merlin S720" },
 { 5120, "Merlin U730/U740 (Vodafone)" },
@@ -23022,19 +18332,20 @@ namespace HardwareInformation.Providers {
 { 40961, "Gobi Wireless Modem" },
 { 40968, "Gobi Wireless Modem (QDL mode)" },
 { 45057, "Ovation MC551" },
- } },
-            { 5141, new Dictionary<int, string>(){ 
-    { 0, "Sony SingStar USBMIC" },
+    })
+ },
+            { 5141, Tuple.Create("Nam Tai E&E Products Ltd. or OmniVision Technologies, Inc.", new Dictionary<int, string>{
+{ 0, "Sony SingStar USBMIC" },
 { 32, "Sony Wireless SingStar" },
 { 8192, "Sony Playstation Eye" },
- } },
-            { 5145, new Dictionary<int, string>(){ 
-     } },
-            { 5153, new Dictionary<int, string>(){ 
-    { 1541, "Sentech Camera" },
- } },
-            { 5156, new Dictionary<int, string>(){ 
-    { 4097, "Temo" },
+    })
+ },
+            { 5153, Tuple.Create("Sensor Technology", new Dictionary<int, string>{
+{ 1541, "Sentech Camera" },
+    })
+ },
+            { 5156, Tuple.Create("Posnet Polska S.A.", new Dictionary<int, string>{
+{ 4097, "Temo" },
 { 4098, "Thermal" },
 { 4099, "Neo" },
 { 4100, "Combo DF" },
@@ -23057,49 +18368,48 @@ namespace HardwareInformation.Providers {
 { 4118, "Mobile HS" },
 { 4119, "TH230+ FV EJ" },
 { 4120, "4610-1NR FV EJ" },
- } },
-            { 5161, new Dictionary<int, string>(){ 
-     } },
-            { 5162, new Dictionary<int, string>(){ 
-    { 3, "Artema Hybrid" },
+    })
+ },
+            { 5162, Tuple.Create("Thales E-Transactions", new Dictionary<int, string>{
+{ 3, "Artema Hybrid" },
 { 5, "Artema Modular" },
 { 67, "medCompact" },
- } },
-            { 5163, new Dictionary<int, string>(){ 
-    { 933, "933A Portable Power Sentinel" },
- } },
-            { 5168, new Dictionary<int, string>(){ 
-    { 336, "wireless receiver for skylanders wii" },
+    })
+ },
+            { 5163, Tuple.Create("Arbiter Systems, Inc.", new Dictionary<int, string>{
+{ 933, "933A Portable Power Sentinel" },
+    })
+ },
+            { 5168, Tuple.Create("RedOctane", new Dictionary<int, string>{
+{ 336, "wireless receiver for skylanders wii" },
 { 18228, "Guitar Hero4 hub" },
 { 18248, "Guitar Hero X-plorer" },
 { 18251, "Guitar Hero MIDI interface" },
 { 34952, "TX6500+ Dance Pad" },
 { 63489, "Controller" },
- } },
-            { 5169, new Dictionary<int, string>(){ 
-     } },
-            { 5173, new Dictionary<int, string>(){ 
-    { 1063, "UR054g 802.11g Wireless Adapter [Intersil ISL3887]" },
+    })
+ },
+            { 5173, Tuple.Create("Wistron NeWeb", new Dictionary<int, string>{
+{ 1063, "UR054g 802.11g Wireless Adapter [Intersil ISL3887]" },
 { 1809, "UR055G 802.11bg" },
 { 2052, "AR9170+AR9104 802.11abgn Wireless Adapter" },
 { 2086, "AR5523" },
 { 2087, "AR5523 (no firmware)" },
 { 2088, "AR5523" },
 { 2089, "AR5523 (no firmware)" },
- } },
-            { 5174, new Dictionary<int, string>(){ 
-     } },
-            { 5180, new Dictionary<int, string>(){ 
-     } },
-            { 5187, new Dictionary<int, string>(){ 
-    { 7, "Development board JTAG" },
- } },
-            { 5190, new Dictionary<int, string>(){ 
-    { 27251, "Stamps.com Model 510 5LB Scale" },
+    })
+ },
+            { 5187, Tuple.Create("Digilent", new Dictionary<int, string>{
+{ 7, "Development board JTAG" },
+    })
+ },
+            { 5190, Tuple.Create("X.J.GROUP", new Dictionary<int, string>{
+{ 27251, "Stamps.com Model 510 5LB Scale" },
 { 27256, "DYMO Endicia 75lb Digital Scale" },
- } },
-            { 5201, new Dictionary<int, string>(){ 
-    { 769, "haptic device" },
+    })
+ },
+            { 5201, Tuple.Create("Force Dimension", new Dictionary<int, string>{
+{ 769, "haptic device" },
 { 770, "haptic device" },
 { 1024, "haptic device" },
 { 1025, "delta.x haptic device" },
@@ -23110,18 +18420,19 @@ namespace HardwareInformation.Providers {
 { 1030, "dedicated haptic device" },
 { 1031, "dedicated haptic device" },
 { 1032, "dedicated haptic device" },
- } },
-            { 5202, new Dictionary<int, string>(){ 
-    { 35585, "DS620" },
+    })
+ },
+            { 5202, Tuple.Create("Dai Nippon Printing, Inc", new Dictionary<int, string>{
+{ 35585, "DS620" },
 { 36865, "DS820" },
- } },
-            { 5203, new Dictionary<int, string>(){ 
-    { 16422, "26-183 Serial Cable" },
- } },
-            { 5206, new Dictionary<int, string>(){ 
-     } },
-            { 5207, new Dictionary<int, string>(){ 
-    { 20759, "OpenMoko Neo1973 kernel usbnet (g_ether, CDC Ethernet) mode" },
+    })
+ },
+            { 5203, Tuple.Create("Radio Shack", new Dictionary<int, string>{
+{ 16422, "26-183 Serial Cable" },
+    })
+ },
+            { 5207, Tuple.Create("First International Computer, Inc.", new Dictionary<int, string>{
+{ 20759, "OpenMoko Neo1973 kernel usbnet (g_ether, CDC Ethernet) mode" },
 { 20760, "OpenMoko Neo1973 Debug board (V2+)" },
 { 20761, "OpenMoko Neo1973 u-boot cdc_acm serial port" },
 { 20762, "HXD8 u-boot usbtty CDC ACM Mode" },
@@ -23133,9 +18444,10 @@ namespace HardwareInformation.Providers {
 { 20770, "OpenMoko Neo1973 / Neo Freerunner kernel cdc_ether USB network" },
 { 20771, "OpenMoko Neo1973 internal USB CSR4 module" },
 { 20772, "OpenMoko Neo1973 Bluetooth Device ID service" },
- } },
-            { 5215, new Dictionary<int, string>(){ 
-    { 262, "K56 V92 Modem" },
+    })
+ },
+            { 5215, Tuple.Create("Trust", new Dictionary<int, string>{
+{ 262, "K56 V92 Modem" },
 { 317, "PC Camera (SN9C201 + OV7660)" },
 { 319, "Megapixel Auto Focus Webcam" },
 { 322, "WB-6250X Webcam" },
@@ -23147,26 +18459,29 @@ namespace HardwareInformation.Providers {
 { 485, "Keyboard [GXT 830]" },
 { 530, "Panora Widescreen Graphic Tablet" },
 { 575, "Mouse [GXT 168]" },
- } },
-            { 5216, new Dictionary<int, string>(){ 
-    { 37200, "eHome Infrared Transceiver" },
- } },
-            { 5217, new Dictionary<int, string>(){ 
-     } },
-            { 5218, new Dictionary<int, string>(){ 
-    { 21778, "MegaStick-1 Flash Stick" },
+    })
+ },
+            { 5216, Tuple.Create("Tatung Co.", new Dictionary<int, string>{
+{ 37200, "eHome Infrared Transceiver" },
+    })
+ },
+            { 5218, Tuple.Create("Micro Star International", new Dictionary<int, string>{
+{ 21778, "MegaStick-1 Flash Stick" },
 { 34823, "DIGIVOX mini III [af9015]" },
- } },
-            { 5227, new Dictionary<int, string>(){ 
-    { 1537, "Controller for Xbox 360" },
+    })
+ },
+            { 5227, Tuple.Create("BigBen Interactive", new Dictionary<int, string>{
+{ 1537, "Controller for Xbox 360" },
 { 2306, "Wired Mini PS3 Game Controller" },
- } },
-            { 5234, new Dictionary<int, string>(){ 
-    { 7, "Aolynk WUB300g [ZyDAS ZD1211]" },
+    })
+ },
+            { 5234, Tuple.Create("Huawei-3Com", new Dictionary<int, string>{
+{ 7, "Aolynk WUB300g [ZyDAS ZD1211]" },
 { 9, "Aolynk WUB320g" },
- } },
-            { 5242, new Dictionary<int, string>(){ 
-    { 57365, "eHome Infrared Receiver" },
+    })
+ },
+            { 5242, Tuple.Create("Formosa Industrial Computing, Inc.", new Dictionary<int, string>{
+{ 57365, "eHome Infrared Receiver" },
 { 57366, "eHome Infrared Receiver" },
 { 57367, "eHome Infrared Receiver" },
 { 57368, "eHome Infrared Receiver" },
@@ -23175,35 +18490,34 @@ namespace HardwareInformation.Providers {
 { 57404, "eHome Infrared Receiver" },
 { 57405, "2 Channel Audio" },
 { 57406, "Infrared Receiver [IR605A/Q]" },
- } },
-            { 5246, new Dictionary<int, string>(){ 
-    { 4096, "Biometric Touchchip/Touchstrip Fingerprint Sensor" },
+    })
+ },
+            { 5246, Tuple.Create("Upek", new Dictionary<int, string>{
+{ 4096, "Biometric Touchchip/Touchstrip Fingerprint Sensor" },
 { 4097, "TCS5B Fingerprint sensor" },
 { 4098, "Biometric Touchchip/Touchstrip Fingerprint Sensor" },
 { 8214, "Biometric Touchchip/Touchstrip Fingerprint Sensor" },
 { 8224, "TouchChip Fingerprint Coprocessor (WBF advanced mode)" },
 { 12288, "TCS1C EIM/Cypress Fingerprint sensor" },
 { 12289, "TCS1C EIM/STM32 Fingerprint sensor" },
- } },
-            { 5247, new Dictionary<int, string>(){ 
-     } },
-            { 5250, new Dictionary<int, string>(){ 
-    { 4101, "VRD PC-Interface" },
- } },
-            { 5252, new Dictionary<int, string>(){ 
-    { 5958, "Ecomo 19H99 Monitor" },
+    })
+ },
+            { 5250, Tuple.Create("Vaillant", new Dictionary<int, string>{
+{ 4101, "VRD PC-Interface" },
+    })
+ },
+            { 5252, Tuple.Create("Elsa AG [hex]", new Dictionary<int, string>{
+{ 5958, "Ecomo 19H99 Monitor" },
 { 30230, "Elsa Hub" },
- } },
-            { 5253, new Dictionary<int, string>(){ 
-    { 1, "U2E" },
+    })
+ },
+            { 5253, Tuple.Create("Silicom", new Dictionary<int, string>{
+{ 1, "U2E" },
 { 2, "Psion Gold Port Ethernet" },
- } },
-            { 5255, new Dictionary<int, string>(){ 
-     } },
-            { 5262, new Dictionary<int, string>(){ 
-     } },
-            { 5263, new Dictionary<int, string>(){ 
-    { 4096, "Motorola BC4 Bluetooth 3.0+HS Adapter" },
+    })
+ },
+            { 5263, Tuple.Create("Ralink Technology, Corp.", new Dictionary<int, string>{
+{ 4096, "Motorola BC4 Bluetooth 3.0+HS Adapter" },
 { 5894, "RT2500USB Wireless Adapter" },
 { 8304, "RT2070 Wireless Adapter" },
 { 9584, "RT2570 Wireless Adapter" },
@@ -23225,48 +18539,47 @@ namespace HardwareInformation.Providers {
 { 30234, "MT7610U (\"Archer T2U\" 2.4G+5G WLAN Adapter" },
 { 36896, "RT2500USB Wireless Adapter" },
 { 36897, "RT2501USB Wireless Adapter" },
- } },
-            { 5265, new Dictionary<int, string>(){ 
-    { 32, "FS81 Fingerprint Scanner Module" },
+    })
+ },
+            { 5265, Tuple.Create("Futronic Technology Co. Ltd.", new Dictionary<int, string>{
+{ 32, "FS81 Fingerprint Scanner Module" },
 { 136, "Fingerprint Scanner Model FS88" },
- } },
-            { 5267, new Dictionary<int, string>(){ 
-    { 16, "Bluebird [Ambit]" },
+    })
+ },
+            { 5267, Tuple.Create("Suunto", new Dictionary<int, string>{
+{ 16, "Bluebird [Ambit]" },
 { 25, "Duck [Ambit2]" },
 { 26, "Colibri [Ambit2 S]" },
 { 27, "Emu [Ambit3 Peak]" },
 { 28, "Finch [Ambit3 Sport]" },
 { 29, "Greentit [Ambit2 R]" },
 { 30, "Ibisbill [Ambit3 Run]" },
- } },
-            { 5271, new Dictionary<int, string>(){ 
-     } },
-            { 5272, new Dictionary<int, string>(){ 
-    { 41104, "DVB-T Tuner" },
- } },
-            { 5274, new Dictionary<int, string>(){ 
-    { 1691, "PURE Digital Evoke-1XT Tri-band" },
+    })
+ },
+            { 5272, Tuple.Create("Microtek International Inc.", new Dictionary<int, string>{
+{ 41104, "DVB-T Tuner" },
+    })
+ },
+            { 5274, Tuple.Create("Imagination Technologies", new Dictionary<int, string>{
+{ 1691, "PURE Digital Evoke-1XT Tri-band" },
 { 8455, "DBX1 DSP core" },
- } },
-            { 5290, new Dictionary<int, string>(){ 
-    { 1, "Avermedia AverTV DVBT USB1.1 (cold)" },
+    })
+ },
+            { 5290, Tuple.Create("WideView Technology Inc.", new Dictionary<int, string>{
+{ 1, "Avermedia AverTV DVBT USB1.1 (cold)" },
 { 2, "Avermedia AverTV DVBT USB1.1 (warm)" },
 { 513, "AVermedia/Yakumo/Hama/Typhoon DVB-T USB2.0 (cold)" },
 { 545, "WT-220U DVB-T dongle" },
 { 555, "WT-220U DVB-T dongle" },
 { 769, "AVermedia/Yakumo/Hama/Typhoon DVB-T USB2.0 (warm)" },
- } },
-            { 5293, new Dictionary<int, string>(){ 
-     } },
-            { 5294, new Dictionary<int, string>(){ 
-     } },
-            { 5295, new Dictionary<int, string>(){ 
-     } },
-            { 5296, new Dictionary<int, string>(){ 
-    { 13328, "Serial Adapter ICUSB2321X [TUSB3410I]" },
- } },
-            { 5298, new Dictionary<int, string>(){ 
-    { 14995, "Topcom 802.11bg Wireless Adapter [Atheros AR5523]" },
+    })
+ },
+            { 5296, Tuple.Create("StarTech.com Ltd.", new Dictionary<int, string>{
+{ 13328, "Serial Adapter ICUSB2321X [TUSB3410I]" },
+    })
+ },
+            { 5298, Tuple.Create("Ralink Technology, Corp.", new Dictionary<int, string>{
+{ 14995, "Topcom 802.11bg Wireless Adapter [Atheros AR5523]" },
 { 14997, "Toshiba WUS-G06G-JT 802.11bg Wireless Adapter [Atheros AR5523]" },
 { 15000, "Airlink101 AWLL4130 802.11bg Wireless Adapter [Atheros AR5523]" },
 { 15362, "Conceptronic C54RU v2 802.11bg Wireless Adapter [Ralink RT2571]" },
@@ -23282,18 +18595,19 @@ namespace HardwareInformation.Providers {
 { 15400, "Conceptronic C300RU v2 802.11bgn Wireless Adapter [Ralink RT2770]" },
 { 15403, "NEC NP02LM 802.11bgn Wireless Adapter [Ralink RT3072]" },
 { 15404, "Keebox W150NU 802.11bgn Wireless Adapter [Ralink RT3070]" },
- } },
-            { 5312, new Dictionary<int, string>(){ 
-     } },
-            { 5314, new Dictionary<int, string>(){ 
-    { 592, "Storage Adapter V2" },
+    })
+ },
+            { 5314, Tuple.Create("Gemlight Computer, Ltd", new Dictionary<int, string>{
+{ 592, "Storage Adapter V2" },
 { 848, "Storage Adapter V2" },
- } },
-            { 5320, new Dictionary<int, string>(){ 
-    { 5, "Touchscreen Controller" },
- } },
-            { 5325, new Dictionary<int, string>(){ 
-    { 4626, "microSD card reader (SY-T18)" },
+    })
+ },
+            { 5320, Tuple.Create("Zytronic", new Dictionary<int, string>{
+{ 5, "Touchscreen Controller" },
+    })
+ },
+            { 5325, Tuple.Create("Super Top", new Dictionary<int, string>{
+{ 4626, "microSD card reader (SY-T18)" },
 { 4636, "microSD card reader" },
 { 4639, "microSD CardReader SY-T18" },
 { 4666, "SD/MMC/RS-MMC Card Reader" },
@@ -23308,27 +18622,28 @@ namespace HardwareInformation.Providers {
 { 33061, "SD MMC Reader" },
 { 34305, "4-Port hub" },
 { 34312, "Hub [Super Top]" },
- } },
-            { 5336, new Dictionary<int, string>(){ 
-     } },
-            { 5341, new Dictionary<int, string>(){ 
-    { 4103, "D2CIM-VUSB KVM connector" },
- } },
-            { 5344, new Dictionary<int, string>(){ 
-    { 1281, "WR-G528e 'CHEETAH'" },
- } },
-            { 5345, new Dictionary<int, string>(){ 
-    { 20480, "PenMount 5000 Touch Controller" },
- } },
-            { 5349, new Dictionary<int, string>(){ 
-     } },
-            { 5354, new Dictionary<int, string>(){ 
-    { 43792, "GW-US54GZ" },
+    })
+ },
+            { 5341, Tuple.Create("Raritan Computer, Inc.", new Dictionary<int, string>{
+{ 4103, "D2CIM-VUSB KVM connector" },
+    })
+ },
+            { 5344, Tuple.Create("WiNRADiO Communications", new Dictionary<int, string>{
+{ 1281, "WR-G528e 'CHEETAH'" },
+    })
+ },
+            { 5345, Tuple.Create("Dialogue Technology Corp.", new Dictionary<int, string>{
+{ 20480, "PenMount 5000 Touch Controller" },
+    })
+ },
+            { 5354, Tuple.Create("Planex Communications", new Dictionary<int, string>{
+{ 43792, "GW-US54GZ" },
 { 43793, "GU-1000T" },
 { 43795, "GW-US54Mini 802.11bg" },
- } },
-            { 5357, new Dictionary<int, string>(){ 
-    { 4096, "MV5" },
+    })
+ },
+            { 5357, Tuple.Create("Shure Inc.", new Dictionary<int, string>{
+{ 4096, "MV5" },
 { 4098, "MV51" },
 { 4099, "MVi" },
 { 4100, "SHA900" },
@@ -23338,50 +18653,53 @@ namespace HardwareInformation.Providers {
 { 4353, "P300" },
 { 10678, "X2u Adapter" },
 { 12288, "RMCE-USB" },
- } },
-            { 5367, new Dictionary<int, string>(){ 
-    { 1, "SkyStar 2 HD CI" },
+    })
+ },
+            { 5367, Tuple.Create("TechniSat Digital GmbH", new Dictionary<int, string>{
+{ 1, "SkyStar 2 HD CI" },
 { 2, "SkyStar 2 HD CI" },
 { 3, "CableStar Combo HD CI" },
 { 4, "AirStar TeleStick 2" },
 { 1280, "DVB-PC TV Star HD" },
- } },
-            { 5376, new Dictionary<int, string>(){ 
-     } },
-            { 5377, new Dictionary<int, string>(){ 
-     } },
-            { 5380, new Dictionary<int, string>(){ 
-    { 31, "SRP-350II Thermal Receipt Printer" },
- } },
-            { 5384, new Dictionary<int, string>(){ 
-     } },
-            { 5385, new Dictionary<int, string>(){ 
-    { 2561, "LI-3100 Area Meter" },
+    })
+ },
+            { 5380, Tuple.Create("Bixolon CO LTD", new Dictionary<int, string>{
+{ 31, "SRP-350II Thermal Receipt Printer" },
+    })
+ },
+            { 5385, Tuple.Create("First International Computer, Inc.", new Dictionary<int, string>{
+{ 2561, "LI-3100 Area Meter" },
 { 2562, "LI-7000 CO2/H2O Gas Analyzer" },
 { 2563, "C-DiGit Blot Scanner" },
 { 37442, "eHome Infrared Transceiver" },
- } },
-            { 5395, new Dictionary<int, string>(){ 
-    { 1092, "medMobile" },
- } },
-            { 5396, new Dictionary<int, string>(){ 
-    { 8195, "FlashPro3 Programmer" },
+    })
+ },
+            { 5395, Tuple.Create("medMobile", new Dictionary<int, string>{
+{ 1092, "medMobile" },
+    })
+ },
+            { 5396, Tuple.Create("Actel", new Dictionary<int, string>{
+{ 8195, "FlashPro3 Programmer" },
 { 8196, "FlashPro3 Programmer" },
 { 8197, "FlashPro3 Programmer" },
- } },
-            { 5398, new Dictionary<int, string>(){ 
-    { 5635, "Flash Drive" },
+    })
+ },
+            { 5398, Tuple.Create("CompUSA", new Dictionary<int, string>{
+{ 5635, "Flash Drive" },
 { 34344, "Pen Drive" },
- } },
-            { 5400, new Dictionary<int, string>(){ 
-    { 1, "HDReye High Dynamic Range Camera" },
+    })
+ },
+            { 5400, Tuple.Create("Cheshire Engineering Corp.", new Dictionary<int, string>{
+{ 1, "HDReye High Dynamic Range Camera" },
 { 2, "HDReye (before firmware loads)" },
- } },
-            { 5401, new Dictionary<int, string>(){ 
-    { 32, "HSIC Device" },
- } },
-            { 5407, new Dictionary<int, string>(){ 
-    { 32, "XEM3001v1" },
+    })
+ },
+            { 5401, Tuple.Create("Comneon", new Dictionary<int, string>{
+{ 32, "HSIC Device" },
+    })
+ },
+            { 5407, Tuple.Create("Opal Kelly Incorporated", new Dictionary<int, string>{
+{ 32, "XEM3001v1" },
 { 33, "XEM3001v2" },
 { 34, "XEM3010" },
 { 35, "XEM3005" },
@@ -23409,27 +18727,30 @@ namespace HardwareInformation.Providers {
 { 301, "ZEM5310-A4" },
 { 304, "XEM7310-A75" },
 { 305, "XEM7310-A200" },
- } },
-            { 5408, new Dictionary<int, string>(){ 
-     } },
-            { 5412, new Dictionary<int, string>(){ 
-    { 26240, "UTS 6680" },
- } },
-            { 5415, new Dictionary<int, string>(){ 
-    { 512, "YAP Phone (no firmware)" },
+    })
+ },
+            { 5412, Tuple.Create("ENE Technology Inc", new Dictionary<int, string>{
+{ 26240, "UTS 6680" },
+    })
+ },
+            { 5415, Tuple.Create("Silicon Portals", new Dictionary<int, string>{
+{ 512, "YAP Phone (no firmware)" },
 { 513, "YAP Phone" },
- } },
-            { 5417, new Dictionary<int, string>(){ 
-    { 12544, "CDMA 1xRTT USB Modem (U-100/105/200/300/520)" },
- } },
-            { 5418, new Dictionary<int, string>(){ 
-    { 33616, "NET Gmbh iCube Camera" },
+    })
+ },
+            { 5417, Tuple.Create("UBIQUAM Co., Ltd.", new Dictionary<int, string>{
+{ 12544, "CDMA 1xRTT USB Modem (U-100/105/200/300/520)" },
+    })
+ },
+            { 5418, Tuple.Create("Thesycon Systemsoftware & Consulting GmbH", new Dictionary<int, string>{
+{ 33616, "NET Gmbh iCube Camera" },
 { 33792, "INI DVS128" },
 { 33805, "INI DAViS" },
 { 33818, "INI DAViS FX3" },
- } },
-            { 5419, new Dictionary<int, string>(){ 
-    { 1, "spirobank II" },
+    })
+ },
+            { 5419, Tuple.Create("MIR Srl", new Dictionary<int, string>{
+{ 1, "spirobank II" },
 { 2, "spirolab III" },
 { 3, "MiniSpir" },
 { 4, "Oxi" },
@@ -23450,9 +18771,10 @@ namespace HardwareInformation.Providers {
 { 19, "spirotel serial" },
 { 20, "spirotel II" },
 { 21, "spirodoc" },
- } },
-            { 5421, new Dictionary<int, string>(){ 
-    { 1337, "JMS539/567 SuperSpeed SATA II/III 3.0G/6.0G Bridge" },
+    })
+ },
+            { 5421, Tuple.Create("JMicron Technology Corp. / JMicron USA Technology Corp.", new Dictionary<int, string>{
+{ 1337, "JMS539/567 SuperSpeed SATA II/III 3.0G/6.0G Bridge" },
 { 1361, "JMS551 SuperSpeed two ports SATA 3Gb/s bridge" },
 { 1377, "JMS551 - Sharkoon SATA QuickPort Duo" },
 { 1378, "JMS567 SATA 6Gb/s bridge" },
@@ -23479,15 +18801,17 @@ namespace HardwareInformation.Providers {
 { 13673, "JMS566 SATA 3Gb/s bridge" },
 { 22414, "JMS578 SATA 6Gb/s bridge" },
 { 34145, "salcar docking station two disks" },
- } },
-            { 5422, new Dictionary<int, string>(){ 
-    { 5696, "INIC-1605 SATA Bridge" },
+    })
+ },
+            { 5422, Tuple.Create("LG (HLDS)", new Dictionary<int, string>{
+{ 5696, "INIC-1605 SATA Bridge" },
 { 9479, "PL-2507 IDE Controller" },
 { 9585, "GP08NU6W DVD-RW" },
 { 57345, "GSA-5120D DVD-RW" },
- } },
-            { 5426, new Dictionary<int, string>(){ 
-    { 1, "RZ01-020300 Optical Mouse [Diamondback]" },
+    })
+ },
+            { 5426, Tuple.Create("Razer USA, Ltd", new Dictionary<int, string>{
+{ 1, "RZ01-020300 Optical Mouse [Diamondback]" },
 { 2, "Diamondback Optical Mouse" },
 { 3, "Krait Mouse" },
 { 5, "Boomslang CE" },
@@ -23703,27 +19027,32 @@ namespace HardwareInformation.Providers {
 { 4106, "Gaming Controller [Raiju 2 Tournament Edition (BT)]" },
 { 4365, "Bootloader (Alternate)" },
 { 32782, "Bootloader" },
- } },
-            { 5435, new Dictionary<int, string>(){ 
-    { 4481, "Cinergy S2 PCIe Dual Port 1" },
+    })
+ },
+            { 5435, Tuple.Create("TerraTec Electronic GmbH", new Dictionary<int, string>{
+{ 4481, "Cinergy S2 PCIe Dual Port 1" },
 { 4482, "Cinergy S2 PCIe Dual Port 2" },
- } },
-            { 5446, new Dictionary<int, string>(){ 
-    { 420, "Antaris 4" },
+    })
+ },
+            { 5446, Tuple.Create("U-Blox AG", new Dictionary<int, string>{
+{ 420, "Antaris 4" },
 { 421, "[u-blox 5]" },
 { 422, "[u-blox 6]" },
 { 423, "[u-blox 7]" },
 { 424, "[u-blox 8]" },
 { 4354, "LISA-U2" },
- } },
-            { 5447, new Dictionary<int, string>(){ 
-    { 4096, "SG-Lock[U2]" },
- } },
-            { 5450, new Dictionary<int, string>(){ 
-    { 33152, "CARD STAR/medic2" },
- } },
-            { 5451, new Dictionary<int, string>(){ 
-    { 15, "Flash Drive" },
+    })
+ },
+            { 5447, Tuple.Create("SG Intec Ltd & Co KG", new Dictionary<int, string>{
+{ 4096, "SG-Lock[U2]" },
+    })
+ },
+            { 5450, Tuple.Create("Celectronic GmbH", new Dictionary<int, string>{
+{ 33152, "CARD STAR/medic2" },
+    })
+ },
+            { 5451, Tuple.Create("PNY", new Dictionary<int, string>{
+{ 15, "Flash Drive" },
 { 16, "USB 2.0 Flash Drive" },
 { 72, "Flash Drive" },
 { 77, "8 GB Flash Drive" },
@@ -23736,34 +19065,26 @@ namespace HardwareInformation.Providers {
 { 24576, "Flash Drive" },
 { 25925, "FD Device" },
 { 64005, "Flash Drive" },
- } },
-            { 5453, new Dictionary<int, string>(){ 
-     } },
-            { 5454, new Dictionary<int, string>(){ 
-    { 12288, "Marantz RC9001 Remote Control" },
- } },
-            { 5455, new Dictionary<int, string>(){ 
-     } },
-            { 5460, new Dictionary<int, string>(){ 
-    { 20496, "PV-D231U(RN)-F [PixelView PlayTV SBTVD Full-Seg]" },
- } },
-            { 5463, new Dictionary<int, string>(){ 
-    { 2, "model 01 WiFi interface" },
+    })
+ },
+            { 5454, Tuple.Create("D&M Holdings, Inc. (Denon/Marantz)", new Dictionary<int, string>{
+{ 12288, "Marantz RC9001 Remote Control" },
+    })
+ },
+            { 5460, Tuple.Create("Prolink Microsystems Corp.", new Dictionary<int, string>{
+{ 20496, "PV-D231U(RN)-F [PixelView PlayTV SBTVD Full-Seg]" },
+    })
+ },
+            { 5463, Tuple.Create("OQO", new Dictionary<int, string>{
+{ 2, "model 01 WiFi interface" },
 { 3, "model 01 Bluetooth interface" },
 { 2688, "Gobi Wireless Modem (QDL mode)" },
 { 30496, "model 01+ Ethernet" },
 { 33104, "model 01 Ethernet interface" },
- } },
-            { 5480, new Dictionary<int, string>(){ 
-     } },
-            { 5487, new Dictionary<int, string>(){ 
-     } },
-            { 5488, new Dictionary<int, string>(){ 
-     } },
-            { 5499, new Dictionary<int, string>(){ 
-     } },
-            { 5502, new Dictionary<int, string>(){ 
-    { 12294, "TEW-444UB EU [TRENDnet]" },
+    })
+ },
+            { 5502, Tuple.Create("TRENDnet", new Dictionary<int, string>{
+{ 12294, "TEW-444UB EU [TRENDnet]" },
 { 12295, "TEW-444UB EU (no firmware)" },
 { 12298, "TEW-429UB 802.11bg" },
 { 12299, "TEW-429UB 802.11bg" },
@@ -23777,21 +19098,18 @@ namespace HardwareInformation.Providers {
 { 12806, "Allnet ALL0283 [AR5523](no firmware)" },
 { 12807, "TEW-509UB A1 802.11abg Wireless Adapter [ZyDAS ZD1211]" },
 { 12808, "TEW-509UB 1.1R 802.11abg Wireless Adapter" },
- } },
-            { 5506, new Dictionary<int, string>(){ 
-    { 24579, "WL-430U 802.11bg" },
- } },
-            { 5511, new Dictionary<int, string>(){ 
-     } },
-            { 5517, new Dictionary<int, string>(){ 
-     } },
-            { 5518, new Dictionary<int, string>(){ 
-    { 2080, "SmartPocket Class Device" },
- } },
-            { 5528, new Dictionary<int, string>(){ 
-     } },
-            { 5538, new Dictionary<int, string>(){ 
-    { 56, "9S08JS Bootloader" },
+    })
+ },
+            { 5506, Tuple.Create("Fiberline", new Dictionary<int, string>{
+{ 24579, "WL-430U 802.11bg" },
+    })
+ },
+            { 5518, Tuple.Create("JDS Uniphase Corporation (JDSU)", new Dictionary<int, string>{
+{ 2080, "SmartPocket Class Device" },
+    })
+ },
+            { 5538, Tuple.Create("Freescale Semiconductor, Inc.", new Dictionary<int, string>{
+{ 56, "9S08JS Bootloader" },
 { 59, "USB2CAN Application for ColdFire DEMOJM board" },
 { 65, "i.MX51 SystemOnChip in RecoveryMode" },
 { 66, "OSBDM - Debug Port" },
@@ -23803,37 +19121,35 @@ namespace HardwareInformation.Providers {
 { 106, "Vybrid series SystemOnChip in RecoveryMode" },
 { 118, "i.MX 7Solo/7Dual SystemOnChip in RecoveryMode" },
 { 128, "i.MX 6ULL SystemOnChip in RecoveryMode" },
- } },
-            { 5540, new Dictionary<int, string>(){ 
-    { 4096, "AF9015/AF9035 DVB-T stick" },
+    })
+ },
+            { 5540, Tuple.Create("Afatech Technologies, Inc.", new Dictionary<int, string>{
+{ 4096, "AF9015/AF9035 DVB-T stick" },
 { 4097, "AF9015/AF9035 DVB-T stick" },
 { 4918, "SDHC/MicroSD/MMC/MS/M2/CF/XD Flash Card Reader" },
 { 36885, "AF9015 DVB-T USB2.0 stick" },
 { 36886, "AF9015 DVB-T USB2.0 stick" },
- } },
-            { 5544, new Dictionary<int, string>(){ 
-     } },
-            { 5545, new Dictionary<int, string>(){ 
-    { 2, "SparkLAN WL-682 802.11bg Wireless Adapter [Intersil ISL3887]" },
+    })
+ },
+            { 5545, Tuple.Create("Gemtek", new Dictionary<int, string>{
+{ 2, "SparkLAN WL-682 802.11bg Wireless Adapter [Intersil ISL3887]" },
 { 4, "WUBR-177G [Ralink RT2571W]" },
 { 6, "Wireless 11n USB Adapter" },
 { 16, "802.11n USB Wireless Card" },
 { 18, "WUBR-208N 802.11abgn Wireless Adapter [Ralink RT2870]" },
 { 45, "WLTUBA-107 [Yota 4G LTE]" },
- } },
-            { 5546, new Dictionary<int, string>(){ 
-     } },
-            { 5549, new Dictionary<int, string>(){ 
-     } },
-            { 5562, new Dictionary<int, string>(){ 
-    { 3, "OpenOCD JTAG" },
+    })
+ },
+            { 5562, Tuple.Create("Olimex Ltd.", new Dictionary<int, string>{
+{ 3, "OpenOCD JTAG" },
 { 4, "OpenOCD JTAG TINY" },
 { 42, "ARM-USB-TINY-H JTAG interface" },
 { 43, "ARM-USB-OCD-H JTAG+RS232" },
 { 60, "TERES Keyboard+Touchpad" },
- } },
-            { 5568, new Dictionary<int, string>(){ 
-    { 1, "2M pixel Microscope Camera" },
+    })
+ },
+            { 5568, Tuple.Create("XL Imaging", new Dictionary<int, string>{
+{ 1, "2M pixel Microscope Camera" },
 { 2, "3M pixel Microscope Camera" },
 { 3, "1.3M pixel Microscope Camera (mono)" },
 { 4, "1.3M pixel Microscope Camera (colour)" },
@@ -23845,19 +19161,22 @@ namespace HardwareInformation.Providers {
 { 10, "2M pixel Microscope Camera (Mk 2)" },
 { 16, "1.3M pixel \"Tinycam\"" },
 { 257, "3M pixel Microscope Camera" },
- } },
-            { 5570, new Dictionary<int, string>(){ 
-    { 54, "LC16M VFD Display/IR Receiver" },
+    })
+ },
+            { 5570, Tuple.Create("SoundGraph Inc.", new Dictionary<int, string>{
+{ 54, "LC16M VFD Display/IR Receiver" },
 { 56, "GD01 MX LCD Display/IR Receiver" },
 { 66, "Antec Veris Multimedia Station E-Z IR Receiver" },
 { 65498, "iMON PAD Remote Controller" },
 { 65500, "iMON PAD Remote Controller" },
- } },
-            { 5573, new Dictionary<int, string>(){ 
-    { 8, "WL532U 802.11g Adapter" },
- } },
-            { 5574, new Dictionary<int, string>(){ 
-    { 4096, "DigistimSP (cold)" },
+    })
+ },
+            { 5573, Tuple.Create("Advance Multimedia Internet Technology Inc. (AMIT)", new Dictionary<int, string>{
+{ 8, "WL532U 802.11g Adapter" },
+    })
+ },
+            { 5574, Tuple.Create("Laboratoires MXM", new Dictionary<int, string>{
+{ 4096, "DigistimSP (cold)" },
 { 4097, "DigistimSP (warm)" },
 { 4098, "DigimapSP USB (cold)" },
 { 4099, "DigimapSP USB (warm)" },
@@ -23866,79 +19185,80 @@ namespace HardwareInformation.Providers {
 { 4352, "Odyssee (cold)" },
 { 4353, "Odyssee (warm)" },
 { 4608, "Digispy" },
- } },
-            { 5576, new Dictionary<int, string>(){ 
-    { 12801, "EVER EV-W100/EV-W250" },
- } },
-            { 5577, new Dictionary<int, string>(){ 
-     } },
-            { 5578, new Dictionary<int, string>(){ 
-    { 195, "Mini Optical Mouse" },
+    })
+ },
+            { 5576, Tuple.Create("KTF Technologies", new Dictionary<int, string>{
+{ 12801, "EVER EV-W100/EV-W250" },
+    })
+ },
+            { 5578, Tuple.Create("Textech International Ltd.", new Dictionary<int, string>{
+{ 195, "Mini Optical Mouse" },
 { 257, "MIDI Interface cable" },
 { 6150, "MIDI Interface cable" },
- } },
-            { 5589, new Dictionary<int, string>(){ 
-     } },
-            { 5593, new Dictionary<int, string>(){ 
-    { 2611, "Optical Mouse" },
+    })
+ },
+            { 5593, Tuple.Create("Trust International B.V.", new Dictionary<int, string>{
+{ 2611, "Optical Mouse" },
 { 2615, "Mouse" },
 { 2625, "MI-2540D [Optical mouse]" },
 { 2636, "USB+PS/2 Optical Mouse" },
 { 2637, "Optical Mouse" },
 { 2638, "AM-5400 [Optical Mouse]" },
 { 2639, "Optical Mouse" },
- } },
-            { 5596, new Dictionary<int, string>(){ 
-     } },
-            { 5600, new Dictionary<int, string>(){ 
-     } },
-            { 5601, new Dictionary<int, string>(){ 
-    { 8199, "RSA SecurID (R) Authenticator" },
- } },
-            { 5604, new Dictionary<int, string>(){ 
-    { 36, "Mixtrack" },
+    })
+ },
+            { 5601, Tuple.Create("RSA", new Dictionary<int, string>{
+{ 8199, "RSA SecurID (R) Authenticator" },
+    })
+ },
+            { 5604, Tuple.Create("Numark", new Dictionary<int, string>{
+{ 36, "Mixtrack" },
 { 60, "DJ2GO2 Touch" },
 { 320, "ION VCR 2 PC / Video 2 PC" },
 { 16128, "Power A Mini Pro Elite" },
 { 16138, "Airflo Wired Controller for Xbox 360" },
 { 16144, "Batarang controller for Xbox 360" },
- } },
-            { 5608, new Dictionary<int, string>(){ 
-    { 37120, "NUB100 Ethernet [pegasus]" },
+    })
+ },
+            { 5608, Tuple.Create("SohoWare", new Dictionary<int, string>{
+{ 37120, "NUB100 Ethernet [pegasus]" },
 { 37136, "10/100 USB Ethernet" },
- } },
-            { 5609, new Dictionary<int, string>(){ 
-    { 1230, "MemoryFrame MF-570" },
+    })
+ },
+            { 5609, Tuple.Create("Pacific Digital Corp.", new Dictionary<int, string>{
+{ 1230, "MemoryFrame MF-570" },
 { 6504, "MemoryFrame MF-570" },
 { 6505, "Digital Frame" },
- } },
-            { 5612, new Dictionary<int, string>(){ 
-     } },
-            { 5620, new Dictionary<int, string>(){ 
-    { 1, "HanfTek UMT-010 USB2.0 DVB-T (cold)" },
+    })
+ },
+            { 5620, Tuple.Create("HanfTek", new Dictionary<int, string>{
+{ 1, "HanfTek UMT-010 USB2.0 DVB-T (cold)" },
 { 37, "HanfTek UMT-010 USB2.0 DVB-T (warm)" },
 { 305, "Astrometa DVB-T/T2/C FM & DAB receiver [RTL2832P]" },
 { 309, "Astrometa T2hybrid" },
- } },
-            { 5636, new Dictionary<int, string>(){ 
-    { 4288, "Dell Integrated Hub" },
+    })
+ },
+            { 5636, Tuple.Create("Tascam", new Dictionary<int, string>{
+{ 4288, "Dell Integrated Hub" },
 { 32768, "US-428 Audio/Midi Controller (without fw)" },
 { 32769, "US-428 Audio/Midi Controller" },
 { 32772, "US-224 Audio/Midi Controller (without fw)" },
 { 32773, "US-224 Audio/Midi Controller" },
 { 32774, "US-122 Audio/Midi Interface (without fw)" },
 { 32775, "US-122 Audio/Midi Interface" },
- } },
-            { 5637, new Dictionary<int, string>(){ 
-    { 1, "DIO-32 (No Firmware Yet)" },
+    })
+ },
+            { 5637, Tuple.Create("ACCES I/O Products, Inc.", new Dictionary<int, string>{
+{ 1, "DIO-32 (No Firmware Yet)" },
 { 2, "USB-DIO-48 (No Firmware Yet)" },
 { 3, "USB-DIO-96 (No Firmware Yet)" },
 { 4, "USB-DIO-32I (No Firmware Yet)" },
 { 5, "USB-DIO24 (based on -CTR6) (No Firmware Yet)" },
 { 6, "USB-DIO24-CTR6 (No Firmware Yet)" },
- } },
-            { 5638, new Dictionary<int, string>(){ 
-    { 2, "Astra 1236U Scanner" },
+    })
+ },
+            { 5638, Tuple.Create("Umax", new Dictionary<int, string>{
+{ 2, "Astra 1236U Scanner" },
 { 16, "Astra 1220U" },
 { 48, "Astra 1600U/2000U" },
 { 80, "Scanner" },
@@ -23954,9 +19274,10 @@ namespace HardwareInformation.Providers {
 { 8208, "AstraCam Digital Camera" },
 { 8224, "AstraCam 1000" },
 { 8240, "AstraCam 1800 Digital Camera" },
- } },
-            { 5640, new Dictionary<int, string>(){ 
-    { 1, "EdgePort/4 Serial Port" },
+    })
+ },
+            { 5640, Tuple.Create("Inside Out Networks [hex]", new Dictionary<int, string>{
+{ 1, "EdgePort/4 Serial Port" },
 { 2, "Edgeport/8" },
 { 3, "Rapidport/4" },
 { 4, "Edgeport/4" },
@@ -24032,50 +19353,49 @@ namespace HardwareInformation.Providers {
 { 785, "Watchport/Hc" },
 { 5123, "MultiTech Systems MT4X56 Modem" },
 { 6679, "Agilent Technologies (E6473)" },
- } },
-            { 5642, new Dictionary<int, string>(){ 
-    { 12676, "VIA VNT-6656 [WiFi 802.11b/g USB Dongle]" },
- } },
-            { 5646, new Dictionary<int, string>(){ 
-    { 1, "E2USBKey" },
- } },
-            { 5652, new Dictionary<int, string>(){ 
-    { 1028, "WMA9109 UMTS Phone" },
+    })
+ },
+            { 5642, Tuple.Create("VIA Technologies, Inc.", new Dictionary<int, string>{
+{ 12676, "VIA VNT-6656 [WiFi 802.11b/g USB Dongle]" },
+    })
+ },
+            { 5646, Tuple.Create("INRO", new Dictionary<int, string>{
+{ 1, "E2USBKey" },
+    })
+ },
+            { 5652, Tuple.Create("Amoi Electronics", new Dictionary<int, string>{
+{ 1028, "WMA9109 UMTS Phone" },
 { 1536, "Vodafone VDA GPS / Toschiba Protege G710" },
 { 2052, "WP-S1 Phone" },
- } },
-            { 5655, new Dictionary<int, string>(){ 
-    { 8194, "NVX-P1 Personal Navigation System" },
- } },
-            { 5657, new Dictionary<int, string>(){ 
-     } },
-            { 5660, new Dictionary<int, string>(){ 
-    { 2, "DTC-02U [Digi Touch Controller]" },
- } },
-            { 5665, new Dictionary<int, string>(){ 
-     } },
-            { 5672, new Dictionary<int, string>(){ 
-     } },
-            { 5674, new Dictionary<int, string>(){ 
-     } },
-            { 5679, new Dictionary<int, string>(){ 
-     } },
-            { 5680, new Dictionary<int, string>(){ 
-    { 5, "802.11g Wireless Adapter [Intersil ISL3886]" },
+    })
+ },
+            { 5655, Tuple.Create("Sony Corp.", new Dictionary<int, string>{
+{ 8194, "NVX-P1 Personal Navigation System" },
+    })
+ },
+            { 5660, Tuple.Create("Digitech Systems", new Dictionary<int, string>{
+{ 2, "DTC-02U [Digi Touch Controller]" },
+    })
+ },
+            { 5680, Tuple.Create("2Wire, Inc.", new Dictionary<int, string>{
+{ 5, "802.11g Wireless Adapter [Intersil ISL3886]" },
 { 17, "PC Port 10 Mps Adapter" },
 { 65409, "802.11b Wireless Adapter [Lucent/Agere Hermes I]" },
- } },
-            { 5681, new Dictionary<int, string>(){ 
-    { 25088, "GWUSB2E" },
+    })
+ },
+            { 5681, Tuple.Create("Good Way Technology", new Dictionary<int, string>{
+{ 25088, "GWUSB2E" },
 { 49177, "RT2573" },
- } },
-            { 5683, new Dictionary<int, string>(){ 
-    { 17680, "ASC1553" },
+    })
+ },
+            { 5683, Tuple.Create("AIM GmbH", new Dictionary<int, string>{
+{ 17680, "ASC1553" },
 { 17696, "ASC429" },
 { 17760, "ASC-FDX" },
- } },
-            { 5701, new Dictionary<int, string>(){ 
-    { 1, "1S Serial Port" },
+    })
+ },
+            { 5701, Tuple.Create("Entrega [hex]", new Dictionary<int, string>{
+{ 1, "1S Serial Port" },
 { 2, "2S Serial Port" },
 { 3, "1S25 Serial Port" },
 { 4, "4S Serial Port" },
@@ -24096,38 +19416,41 @@ namespace HardwareInformation.Providers {
 { 32896, "1 port to Serial" },
 { 32897, "1 port to Serial" },
 { 32915, "PortGear Serial Port" },
- } },
-            { 5705, new Dictionary<int, string>(){ 
-    { 258, "uDART In-Circuit Debugger" },
+    })
+ },
+            { 5705, Tuple.Create("SofTec Microsystems", new Dictionary<int, string>{
+{ 258, "uDART In-Circuit Debugger" },
 { 512, "SpYder USBSPYDER08" },
- } },
-            { 5706, new Dictionary<int, string>(){ 
-     } },
-            { 5708, new Dictionary<int, string>(){ 
-    { 257, "mvBlueFOX camera (no firmware)" },
+    })
+ },
+            { 5708, Tuple.Create("Matrix Vision GmbH", new Dictionary<int, string>{
+{ 257, "mvBlueFOX camera (no firmware)" },
 { 259, "mvBlueFOX camera" },
 { 513, "mvBlueLYNX-X intelligent camera (bootloader)" },
 { 515, "mvBlueLYNX-X intelligent camera" },
- } },
-            { 5719, new Dictionary<int, string>(){ 
-    { 12624, "SIS3150 USB2.0 to VME interface" },
- } },
-            { 5723, new Dictionary<int, string>(){ 
-    { 33025, "Tranzport Control Surface" },
+    })
+ },
+            { 5719, Tuple.Create("Struck Innovative Systeme GmbH", new Dictionary<int, string>{
+{ 12624, "SIS3150 USB2.0 to VME interface" },
+    })
+ },
+            { 5723, Tuple.Create("Frontier Design Group", new Dictionary<int, string>{
+{ 33025, "Tranzport Control Surface" },
 { 64209, "Alphatrack Control Surface" },
- } },
-            { 5724, new Dictionary<int, string>(){ 
-    { 2, "Serial Adapter" },
+    })
+ },
+            { 5724, Tuple.Create("Kondo Kagaku", new Dictionary<int, string>{
+{ 2, "Serial Adapter" },
 { 6, "FT232 [ICS adapter HS]" },
 { 8, "FT232 [Dual adapter HS]" },
- } },
-            { 5728, new Dictionary<int, string>(){ 
-     } },
-            { 5735, new Dictionary<int, string>(){ 
-    { 5, "PCR330A RFID Reader (125 kHz, keyboard emulation)" },
- } },
-            { 5736, new Dictionary<int, string>(){ 
-    { 9, "Gateway" },
+    })
+ },
+            { 5735, Tuple.Create("GIGA-TMS INC.", new Dictionary<int, string>{
+{ 5, "PCR330A RFID Reader (125 kHz, keyboard emulation)" },
+    })
+ },
+            { 5736, Tuple.Create("Actiontec Electronics, Inc. [hex]", new Dictionary<int, string>{
+{ 9, "Gateway" },
 { 819, "Modem" },
 { 856, "InternetPhoneWizard" },
 { 1029, "Gateway" },
@@ -24145,70 +19468,77 @@ namespace HardwareInformation.Providers {
 { 24727, "802.11b Wireless Adapter" },
 { 24838, "802UI3(B) 802.11b Wireless Adapter [Intersil PRISM 3]" },
 { 30213, "UAT1 Wireless Ethernet Adapter" },
- } },
-            { 5737, new Dictionary<int, string>(){ 
-    { 4097, "uLan2USB Converter - PS1 protocol" },
- } },
-            { 5738, new Dictionary<int, string>(){ 
-    { 257, "C-Bus Multi-room Audio Matrix Switcher" },
+    })
+ },
+            { 5737, Tuple.Create("PiKRON Ltd. [hex]", new Dictionary<int, string>{
+{ 4097, "uLan2USB Converter - PS1 protocol" },
+    })
+ },
+            { 5738, Tuple.Create("Clipsal", new Dictionary<int, string>{
+{ 257, "C-Bus Multi-room Audio Matrix Switcher" },
 { 513, "C-Bus Pascal Automation Controller" },
 { 769, "C-Bus Wireless PC Interface" },
 { 771, "C-Bus interface" },
 { 772, "C-Bus Black and White Touchscreen" },
 { 773, "C-Bus Spectrum Colour Touchscreen" },
 { 1025, "C-Bus Architectural Dimmer" },
- } },
-            { 5751, new Dictionary<int, string>(){ 
-    { 259, "Token" },
- } },
-            { 5753, new Dictionary<int, string>(){ 
-    { 8193, "Beagle Protocol Analyzer" },
+    })
+ },
+            { 5751, Tuple.Create("China Huada Integrated Circuit Design (Group) Co., Ltd. (CIDC Group)", new Dictionary<int, string>{
+{ 259, "Token" },
+    })
+ },
+            { 5753, Tuple.Create("Total Phase", new Dictionary<int, string>{
+{ 8193, "Beagle Protocol Analyzer" },
 { 8194, "Cheetah SPI Host Adapter" },
- } },
-            { 5755, new Dictionary<int, string>(){ 
-    { 8201, "Flip Ultra U1120" },
- } },
-            { 5760, new Dictionary<int, string>(){ 
-    { 41778, "DVB-T Dongle [RTL2832U]" },
- } },
-            { 5761, new Dictionary<int, string>(){ 
-    { 1, "Tuner's Dashboard" },
+    })
+ },
+            { 5755, Tuple.Create("Pure Digital Technologies, Inc.", new Dictionary<int, string>{
+{ 8201, "Flip Ultra U1120" },
+    })
+ },
+            { 5760, Tuple.Create("Golden Bridge Electech Inc.", new Dictionary<int, string>{
+{ 41778, "DVB-T Dongle [RTL2832U]" },
+    })
+ },
+            { 5761, Tuple.Create("Prevo Technologies, Inc.", new Dictionary<int, string>{
+{ 1, "Tuner's Dashboard" },
 { 2, "DocuBrain(R) Tubachron" },
 { 3, "DocuBrain(R) I2C" },
 { 4, "DocuBrain(R) WWVB Receiver" },
 { 5, "DocuBrain(R) WWVB Transmitter" },
- } },
-            { 5762, new Dictionary<int, string>(){ 
-     } },
-            { 5764, new Dictionary<int, string>(){ 
-     } },
-            { 5765, new Dictionary<int, string>(){ 
-    { 512, "Infrared adapter" },
- } },
-            { 5766, new Dictionary<int, string>(){ 
-    { 69, "Handy Recorder stereo mix" },
+    })
+ },
+            { 5765, Tuple.Create("Delock", new Dictionary<int, string>{
+{ 512, "Infrared adapter" },
+    })
+ },
+            { 5766, Tuple.Create("ZOOM Corporation", new Dictionary<int, string>{
+{ 69, "Handy Recorder stereo mix" },
 { 448, "Zoom Handy Recorder card reader" },
 { 453, "Zoom Handy Recorder multi track" },
 { 981, "LiveTrak L-12" },
- } },
-            { 5767, new Dictionary<int, string>(){ 
-    { 21129, "FlashDisk" },
+    })
+ },
+            { 5767, Tuple.Create("Kingmax Digital Inc.", new Dictionary<int, string>{
+{ 21129, "FlashDisk" },
 { 25105, "FlashDisk" },
 { 25107, "FlashDisk" },
- } },
-            { 5768, new Dictionary<int, string>(){ 
-     } },
-            { 5769, new Dictionary<int, string>(){ 
-    { 64768, "Onza Tournament Edition controller" },
+    })
+ },
+            { 5769, Tuple.Create("Razer USA, Ltd", new Dictionary<int, string>{
+{ 64768, "Onza Tournament Edition controller" },
 { 64769, "Onza Classic Edition" },
 { 65024, "Sabertooth Elite" },
- } },
-            { 5772, new Dictionary<int, string>(){ 
-    { 1, "AR5523" },
+    })
+ },
+            { 5772, Tuple.Create("Atheros Communications", new Dictionary<int, string>{
+{ 1, "AR5523" },
 { 2, "AR5523 (no firmware)" },
- } },
-            { 5776, new Dictionary<int, string>(){ 
-    { 1, "Arcaze Gamepad" },
+    })
+ },
+            { 5776, Tuple.Create("Askey Computer Corp. [hex]", new Dictionary<int, string>{
+{ 1, "Arcaze Gamepad" },
 { 257, "Creative Modem Blaster DE5670" },
 { 258, "V1456 VQE-R2 Modem [conexant]" },
 { 259, "1456 VQE-R3 Modem [conexant]" },
@@ -24239,35 +19569,32 @@ namespace HardwareInformation.Providers {
 { 8192, "naturaSign Pad Standard" },
 { 8193, "naturaSign Pad Standard" },
 { 65042, "Bootloader" },
- } },
-            { 5782, new Dictionary<int, string>(){ 
-     } },
-            { 5783, new Dictionary<int, string>(){ 
-     } },
-            { 5797, new Dictionary<int, string>(){ 
-     } },
-            { 5798, new Dictionary<int, string>(){ 
-    { 12288, "VTG-3xxx Video Test Generator family" },
+    })
+ },
+            { 5798, Tuple.Create("Unigraf", new Dictionary<int, string>{
+{ 12288, "VTG-3xxx Video Test Generator family" },
 { 16384, "VTG-4xxx Video Test Generator family" },
 { 20480, "VTG-5xxx Video Test Generator family" },
 { 20481, "VTG-5xxx Special (update) mode of VTG-5xxx family" },
- } },
-            { 5803, new Dictionary<int, string>(){ 
-    { 30721, "AR5523" },
+    })
+ },
+            { 5803, Tuple.Create("Global Sun Technology", new Dictionary<int, string>{
+{ 30721, "AR5523" },
 { 30722, "AR5523 (no firmware)" },
 { 30737, "AR5523" },
 { 30738, "AR5523 (no firmware)" },
- } },
-            { 5804, new Dictionary<int, string>(){ 
-     } },
-            { 5812, new Dictionary<int, string>(){ 
-    { 2049, "U43" },
- } },
-            { 5813, new Dictionary<int, string>(){ 
-    { 2, "Otto driving companion" },
- } },
-            { 5824, new Dictionary<int, string>(){ 
-    { 1000, "free for internal lab use 1000" },
+    })
+ },
+            { 5812, Tuple.Create("iStation", new Dictionary<int, string>{
+{ 2049, "U43" },
+    })
+ },
+            { 5813, Tuple.Create("Persentec, Inc.", new Dictionary<int, string>{
+{ 2, "Otto driving companion" },
+    })
+ },
+            { 5824, Tuple.Create("Van Ooijen Technische Informatica", new Dictionary<int, string>{
+{ 1000, "free for internal lab use 1000" },
 { 1001, "free for internal lab use 1001" },
 { 1002, "free for internal lab use 1002" },
 { 1003, "free for internal lab use 1003" },
@@ -24325,14 +19652,14 @@ namespace HardwareInformation.Providers {
 { 10206, "MIDI class devices" },
 { 10570, "Eye Movement Recorder [Visagraph]" },
 { 10571, "Eye Movement Recorder [ReadAlyzer]" },
- } },
-            { 5834, new Dictionary<int, string>(){ 
-    { 5378, "Bluetooth Dongle" },
- } },
-            { 5836, new Dictionary<int, string>(){ 
-     } },
-            { 5840, new Dictionary<int, string>(){ 
-    { 1078, "Xylanta Ltd, XSP Device" },
+    })
+ },
+            { 5834, Tuple.Create("Wireless Cables, Inc.", new Dictionary<int, string>{
+{ 5378, "Bluetooth Dongle" },
+    })
+ },
+            { 5840, Tuple.Create("MCS", new Dictionary<int, string>{
+{ 1078, "Xylanta Ltd, XSP Device" },
 { 1176, "Braintechnology USB-LPS" },
 { 1284, "RETRO Innovations ZoomFloppy" },
 { 1355, "GrauTec ReelBox OLED Display (external)" },
@@ -24365,82 +19692,78 @@ namespace HardwareInformation.Providers {
 { 3227, "Fermium LABS srl/LabTrek srl Hall Effect Apparatus" },
 { 3388, "InputStick BT4.0" },
 { 3614, "AtomMiner" },
- } },
-            { 5841, new Dictionary<int, string>(){ 
-    { 1025, "SUP-SFR400(A) BioMini Fingerprint Reader" },
- } },
-            { 5843, new Dictionary<int, string>(){ 
-     } },
-            { 5845, new Dictionary<int, string>(){ 
-    { 25090, "CDMA/UMTS/GPRS modem" },
+    })
+ },
+            { 5841, Tuple.Create("Suprema Inc.", new Dictionary<int, string>{
+{ 1025, "SUP-SFR400(A) BioMini Fingerprint Reader" },
+    })
+ },
+            { 5845, Tuple.Create("AnyDATA Corporation", new Dictionary<int, string>{
+{ 25090, "CDMA/UMTS/GPRS modem" },
 { 25857, "CDMA 2000 1xRTT/EV-DO Modem" },
 { 25858, "CDMA/UMTS/GPRS modem" },
 { 26115, "ADU-890WH modem" },
- } },
-            { 5846, new Dictionary<int, string>(){ 
-    { 32768, "GDP-04 desktop phone" },
+    })
+ },
+            { 5846, Tuple.Create("JABLOCOM s.r.o.", new Dictionary<int, string>{
+{ 32768, "GDP-04 desktop phone" },
 { 32769, "EYE-02" },
 { 32771, "GDP-04 modem" },
 { 32772, "Bootloader" },
 { 32773, "GDP-04i" },
 { 32775, "BTP-06 modem" },
- } },
-            { 5848, new Dictionary<int, string>(){ 
-    { 20801, "CMOTECH CDMA Technologies modem" },
+    })
+ },
+            { 5848, Tuple.Create("CMOTECH Co., Ltd.", new Dictionary<int, string>{
+{ 20801, "CMOTECH CDMA Technologies modem" },
 { 21811, "CCU-550 CDMA EV-DO modem" },
 { 21827, "CDMA 2000 1xRTT/1xEVDO modem" },
 { 25216, "CMOTECH CDMA Technologies modem" },
 { 26627, "CNU-680 CDMA EV-DO modem" },
 { 32769, "Gobi 2000 Wireless Modem (QDL mode)" },
 { 32770, "Gobi 2000 Wireless Modem" },
- } },
-            { 5852, new Dictionary<int, string>(){ 
-    { 1, "CC" },
+    })
+ },
+            { 5852, Tuple.Create("Wiener, Plein & Baus", new Dictionary<int, string>{
+{ 1, "CC" },
 { 11, "VM" },
 { 16, "PL512 Power Supply System" },
 { 17, "MARATON Power Supply System" },
 { 18, "MPOD Multi Channel Power Supply System" },
 { 21, "CML Control, Measurement and Data Logging System" },
- } },
-            { 5854, new Dictionary<int, string>(){ 
-     } },
-            { 5855, new Dictionary<int, string>(){ 
-     } },
-            { 5872, new Dictionary<int, string>(){ 
-    { 1, "Speedlink Programming Interface" },
+    })
+ },
+            { 5872, Tuple.Create("GN Hearing A/S", new Dictionary<int, string>{
+{ 1, "Speedlink Programming Interface" },
 { 3, "Airlink Wireless Programming Interface" },
 { 4, "Accessory Programming Interface" },
- } },
-            { 5877, new Dictionary<int, string>(){ 
-     } },
-            { 5890, new Dictionary<int, string>(){ 
-    { 2, "Encodeur" },
- } },
-            { 5894, new Dictionary<int, string>(){ 
-     } },
-            { 5895, new Dictionary<int, string>(){ 
-     } },
-            { 5899, new Dictionary<int, string>(){ 
-    { 17, "MIDI-USB 1x1" },
- } },
-            { 5901, new Dictionary<int, string>(){ 
-     } },
-            { 5905, new Dictionary<int, string>(){ 
-    { 257, "DFC-365FX camera" },
+    })
+ },
+            { 5890, Tuple.Create("FDI-MATELEC", new Dictionary<int, string>{
+{ 2, "Encodeur" },
+    })
+ },
+            { 5899, Tuple.Create("Swissonic", new Dictionary<int, string>{
+{ 17, "MIDI-USB 1x1" },
+    })
+ },
+            { 5905, Tuple.Create("Leica Microsystems", new Dictionary<int, string>{
+{ 257, "DFC-365FX camera" },
 { 12320, "IC80 HD Camera" },
- } },
-            { 5924, new Dictionary<int, string>(){ 
-    { 277, "PAXcam5" },
- } },
-            { 5925, new Dictionary<int, string>(){ 
-     } },
-            { 5926, new Dictionary<int, string>(){ 
-    { 4096, "wireless modem" },
+    })
+ },
+            { 5924, Tuple.Create("Meyer Instruments (MIS)", new Dictionary<int, string>{
+{ 277, "PAXcam5" },
+    })
+ },
+            { 5926, Tuple.Create("Axesstel, Inc.", new Dictionary<int, string>{
+{ 4096, "wireless modem" },
 { 8192, "wireless modem" },
 { 12288, "wireless modem" },
- } },
-            { 5935, new Dictionary<int, string>(){ 
-    { 34, "Tablet" },
+    })
+ },
+            { 5935, Tuple.Create("Waltop International Corp.", new Dictionary<int, string>{
+{ 34, "Tablet" },
 { 36, "Tablet" },
 { 37, "Tablet" },
 { 38, "Tablet" },
@@ -24451,14 +19774,14 @@ namespace HardwareInformation.Providers {
 { 1280, "Media Tablet 14.1\"" },
 { 1281, "Media Tablet 10.6\"" },
 { 1282, "Sirius Battery Free Tablet" },
- } },
-            { 5939, new Dictionary<int, string>(){ 
-    { 257, "RF Wireless Optical Mouse OP-701" },
- } },
-            { 5942, new Dictionary<int, string>(){ 
-     } },
-            { 5943, new Dictionary<int, string>(){ 
-    { 57, "USB1000 Gigabit Notebook Adapter" },
+    })
+ },
+            { 5939, Tuple.Create("Cellink Technology Co., Ltd", new Dictionary<int, string>{
+{ 257, "RF Wireless Optical Mouse OP-701" },
+    })
+ },
+            { 5943, Tuple.Create("802.11g Adapter [Linksys WUSB54GC v3]", new Dictionary<int, string>{
+{ 57, "USB1000 Gigabit Notebook Adapter" },
 { 112, "WUSB100 v1 RangePlus Wireless Network Adapter [Ralink RT2870]" },
 { 113, "WUSB600N v1 Dual-Band Wireless-N Network Adapter [Ralink RT2870]" },
 { 115, "WUSB54GC v2 802.11g Adapter [Realtek RTL8187B]" },
@@ -24466,16 +19789,19 @@ namespace HardwareInformation.Providers {
 { 119, "WUSB54GC v3 802.11g Adapter [Ralink RT2070L]" },
 { 120, "WUSB100 v2 RangePlus Wireless Network Adapter [Ralink RT3070]" },
 { 121, "WUSB600N v2 Dual-Band Wireless-N Network Adapter [Ralink RT3572]" },
- } },
-            { 5946, new Dictionary<int, string>(){ 
-    { 8600, "Accu-Chek Mobile" },
+    })
+ },
+            { 5946, Tuple.Create("Roche", new Dictionary<int, string>{
+{ 8600, "Accu-Chek Mobile" },
 { 8650, "ACCU-CHEK Mobile Model U1" },
- } },
-            { 5949, new Dictionary<int, string>(){ 
-    { 2, "GP-K7000 keyboard" },
- } },
-            { 5952, new Dictionary<int, string>(){ 
-    { 256, "EUB1200AC AC1200 DB Wireless Adapter [Realtek RTL8812AU]" },
+    })
+ },
+            { 5949, Tuple.Create("QSENN", new Dictionary<int, string>{
+{ 2, "GP-K7000 keyboard" },
+    })
+ },
+            { 5952, Tuple.Create("Senao", new Dictionary<int, string>{
+{ 256, "EUB1200AC AC1200 DB Wireless Adapter [Realtek RTL8812AU]" },
 { 1536, "EUB600v1 802.11abgn Wireless Adapter [Ralink RT3572]" },
 { 1541, "LevelOne WUA-0605 N_Max Wireless USB Adapter" },
 { 1557, "LevelOne WUA-0615 N_Max Wireless USB Adapter" },
@@ -24489,14 +19815,14 @@ namespace HardwareInformation.Providers {
 { 38661, "EnGenius 802.11n Wireless USB Adapter" },
 { 38662, "EUB9706 802.11n Wireless Adapter [Ralink RT3072]" },
 { 38913, "EUB9801 802.11abgn Wireless Adapter [Ralink RT3572]" },
- } },
-            { 5955, new Dictionary<int, string>(){ 
-     } },
-            { 5960, new Dictionary<int, string>(){ 
-    { 257, "Packet-Master USB12" },
- } },
-            { 5964, new Dictionary<int, string>(){ 
-    { 2001, "Transcend ESD400 Portable SSD (USB 3.0)" },
+    })
+ },
+            { 5960, Tuple.Create("MQP Electronics", new Dictionary<int, string>{
+{ 257, "Packet-Master USB12" },
+    })
+ },
+            { 5964, Tuple.Create("ASMedia Technology Inc.", new Dictionary<int, string>{
+{ 2001, "Transcend ESD400 Portable SSD (USB 3.0)" },
 { 4433, "ASM1151W" },
 { 4435, "ASM1153 SATA 3Gb/s bridge" },
 { 8308, "ASM1074 High-Speed hub" },
@@ -24505,9 +19831,10 @@ namespace HardwareInformation.Providers {
 { 20790, "ASM1053 SATA 3Gb/s bridge" },
 { 20950, "ASM1051W SATA 3Gb/s bridge" },
 { 21930, "ASM1051E SATA 6Gb/s bridge, ASM1053E SATA 6Gb/s bridge, ASM1153 SATA 3Gb/s bridge, ASM1153E SATA 6Gb/s bridge" },
- } },
-            { 5967, new Dictionary<int, string>(){ 
-    { 4357, "SM-MS/Pro-MMC-XD Card Reader" },
+    })
+ },
+            { 5967, Tuple.Create("Syntek", new Dictionary<int, string>{
+{ 4357, "SM-MS/Pro-MMC-XD Card Reader" },
 { 4363, "HP Webcam" },
 { 4386, "HP Webcam" },
 { 4457, "Lenovo EasyCamera" },
@@ -24530,37 +19857,41 @@ namespace HardwareInformation.Providers {
 { 41746, "1.3MPixel Web Cam" },
 { 43041, "Web Cam - Packard Bell BU45, PB Easynote MX66-208W" },
 { 43537, "Web Cam" },
- } },
-            { 5971, new Dictionary<int, string>(){ 
-    { 51457, "PPC900 Pinpad Terminal" },
- } },
-            { 5974, new Dictionary<int, string>(){ 
-    { 6, "DiviPitch" },
- } },
-            { 5977, new Dictionary<int, string>(){ 
-     } },
-            { 5985, new Dictionary<int, string>(){ 
-    { 2821, "802.11n Network Adapter (wrong ID - swapped vendor and device)" },
- } },
-            { 6000, new Dictionary<int, string>(){ 
-    { 65280, "steel series rgb keyboard" },
- } },
-            { 6002, new Dictionary<int, string>(){ 
-     } },
-            { 6006, new Dictionary<int, string>(){ 
-    { 20508, "300K CMOS Camera" },
- } },
-            { 6007, new Dictionary<int, string>(){ 
-    { 3, "MicroHAWK ID-20" },
- } },
-            { 6015, new Dictionary<int, string>(){ 
-    { 4, "MM004V5 Photo Key Chain (Digital Photo Frame) 1.5\"" },
+    })
+ },
+            { 5971, Tuple.Create("GERTEC Telecomunicacoes Ltda.", new Dictionary<int, string>{
+{ 51457, "PPC900 Pinpad Terminal" },
+    })
+ },
+            { 5974, Tuple.Create("ENENSYS Technologies", new Dictionary<int, string>{
+{ 6, "DiviPitch" },
+    })
+ },
+            { 5985, Tuple.Create("ASUSTek Computer, Inc. (wrong ID)", new Dictionary<int, string>{
+{ 2821, "802.11n Network Adapter (wrong ID - swapped vendor and device)" },
+    })
+ },
+            { 6000, Tuple.Create("MSI", new Dictionary<int, string>{
+{ 65280, "steel series rgb keyboard" },
+    })
+ },
+            { 6006, Tuple.Create("Arowana", new Dictionary<int, string>{
+{ 20508, "300K CMOS Camera" },
+    })
+ },
+            { 6007, Tuple.Create("Microscan Systems, Inc.", new Dictionary<int, string>{
+{ 3, "MicroHAWK ID-20" },
+    })
+ },
+            { 6015, Tuple.Create("Sweex", new Dictionary<int, string>{
+{ 4, "MM004V5 Photo Key Chain (Digital Photo Frame) 1.5\"" },
 { 339, "LW153 802.11n Adapter [ralink rt3070]" },
 { 340, "LW154 802.11bgn (1x1:1) Wireless Adapter [Realtek RTL8188SU]" },
 { 787, "LW313 802.11n Adapter [ralink rt2770 + rt2720]" },
- } },
-            { 6017, new Dictionary<int, string>(){ 
-    { 2015, "Axium AX-800DAV Amplifier" },
+    })
+ },
+            { 6017, Tuple.Create("Multiple Vendors", new Dictionary<int, string>{
+{ 2015, "Axium AX-800DAV Amplifier" },
 { 2017, "Axium AX-KPC Keypad" },
 { 2018, "Axium AX-KPD Keypad" },
 { 2019, "Axium AX-400DA Amplifier" },
@@ -24586,39 +19917,37 @@ namespace HardwareInformation.Providers {
 { 7920, "E1701 Modular Controller Card" },
 { 7921, "E1701 Modular Controller Card" },
 { 7922, "E1803 Compact Controller Card" },
- } },
-            { 6018, new Dictionary<int, string>(){ 
-    { 15616, "F200n mobile phone" },
- } },
-            { 6020, new Dictionary<int, string>(){ 
-    { 1, "eHome Infrared Transceiver" },
+    })
+ },
+            { 6018, Tuple.Create("Spreadtrum Communications Inc.", new Dictionary<int, string>{
+{ 15616, "F200n mobile phone" },
+    })
+ },
+            { 6020, Tuple.Create("TopSeed Technology Corp.", new Dictionary<int, string>{
+{ 1, "eHome Infrared Transceiver" },
 { 4, "RF Combo Device" },
 { 6, "eHome Infrared Transceiver" },
 { 7, "eHome Infrared Transceiver" },
 { 8, "eHome Infrared Transceiver" },
 { 10, "eHome Infrared Transceiver" },
 { 17, "eHome Infrared Transceiver" },
- } },
-            { 6023, new Dictionary<int, string>(){ 
-     } },
-            { 6024, new Dictionary<int, string>(){ 
-     } },
-            { 6030, new Dictionary<int, string>(){ 
-    { 2821, "CrossLink cable 2GB (wrong ID - swapped vendor and device)" },
- } },
-            { 6038, new Dictionary<int, string>(){ 
-     } },
-            { 6039, new Dictionary<int, string>(){ 
-     } },
-            { 6041, new Dictionary<int, string>(){ 
-    { 28753, "Belkin F5D7051 802.11g Adapter v1000 [Broadcom 4320]" },
+    })
+ },
+            { 6030, Tuple.Create("ASUSTek Computer, Inc. (wrong ID)", new Dictionary<int, string>{
+{ 2821, "CrossLink cable 2GB (wrong ID - swapped vendor and device)" },
+    })
+ },
+            { 6041, Tuple.Create("Thales Norway A/S", new Dictionary<int, string>{
+{ 28753, "Belkin F5D7051 802.11g Adapter v1000 [Broadcom 4320]" },
 { 32849, "Belkin F5D8051 v2 802.11bgn Wireless Adapter [Marvell 88W8362]" },
- } },
-            { 6045, new Dictionary<int, string>(){ 
-    { 16, "Internal Infrared Transceiver" },
- } },
-            { 6048, new Dictionary<int, string>(){ 
-    { 1, "C01U condenser microphone" },
+    })
+ },
+            { 6045, Tuple.Create("Ricavision International, Inc.", new Dictionary<int, string>{
+{ 16, "Internal Infrared Transceiver" },
+    })
+ },
+            { 6048, Tuple.Create("Samson Technologies Corp.", new Dictionary<int, string>{
+{ 1, "C01U condenser microphone" },
 { 2, "Q1U dynamic microphone" },
 { 256, "C03U multi-pattern microphone" },
 { 257, "UB1 boundary microphone" },
@@ -24641,40 +19970,40 @@ namespace HardwareInformation.Providers {
 { 5654, "RXD1 wireless receiver" },
 { 45633, "G-Track Pro firmware update" },
 { 45841, "Satellite firmware update" },
- } },
-            { 6052, new Dictionary<int, string>(){ 
-    { 1, "Performance Monitor 3" },
+    })
+ },
+            { 6052, Tuple.Create("Concept2", new Dictionary<int, string>{
+{ 1, "Performance Monitor 3" },
 { 2, "Performance Monitor 4" },
- } },
-            { 6053, new Dictionary<int, string>(){ 
-     } },
-            { 6055, new Dictionary<int, string>(){ 
-     } },
-            { 6056, new Dictionary<int, string>(){ 
-    { 1, "Optical Eye/3-wire" },
+    })
+ },
+            { 6056, Tuple.Create("Kamstrup A/S", new Dictionary<int, string>{
+{ 1, "Optical Eye/3-wire" },
 { 5, "M-Bus Master MultiPort 250D" },
 { 16, "444MHz Radio Mesh Frontend" },
 { 17, "444MHz RF sniffer" },
 { 18, "870MHz Radio Mesh Frontend" },
 { 19, "870MHz RF sniffer" },
- } },
-            { 6067, new Dictionary<int, string>(){ 
-    { 4, "Linux-USB Midi Gadget" },
- } },
-            { 6069, new Dictionary<int, string>(){ 
-    { 16, "MFT Sensor" },
- } },
-            { 6074, new Dictionary<int, string>(){ 
-    { 1, "SAU510-USB [no firmware]" },
+    })
+ },
+            { 6067, Tuple.Create("Grey Innovation", new Dictionary<int, string>{
+{ 4, "Linux-USB Midi Gadget" },
+    })
+ },
+            { 6069, Tuple.Create("Lunatone", new Dictionary<int, string>{
+{ 16, "MFT Sensor" },
+    })
+ },
+            { 6074, Tuple.Create("SAURIS GmbH", new Dictionary<int, string>{
+{ 1, "SAU510-USB [no firmware]" },
 { 1296, "SAU510-USB and SAU510-USB plus JTAG Emulators" },
 { 1297, "SAU510-USB Iso Plus JTAG Emulator" },
 { 1312, "SAU510-USB Nano JTAG Emulator" },
 { 5393, "Onboard Emulator on SAUModule development kit" },
- } },
-            { 6083, new Dictionary<int, string>(){ 
-     } },
-            { 6092, new Dictionary<int, string>(){ 
-    { 1052, "Audio 2 DJ" },
+    })
+ },
+            { 6092, Tuple.Create("Native Instruments", new Dictionary<int, string>{
+{ 1052, "Audio 2 DJ" },
 { 1053, "Traktor Audio 2" },
 { 2056, "Maschine Controller" },
 { 2069, "Audio Kontrol 1" },
@@ -24691,15 +20020,10 @@ namespace HardwareInformation.Providers {
 { 18193, "Kore Controller" },
 { 18194, "Kore Controller 2" },
 { 47871, "Traktor Kontrol S4" },
- } },
-            { 6095, new Dictionary<int, string>(){ 
-     } },
-            { 6096, new Dictionary<int, string>(){ 
-     } },
-            { 6099, new Dictionary<int, string>(){ 
-     } },
-            { 6121, new Dictionary<int, string>(){ 
-    { 81, "USB VGA Adaptor" },
+    })
+ },
+            { 6121, Tuple.Create("DisplayLink", new Dictionary<int, string>{
+{ 81, "USB VGA Adaptor" },
 { 408, "DisplayLink" },
 { 414, "Overfly FY-1016A" },
 { 655, "HIS Multi-View II" },
@@ -24717,11 +20041,10 @@ namespace HardwareInformation.Providers {
 { 17170, "S2340T" },
 { 17262, "Dell D3100 Docking Station" },
 { 65296, "I1659FWUX {AOC Powered Monitor]" },
- } },
-            { 6123, new Dictionary<int, string>(){ 
-     } },
-            { 6127, new Dictionary<int, string>(){ 
-    { 4096, "ThinkPad X6 UltraBase" },
+    })
+ },
+            { 6127, Tuple.Create("Lenovo", new Dictionary<int, string>{
+{ 4096, "ThinkPad X6 UltraBase" },
 { 4099, "Integrated Smart Card Reader" },
 { 4100, "Integrated Webcam" },
 { 4101, "ThinkPad X200 Ultrabase (42X4963 )" },
@@ -24803,97 +20126,94 @@ namespace HardwareInformation.Providers {
 { 45057, "Ethernet" },
 { 45059, "Virtual Keyboard and Mouse / Mass Storage" },
 { 61443, "MEDION LIFETAB X10605 MTP mode" },
- } },
-            { 6132, new Dictionary<int, string>(){ 
-    { 43690, "Jazz Blood Glucose Meter" },
- } },
-            { 6133, new Dictionary<int, string>(){ 
-     } },
-            { 6134, new Dictionary<int, string>(){ 
-    { 1801, "Model M Keyboard" },
+    })
+ },
+            { 6132, Tuple.Create("WaveSense", new Dictionary<int, string>{
+{ 43690, "Jazz Blood Glucose Meter" },
+    })
+ },
+            { 6134, Tuple.Create("Unicomp, Inc.", new Dictionary<int, string>{
+{ 1801, "Model M Keyboard" },
 { 2082, "Ruffian 6 Keyboard v3 [Model M]" },
- } },
-            { 6153, new Dictionary<int, string>(){ 
-    { 17924, "USB-4604" },
+    })
+ },
+            { 6153, Tuple.Create("Advantech", new Dictionary<int, string>{
+{ 17924, "USB-4604" },
 { 18273, "USB-4761 Portable Data Acquisition Module" },
- } },
-            { 6178, new Dictionary<int, string>(){ 
-    { 12801, "VisionDTV USB-Ter/HAMA USB DVB-T device cold" },
+    })
+ },
+            { 6178, Tuple.Create("Twinhan", new Dictionary<int, string>{
+{ 12801, "VisionDTV USB-Ter/HAMA USB DVB-T device cold" },
 { 12802, "VisionDTV USB-Ter/HAMA USB DVB-T device warm" },
- } },
-            { 6193, new Dictionary<int, string>(){ 
-     } },
-            { 6194, new Dictionary<int, string>(){ 
-     } },
-            { 6205, new Dictionary<int, string>(){ 
-    { 16, "VoiceKey" },
- } },
-            { 6211, new Dictionary<int, string>(){ 
-     } },
-            { 6217, new Dictionary<int, string>(){ 
-     } },
-            { 6223, new Dictionary<int, string>(){ 
-    { 18, "MOCCA compact" },
- } },
-            { 6226, new Dictionary<int, string>(){ 
-    { 28706, "Fiio E10" },
+    })
+ },
+            { 6205, Tuple.Create("VIVOphone", new Dictionary<int, string>{
+{ 16, "VoiceKey" },
+    })
+ },
+            { 6223, Tuple.Create("K2L GmbH", new Dictionary<int, string>{
+{ 18, "MOCCA compact" },
+    })
+ },
+            { 6226, Tuple.Create("GYROCOM C&C Co., LTD", new Dictionary<int, string>{
+{ 28706, "Fiio E10" },
 { 31009, "Audiotrak ProDigy CUBE" },
 { 31010, "Audiotrak DR.DAC2 DX [GYROCOM C&C]" },
- } },
-            { 6228, new Dictionary<int, string>(){ 
-     } },
-            { 6235, new Dictionary<int, string>(){ 
-    { 12320, "K100 Infrared Receiver" },
+    })
+ },
+            { 6235, Tuple.Create("Compro", new Dictionary<int, string>{
+{ 12320, "K100 Infrared Receiver" },
 { 12418, "K100 Infrared Receiver v2" },
 { 53248, "Compro Videomate DVB-U2000 - DVB-T USB cold" },
 { 53249, "Compro Videomate DVB-U2000 - DVB-T USB warm" },
- } },
-            { 6241, new Dictionary<int, string>(){ 
-     } },
-            { 6242, new Dictionary<int, string>(){ 
-     } },
-            { 6256, new Dictionary<int, string>(){ 
-    { 1, "iNexio Touchscreen controller" },
- } },
-            { 6257, new Dictionary<int, string>(){ 
-    { 257, "UVC camera (Bresser microscope)" },
+    })
+ },
+            { 6256, Tuple.Create("Nexio Co., Ltd", new Dictionary<int, string>{
+{ 1, "iNexio Touchscreen controller" },
+    })
+ },
+            { 6257, Tuple.Create("Aveo Technology Corp.", new Dictionary<int, string>{
+{ 257, "UVC camera (Bresser microscope)" },
 { 321, "Camera" },
 { 3329, "USB2.0 Camera" },
- } },
-            { 6259, new Dictionary<int, string>(){ 
-    { 61075, "EasyLogger" },
- } },
-            { 6268, new Dictionary<int, string>(){ 
-    { 1297, "AlienFX Mobile lighting" },
+    })
+ },
+            { 6259, Tuple.Create("Navilock", new Dictionary<int, string>{
+{ 61075, "EasyLogger" },
+    })
+ },
+            { 6268, Tuple.Create("Alienware Corporation", new Dictionary<int, string>{
+{ 1297, "AlienFX Mobile lighting" },
 { 1299, "Gaming Desktop [Aurora R4]" },
 { 1360, "LED controller" },
 { 1536, "Dual Compatible Game Pad" },
- } },
-            { 6271, new Dictionary<int, string>(){ 
-    { 16, "Stallar Board" },
+    })
+ },
+            { 6271, Tuple.Create("Siano Mobile Silicon", new Dictionary<int, string>{
+{ 16, "Stallar Board" },
 { 256, "Stallar Board" },
 { 512, "Nova A" },
 { 513, "Nova B" },
 { 514, "Nice" },
 { 768, "Vega" },
 { 769, "VeNice" },
- } },
-            { 6290, new Dictionary<int, string>(){ 
-     } },
-            { 6292, new Dictionary<int, string>(){ 
-    { 22066, "Atek Tote Remote" },
+    })
+ },
+            { 6292, Tuple.Create("Topseed", new Dictionary<int, string>{
+{ 22066, "Atek Tote Remote" },
 { 22081, "TSAM-004 Presentation Remote" },
- } },
-            { 6295, new Dictionary<int, string>(){ 
-     } },
-            { 6303, new Dictionary<int, string>(){ 
-    { 2, "Legato2 3D Scanner" },
- } },
-            { 6308, new Dictionary<int, string>(){ 
-    { 1, "Snapshell IDR" },
- } },
-            { 6309, new Dictionary<int, string>(){ 
-    { 532, "Portable Hard Drive" },
+    })
+ },
+            { 6303, Tuple.Create("3Shape A/S", new Dictionary<int, string>{
+{ 2, "Legato2 3D Scanner" },
+    })
+ },
+            { 6308, Tuple.Create("CSSN", new Dictionary<int, string>{
+{ 1, "Snapshell IDR" },
+    })
+ },
+            { 6309, Tuple.Create("Verbatim, Ltd", new Dictionary<int, string>{
+{ 532, "Portable Hard Drive" },
 { 534, "External Hard Drive" },
 { 536, "External Hard Drive" },
 { 548, "Store 'n' Go Micro Plus" },
@@ -24906,31 +20226,32 @@ namespace HardwareInformation.Providers {
 { 772, "Store 'n' Go" },
 { 1032, "Store 'n' Go" },
 { 16675, "Store N Go" },
- } },
-            { 6321, new Dictionary<int, string>(){ 
-    { 55, "Maxter Remote Control" },
- } },
-            { 6324, new Dictionary<int, string>(){ 
-    { 4097, "DUTV007" },
+    })
+ },
+            { 6321, Tuple.Create("Petalynx", new Dictionary<int, string>{
+{ 55, "Maxter Remote Control" },
+    })
+ },
+            { 6324, Tuple.Create("e3C Technologies", new Dictionary<int, string>{
+{ 4097, "DUTV007" },
 { 4098, "EC168 (v5) based USB DVB-T receiver" },
 { 5769, "DUTV009" },
 { 65530, "EC168 (v2) based USB DVB-T receiver" },
 { 65531, "EC168 (v3) based USB DVB-T receiver" },
- } },
-            { 6326, new Dictionary<int, string>(){ 
-     } },
-            { 6327, new Dictionary<int, string>(){ 
-     } },
-            { 6341, new Dictionary<int, string>(){ 
-    { 2, "CG-WLUSB2GO" },
+    })
+ },
+            { 6341, Tuple.Create("AMIT Technology, Inc.", new Dictionary<int, string>{
+{ 2, "CG-WLUSB2GO" },
 { 8, "CG-WLUSB2GNR Corega Wireless USB Adapter" },
 { 18, "CG-WLUSB10 Corega Wireless USB Adapter" },
- } },
-            { 6349, new Dictionary<int, string>(){ 
-    { 51966, "Pico iMage" },
- } },
-            { 6353, new Dictionary<int, string>(){ 
-    { 1, "Onda V972 (storage access)" },
+    })
+ },
+            { 6349, Tuple.Create("Ecamm", new Dictionary<int, string>{
+{ 51966, "Pico iMage" },
+    })
+ },
+            { 6353, Tuple.Create("Google Inc.", new Dictionary<int, string>{
+{ 1, "Onda V972 (storage access)" },
 { 3, "Android-powered device using AllWinner Technology SoC" },
 { 6, "Onda V972 MTP" },
 { 8, "Onda V972 PTP (camera)" },
@@ -24972,53 +20293,58 @@ namespace HardwareInformation.Providers {
 { 53261, "Xiaomi Mi/Redmi 2 (fastboot)" },
 { 53513, "LG G2x MTP" },
 { 53514, "LG G2x MTP (debug)" },
- } },
-            { 6357, new Dictionary<int, string>(){ 
-     } },
-            { 6361, new Dictionary<int, string>(){ 
-    { 416, "B-Net 91 07" },
- } },
-            { 6364, new Dictionary<int, string>(){ 
-     } },
-            { 6365, new Dictionary<int, string>(){ 
-    { 4096, "DocuPen RC800" },
- } },
-            { 6371, new Dictionary<int, string>(){ 
-    { 28930, "Multi Card Reader (Internal)" },
+    })
+ },
+            { 6361, Tuple.Create("Kaba", new Dictionary<int, string>{
+{ 416, "B-Net 91 07" },
+    })
+ },
+            { 6365, Tuple.Create("Planon System Solutions Inc.", new Dictionary<int, string>{
+{ 4096, "DocuPen RC800" },
+    })
+ },
+            { 6371, Tuple.Create("Fitipower Integrated Technology Inc", new Dictionary<int, string>{
+{ 28930, "Multi Card Reader (Internal)" },
 { 37121, "All-in-1 Card Reader" },
 { 37122, "Multi Card Reader" },
 { 38162, "Webcam" },
- } },
-            { 6376, new Dictionary<int, string>(){ 
-    { 24900, "LR802UA 802.11b Wireless Adapter [ALi M4301AU]" },
+    })
+ },
+            { 6376, Tuple.Create("Qcom", new Dictionary<int, string>{
+{ 24900, "LR802UA 802.11b Wireless Adapter [ALi M4301AU]" },
 { 24982, "RT2573" },
 { 25129, "RT2573" },
 { 25138, "Wireless 802.11g 54Mbps Network Adapter [RTL8187]" },
- } },
-            { 6378, new Dictionary<int, string>(){ 
-    { 2, "DualHead2Go [Analog Edition]" },
+    })
+ },
+            { 6378, Tuple.Create("Matrox Graphics, Inc.", new Dictionary<int, string>{
+{ 2, "DualHead2Go [Analog Edition]" },
 { 4, "TripleHead2Go [Digital Edition]" },
- } },
-            { 6380, new Dictionary<int, string>(){ 
-    { 12568, "USB to IrDA adapter [ARK3116T]" },
+    })
+ },
+            { 6380, Tuple.Create("Arkmicro Technologies Inc.", new Dictionary<int, string>{
+{ 12568, "USB to IrDA adapter [ARK3116T]" },
 { 12680, "ARK3188 UVC Webcam" },
 { 12953, "Webcam Carrefour" },
 { 13158, "Bresser Biolux NV" },
 { 22608, "CVBS / S-Video Capture Device [UVC]" },
- } },
-            { 6383, new Dictionary<int, string>(){ 
-    { 57364, "FS20PCE" },
+    })
+ },
+            { 6383, Tuple.Create("ELV Elektronik AG", new Dictionary<int, string>{
+{ 57364, "FS20PCE" },
 { 57365, "FS20PCS" },
 { 57370, "Bedien-Anzeige-Terminal" },
- } },
-            { 6392, new Dictionary<int, string>(){ 
-    { 3991, "Optical Gaming Mouse [Xtrem]" },
+    })
+ },
+            { 6392, Tuple.Create("[Maxxter]", new Dictionary<int, string>{
+{ 3991, "Optical Gaming Mouse [Xtrem]" },
 { 3993, "Optical gaming mouse" },
 { 4418, "Optical gaming mouse" },
 { 5254, "X5s ZEUS Macro Pro Gaming Mouse" },
- } },
-            { 6395, new Dictionary<int, string>(){ 
-    { 448, "ST1501-STN" },
+    })
+ },
+            { 6395, Tuple.Create("Scriptel Corporation", new Dictionary<int, string>{
+{ 448, "ST1501-STN" },
 { 449, "ST1526-STN" },
 { 450, "ST1501-PYJ" },
 { 451, "ST1501B-PYJ" },
@@ -25034,42 +20360,42 @@ namespace HardwareInformation.Providers {
 { 516, "ST1400" },
 { 518, "ST1475" },
 { 519, "ST1570" },
- } },
-            { 6397, new Dictionary<int, string>(){ 
-     } },
-            { 6401, new Dictionary<int, string>(){ 
-    { 21, "Nemo Tracker" },
- } },
-            { 6408, new Dictionary<int, string>(){ 
-    { 258, "Digital Photo Frame" },
+    })
+ },
+            { 6401, Tuple.Create("GE Healthcare", new Dictionary<int, string>{
+{ 21, "Nemo Tracker" },
+    })
+ },
+            { 6408, Tuple.Create("GEMBIRD", new Dictionary<int, string>{
+{ 258, "Digital Photo Frame" },
 { 550, "MicroSD Card Reader/Writer" },
 { 4885, "Digital Photo Frame" },
 { 4896, "DM8261 Flashdisc" },
 { 8304, "Honk HK-5002 USB Speaker" },
 { 8736, "Buildwin Media-Player" },
 { 8977, "Generic UVC 1.00 camera [AppoTech AX2311]" },
- } },
-            { 6413, new Dictionary<int, string>(){ 
-     } },
-            { 6420, new Dictionary<int, string>(){ 
-     } },
-            { 6421, new Dictionary<int, string>(){ 
-    { 12, "Wireless Desktop nRF24L01 CX-1766" },
+    })
+ },
+            { 6421, Tuple.Create("Nordic Semiconductor ASA", new Dictionary<int, string>{
+{ 12, "Wireless Desktop nRF24L01 CX-1766" },
 { 257, "HP Prime Wireless Kit [FOK65AA] (Flash mode)" },
 { 8755, "Linksys WUSB11 v2.8 802.11b Adapter [Atmel AT76C505]" },
 { 8756, "Linksys WUSB54G v1 OEM 802.11g Adapter [Intersil ISL3886]" },
 { 8757, "Linksys WUSB54GP v1 OEM 802.11g Adapter [Intersil ISL3886]" },
 { 8758, "Linksys WUSB11 v3.0 802.11b Adapter [Intersil PRISM 3]" },
 { 30583, "Bitcraze Crazyradio (PA) dongle" },
- } },
-            { 6428, new Dictionary<int, string>(){ 
-    { 16644, "Banknote validator NV-150" },
- } },
-            { 6435, new Dictionary<int, string>(){ 
-    { 2, "Personal SyncPoint" },
- } },
-            { 6438, new Dictionary<int, string>(){ 
-    { 3, "1900 HID Touchscreen" },
+    })
+ },
+            { 6428, Tuple.Create("Innovative Technology LTD", new Dictionary<int, string>{
+{ 16644, "Banknote validator NV-150" },
+    })
+ },
+            { 6435, Tuple.Create("FitLinxx", new Dictionary<int, string>{
+{ 2, "Personal SyncPoint" },
+    })
+ },
+            { 6438, Tuple.Create("NextWindow", new Dictionary<int, string>{
+{ 3, "1900 HID Touchscreen" },
 { 6, "1950 HID Touchscreen" },
 { 100, "1950 HID Touchscreen" },
 { 101, "1950 HID Touchscreen" },
@@ -25099,46 +20425,50 @@ namespace HardwareInformation.Providers {
 { 135, "1950 HID Touchscreen" },
 { 3519, "HID Touchscreen" },
 { 3522, "HID Touchscreen" },
- } },
-            { 6440, new Dictionary<int, string>(){ 
-    { 1024, "Equotip Piccolo" },
- } },
-            { 6447, new Dictionary<int, string>(){ 
-    { 0, "Mouse" },
+    })
+ },
+            { 6440, Tuple.Create("Proceq SA", new Dictionary<int, string>{
+{ 1024, "Equotip Piccolo" },
+    })
+ },
+            { 6447, Tuple.Create("Avago Technologies, Pte.", new Dictionary<int, string>{
+{ 0, "Mouse" },
 { 1046, "ADNS-5700 Optical Mouse Controller (3-button)" },
 { 1558, "ADNS-5700 Optical Mouse Controller (5-button)" },
 { 2326, "ADNS-2710 Optical Mouse Controller" },
- } },
-            { 6448, new Dictionary<int, string>(){ 
-     } },
-            { 6449, new Dictionary<int, string>(){ 
-     } },
-            { 6452, new Dictionary<int, string>(){ 
-    { 1538, "F71610 or F71612 Consumer Infrared Receiver/Transceiver" },
+    })
+ },
+            { 6452, Tuple.Create("Feature Integration Technology Inc. (Fintek)", new Dictionary<int, string>{
+{ 1538, "F71610 or F71612 Consumer Infrared Receiver/Transceiver" },
 { 1794, "Integrated Consumer Infrared Receiver/Transceiver" },
 { 20840, "F71610A or F71612A Consumer Infrared Receiver/Transceiver" },
- } },
-            { 6453, new Dictionary<int, string>(){ 
-    { 13, "Elektron Digitakt" },
- } },
-            { 6456, new Dictionary<int, string>(){ 
-    { 1281, "TCR51USB IRIG Time Code Reader" },
+    })
+ },
+            { 6453, Tuple.Create("Elektron Music Machines", new Dictionary<int, string>{
+{ 13, "Elektron Digitakt" },
+    })
+ },
+            { 6456, Tuple.Create("Meinberg Funkuhren GmbH & Co. KG", new Dictionary<int, string>{
+{ 1281, "TCR51USB IRIG Time Code Reader" },
 { 1282, "TCR600USB IRIG Time Code Reader" },
- } },
-            { 6465, new Dictionary<int, string>(){ 
-    { 32801, "WH1080 Weather Station / USB Missile Launcher" },
- } },
-            { 6467, new Dictionary<int, string>(){ 
-    { 8784, "Model 2250 MPEG and JPEG Capture Card" },
+    })
+ },
+            { 6465, Tuple.Create("Dream Link", new Dictionary<int, string>{
+{ 32801, "WH1080 Weather Station / USB Missile Launcher" },
+    })
+ },
+            { 6467, Tuple.Create("Sensoray Co., Inc.", new Dictionary<int, string>{
+{ 8784, "Model 2250 MPEG and JPEG Capture Card" },
 { 8787, "Model 2253 Audio/Video Codec Card" },
 { 8789, "Model 2255 4 Channel Capture Card" },
 { 8791, "Model 2257 4 Channel Capture Card" },
 { 8803, "Model 2263 UVC HD Audio/Video Codec Card" },
 { 41552, "Model 2250 MPEG and JPEG Capture Card (cold)" },
 { 41555, "Model 2253 Audio/Video Codec Card (cold)" },
- } },
-            { 6473, new Dictionary<int, string>(){ 
-    { 2, "Amazon Kindle" },
+    })
+ },
+            { 6473, Tuple.Create("Lab126, Inc.", new Dictionary<int, string>{
+{ 2, "Amazon Kindle" },
 { 4, "Amazon Kindle 3/4/Paperwhite" },
 { 6, "Amazon Kindle Fire" },
 { 8, "Amazon Kindle Fire HD 8.9\"" },
@@ -25146,139 +20476,142 @@ namespace HardwareInformation.Providers {
 { 817, "Kindle Fire HD 8 (2018)" },
 { 1047, "Amazon Zukey; clone of Yubikey 4 OTP+U2F" },
 { 2048, "Fire Phone" },
- } },
-            { 6479, new Dictionary<int, string>(){ 
-    { 257, "AudioBox 22 VSL" },
+    })
+ },
+            { 6479, Tuple.Create("PreSonus Audio Electronics, Inc.", new Dictionary<int, string>{
+{ 257, "AudioBox 22 VSL" },
 { 258, "AudioBox 44 VSL" },
 { 259, "AudioBox 1818 VSL" },
 { 513, "FaderPort" },
 { 769, "AudioBox" },
- } },
-            { 6481, new Dictionary<int, string>(){ 
-     } },
-            { 6483, new Dictionary<int, string>(){ 
-    { 514, "S200 2GB Rev. 1" },
- } },
-            { 6484, new Dictionary<int, string>(){ 
-     } },
-            { 6493, new Dictionary<int, string>(){ 
-    { 8240, "Func KB-460 Gaming Keyboard" },
+    })
+ },
+            { 6483, Tuple.Create("Ironkey Inc.", new Dictionary<int, string>{
+{ 514, "S200 2GB Rev. 1" },
+    })
+ },
+            { 6493, Tuple.Create("Itron Technology iONE", new Dictionary<int, string>{
+{ 8240, "Func KB-460 Gaming Keyboard" },
 { 28674, "Libra-Q11 IR remote" },
 { 28678, "Libra-Q26 / 1.0 Remote" },
 { 30583, "Scorpius wireless keyboard" },
 { 30585, "Scorpius-P20MT" },
- } },
-            { 6499, new Dictionary<int, string>(){ 
-    { 5, "iRig KEYS" },
+    })
+ },
+            { 6499, Tuple.Create("IK Multimedia", new Dictionary<int, string>{
+{ 5, "iRig KEYS" },
 { 70, "UNO Synth" },
- } },
-            { 6501, new Dictionary<int, string>(){ 
-    { 22, "HomePatrol-1" },
+    })
+ },
+            { 6501, Tuple.Create("Uniden Corporation", new Dictionary<int, string>{
+{ 22, "HomePatrol-1" },
 { 24, "UBC125XLT" },
 { 26, "BCD436HP Scanner" },
- } },
-            { 6503, new Dictionary<int, string>(){ 
-     } },
-            { 6507, new Dictionary<int, string>(){ 
-     } },
-            { 6512, new Dictionary<int, string>(){ 
-    { 0, "Z Mate 16GB" },
- } },
-            { 6515, new Dictionary<int, string>(){ 
-    { 2, "Pivot recovery" },
+    })
+ },
+            { 6512, Tuple.Create("Dane-Elec Corp. USA", new Dictionary<int, string>{
+{ 0, "Z Mate 16GB" },
+    })
+ },
+            { 6515, Tuple.Create("Spectralink Corporation", new Dictionary<int, string>{
+{ 2, "Pivot recovery" },
 { 3, "Pivot Media Transfer Protocol" },
 { 4, "Pivot Media Transfer Protocol" },
- } },
-            { 6517, new Dictionary<int, string>(){ 
-     } },
-            { 6518, new Dictionary<int, string>(){ 
-    { 4871, "microSD Card Reader" },
+    })
+ },
+            { 6518, Tuple.Create("Chipsbrand Microelectronics (HK) Co., Ltd.", new Dictionary<int, string>{
+{ 4871, "microSD Card Reader" },
 { 24613, "CBM2090 Flash Drive" },
- } },
-            { 6519, new Dictionary<int, string>(){ 
-    { 273, "TL203 MP3 Player and Voice Recorder" },
- } },
-            { 6525, new Dictionary<int, string>(){ 
-    { 546, "BCL 508i" },
- } },
-            { 6528, new Dictionary<int, string>(){ 
-    { 2056, "Clickfree C2 Slimline (527SE)" },
- } },
-            { 6537, new Dictionary<int, string>(){ 
-     } },
-            { 6543, new Dictionary<int, string>(){ 
-    { 528, "BCS200 WiMAX Adapter" },
+    })
+ },
+            { 6519, Tuple.Create("T-Logic", new Dictionary<int, string>{
+{ 273, "TL203 MP3 Player and Voice Recorder" },
+    })
+ },
+            { 6525, Tuple.Create("Leuze electronic", new Dictionary<int, string>{
+{ 546, "BCL 508i" },
+    })
+ },
+            { 6528, Tuple.Create("Storage Appliance Corporation", new Dictionary<int, string>{
+{ 2056, "Clickfree C2 Slimline (527SE)" },
+    })
+ },
+            { 6543, Tuple.Create("Beceem Communications Inc.", new Dictionary<int, string>{
+{ 528, "BCS200 WiMAX Adapter" },
 { 544, "BCSM250 WiMAX Adapter" },
- } },
-            { 6544, new Dictionary<int, string>(){ 
-     } },
-            { 6549, new Dictionary<int, string>(){ 
-    { 12802, "REC-ADPT-USB (recorder)" },
+    })
+ },
+            { 6549, Tuple.Create("Trillium Technology Pty. Ltd.", new Dictionary<int, string>{
+{ 12802, "REC-ADPT-USB (recorder)" },
 { 12803, "REC-A-ADPT-USB (recorder)" },
- } },
-            { 6550, new Dictionary<int, string>(){ 
-    { 12304, "Camera Release 4" },
+    })
+ },
+            { 6550, Tuple.Create("PixeLINK", new Dictionary<int, string>{
+{ 12304, "Camera Release 4" },
 { 12305, "OEM Camera" },
 { 12306, "e-ImageData Corp. ScanPro" },
- } },
-            { 6551, new Dictionary<int, string>(){ 
-    { 1033, "wireless mini keyboard with touchpad" },
+    })
+ },
+            { 6551, Tuple.Create("Shenzhen Riitek Technology Co., Ltd", new Dictionary<int, string>{
+{ 1033, "wireless mini keyboard with touchpad" },
 { 9267, "wireless mini keyboard with touchpad" },
- } },
-            { 6555, new Dictionary<int, string>(){ 
-    { 12389, "3DM-GX3-25 Orientation Sensor" },
- } },
-            { 6558, new Dictionary<int, string>(){ 
-    { 33025, "DFx 21BU04 Camera" },
+    })
+ },
+            { 6555, Tuple.Create("MicroStrain, Inc.", new Dictionary<int, string>{
+{ 12389, "3DM-GX3-25 Orientation Sensor" },
+    })
+ },
+            { 6558, Tuple.Create("The Imaging Source Europe GmbH", new Dictionary<int, string>{
+{ 33025, "DFx 21BU04 Camera" },
 { 33879, "DFK AFU130-L53 camera" },
- } },
-            { 6559, new Dictionary<int, string>(){ 
-     } },
-            { 6565, new Dictionary<int, string>(){ 
-    { 4, "Remote NDIS Network Device" },
+    })
+ },
+            { 6565, Tuple.Create("HARRIS Corp.", new Dictionary<int, string>{
+{ 4, "Remote NDIS Network Device" },
 { 18, "RF-7800S Secure Personal Radio" },
 { 1025, "Mass Storage Device" },
 { 1026, "Falcon III RF-7800V family RNDIS" },
- } },
-            { 6568, new Dictionary<int, string>(){ 
-     } },
-            { 6571, new Dictionary<int, string>(){ 
-    { 4096, "ProScope HR" },
- } },
-            { 6575, new Dictionary<int, string>(){ 
-    { 26129, "Celestia VoIP Phone" },
- } },
-            { 6578, new Dictionary<int, string>(){ 
-    { 16, "BX32 Batupo" },
+    })
+ },
+            { 6571, Tuple.Create("Bodelin", new Dictionary<int, string>{
+{ 4096, "ProScope HR" },
+    })
+ },
+            { 6575, Tuple.Create("S Life", new Dictionary<int, string>{
+{ 26129, "Celestia VoIP Phone" },
+    })
+ },
+            { 6578, Tuple.Create("Batronix", new Dictionary<int, string>{
+{ 16, "BX32 Batupo" },
 { 17, "BX32P Barlino" },
 { 18, "BX40 Bagero" },
 { 19, "BX48 Batego" },
- } },
-            { 6580, new Dictionary<int, string>(){ 
-    { 2, "SkyScout Personal Planetarium" },
+    })
+ },
+            { 6580, Tuple.Create("Celestron", new Dictionary<int, string>{
+{ 2, "SkyScout Personal Planetarium" },
 { 257, "Handheld Digital Microscope 44302" },
- } },
-            { 6581, new Dictionary<int, string>(){ 
-     } },
-            { 6582, new Dictionary<int, string>(){ 
-     } },
-            { 6585, new Dictionary<int, string>(){ 
-    { 19216, "Drobo" },
+    })
+ },
+            { 6585, Tuple.Create("Data Robotics", new Dictionary<int, string>{
+{ 19216, "Drobo" },
 { 36128, "Drobo Elite" },
- } },
-            { 6594, new Dictionary<int, string>(){ 
-    { 27153, "MDM166A Fluorescent Display" },
- } },
-            { 6602, new Dictionary<int, string>(){ 
-    { 1, "Sandio 3D HID Mouse" },
- } },
-            { 6607, new Dictionary<int, string>(){ 
-    { 1, "MiniKit Slim handsfree car kit in firmware update mode" },
- } },
-            { 6609, new Dictionary<int, string>(){ 
-     } },
-            { 6610, new Dictionary<int, string>(){ 
-    { 1, "CDMA Wireless Modem" },
+    })
+ },
+            { 6594, Tuple.Create("Futuba", new Dictionary<int, string>{
+{ 27153, "MDM166A Fluorescent Display" },
+    })
+ },
+            { 6602, Tuple.Create("Mindtribe", new Dictionary<int, string>{
+{ 1, "Sandio 3D HID Mouse" },
+    })
+ },
+            { 6607, Tuple.Create("Parrot SA", new Dictionary<int, string>{
+{ 1, "MiniKit Slim handsfree car kit in firmware update mode" },
+    })
+ },
+            { 6610, Tuple.Create("ZTE WCDMA Technologies MSM", new Dictionary<int, string>{
+{ 1, "CDMA Wireless Modem" },
 { 2, "MF632/ONDA ET502HS/MT505UP" },
 { 7, "TU25 WiMAX Adapter [Beceem BCS200]" },
 { 23, "MF669" },
@@ -25310,205 +20643,176 @@ namespace HardwareInformation.Providers {
 { 8192, "MF627/MF628/MF628+/MF636+ HSDPA/HSUPA" },
 { 65522, "Gobi Wireless Modem (QDL mode)" },
 { 65523, "Gobi Wireless Modem" },
- } },
-            { 6619, new Dictionary<int, string>(){ 
-    { 753, "NAUT324C" },
- } },
-            { 6625, new Dictionary<int, string>(){ 
-     } },
-            { 6632, new Dictionary<int, string>(){ 
-     } },
-            { 6639, new Dictionary<int, string>(){ 
-     } },
-            { 6647, new Dictionary<int, string>(){ 
-    { 1, "Podcaster" },
- } },
-            { 6650, new Dictionary<int, string>(){ 
-    { 1543, "GAME CONTROLLER" },
+    })
+ },
+            { 6619, Tuple.Create("KFI Printers", new Dictionary<int, string>{
+{ 753, "NAUT324C" },
+    })
+ },
+            { 6647, Tuple.Create("RODE Microphones", new Dictionary<int, string>{
+{ 1, "Podcaster" },
+    })
+ },
+            { 6650, Tuple.Create("Gampaq Co.Ltd", new Dictionary<int, string>{
+{ 1543, "GAME CONTROLLER" },
 { 1795, "Steering Wheel" },
- } },
-            { 6653, new Dictionary<int, string>(){ 
-     } },
-            { 6655, new Dictionary<int, string>(){ 
-    { 258, "1.3MP Webcam" },
+    })
+ },
+            { 6655, Tuple.Create("Dynex", new Dictionary<int, string>{
+{ 258, "1.3MP Webcam" },
 { 513, "Rocketfish Wireless 2.4G Laser Mouse" },
 { 544, "RF-HDWEBLT RocketFish HD WebCam" },
 { 568, "DX-WRM1401 Mouse" },
 { 569, "Bluetooth 4.0 Adapter [Broadcom, 1.12, BCM20702A0]" },
- } },
-            { 6664, new Dictionary<int, string>(){ 
-     } },
-            { 6666, new Dictionary<int, string>(){ 
-    { 47837, "USB OTG Compliance test device" },
- } },
-            { 6674, new Dictionary<int, string>(){ 
-     } },
-            { 6685, new Dictionary<int, string>(){ 
-    { 1031, "Mimi WiFi speakers" },
- } },
-            { 6693, new Dictionary<int, string>(){ 
-     } },
-            { 6698, new Dictionary<int, string>(){ 
-     } },
-            { 6700, new Dictionary<int, string>(){ 
-    { 33, "Keyboard" },
+    })
+ },
+            { 6666, Tuple.Create("USB-IF non-workshop", new Dictionary<int, string>{
+{ 47837, "USB OTG Compliance test device" },
+    })
+ },
+            { 6685, Tuple.Create("Veho", new Dictionary<int, string>{
+{ 1031, "Mimi WiFi speakers" },
+    })
+ },
+            { 6700, Tuple.Create("China Resource Semico Co., Ltd", new Dictionary<int, string>{
+{ 33, "Keyboard" },
 { 36, "Multimedia Keyboard" },
 { 8484, "Keyboard" },
 { 11555, "Keyboard" },
 { 17020, "Backlit Keyboard [Cougar Vantar]" },
- } },
-            { 6706, new Dictionary<int, string>(){ 
-    { 772, "802.11n Wireless LAN Card" },
- } },
-            { 6708, new Dictionary<int, string>(){ 
-    { 2050, "Gamepad" },
- } },
-            { 6710, new Dictionary<int, string>(){ 
-     } },
-            { 6720, new Dictionary<int, string>(){ 
-    { 257, "Hub" },
+    })
+ },
+            { 6706, Tuple.Create("Quanta Microsystems, Inc.", new Dictionary<int, string>{
+{ 772, "802.11n Wireless LAN Card" },
+    })
+ },
+            { 6708, Tuple.Create("ACRUX", new Dictionary<int, string>{
+{ 2050, "Gamepad" },
+    })
+ },
+            { 6720, Tuple.Create("Terminus Technology Inc.", new Dictionary<int, string>{
+{ 257, "Hub" },
 { 513, "FE 2.1 7-port Hub" },
- } },
-            { 6721, new Dictionary<int, string>(){ 
-     } },
-            { 6724, new Dictionary<int, string>(){ 
-    { 1, "Digipass 905 SmartCard Reader" },
- } },
-            { 6730, new Dictionary<int, string>(){ 
-     } },
-            { 6731, new Dictionary<int, string>(){ 
-     } },
-            { 6746, new Dictionary<int, string>(){ 
-     } },
-            { 6753, new Dictionary<int, string>(){ 
-    { 13328, "CoPilot System Cable" },
+    })
+ },
+            { 6724, Tuple.Create("VASCO Data Security International", new Dictionary<int, string>{
+{ 1, "Digipass 905 SmartCard Reader" },
+    })
+ },
+            { 6753, Tuple.Create("Abbott Diabetes Care", new Dictionary<int, string>{
+{ 13328, "CoPilot System Cable" },
 { 13904, "FreeStyle Libre" },
 { 14416, "FreeStyle Optium/Precision Neo" },
 { 14672, "FreeStyle Libre 2" },
- } },
-            { 6756, new Dictionary<int, string>(){ 
-    { 0, "MasterBus Link" },
- } },
-            { 6762, new Dictionary<int, string>(){ 
-     } },
-            { 6765, new Dictionary<int, string>(){ 
-     } },
-            { 6766, new Dictionary<int, string>(){ 
-     } },
-            { 6767, new Dictionary<int, string>(){ 
-     } },
-            { 6770, new Dictionary<int, string>(){ 
-    { 4104, "E-861 PiezoWalk NEXACT Controller" },
- } },
-            { 6777, new Dictionary<int, string>(){ 
-    { 24578, "Contour" },
+    })
+ },
+            { 6756, Tuple.Create("Mastervolt", new Dictionary<int, string>{
+{ 0, "MasterBus Link" },
+    })
+ },
+            { 6770, Tuple.Create("Physik Instrumente", new Dictionary<int, string>{
+{ 4104, "E-861 PiezoWalk NEXACT Controller" },
+    })
+ },
+            { 6777, Tuple.Create("Bayer Health Care LLC", new Dictionary<int, string>{
+{ 24578, "Contour" },
 { 25104, "Contour Next Link 2.4 glucometer" },
 { 25344, "Contour next link" },
 { 29712, "Contour Next" },
 { 30720, "Contour Plus One" },
- } },
-            { 6779, new Dictionary<int, string>(){ 
-     } },
-            { 6780, new Dictionary<int, string>(){ 
-    { 104, "VerticalMouse 3" },
+    })
+ },
+            { 6780, Tuple.Create("Evoluent", new Dictionary<int, string>{
+{ 104, "VerticalMouse 3" },
 { 360, "VerticalMouse 3 Wireless" },
 { 401, "VerticalMouse 4" },
 { 405, "VerticalMouse C Wireless" },
- } },
-            { 6782, new Dictionary<int, string>(){ 
-    { 4097, "UFT75, UT150, UT60" },
+    })
+ },
+            { 6782, Tuple.Create("Meltec Systementwicklung", new Dictionary<int, string>{
+{ 4097, "UFT75, UT150, UT60" },
 { 4099, "Thermostick" },
- } },
-            { 6785, new Dictionary<int, string>(){ 
-    { 4100, "Wireless Dongle 2.4 GHZ HT82D40REW" },
+    })
+ },
+            { 6785, Tuple.Create("Holtek Semiconductor, Inc.", new Dictionary<int, string>{
+{ 4100, "Wireless Dongle 2.4 GHZ HT82D40REW" },
 { 5889, "Wireless dongle" },
 { 8196, "Keyboard" },
 { 8707, "Laser Gaming mouse" },
 { 8708, "Optical Mouse" },
 { 8709, "Laser Mouse" },
 { 16385, "Keyboard" },
- } },
-            { 6790, new Dictionary<int, string>(){ 
-    { 21778, "CH341 in EPP/MEM/I2C mode, EPP/I2C adapter" },
+    })
+ },
+            { 6790, Tuple.Create("QinHeng Electronics", new Dictionary<int, string>{
+{ 21778, "CH341 in EPP/MEM/I2C mode, EPP/I2C adapter" },
 { 21795, "CH341 in serial mode, usb to serial port converter" },
 { 21892, "CH341 in parallel mode, usb to printer port converter" },
 { 29987, "CH340 serial converter" },
 { 29997, "CH345 MIDI adapter" },
 { 30084, "CH340S" },
 { 57352, "HID-based serial adapater" },
- } },
-            { 6793, new Dictionary<int, string>(){ 
-     } },
-            { 6795, new Dictionary<int, string>(){ 
-     } },
-            { 6797, new Dictionary<int, string>(){ 
-    { 4098, "BandLuxe 3.5G HSDPA Adapter" },
+    })
+ },
+            { 6797, Tuple.Create("BandRich, Inc.", new Dictionary<int, string>{
+{ 4098, "BandLuxe 3.5G HSDPA Adapter" },
 { 4105, "BandLuxe 3.5G HSPA Adapter" },
 { 4109, "4G LTE adapter" },
- } },
-            { 6808, new Dictionary<int, string>(){ 
-     } },
-            { 6820, new Dictionary<int, string>(){ 
-     } },
-            { 6821, new Dictionary<int, string>(){ 
-     } },
-            { 6822, new Dictionary<int, string>(){ 
-     } },
-            { 6827, new Dictionary<int, string>(){ 
-    { 30518, "sceye (Gen 2)" },
+    })
+ },
+            { 6827, Tuple.Create("Silvercreations Software AG", new Dictionary<int, string>{
+{ 30518, "sceye (Gen 2)" },
 { 30519, "sceye (Gen 3)" },
 { 30520, "sceye (Gen 4, 3 Mpix)" },
 { 30544, "sceyeS (Gen 5, 5 MPix)" },
- } },
-            { 6829, new Dictionary<int, string>(){ 
-    { 1, "Touchscreen" },
- } },
-            { 6833, new Dictionary<int, string>(){ 
-    { 1200, "DS6000 SERIES" },
+    })
+ },
+            { 6829, Tuple.Create("KeeTouch", new Dictionary<int, string>{
+{ 1, "Touchscreen" },
+    })
+ },
+            { 6833, Tuple.Create("Rigol Technologies", new Dictionary<int, string>{
+{ 1200, "DS6000 SERIES" },
 { 1214, "DS4000 SERIES" },
 { 1230, "DS1xx4Z/MSO1xxZ series" },
 { 1416, "DS1000 SERIES" },
- } },
-            { 6834, new Dictionary<int, string>(){ 
-    { 1, "Vision device" },
- } },
-            { 6859, new Dictionary<int, string>(){ 
-     } },
-            { 6860, new Dictionary<int, string>(){ 
-    { 259, "AudioLink plus 4x4 2.9.28" },
- } },
-            { 6865, new Dictionary<int, string>(){ 
-     } },
-            { 6868, new Dictionary<int, string>(){ 
-    { 2, "KM290-HRS" },
- } },
-            { 6875, new Dictionary<int, string>(){ 
-    { 1, "C662 Serial Cable" },
+    })
+ },
+            { 6834, Tuple.Create("Allied Vision", new Dictionary<int, string>{
+{ 1, "Vision device" },
+    })
+ },
+            { 6860, Tuple.Create("Midiplus Co, Ltd.", new Dictionary<int, string>{
+{ 259, "AudioLink plus 4x4 2.9.28" },
+    })
+ },
+            { 6868, Tuple.Create("APS", new Dictionary<int, string>{
+{ 2, "KM290-HRS" },
+    })
+ },
+            { 6875, Tuple.Create("Schweitzer Engineering Laboratories, Inc", new Dictionary<int, string>{
+{ 1, "C662 Serial Cable" },
 { 3, "CDC Ethernet Gadget" },
- } },
-            { 6884, new Dictionary<int, string>(){ 
-     } },
-            { 6887, new Dictionary<int, string>(){ 
-    { 897, "VS-DVB-T 380U (af9015 based)" },
+    })
+ },
+            { 6887, Tuple.Create("X-TENSIONS", new Dictionary<int, string>{
+{ 897, "VS-DVB-T 380U (af9015 based)" },
 { 1317, "X-Tensions ISDN TA XC-525 [HFC-S USB]" },
 { 8193, "SpeedLink Snappy Mic webcam (SL-6825-SBK)" },
 { 36867, "SpeedLink Vicious And Devine Laplace webcam, white (VD-1504-SWT)" },
 { 36868, "SpeedLink Vicious And Devine Laplace webcam, black (VD-1504-SBK)" },
- } },
-            { 6893, new Dictionary<int, string>(){ 
-     } },
-            { 6895, new Dictionary<int, string>(){ 
-     } },
-            { 6897, new Dictionary<int, string>(){ 
-     } },
-            { 6899, new Dictionary<int, string>(){ 
-    { 1, "ZOWIE Gaming mouse" },
- } },
-            { 6910, new Dictionary<int, string>(){ 
-    { 1, "PQ Box 100" },
- } },
-            { 6916, new Dictionary<int, string>(){ 
-    { 1584, "ME-630" },
+    })
+ },
+            { 6899, Tuple.Create("Kingsis Technology Corporation", new Dictionary<int, string>{
+{ 1, "ZOWIE Gaming mouse" },
+    })
+ },
+            { 6910, Tuple.Create("A. Eberle GmbH & Co. KG", new Dictionary<int, string>{
+{ 1, "PQ Box 100" },
+    })
+ },
+            { 6916, Tuple.Create("Meilhaus Electronic GmbH", new Dictionary<int, string>{
+{ 1584, "ME-630" },
 { 2368, "ME-94" },
 { 2384, "ME-95" },
 { 2400, "ME-96" },
@@ -25584,17 +20888,20 @@ namespace HardwareInformation.Providers {
 { 33035, "ME-8100B" },
 { 33290, "ME-8200A" },
 { 33291, "ME-8200B" },
- } },
-            { 6926, new Dictionary<int, string>(){ 
-    { 4216, "BLUDRIVE II CCID" },
+    })
+ },
+            { 6926, Tuple.Create("BLUTRONICS S.r.l.", new Dictionary<int, string>{
+{ 4216, "BLUDRIVE II CCID" },
 { 4217, "BLUDRIVE II CCID" },
 { 4224, "WRITECHIP II CCID" },
- } },
-            { 6930, new Dictionary<int, string>(){ 
-    { 17, "ModFactor" },
- } },
-            { 6940, new Dictionary<int, string>(){ 
-    { 2192, "Flash Padlock" },
+    })
+ },
+            { 6930, Tuple.Create("Eventide", new Dictionary<int, string>{
+{ 17, "ModFactor" },
+    })
+ },
+            { 6940, Tuple.Create("Corsair", new Dictionary<int, string>{
+{ 2192, "Flash Padlock" },
 { 2560, "SP2500 Speakers" },
 { 2656, "Vengeance K60 Keyboard" },
 { 3076, "Link Cooling Node" },
@@ -25634,34 +20941,27 @@ namespace HardwareInformation.Providers {
 { 7179, "RM750i Power Supply" },
 { 7180, "RM850i Power Supply" },
 { 7194, "Corsair CORSAIR Lighting Node CORE" },
- } },
-            { 6942, new Dictionary<int, string>(){ 
-    { 4099, "A1250" },
- } },
-            { 6943, new Dictionary<int, string>(){ 
-    { 49167, "HM-CFG-USB/HM-CFG-USB-2 [HomeMatic Configuration adapter]" },
+    })
+ },
+            { 6942, Tuple.Create("General Imaging / General Electric", new Dictionary<int, string>{
+{ 4099, "A1250" },
+    })
+ },
+            { 6943, Tuple.Create("eQ-3 Entwicklung GmbH", new Dictionary<int, string>{
+{ 49167, "HM-CFG-USB/HM-CFG-USB-2 [HomeMatic Configuration adapter]" },
 { 49184, "HmIP-RFUSB" },
- } },
-            { 6944, new Dictionary<int, string>(){ 
-     } },
-            { 6946, new Dictionary<int, string>(){ 
-     } },
-            { 6948, new Dictionary<int, string>(){ 
-    { 16385, "TLG2300 Hybrid TV Device" },
- } },
-            { 6950, new Dictionary<int, string>(){ 
-     } },
-            { 6951, new Dictionary<int, string>(){ 
-     } },
-            { 6952, new Dictionary<int, string>(){ 
-     } },
-            { 6962, new Dictionary<int, string>(){ 
-    { 100, "Pleo robotic dinosaur" },
- } },
-            { 6966, new Dictionary<int, string>(){ 
-     } },
-            { 6971, new Dictionary<int, string>(){ 
-    { 10547, "PC Camera/Webcam controller" },
+    })
+ },
+            { 6948, Tuple.Create("Telegent Systems, Inc.", new Dictionary<int, string>{
+{ 16385, "TLG2300 Hybrid TV Device" },
+    })
+ },
+            { 6962, Tuple.Create("Ugobe Life Forms, Inc.", new Dictionary<int, string>{
+{ 100, "Pleo robotic dinosaur" },
+    })
+ },
+            { 6971, Tuple.Create("iPassion Technology Inc.", new Dictionary<int, string>{
+{ 10547, "PC Camera/Webcam controller" },
 { 10549, "PC Camera/Webcam controller" },
 { 10550, "PC Camera/Webcam controller" },
 { 10551, "PC Camera/Webcam controller" },
@@ -25685,19 +20985,20 @@ namespace HardwareInformation.Providers {
 { 10599, "PC Camera/Webcam controller" },
 { 10600, "PC Camera/Webcam controller" },
 { 10601, "PC Camera/Webcam controller" },
- } },
-            { 6975, new Dictionary<int, string>(){ 
-    { 3154, "808 Camera #9 (mass storage mode)" },
+    })
+ },
+            { 6975, Tuple.Create("Generalplus Technology Inc.", new Dictionary<int, string>{
+{ 3154, "808 Camera #9 (mass storage mode)" },
 { 8194, "808 Camera #9 (web-cam mode)" },
 { 8195, "GPD6000 [Digital MP3 Player]" },
- } },
-            { 6983, new Dictionary<int, string>(){ 
-    { 1, "CHUSB Duo Charger (NiMH AA/AAA USB smart charger)" },
- } },
-            { 6984, new Dictionary<int, string>(){ 
-     } },
-            { 6994, new Dictionary<int, string>(){ 
-    { 8449, "FXMC Neural Network Controller" },
+    })
+ },
+            { 6983, Tuple.Create("Energizer Holdings, Inc.", new Dictionary<int, string>{
+{ 1, "CHUSB Duo Charger (NiMH AA/AAA USB smart charger)" },
+    })
+ },
+            { 6994, Tuple.Create("ARH Inc.", new Dictionary<int, string>{
+{ 8449, "FXMC Neural Network Controller" },
 { 8450, "FXMC Neural Network Controller V2" },
 { 8451, "FXMC Neural Network Controller V3" },
 { 16641, "Passport Reader CLR device" },
@@ -25719,33 +21020,27 @@ namespace HardwareInformation.Providers {
 { 33025, "Camera V1" },
 { 33026, "Recovery / Camera V2" },
 { 33027, "Camera V3" },
- } },
-            { 7001, new Dictionary<int, string>(){ 
-     } },
-            { 7002, new Dictionary<int, string>(){ 
-     } },
-            { 7013, new Dictionary<int, string>(){ 
-     } },
-            { 7025, new Dictionary<int, string>(){ 
-    { 80, "Encore ENUTV-4 Analog TV Tuner" },
+    })
+ },
+            { 7025, Tuple.Create("Fushicai", new Dictionary<int, string>{
+{ 80, "Encore ENUTV-4 Analog TV Tuner" },
 { 12290, "USBTV007 Video Grabber [EasyCAP]" },
- } },
-            { 7026, new Dictionary<int, string>(){ 
-     } },
-            { 7027, new Dictionary<int, string>(){ 
-    { 4096, "xHC1 Controller" },
- } },
-            { 7029, new Dictionary<int, string>(){ 
-    { 12402, "AirLive WN-360USB adapter" },
+    })
+ },
+            { 7027, Tuple.Create("Fresco Logic", new Dictionary<int, string>{
+{ 4096, "xHC1 Controller" },
+    })
+ },
+            { 7029, Tuple.Create("Ovislink Corp.", new Dictionary<int, string>{
+{ 12402, "AirLive WN-360USB adapter" },
 { 33137, "WN-370USB 802.11bgn Wireless Adapter [Realtek RTL8188SU]" },
 { 33159, "AirLive WL-1600USB 802.11g Adapter [Realtek RTL8187L]" },
 { 37232, "AirLive X.USB 802.11abgn [Atheros AR9170+AR9104]" },
 { 41472, "AirLive WN-200USB wireless 11b/g/n dongle" },
- } },
-            { 7030, new Dictionary<int, string>(){ 
-     } },
-            { 7040, new Dictionary<int, string>(){ 
-    { 51216, "MC810 [af9015]" },
+    })
+ },
+            { 7040, Tuple.Create("Afatech", new Dictionary<int, string>{
+{ 51216, "MC810 [af9015]" },
 { 54163, "DVB-T receiver [RTL2832U]" },
 { 54166, "UB396-T [RTL2832U]" },
 { 54167, "DVB-T receiver [RTL2832U]" },
@@ -25762,40 +21057,19 @@ namespace HardwareInformation.Providers {
 { 58267, "DVB-T395U [af9015]" },
 { 58369, "Sveon STV22 DVB-T [af9015]" },
 { 58377, "IT9137FN Dual DVB-T [KWorld UB499-2T]" },
- } },
-            { 7046, new Dictionary<int, string>(){ 
-     } },
-            { 7048, new Dictionary<int, string>(){ 
-     } },
-            { 7052, new Dictionary<int, string>(){ 
-     } },
-            { 7053, new Dictionary<int, string>(){ 
-     } },
-            { 7054, new Dictionary<int, string>(){ 
-     } },
-            { 7055, new Dictionary<int, string>(){ 
-     } },
-            { 7062, new Dictionary<int, string>(){ 
-    { 1, "Duosense Transparent Electromagnetic Digitizer" },
- } },
-            { 7064, new Dictionary<int, string>(){ 
-     } },
-            { 7065, new Dictionary<int, string>(){ 
-     } },
-            { 7073, new Dictionary<int, string>(){ 
-     } },
-            { 7074, new Dictionary<int, string>(){ 
-     } },
-            { 7076, new Dictionary<int, string>(){ 
-    { 1, "InSight USB Link" },
+    })
+ },
+            { 7062, Tuple.Create("N-Trig", new Dictionary<int, string>{
+{ 1, "Duosense Transparent Electromagnetic Digitizer" },
+    })
+ },
+            { 7076, Tuple.Create("Ember Corporation", new Dictionary<int, string>{
+{ 1, "InSight USB Link" },
 { 2, "EM358 Virtual COM Port" },
- } },
-            { 7078, new Dictionary<int, string>(){ 
-     } },
-            { 7080, new Dictionary<int, string>(){ 
-     } },
-            { 7085, new Dictionary<int, string>(){ 
-    { 2, "Rock Band Guitar for Xbox 360" },
+    })
+ },
+            { 7085, Tuple.Create("Harmonix Music", new Dictionary<int, string>{
+{ 2, "Rock Band Guitar for Xbox 360" },
 { 3, "Rock Band Drum Kit for Xbox 360" },
 { 304, "Ion Drum Rocker for Xbox 360" },
 { 654, "Controller" },
@@ -25834,12 +21108,14 @@ namespace HardwareInformation.Providers {
 { 64001, "Gamepad" },
 { 64768, "Razer Onza Tournament Edition" },
 { 64769, "Razer Onza Classic Edition" },
- } },
-            { 7086, new Dictionary<int, string>(){ 
-    { 2, "VR920 Immersive Eyewear" },
- } },
-            { 7099, new Dictionary<int, string>(){ 
-    { 3, "Alcatel one touch 4030D modem connection" },
+    })
+ },
+            { 7086, Tuple.Create("Vuzix Corporation", new Dictionary<int, string>{
+{ 2, "VR920 Immersive Eyewear" },
+    })
+ },
+            { 7099, Tuple.Create("T & A Mobile Phones", new Dictionary<int, string>{
+{ 3, "Alcatel one touch 4030D modem connection" },
 { 23, "HSPA Data Card" },
 { 122, "Alcatel OneTouch (firmware upgrade mode)" },
 { 286, "Alcatel One Touch L100V / Telekom Speedstick LTE II" },
@@ -25848,27 +21124,26 @@ namespace HardwareInformation.Providers {
 { 40974, "Vodafone Smart Tab 4G" },
 { 61440, "Alcatel OneTouch (mass storage mode)" },
 { 61463, "Alcatel One Touch L100V / Telekom Speedstick LTE II" },
- } },
-            { 7101, new Dictionary<int, string>(){ 
-    { 96, "1.3MP Mono Camera" },
+    })
+ },
+            { 7101, Tuple.Create("Videology Imaging Solutions, Inc.", new Dictionary<int, string>{
+{ 96, "1.3MP Mono Camera" },
 { 102, "1.3MP Mono Camera" },
 { 103, "1.3MP Mono Camera" },
- } },
-            { 7104, new Dictionary<int, string>(){ 
-    { 19, "Elitee-e" },
+    })
+ },
+            { 7104, Tuple.Create("Beijing Senseshield Technology Co.,Ltd.", new Dictionary<int, string>{
+{ 19, "Elitee-e" },
 { 20, "Elite4" },
 { 32, "iToken" },
 { 33, "Mikey" },
 { 81, "Elite5" },
 { 85, "Elite5 v3.x" },
 { 18525, "EliteIV" },
- } },
-            { 7108, new Dictionary<int, string>(){ 
-     } },
-            { 7109, new Dictionary<int, string>(){ 
-     } },
-            { 7111, new Dictionary<int, string>(){ 
-    { 32, "HE863" },
+    })
+ },
+            { 7111, Tuple.Create("Telit Wireless Solutions", new Dictionary<int, string>{
+{ 32, "HE863" },
 { 33, "HE910" },
 { 34, "GE910-QUAD" },
 { 35, "HE910-D ECM" },
@@ -25884,11 +21159,10 @@ namespace HardwareInformation.Providers {
 { 4362, "ME310" },
 { 4608, "LE920 (old firmware)" },
 { 4609, "LE910 / LE920" },
- } },
-            { 7118, new Dictionary<int, string>(){ 
-     } },
-            { 7119, new Dictionary<int, string>(){ 
-    { 5, "Optical Mouse" },
+    })
+ },
+            { 7119, Tuple.Create("Sunplus Innovation Technology Inc.", new Dictionary<int, string>{
+{ 5, "Optical Mouse" },
 { 7, "Optical Mouse" },
 { 1338, "Targa Silvercrest OMC807-C optische Funkmaus" },
 { 1477, "SPRF2413A [2.4GHz Wireless Keyboard/Mouse Receiver]" },
@@ -25910,27 +21184,15 @@ namespace HardwareInformation.Providers {
 { 11153, "Dell E5570 integrated webcam" },
 { 11159, "Laptop Integrated Webcam FHD" },
 { 11374, "Laptop Integrated WebCam HD" },
- } },
-            { 7120, new Dictionary<int, string>(){ 
-     } },
-            { 7125, new Dictionary<int, string>(){ 
-     } },
-            { 7130, new Dictionary<int, string>(){ 
-    { 16, "Power Board v4 Rev B" },
+    })
+ },
+            { 7130, Tuple.Create("University Of Southampton", new Dictionary<int, string>{
+{ 16, "Power Board v4 Rev B" },
 { 17, "Student Robotics SBv4B" },
- } },
-            { 7134, new Dictionary<int, string>(){ 
-     } },
-            { 7151, new Dictionary<int, string>(){ 
-     } },
-            { 7152, new Dictionary<int, string>(){ 
-     } },
-            { 7157, new Dictionary<int, string>(){ 
-     } },
-            { 7158, new Dictionary<int, string>(){ 
-     } },
-            { 7165, new Dictionary<int, string>(){ 
-    { 4712, "Touch Screen" },
+    })
+ },
+            { 7165, Tuple.Create("TouchPack", new Dictionary<int, string>{
+{ 4712, "Touch Screen" },
 { 4968, "Touch Screen" },
 { 5480, "Capacitive Touch Screen" },
 { 5736, "IR Touch Screen" },
@@ -25938,47 +21200,31 @@ namespace HardwareInformation.Providers {
 { 10600, "Touch Screen" },
 { 22888, "Touch Screen" },
 { 26984, "Touch Screen" },
- } },
-            { 7170, new Dictionary<int, string>(){ 
-     } },
-            { 7172, new Dictionary<int, string>(){ 
-    { 8308, "ASM1074 High-Speed hub" },
+    })
+ },
+            { 7172, Tuple.Create("QNAP System Inc.", new Dictionary<int, string>{
+{ 8308, "ASM1074 High-Speed hub" },
 { 12404, "ASM1074 SuperSpeed hub" },
- } },
-            { 7173, new Dictionary<int, string>(){ 
-    { 60021, "G540 Programmer" },
- } },
-            { 7180, new Dictionary<int, string>(){ 
-    { 258, "Plug Computer" },
- } },
-            { 7181, new Dictionary<int, string>(){ 
-     } },
-            { 7184, new Dictionary<int, string>(){ 
-     } },
-            { 7185, new Dictionary<int, string>(){ 
-    { 45133, "ErgoDox Infinity" },
- } },
-            { 7187, new Dictionary<int, string>(){ 
-     } },
-            { 7194, new Dictionary<int, string>(){ 
-    { 256, "Action Replay DS \"3DS/DSi/DS/Lite Compatible\"" },
- } },
-            { 7195, new Dictionary<int, string>(){ 
-     } },
-            { 7199, new Dictionary<int, string>(){ 
-     } },
-            { 7200, new Dictionary<int, string>(){ 
-     } },
-            { 7201, new Dictionary<int, string>(){ 
-     } },
-            { 7202, new Dictionary<int, string>(){ 
-     } },
-            { 7206, new Dictionary<int, string>(){ 
-     } },
-            { 7207, new Dictionary<int, string>(){ 
-     } },
-            { 7208, new Dictionary<int, string>(){ 
-    { 49155, "CamCube" },
+    })
+ },
+            { 7173, Tuple.Create("Shenxhen Stager Electric", new Dictionary<int, string>{
+{ 60021, "G540 Programmer" },
+    })
+ },
+            { 7180, Tuple.Create("Ionics EMS, Inc.", new Dictionary<int, string>{
+{ 258, "Plug Computer" },
+    })
+ },
+            { 7185, Tuple.Create("Input Club Inc.", new Dictionary<int, string>{
+{ 45133, "ErgoDox Infinity" },
+    })
+ },
+            { 7194, Tuple.Create("Datel Electronics Ltd.", new Dictionary<int, string>{
+{ 256, "Action Replay DS \"3DS/DSi/DS/Lite Compatible\"" },
+    })
+ },
+            { 7208, Tuple.Create("PMD Technologies", new Dictionary<int, string>{
+{ 49155, "CamCube" },
 { 49156, "CamBoard" },
 { 49157, "ConceptCam" },
 { 49158, "CamBoard 22" },
@@ -25988,37 +21234,35 @@ namespace HardwareInformation.Providers {
 { 49162, "DigiCam" },
 { 49165, "CamBoard pico LDD" },
 { 49167, "CamBoard pico" },
- } },
-            { 7209, new Dictionary<int, string>(){ 
-    { 1, "ExMFE5 Simulator" },
+    })
+ },
+            { 7209, Tuple.Create("Elster GmbH", new Dictionary<int, string>{
+{ 1, "ExMFE5 Simulator" },
 { 4348, "enCore device" },
- } },
-            { 7217, new Dictionary<int, string>(){ 
-     } },
-            { 7220, new Dictionary<int, string>(){ 
-    { 29249, "Prox'N'Roll RFID Scanner" },
- } },
-            { 7223, new Dictionary<int, string>(){ 
-    { 24976, "U2F Fido-compliant cryptotoken" },
- } },
-            { 7229, new Dictionary<int, string>(){ 
-     } },
-            { 7230, new Dictionary<int, string>(){ 
-     } },
-            { 7232, new Dictionary<int, string>(){ 
-    { 1331, "TiltStick" },
+    })
+ },
+            { 7220, Tuple.Create("SpringCard", new Dictionary<int, string>{
+{ 29249, "Prox'N'Roll RFID Scanner" },
+    })
+ },
+            { 7223, Tuple.Create("Authorizer Technologies, Inc.", new Dictionary<int, string>{
+{ 24976, "U2F Fido-compliant cryptotoken" },
+    })
+ },
+            { 7232, Tuple.Create("EZPrototypes", new Dictionary<int, string>{
+{ 1331, "TiltStick" },
 { 1332, "i2c-tiny-usb interface" },
 { 1333, "glcd2usb interface" },
 { 1334, "Swiss ColorPAL" },
 { 1335, "MIST Board" },
- } },
-            { 7241, new Dictionary<int, string>(){ 
-     } },
-            { 7243, new Dictionary<int, string>(){ 
-    { 623, "Spirostik" },
- } },
-            { 7247, new Dictionary<int, string>(){ 
-    { 2, "Keyboard TRACER Gamma Ivory" },
+    })
+ },
+            { 7243, Tuple.Create("Geratherm Medical AG", new Dictionary<int, string>{
+{ 623, "Spirostik" },
+    })
+ },
+            { 7247, Tuple.Create("SiGma Micro", new Dictionary<int, string>{
+{ 2, "Keyboard TRACER Gamma Ivory" },
 { 3, "HID controller" },
 { 14, "Genius KB-120 Keyboard" },
 { 38, "Keyboard" },
@@ -26028,110 +21272,79 @@ namespace HardwareInformation.Providers {
 { 101, "Optical Wheel Mouse [Rapoo N1130]" },
 { 12288, "Micro USB Web Camera" },
 { 12290, "WebCam SiGma Micro" },
- } },
-            { 7255, new Dictionary<int, string>(){ 
-    { 7749, "FPSGUN FG1000 Mouse" },
- } },
-            { 7275, new Dictionary<int, string>(){ 
-    { 41504, "DVD Writer Slimtype eSAU108" },
+    })
+ },
+            { 7255, Tuple.Create("Zalman Tech Co., Ltd.", new Dictionary<int, string>{
+{ 7749, "FPSGUN FG1000 Mouse" },
+    })
+ },
+            { 7275, Tuple.Create("Philips & Lite-ON Digital Solutions Corporation", new Dictionary<int, string>{
+{ 41504, "DVD Writer Slimtype eSAU108" },
 { 41506, "DVD Writer Slimtype eTAU108" },
 { 41507, "DVD Writer Slimtype eUAU108" },
- } },
-            { 7276, new Dictionary<int, string>(){ 
-     } },
-            { 7281, new Dictionary<int, string>(){ 
-    { 49156, "Braille Note Apex (braille terminal mode)" },
- } },
-            { 7283, new Dictionary<int, string>(){ 
-    { 34335, "Anysee E30 USB 2.0 DVB-T Receiver" },
- } },
-            { 7285, new Dictionary<int, string>(){ 
-    { 648, "KeyStep" },
- } },
-            { 7287, new Dictionary<int, string>(){ 
-     } },
-            { 7288, new Dictionary<int, string>(){ 
-     } },
-            { 7289, new Dictionary<int, string>(){ 
-     } },
-            { 7290, new Dictionary<int, string>(){ 
-    { 1399, "Fingerprint Sensor" },
+    })
+ },
+            { 7281, Tuple.Create("Humanware Inc", new Dictionary<int, string>{
+{ 49156, "Braille Note Apex (braille terminal mode)" },
+    })
+ },
+            { 7283, Tuple.Create("AMT", new Dictionary<int, string>{
+{ 34335, "Anysee E30 USB 2.0 DVB-T Receiver" },
+    })
+ },
+            { 7285, Tuple.Create("Arturia", new Dictionary<int, string>{
+{ 648, "KeyStep" },
+    })
+ },
+            { 7290, Tuple.Create("LighTuning Technology Inc.", new Dictionary<int, string>{
+{ 1399, "Fingerprint Sensor" },
 { 1539, "ES603 Swipe Fingerprint Sensor" },
 { 2049, "Fingerprint Reader" },
- } },
-            { 7291, new Dictionary<int, string>(){ 
-     } },
-            { 7298, new Dictionary<int, string>(){ 
-    { 512, "spryTrac" },
- } },
-            { 7299, new Dictionary<int, string>(){ 
-    { 1, "RS150 V2" },
+    })
+ },
+            { 7298, Tuple.Create("Atracsys", new Dictionary<int, string>{
+{ 512, "spryTrac" },
+    })
+ },
+            { 7299, Tuple.Create("Schomaecker GmbH", new Dictionary<int, string>{
+{ 1, "RS150 V2" },
 { 2, "RFID card reader" },
 { 3, "Communicator" },
 { 5, "Mobile RFID Reader" },
- } },
-            { 7303, new Dictionary<int, string>(){ 
-     } },
-            { 7304, new Dictionary<int, string>(){ 
-    { 7, "SMI Grabber (EasyCAP DC60+ clone) (no firmware) [SMI-2021CBE]" },
+    })
+ },
+            { 7304, Tuple.Create("Somagic, Inc.", new Dictionary<int, string>{
+{ 7, "SMI Grabber (EasyCAP DC60+ clone) (no firmware) [SMI-2021CBE]" },
 { 60, "SMI Grabber (EasyCAP DC60+ clone) [SMI-2021CBE]" },
- } },
-            { 7305, new Dictionary<int, string>(){ 
-     } },
-            { 7310, new Dictionary<int, string>(){ 
-     } },
-            { 7320, new Dictionary<int, string>(){ 
-     } },
-            { 7326, new Dictionary<int, string>(){ 
-    { 24673, "WL-72B 3.5G MODEM" },
- } },
-            { 7328, new Dictionary<int, string>(){ 
-     } },
-            { 7329, new Dictionary<int, string>(){ 
-    { 6315, "SATA bridge" },
- } },
-            { 7340, new Dictionary<int, string>(){ 
-    { 41778, "C8 Webcam" },
+    })
+ },
+            { 7326, Tuple.Create("OMEGA TECHNOLOGY", new Dictionary<int, string>{
+{ 24673, "WL-72B 3.5G MODEM" },
+    })
+ },
+            { 7329, Tuple.Create("Symwave", new Dictionary<int, string>{
+{ 6315, "SATA bridge" },
+    })
+ },
+            { 7340, Tuple.Create("Kinstone", new Dictionary<int, string>{
+{ 41778, "C8 Webcam" },
 { 45704, "C18 Webcam" },
- } },
-            { 7347, new Dictionary<int, string>(){ 
-     } },
-            { 7348, new Dictionary<int, string>(){ 
-     } },
-            { 7350, new Dictionary<int, string>(){ 
-    { 26241, "IDC6681" },
- } },
-            { 7358, new Dictionary<int, string>(){ 
-    { 2, "CDC serial port [TivaWare]" },
+    })
+ },
+            { 7350, Tuple.Create("IdeaCom Technology Inc.", new Dictionary<int, string>{
+{ 26241, "IDC6681" },
+    })
+ },
+            { 7358, Tuple.Create("Luminary Micro Inc.", new Dictionary<int, string>{
+{ 2, "CDC serial port [TivaWare]" },
 { 253, "In-Circuit Debug Interface" },
 { 255, "Stellaris ROM DFU Bootloader" },
 { 358, "CANAL USB2CAN" },
 { 576, "McGill Robotics TM4C Microcontroller" },
- } },
-            { 7359, new Dictionary<int, string>(){ 
-     } },
-            { 7360, new Dictionary<int, string>(){ 
-     } },
-            { 7370, new Dictionary<int, string>(){ 
-     } },
-            { 7373, new Dictionary<int, string>(){ 
-     } },
-            { 7380, new Dictionary<int, string>(){ 
-     } },
-            { 7381, new Dictionary<int, string>(){ 
-     } },
-            { 7382, new Dictionary<int, string>(){ 
-     } },
-            { 7390, new Dictionary<int, string>(){ 
-     } },
-            { 7391, new Dictionary<int, string>(){ 
-     } },
-            { 7392, new Dictionary<int, string>(){ 
-     } },
-            { 7393, new Dictionary<int, string>(){ 
-     } },
-            { 7409, new Dictionary<int, string>(){ 
-    { 1, "Sensor Terminal Board" },
+    })
+ },
+            { 7409, Tuple.Create("Dresden Elektronik", new Dictionary<int, string>{
+{ 1, "Sensor Terminal Board" },
 { 4, "Wireless Handheld Terminal" },
 { 23, "deRFusbSniffer 2.4 GHz" },
 { 24, "deRFusb24E001" },
@@ -26145,53 +21358,40 @@ namespace HardwareInformation.Providers {
 { 37, "deRFusb23E06" },
 { 39, "deRFusb13E06" },
 { 48, "ZigBee gateway [ConBee II]" },
- } },
-            { 7420, new Dictionary<int, string>(){ 
-     } },
-            { 7421, new Dictionary<int, string>(){ 
-     } },
-            { 7427, new Dictionary<int, string>(){ 
-    { 40, "iCreativ MIDI Controller" },
- } },
-            { 7431, new Dictionary<int, string>(){ 
-     } },
-            { 7432, new Dictionary<int, string>(){ 
-     } },
-            { 7433, new Dictionary<int, string>(){ 
-    { 4134, "HSUPA Modem FLYING-LARK46-VER0.07 [Flying Angel]" },
- } },
-            { 7434, new Dictionary<int, string>(){ 
-     } },
-            { 7435, new Dictionary<int, string>(){ 
-     } },
-            { 7437, new Dictionary<int, string>(){ 
-    { 532, "Trans-It Drive" },
- } },
-            { 7439, new Dictionary<int, string>(){ 
-     } },
-            { 7444, new Dictionary<int, string>(){ 
-     } },
-            { 7447, new Dictionary<int, string>(){ 
-    { 1, "AXiS-49 Harmonic Table MIDI Keyboard" },
- } },
-            { 7449, new Dictionary<int, string>(){ 
-    { 4353, "DK DVB-T Dongle" },
+    })
+ },
+            { 7427, Tuple.Create("iCON", new Dictionary<int, string>{
+{ 40, "iCreativ MIDI Controller" },
+    })
+ },
+            { 7433, Tuple.Create("TechFaith Wireless Technology Limited", new Dictionary<int, string>{
+{ 4134, "HSUPA Modem FLYING-LARK46-VER0.07 [Flying Angel]" },
+    })
+ },
+            { 7437, Tuple.Create("TDKMedia", new Dictionary<int, string>{
+{ 532, "Trans-It Drive" },
+    })
+ },
+            { 7447, Tuple.Create("C-Thru Music Ltd.", new Dictionary<int, string>{
+{ 1, "AXiS-49 Harmonic Table MIDI Keyboard" },
+    })
+ },
+            { 7449, Tuple.Create("Dexatek Technology Ltd.", new Dictionary<int, string>{
+{ 4353, "DK DVB-T Dongle" },
 { 4354, "DK mini DVB-T Dongle" },
 { 4355, "DK 5217 DVB-T Dongle" },
 { 4356, "MSI DigiVox Micro HD" },
 { 24837, "Video grabber" },
 { 24842, "Video grabber" },
 { 33282, "DK DVBC/T DONGLE" },
- } },
-            { 7455, new Dictionary<int, string>(){ 
-     } },
-            { 7456, new Dictionary<int, string>(){ 
-     } },
-            { 7463, new Dictionary<int, string>(){ 
-    { 1537, "Xtion" },
- } },
-            { 7476, new Dictionary<int, string>(){ 
-    { 1, "Fidget" },
+    })
+ },
+            { 7463, Tuple.Create("ASUS", new Dictionary<int, string>{
+{ 1537, "Xtion" },
+    })
+ },
+            { 7476, Tuple.Create("Dream Cheeky", new Dictionary<int, string>{
+{ 1, "Fidget" },
 { 2, "Fidget (Basketball)" },
 { 3, "Fidget (Golf Ball)" },
 { 4, "Webmail Notifier" },
@@ -26200,19 +21400,22 @@ namespace HardwareInformation.Providers {
 { 13, "Big Red Button" },
 { 19, "LED Message Board" },
 { 32, "Stress Ball" },
- } },
-            { 7493, new Dictionary<int, string>(){ 
-    { 7493, "Foxlink Optical touch sensor" },
+    })
+ },
+            { 7493, Tuple.Create("Touch", new Dictionary<int, string>{
+{ 7493, "Foxlink Optical touch sensor" },
 { 17821, "BenQ F5" },
 { 18012, "Harrier Mini by EE" },
- } },
-            { 7501, new Dictionary<int, string>(){ 
-    { 2, "Ralink RT2770/2720 802.11b/g/n Wireless LAN Mini-USB Device" },
+    })
+ },
+            { 7501, Tuple.Create("PEGATRON CORPORATION", new Dictionary<int, string>{
+{ 2, "Ralink RT2770/2720 802.11b/g/n Wireless LAN Mini-USB Device" },
 { 12, "Ralink RT3070 802.11b/g/n Wireless Lan USB Device" },
 { 14, "Ralink RT3070 802.11b/g/n Wireless Lan USB Device" },
- } },
-            { 7504, new Dictionary<int, string>(){ 
-    { 7605, "IDBG (DFU)" },
+    })
+ },
+            { 7504, Tuple.Create("OpenMoko, Inc.", new Dictionary<int, string>{
+{ 7605, "IDBG (DFU)" },
 { 7606, "IDBG" },
 { 20759, "Neo1973/FreeRunner kernel usbnet (g_ether, CDC Ethernet) mode" },
 { 20760, "Neo1973/FreeRunner Debug board (V2+)" },
@@ -26525,9 +21728,10 @@ namespace HardwareInformation.Providers {
 { 24908, "dwtk In-Circuit Emulator" },
 { 32901, "Box0 (box0-v5)" },
 { 52245, "rad1o badge for CCC summer camp 2015" },
- } },
-            { 7511, new Dictionary<int, string>(){ 
-    { 5, "Wireless Receiver (Keyboard and Mouse)" },
+    })
+ },
+            { 7511, Tuple.Create("Xenta", new Dictionary<int, string>{
+{ 5, "Wireless Receiver (Keyboard and Mouse)" },
 { 6, "Wireless Receiver (RC Laser Pointer)" },
 { 12, "Optical Mouse" },
 { 4879, "2.4Ghz wireless optical mouse receiver" },
@@ -26542,14 +21746,14 @@ namespace HardwareInformation.Providers {
 { 44801, "AUVIO Universal Remote Receiver for PlayStation 3" },
 { 44803, "Wireless Receiver" },
 { 64032, "2.4GHz Wireless Reciever (Mini Keyboard & Mouse)" },
- } },
-            { 7515, new Dictionary<int, string>(){ 
-     } },
-            { 7516, new Dictionary<int, string>(){ 
-    { 8192, "FL2000/FL2000DX VGA/DVI/HDMI Adapter" },
- } },
-            { 7531, new Dictionary<int, string>(){ 
-    { 1, "1.1 root hub" },
+    })
+ },
+            { 7516, Tuple.Create("Fresco Logic", new Dictionary<int, string>{
+{ 8192, "FL2000/FL2000DX VGA/DVI/HDMI Adapter" },
+    })
+ },
+            { 7531, Tuple.Create("Linux Foundation", new Dictionary<int, string>{
+{ 1, "1.1 root hub" },
 { 2, "2.0 root hub" },
 { 3, "3.0 root hub" },
 { 256, "PTP Gadget" },
@@ -26559,50 +21763,54 @@ namespace HardwareInformation.Providers {
 { 260, "Multifunction Composite Gadget" },
 { 261, "FunctionFS Gadget" },
 { 512, "Qemu Audio Device" },
- } },
-            { 7560, new Dictionary<int, string>(){ 
-    { 1, "Measurement Device [MarECon]" },
+    })
+ },
+            { 7560, Tuple.Create("Mahr GmbH", new Dictionary<int, string>{
+{ 1, "Measurement Device [MarECon]" },
 { 2, "Probe" },
 { 3, "Surface Measurement [PS10]" },
- } },
-            { 7568, new Dictionary<int, string>(){ 
-    { 8222, "PPU-700" },
+    })
+ },
+            { 7568, Tuple.Create("Citizen", new Dictionary<int, string>{
+{ 8222, "PPU-700" },
 { 8247, "CL-S631 Barcode Printer" },
 { 8432, "Thermal Receipt Printer [CT-E351]" },
- } },
-            { 7581, new Dictionary<int, string>(){ 
-    { 4112, "Docking Station Topline 2009" },
+    })
+ },
+            { 7581, Tuple.Create("Sigma Sport", new Dictionary<int, string>{
+{ 4112, "Docking Station Topline 2009" },
 { 4113, "Docking Station Topline 2012" },
 { 4114, "Docking Station Topline 2016" },
- } },
-            { 7634, new Dictionary<int, string>(){ 
-     } },
-            { 7635, new Dictionary<int, string>(){ 
-    { 1, "Expert I/O 1000" },
- } },
-            { 7649, new Dictionary<int, string>(){ 
-    { 4353, "Generic Display Device (Mass storage mode)" },
+    })
+ },
+            { 7635, Tuple.Create("Dajc Inc.", new Dictionary<int, string>{
+{ 1, "Expert I/O 1000" },
+    })
+ },
+            { 7649, Tuple.Create("Actions Microelectronics Co.", new Dictionary<int, string>{
+{ 4353, "Generic Display Device (Mass storage mode)" },
 { 49409, "Generic Display Device" },
- } },
-            { 7654, new Dictionary<int, string>(){ 
-     } },
-            { 7694, new Dictionary<int, string>(){ 
-    { 61440, "iCON 210 UMTS Surfstick" },
- } },
-            { 7696, new Dictionary<int, string>(){ 
-    { 8196, "Sony 1.3MP 1/3\" ICX445 IIDC video camera [Chameleon]" },
- } },
-            { 7703, new Dictionary<int, string>(){ 
-    { 1, "instadose dosimeter" },
- } },
-            { 7709, new Dictionary<int, string>(){ 
-    { 357, "Secure Pen drive" },
+    })
+ },
+            { 7694, Tuple.Create("Qualcomm / Option", new Dictionary<int, string>{
+{ 61440, "iCON 210 UMTS Surfstick" },
+    })
+ },
+            { 7696, Tuple.Create("Point Grey Research, Inc.", new Dictionary<int, string>{
+{ 8196, "Sony 1.3MP 1/3\" ICX445 IIDC video camera [Chameleon]" },
+    })
+ },
+            { 7703, Tuple.Create("Mirion Technologies Dosimetry Services Division", new Dictionary<int, string>{
+{ 1, "instadose dosimeter" },
+    })
+ },
+            { 7709, Tuple.Create("Kanguru Solutions", new Dictionary<int, string>{
+{ 357, "Secure Pen drive" },
 { 4353, "FlashBlu Flash Drive" },
- } },
-            { 7711, new Dictionary<int, string>(){ 
-     } },
-            { 7721, new Dictionary<int, string>(){ 
-    { 257, "CPX Adapter" },
+    })
+ },
+            { 7721, Tuple.Create("Festo AG & Co. KG", new Dictionary<int, string>{
+{ 257, "CPX Adapter" },
 { 258, "CPX Adapter >=HW10.09 [CP2102]" },
 { 1025, "iL3-TP [AT90USB646]" },
 { 1026, "FTDI232 [EasyPort]" },
@@ -26623,67 +21831,78 @@ namespace HardwareInformation.Providers {
 { 1281, "CP2102 [CMSP]" },
 { 1537, "CMMP-AS" },
 { 1538, "FTDI232 [CMMS]" },
- } },
-            { 7725, new Dictionary<int, string>(){ 
-    { 79, "EGS3 GSM/GPRS modem" },
+    })
+ },
+            { 7725, Tuple.Create("Gemalto M2M GmbH", new Dictionary<int, string>{
+{ 79, "EGS3 GSM/GPRS modem" },
 { 84, "PH8 wireless module" },
 { 88, "Wireless Module [Cinterion EHS6]" },
 { 89, "Wireless Module [Cinterion BGx]" },
 { 91, "Zoom 4625 Modem" },
 { 97, "ALSx PLSx LTE modem" },
 { 160, "Cinterion ELS31-V" },
- } },
-            { 7741, new Dictionary<int, string>(){ 
-    { 6538, "Flash Disk" },
+    })
+ },
+            { 7741, Tuple.Create("Chipsbank Microelectronics Co., Ltd", new Dictionary<int, string>{
+{ 6538, "Flash Disk" },
 { 8339, "CBM209x Flash Drive (OEM)" },
 { 16514, "CBM4082 SD Card Reader" },
- } },
-            { 7745, new Dictionary<int, string>(){ 
-    { 1, "CS328A PC Oscilloscope" },
+    })
+ },
+            { 7745, Tuple.Create("Cleverscope", new Dictionary<int, string>{
+{ 1, "CS328A PC Oscilloscope" },
 { 4, "CS448" },
- } },
-            { 7748, new Dictionary<int, string>(){ 
-    { 29216, "SM-BCR2" },
- } },
-            { 7758, new Dictionary<int, string>(){ 
-    { 256, "WebCam" },
+    })
+ },
+            { 7748, Tuple.Create("SHIMANO INC.", new Dictionary<int, string>{
+{ 29216, "SM-BCR2" },
+    })
+ },
+            { 7758, Tuple.Create("Cubeternet", new Dictionary<int, string>{
+{ 256, "WebCam" },
 { 258, "GL-UPC822 UVC WebCam" },
 { 265, "EtronTech CMOS based eSP570 WebCam [Onyx Titanium TC101]" },
- } },
-            { 7764, new Dictionary<int, string>(){ 
-    { 8240, "2030 USB Keyboard" },
- } },
-            { 7784, new Dictionary<int, string>(){ 
-    { 27, "DataStation maxi g.u" },
+    })
+ },
+            { 7764, Tuple.Create("TypeMatrix", new Dictionary<int, string>{
+{ 8240, "2030 USB Keyboard" },
+    })
+ },
+            { 7784, Tuple.Create("TrekStor GmbH & Co. KG", new Dictionary<int, string>{
+{ 27, "DataStation maxi g.u" },
 { 76, "DataStation Pocket Click" },
 { 80, "DataStation maxi light" },
 { 4165, "ST70408-3 [SurfTab breeze 7.0 quad 3G] (MTP Mode)" },
 { 4166, "ST70408-3 [SurfTab breeze 7.0 quad 3G] (PTP Mode)" },
- } },
-            { 7793, new Dictionary<int, string>(){ 
-    { 1, "Avatar Optical Mouse" },
+    })
+ },
+            { 7793, Tuple.Create("NZXT", new Dictionary<int, string>{
+{ 1, "Avatar Optical Mouse" },
 { 5902, "Kraken X" },
 { 5905, "Grid+ V3" },
 { 5908, "Smart Device" },
 { 5909, "Kraken M22" },
 { 8198, "Smart Device V2" },
- } },
-            { 7796, new Dictionary<int, string>(){ 
-    { 8721, "MP300" },
+    })
+ },
+            { 7796, Tuple.Create("Coby Electronics Corporation", new Dictionary<int, string>{
+{ 8721, "MP300" },
 { 9799, "2 GB 2 Go Video MP3 Player [MP601-2G]" },
 { 9817, "Coby 4GB Go Video MP3 Player [MP620-4G]" },
 { 17985, "A8705 MP3/Video Player" },
 { 25873, "MP705-8G MP3 player" },
 { 25874, "MP705-4G" },
 { 28945, "MP957 Music and Video Player" },
- } },
-            { 7803, new Dictionary<int, string>(){ 
-    { 2, "HF2" },
+    })
+ },
+            { 7803, Tuple.Create("Zurich Instruments", new Dictionary<int, string>{
+{ 2, "HF2" },
 { 3, "UHF" },
 { 4, "MFLI" },
- } },
-            { 7805, new Dictionary<int, string>(){ 
-    { 11300, "Pyra Mouse (wired)" },
+    })
+ },
+            { 7805, Tuple.Create("ROCCAT", new Dictionary<int, string>{
+{ 11300, "Pyra Mouse (wired)" },
 { 11310, "Lua Mouse" },
 { 11320, "Kiro Mouse" },
 { 11501, "Kone Mouse" },
@@ -26719,23 +21938,27 @@ namespace HardwareInformation.Providers {
 { 12850, "Ryos MK Pro Keyboard" },
 { 12870, "Suora FX Keyboard" },
 { 12900, "Isku FX Keyboard" },
- } },
-            { 7822, new Dictionary<int, string>(){ 
-    { 24577, "P8GR" },
- } },
-            { 7825, new Dictionary<int, string>(){ 
-    { 45233, "miniStack" },
- } },
-            { 7847, new Dictionary<int, string>(){ 
-    { 48, "Trust GXT 158 Orna Laser Gaming Mouse" },
+    })
+ },
+            { 7822, Tuple.Create("Airbus Defence and Space", new Dictionary<int, string>{
+{ 24577, "P8GR" },
+    })
+ },
+            { 7825, Tuple.Create("Other World Computing", new Dictionary<int, string>{
+{ 45233, "miniStack" },
+    })
+ },
+            { 7847, Tuple.Create("SHARKOON Technologies GmbH", new Dictionary<int, string>{
+{ 48, "Trust GXT 158 Orna Laser Gaming Mouse" },
 { 100, "2.4GHz Wireless rechargeable vertical mouse [More&Better]" },
 { 102, "[Mediatrack Edge Mini Keyboard]" },
 { 2311, "Keyboard" },
 { 4098, "Vintorez Gaming Mouse" },
 { 8199, "SHARK ZONE K30 Illuminated Gaming Keyboard" },
- } },
-            { 7851, new Dictionary<int, string>(){ 
-    { 259, "HR200 Barcode scanner engine (HID keyboard)" },
+    })
+ },
+            { 7851, Tuple.Create("Fujian Newland Computer Co., Ltd", new Dictionary<int, string>{
+{ 259, "HR200 Barcode scanner engine (HID keyboard)" },
 { 262, "HR200 Barcode scanner engine (Serial CDC)" },
 { 272, "HR200 Barcode scanner engine (HID Pos)" },
 { 3075, "HR100/HR3260 cordless/HR3290 cordless/BS80 Barcode scanner engine (HID keyboard)" },
@@ -26783,21 +22006,23 @@ namespace HardwareInformation.Providers {
 { 33539, "HR2160 Barcode scanner engine (HID keyboard)" },
 { 33542, "HR2160 Barcode scanner engine (Serial CDC)" },
 { 33552, "HR2160 Barcode scanner engine (HID Pos)" },
- } },
-            { 7855, new Dictionary<int, string>(){ 
-    { 3, "Maple DFU interface" },
+    })
+ },
+            { 7855, Tuple.Create("Leaflabs", new Dictionary<int, string>{
+{ 3, "Maple DFU interface" },
 { 4, "Maple serial interface" },
- } },
-            { 7864, new Dictionary<int, string>(){ 
-    { 32512, "MW-U3500 WiMAX adapter" },
- } },
-            { 7867, new Dictionary<int, string>(){ 
-     } },
-            { 7883, new Dictionary<int, string>(){ 
-    { 738, "JMR1140 [Jiofi]" },
- } },
-            { 7896, new Dictionary<int, string>(){ 
-    { 4, "Mustang I/II" },
+    })
+ },
+            { 7864, Tuple.Create("Modacom Co., Ltd.", new Dictionary<int, string>{
+{ 32512, "MW-U3500 WiMAX adapter" },
+    })
+ },
+            { 7883, Tuple.Create("AMTelecom", new Dictionary<int, string>{
+{ 738, "JMR1140 [Jiofi]" },
+    })
+ },
+            { 7896, Tuple.Create("FENDER MUSICAL INSTRUMENTS CORPORATION", new Dictionary<int, string>{
+{ 4, "Mustang I/II" },
 { 5, "Mustang III/IV/V" },
 { 6, "Mustang I/II [Firmware Update]" },
 { 7, "Mustang III/IV/V [Firmware Update]" },
@@ -26805,107 +22030,128 @@ namespace HardwareInformation.Providers {
 { 17, "Mustang Mini [Firmware Update]" },
 { 20, "Mustang I (V.2)" },
 { 22, "Mustang IV v.2" },
- } },
-            { 7898, new Dictionary<int, string>(){ 
-    { 8210, "Air2210 54 Mbps Wireless Adapter" },
+    })
+ },
+            { 7898, Tuple.Create("AirTies Wireless Networks", new Dictionary<int, string>{
+{ 8210, "Air2210 54 Mbps Wireless Adapter" },
 { 8720, "Air2210 54 Mbps Wireless Adapter" },
 { 8976, "Air2310 150 Mbps Wireless Adapter" },
 { 9232, "Air2410 300 Mbps Wireless Adapter" },
- } },
-            { 7899, new Dictionary<int, string>(){ 
-    { 48443, "Intensity Shuttle" },
+    })
+ },
+            { 7899, Tuple.Create("Blackmagic design", new Dictionary<int, string>{
+{ 48443, "Intensity Shuttle" },
 { 48454, "Mini Converter Analog to SDI" },
 { 48501, "2.5K Cinema Camera (BMCC)" },
- } },
-            { 7912, new Dictionary<int, string>(){ 
-    { 20, "MT833UP" },
- } },
-            { 7926, new Dictionary<int, string>(){ 
-    { 8755, "Cassidian NH90 STTE" },
+    })
+ },
+            { 7912, Tuple.Create("ONDA COMMUNICATION S.p.a.", new Dictionary<int, string>{
+{ 20, "MT833UP" },
+    })
+ },
+            { 7926, Tuple.Create("EADS Deutschland GmbH", new Dictionary<int, string>{
+{ 8755, "Cassidian NH90 STTE" },
 { 20580, "FDR Interface" },
 { 21795, "Cassidian SSDC Adapter II" },
 { 21829, "Cassidian SSDC Adapter III" },
 { 22088, "RIU CSMU/BSD" },
 { 22090, "Cassidian RIU CSMU/BSD Simulator" },
- } },
-            { 7948, new Dictionary<int, string>(){ 
-    { 8192, "HP StreamSmart 410 [NW278AA]" },
- } },
-            { 7976, new Dictionary<int, string>(){ 
-    { 32, "CDMA USB Modem A600" },
+    })
+ },
+            { 7948, Tuple.Create("CMX Systems", new Dictionary<int, string>{
+{ 8192, "HP StreamSmart 410 [NW278AA]" },
+    })
+ },
+            { 7976, Tuple.Create("Cal-Comp", new Dictionary<int, string>{
+{ 32, "CDMA USB Modem A600" },
 { 33, "CD INSTALLER USB Device" },
- } },
-            { 7994, new Dictionary<int, string>(){ 
-    { 4096, "Prestigio PER3464B ebook reader (Mass storage mode)" },
+    })
+ },
+            { 7994, Tuple.Create("Allwinner Technology", new Dictionary<int, string>{
+{ 4096, "Prestigio PER3464B ebook reader (Mass storage mode)" },
 { 4098, "mediacom XPRO 415" },
 { 4112, "Android device in fastboot mode" },
 { 61416, "sunxi SoC OTG connector in FEL/flashing mode" },
- } },
-            { 8004, new Dictionary<int, string>(){ 
-    { 1, "NM-1000 scanner" },
- } },
-            { 8008, new Dictionary<int, string>(){ 
-    { 1575, "Data capturing system" },
+    })
+ },
+            { 8004, Tuple.Create("The Neat Company", new Dictionary<int, string>{
+{ 1, "NM-1000 scanner" },
+    })
+ },
+            { 8008, Tuple.Create("H-TRONIC GmbH", new Dictionary<int, string>{
+{ 1575, "Data capturing system" },
 { 1576, "Data capturing and control module" },
- } },
-            { 8013, new Dictionary<int, string>(){ 
-    { 41237, "EVOLVEO XtraTV stick [DVB-T]" },
+    })
+ },
+            { 8013, Tuple.Create("G-Tek Electronics Group", new Dictionary<int, string>{
+{ 41237, "EVOLVEO XtraTV stick [DVB-T]" },
 { 47107, "Lifeview LV5TDLX DVB-T [RTL2832U]" },
 { 51203, "NotOnlyTV (Lifeview) LV5TDLX DVB-T [RTL2832U]" },
 { 53792, "Geniatech T220 DVB-T2 TV Stick" },
- } },
-            { 8018, new Dictionary<int, string>(){ 
-    { 1, "Ultima 49 Printer" },
+    })
+ },
+            { 8018, Tuple.Create("Systems & Electronic Development FZCO (SEDCO)", new Dictionary<int, string>{
+{ 1, "Ultima 49 Printer" },
 { 2, "Ultima 90 Printer" },
 { 3, "FormsPro 50 Printer" },
 { 4, "Ultima 90+ Printer" },
- } },
-            { 8047, new Dictionary<int, string>(){ 
-    { 35, "Jawbone Jambox" },
+    })
+ },
+            { 8047, Tuple.Create("Aliph", new Dictionary<int, string>{
+{ 35, "Jawbone Jambox" },
 { 32768, "Jawbone Jambox - Updating" },
- } },
-            { 8053, new Dictionary<int, string>(){ 
-    { 1553, "IS611 SATA/PATA Bridge Controller" },
+    })
+ },
+            { 8053, Tuple.Create("Innostor Technology Corporation", new Dictionary<int, string>{
+{ 1553, "IS611 SATA/PATA Bridge Controller" },
 { 1569, "IS621 SATA Storage Controller" },
 { 2184, "IS888 SATA Storage Controller" },
 { 2306, "IS902 UFD controller" },
 { 2326, "IS916 Flash Drive" },
 { 2327, "IS917 Mass storage" },
 { 2328, "IS918 Flash Drive" },
- } },
-            { 8066, new Dictionary<int, string>(){ 
-    { 1, "PrecisionHD Camera" },
- } },
-            { 8068, new Dictionary<int, string>(){ 
-    { 8062, "Lateral Flow Engine" },
- } },
-            { 8071, new Dictionary<int, string>(){ 
-    { 2, "Multi-touch HID Controller" },
- } },
-            { 8091, new Dictionary<int, string>(){ 
-    { 577, "AirView2-EXT" },
+    })
+ },
+            { 8066, Tuple.Create("TANDBERG", new Dictionary<int, string>{
+{ 1, "PrecisionHD Camera" },
+    })
+ },
+            { 8068, Tuple.Create("Alere, Inc.", new Dictionary<int, string>{
+{ 8062, "Lateral Flow Engine" },
+    })
+ },
+            { 8071, Tuple.Create("Stantum", new Dictionary<int, string>{
+{ 2, "Multi-touch HID Controller" },
+    })
+ },
+            { 8091, Tuple.Create("Ubiquiti Networks, Inc.", new Dictionary<int, string>{
+{ 577, "AirView2-EXT" },
 { 45233, "UniFi VoIP Phone" },
- } },
-            { 8107, new Dictionary<int, string>(){ 
-    { 4173, "ES65" },
- } },
-            { 8108, new Dictionary<int, string>(){ 
-    { 562, "U770 3G/4G Wimax/4G LTE Modem" },
- } },
-            { 8110, new Dictionary<int, string>(){ 
-    { 64, "M311 Fingerprint Scanner" },
+    })
+ },
+            { 8107, Tuple.Create("Samsung Opto-Electroncs Co., Ltd.", new Dictionary<int, string>{
+{ 4173, "ES65" },
+    })
+ },
+            { 8108, Tuple.Create("Franklin Wireless", new Dictionary<int, string>{
+{ 562, "U770 3G/4G Wimax/4G LTE Modem" },
+    })
+ },
+            { 8110, Tuple.Create("Lumidigm", new Dictionary<int, string>{
+{ 64, "M311 Fingerprint Scanner" },
 { 8492, "M30x (Mercury) fingerprint sensor" },
- } },
-            { 8114, new Dictionary<int, string>(){ 
-    { 1, "Wi-Fi Body Scale (WBS01)" },
- } },
-            { 8122, new Dictionary<int, string>(){ 
-     } },
-            { 8125, new Dictionary<int, string>(){ 
-    { 1, "Expert Key - Data aquisition system" },
- } },
-            { 8137, new Dictionary<int, string>(){ 
-    { 3, "LPC1343" },
+    })
+ },
+            { 8114, Tuple.Create("Withings", new Dictionary<int, string>{
+{ 1, "Wi-Fi Body Scale (WBS01)" },
+    })
+ },
+            { 8125, Tuple.Create("Delphin Technology AG", new Dictionary<int, string>{
+{ 1, "Expert Key - Data aquisition system" },
+    })
+ },
+            { 8137, Tuple.Create("NXP Semiconductors", new Dictionary<int, string>{
+{ 3, "LPC1343" },
 { 12, "LPC4330FET180 [ARM Cortex M4 + M0] (device firmware upgrade mode)" },
 { 130, "LPC4330FET180 [ARM Cortex M4 + M0] (mass storage controller mode)" },
 { 267, "PR533" },
@@ -26914,33 +22160,37 @@ namespace HardwareInformation.Providers {
 { 20482, "PTN5002 [Startech VGA/DVI-D adapter]" },
 { 33060, "SharkRF Bootloader" },
 { 33356, "LumiNode1" },
- } },
-            { 8158, new Dictionary<int, string>(){ 
-    { 1, "UART Bridge" },
- } },
-            { 8167, new Dictionary<int, string>(){ 
-    { 4096, "VW100 series CDMA EV-DO Rev.A modem" },
- } },
-            { 8183, new Dictionary<int, string>(){ 
-    { 19, "CVTouch Screen (HID)" },
+    })
+ },
+            { 8158, Tuple.Create("ILX Lightwave Corporation", new Dictionary<int, string>{
+{ 1, "UART Bridge" },
+    })
+ },
+            { 8167, Tuple.Create("Vertex Wireless Co., Ltd.", new Dictionary<int, string>{
+{ 4096, "VW100 series CDMA EV-DO Rev.A modem" },
+    })
+ },
+            { 8183, Tuple.Create("CVT Electronics.Co.,Ltd", new Dictionary<int, string>{
+{ 19, "CVTouch Screen (HID)" },
 { 26, "Human Interface Device" },
- } },
-            { 8187, new Dictionary<int, string>(){ 
-    { 129, "AVR Programmer" },
+    })
+ },
+            { 8187, Tuple.Create("Pololu Corporation", new Dictionary<int, string>{
+{ 129, "AVR Programmer" },
 { 131, "Jrk 21v3 Motor Controller" },
 { 137, "Micro Maestro 6-Servo Controller" },
 { 138, "Mini Maestro 12-Channel Servo Controller" },
 { 139, "Mini Maestro 18-Channel Servo Controller" },
 { 140, "Mini Maestro 24-Channel Servo Controller" },
 { 176, "AVR Programmer v2" },
- } },
-            { 8191, new Dictionary<int, string>(){ 
-     } },
-            { 8192, new Dictionary<int, string>(){ 
-    { 7948, "HP StreamSmart 410 [NW278AA]" },
- } },
-            { 8193, new Dictionary<int, string>(){ 
-    { 1, "DWL-120 WIRELESS ADAPTER" },
+    })
+ },
+            { 8192, Tuple.Create("CMX Systems", new Dictionary<int, string>{
+{ 7948, "HP StreamSmart 410 [NW278AA]" },
+    })
+ },
+            { 8193, Tuple.Create("D-Link Corp.", new Dictionary<int, string>{
+{ 1, "DWL-120 WIRELESS ADAPTER" },
 { 513, "DHN-120 10Mb Home Phoneline Adapter" },
 { 6656, "DUB-E100 Fast Ethernet Adapter(rev.A) [ASIX AX88172]" },
 { 6658, "DUB-E100 Fast Ethernet Adapter(rev.C1) [ASIX AX88772]" },
@@ -27011,24 +22261,24 @@ namespace HardwareInformation.Providers {
 { 61718, "Formosa 2" },
 { 61719, "Formosa 3" },
 { 61720, "Formosa 4" },
- } },
-            { 8194, new Dictionary<int, string>(){ 
-     } },
-            { 8195, new Dictionary<int, string>(){ 
-    { 60001, "dc3500" },
- } },
-            { 8198, new Dictionary<int, string>(){ 
-     } },
-            { 8201, new Dictionary<int, string>(){ 
-    { 20484, "datAshur 4GB" },
+    })
+ },
+            { 8195, Tuple.Create("detectomat", new Dictionary<int, string>{
+{ 60001, "dc3500" },
+    })
+ },
+            { 8201, Tuple.Create("iStorage", new Dictionary<int, string>{
+{ 20484, "datAshur 4GB" },
 { 20502, "datAshur 16GB" },
 { 20530, "datAshur 32GB" },
- } },
-            { 8204, new Dictionary<int, string>(){ 
-    { 4107, "Play audio soundcard" },
- } },
-            { 8211, new Dictionary<int, string>(){ 
-    { 578, "QuatroStick 510e" },
+    })
+ },
+            { 8204, Tuple.Create("Reloop", new Dictionary<int, string>{
+{ 4107, "Play audio soundcard" },
+    })
+ },
+            { 8211, Tuple.Create("PCTV Systems", new Dictionary<int, string>{
+{ 578, "QuatroStick 510e" },
 { 581, "PCTV 73ESE" },
 { 582, "PCTV 74E" },
 { 584, "PCTV 282E" },
@@ -27039,13 +22289,15 @@ namespace HardwareInformation.Providers {
 { 602, "AndroiDTV 78e" },
 { 607, "tripleStick 292e" },
 { 610, "microStick 79e" },
- } },
-            { 8216, new Dictionary<int, string>(){ 
-    { 1030, "Eumex 800" },
+    })
+ },
+            { 8216, Tuple.Create("Deutsche Telekom AG", new Dictionary<int, string>{
+{ 1030, "Eumex 800" },
 { 1032, "Eumex 800" },
- } },
-            { 8217, new Dictionary<int, string>(){ 
-    { 12832, "GW-US11S WLAN [Atmel AT76C503A]" },
+    })
+ },
+            { 8217, Tuple.Create("PLANEX", new Dictionary<int, string>{
+{ 12832, "GW-US11S WLAN [Atmel AT76C503A]" },
 { 18689, "GW-USSuper300 802.11bgn Wireless Adapter [Realtek RTL8191SU]" },
 { 18691, "GW-USFang300 802.11abgn Wireless Adapter [Realtek RTL8192DU]" },
 { 18692, "GW-USUltra300 802.11abgn Wireless Adapter [Realtek RTL8192DU]" },
@@ -27069,17 +22321,18 @@ namespace HardwareInformation.Providers {
 { 60694, "GW-USMicroN2W 802.11bgn Wireless Adapter [Realtek RTL8188SU]" },
 { 60695, "GW-USValue-EZ 802.11n Wireless Adapter [Realtek RTL8188CUS]" },
 { 60696, "GW-USHyper300 / GW-USH300N 802.11bgn Wireless Adapter [Realtek RTL8191SU]" },
- } },
-            { 8222, new Dictionary<int, string>(){ 
-    { 8201, "CE100 CDMA EVDO" },
- } },
-            { 8250, new Dictionary<int, string>(){ 
-     } },
-            { 8253, new Dictionary<int, string>(){ 
-    { 5248, "ENUWI-N3 [802.11n Wireless N150 Adapter]" },
- } },
-            { 8256, new Dictionary<int, string>(){ 
-    { 613, "WinTV-dualHD DVB" },
+    })
+ },
+            { 8222, Tuple.Create("Haier", new Dictionary<int, string>{
+{ 8201, "CE100 CDMA EVDO" },
+    })
+ },
+            { 8253, Tuple.Create("Encore Electronics Inc.", new Dictionary<int, string>{
+{ 5248, "ENUWI-N3 [802.11n Wireless N150 Adapter]" },
+    })
+ },
+            { 8256, Tuple.Create("Hauppauge", new Dictionary<int, string>{
+{ 613, "WinTV-dualHD DVB" },
 { 621, "WinTV-dualHD ATSC" },
 { 3200, "Windham" },
 { 3216, "Windham" },
@@ -27126,9 +22379,10 @@ namespace HardwareInformation.Providers {
 { 47504, "Windham" },
 { 49152, "Windham" },
 { 49168, "Windham" },
- } },
-            { 8263, new Dictionary<int, string>(){ 
-    { 19, "MSP eZ-FET lite" },
+    })
+ },
+            { 8263, Tuple.Create("Texas Instruments", new Dictionary<int, string>{
+{ 19, "MSP eZ-FET lite" },
 { 20, "MSP-FET" },
 { 512, "MSP430 Bootloader" },
 { 515, "eZ-FET Bootloader" },
@@ -27185,15 +22439,18 @@ namespace HardwareInformation.Providers {
 { 2404, "Inventio Software MSP430" },
 { 2678, "GEOKON S-3810A-5 USB-RS485 CONVERTER" },
 { 65511, "HID v1.00 Device [Improv Device]" },
- } },
-            { 8280, new Dictionary<int, string>(){ 
-    { 8280, "ViperBoard I2C, SPI, GPIO interface" },
- } },
-            { 8311, new Dictionary<int, string>(){ 
-    { 36866, "W1M100 HSPA/WCDMA Module" },
- } },
-            { 8320, new Dictionary<int, string>(){ 
-    { 1, "nook" },
+    })
+ },
+            { 8280, Tuple.Create("Nano River Technology", new Dictionary<int, string>{
+{ 8280, "ViperBoard I2C, SPI, GPIO interface" },
+    })
+ },
+            { 8311, Tuple.Create("Taicang T&W Electronics Co. Ltd", new Dictionary<int, string>{
+{ 36866, "W1M100 HSPA/WCDMA Module" },
+    })
+ },
+            { 8320, Tuple.Create("Barnes & Noble", new Dictionary<int, string>{
+{ 1, "nook" },
 { 2, "NOOKcolor" },
 { 3, "NOOK Simple Touch" },
 { 4, "NOOK Tablet" },
@@ -27203,16 +22460,16 @@ namespace HardwareInformation.Providers {
 { 10, "BNRV510 [Nook Glowlight Plus]" },
 { 11, "BNRV520 [Nook Glowlight 3]" },
 { 12, "BNRV700 [Nook Glowlight Plus]" },
- } },
-            { 8326, new Dictionary<int, string>(){ 
-     } },
-            { 8327, new Dictionary<int, string>(){ 
-    { 2561, "Multi Touch Panel" },
+    })
+ },
+            { 8327, Tuple.Create("Cando", new Dictionary<int, string>{
+{ 2561, "Multi Touch Panel" },
 { 2562, "Multi Touch Panel" },
 { 2819, "Multi Touch Panel" },
- } },
-            { 8352, new Dictionary<int, string>(){ 
-    { 6, "flirc" },
+    })
+ },
+            { 8352, Tuple.Create("Clay Logic", new Dictionary<int, string>{
+{ 6, "flirc" },
 { 16647, "GPF Crypto Stick V1.2" },
 { 16675, "IKALOGIC SCANALOGIC 2" },
 { 16714, "MDE SPI Interface" },
@@ -27223,57 +22480,68 @@ namespace HardwareInformation.Providers {
 { 16913, "Nitrokey Start" },
 { 16931, "ATSAMD21 [castAR]" },
 { 17037, "Electrosense wideband converter" },
- } },
-            { 8369, new Dictionary<int, string>(){ 
-    { 4269, "XUSB Loader" },
+    })
+ },
+            { 8369, Tuple.Create("XMOS Ltd", new Dictionary<int, string>{
+{ 4269, "XUSB Loader" },
 { 63441, "XTAG2 - JTAG Adapter" },
- } },
-            { 8371, new Dictionary<int, string>(){ 
-    { 2584, "10.1 Touch screen overlay" },
- } },
-            { 8375, new Dictionary<int, string>(){ 
-    { 1811, "Milkymist JTAG/serial" },
+    })
+ },
+            { 8371, Tuple.Create("Hanvon", new Dictionary<int, string>{
+{ 2584, "10.1 Touch screen overlay" },
+    })
+ },
+            { 8375, Tuple.Create("Qi Hardware", new Dictionary<int, string>{
+{ 1811, "Milkymist JTAG/serial" },
 { 5440, "ben-wpan, AT86RF230-based" },
 { 7605, "IDBG in DFU mode" },
 { 7606, "IDBG in normal mode" },
 { 40369, "Glasgow Debug Tool" },
 { 49755, "C2 Dongle" },
 { 52082, "ben-wpan, cntr" },
- } },
-            { 8380, new Dictionary<int, string>(){ 
-    { 21760, "Frostbite controller" },
- } },
-            { 8398, new Dictionary<int, string>(){ 
-    { 18, "RF Sythesizer 250-4200MHz model SSG-4000LH" },
+    })
+ },
+            { 8380, Tuple.Create("ShenZhen ShanWan Technology Co., Ltd.", new Dictionary<int, string>{
+{ 21760, "Frostbite controller" },
+    })
+ },
+            { 8398, Tuple.Create("Minicircuits", new Dictionary<int, string>{
+{ 18, "RF Sythesizer 250-4200MHz model SSG-4000LH" },
 { 33, "RF Switch Matrix" },
 { 34, "I/O Controller" },
- } },
-            { 8415, new Dictionary<int, string>(){ 
-    { 1, "Entropy Key [UDEKEY01]" },
- } },
-            { 8432, new Dictionary<int, string>(){ 
-    { 8450, "EWLA V2 Module" },
- } },
-            { 8433, new Dictionary<int, string>(){ 
-    { 257, "iCube3 Camera" },
- } },
-            { 8436, new Dictionary<int, string>(){ 
-    { 25707, "TEW-646UBH High Power 150Mbps Wireless N Adapter [Realtek RTL8188SU]" },
+    })
+ },
+            { 8415, Tuple.Create("Simtec Electronics", new Dictionary<int, string>{
+{ 1, "Entropy Key [UDEKEY01]" },
+    })
+ },
+            { 8432, Tuple.Create("L3Harris Technologies", new Dictionary<int, string>{
+{ 8450, "EWLA V2 Module" },
+    })
+ },
+            { 8433, Tuple.Create("NET New Electronic Technology GmbH", new Dictionary<int, string>{
+{ 257, "iCube3 Camera" },
+    })
+ },
+            { 8436, Tuple.Create("TRENDnet", new Dictionary<int, string>{
+{ 25707, "TEW-646UBH High Power 150Mbps Wireless N Adapter [Realtek RTL8188SU]" },
 { 25739, "TEW-648UBM 802.11n 150Mbps Micro Wireless N Adapter [Realtek RTL8188CUS]" },
 { 26187, "TEW-664UB H/W:V2.0R" },
 { 32843, "TEW-804UB 802.11a/b/g/n/ac (1x1) Wireless Adapter [Realtek RTL8811AU]" },
 { 32859, "TEW-805UB 300Mbps+867Mbps Wireless AC Adapter [Realtek RTL8812AU]" },
 { 32875, "TEW-806UBH 802.11a/b/g/n/ac (1x1) Wireless Adapter [MediaTek MT7610U]" },
- } },
-            { 8439, new Dictionary<int, string>(){ 
-    { 12289, "MQ or MD camera" },
+    })
+ },
+            { 8439, Tuple.Create("XIMEA", new Dictionary<int, string>{
+{ 12289, "MQ or MD camera" },
 { 12290, "MU camera" },
 { 12321, "MJ camera" },
 { 12467, "MQ in U3V mode or MC camera" },
 { 40963, "MU camera" },
- } },
-            { 8448, new Dictionary<int, string>(){ 
-    { 3670, "USB62C Radio Cable [Yaesu 857/D - 897/D]" },
+    })
+ },
+            { 8448, Tuple.Create("RT Systems", new Dictionary<int, string>{
+{ 3670, "USB62C Radio Cable [Yaesu 857/D - 897/D]" },
 { 40528, "USB-59 Radio Cable [Yaesu VX-8/D/DR]" },
 { 40530, "Yaesu VX-7" },
 { 40532, "CT29B Radio Cable" },
@@ -27281,19 +22549,20 @@ namespace HardwareInformation.Providers {
 { 40536, "USB63C Radio Cable [Yaesu FTDX-1200]" },
 { 40541, "K4Y Radio Cable" },
 { 40543, "FT232RL [RTS05 Serial Cable]" },
- } },
-            { 8449, new Dictionary<int, string>(){ 
-    { 513, "SIIG 4-to-2 Printer Switch" },
+    })
+ },
+            { 8449, Tuple.Create("ActionStar", new Dictionary<int, string>{
+{ 513, "SIIG 4-to-2 Printer Switch" },
 { 5122, "Keyboard/Mouse Switch" },
- } },
-            { 8452, new Dictionary<int, string>(){ 
-    { 80, "Eye tracker [EYEX2]" },
+    })
+ },
+            { 8452, Tuple.Create("Tobii Technology AB", new Dictionary<int, string>{
+{ 80, "Eye tracker [EYEX2]" },
 { 292, "Eyechip" },
- } },
-            { 8455, new Dictionary<int, string>(){ 
-     } },
-            { 8457, new Dictionary<int, string>(){ 
-    { 528, "Hub" },
+    })
+ },
+            { 8457, Tuple.Create("VIA Labs, Inc.", new Dictionary<int, string>{
+{ 528, "Hub" },
 { 1792, "VL700 SATA 3Gb/s bridge" },
 { 1793, "VL701 SATA 3Gb/s bridge" },
 { 1809, "VL711 SATA 6Gb/s bridge" },
@@ -27311,97 +22580,118 @@ namespace HardwareInformation.Providers {
 { 13361, "Hub" },
 { 28959, "External" },
 { 33040, "Hub" },
- } },
-            { 8467, new Dictionary<int, string>(){ 
-    { 311, "DepthSense 311 (3D)" },
+    })
+ },
+            { 8467, Tuple.Create("Softkinetic", new Dictionary<int, string>{
+{ 311, "DepthSense 311 (3D)" },
 { 325, "DepthSense 325" },
 { 32768, "DepthSense 311 (Color)" },
- } },
-            { 8470, new Dictionary<int, string>(){ 
-    { 10, "IDE Hard Drive Enclosure" },
- } },
-            { 8479, new Dictionary<int, string>(){ 
-    { 26625, "CDMA Products" },
- } },
-            { 8483, new Dictionary<int, string>(){ 
-    { 4112, "Rocket Launcher" },
- } },
-            { 8485, new Dictionary<int, string>(){ 
-    { 0, "Bootloader" },
+    })
+ },
+            { 8470, Tuple.Create("KT Tech", new Dictionary<int, string>{
+{ 10, "IDE Hard Drive Enclosure" },
+    })
+ },
+            { 8479, Tuple.Create("CELOT Corporation", new Dictionary<int, string>{
+{ 26625, "CDMA Products" },
+    })
+ },
+            { 8483, Tuple.Create("Cheeky Dream", new Dictionary<int, string>{
+{ 4112, "Rocket Launcher" },
+    })
+ },
+            { 8485, Tuple.Create("Fiberpro Inc.", new Dictionary<int, string>{
+{ 0, "Bootloader" },
 { 16, "MCB-100 Series" },
- } },
-            { 8499, new Dictionary<int, string>(){ 
-    { 1, "LCD Signature Pad Sigma" },
+    })
+ },
+            { 8499, Tuple.Create("signotec GmbH", new Dictionary<int, string>{
+{ 1, "LCD Signature Pad Sigma" },
 { 24, "Delta Pen" },
 { 25, "Delta Touch" },
 { 28, "Kronos Pen" },
 { 34, "Epsilon Pen" },
- } },
-            { 8521, new Dictionary<int, string>(){ 
-    { 8475, "Touchscreen Controller" },
+    })
+ },
+            { 8521, Tuple.Create("Advanced Silicon S.A.", new Dictionary<int, string>{
+{ 8475, "Touchscreen Controller" },
 { 8966, "TS58xxA/TC56xxA [CoolTouch]" },
 { 9987, "TS58xxA/TC56xxA [CoolTouch]" },
- } },
-            { 8523, new Dictionary<int, string>(){ 
-    { 28672, "4-port hub [Maxxter ACT-HUB2-4P, HS8836, iSoul ultra-slim]" },
- } },
-            { 8526, new Dictionary<int, string>(){ 
-    { 5, "Z - Gaming mouse [SM700]" },
- } },
-            { 8546, new Dictionary<int, string>(){ 
-    { 8241, "Network Blaster Wireless Adapter" },
+    })
+ },
+            { 8523, Tuple.Create("Huasheng Electronics", new Dictionary<int, string>{
+{ 28672, "4-port hub [Maxxter ACT-HUB2-4P, HS8836, iSoul ultra-slim]" },
+    })
+ },
+            { 8526, Tuple.Create("Swiftpoint", new Dictionary<int, string>{
+{ 5, "Z - Gaming mouse [SM700]" },
+    })
+ },
+            { 8546, Tuple.Create("Broadxent (Creative Labs)", new Dictionary<int, string>{
+{ 8241, "Network Blaster Wireless Adapter" },
 { 20492, "DE5771 Modem Blaster" },
 { 32769, "Broadxent BritePort DSL Bridge 8010U" },
- } },
-            { 8550, new Dictionary<int, string>(){ 
-    { 24587, "TH-D74" },
- } },
-            { 8580, new Dictionary<int, string>(){ 
-    { 5, "GDS-3000 Oscilloscope" },
+    })
+ },
+            { 8550, Tuple.Create("JVC Kenwood", new Dictionary<int, string>{
+{ 24587, "TH-D74" },
+    })
+ },
+            { 8580, Tuple.Create("GW Instek", new Dictionary<int, string>{
+{ 5, "GDS-3000 Oscilloscope" },
 { 6, "GDS-3000 Oscilloscope" },
 { 17, "AFG Function Generator (CDC)" },
 { 23, "DSO" },
 { 24, "DSO" },
 { 54, "AFG-125 Function Generator (CDC)" },
- } },
-            { 8584, new Dictionary<int, string>(){ 
-    { 1552, "Hub" },
+    })
+ },
+            { 8584, Tuple.Create("No brand", new Dictionary<int, string>{
+{ 1552, "Hub" },
 { 1553, "Hub" },
 { 1568, "Hub" },
 { 1573, "Hub" },
 { 1876, "Card Reader" },
 { 16450, "CalDigit Pro Audio" },
- } },
-            { 8604, new Dictionary<int, string>(){ 
-    { 16, "USB 2200 K Secure Sign Token" },
- } },
-            { 8609, new Dictionary<int, string>(){ 
-    { 1, "EPOC Consumer Headset Wireless Dongle" },
- } },
-            { 8612, new Dictionary<int, string>(){ 
-    { 44071, "SPORTS Active 2 Wireless Controller for PS3" },
+    })
+ },
+            { 8604, Tuple.Create("Seal One AG", new Dictionary<int, string>{
+{ 16, "USB 2200 K Secure Sign Token" },
+    })
+ },
+            { 8609, Tuple.Create("Emotiv Systems Pty. Ltd.", new Dictionary<int, string>{
+{ 1, "EPOC Consumer Headset Wireless Dongle" },
+    })
+ },
+            { 8612, Tuple.Create("Electronic Arts Inc.", new Dictionary<int, string>{
+{ 44071, "SPORTS Active 2 Wireless Controller for PS3" },
 { 44096, "SPORTS Active 2 Wireless Controller for Wii" },
- } },
-            { 8617, new Dictionary<int, string>(){ 
-    { 4097, "16-channel Logic Analyzer [Logic16]" },
+    })
+ },
+            { 8617, Tuple.Create("Saleae, Inc.", new Dictionary<int, string>{
+{ 4097, "16-channel Logic Analyzer [Logic16]" },
 { 4099, "Logic 4" },
 { 4100, "Logic8" },
 { 4101, "Logic Pro 8" },
 { 4102, "Logic Pro 16" },
- } },
-            { 8619, new Dictionary<int, string>(){ 
-    { 16, "RC700 NFC SmartCard Reader" },
+    })
+ },
+            { 8619, Tuple.Create("Planeta Informatica", new Dictionary<int, string>{
+{ 16, "RC700 NFC SmartCard Reader" },
 { 17, "DSR700 SmartCard Reader" },
- } },
-            { 8628, new Dictionary<int, string>(){ 
-    { 129, "DragonFly" },
+    })
+ },
+            { 8628, Tuple.Create("AudioQuest", new Dictionary<int, string>{
+{ 129, "DragonFly" },
 { 130, "DragonFly Red" },
- } },
-            { 8662, new Dictionary<int, string>(){ 
-    { 2, "Seismic recorder [Tellus]" },
- } },
-            { 8711, new Dictionary<int, string>(){ 
-    { 16, "GoClever Tab R83" },
+    })
+ },
+            { 8662, Tuple.Create("Agecodagis SARL", new Dictionary<int, string>{
+{ 2, "Seismic recorder [Tellus]" },
+    })
+ },
+            { 8711, Tuple.Create("Fuzhou Rockchip Electronics Company", new Dictionary<int, string>{
+{ 16, "GoClever Tab R83" },
 { 17, "SmartTab" },
 { 10266, "RK2818 in Mask ROM mode" },
 { 10506, "RK2918 in Mask ROM mode" },
@@ -27419,63 +22709,73 @@ namespace HardwareInformation.Providers {
 { 12812, "RK3328 in Mask ROM mode" },
 { 13066, "RK3368 in Mask ROM mode" },
 { 13068, "RK3399 in Mask ROM mode" },
- } },
-            { 8730, new Dictionary<int, string>(){ 
-    { 256, "FPGA Boards" },
- } },
-            { 8738, new Dictionary<int, string>(){ 
-    { 4, "iWebKey Keyboard" },
+    })
+ },
+            { 8730, Tuple.Create("ZTEX GmbH", new Dictionary<int, string>{
+{ 256, "FPGA Boards" },
+    })
+ },
+            { 8738, Tuple.Create("MacAlly", new Dictionary<int, string>{
+{ 4, "iWebKey Keyboard" },
 { 5, "ICEKey Keyboard" },
 { 4097, "Generic Hub" },
 { 9504, "Mini Tablet" },
 { 16464, "AirStick joystick" },
- } },
-            { 8742, new Dictionary<int, string>(){ 
-     } },
-            { 8743, new Dictionary<int, string>(){ 
-    { 12549, "SKYDATA SKD-U100" },
- } },
-            { 8746, new Dictionary<int, string>(){ 
-    { 1, "Multi-Touch Screen" },
+    })
+ },
+            { 8743, Tuple.Create("SAMWOO Enterprise", new Dictionary<int, string>{
+{ 12549, "SKYDATA SKD-U100" },
+    })
+ },
+            { 8746, Tuple.Create("ILI Technology Corp.", new Dictionary<int, string>{
+{ 1, "Multi-Touch Screen" },
 { 55, "Multi-Touch Screen" },
- } },
-            { 8752, new Dictionary<int, string>(){ 
-    { 1, "UD-160-A / M Integrated Hub" },
+    })
+ },
+            { 8752, Tuple.Create("Plugable", new Dictionary<int, string>{
+{ 1, "UD-160-A / M Integrated Hub" },
 { 3, "DC-125 / M Integrated Hub" },
- } },
-            { 8754, new Dictionary<int, string>(){ 
-    { 4101, "WebCam SCB-0385N" },
+    })
+ },
+            { 8754, Tuple.Create("Silicon Motion", new Dictionary<int, string>{
+{ 4101, "WebCam SCB-0385N" },
 { 4132, "Webcam SC-13HDL11624N [Namuga Co., Ltd.]" },
 { 4136, "WebCam SC-03FFL11939N" },
 { 4137, "WebCam SC-13HDL11939N" },
 { 4151, "WebCam SC-03FFM12339N" },
 { 4165, "WebCam SC-10HDP12631N" },
- } },
-            { 8755, new Dictionary<int, string>(){ 
-    { 25379, "USB Electronic Scale" },
- } },
-            { 8759, new Dictionary<int, string>(){ 
-    { 16737, "eReader White" },
+    })
+ },
+            { 8755, Tuple.Create("RadioShack Corporation", new Dictionary<int, string>{
+{ 25379, "USB Electronic Scale" },
+    })
+ },
+            { 8759, Tuple.Create("Kobo Inc.", new Dictionary<int, string>{
+{ 16737, "eReader White" },
 { 16739, "Touch" },
 { 16755, "Glo" },
- } },
-            { 8773, new Dictionary<int, string>(){ 
-    { 5376, "AST1500/1510 PC-over-LAN Virtual Hub" },
- } },
-            { 8783, new Dictionary<int, string>(){ 
-    { 1, "Access Point" },
+    })
+ },
+            { 8773, Tuple.Create("Aspeed Technology, Inc.", new Dictionary<int, string>{
+{ 5376, "AST1500/1510 PC-over-LAN Virtual Hub" },
+    })
+ },
+            { 8783, Tuple.Create("APDM", new Dictionary<int, string>{
+{ 1, "Access Point" },
 { 2, "Docking Station" },
 { 4, "V2 Opal ACM" },
 { 5, "V2 Opal" },
 { 6, "V2 Docking Station" },
 { 7, "V2 Access Point ACM" },
 { 8, "V2 Access Point" },
- } },
-            { 8790, new Dictionary<int, string>(){ 
-    { 4103, "LV3 MIDI Controller" },
- } },
-            { 8797, new Dictionary<int, string>(){ 
-    { 1, "FINGER VP Multimodal Biometric Sensor" },
+    })
+ },
+            { 8790, Tuple.Create("Faderfox", new Dictionary<int, string>{
+{ 4103, "LV3 MIDI Controller" },
+    })
+ },
+            { 8797, Tuple.Create("Morpho", new Dictionary<int, string>{
+{ 1, "FINGER VP Multimodal Biometric Sensor" },
 { 8, "CBM-E3 Fingerprint Sensor" },
 { 9, "CBM-V3 Fingerprint Sensor" },
 { 10, "MSO1300-E3 Fingerprint Sensor" },
@@ -27494,25 +22794,26 @@ namespace HardwareInformation.Providers {
 { 61443, "Tablet 2 secure multifunction biometric tablet" },
 { 61446, "Tablet 2 secure multifunction biometric tablet" },
 { 61454, "Tablet 2 secure multifunction biometric tablet" },
- } },
-            { 8814, new Dictionary<int, string>(){ 
-     } },
-            { 8845, new Dictionary<int, string>(){ 
-    { 1, "Terminal Bike Key Reader" },
- } },
-            { 8868, new Dictionary<int, string>(){ 
-     } },
-            { 8870, new Dictionary<int, string>(){ 
-    { 65535, "PieKey \"beta\" 4GB model 4E4F41482E4F5247 (SM3251Q BB)" },
- } },
-            { 8871, new Dictionary<int, string>(){ 
-    { 4097, "FortiGate Device" },
- } },
-            { 8881, new Dictionary<int, string>(){ 
-    { 4096, "Netduino MCU pcb" },
- } },
-            { 8888, new Dictionary<int, string>(){ 
-    { 1, "Wally 2.2 chipset" },
+    })
+ },
+            { 8845, Tuple.Create("8D Technologies inc.", new Dictionary<int, string>{
+{ 1, "Terminal Bike Key Reader" },
+    })
+ },
+            { 8870, Tuple.Create("Pie Digital, Inc.", new Dictionary<int, string>{
+{ 65535, "PieKey \"beta\" 4GB model 4E4F41482E4F5247 (SM3251Q BB)" },
+    })
+ },
+            { 8871, Tuple.Create("Fortinet Technologies", new Dictionary<int, string>{
+{ 4097, "FortiGate Device" },
+    })
+ },
+            { 8881, Tuple.Create("Secret Labs LLC", new Dictionary<int, string>{
+{ 4096, "Netduino MCU pcb" },
+    })
+ },
+            { 8888, Tuple.Create("Motorola PCS", new Dictionary<int, string>{
+{ 1, "Wally 2.2 chipset" },
 { 2, "Wally 2.4 chipset" },
 { 5, "V.60c/V.60i GSM Phone" },
 { 46, "XT1806" },
@@ -27608,16 +22909,19 @@ namespace HardwareInformation.Providers {
 { 28806, "Atrix" },
 { 28840, "Xoom Tablet" },
 { 65025, "StarTAC III MS900" },
- } },
-            { 8889, new Dictionary<int, string>(){ 
-    { 6, "Touch Screen" },
- } },
-            { 8890, new Dictionary<int, string>(){ 
-    { 264, "Double Shock Steering Wheel HID" },
+    })
+ },
+            { 8889, Tuple.Create("eTurboTouch Technology, Inc.", new Dictionary<int, string>{
+{ 6, "Touch Screen" },
+    })
+ },
+            { 8890, Tuple.Create("Technology Innovation Holdings, Ltd", new Dictionary<int, string>{
+{ 264, "Double Shock Steering Wheel HID" },
 { 265, "Double Shock Steering Wheel Hub" },
- } },
-            { 8905, new Dictionary<int, string>(){ 
-    { 1537, "naturaSign Pad Colour" },
+    })
+ },
+            { 8905, Tuple.Create("StepOver GmbH", new Dictionary<int, string>{
+{ 1537, "naturaSign Pad Colour" },
 { 1793, "naturaSign Pad Mobile" },
 { 2049, "naturaSign Pad Comfort" },
 { 2177, "naturaSign Pad Flawless" },
@@ -27627,35 +22931,35 @@ namespace HardwareInformation.Providers {
 { 3313, "duraSign Pad Biometric 5.0" },
 { 3329, "duraSign 10.0" },
 { 3569, "duraSign Pad Biometric 10.0" },
- } },
-            { 8909, new Dictionary<int, string>(){ 
-     } },
-            { 8916, new Dictionary<int, string>(){ 
-    { 4865, "Mionix NAOS 8200 [STM32F103 MCU]" },
+    })
+ },
+            { 8916, Tuple.Create("Laview Technology", new Dictionary<int, string>{
+{ 4865, "Mionix NAOS 8200 [STM32F103 MCU]" },
 { 4872, "Mionix Avior 7000" },
 { 4876, "Mionix Naos 7000" },
 { 4886, "Mionix Castor" },
- } },
-            { 8921, new Dictionary<int, string>(){ 
-    { 10085, "Oppo N1" },
+    })
+ },
+            { 8921, Tuple.Create("OPPO Electronics Corp.", new Dictionary<int, string>{
+{ 10085, "Oppo N1" },
 { 10087, "Oppo Find 5 (X909)" },
- } },
-            { 8923, new Dictionary<int, string>(){ 
-    { 3, "IQ3 100MP IG030372" },
- } },
-            { 8924, new Dictionary<int, string>(){ 
-    { 4, "BlueField SOC" },
- } },
-            { 8926, new Dictionary<int, string>(){ 
-     } },
-            { 8927, new Dictionary<int, string>(){ 
-     } },
-            { 8928, new Dictionary<int, string>(){ 
-    { 2, "SINA Flash Drive" },
+    })
+ },
+            { 8923, Tuple.Create("Phase One", new Dictionary<int, string>{
+{ 3, "IQ3 100MP IG030372" },
+    })
+ },
+            { 8924, Tuple.Create("Mellanox Technologies", new Dictionary<int, string>{
+{ 4, "BlueField SOC" },
+    })
+ },
+            { 8928, Tuple.Create("secunet Security Networks AG", new Dictionary<int, string>{
+{ 2, "SINA Flash Drive" },
 { 3, "SINA ID Token A" },
- } },
-            { 8936, new Dictionary<int, string>(){ 
-    { 25874, "651N Audio" },
+    })
+ },
+            { 8936, Tuple.Create("Cambridge Audio", new Dictionary<int, string>{
+{ 25874, "651N Audio" },
 { 26985, "Audio Prototype" },
 { 29970, "751R Audio" },
 { 30474, "X70A Audio" },
@@ -27669,9 +22973,10 @@ namespace HardwareInformation.Providers {
 { 56004, "Azur DacMagic 100" },
 { 56006, "DacMagicXS 2.0" },
 { 56008, "Audio" },
- } },
-            { 8964, new Dictionary<int, string>(){ 
-    { 265, "Studio PCTV USB (SECAM)" },
+    })
+ },
+            { 8964, Tuple.Create("Pinnacle Systems, Inc.", new Dictionary<int, string>{
+{ 265, "Studio PCTV USB (SECAM)" },
 { 272, "Studio PCTV USB (PAL)" },
 { 273, "Miro PCTV USB" },
 { 274, "Studio PCTV USB (NTSC) with FM radio" },
@@ -27717,28 +23022,30 @@ namespace HardwareInformation.Providers {
 { 1565, "PCTV Deluxe (NTSC) Device" },
 { 1566, "PCTV Deluxe (PAL) Device" },
 { 8964, "1689" },
- } },
-            { 8973, new Dictionary<int, string>(){ 
-    { 259, "Huwaii 3g wireless modem" },
- } },
-            { 8980, new Dictionary<int, string>(){ 
-     } },
-            { 8984, new Dictionary<int, string>(){ 
-    { 17, "CitiDISK Jr. IDE Enclosure" },
- } },
-            { 8985, new Dictionary<int, string>(){ 
-    { 20, "TSM01 Air Mouse + Keyboard" },
- } },
-            { 9003, new Dictionary<int, string>(){ 
-    { 2064, "P2000" },
- } },
-            { 9006, new Dictionary<int, string>(){ 
-    { 16, "EA-PS-2000 B Series Power Supply" },
- } },
-            { 9024, new Dictionary<int, string>(){ 
-     } },
-            { 9025, new Dictionary<int, string>(){ 
-    { 1, "Uno (CDC ACM)" },
+    })
+ },
+            { 8973, Tuple.Create("Teracom", new Dictionary<int, string>{
+{ 259, "Huwaii 3g wireless modem" },
+    })
+ },
+            { 8984, Tuple.Create("Shining Technologies, Inc. [hex]", new Dictionary<int, string>{
+{ 17, "CitiDISK Jr. IDE Enclosure" },
+    })
+ },
+            { 8985, Tuple.Create("Tronsmart", new Dictionary<int, string>{
+{ 20, "TSM01 Air Mouse + Keyboard" },
+    })
+ },
+            { 9003, Tuple.Create("Pantum Ltd.", new Dictionary<int, string>{
+{ 2064, "P2000" },
+    })
+ },
+            { 9006, Tuple.Create("EA Elektro-Automatik GmbH & Co. KG", new Dictionary<int, string>{
+{ 16, "EA-PS-2000 B Series Power Supply" },
+    })
+ },
+            { 9025, Tuple.Create("Arduino SA", new Dictionary<int, string>{
+{ 1, "Uno (CDC ACM)" },
 { 16, "Mega 2560 (CDC ACM)" },
 { 54, "Leonardo Bootloader" },
 { 59, "Serial Adapter (CDC ACM)" },
@@ -27753,15 +23060,15 @@ namespace HardwareInformation.Providers {
 { 32822, "Leonardo (CDC ACM, HID)" },
 { 32824, "Robot Control Board (CDC ACM, HID)" },
 { 32825, "Robot Motor Board (CDC ACM, HID)" },
- } },
-            { 9033, new Dictionary<int, string>(){ 
-     } },
-            { 9035, new Dictionary<int, string>(){ 
-    { 0, "Gnuk Token" },
+    })
+ },
+            { 9035, Tuple.Create("Free Software Initiative of Japan", new Dictionary<int, string>{
+{ 0, "Gnuk Token" },
 { 1, "NeuG True RNG" },
- } },
-            { 9047, new Dictionary<int, string>(){ 
-    { 5, "M7350 4G Mi-Fi Router" },
+    })
+ },
+            { 9047, Tuple.Create("TP-Link", new Dictionary<int, string>{
+{ 5, "M7350 4G Mi-Fi Router" },
 { 256, "TL-WN8200ND [Realtek RTL8192CU]" },
 { 257, "RTL8812AU Archer T4U 802.11ac" },
 { 259, "Archer T4UH wireless Realtek 8812AU" },
@@ -27783,9 +23090,10 @@ namespace HardwareInformation.Providers {
 { 513, "HSUPA Modem MA180" },
 { 1536, "UE300 10/100/1000 LAN (mass storage CD-ROM mode) [Realtek RTL8153]" },
 { 1537, "UE300 10/100/1000 LAN (ethernet mode) [Realtek RTL8153]" },
- } },
-            { 9062, new Dictionary<int, string>(){ 
-    { 1, "Reserved Prototyping PID" },
+    })
+ },
+            { 9062, Tuple.Create("Bitmanufaktur GmbH", new Dictionary<int, string>{
+{ 1, "Reserved Prototyping PID" },
 { 2, "OpenBeacon USB 2" },
 { 3, "OpenPCD 2 RFID Reader for 13.56MHz" },
 { 4, "OpenBeacon" },
@@ -27795,122 +23103,145 @@ namespace HardwareInformation.Providers {
 { 8, "OpenBeacon WLAN" },
 { 9, "OpenPCD 2 RFID Reader for 13.56MHz" },
 { 10, "OpenPCD 2 Audio & LCD Display" },
- } },
-            { 9063, new Dictionary<int, string>(){ 
-    { 2, "OP-1 Portable synthesizer" },
+    })
+ },
+            { 9063, Tuple.Create("Teenage Engineering", new Dictionary<int, string>{
+{ 2, "OP-1 Portable synthesizer" },
 { 12, "OP-Z Portable synthesizer" },
- } },
-            { 9064, new Dictionary<int, string>(){ 
-    { 1, "BBS-1 [BodyBeat Sync]" },
- } },
-            { 9066, new Dictionary<int, string>(){ 
-    { 6501, "SB6501 802.11ad Wireless Network Adapter" },
- } },
-            { 9075, new Dictionary<int, string>(){ 
-    { 1, "5 MegaPixel Digital Still Camera [DSC5M]" },
- } },
-            { 9077, new Dictionary<int, string>(){ 
-    { 1, "Digital Audio Player" },
- } },
-            { 9080, new Dictionary<int, string>(){ 
-    { 4106, "Universal Wireless Controller" },
- } },
-            { 9085, new Dictionary<int, string>(){ 
-    { 1024, "MC400" },
- } },
-            { 9094, new Dictionary<int, string>(){ 
-    { 12581, "Touch System" },
+    })
+ },
+            { 9064, Tuple.Create("Peterson Electro-Musical Products Inc.", new Dictionary<int, string>{
+{ 1, "BBS-1 [BodyBeat Sync]" },
+    })
+ },
+            { 9066, Tuple.Create("SiBEAM", new Dictionary<int, string>{
+{ 6501, "SB6501 802.11ad Wireless Network Adapter" },
+    })
+ },
+            { 9075, Tuple.Create("Pumatronix Ltda", new Dictionary<int, string>{
+{ 1, "5 MegaPixel Digital Still Camera [DSC5M]" },
+    })
+ },
+            { 9077, Tuple.Create("Digit@lway, Inc.", new Dictionary<int, string>{
+{ 1, "Digital Audio Player" },
+    })
+ },
+            { 9080, Tuple.Create("OnLive", new Dictionary<int, string>{
+{ 4106, "Universal Wireless Controller" },
+    })
+ },
+            { 9085, Tuple.Create("Cradlepoint", new Dictionary<int, string>{
+{ 1024, "MC400" },
+    })
+ },
+            { 9094, Tuple.Create("Raydium Corporation", new Dictionary<int, string>{
+{ 12581, "Touch System" },
 { 17192, "Touch System" },
 { 17199, "Touch System" },
- } },
-            { 9099, new Dictionary<int, string>(){ 
-    { 2577, "DMR Radio" },
- } },
-            { 9114, new Dictionary<int, string>(){ 
-    { 1, "CDC Bootloader" },
+    })
+ },
+            { 9099, Tuple.Create("Hytera Communications", new Dictionary<int, string>{
+{ 2577, "DMR Radio" },
+    })
+ },
+            { 9114, Tuple.Create("Adafruit", new Dictionary<int, string>{
+{ 1, "CDC Bootloader" },
 { 32798, "Trinket M0" },
- } },
-            { 9120, new Dictionary<int, string>(){ 
-    { 1, "Token iBank2key" },
+    })
+ },
+            { 9120, Tuple.Create("BIFIT", new Dictionary<int, string>{
+{ 1, "Token iBank2key" },
 { 2, "iBank2Key Type M Token" },
 { 3, "iToken" },
 { 8, "MS_KEY K - Angara" },
- } },
-            { 9126, new Dictionary<int, string>(){ 
-    { 8192, "Gibson Firebird X Pedal Board" },
+    })
+ },
+            { 9126, Tuple.Create("Tronical Components GmbH", new Dictionary<int, string>{
+{ 8192, "Gibson Firebird X Pedal Board" },
 { 8193, "Gibson Firebird X Switch Board" },
- } },
-            { 9140, new Dictionary<int, string>(){ 
-    { 512, "DW0200 Color Camera" },
+    })
+ },
+            { 9140, Tuple.Create("Dental Wings Inc.", new Dictionary<int, string>{
+{ 512, "DW0200 Color Camera" },
 { 768, "DW0300 Hight Speed Monochrome Camera" },
- } },
-            { 9159, new Dictionary<int, string>(){ 
-    { 4129, "FirstMix" },
- } },
-            { 9212, new Dictionary<int, string>(){ 
-    { 513, "SPI-Simulyzer box for SPI data communication" },
+    })
+ },
+            { 9159, Tuple.Create("Gemini", new Dictionary<int, string>{
+{ 4129, "FirstMix" },
+    })
+ },
+            { 9212, Tuple.Create("SesKion GmbH", new Dictionary<int, string>{
+{ 513, "SPI-Simulyzer box for SPI data communication" },
 { 514, "PSI5-Simulyzer box for PSI5 (Peripheral-Sensor-Interfacs) data communication" },
 { 515, "SENT-Simulyzer box for SENT data communication" },
 { 516, "DSI-Simulyzer box for DSI3 data communication" },
- } },
-            { 9221, new Dictionary<int, string>(){ 
-    { 2, "West Mountain Radio RIGblaster Advantage Audio" },
+    })
+ },
+            { 9221, Tuple.Create("Custom Computer Services, Inc", new Dictionary<int, string>{
+{ 2, "West Mountain Radio RIGblaster Advantage Audio" },
 { 3, "West Mountain Radio RIGblaster Advantage" },
- } },
-            { 9222, new Dictionary<int, string>(){ 
-    { 26248, "PD7X Portable Storage" },
- } },
-            { 9248, new Dictionary<int, string>(){ 
-     } },
-            { 9262, new Dictionary<int, string>(){ 
-    { 1, "DALI Master" },
+    })
+ },
+            { 9222, Tuple.Create("SANHO Digital Electronics Co., Ltd.", new Dictionary<int, string>{
+{ 26248, "PD7X Portable Storage" },
+    })
+ },
+            { 9262, Tuple.Create("Vossloh-Schwabe Deutschland GmbH", new Dictionary<int, string>{
+{ 1, "DALI Master" },
 { 2, "LiCS Bootloader Mode" },
 { 3, "LiCS Running Mode" },
 { 4, "iProgrammer" },
 { 5, "NFC programming device" },
- } },
-            { 9267, new Dictionary<int, string>(){ 
-    { 45568, "[NZXT Kraken X60]" },
- } },
-            { 9283, new Dictionary<int, string>(){ 
-    { 220, "aes220 FPGA Mini-Module" },
- } },
-            { 9303, new Dictionary<int, string>(){ 
-    { 4106, "HR2000 Spectrometer 1.00.0" },
+    })
+ },
+            { 9267, Tuple.Create("ASETEK", new Dictionary<int, string>{
+{ 45568, "[NZXT Kraken X60]" },
+    })
+ },
+            { 9283, Tuple.Create("Aessent Technology Ltd", new Dictionary<int, string>{
+{ 220, "aes220 FPGA Mini-Module" },
+    })
+ },
+            { 9303, Tuple.Create("Ocean Optics Inc.", new Dictionary<int, string>{
+{ 4106, "HR2000 Spectrometer 1.00.0" },
 { 4114, "HR4000 Spectrometer" },
- } },
-            { 9304, new Dictionary<int, string>(){ 
-    { 1, "BLED112 Bluetooth 4.0 Single Mode Dongle" },
- } },
-            { 9311, new Dictionary<int, string>(){ 
-     } },
-            { 9316, new Dictionary<int, string>(){ 
-    { 1, "Learning Thermostat" },
+    })
+ },
+            { 9304, Tuple.Create("Bluegiga Technologies", new Dictionary<int, string>{
+{ 1, "BLED112 Bluetooth 4.0 Single Mode Dongle" },
+    })
+ },
+            { 9316, Tuple.Create("Nest", new Dictionary<int, string>{
+{ 1, "Learning Thermostat" },
 { 2, "Learning Thermostat (2nd Generation)" },
 { 16, "Protect : Smoke + Carbon Monoxide" },
 { 32, "Heat Link" },
- } },
-            { 9318, new Dictionary<int, string>(){ 
-    { 32771, "Axe-Fx II" },
+    })
+ },
+            { 9318, Tuple.Create("Fractal Audio Systems", new Dictionary<int, string>{
+{ 32771, "Axe-Fx II" },
 { 32784, "Axe-FX III" },
- } },
-            { 9334, new Dictionary<int, string>(){ 
-    { 4160, "3-Space Embedded Sensor" },
- } },
-            { 9336, new Dictionary<int, string>(){ 
-    { 8200, "U209-000-R Serial Port" },
- } },
-            { 9354, new Dictionary<int, string>(){ 
-    { 33638, "Wireless Optical Mouse ACT-MUSW-002" },
+    })
+ },
+            { 9334, Tuple.Create("YEI Technology", new Dictionary<int, string>{
+{ 4160, "3-Space Embedded Sensor" },
+    })
+ },
+            { 9336, Tuple.Create("Tripp-Lite", new Dictionary<int, string>{
+{ 8200, "U209-000-R Serial Port" },
+    })
+ },
+            { 9354, Tuple.Create("Maxxter", new Dictionary<int, string>{
+{ 33638, "Wireless Optical Mouse ACT-MUSW-002" },
 { 33639, "Telink Wireless Receiver" },
- } },
-            { 9372, new Dictionary<int, string>(){ 
-     } },
-            { 9380, new Dictionary<int, string>(){ 
-    { 2, "I15_v1.06 [Primare Audio DAC]" },
- } },
-            { 9390, new Dictionary<int, string>(){ 
-    { 1, "KX Keyboard" },
+    })
+ },
+            { 9380, Tuple.Create("Primare AB", new Dictionary<int, string>{
+{ 2, "I15_v1.06 [Primare Audio DAC]" },
+    })
+ },
+            { 9390, Tuple.Create("Shenzhen Rapoo Technology Co., Ltd.", new Dictionary<int, string>{
+{ 1, "KX Keyboard" },
 { 407, "meva Barcode Scanner" },
 { 6163, "E9260 Wireless Multi-mode Keyboard" },
 { 8192, "2.4G Wireless Device Serial" },
@@ -27918,12 +23249,14 @@ namespace HardwareInformation.Providers {
 { 8195, "5GHz Wireless Transceiver" },
 { 16656, "Optical Gaming Mouse [V280]" },
 { 24576, "Wireless Audio" },
- } },
-            { 9408, new Dictionary<int, string>(){ 
-    { 3, "Model 01036 weather center" },
- } },
-            { 9414, new Dictionary<int, string>(){ 
-    { 20480, "Razer Atrox Gaming Arcade Stick" },
+    })
+ },
+            { 9408, Tuple.Create("Chaney Instrument", new Dictionary<int, string>{
+{ 3, "Model 01036 weather center" },
+    })
+ },
+            { 9414, Tuple.Create("ThrustMaster, Inc.", new Dictionary<int, string>{
+{ 20480, "Razer Atrox Gaming Arcade Stick" },
 { 21248, "PowerA Mini ProEX Controller for Xbox 360" },
 { 21251, "Airflo Wired Controller for Xbox 360" },
 { 21258, "ProEX Controller for Xbox 360" },
@@ -27948,42 +23281,44 @@ namespace HardwareInformation.Providers {
 { 64251, "Aplay Controller" },
 { 64253, "Afterglow Gamepad for Xbox 360" },
 { 64254, "Rock Candy Gamepad for Xbox 360" },
- } },
-            { 9423, new Dictionary<int, string>(){ 
-    { 161, "Light Field Camera" },
- } },
-            { 9436, new Dictionary<int, string>(){ 
-    { 1030, "JaCarta SF GOST" },
- } },
-            { 9440, new Dictionary<int, string>(){ 
-     } },
-            { 9441, new Dictionary<int, string>(){ 
-    { 12289, "Adp-usb" },
+    })
+ },
+            { 9423, Tuple.Create("Lytro, Inc.", new Dictionary<int, string>{
+{ 161, "Light Field Camera" },
+    })
+ },
+            { 9436, Tuple.Create("Aladdin R.D.", new Dictionary<int, string>{
+{ 1030, "JaCarta SF GOST" },
+    })
+ },
+            { 9441, Tuple.Create("Paratronic", new Dictionary<int, string>{
+{ 12289, "Adp-usb" },
 { 12293, "Radius" },
- } },
-            { 9443, new Dictionary<int, string>(){ 
-     } },
-            { 9450, new Dictionary<int, string>(){ 
-    { 407, "Barcode Scanner" },
- } },
-            { 9453, new Dictionary<int, string>(){ 
-    { 1101, "Chat Headset" },
- } },
-            { 9456, new Dictionary<int, string>(){ 
-    { 261, "Das Keyboard 4" },
+    })
+ },
+            { 9450, Tuple.Create("Meva", new Dictionary<int, string>{
+{ 407, "Barcode Scanner" },
+    })
+ },
+            { 9453, Tuple.Create("Zen Group", new Dictionary<int, string>{
+{ 1101, "Chat Headset" },
+    })
+ },
+            { 9456, Tuple.Create("Metadot", new Dictionary<int, string>{
+{ 261, "Das Keyboard 4" },
 { 320, "Das Keyboard 4" },
 { 8224, "Das Keyboard 5Q" },
- } },
-            { 9471, new Dictionary<int, string>(){ 
-     } },
-            { 9472, new Dictionary<int, string>(){ 
-    { 32, "USRP B210" },
+    })
+ },
+            { 9472, Tuple.Create("Ettus Research LLC", new Dictionary<int, string>{
+{ 32, "USRP B210" },
 { 33, "USRP B200-mini" },
 { 34, "USRP B205-mini" },
 { 512, "USRP B200" },
- } },
-            { 9494, new Dictionary<int, string>(){ 
-    { 3, "Storm Xornet" },
+    })
+ },
+            { 9494, Tuple.Create("Cooler Master Co., Ltd.", new Dictionary<int, string>{
+{ 3, "Storm Xornet" },
 { 4, "Storm QuickFire Rapid Mechanical Keyboard" },
 { 6, "Storm Recon" },
 { 7, "Storm Sentinel Advance II" },
@@ -28003,51 +23338,59 @@ namespace HardwareInformation.Providers {
 { 85, "MasterKeys L" },
 { 4102, "MasterCase SL600M" },
 { 38036, "Sirus Headset" },
- } },
-            { 9504, new Dictionary<int, string>(){ 
-    { 1, "EasyPrinter S3" },
- } },
-            { 9511, new Dictionary<int, string>(){ 
-    { 5000, "Paramount 5" },
- } },
-            { 9527, new Dictionary<int, string>(){ 
-    { 4198, "NS1066" },
+    })
+ },
+            { 9504, Tuple.Create("ANA-U GmbH", new Dictionary<int, string>{
+{ 1, "EasyPrinter S3" },
+    })
+ },
+            { 9511, Tuple.Create("Software Bisque", new Dictionary<int, string>{
+{ 5000, "Paramount 5" },
+    })
+ },
+            { 9527, Tuple.Create("Norelsys", new Dictionary<int, string>{
+{ 4198, "NS1066" },
 { 4200, "NS1068/NS1068X SATA Bridge Controller" },
- } },
-            { 9540, new Dictionary<int, string>(){ 
-     } },
-            { 9542, new Dictionary<int, string>(){ 
-    { 58113, "TipToi Pen" },
- } },
-            { 9544, new Dictionary<int, string>(){ 
-    { 4097, "CEC Adapter" },
+    })
+ },
+            { 9542, Tuple.Create("Ravensburger", new Dictionary<int, string>{
+{ 58113, "TipToi Pen" },
+    })
+ },
+            { 9544, Tuple.Create("Pulse-Eight", new Dictionary<int, string>{
+{ 4097, "CEC Adapter" },
 { 4098, "CEC Adapter" },
- } },
-            { 9550, new Dictionary<int, string>(){ 
-    { 58035, "SHF 58035 A BiasBoard" },
- } },
-            { 9556, new Dictionary<int, string>(){ 
-     } },
-            { 9557, new Dictionary<int, string>(){ 
-    { 1, "B1 Fitness Band" },
- } },
-            { 9566, new Dictionary<int, string>(){ 
-    { 1, "Device" },
+    })
+ },
+            { 9550, Tuple.Create("SHF Communication Technologies AG", new Dictionary<int, string>{
+{ 58035, "SHF 58035 A BiasBoard" },
+    })
+ },
+            { 9557, Tuple.Create("Basis Science Inc.", new Dictionary<int, string>{
+{ 1, "B1 Fitness Band" },
+    })
+ },
+            { 9566, Tuple.Create("Beijing Bonxeon Technology Co., Ltd.", new Dictionary<int, string>{
+{ 1, "Device" },
 { 2, "Dual" },
- } },
-            { 9568, new Dictionary<int, string>(){ 
-    { 49490, "See3CAM_CU51 5 Mpx monochrome camera" },
- } },
-            { 9571, new Dictionary<int, string>(){ 
-    { 797, "DXT Mouse" },
+    })
+ },
+            { 9568, Tuple.Create("e-con Systems", new Dictionary<int, string>{
+{ 49490, "See3CAM_CU51 5 Mpx monochrome camera" },
+    })
+ },
+            { 9571, Tuple.Create("ShenZhen ShanWan Technology Co., Ltd.", new Dictionary<int, string>{
+{ 797, "DXT Mouse" },
 { 1315, "BM0523 WirelessGamepad" },
 { 1397, "ZD-V+ Wired Gaming Controller" },
- } },
-            { 9579, new Dictionary<int, string>(){ 
-    { 289, "Audiant 80i" },
- } },
-            { 9583, new Dictionary<int, string>(){ 
-    { 50734, "SpaceMouse Wireless (cabled)" },
+    })
+ },
+            { 9579, Tuple.Create("Perreaux Industries Ltd", new Dictionary<int, string>{
+{ 289, "Audiant 80i" },
+    })
+ },
+            { 9583, Tuple.Create("3Dconnexion", new Dictionary<int, string>{
+{ 50734, "SpaceMouse Wireless (cabled)" },
 { 50735, "SpaceMouse Wireless Receiver" },
 { 50737, "SpaceMouse Pro Wireless (cabled)" },
 { 50738, "SpaceMouse Pro Wireless Receiver" },
@@ -28057,48 +23400,50 @@ namespace HardwareInformation.Providers {
 { 50770, "Universal Receiver" },
 { 50772, "CadMouse Pro Wireless" },
 { 50775, "CadMouse Pro Wireless Left" },
- } },
-            { 9587, new Dictionary<int, string>(){ 
-    { 23, "MAYA22" },
- } },
-            { 9588, new Dictionary<int, string>(){ 
-    { 2305, "VC520" },
+    })
+ },
+            { 9587, Tuple.Create("ESI Audiotechnik GmbH", new Dictionary<int, string>{
+{ 23, "MAYA22" },
+    })
+ },
+            { 9588, Tuple.Create("AVer Information, Inc.", new Dictionary<int, string>{
+{ 2305, "VC520" },
 { 2320, "CAM520" },
 { 2336, "VC320" },
 { 2352, "CAM530" },
 { 2368, "CAM340" },
 { 2384, "VC322" },
 { 2400, "VB342" },
- } },
-            { 9589, new Dictionary<int, string>(){ 
-     } },
-            { 9590, new Dictionary<int, string>(){ 
-    { 3, "TCM" },
+    })
+ },
+            { 9590, Tuple.Create("AFO Co., Ltd.", new Dictionary<int, string>{
+{ 3, "TCM" },
 { 5, "BL [Boot Loader]" },
 { 17, "THM" },
- } },
-            { 9592, new Dictionary<int, string>(){ 
-    { 16744, "2.4GHZ Wireless Arc Folding Mouse" },
- } },
-            { 9601, new Dictionary<int, string>(){ 
-    { 6151, "Generic HID Smartcard" },
+    })
+ },
+            { 9592, Tuple.Create("Pluscom", new Dictionary<int, string>{
+{ 16744, "2.4GHZ Wireless Arc Folding Mouse" },
+    })
+ },
+            { 9601, Tuple.Create("Plug-up", new Dictionary<int, string>{
+{ 6151, "Generic HID Smartcard" },
 { 6152, "WinUSB Smartcard" },
 { 61904, "FIDO U2F Security Key" },
- } },
-            { 9613, new Dictionary<int, string>(){ 
-     } },
-            { 9626, new Dictionary<int, string>(){ 
-     } },
-            { 9639, new Dictionary<int, string>(){ 
-    { 9232, "Laser mouse" },
+    })
+ },
+            { 9639, Tuple.Create("Areson Technology Corp", new Dictionary<int, string>{
+{ 9232, "Laser mouse" },
 { 64035, "2.4G Receiver" },
 { 64097, "Elecom Co., Ltd MR-K013 Multicard Reader" },
- } },
-            { 9653, new Dictionary<int, string>(){ 
-    { 2, "Multitouch 3200" },
- } },
-            { 9659, new Dictionary<int, string>(){ 
-    { 99, "PRT.5105 [Yoke]" },
+    })
+ },
+            { 9653, Tuple.Create("FlatFrog", new Dictionary<int, string>{
+{ 2, "Multitouch 3200" },
+    })
+ },
+            { 9659, Tuple.Create("Brunner Elektronik AG", new Dictionary<int, string>{
+{ 99, "PRT.5105 [Yoke]" },
 { 100, "PRT.5105 [reserved]" },
 { 101, "PRT.5096 [Battery Management System]" },
 { 102, "PRT.5096 [Battery Management System]" },
@@ -28110,39 +23455,39 @@ namespace HardwareInformation.Providers {
 { 108, "PRT.5123 [reserved]" },
 { 109, "PRT.5127" },
 { 255, "MSP430 HID Update Agent" },
- } },
-            { 9663, new Dictionary<int, string>(){ 
-    { 1, "Isostick" },
+    })
+ },
+            { 9663, Tuple.Create("Elegant Invention", new Dictionary<int, string>{
+{ 1, "Isostick" },
 { 2, "Isostick updater" },
- } },
-            { 9668, new Dictionary<int, string>(){ 
-     } },
-            { 9670, new Dictionary<int, string>(){ 
-     } },
-            { 9672, new Dictionary<int, string>(){ 
-    { 20, "Single User touchfoil(tm) (SU2-80)" },
- } },
-            { 9690, new Dictionary<int, string>(){ 
-    { 1, "Weather Station" },
- } },
-            { 9699, new Dictionary<int, string>(){ 
-     } },
-            { 9712, new Dictionary<int, string>(){ 
-    { 49457, "Gioteck PS3 2.4G Wireless Controller" },
- } },
-            { 9723, new Dictionary<int, string>(){ 
-    { 258, "K-5" },
- } },
-            { 9732, new Dictionary<int, string>(){ 
-    { 18, "U12" },
- } },
-            { 9765, new Dictionary<int, string>(){ 
-     } },
-            { 9766, new Dictionary<int, string>(){ 
-    { 60000, "UART Bridge Controller [cp210x]" },
- } },
-            { 9770, new Dictionary<int, string>(){ 
-    { 4110, "SA9027 Audio Streaming Controller" },
+    })
+ },
+            { 9672, Tuple.Create("Visual Planet Ltd", new Dictionary<int, string>{
+{ 20, "Single User touchfoil(tm) (SU2-80)" },
+    })
+ },
+            { 9690, Tuple.Create("Netatmo", new Dictionary<int, string>{
+{ 1, "Weather Station" },
+    })
+ },
+            { 9712, Tuple.Create("ShanWan", new Dictionary<int, string>{
+{ 49457, "Gioteck PS3 2.4G Wireless Controller" },
+    })
+ },
+            { 9723, Tuple.Create("Pentax Ricoh Imaging Co., Ltd", new Dictionary<int, string>{
+{ 258, "K-5" },
+    })
+ },
+            { 9732, Tuple.Create("Tenda", new Dictionary<int, string>{
+{ 18, "U12" },
+    })
+ },
+            { 9766, Tuple.Create("Aruba Networks", new Dictionary<int, string>{
+{ 60000, "UART Bridge Controller [cp210x]" },
+    })
+ },
+            { 9770, Tuple.Create("SAVITECH Corp.", new Dictionary<int, string>{
+{ 4110, "SA9027 Audio Streaming Controller" },
 { 4320, "SA9023 Audio Streaming Controller" },
 { 36896, "SA9020 audio controller" },
 { 36899, "SA9023 audio controller" },
@@ -28150,12 +23495,14 @@ namespace HardwareInformation.Providers {
 { 37414, "SA9226 192KHz audio controller" },
 { 37415, "SA9227 384KHz audio controller" },
 { 37416, "SA9228 384KHz/DSD audio controller" },
- } },
-            { 9778, new Dictionary<int, string>(){ 
-    { 12809, "7-in-1 Card Reader" },
- } },
-            { 9785, new Dictionary<int, string>(){ 
-    { 1, "MTi-10 IMU" },
+    })
+ },
+            { 9778, Tuple.Create("TwinMOS", new Dictionary<int, string>{
+{ 12809, "7-in-1 Card Reader" },
+    })
+ },
+            { 9785, Tuple.Create("Xsens", new Dictionary<int, string>{
+{ 1, "MTi-10 IMU" },
 { 2, "MTi-20 VRU" },
 { 3, "MTi-30 AHRS" },
 { 17, "MTi-100 IMU" },
@@ -28170,15 +23517,18 @@ namespace HardwareInformation.Providers {
 { 768, "Motion Tracker Development Board" },
 { 769, "MTi Converter" },
 { 53261, "Wireless Receiver" },
- } },
-            { 9802, new Dictionary<int, string>(){ 
-    { 4100, "Ventus" },
- } },
-            { 9808, new Dictionary<int, string>(){ 
-    { 4881, "eBeam Classic [Luidia]" },
- } },
-            { 9817, new Dictionary<int, string>(){ 
-    { 4353, "TNT DVB-T/DAB/DAB+/FM" },
+    })
+ },
+            { 9802, Tuple.Create("Thermaltake", new Dictionary<int, string>{
+{ 4100, "Ventus" },
+    })
+ },
+            { 9808, Tuple.Create("Electronics For Imaging, Inc. [hex]", new Dictionary<int, string>{
+{ 4881, "eBeam Classic [Luidia]" },
+    })
+ },
+            { 9817, Tuple.Create("Sundtek", new Dictionary<int, string>{
+{ 4353, "TNT DVB-T/DAB/DAB+/FM" },
 { 4609, "FM Transmitter/Receiver" },
 { 4610, "MediaTV Analog/FM/DVB-T" },
 { 4611, "MediaTV Analog/FM/DVB-T MiniPCIe" },
@@ -28192,20 +23542,18 @@ namespace HardwareInformation.Providers {
 { 4625, "MediaTV Pro III (US)" },
 { 4626, "MediaTV Pro III MiniPCIe (EU)" },
 { 4627, "MediaTV Pro III MiniPCIe (US)" },
- } },
-            { 9826, new Dictionary<int, string>(){ 
-     } },
-            { 9838, new Dictionary<int, string>(){ 
-     } },
-            { 9842, new Dictionary<int, string>(){ 
-    { 4, "Hero 3" },
+    })
+ },
+            { 9842, Tuple.Create("GoPro", new Dictionary<int, string>{
+{ 4, "Hero 3" },
 { 6, "HERO 3+ Silver Edition" },
 { 7, "HERO 3+ Black" },
 { 14, "HERO4 Black" },
 { 17, "Hero 3+ Black" },
- } },
-            { 9846, new Dictionary<int, string>(){ 
-    { 47618, "ace" },
+    })
+ },
+            { 9846, Tuple.Create("Basler AG", new Dictionary<int, string>{
+{ 47618, "ace" },
 { 47619, "ba03 dart Vision Caera" },
 { 47620, "ba04 pulse Vision Camera" },
 { 47621, "Vision Camera" },
@@ -28219,23 +23567,27 @@ namespace HardwareInformation.Providers {
 { 47629, "Vision Camera" },
 { 47630, "Vision Camera" },
 { 47631, "Vision Camera" },
- } },
-            { 9861, new Dictionary<int, string>(){ 
-    { 2304, "[Packtalk Bold Bluetooth Motorcycle Intercom]" },
- } },
-            { 9863, new Dictionary<int, string>(){ 
-    { 64257, "Base Station" },
- } },
-            { 9865, new Dictionary<int, string>(){ 
-    { 1537, "naturaSign Pad POS" },
+    })
+ },
+            { 9861, Tuple.Create("Cardo Peripheral Systems LTD", new Dictionary<int, string>{
+{ 2304, "[Packtalk Bold Bluetooth Motorcycle Intercom]" },
+    })
+ },
+            { 9863, Tuple.Create("Fitbit Inc.", new Dictionary<int, string>{
+{ 64257, "Base Station" },
+    })
+ },
+            { 9865, Tuple.Create("StepOver International GmbH", new Dictionary<int, string>{
+{ 1537, "naturaSign Pad POS" },
 { 2305, "naturaSign Pad Light" },
 { 3297, "Pad Vivid US" },
 { 3313, "Pad Biometric US 5.0" },
 { 3329, "duraSign Pad US 10.0" },
 { 3569, "duraSign Pad Biometric US 10.0" },
- } },
-            { 9867, new Dictionary<int, string>(){ 
-    { 257, "DELink 2" },
+    })
+ },
+            { 9867, Tuple.Create("Dimension Engineering", new Dictionary<int, string>{
+{ 257, "DELink 2" },
 { 513, "Sabertooth 2x32" },
 { 1029, "Evolv DNA 200" },
 { 1030, "Evolv DNA 200" },
@@ -28267,41 +23619,47 @@ namespace HardwareInformation.Providers {
 { 33828, "Evolv DNA 250 (recovery mode)" },
 { 33829, "Evolv DNA 75 (recovery mode)" },
 { 33830, "Evolv DNA 60 (recovery mode)" },
- } },
-            { 9897, new Dictionary<int, string>(){ 
-    { 1, "Payment Terminal v1.0" },
- } },
-            { 9898, new Dictionary<int, string>(){ 
-    { 1, "FT-1D" },
+    })
+ },
+            { 9897, Tuple.Create("Research Industrial Systems Engineering", new Dictionary<int, string>{
+{ 1, "Payment Terminal v1.0" },
+    })
+ },
+            { 9898, Tuple.Create("Yaesu Musen", new Dictionary<int, string>{
+{ 1, "FT-1D" },
 { 14, "FTA-550" },
 { 15, "FTA-750" },
- } },
-            { 9909, new Dictionary<int, string>(){ 
-    { 2, "ECD 2" },
+    })
+ },
+            { 9909, Tuple.Create("Electrocompaniet", new Dictionary<int, string>{
+{ 2, "ECD 2" },
 { 3, "ECD 2 (Audio Class 1)" },
 { 4, "PI 2D" },
 { 5, "PI 2D (Audio Class 1)" },
 { 6, "ECI 6" },
 { 7, "ECI 6 (Audio Class 1)" },
 { 32, "ECI 80" },
- } },
-            { 9917, new Dictionary<int, string>(){ 
-    { 39191, "Fusion Flash Drive" },
- } },
-            { 9954, new Dictionary<int, string>(){ 
-     } },
-            { 9970, new Dictionary<int, string>(){ 
-    { 512, "MyDac" },
- } },
-            { 9991, new Dictionary<int, string>(){ 
-    { 5, "drive.web" },
- } },
-            { 9997, new Dictionary<int, string>(){ 
-    { 4097, "R-Idge Bootloader" },
+    })
+ },
+            { 9917, Tuple.Create("Integral Memory", new Dictionary<int, string>{
+{ 39191, "Fusion Flash Drive" },
+    })
+ },
+            { 9970, Tuple.Create("Micromega", new Dictionary<int, string>{
+{ 512, "MyDac" },
+    })
+ },
+            { 9991, Tuple.Create("Bardac Corporation", new Dictionary<int, string>{
+{ 5, "drive.web" },
+    })
+ },
+            { 9997, Tuple.Create("Rosand Technologies", new Dictionary<int, string>{
+{ 4097, "R-Idge Bootloader" },
 { 4098, "R-Idge Router" },
- } },
-            { 10007, new Dictionary<int, string>(){ 
-    { 17, "100Mbps Network Card Adapter" },
+    })
+ },
+            { 10007, Tuple.Create("Xiaomi Inc.", new Dictionary<int, string>{
+{ 17, "100Mbps Network Card Adapter" },
 { 864, "Mi3W" },
 { 872, "Mi4 LTE" },
 { 14337, "Mi ANC & Type-C In-Ear Earphones" },
@@ -28315,20 +23673,21 @@ namespace HardwareInformation.Providers {
 { 65384, "Mi-4c" },
 { 65408, "Mi/Redmi series (RNDIS)" },
 { 65416, "Mi/Redmi series (RNDIS + ADB)" },
- } },
-            { 10026, new Dictionary<int, string>(){ 
-     } },
-            { 10028, new Dictionary<int, string>(){ 
-    { 32019, "I-jet" },
- } },
-            { 10032, new Dictionary<int, string>(){ 
-    { 4095, "CT-S2000/4000/310/CLP-521/621/631/CL-S700 Series" },
+    })
+ },
+            { 10028, Tuple.Create("Signum Systems", new Dictionary<int, string>{
+{ 32019, "I-jet" },
+    })
+ },
+            { 10032, Tuple.Create("Citizen", new Dictionary<int, string>{
+{ 4095, "CT-S2000/4000/310/CLP-521/621/631/CL-S700 Series" },
 { 4100, "PPU-700" },
 { 8194, "CT-S2000 Thermal Printer (Parallel mode)" },
 { 8207, "CT-S310 Label printer" },
- } },
-            { 10037, new Dictionary<int, string>(){ 
-    { 3, "MPIO HS100" },
+    })
+ },
+            { 10037, Tuple.Create("DigitalWay", new Dictionary<int, string>{
+{ 3, "MPIO HS100" },
 { 4097, "MPIO FY200" },
 { 4098, "MPIO FL100" },
 { 4099, "MPIO FD100" },
@@ -28361,29 +23720,35 @@ namespace HardwareInformation.Providers {
 { 4162, "MPIO FY670" },
 { 4163, "HCT HMD-180A" },
 { 4164, "HCT HMD-180A" },
- } },
-            { 10047, new Dictionary<int, string>(){ 
-    { 4096, "ColorHug bootloader" },
+    })
+ },
+            { 10047, Tuple.Create("Hughski Limited", new Dictionary<int, string>{
+{ 4096, "ColorHug bootloader" },
 { 4097, "ColorHug" },
 { 4098, "ColorHug+" },
 { 4099, "ColorHug+ Bootloader" },
 { 4100, "ColorHug2" },
 { 4101, "ColorHug2 bootloader" },
- } },
-            { 10070, new Dictionary<int, string>(){ 
-    { 2, "X1D Camera" },
- } },
-            { 10073, new Dictionary<int, string>(){ 
-    { 3, "IQOS Pocket Charger 2.4" },
- } },
-            { 10085, new Dictionary<int, string>(){ 
-    { 4, "Bodyguard 2" },
- } },
-            { 10086, new Dictionary<int, string>(){ 
-    { 0, "OneTouch Verio" },
- } },
-            { 10096, new Dictionary<int, string>(){ 
-    { 2561, "ScanJet 4600 series" },
+    })
+ },
+            { 10070, Tuple.Create("Victor Hasselblad AB", new Dictionary<int, string>{
+{ 2, "X1D Camera" },
+    })
+ },
+            { 10073, Tuple.Create("Philip Morris Products S.A.", new Dictionary<int, string>{
+{ 3, "IQOS Pocket Charger 2.4" },
+    })
+ },
+            { 10085, Tuple.Create("Firstbeat Technologies, Ltd.", new Dictionary<int, string>{
+{ 4, "Bodyguard 2" },
+    })
+ },
+            { 10086, Tuple.Create("LifeScan", new Dictionary<int, string>{
+{ 0, "OneTouch Verio" },
+    })
+ },
+            { 10096, Tuple.Create("NHJ, Ltd", new Dictionary<int, string>{
+{ 2561, "ScanJet 4600 series" },
 { 36956, "Che-Ez Snap SNAP-U/Digigr8/Soundstar TDC-35" },
 { 36960, "A130" },
 { 37152, "Che-ez! Snap / iClick Tiny VGA Digital Camera" },
@@ -28394,22 +23759,27 @@ namespace HardwareInformation.Providers {
 { 37213, "Cyberpix S-210S / Little Tikes My Real Digital Camera" },
 { 37643, "CCD Webcam(PC370R)" },
 { 37644, "CCD Webcam(PC370R)" },
- } },
-            { 10152, new Dictionary<int, string>(){ 
-    { 41248, "Contactless + Chip Reader" },
- } },
-            { 10168, new Dictionary<int, string>(){ 
-    { 493, "blink(1)" },
- } },
-            { 10173, new Dictionary<int, string>(){ 
-    { 1, "Slab Node Manager" },
+    })
+ },
+            { 10152, Tuple.Create("Square, Inc.", new Dictionary<int, string>{
+{ 41248, "Contactless + Chip Reader" },
+    })
+ },
+            { 10168, Tuple.Create("ThingM", new Dictionary<int, string>{
+{ 493, "blink(1)" },
+    })
+ },
+            { 10173, Tuple.Create("Codethink Ltd.", new Dictionary<int, string>{
+{ 1, "Slab Node Manager" },
 { 2, "Slab Node Manager JTAG" },
- } },
-            { 10176, new Dictionary<int, string>(){ 
-    { 2072, "Paperlike HD-FT" },
- } },
-            { 10182, new Dictionary<int, string>(){ 
-    { 20759, "Fingerprint Reader" },
+    })
+ },
+            { 10176, Tuple.Create("Cadwell Laboratories, Inc.", new Dictionary<int, string>{
+{ 2072, "Paperlike HD-FT" },
+    })
+ },
+            { 10182, Tuple.Create("Shenzhen Goodix Technology Co.,Ltd.", new Dictionary<int, string>{
+{ 20759, "Fingerprint Reader" },
 { 20993, "Fingerprint Reader" },
 { 21249, "Fingerprint Reader" },
 { 21260, "Fingerprint Reader" },
@@ -28421,36 +23791,37 @@ namespace HardwareInformation.Providers {
 { 21892, "Fingerprint Reader" },
 { 21940, "Fingerprint Reader" },
 { 22336, "Fingerprint Reader" },
- } },
-            { 10196, new Dictionary<int, string>(){ 
-     } },
-            { 10205, new Dictionary<int, string>(){ 
-    { 2, "Mindeo Virtual COM Port" },
- } },
-            { 10226, new Dictionary<int, string>(){ 
-     } },
-            { 10243, new Dictionary<int, string>(){ 
-    { 1, "Controller Area Network car alarm module [SLCAN-2]" },
- } },
-            { 10246, new Dictionary<int, string>(){ 
-    { 1, "N-PASS X1" },
- } },
-            { 10263, new Dictionary<int, string>(){ 
-    { 2, "BB60C Spectrum Analyzer" },
+    })
+ },
+            { 10205, Tuple.Create("Mindeo", new Dictionary<int, string>{
+{ 2, "Mindeo Virtual COM Port" },
+    })
+ },
+            { 10243, Tuple.Create("StarLine LLC.", new Dictionary<int, string>{
+{ 1, "Controller Area Network car alarm module [SLCAN-2]" },
+    })
+ },
+            { 10246, Tuple.Create("SIMPASS", new Dictionary<int, string>{
+{ 1, "N-PASS X1" },
+    })
+ },
+            { 10263, Tuple.Create("Signal Hound, Inc.", new Dictionary<int, string>{
+{ 2, "BB60C Spectrum Analyzer" },
 { 4, "SM200A Spectrum Analyzer" },
- } },
-            { 10264, new Dictionary<int, string>(){ 
-    { 1, "Transfer Drive Dock" },
- } },
-            { 10273, new Dictionary<int, string>(){ 
-    { 353, "WL-161 802.11b Wireless Adapter [SiS 162U]" },
+    })
+ },
+            { 10264, Tuple.Create("Codex Digital Limited", new Dictionary<int, string>{
+{ 1, "Transfer Drive Dock" },
+    })
+ },
+            { 10273, Tuple.Create("ASUSTek Computer Inc.", new Dictionary<int, string>{
+{ 353, "WL-161 802.11b Wireless Adapter [SiS 162U]" },
 { 5647, "WL-160g 802.11g Wireless Adapter [Envara WiND512]" },
 { 13056, "WL-140 / Hawking HWU36D 802.11b Wireless Adapter [Intersil PRISM 3]" },
- } },
-            { 10274, new Dictionary<int, string>(){ 
-     } },
-            { 10291, new Dictionary<int, string>(){ 
-    { 1, "Rift Developer Kit 1" },
+    })
+ },
+            { 10291, Tuple.Create("Oculus VR, Inc.", new Dictionary<int, string>{
+{ 1, "Rift Developer Kit 1" },
 { 33, "Rift DK2" },
 { 49, "Rift CV1" },
 { 257, "Latency Tester" },
@@ -28462,23 +23833,26 @@ namespace HardwareInformation.Providers {
 { 8225, "Rift DK2" },
 { 8241, "Rift CV1" },
 { 12337, "Rift CV1" },
- } },
-            { 10294, new Dictionary<int, string>(){ 
-     } },
-            { 10347, new Dictionary<int, string>(){ 
-    { 3, "D6BB/D9 seismic digitizer" },
- } },
-            { 10374, new Dictionary<int, string>(){ 
-    { 2, "Seeeduino Lite" },
- } },
-            { 10384, new Dictionary<int, string>(){ 
-    { 531, "ClearPath 4-axis Comm Hub" },
- } },
-            { 10393, new Dictionary<int, string>(){ 
-    { 300, "Camera Device" },
- } },
-            { 10395, new Dictionary<int, string>(){ 
-    { 1, "Gamecube/N64 controller v2.2" },
+    })
+ },
+            { 10347, Tuple.Create("STANEO SAS", new Dictionary<int, string>{
+{ 3, "D6BB/D9 seismic digitizer" },
+    })
+ },
+            { 10374, Tuple.Create("Seeed Technology Co., Ltd.", new Dictionary<int, string>{
+{ 2, "Seeeduino Lite" },
+    })
+ },
+            { 10384, Tuple.Create("Teknic, Inc", new Dictionary<int, string>{
+{ 531, "ClearPath 4-axis Comm Hub" },
+    })
+ },
+            { 10393, Tuple.Create("Toptronic Industrial Co., Ltd", new Dictionary<int, string>{
+{ 300, "Camera Device" },
+    })
+ },
+            { 10395, Tuple.Create("Dracal/Raphnet technologies", new Dictionary<int, string>{
+{ 1, "Gamecube/N64 controller v2.2" },
 { 2, "2nes2snes" },
 { 3, "4nes4snes" },
 { 4, "Gamecube/N64 controller v2.3" },
@@ -28505,65 +23879,76 @@ namespace HardwareInformation.Providers {
 { 256, "Dual-relay board" },
 { 1280, "Energy meter" },
 { 1282, "Precision barometer" },
- } },
-            { 10397, new Dictionary<int, string>(){ 
-    { 16, "PIR206 Thermal Camera [Seek Compact]" },
- } },
-            { 10429, new Dictionary<int, string>(){ 
-    { 2336, "Star G960 Graphic Tablet" },
- } },
-            { 10439, new Dictionary<int, string>(){ 
-    { 1, "3D printer serial interface" },
- } },
-            { 10452, new Dictionary<int, string>(){ 
-    { 8, "120/200/250/400/800/D-Premier" },
- } },
-            { 10462, new Dictionary<int, string>(){ 
-    { 4354, "Wired Controller" },
+    })
+ },
+            { 10397, Tuple.Create("Seek Thermal, Inc.", new Dictionary<int, string>{
+{ 16, "PIR206 Thermal Camera [Seek Compact]" },
+    })
+ },
+            { 10429, Tuple.Create("XP-Pen", new Dictionary<int, string>{
+{ 2336, "Star G960 Graphic Tablet" },
+    })
+ },
+            { 10439, Tuple.Create("Ultimaker B.V.", new Dictionary<int, string>{
+{ 1, "3D printer serial interface" },
+    })
+ },
+            { 10452, Tuple.Create("Devialet", new Dictionary<int, string>{
+{ 8, "120/200/250/400/800/D-Premier" },
+    })
+ },
+            { 10462, Tuple.Create("Valve Software", new Dictionary<int, string>{
+{ 4354, "Wired Controller" },
 { 4418, "Wireless Steam Controller" },
 { 8192, "Lighthouse FPGA RX" },
 { 8210, "Virtual Reality Controller [VRC]" },
 { 8449, "Watchman Dongle" },
 { 9472, "Lighthouse Base Station" },
- } },
-            { 10464, new Dictionary<int, string>(){ 
-    { 4097, "BTS Monitoring Config for Prototype" },
+    })
+ },
+            { 10464, Tuple.Create("PT. Prasimax Inovasi Teknologi", new Dictionary<int, string>{
+{ 4097, "BTS Monitoring Config for Prototype" },
 { 22336, "TRUMON TS-107" },
 { 22337, "TRUMON TS-108" },
- } },
-            { 10473, new Dictionary<int, string>(){ 
-    { 393, "GD32 DFU Bootloader (Longan Nano)" },
- } },
-            { 10483, new Dictionary<int, string>(){ 
-    { 8192, "Mobile Wi-Fi (C200)" },
+    })
+ },
+            { 10473, Tuple.Create("GDMicroelectronics", new Dictionary<int, string>{
+{ 393, "GD32 DFU Bootloader (Longan Nano)" },
+    })
+ },
+            { 10483, Tuple.Create("Clover Network, Inc.", new Dictionary<int, string>{
+{ 8192, "Mobile Wi-Fi (C200)" },
 { 12288, "Mini" },
 { 16384, "Flex" },
- } },
-            { 10489, new Dictionary<int, string>(){ 
-    { 1, "Profishark 1G Black" },
+    })
+ },
+            { 10489, Tuple.Create("Profitap HQ BV", new Dictionary<int, string>{
+{ 1, "Profishark 1G Black" },
 { 3, "Profishark 1G+" },
 { 4, "Profishark 1G" },
 { 5, "Profishark 10G" },
 { 6, "Profishark 100M" },
- } },
-            { 10508, new Dictionary<int, string>(){ 
-    { 19277, "Mercury iPod Dock" },
- } },
-            { 10514, new Dictionary<int, string>(){ 
-    { 8392, "D1 24-bit DAC" },
+    })
+ },
+            { 10508, Tuple.Create("R. Hamilton & Co. Ltd.", new Dictionary<int, string>{
+{ 19277, "Mercury iPod Dock" },
+    })
+ },
+            { 10514, Tuple.Create("Audioengine", new Dictionary<int, string>{
+{ 8392, "D1 24-bit DAC" },
 { 12488, "D1 24-bit DAC" },
- } },
-            { 10518, new Dictionary<int, string>(){ 
-     } },
-            { 10545, new Dictionary<int, string>(){ 
-    { 2561, "Jolla Phone MTP" },
+    })
+ },
+            { 10545, Tuple.Create("Jolla Oy", new Dictionary<int, string>{
+{ 2561, "Jolla Phone MTP" },
 { 2562, "Jolla Phone Developer" },
 { 2565, "Jolla PC connection" },
 { 2567, "Phone MTP" },
 { 2814, "Jolla charging only" },
- } },
-            { 10553, new Dictionary<int, string>(){ 
-    { 18777, "A-MCB2" },
+    })
+ },
+            { 10553, Tuple.Create("Zaber Technologies Inc.", new Dictionary<int, string>{
+{ 18777, "A-MCB2" },
 { 18778, "X-MCB1" },
 { 18779, "X-MCB2" },
 { 18865, "X-MCB1" },
@@ -28572,54 +23957,57 @@ namespace HardwareInformation.Providers {
 { 18882, "X-MCC2" },
 { 18883, "X-MCC3" },
 { 18884, "X-MCC4" },
- } },
-            { 10583, new Dictionary<int, string>(){ 
-    { 1, "Management Console" },
- } },
-            { 10593, new Dictionary<int, string>(){ 
-    { 1, "C.24 keyboard" },
- } },
-            { 10603, new Dictionary<int, string>(){ 
-    { 14615, "CX-WE100 Camera" },
- } },
-            { 10610, new Dictionary<int, string>(){ 
-    { 7, "X3 2nd gen audio player / DAC" },
- } },
-            { 10637, new Dictionary<int, string>(){ 
-    { 8224, "NB-2020-U Fingerprint Reader" },
- } },
-            { 10685, new Dictionary<int, string>(){ 
-    { 16641, "Multi-touch Device" },
- } },
-            { 10689, new Dictionary<int, string>(){ 
-    { 4357, "M17-G903-1 [Tazpad]" },
+    })
+ },
+            { 10583, Tuple.Create("Obsidian Research Corporation", new Dictionary<int, string>{
+{ 1, "Management Console" },
+    })
+ },
+            { 10593, Tuple.Create("Miselu", new Dictionary<int, string>{
+{ 1, "C.24 keyboard" },
+    })
+ },
+            { 10603, Tuple.Create("Xacti Corporation", new Dictionary<int, string>{
+{ 14615, "CX-WE100 Camera" },
+    })
+ },
+            { 10610, Tuple.Create("FiiO Electronics Technology", new Dictionary<int, string>{
+{ 7, "X3 2nd gen audio player / DAC" },
+    })
+ },
+            { 10637, Tuple.Create("Next Biometrics", new Dictionary<int, string>{
+{ 8224, "NB-2020-U Fingerprint Reader" },
+    })
+ },
+            { 10685, Tuple.Create("Silicon Works", new Dictionary<int, string>{
+{ 16641, "Multi-touch Device" },
+    })
+ },
+            { 10689, Tuple.Create("Taztag", new Dictionary<int, string>{
+{ 4357, "M17-G903-1 [Tazpad]" },
 { 4359, "M17-G903-A [Tazpad] (CCID)" },
- } },
-            { 10690, new Dictionary<int, string>(){ 
-    { 1, "DGT 650" },
+    })
+ },
+            { 10690, Tuple.Create("Lewitt GmbH", new Dictionary<int, string>{
+{ 1, "DGT 650" },
 { 3, "DGT 450" },
 { 9, "DGT 260" },
 { 17, "Stream 4x5" },
- } },
-            { 10691, new Dictionary<int, string>(){ 
-     } },
-            { 10722, new Dictionary<int, string>(){ 
-     } },
-            { 10727, new Dictionary<int, string>(){ 
-     } },
-            { 10728, new Dictionary<int, string>(){ 
-     } },
-            { 10730, new Dictionary<int, string>(){ 
-    { 258, "Advantage2 Keyboard" },
- } },
-            { 10737, new Dictionary<int, string>(){ 
-    { 13297, "Avalon nano 1.0" },
+    })
+ },
+            { 10730, Tuple.Create("Kinesis Corporation", new Dictionary<int, string>{
+{ 258, "Advantage2 Keyboard" },
+    })
+ },
+            { 10737, Tuple.Create("Canaan Creative Co., Ltd", new Dictionary<int, string>{
+{ 13297, "Avalon nano 1.0" },
 { 13298, "Avalon USB2IIC Converter" },
 { 13299, "Avalon nano 2.0" },
 { 16625, "Avalon4 mini" },
- } },
-            { 10755, new Dictionary<int, string>(){ 
-    { 1, "Linino ONE (bootloader)" },
+    })
+ },
+            { 10755, Tuple.Create("dog hunter AG", new Dictionary<int, string>{
+{ 1, "Linino ONE (bootloader)" },
 { 54, "Arduino Leonardo (bootloader)" },
 { 55, "Arduino Micro (bootloader)" },
 { 56, "Arduino Robot Control (bootloader)" },
@@ -28642,38 +24030,42 @@ namespace HardwareInformation.Providers {
 { 32828, "Arduino Explora (CDC ACM)" },
 { 32833, "Arduino Yun (CDC ACM)" },
 { 32845, "Arduino Zero Pro (CDC ACM)" },
- } },
-            { 10766, new Dictionary<int, string>(){ 
-     } },
-            { 10771, new Dictionary<int, string>(){ 
-    { 0, "S-Series data capture device" },
- } },
-            { 10777, new Dictionary<int, string>(){ 
-    { 4098, "Mimas V2 Spartan6 FPGA Development Board" },
+    })
+ },
+            { 10771, Tuple.Create("Grabba International", new Dictionary<int, string>{
+{ 0, "S-Series data capture device" },
+    })
+ },
+            { 10777, Tuple.Create("Numato Systems Pvt. Ltd", new Dictionary<int, string>{
+{ 4098, "Mimas V2 Spartan6 FPGA Development Board" },
 { 21568, "TimVideos' HDMI2USB Opsis (FX2) - Unconfigured device" },
 { 21569, "TimVideos' HDMI2USB Opsis (FX2) - Firmware load/upgrade" },
 { 21570, "TimVideos' HDMI2USB Opsis (FX2) - HDMI/DVI Capture Device" },
- } },
-            { 10781, new Dictionary<int, string>(){ 
-    { 0, "MinION" },
+    })
+ },
+            { 10781, Tuple.Create("Oxford Nanopore Technologies, Ltd", new Dictionary<int, string>{
+{ 0, "MinION" },
 { 1, "MinION" },
 { 16, "VolTRAX" },
 { 17, "VolTRAX" },
 { 32, "GridION" },
 { 33, "GridION" },
- } },
-            { 10807, new Dictionary<int, string>(){ 
-    { 20752, "UPS35110/UPS25110" },
- } },
-            { 10809, new Dictionary<int, string>(){ 
-    { 16304, "Babyface Pro (Class Compliant Mode)" },
+    })
+ },
+            { 10807, Tuple.Create("RTD Embedded Technologies, Inc.", new Dictionary<int, string>{
+{ 20752, "UPS35110/UPS25110" },
+    })
+ },
+            { 10809, Tuple.Create("RME", new Dictionary<int, string>{
+{ 16304, "Babyface Pro (Class Compliant Mode)" },
 { 16320, "Babyface Pro" },
 { 16321, "Fireface UFX+" },
 { 16322, "Fireface UFX+" },
 { 16337, "Fireface UFX+" },
- } },
-            { 10812, new Dictionary<int, string>(){ 
-    { 256, "Stepper Device" },
+    })
+ },
+            { 10812, Tuple.Create("Trinamic Motion Control GmbH & Co KG", new Dictionary<int, string>{
+{ 256, "Stepper Device" },
 { 512, "BLDC/PMSM Device" },
 { 768, "Motor Control Device" },
 { 1024, "Motor Control Device" },
@@ -28682,9 +24074,10 @@ namespace HardwareInformation.Providers {
 { 1792, "Evaluation Device" },
 { 2048, "Interface Device" },
 { 2304, "Generic Device" },
- } },
-            { 10821, new Dictionary<int, string>(){ 
-    { 1, "MX Phone (BICR)" },
+    })
+ },
+            { 10821, Tuple.Create("Meizu Corp.", new Dictionary<int, string>{
+{ 1, "MX Phone (BICR)" },
 { 3074, "MX Phone (MTP & ADB)" },
 { 3075, "MX Phone (BICR & ADB)" },
 { 8200, "MX Phone (MTP)" },
@@ -28692,40 +24085,46 @@ namespace HardwareInformation.Providers {
 { 8203, "MX Phone (PTP)" },
 { 8204, "MX Phone (PTP & ADB)" },
 { 8210, "MX Phone (MTP & ACM)" },
- } },
-            { 10823, new Dictionary<int, string>(){ 
-    { 3074, "bq Aquaris E4.5" },
+    })
+ },
+            { 10823, Tuple.Create("Mundo Reader, S.L.", new Dictionary<int, string>{
+{ 3074, "bq Aquaris E4.5" },
 { 8221, "Tablet Edison 3" },
 { 36922, "bq Aquaris U" },
- } },
-            { 10827, new Dictionary<int, string>(){ 
-    { 1024, "Pilot4 Integrated Hub" },
- } },
-            { 10850, new Dictionary<int, string>(){ 
-    { 45825, "LiveSD" },
+    })
+ },
+            { 10827, Tuple.Create("EMULEX Corporation", new Dictionary<int, string>{
+{ 1024, "Pilot4 Integrated Hub" },
+    })
+ },
+            { 10850, Tuple.Create("Flymaster Avionics", new Dictionary<int, string>{
+{ 45825, "LiveSD" },
 { 45826, "NavSD" },
- } },
-            { 10862, new Dictionary<int, string>(){ 
-    { 3, "Touch Board" },
+    })
+ },
+            { 10862, Tuple.Create("Bare Conductive", new Dictionary<int, string>{
+{ 3, "Touch Board" },
 { 32771, "Touch Board" },
- } },
-            { 10864, new Dictionary<int, string>(){ 
-    { 20199, "ONEPLUS A3010 [OnePlus 3T] / A5010 [OnePlus 5T] / A6003 [OnePlus 6] (Charging + USB debugging modes)" },
+    })
+ },
+            { 10864, Tuple.Create("OnePlus Technology (Shenzhen) Co., Ltd.", new Dictionary<int, string>{
+{ 20199, "ONEPLUS A3010 [OnePlus 3T] / A5010 [OnePlus 5T] / A6003 [OnePlus 6] (Charging + USB debugging modes)" },
 { 36941, "A3000 phone (PTP mode) [3T]" },
 { 36942, "A3000 phone (PTP mode, with debug) [3T]" },
- } },
-            { 10888, new Dictionary<int, string>(){ 
-    { 65535, "DFU" },
- } },
-            { 10893, new Dictionary<int, string>(){ 
-     } },
-            { 10934, new Dictionary<int, string>(){ 
-    { 1, "PDP3000HV DAC" },
+    })
+ },
+            { 10888, Tuple.Create("DFU Technology Ltd", new Dictionary<int, string>{
+{ 65535, "DFU" },
+    })
+ },
+            { 10934, Tuple.Create("T+A elektroakustik GmbH & Co KG, Germany", new Dictionary<int, string>{
+{ 1, "PDP3000HV DAC" },
 { 2, "MP1000E, MP2000R, MP2500R, MP3100HV" },
 { 3, "TA HD AUDIO V2" },
- } },
-            { 10951, new Dictionary<int, string>(){ 
-    { 257, "Evaluation Kit [Dragonfly]" },
+    })
+ },
+            { 10951, Tuple.Create("Ultrahaptics Ltd.", new Dictionary<int, string>{
+{ 257, "Evaluation Kit [Dragonfly]" },
 { 258, "UHDK5" },
 { 260, "Touchbase" },
 { 272, "STRATOS Explore" },
@@ -28733,12 +24132,14 @@ namespace HardwareInformation.Providers {
 { 274, "STRATOS Inspire" },
 { 275, "STRATOS Inspire DFU" },
 { 65535, "DFU" },
- } },
-            { 10961, new Dictionary<int, string>(){ 
-    { 31416, "Turningtable" },
- } },
-            { 10981, new Dictionary<int, string>(){ 
-    { 36885, "2 (Mass storage & ADB)" },
+    })
+ },
+            { 10961, Tuple.Create("Picotronic GmbH", new Dictionary<int, string>{
+{ 31416, "Turningtable" },
+    })
+ },
+            { 10981, Tuple.Create("Fairphone B.V.", new Dictionary<int, string>{
+{ 36885, "2 (Mass storage & ADB)" },
 { 36900, "2 (RNDIS & ADB)" },
 { 36921, "2 (MTP & ADB)" },
 { 36941, "2 (PTP)" },
@@ -28748,28 +24149,32 @@ namespace HardwareInformation.Providers {
 { 61443, "2 (MTP)" },
 { 61445, "2 (tethering)" },
 { 61454, "2 (RNDIS)" },
- } },
-            { 10988, new Dictionary<int, string>(){ 
-    { 24593, "Converter" },
- } },
-            { 10996, new Dictionary<int, string>(){ 
-    { 256, "Seaboard GRAND" },
+    })
+ },
+            { 10988, Tuple.Create("Ambiq Micro, Inc.", new Dictionary<int, string>{
+{ 24593, "Converter" },
+    })
+ },
+            { 10996, Tuple.Create("ROLI Ltd.", new Dictionary<int, string>{
+{ 256, "Seaboard GRAND" },
 { 512, "Seaboard RISE" },
 { 768, "BlueWing Proto" },
 { 1024, "VOICE" },
 { 1280, "BLOCKS" },
- } },
-            { 11011, new Dictionary<int, string>(){ 
-    { 62848, "ZED camera" },
+    })
+ },
+            { 11011, Tuple.Create("STEREOLABS", new Dictionary<int, string>{
+{ 62848, "ZED camera" },
 { 62850, "ZED camera" },
 { 63104, "ZED-M camera" },
 { 63105, "ZED-M HID Interface" },
 { 63106, "ZED-M camera" },
 { 63107, "ZED-M HID Interface" },
 { 63108, "ZED-M camera" },
- } },
-            { 11022, new Dictionary<int, string>(){ 
-    { 5915, "Le2" },
+    })
+ },
+            { 11022, Tuple.Create("LeEco", new Dictionary<int, string>{
+{ 5915, "Le2" },
 { 5918, "Le2 in USB tethering mode" },
 { 6192, "Le1 Pro" },
 { 6212, "Le Max2" },
@@ -28778,127 +24183,142 @@ namespace HardwareInformation.Providers {
 { 24843, "Lex720 [LePro 3] in Camera mode" },
 { 24844, "Lex720 [LePro 3]" },
 { 24845, "Lex720 [LePro 3] in debug" },
- } },
-            { 11043, new Dictionary<int, string>(){ 
-    { 51966, "UsbDk (USB Development Kit)" },
- } },
-            { 11044, new Dictionary<int, string>(){ 
-    { 1, "Bitcoin Wallet [KeepKey]" },
+    })
+ },
+            { 11043, Tuple.Create("Red Hat, Inc.", new Dictionary<int, string>{
+{ 51966, "UsbDk (USB Development Kit)" },
+    })
+ },
+            { 11044, Tuple.Create("KeepKey LLC", new Dictionary<int, string>{
+{ 1, "Bitcoin Wallet [KeepKey]" },
 { 2, "Bitcoin Wallet" },
- } },
-            { 11070, new Dictionary<int, string>(){ 
-    { 44258, "CW1173 [ChipWhisperer-Lite]" },
- } },
-            { 11084, new Dictionary<int, string>(){ 
-    { 4100, "Z1 MTP" },
- } },
-            { 11205, new Dictionary<int, string>(){ 
-    { 1025, "Astra" },
+    })
+ },
+            { 11070, Tuple.Create("NewAE Technology Inc.", new Dictionary<int, string>{
+{ 44258, "CW1173 [ChipWhisperer-Lite]" },
+    })
+ },
+            { 11084, Tuple.Create("ZUK", new Dictionary<int, string>{
+{ 4100, "Z1 MTP" },
+    })
+ },
+            { 11205, Tuple.Create("Orbbec 3D Technology International, Inc", new Dictionary<int, string>{
+{ 1025, "Astra" },
 { 1027, "Astra Pro" },
 { 1031, "Astra Mini S" },
- } },
-            { 11212, new Dictionary<int, string>(){ 
-     } },
-            { 11222, new Dictionary<int, string>(){ 
-    { 16897, "RS-485 Controller and Interface [Cypress Semiconductor]" },
- } },
-            { 11224, new Dictionary<int, string>(){ 
-     } },
-            { 11266, new Dictionary<int, string>(){ 
-    { 5354, "GW-US11H WLAN" },
- } },
-            { 11290, new Dictionary<int, string>(){ 
-    { 0, "Wireless Optical Mouse" },
- } },
-            { 11299, new Dictionary<int, string>(){ 
-    { 7043, "NIC" },
- } },
-            { 11342, new Dictionary<int, string>(){ 
-    { 256, "MW300UM RTL8192EU wifi" },
- } },
-            { 11343, new Dictionary<int, string>(){ 
-    { 12291, "PR Wireless Presenter" },
- } },
-            { 11349, new Dictionary<int, string>(){ 
-    { 41216, "ML1 Lightpack (MLDB)" },
+    })
+ },
+            { 11222, Tuple.Create("Coroware, Inc.", new Dictionary<int, string>{
+{ 16897, "RS-485 Controller and Interface [Cypress Semiconductor]" },
+    })
+ },
+            { 11266, Tuple.Create("Planex Communications", new Dictionary<int, string>{
+{ 5354, "GW-US11H WLAN" },
+    })
+ },
+            { 11290, Tuple.Create("Dolphin Peripherals", new Dictionary<int, string>{
+{ 0, "Wireless Optical Mouse" },
+    })
+ },
+            { 11299, Tuple.Create("Supermicro Computer Incorporated", new Dictionary<int, string>{
+{ 7043, "NIC" },
+    })
+ },
+            { 11342, Tuple.Create("Mercucys INC", new Dictionary<int, string>{
+{ 256, "MW300UM RTL8192EU wifi" },
+    })
+ },
+            { 11343, Tuple.Create("Canon Electronic Business Machines Co., Ltd.", new Dictionary<int, string>{
+{ 12291, "PR Wireless Presenter" },
+    })
+ },
+            { 11349, Tuple.Create("Magic Leap, Inc.", new Dictionary<int, string>{
+{ 41216, "ML1 Lightpack (MLDB)" },
 { 45312, "ML1 Lightpack (fastboot)" },
 { 49153, "ML1 Control (COM)" },
 { 49154, "ML1 Control (Bootloader)" },
- } },
-            { 11388, new Dictionary<int, string>(){ 
-    { 289, "EC21 LTE modem" },
+    })
+ },
+            { 11388, Tuple.Create("Quectel Wireless Solutions Co., Ltd.", new Dictionary<int, string>{
+{ 289, "EC21 LTE modem" },
 { 293, "EC25 LTE modem" },
 { 401, "EG91 LTE modem" },
 { 405, "EG95 LTE modem" },
 { 662, "BG96 CAT-M1/NB-IoT modem" },
 { 774, "EG06/EP06/EM06 LTE-A modem" },
 { 1077, "AG35 LTE modem" },
- } },
-            { 11415, new Dictionary<int, string>(){ 
-    { 0, "Blue" },
+    })
+ },
+            { 11415, Tuple.Create("Ledger", new Dictionary<int, string>{
+{ 0, "Blue" },
 { 1, "Nano S" },
 { 4, "Nano X" },
- } },
-            { 11417, new Dictionary<int, string>(){ 
-    { 1, "i3 MK2S" },
- } },
-            { 11420, new Dictionary<int, string>(){ 
-    { 4096, "Walabot Makers Series" },
+    })
+ },
+            { 11417, Tuple.Create("Prusa", new Dictionary<int, string>{
+{ 1, "i3 MK2S" },
+    })
+ },
+            { 11420, Tuple.Create("Vayyar Imaging Ltd.", new Dictionary<int, string>{
+{ 4096, "Walabot Makers Series" },
 { 4128, "Walabot DIY" },
 { 4130, "Walabot DIY Plus" },
 { 4144, "Walabot Home (vHC)" },
 { 37120, "VNAKit" },
- } },
-            { 11421, new Dictionary<int, string>(){ 
-    { 37024, "Goa" },
+    })
+ },
+            { 11421, Tuple.Create("Nod Inc", new Dictionary<int, string>{
+{ 37024, "Goa" },
 { 47813, "Backspin" },
- } },
-            { 11427, new Dictionary<int, string>(){ 
-    { 8, "Mavic Mini MR1SD25 Remote controller" },
- } },
-            { 11447, new Dictionary<int, string>(){ 
-    { 528, "L830-EB-00 LTE WWAN Modem" },
- } },
-            { 11456, new Dictionary<int, string>(){ 
-     } },
-            { 11458, new Dictionary<int, string>(){ 
-     } },
-            { 11471, new Dictionary<int, string>(){ 
-    { 2176, "HyperFIDO" },
- } },
-            { 11481, new Dictionary<int, string>(){ 
-    { 2052, "PowerSync4 USBPD Hub" },
- } },
-            { 11484, new Dictionary<int, string>(){ 
-    { 62002, "CTD48Mc CTD Probe" },
- } },
-            { 11493, new Dictionary<int, string>(){ 
-    { 20, "Mass Storage [NT2 U31C]" },
- } },
-            { 11504, new Dictionary<int, string>(){ 
-    { 21062, "bladeRF" },
+    })
+ },
+            { 11427, Tuple.Create("DJI Technology Co., Ltd.", new Dictionary<int, string>{
+{ 8, "Mavic Mini MR1SD25 Remote controller" },
+    })
+ },
+            { 11447, Tuple.Create("Fibocom", new Dictionary<int, string>{
+{ 528, "L830-EB-00 LTE WWAN Modem" },
+    })
+ },
+            { 11471, Tuple.Create("Hypersecu", new Dictionary<int, string>{
+{ 2176, "HyperFIDO" },
+    })
+ },
+            { 11481, Tuple.Create("Cambrionix Ltd", new Dictionary<int, string>{
+{ 2052, "PowerSync4 USBPD Hub" },
+    })
+ },
+            { 11484, Tuple.Create("Sea & Sun Technology GmbH", new Dictionary<int, string>{
+{ 62002, "CTD48Mc CTD Probe" },
+    })
+ },
+            { 11493, Tuple.Create("InX8 Inc [AKiTiO]", new Dictionary<int, string>{
+{ 20, "Mass Storage [NT2 U31C]" },
+    })
+ },
+            { 11504, Tuple.Create("Nuand LLC", new Dictionary<int, string>{
+{ 21062, "bladeRF" },
 { 21072, "bladeRF 2.0 micro" },
- } },
-            { 11551, new Dictionary<int, string>(){ 
-     } },
-            { 11557, new Dictionary<int, string>(){ 
-     } },
-            { 11565, new Dictionary<int, string>(){ 
-    { 20557, "Proxmark3" },
- } },
-            { 11575, new Dictionary<int, string>(){ 
-     } },
-            { 11627, new Dictionary<int, string>(){ 
-    { 30583, "Joker TV universal DTV receiver" },
- } },
-            { 11649, new Dictionary<int, string>(){ 
-    { 20225, "Ozobot Evo" },
- } },
-            { 11652, new Dictionary<int, string>(){ 
-    { 47110, "DT-108B Thermal Label Printer" },
- } },
-            { 11720, new Dictionary<int, string>(){ 
-    { 20486, "M30 Bluetooth gamepad" },
+    })
+ },
+            { 11565, Tuple.Create("proxmark.org", new Dictionary<int, string>{
+{ 20557, "Proxmark3" },
+    })
+ },
+            { 11627, Tuple.Create("NetUP Inc.", new Dictionary<int, string>{
+{ 30583, "Joker TV universal DTV receiver" },
+    })
+ },
+            { 11649, Tuple.Create("Evollve Inc.", new Dictionary<int, string>{
+{ 20225, "Ozobot Evo" },
+    })
+ },
+            { 11652, Tuple.Create("Zhuhai Poskey Technology Co.,Ltd", new Dictionary<int, string>{
+{ 47110, "DT-108B Thermal Label Printer" },
+    })
+ },
+            { 11720, Tuple.Create("8BitDo", new Dictionary<int, string>{
+{ 20486, "M30 Bluetooth gamepad" },
 { 22352, "Bootloader" },
 { 24576, "SF30 Pro gamepad" },
 { 24577, "SN30/SF30 Pro gamepad" },
@@ -28906,22 +24326,26 @@ namespace HardwareInformation.Providers {
 { 43794, "N30 gamepad" },
 { 43808, "SN30/SF30 gamepad" },
 { 43809, "SF30 gamepad" },
- } },
-            { 11727, new Dictionary<int, string>(){ 
-    { 51537, "Audio Class 1.0 Devices" },
+    })
+ },
+            { 11727, Tuple.Create("Dialog Semiconductor", new Dictionary<int, string>{
+{ 51537, "Audio Class 1.0 Devices" },
 { 51538, "Audio Class 2.0 Devices" },
- } },
-            { 11759, new Dictionary<int, string>(){ 
-    { 0, "KiNOS Boot DFU" },
+    })
+ },
+            { 11759, Tuple.Create("Kirale Technologies", new Dictionary<int, string>{
+{ 0, "KiNOS Boot DFU" },
 { 258, "KTWM102 Module" },
- } },
-            { 11762, new Dictionary<int, string>(){ 
-    { 531, "LIPSedge DL 3D ToF Camera" },
+    })
+ },
+            { 11762, Tuple.Create("LIPS Corporation", new Dictionary<int, string>{
+{ 531, "LIPSedge DL 3D ToF Camera" },
 { 533, "LIPSedge DL RGB Camera" },
 { 8450, "LIPSedge 5 Megapixel RGB Camera" },
- } },
-            { 11780, new Dictionary<int, string>(){ 
-    { 1, "Nokia 3310 3G" },
+    })
+ },
+            { 11780, Tuple.Create("HMD Global", new Dictionary<int, string>{
+{ 1, "Nokia 3310 3G" },
 { 2, "Nokia 3310 3G" },
 { 2580, "Nokia 3310 3G" },
 { 49160, "Tethering Network Interface" },
@@ -28931,74 +24355,75 @@ namespace HardwareInformation.Providers {
 { 49193, "Nokia 8 (PTP mode)" },
 { 49201, "Nokia 1 (PTP)" },
 { 49215, "Nokia 8 (MIDI mode)" },
- } },
-            { 11790, new Dictionary<int, string>(){ 
-    { 1, "CAN Gateway" },
- } },
-            { 11812, new Dictionary<int, string>(){ 
-    { 1618, "Duke Xbox One controller" },
+    })
+ },
+            { 11790, Tuple.Create("Hatteland Display AS", new Dictionary<int, string>{
+{ 1, "CAN Gateway" },
+    })
+ },
+            { 11812, Tuple.Create("Hyperkin", new Dictionary<int, string>{
+{ 1618, "Duke Xbox One controller" },
 { 5768, "X91 Xbox One controller" },
- } },
-            { 11835, new Dictionary<int, string>(){ 
-     } },
-            { 11863, new Dictionary<int, string>(){ 
-    { 17741, "SlideSX EnergyMeter" },
+    })
+ },
+            { 11863, Tuple.Create("MEGWARE Computer Vertrieb und Service GmbH", new Dictionary<int, string>{
+{ 17741, "SlideSX EnergyMeter" },
 { 17742, "SlideSX EnergyMeter DFU" },
 { 23738, "SlideSX / ClustSafe Bus Adapter" },
- } },
-            { 11881, new Dictionary<int, string>(){ 
-    { 4097, "Piksi Multi" },
- } },
-            { 11925, new Dictionary<int, string>(){ 
-    { 30501, "Controller" },
- } },
-            { 12150, new Dictionary<int, string>(){ 
-    { 2309, "KX905 Smart Terminal" },
+    })
+ },
+            { 11881, Tuple.Create("Swift Navigation", new Dictionary<int, string>{
+{ 4097, "Piksi Multi" },
+    })
+ },
+            { 11925, Tuple.Create("SCUF Gaming", new Dictionary<int, string>{
+{ 30501, "Controller" },
+    })
+ },
+            { 12150, Tuple.Create("KeyXentic Inc.", new Dictionary<int, string>{
+{ 2309, "KX905 Smart Terminal" },
 { 2310, "KX906 Smart Card Reader" },
 { 6406, "KX906 Smart Token (Mass Storage)" },
- } },
-            { 12205, new Dictionary<int, string>(){ 
-     } },
-            { 12208, new Dictionary<int, string>(){ 
-     } },
-            { 12210, new Dictionary<int, string>(){ 
-     } },
-            { 12224, new Dictionary<int, string>(){ 
-    { 1, "Project Archer" },
- } },
-            { 12230, new Dictionary<int, string>(){ 
-    { 24594, "UAC2 Device GB" },
- } },
-            { 12256, new Dictionary<int, string>(){ 
-    { 35585, "XAP-RC-001 ENF Router Card" },
+    })
+ },
+            { 12224, Tuple.Create("Sensidyne, LP", new Dictionary<int, string>{
+{ 1, "Project Archer" },
+    })
+ },
+            { 12230, Tuple.Create("Comtrue Inc.", new Dictionary<int, string>{
+{ 24594, "UAC2 Device GB" },
+    })
+ },
+            { 12256, Tuple.Create("Xaptum, Inc.", new Dictionary<int, string>{
+{ 35585, "XAP-RC-001 ENF Router Card" },
 { 35586, "XAP-RW-001 ENF Router Card with WiFi" },
 { 35806, "XAP-EA-002 ENF Access Card" },
 { 35822, "XAP-EA-003 ENF Access Card" },
- } },
-            { 12259, new Dictionary<int, string>(){ 
-     } },
-            { 12263, new Dictionary<int, string>(){ 
-    { 1, "SMART S@T" },
- } },
-            { 12267, new Dictionary<int, string>(){ 
-    { 4, "Veikk A15 Pen Tablet" },
- } },
-            { 12276, new Dictionary<int, string>(){ 
-     } },
-            { 12310, new Dictionary<int, string>(){ 
-    { 1, "Nitrogen Bootloader" },
- } },
-            { 12342, new Dictionary<int, string>(){ 
-    { 1, "Print iD" },
+    })
+ },
+            { 12263, Tuple.Create("ELGIN S.A.", new Dictionary<int, string>{
+{ 1, "SMART S@T" },
+    })
+ },
+            { 12267, Tuple.Create("Beijing Veikk E-Commerce Co., Ltd.", new Dictionary<int, string>{
+{ 4, "Veikk A15 Pen Tablet" },
+    })
+ },
+            { 12310, Tuple.Create("Boundary Devices, LLC", new Dictionary<int, string>{
+{ 1, "Nitrogen Bootloader" },
+    })
+ },
+            { 12342, Tuple.Create("Control iD", new Dictionary<int, string>{
+{ 1, "Print iD" },
 { 2, "iDBio" },
- } },
-            { 12343, new Dictionary<int, string>(){ 
-     } },
-            { 12375, new Dictionary<int, string>(){ 
-    { 2, "ZOWIE Gaming mouse" },
- } },
-            { 12431, new Dictionary<int, string>(){ 
-    { 0, "Infinity 60% Bootloader" },
+    })
+ },
+            { 12375, Tuple.Create("Kingsis Corporation", new Dictionary<int, string>{
+{ 2, "ZOWIE Gaming mouse" },
+    })
+ },
+            { 12431, Tuple.Create("Input Club", new Dictionary<int, string>{
+{ 0, "Infinity 60% Bootloader" },
 { 1, "Infinity 60% - Standard" },
 { 2, "Infinity 60% - Hacker" },
 { 3, "Infinity Ergodox Bootloader" },
@@ -29030,135 +24455,141 @@ namespace HardwareInformation.Providers {
 { 29, "WhiteFox (SAM4S) - Winkeyless" },
 { 30, "WhiteFox (SAM4S) - True Fox" },
 { 31, "WhiteFox (SAM4S) - Jack of All Trades" },
- } },
-            { 12452, new Dictionary<int, string>(){ 
-    { 1, "Notecard" },
- } },
-            { 12482, new Dictionary<int, string>(){ 
-    { 5000, "SPL Meter" },
- } },
-            { 12489, new Dictionary<int, string>(){ 
-     } },
-            { 12526, new Dictionary<int, string>(){ 
-    { 4097, "F-01L" },
- } },
-            { 12530, new Dictionary<int, string>(){ 
-     } },
-            { 12561, new Dictionary<int, string>(){ 
-    { 0, "SGS-NT Microspectrometer" },
- } },
-            { 12562, new Dictionary<int, string>(){ 
-    { 1, "MBC-WB01 (CDC-ACM)" },
+    })
+ },
+            { 12452, Tuple.Create("Blues Wireless", new Dictionary<int, string>{
+{ 1, "Notecard" },
+    })
+ },
+            { 12482, Tuple.Create("UNPARALLEL Innovation, Lda", new Dictionary<int, string>{
+{ 5000, "SPL Meter" },
+    })
+ },
+            { 12526, Tuple.Create("Fujitsu Connected Technologies Limited", new Dictionary<int, string>{
+{ 4097, "F-01L" },
+    })
+ },
+            { 12561, Tuple.Create("Hiperscan GmbH", new Dictionary<int, string>{
+{ 0, "SGS-NT Microspectrometer" },
+    })
+ },
+            { 12562, Tuple.Create("Meteca SA", new Dictionary<int, string>{
+{ 1, "MBC-WB01 (CDC-ACM)" },
 { 2, "MBC-WB01 (Bootloader)" },
 { 3, "ABC (CDC ACM)" },
 { 4, "ABC (Bootloader)" },
- } },
-            { 12581, new Dictionary<int, string>(){ 
-    { 1, "TrackerPod Camera Stand" },
- } },
-            { 12598, new Dictionary<int, string>(){ 
-     } },
-            { 12613, new Dictionary<int, string>(){ 
-     } },
-            { 12615, new Dictionary<int, string>(){ 
-     } },
-            { 12652, new Dictionary<int, string>(){ 
-     } },
-            { 12653, new Dictionary<int, string>(){ 
-    { 19531, "Librem Key" },
- } },
-            { 12654, new Dictionary<int, string>(){ 
-    { 1, "DIAMOND token" },
- } },
-            { 12657, new Dictionary<int, string>(){ 
-    { 17, "ClusterCTRL DA" },
+    })
+ },
+            { 12581, Tuple.Create("Eagletron", new Dictionary<int, string>{
+{ 1, "TrackerPod Camera Stand" },
+    })
+ },
+            { 12653, Tuple.Create("Purism, SPC", new Dictionary<int, string>{
+{ 19531, "Librem Key" },
+    })
+ },
+            { 12654, Tuple.Create("SPECINFOSYSTEMS", new Dictionary<int, string>{
+{ 1, "DIAMOND token" },
+    })
+ },
+            { 12657, Tuple.Create("8086 Consultancy", new Dictionary<int, string>{
+{ 17, "ClusterCTRL DA" },
 { 18, "ClusterCTRL pHAT" },
 { 19, "ClusterCTRL A+6" },
 { 20, "ClusterCTRL Triple" },
 { 21, "ClusterCTRL Single" },
- } },
-            { 12662, new Dictionary<int, string>(){ 
-     } },
-            { 12693, new Dictionary<int, string>(){ 
-    { 61840, "MSO-19" },
+    })
+ },
+            { 12693, Tuple.Create("Link Instruments", new Dictionary<int, string>{
+{ 61840, "MSO-19" },
 { 62080, "MSO-28" },
 { 62081, "MSO-28" },
- } },
-            { 12745, new Dictionary<int, string>(){ 
-    { 4097, "Printer" },
+    })
+ },
+            { 12745, Tuple.Create("BeiJing LanXum Computer Technology Co., Ltd.", new Dictionary<int, string>{
+{ 4097, "Printer" },
 { 4865, "Black and White Laser Printer" },
 { 5377, "LaserPrint GA50 series" },
- } },
-            { 12800, new Dictionary<int, string>(){ 
-    { 8448, "ALE 8058s" },
+    })
+ },
+            { 12800, Tuple.Create("Alcatel-Lucent Enterprise", new Dictionary<int, string>{
+{ 8448, "ALE 8058s" },
 { 8449, "ALE 8068s" },
 { 8450, "8078s" },
- } },
-            { 12825, new Dictionary<int, string>(){ 
-    { 68, "SKO44 Optical Keyboard" },
- } },
-            { 12828, new Dictionary<int, string>(){ 
-     } },
-            { 12876, new Dictionary<int, string>(){ 
-     } },
-            { 12909, new Dictionary<int, string>(){ 
-    { 1, "Avocor USB Camera" },
- } },
-            { 12917, new Dictionary<int, string>(){ 
-    { 20401, "MonsterTV P2H" },
- } },
-            { 12947, new Dictionary<int, string>(){ 
-     } },
-            { 12979, new Dictionary<int, string>(){ 
-    { 53670, "TXT Multihub" },
+    })
+ },
+            { 12825, Tuple.Create("Smak Tecnologia e Automacao LTDA", new Dictionary<int, string>{
+{ 68, "SKO44 Optical Keyboard" },
+    })
+ },
+            { 12909, Tuple.Create("Agile Display Solutions Co., Ltd", new Dictionary<int, string>{
+{ 1, "Avocor USB Camera" },
+    })
+ },
+            { 12917, Tuple.Create("VidzMedia Pte Ltd", new Dictionary<int, string>{
+{ 20401, "MonsterTV P2H" },
+    })
+ },
+            { 12979, Tuple.Create("TEXA", new Dictionary<int, string>{
+{ 53670, "TXT Multihub" },
 { 53671, "TXT Multihub" },
- } },
-            { 13107, new Dictionary<int, string>(){ 
-    { 13107, "2 port KVM switch model 60652K" },
- } },
-            { 13108, new Dictionary<int, string>(){ 
-    { 5889, "Fast Ethernet" },
- } },
-            { 13120, new Dictionary<int, string>(){ 
-    { 1082, "Mio A701 DigiWalker PPCPhone" },
+    })
+ },
+            { 13107, Tuple.Create("InLine", new Dictionary<int, string>{
+{ 13107, "2 port KVM switch model 60652K" },
+    })
+ },
+            { 13108, Tuple.Create("AEI", new Dictionary<int, string>{
+{ 5889, "Fast Ethernet" },
+    })
+ },
+            { 13120, Tuple.Create("Yakumo", new Dictionary<int, string>{
+{ 1082, "Mio A701 DigiWalker PPCPhone" },
 { 3642, "Pocket PC 300 GPS SL / Typhoon MyGuide 3500" },
 { 41123, "deltaX 5 BT (D) PDA" },
 { 65535, "Mio DigiWalker Sync" },
- } },
-            { 13124, new Dictionary<int, string>(){ 
-    { 14148, "OEM PC Remote" },
- } },
-            { 13455, new Dictionary<int, string>(){ 
-    { 8994, "Wireless Presenter" },
- } },
-            { 13572, new Dictionary<int, string>(){ 
-    { 61712, "Security Key" },
- } },
-            { 13624, new Dictionary<int, string>(){ 
-    { 1, "Travel Flash" },
+    })
+ },
+            { 13124, Tuple.Create("Leaguer Microelectronics (LME)", new Dictionary<int, string>{
+{ 14148, "OEM PC Remote" },
+    })
+ },
+            { 13455, Tuple.Create("ISY", new Dictionary<int, string>{
+{ 8994, "Wireless Presenter" },
+    })
+ },
+            { 13572, Tuple.Create("Micro Star", new Dictionary<int, string>{
+{ 61712, "Security Key" },
+    })
+ },
+            { 13624, Tuple.Create("Power Quotient International Co., Ltd", new Dictionary<int, string>{
+{ 1, "Travel Flash" },
 { 21, "Mass Storge Device" },
 { 34, "Hi-Speed Mass Storage Device" },
 { 66, "Cool Drive U339 Flash Disk" },
 { 84, "Flash Drive (2GB)" },
 { 2305, "Traveling Disk U273 (4GB)" },
- } },
-            { 13689, new Dictionary<int, string>(){ 
-    { 26881, "Media Reader" },
- } },
-            { 13693, new Dictionary<int, string>(){ 
-    { 30600, "JMicron JMS567 ATA/ATAPI Bridge" },
- } },
-            { 13878, new Dictionary<int, string>(){ 
-     } },
-            { 14183, new Dictionary<int, string>(){ 
-    { 257, "Speedster 3 Forceshock Wheel" },
- } },
-            { 14392, new Dictionary<int, string>(){ 
-    { 1, "5-in-1 Card Reader" },
+    })
+ },
+            { 13689, Tuple.Create("DIVA", new Dictionary<int, string>{
+{ 26881, "Media Reader" },
+    })
+ },
+            { 13693, Tuple.Create("Sharkoon", new Dictionary<int, string>{
+{ 30600, "JMicron JMS567 ATA/ATAPI Bridge" },
+    })
+ },
+            { 14183, Tuple.Create("Fanatec", new Dictionary<int, string>{
+{ 257, "Speedster 3 Forceshock Wheel" },
+    })
+ },
+            { 14392, Tuple.Create("WEM", new Dictionary<int, string>{
+{ 1, "5-in-1 Card Reader" },
 { 4145, "2.4G Wireless Mouse" },
- } },
-            { 14627, new Dictionary<int, string>(){ 
-    { 4800, "DAQPad-6020E" },
+    })
+ },
+            { 14627, Tuple.Create("National Instruments Corp.", new Dictionary<int, string>{
+{ 4800, "DAQPad-6020E" },
 { 4816, "DAQPad-6507" },
 { 4832, "NI 4350" },
 { 4848, "NI 5102" },
@@ -29197,15 +24628,18 @@ namespace HardwareInformation.Providers {
 { 30405, "USB-6002 OEM" },
 { 30406, "USB-6003" },
 { 30407, "USB-6003 OEM" },
- } },
-            { 16571, new Dictionary<int, string>(){ 
-    { 2569, "USB2.0-SCSI Bridge USB2-SC" },
- } },
-            { 16641, new Dictionary<int, string>(){ 
-    { 4865, "IR-2510 usb phone" },
- } },
-            { 16642, new Dictionary<int, string>(){ 
-    { 4097, "iFP-100 series mp3 player" },
+    })
+ },
+            { 16571, Tuple.Create("I-O Data", new Dictionary<int, string>{
+{ 2569, "USB2.0-SCSI Bridge USB2-SC" },
+    })
+ },
+            { 16641, Tuple.Create("i-rocks", new Dictionary<int, string>{
+{ 4865, "IR-2510 usb phone" },
+    })
+ },
+            { 16642, Tuple.Create("iRiver, Ltd.", new Dictionary<int, string>{
+{ 4097, "iFP-100 series mp3 player" },
 { 4099, "iFP-300 series mp3 player" },
 { 4101, "iFP-500 series mp3 player" },
 { 4103, "iFP-700 series mp3/ogg vorbis player" },
@@ -29227,9 +24661,10 @@ namespace HardwareInformation.Providers {
 { 8449, "H10 20GB (mtp)" },
 { 8450, "H10 5GB (mtp)" },
 { 8453, "H10 5/6GB (mtp)" },
- } },
-            { 16700, new Dictionary<int, string>(){ 
-    { 0, "DRAC 5 Virtual Keyboard and Mouse" },
+    })
+ },
+            { 16700, Tuple.Create("Dell Computer Corp.", new Dictionary<int, string>{
+{ 0, "DRAC 5 Virtual Keyboard and Mouse" },
 { 1, "DRAC 5 Virtual Media" },
 { 88, "Port Replicator" },
 { 4097, "Keyboard Hub" },
@@ -29370,60 +24805,72 @@ namespace HardwareInformation.Providers {
 { 42243, "AC511 Sound Bar" },
 { 42752, "Hub (in 1905FP LCD Monitor)" },
 { 45063, "Streak 5 Android Tablet" },
- } },
-            { 16710, new Dictionary<int, string>(){ 
-    { 37505, "Iomega Micro Mini 128MB Flash Drive" },
+    })
+ },
+            { 16710, Tuple.Create("USBest Technology", new Dictionary<int, string>{
+{ 37505, "Iomega Micro Mini 128MB Flash Drive" },
 { 47617, "Intuix Flash Drive" },
- } },
-            { 16744, new Dictionary<int, string>(){ 
-    { 4112, "Wireless Compact Laser Mouse" },
- } },
-            { 16962, new Dictionary<int, string>(){ 
-    { 16897, "Buttons and Lights HID device" },
+    })
+ },
+            { 16744, Tuple.Create("Targus", new Dictionary<int, string>{
+{ 4112, "Wireless Compact Laser Mouse" },
+    })
+ },
+            { 16962, Tuple.Create("USB Design by Example", new Dictionary<int, string>{
+{ 16897, "Buttons and Lights HID device" },
 { 16928, "Echo 1 Camera" },
- } },
-            { 16981, new Dictionary<int, string>(){ 
-    { 4096, "9FF2 [Digital Photo Display]" },
+    })
+ },
+            { 16981, Tuple.Create("GoPro", new Dictionary<int, string>{
+{ 4096, "9FF2 [Digital Photo Display]" },
 { 8192, "HD2-14 [Hero 2 Camera]" },
- } },
-            { 17175, new Dictionary<int, string>(){ 
-    { 1792, "U.S. Robotics USR5426 802.11g Adapter" },
+    })
+ },
+            { 17175, Tuple.Create("Broadcom Corp.", new Dictionary<int, string>{
+{ 1792, "U.S. Robotics USR5426 802.11g Adapter" },
 { 1793, "U.S. Robotics USR5425 Wireless MAXg Adapter" },
 { 1809, "Belkin F5D7051 v3000 802.11g" },
 { 1824, "Dynex DX-BUSB" },
 { 1825, "Dynex DX-EBUSB" },
- } },
-            { 17224, new Dictionary<int, string>(){ 
-    { 21795, "USB->RS 232 adapter with Prolific PL 2303 chipset" },
+    })
+ },
+            { 17224, Tuple.Create("WinChipHead", new Dictionary<int, string>{
+{ 21795, "USB->RS 232 adapter with Prolific PL 2303 chipset" },
 { 21815, "13.56Mhz RFID Card Reader and Writer" },
 { 21892, "CH34x printer adapter cable" },
- } },
-            { 17778, new Dictionary<int, string>(){ 
-    { 17778, "Shuttle PN31 Remote" },
- } },
-            { 17798, new Dictionary<int, string>(){ 
-    { 4134, "Crystal Bar Flash Drive" },
- } },
-            { 18032, new Dictionary<int, string>(){ 
-    { 37780, "Game Cube USB Memory Adaptor 64M" },
- } },
-            { 18164, new Dictionary<int, string>(){ 
-     } },
-            { 18258, new Dictionary<int, string>(){ 
-    { 17, "Midistart-2" },
- } },
-            { 18263, new Dictionary<int, string>(){ 
-    { 8201, "PEL-2000 Series Electronic Load (CDC)" },
+    })
+ },
+            { 17778, Tuple.Create("Shuttle, Inc.", new Dictionary<int, string>{
+{ 17778, "Shuttle PN31 Remote" },
+    })
+ },
+            { 17798, Tuple.Create("Panram", new Dictionary<int, string>{
+{ 4134, "Crystal Bar Flash Drive" },
+    })
+ },
+            { 18032, Tuple.Create("EMS Production", new Dictionary<int, string>{
+{ 37780, "Game Cube USB Memory Adaptor 64M" },
+    })
+ },
+            { 18258, Tuple.Create("Miditech", new Dictionary<int, string>{
+{ 17, "Midistart-2" },
+    })
+ },
+            { 18263, Tuple.Create("GW Instek", new Dictionary<int, string>{
+{ 8201, "PEL-2000 Series Electronic Load (CDC)" },
 { 8208, "PEL-2000 Series Electronic Load (CDC)" },
- } },
-            { 18278, new Dictionary<int, string>(){ 
-    { 1, "MEZ1000 RDA" },
- } },
-            { 18517, new Dictionary<int, string>(){ 
-    { 29320, "Ultra Traveldrive 160G 2.5\" HDD" },
- } },
-            { 18801, new Dictionary<int, string>(){ 
-    { 4100, "Hitachi LifeStudio Desk (3.5\" HDD) [w/o flash key]" },
+    })
+ },
+            { 18278, Tuple.Create("Aceeca", new Dictionary<int, string>{
+{ 1, "MEZ1000 RDA" },
+    })
+ },
+            { 18517, Tuple.Create("Memorex", new Dictionary<int, string>{
+{ 29320, "Ultra Traveldrive 160G 2.5\" HDD" },
+    })
+ },
+            { 18801, Tuple.Create("SimpleTech", new Dictionary<int, string>{
+{ 4100, "Hitachi LifeStudio Desk (3.5\" HDD) [w/o flash key]" },
 { 4115, "Touro Desk Pro" },
 { 4117, "Touro Desk 3.0" },
 { 32769, "G-Tech G-DRIVE Mobile" },
@@ -29435,50 +24882,60 @@ namespace HardwareInformation.Providers {
 { 52760, "(re)Drive" },
 { 52769, "JMicron JM20329 SATA Bridge [eg. HITACHI SimpleDrive mini]" },
 { 52770, "Hitachi SimpleTough (3.5\" HDD)" },
- } },
-            { 19782, new Dictionary<int, string>(){ 
-    { 1, "V-Link" },
+    })
+ },
+            { 19782, Tuple.Create("Musical Fidelity", new Dictionary<int, string>{
+{ 1, "V-Link" },
 { 2, "V-DAC II" },
- } },
-            { 20530, new Dictionary<int, string>(){ 
-    { 3000, "Grandtec USB1.1 DVB-T (cold)" },
+    })
+ },
+            { 20530, Tuple.Create("Grandtec", new Dictionary<int, string>{
+{ 3000, "Grandtec USB1.1 DVB-T (cold)" },
 { 3001, "Grandtec USB1.1 DVB-T (warm)" },
 { 4000, "Grandtec USB1.1 DVB-T (cold)" },
 { 4001, "Grandtec USB1.1 DVB-T (warm)" },
- } },
-            { 20674, new Dictionary<int, string>(){ 
-    { 16403, "WLAN Adapter" },
- } },
-            { 20785, new Dictionary<int, string>(){ 
-    { 8199, "MSR-101U Mini HID magnetic card reader" },
- } },
-            { 20851, new Dictionary<int, string>(){ 
-    { 6153, "ZD1211" },
- } },
-            { 21017, new Dictionary<int, string>(){ 
-    { 4097, "Cetus CDC Device" },
- } },
-            { 21298, new Dictionary<int, string>(){ 
-    { 4864, "CST2545-5W (L-Trac)" },
- } },
-            { 21317, new Dictionary<int, string>(){ 
-    { 4660, "PDS6062T Oscilloscope" },
- } },
-            { 21324, new Dictionary<int, string>(){ 
-    { 1, "Bitcoin Wallet [TREZOR]" },
+    })
+ },
+            { 20674, Tuple.Create("Averatec (?)", new Dictionary<int, string>{
+{ 16403, "WLAN Adapter" },
+    })
+ },
+            { 20785, Tuple.Create("MSR", new Dictionary<int, string>{
+{ 8199, "MSR-101U Mini HID magnetic card reader" },
+    })
+ },
+            { 20851, Tuple.Create("Sweex", new Dictionary<int, string>{
+{ 6153, "ZD1211" },
+    })
+ },
+            { 21017, Tuple.Create("I-Tetra", new Dictionary<int, string>{
+{ 4097, "Cetus CDC Device" },
+    })
+ },
+            { 21298, Tuple.Create("Clearly Superior Technologies, Inc.", new Dictionary<int, string>{
+{ 4864, "CST2545-5W (L-Trac)" },
+    })
+ },
+            { 21317, Tuple.Create("Owon", new Dictionary<int, string>{
+{ 4660, "PDS6062T Oscilloscope" },
+    })
+ },
+            { 21324, Tuple.Create("SatoshiLabs", new Dictionary<int, string>{
+{ 1, "Bitcoin Wallet [TREZOR]" },
 { 2, "Bitcoin Wallet [TREZOR v2]" },
- } },
-            { 21325, new Dictionary<int, string>(){ 
-    { 33, "MS210x Video Grabber [EasierCAP]" },
+    })
+ },
+            { 21325, Tuple.Create("MacroSilicon", new Dictionary<int, string>{
+{ 33, "MS210x Video Grabber [EasierCAP]" },
 { 24609, "VGA Display Adapter" },
- } },
-            { 21332, new Dictionary<int, string>(){ 
-    { 23, "PAXcam2" },
- } },
-            { 21581, new Dictionary<int, string>(){ 
-     } },
-            { 21827, new Dictionary<int, string>(){ 
-    { 2, "SuperPen WP3325U Tablet" },
+    })
+ },
+            { 21332, Tuple.Create("Meyer Instruments (MIS)", new Dictionary<int, string>{
+{ 23, "PAXcam2" },
+    })
+ },
+            { 21827, Tuple.Create("UC-Logic Technology Corp.", new Dictionary<int, string>{
+{ 2, "SuperPen WP3325U Tablet" },
 { 3, "Tablet WP4030U" },
 { 4, "Tablet WP5540U" },
 { 5, "Tablet WP8060U" },
@@ -29488,9 +24945,10 @@ namespace HardwareInformation.Providers {
 { 77, "Tablet Monitor MSP19U" },
 { 100, "Aiptek HyperPen 10000U" },
 { 12337, "Graphics tablet [DrawImage G3, Ugee G3]" },
- } },
-            { 21845, new Dictionary<int, string>(){ 
-    { 4368, "VGA2USB" },
+    })
+ },
+            { 21845, Tuple.Create("Epiphan Systems Inc.", new Dictionary<int, string>{
+{ 4368, "VGA2USB" },
 { 4384, "KVM2USB" },
 { 8738, "DVI2USB" },
 { 13107, "VGA2USB Pro" },
@@ -29503,9 +24961,10 @@ namespace HardwareInformation.Providers {
 { 13569, "DVI2USB3 Rev3" },
 { 13584, "DVI2USB3_ET" },
 { 13600, "SDI2USB3" },
- } },
-            { 21930, new Dictionary<int, string>(){ 
-    { 21, "Hard Drive" },
+    })
+ },
+            { 21930, Tuple.Create("OnSpec Electronic, Inc.", new Dictionary<int, string>{
+{ 21, "Hard Drive" },
 { 258, "SuperDisk" },
 { 259, "IDE Hard Drive" },
 { 513, "DDI to Reader-19" },
@@ -29519,18 +24978,22 @@ namespace HardwareInformation.Providers {
 { 45568, "Compact Flash Reader" },
 { 45572, "MMC/ SD Reader" },
 { 45575, "Memory Stick Reader" },
- } },
-            { 22100, new Dictionary<int, string>(){ 
-    { 51778, "MasterHD 3" },
- } },
-            { 22102, new Dictionary<int, string>(){ 
-    { 2098, "UT2000/UT3000 Digital Storage Oscilloscope" },
- } },
-            { 22874, new Dictionary<int, string>(){ 
-    { 1, "Touchscreen" },
- } },
-            { 22918, new Dictionary<int, string>(){ 
-    { 256, "Orbicam" },
+    })
+ },
+            { 22100, Tuple.Create("Gotview", new Dictionary<int, string>{
+{ 51778, "MasterHD 3" },
+    })
+ },
+            { 22102, Tuple.Create("Uni-Trend Group Limited", new Dictionary<int, string>{
+{ 2098, "UT2000/UT3000 Digital Storage Oscilloscope" },
+    })
+ },
+            { 22874, Tuple.Create("IRTOUCHSYSTEMS Co. Ltd.", new Dictionary<int, string>{
+{ 1, "Touchscreen" },
+    })
+ },
+            { 22918, Tuple.Create("Acer, Inc", new Dictionary<int, string>{
+{ 256, "Orbicam" },
 { 257, "USB2.0 Camera" },
 { 258, "Crystal Eye Webcam" },
 { 311, "HP Webcam" },
@@ -29568,36 +25031,40 @@ namespace HardwareInformation.Providers {
 { 1798, "ThinkPad P50 Integrated Camera" },
 { 8467, "SunplusIT Integrated Camera" },
 { 40962, "Lenovo EasyCamera Integrated Webcam" },
- } },
-            { 23011, new Dictionary<int, string>(){ 
-     } },
-            { 23127, new Dictionary<int, string>(){ 
-    { 608, "RT2570" },
+    })
+ },
+            { 23127, Tuple.Create("Zinwell", new Dictionary<int, string>{
+{ 608, "RT2570" },
 { 640, "802.11a/b/g/n USB Wireless LAN Card" },
 { 642, "802.11b/g/n USB Wireless LAN Card" },
 { 643, "802.11b/g/n USB Wireless LAN Card" },
 { 644, "802.11a/b/g/n USB Wireless LAN Card" },
 { 656, "ZW-N290 802.11n [Realtek RTL8192U]" },
 { 21079, "Metronic 495257 wifi 802.11ng" },
- } },
-            { 24576, new Dictionary<int, string>(){ 
-    { 1, "Trident TVBOX Video Grabber" },
+    })
+ },
+            { 24576, Tuple.Create("Beholder International Ltd.", new Dictionary<int, string>{
+{ 1, "Trident TVBOX Video Grabber" },
 { 57024, "TV Wander" },
 { 57025, "TV Voyage" },
- } },
-            { 24602, new Dictionary<int, string>(){ 
-    { 18240, "XBurst Jz4740 boot mode" },
+    })
+ },
+            { 24602, Tuple.Create("Ingenic Semiconductor Ltd.", new Dictionary<int, string>{
+{ 18240, "XBurst Jz4740 boot mode" },
 { 18272, "JZ4760 Boot Device" },
- } },
-            { 24610, new Dictionary<int, string>(){ 
-    { 1280, "SuperPro Universal Device Programmer" },
- } },
-            { 24969, new Dictionary<int, string>(){ 
-    { 6189, "LN-029 10/100 Ethernet Adapter" },
+    })
+ },
+            { 24610, Tuple.Create("Xektek", new Dictionary<int, string>{
+{ 1280, "SuperPro Universal Device Programmer" },
+    })
+ },
+            { 24969, Tuple.Create("Sitecom", new Dictionary<int, string>{
+{ 6189, "LN-029 10/100 Ethernet Adapter" },
 { 8296, "USB to serial cable (v2)" },
- } },
-            { 25156, new Dictionary<int, string>(){ 
-    { 257, "Intelligent Usb Dmx Interface SIUDI5A" },
+    })
+ },
+            { 25156, Tuple.Create("LightingSoft AG", new Dictionary<int, string>{
+{ 257, "Intelligent Usb Dmx Interface SIUDI5A" },
 { 513, "Intelligent Usb Dmx Interface SIUDI5C" },
 { 768, "Intelligent Usb Dmx Interface SIUDI6 Firmware download" },
 { 769, "Intelligent Usb Dmx Interface SIUDI6C" },
@@ -29639,71 +25106,84 @@ namespace HardwareInformation.Providers {
 { 1537, "Intelligent Dmx Interface (SIUDI9M, 32/64bits)" },
 { 1552, "Intelligent Dmx Interface SIUDI10A Firmware Download" },
 { 1553, "Intelligent Dmx Interface SIUDI10A" },
- } },
-            { 25171, new Dictionary<int, string>(){ 
-    { 256, "Ir reciver f. remote control" },
- } },
-            { 25452, new Dictionary<int, string>(){ 
-     } },
-            { 25714, new Dictionary<int, string>(){ 
-    { 456, "PlayStation Portable [Mass Storage]" },
- } },
-            { 25927, new Dictionary<int, string>(){ 
-    { 562, "ARK3116 Serial" },
- } },
-            { 25943, new Dictionary<int, string>(){ 
-    { 21760, "Mass Storage Device" },
+    })
+ },
+            { 25171, Tuple.Create("TwinHan Technology Co., Ltd", new Dictionary<int, string>{
+{ 256, "Ir reciver f. remote control" },
+    })
+ },
+            { 25714, Tuple.Create("Sony Corp.", new Dictionary<int, string>{
+{ 456, "PlayStation Portable [Mass Storage]" },
+    })
+ },
+            { 25927, Tuple.Create("Arkmicro Technologies Inc.", new Dictionary<int, string>{
+{ 562, "ARK3116 Serial" },
+    })
+ },
+            { 25943, Tuple.Create("Emtec", new Dictionary<int, string>{
+{ 21760, "Mass Storage Device" },
 { 32773, "Car Key" },
- } },
-            { 26133, new Dictionary<int, string>(){ 
-    { 1, "Touchscreen" },
+    })
+ },
+            { 26133, Tuple.Create("IRTOUCHSYSTEMS Co. Ltd.", new Dictionary<int, string>{
+{ 1, "Touchscreen" },
 { 32, "IRTOUCH InfraRed TouchScreen" },
 { 129, "TouchScreen" },
- } },
-            { 26214, new Dictionary<int, string>(){ 
-    { 1639, "WiseGroup Smart Joy PSX, PS-PC Smart JoyPad" },
+    })
+ },
+            { 26214, Tuple.Create("Prototype product Vendor ID", new Dictionary<int, string>{
+{ 1639, "WiseGroup Smart Joy PSX, PS-PC Smart JoyPad" },
 { 7232, "TELEMIC 802.15.4 Sensor node (Bootloader)" },
 { 7233, "TELEMIC 802.15.4 Sensor node" },
 { 9831, "JCOP BlueZ Smartcard reader" },
 { 34818, "SmartJoy Dual Plus PS2 converter" },
 { 34820, "WiseGroup SuperJoy Box 5" },
- } },
-            { 26231, new Dictionary<int, string>(){ 
-    { 34818, "SmartJoy Dual Plus PS2 converter" },
+    })
+ },
+            { 26231, Tuple.Create("WiseGroup, Ltd.", new Dictionary<int, string>{
+{ 34818, "SmartJoy Dual Plus PS2 converter" },
 { 34833, "Deluxe Dance Mat" },
- } },
-            { 26461, new Dictionary<int, string>(){ 
-    { 1578, "Switch Mouse" },
- } },
-            { 26769, new Dictionary<int, string>(){ 
-    { 42791, "3CRUSB10075 802.11bg [ZyDAS ZD1211]" },
- } },
-            { 26972, new Dictionary<int, string>(){ 
-    { 14377, "Opera1 DVB-S (warm state)" },
- } },
-            { 27027, new Dictionary<int, string>(){ 
-    { 45057, "VoIP Phone" },
- } },
-            { 27253, new Dictionary<int, string>(){ 
-     } },
-            { 28932, new Dictionary<int, string>(){ 
-    { 8706, "UF5/UF6/UF7/UF8 MIDI Master Keyboard" },
- } },
-            { 29292, new Dictionary<int, string>(){ 
-    { 8521, "EntropyKing Random Number Generator" },
- } },
-            { 29442, new Dictionary<int, string>(){ 
-    { 1, "HUB 4X232" },
- } },
-            { 29516, new Dictionary<int, string>(){ 
-    { 22816, "Q-Box II DVB-S2 HD" },
+    })
+ },
+            { 26461, Tuple.Create("Humanscale", new Dictionary<int, string>{
+{ 1578, "Switch Mouse" },
+    })
+ },
+            { 26769, Tuple.Create("3Com", new Dictionary<int, string>{
+{ 42791, "3CRUSB10075 802.11bg [ZyDAS ZD1211]" },
+    })
+ },
+            { 26972, Tuple.Create("Opera1", new Dictionary<int, string>{
+{ 14377, "Opera1 DVB-S (warm state)" },
+    })
+ },
+            { 27027, Tuple.Create("Yealink Network Technology Co., Ltd.", new Dictionary<int, string>{
+{ 45057, "VoIP Phone" },
+    })
+ },
+            { 28932, Tuple.Create("CME (Central Music Co.)", new Dictionary<int, string>{
+{ 8706, "UF5/UF6/UF7/UF8 MIDI Master Keyboard" },
+    })
+ },
+            { 29292, Tuple.Create("StackFoundry LLC", new Dictionary<int, string>{
+{ 8521, "EntropyKing Random Number Generator" },
+    })
+ },
+            { 29442, Tuple.Create("Solinftec", new Dictionary<int, string>{
+{ 1, "HUB 4X232" },
+    })
+ },
+            { 29516, Tuple.Create("TBS Technologies China", new Dictionary<int, string>{
+{ 22816, "Q-Box II DVB-S2 HD" },
 { 22824, "Q-Box II DVB-S2 HD" },
- } },
-            { 29555, new Dictionary<int, string>(){ 
-    { 22336, "Intelligent TFT-LCD Module" },
- } },
-            { 29586, new Dictionary<int, string>(){ 
-    { 30481, "EW-7711UTn nLite Wireless Adapter [Ralink RT3070]" },
+    })
+ },
+            { 29555, Tuple.Create("Beijing STONE Technology Co. Ltd.", new Dictionary<int, string>{
+{ 22336, "Intelligent TFT-LCD Module" },
+    })
+ },
+            { 29586, Tuple.Create("Edimax Technology Co., Ltd", new Dictionary<int, string>{
+{ 30481, "EW-7711UTn nLite Wireless Adapter [Ralink RT3070]" },
 { 30487, "EW-7717UN 802.11n Wireless Adapter [Ralink RT2770]" },
 { 30488, "EW-7718UN 802.11n Wireless Adapter [Ralink RT2870]" },
 { 30498, "EW-7722UTn 802.11n Wireless Adapter [Ralink RT3072]" },
@@ -29715,13 +25195,15 @@ namespace HardwareInformation.Providers {
 { 43025, "EW-7811UTC 802.11ac Wireless Adapter" },
 { 46865, "EW-7722UAC 802.11a/b/g/n/ac (2x2) Wireless Adapter [MediaTek MT7612U]" },
 { 47138, "EW-7822ULC 802.11ac Wireless Adapter [Realtek RTL8812AU]" },
- } },
-            { 29656, new Dictionary<int, string>(){ 
-    { 260, "VetPro DR, Size 1" },
+    })
+ },
+            { 29656, Tuple.Create("Progeny Dental Equipment Specialists", new Dictionary<int, string>{
+{ 260, "VetPro DR, Size 1" },
 { 261, "VetPro DR, Size 2" },
- } },
-            { 30313, new Dictionary<int, string>(){ 
-    { 13580, "Model 350c, Frequency Response Analyzer" },
+    })
+ },
+            { 30313, Tuple.Create("Venable Instruments", new Dictionary<int, string>{
+{ 13580, "Model 350c, Frequency Response Analyzer" },
 { 20800, "Model 5140, Frequency Response Analyzer" },
 { 25349, "Model 6305, Frequency Response Analyzer" },
 { 25376, "Model 6320, Frequency Response Analyzer" },
@@ -29732,17 +25214,20 @@ namespace HardwareInformation.Providers {
 { 34821, "Model 8805, Frequency Response Analyzer" },
 { 34848, "Model 8820, Frequency Response Analyzer" },
 { 34880, "Model 8840, Frequency Response Analyzer" },
- } },
-            { 30757, new Dictionary<int, string>(){ 
-    { 41636, "External SATA Hard Drive Adapter cable PA023U3" },
+    })
+ },
+            { 30757, Tuple.Create("Other World Computing", new Dictionary<int, string>{
+{ 41636, "External SATA Hard Drive Adapter cable PA023U3" },
 { 45235, "miniStack MAX" },
- } },
-            { 32880, new Dictionary<int, string>(){ 
-    { 32771, "USB-DIO-96" },
+    })
+ },
+            { 32880, Tuple.Create("ACCES I/O Products, Inc.", new Dictionary<int, string>{
+{ 32771, "USB-DIO-96" },
 { 32880, "USB-AO16-16A" },
- } },
-            { 32902, new Dictionary<int, string>(){ 
-    { 1, "AnyPoint (TM) Home Network 1.6 Mbps Wireless Adapter" },
+    })
+ },
+            { 32902, Tuple.Create("Intel Corp.", new Dictionary<int, string>{
+{ 1, "AnyPoint (TM) Home Network 1.6 Mbps Wireless Adapter" },
 { 68, "CPU DRAM Controller" },
 { 70, "HD Graphics" },
 { 256, "Personal Audio Player 3000" },
@@ -29793,9 +25278,10 @@ namespace HardwareInformation.Providers {
 { 57005, "Galileo" },
 { 61441, "XScale PXA27x Bulverde flash" },
 { 61861, "Z-U130 [Value Solid State Drive]" },
- } },
-            { 32903, new Dictionary<int, string>(){ 
-    { 32, "Integrated Rate Matching Hub" },
+    })
+ },
+            { 32903, Tuple.Create("Intel Corp.", new Dictionary<int, string>{
+{ 32, "Integrated Rate Matching Hub" },
 { 36, "Integrated Rate Matching Hub" },
 { 37, "Wireless-AC 9260 Bluetooth Adapter" },
 { 41, "AX200 Bluetooth" },
@@ -29814,53 +25300,63 @@ namespace HardwareInformation.Providers {
 { 32770, "8 channel internal hub" },
 { 32776, "Integrated Rate Matching Hub" },
 { 32778, "Hub" },
- } },
-            { 33006, new Dictionary<int, string>(){ 
-    { 33, "USB Tablet" },
+    })
+ },
+            { 33006, Tuple.Create("VirtualBox", new Dictionary<int, string>{
+{ 33, "USB Tablet" },
 { 34, "multitouch tablet" },
- } },
-            { 33410, new Dictionary<int, string>(){ 
-    { 12801, "Retro Adapter" },
+    })
+ },
+            { 33410, Tuple.Create("Keio", new Dictionary<int, string>{
+{ 12801, "Retro Adapter" },
 { 13057, "Retro Adapter Mouse" },
- } },
-            { 33537, new Dictionary<int, string>(){ 
-    { 137, "HPBT05R 2.4 G Mini Wireless Touchpad Keyboard" },
- } },
-            { 33601, new Dictionary<int, string>(){ 
-    { 8192, "Flashdisk" },
- } },
-            { 34148, new Dictionary<int, string>(){ 
-    { 4096, "JetFlash" },
+    })
+ },
+            { 33537, Tuple.Create("Hapurs", new Dictionary<int, string>{
+{ 137, "HPBT05R 2.4 G Mini Wireless Touchpad Keyboard" },
+    })
+ },
+            { 33601, Tuple.Create("EGO Systems, Inc.", new Dictionary<int, string>{
+{ 8192, "Flashdisk" },
+    })
+ },
+            { 34148, Tuple.Create("Transcend Information, Inc.", new Dictionary<int, string>{
+{ 4096, "JetFlash" },
 { 16384, "microSD/SD/CF UHS-II Card Reader [RDF8, RDF9]" },
 { 24576, "digital photo frame PF830" },
 { 24578, "digital photo frame PF830" },
 { 28672, "StoreJet 25H3" },
- } },
-            { 34372, new Dictionary<int, string>(){ 
-    { 32771, "Micro Line" },
+    })
+ },
+            { 34372, Tuple.Create("Intenso GmbG", new Dictionary<int, string>{
+{ 32771, "Micro Line" },
 { 32779, "Micro Line (4GB)" },
- } },
-            { 36358, new Dictionary<int, string>(){ 
-    { 63232, "DT225 Trackball" },
- } },
-            { 36515, new Dictionary<int, string>(){ 
-    { 41004, "Wireless Presenter Receiver" },
- } },
-            { 36886, new Dictionary<int, string>(){ 
-    { 6189, "WL-022 802.11b Adapter" },
- } },
-            { 36898, new Dictionary<int, string>(){ 
-    { 54832, "DVB-S S630" },
+    })
+ },
+            { 36358, Tuple.Create("CH Products, Inc.", new Dictionary<int, string>{
+{ 63232, "DT225 Trackball" },
+    })
+ },
+            { 36515, Tuple.Create("Doosl", new Dictionary<int, string>{
+{ 41004, "Wireless Presenter Receiver" },
+    })
+ },
+            { 36886, Tuple.Create("Sitecom", new Dictionary<int, string>{
+{ 6189, "WL-022 802.11b Adapter" },
+    })
+ },
+            { 36898, Tuple.Create("TeVii Technology Ltd.", new Dictionary<int, string>{
+{ 54832, "DVB-S S630" },
 { 54864, "DVB-S2 S650" },
 { 54880, "DVB-S2 S660" },
- } },
-            { 37192, new Dictionary<int, string>(){ 
-    { 4, "R3 Compatible Device" },
- } },
-            { 38166, new Dictionary<int, string>(){ 
-     } },
-            { 38672, new Dictionary<int, string>(){ 
-    { 30467, "MCS7703 Serial Port Adapter" },
+    })
+ },
+            { 37192, Tuple.Create("GeoLab, Ltd", new Dictionary<int, string>{
+{ 4, "R3 Compatible Device" },
+    })
+ },
+            { 38672, Tuple.Create("MosChip Semiconductor", new Dictionary<int, string>{
+{ 30467, "MCS7703 Serial Port Adapter" },
 { 30469, "MCS7705 Parallel port adapter" },
 { 30485, "MCS7715 Parallel and serial port adapter" },
 { 30487, "MCS7717 3-port hub with serial and parallel adapter" },
@@ -29874,34 +25370,43 @@ namespace HardwareInformation.Providers {
 { 30770, "MCS7832 10/100 Mbps Ethernet adapter" },
 { 30784, "MCS7820/MCS7840 2/4 port serial adapter" },
 { 39312, "MCS9990 PCIe Host Controller" },
- } },
-            { 38985, new Dictionary<int, string>(){ 
-    { 1793, "Platinum MyDrive HP" },
- } },
-            { 39046, new Dictionary<int, string>(){ 
-    { 21, "A50" },
- } },
-            { 39321, new Dictionary<int, string>(){ 
-    { 1, "JAF Mobile Phone Flasher Interface" },
- } },
-            { 39418, new Dictionary<int, string>(){ 
-    { 35208, "V.cap Camera Device" },
- } },
-            { 39620, new Dictionary<int, string>(){ 
-    { 19343, "ProxMark-3 RFID Instrument" },
- } },
-            { 40584, new Dictionary<int, string>(){ 
-    { 40591, "Plug Computer Basic [SheevaPlug]" },
- } },
-            { 40980, new Dictionary<int, string>(){ 
-    { 45076, "Desktop Microphone NS-PAUM50" },
- } },
-            { 41224, new Dictionary<int, string>(){ 
-    { 4096, "X1000" },
+    })
+ },
+            { 38985, Tuple.Create("Bestmedia CD Recordable GmbH & Co. KG", new Dictionary<int, string>{
+{ 1793, "Platinum MyDrive HP" },
+    })
+ },
+            { 39046, Tuple.Create("Astro Gaming", new Dictionary<int, string>{
+{ 21, "A50" },
+    })
+ },
+            { 39321, Tuple.Create("Odeon", new Dictionary<int, string>{
+{ 1, "JAF Mobile Phone Flasher Interface" },
+    })
+ },
+            { 39418, Tuple.Create("Grandtec", new Dictionary<int, string>{
+{ 35208, "V.cap Camera Device" },
+    })
+ },
+            { 39620, Tuple.Create("J. Westhues", new Dictionary<int, string>{
+{ 19343, "ProxMark-3 RFID Instrument" },
+    })
+ },
+            { 40584, Tuple.Create("Marvell Semiconductor, Inc.", new Dictionary<int, string>{
+{ 40591, "Plug Computer Basic [SheevaPlug]" },
+    })
+ },
+            { 40980, Tuple.Create("Insignia (Best Buy)", new Dictionary<int, string>{
+{ 45076, "Desktop Microphone NS-PAUM50" },
+    })
+ },
+            { 41224, Tuple.Create("Ingenic Semiconductor Co.,Ltd", new Dictionary<int, string>{
+{ 4096, "X1000" },
 { 18293, "JZ4775 Boot Device" },
- } },
-            { 41256, new Dictionary<int, string>(){ 
-    { 1552, "Dino-Lite Digital Microscope (SN9C201 + HV7131R)" },
+    })
+ },
+            { 41256, Tuple.Create("AnMo Electronics Corp. / Dino-Lite (?)", new Dictionary<int, string>{
+{ 1552, "Dino-Lite Digital Microscope (SN9C201 + HV7131R)" },
 { 1553, "Dino-Lite Digital Microscope (SN9C201 + HV7131R)" },
 { 1554, "Dino-Lite Digital Microscope (SN9C120 + HV7131R)" },
 { 1555, "Dino-Lite Digital Microscope (SN9C201 + HV7131R)" },
@@ -29910,21 +25415,24 @@ namespace HardwareInformation.Providers {
 { 1558, "Dino-Lite Digital Microscope (SN9C120 + HV7131R)" },
 { 1559, "Dino-Lite Digital Microscope (SN9C201 + MI1310/MT9M111)" },
 { 1560, "Dino-Lite Digital Microscope (SN9C201 + HV7131R)" },
- } },
-            { 41320, new Dictionary<int, string>(){ 
-    { 1552, "Dino-Lite Digital Microscope" },
+    })
+ },
+            { 41320, Tuple.Create("AnMo Electronics Corporation", new Dictionary<int, string>{
+{ 1552, "Dino-Lite Digital Microscope" },
 { 1553, "Dino-Lite Digital Microscope" },
 { 1555, "Dino-Lite Digital Microscope" },
 { 1556, "Dino-Lite Pro Digital Microscope" },
 { 1557, "Dino-Lite Pro Digital Microscope" },
 { 1559, "Dino-Lite Pro Digital Microscope" },
 { 1560, "Dino-Lite Digital Microscope" },
- } },
-            { 42086, new Dictionary<int, string>(){ 
-    { 2643, "TL866II Plus Device Programmer [MiniPRO]" },
- } },
-            { 42496, new Dictionary<int, string>(){ 
-    { 21760, "zuban H2OPS - GPS for canoeing" },
+    })
+ },
+            { 42086, Tuple.Create("Haikou Xingong Electronics Co.,Ltd", new Dictionary<int, string>{
+{ 2643, "TL866II Plus Device Programmer [MiniPRO]" },
+    })
+ },
+            { 42496, Tuple.Create("ASIX s.r.o.", new Dictionary<int, string>{
+{ 21760, "zuban H2OPS - GPS for canoeing" },
 { 40960, "SIGMA Logic Analyzer" },
 { 40962, "EMUSB interface pro MU Beta" },
 { 49152, "MREL Data Trap II" },
@@ -29936,67 +25444,81 @@ namespace HardwareInformation.Providers {
 { 57618, "OK1ZIA Antenna rotator" },
 { 57619, "OK1ZIA GPIO" },
 { 57620, "OK1ZIA HD&Keyb" },
- } },
-            { 42791, new Dictionary<int, string>(){ 
-    { 26771, "3CRUSB20075 OfficeConnect Wireless 108Mbps 11g Adapter [Atheros AR5523]" },
+    })
+ },
+            { 42791, Tuple.Create("3Com", new Dictionary<int, string>{
+{ 26771, "3CRUSB20075 OfficeConnect Wireless 108Mbps 11g Adapter [Atheros AR5523]" },
 { 26773, "AR5523" },
 { 26775, "AR5523" },
- } },
-            { 43146, new Dictionary<int, string>(){ 
-    { 12291, "PCFree Multimedia Remote Control PC" },
- } },
-            { 43690, new Dictionary<int, string>(){ 
-    { 34837, "microSD CardReader" },
+    })
+ },
+            { 43146, Tuple.Create("Clas Ohlsson", new Dictionary<int, string>{
+{ 12291, "PCFree Multimedia Remote Control PC" },
+    })
+ },
+            { 43690, Tuple.Create("MXT", new Dictionary<int, string>{
+{ 34837, "microSD CardReader" },
 { 34838, "microSD CardReader" },
- } },
-            { 43794, new Dictionary<int, string>(){ 
-    { 13517, "JMICRON JMS578 SATA 6Gb/s bridge" },
- } },
-            { 43981, new Dictionary<int, string>(){ 
-    { 4660, "UDisk flash drive" },
+    })
+ },
+            { 43794, Tuple.Create("aplic", new Dictionary<int, string>{
+{ 13517, "JMICRON JMS578 SATA 6Gb/s bridge" },
+    })
+ },
+            { 43981, Tuple.Create("LogiLink", new Dictionary<int, string>{
+{ 4660, "UDisk flash drive" },
 { 24836, "PCCloneEX Lite+ SATA docking station [QP0017]" },
 { 52718, "Petcam" },
- } },
-            { 46478, new Dictionary<int, string>(){ 
-    { 40580, "Yeti Stereo Microphone" },
- } },
-            { 47735, new Dictionary<int, string>(){ 
-    { 28999, "Agterbosch" },
- } },
-            { 49686, new Dictionary<int, string>(){ 
-    { 384, "MSR90 MagStripe reader" },
- } },
-            { 49745, new Dictionary<int, string>(){ 
-    { 5893, "MCB2300" },
+    })
+ },
+            { 46478, Tuple.Create("Blue Microphones", new Dictionary<int, string>{
+{ 40580, "Yeti Stereo Microphone" },
+    })
+ },
+            { 47735, Tuple.Create("Clockmaker", new Dictionary<int, string>{
+{ 28999, "Agterbosch" },
+    })
+ },
+            { 49686, Tuple.Create("Card Device Expert Co., LTD", new Dictionary<int, string>{
+{ 384, "MSR90 MagStripe reader" },
+    })
+ },
+            { 49745, Tuple.Create("Keil Software, Inc.", new Dictionary<int, string>{
+{ 5893, "MCB2300" },
 { 10000, "ULink" },
 { 10019, "ULink-ME" },
- } },
-            { 50434, new Dictionary<int, string>(){ 
-    { 41, "Rocker" },
- } },
-            { 51918, new Dictionary<int, string>(){ 
-    { 2, "AirPCAP Classic 802.11 packet capture adapter" },
+    })
+ },
+            { 50434, Tuple.Create("AGPTek", new Dictionary<int, string>{
+{ 41, "Rocker" },
+    })
+ },
+            { 51918, Tuple.Create("CACE Technologies Inc.", new Dictionary<int, string>{
+{ 2, "AirPCAP Classic 802.11 packet capture adapter" },
 { 768, "AirPcap NX [Atheros AR9170+AR9104]" },
- } },
-            { 52498, new Dictionary<int, string>(){ 
-     } },
-            { 53768, new Dictionary<int, string>(){ 
-    { 784, "Mini-PAC Arcade Control Interface" },
- } },
-            { 53769, new Dictionary<int, string>(){ 
-    { 769, "I-PAC Arcade Control Interface" },
+    })
+ },
+            { 53768, Tuple.Create("Ultimarc", new Dictionary<int, string>{
+{ 784, "Mini-PAC Arcade Control Interface" },
+    })
+ },
+            { 53769, Tuple.Create("Ultimarc", new Dictionary<int, string>{
+{ 769, "I-PAC Arcade Control Interface" },
 { 1281, "Ultra-Stik Ultimarc Ultra-Stik Player 1" },
 { 5489, "A-PAC Arcade Control Interface" },
- } },
-            { 55556, new Dictionary<int, string>(){ 
-    { 3, "Laser Mouse (ID0009A)" },
- } },
-            { 58039, new Dictionary<int, string>(){ 
-    { 2065, "CD002" },
+    })
+ },
+            { 55556, Tuple.Create("LogiLink", new Dictionary<int, string>{
+{ 3, "Laser Mouse (ID0009A)" },
+    })
+ },
+            { 58039, Tuple.Create("Jie Li", new Dictionary<int, string>{
+{ 2065, "CD002" },
 { 2066, "CD005 MP3 Player" },
- } },
-            { 58596, new Dictionary<int, string>(){ 
-    { 4400, "Astribank series" },
+    })
+ },
+            { 58596, Tuple.Create("Xorcom Ltd.", new Dictionary<int, string>{
+{ 4400, "Astribank series" },
 { 4401, "Astribank series" },
 { 4402, "Astribank series" },
 { 4416, "Astribank series" },
@@ -30008,12 +25530,14 @@ namespace HardwareInformation.Providers {
 { 4448, "Astribank 2 series" },
 { 4449, "Astribank 2 series" },
 { 4450, "Astribank 2 series" },
- } },
-            { 60163, new Dictionary<int, string>(){ 
-    { 2336, "Make Controller Kit" },
- } },
-            { 60186, new Dictionary<int, string>(){ 
-    { 6110, "KWorld V-Stream XPERT DTV - DVB-T USB cold" },
+    })
+ },
+            { 60163, Tuple.Create("MakingThings", new Dictionary<int, string>{
+{ 2336, "Make Controller Kit" },
+    })
+ },
+            { 60186, Tuple.Create("eMPIA Technology, Inc.", new Dictionary<int, string>{
+{ 6110, "KWorld V-Stream XPERT DTV - DVB-T USB cold" },
 { 6111, "KWorld V-Stream XPERT DTV - DVB-T USB warm" },
 { 9585, "M035 Compact Web Cam" },
 { 10000, "SilverCrest Webcam" },
@@ -30037,73 +25561,70 @@ namespace HardwareInformation.Providers {
 { 33145, "Terratec Cinergy T2 Stick HD" },
 { 58117, "KWorld PlusTV Analog Stick" },
 { 58197, "KWorld DVB-T 355U Digital TV Dongle" },
- } },
-            { 60202, new Dictionary<int, string>(){ 
-     } },
-            { 61208, new Dictionary<int, string>(){ 
-     } },
-            { 61443, new Dictionary<int, string>(){ 
-    { 24578, "PhotoSmart C500" },
- } },
-            { 61447, new Dictionary<int, string>(){ 
-    { 43417, "Endoscope Camera" },
+    })
+ },
+            { 61443, Tuple.Create("Hewlett Packard", new Dictionary<int, string>{
+{ 24578, "PhotoSmart C500" },
+    })
+ },
+            { 61447, Tuple.Create("Teslong", new Dictionary<int, string>{
+{ 43417, "Endoscope Camera" },
 { 47513, "Otoscope Camera" },
- } },
-            { 61826, new Dictionary<int, string>(){ 
-    { 3, "Controller" },
- } },
-            { 62448, new Dictionary<int, string>(){ 
-    { 1856, "multi-function device" },
+    })
+ },
+            { 61826, Tuple.Create("Leap Motion", new Dictionary<int, string>{
+{ 3, "Controller" },
+    })
+ },
+            { 62448, Tuple.Create("CCT, Inc", new Dictionary<int, string>{
+{ 1856, "multi-function device" },
 { 4928, "multi-function printer" },
 { 5184, "printer device" },
 { 6433, "printer" },
- } },
-            { 62700, new Dictionary<int, string>(){ 
-    { 60984, "Digital Storage Oscilloscope" },
- } },
-            { 62701, new Dictionary<int, string>(){ 
-    { 60983, "SDG1010 Waveform Generator" },
+    })
+ },
+            { 62700, Tuple.Create("Atten Electronics / Siglent Technologies", new Dictionary<int, string>{
+{ 60984, "Digital Storage Oscilloscope" },
+    })
+ },
+            { 62701, Tuple.Create("Shenzhen Siglent Co., Ltd.", new Dictionary<int, string>{
+{ 60983, "SDG1010 Waveform Generator" },
 { 60986, "SDG1010 Waveform Generator (TMC mode)" },
- } },
-            { 63334, new Dictionary<int, string>(){ 
-    { 1, "PC-Gamepad \"Greystorm\"" },
- } },
-            { 64017, new Dictionary<int, string>(){ 
-    { 23294, "DyingLight" },
- } },
-            { 64520, new Dictionary<int, string>(){ 
-    { 257, "MIDI Cable UA0037" },
- } },
-            { 65280, new Dictionary<int, string>(){ 
-     } },
-            { 65518, new Dictionary<int, string>(){ 
-    { 256, "Card Reader Controller RTS5101/RTS5111/RTS5116" },
- } },
+    })
+ },
+            { 63334, Tuple.Create("Hama", new Dictionary<int, string>{
+{ 1, "PC-Gamepad \"Greystorm\"" },
+    })
+ },
+            { 64017, Tuple.Create("DyingLight", new Dictionary<int, string>{
+{ 23294, "DyingLight" },
+    })
+ },
+            { 64520, Tuple.Create("Conrad Electronic SE", new Dictionary<int, string>{
+{ 257, "MIDI Cable UA0037" },
+    })
+ },
+            { 65518, Tuple.Create("FNK Tech", new Dictionary<int, string>{
+{ 256, "Card Reader Controller RTS5101/RTS5111/RTS5116" },
+    })
+ },
                 };
 
-    internal static string GetVendorName(string vendorId) {
-        return GetVendorName(int.Parse(vendorId, NumberStyles.HexNumber));
+    internal static Tuple<string, string> GetVendorAndProductName(string vendorId, string productId) {
+        return GetVendorAndProductName(vendorId != null ? int.Parse(vendorId, NumberStyles.HexNumber) : -1, productId != null ? int.Parse(productId, NumberStyles.HexNumber) : -1);
     }
 
-    internal static string GetProductName(string vendorId, string productId) {
-        return GetProductName(int.Parse(vendorId, NumberStyles.HexNumber), int.Parse(productId, NumberStyles.HexNumber));
-    }
-
-    internal static string GetVendorName(int vendorId) {
-        if (vendorIds.TryGetValue(vendorId, out var vendorName)) {
-            return vendorName;
-        }    
-        return null;
-    }
-
-    internal static string GetProductName(int vendorId, int productId) {
-        if (vendorProductIds.TryGetValue(vendorId, out var vendorProducts)) {
-            if (vendorProducts.TryGetValue(productId, out var productName)) {
-                return productName;
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    internal static Tuple<string, string> GetVendorAndProductName(int vendorId, int productId) {
+        if (vendorId != -1 && vendorAndProductIds.TryGetValue(vendorId, out var vendorTuple)) {
+            if(productId != -1 && vendorTuple.Item2.TryGetValue(productId, out var productName)) {
+                return Tuple.Create(vendorTuple.Item1, productName);
             }
+
+            return Tuple.Create<string, string>(vendorTuple.Item1, string.Empty);
         }
-    
-        return null;
+
+        return Tuple.Create<string, string>(string.Empty, string.Empty);
     }
 
     }

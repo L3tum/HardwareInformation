@@ -29,7 +29,7 @@ namespace SimpleGatheringTest
             );
         }
 
-        private static void CurrentDomainOnFirstChanceException(object? sender, FirstChanceExceptionEventArgs e)
+        private static void CurrentDomainOnFirstChanceException(object sender, FirstChanceExceptionEventArgs e)
         {
 	        Logger.LogError(e.Exception, "First Chance");
         }

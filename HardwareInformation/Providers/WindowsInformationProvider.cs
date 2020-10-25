@@ -3,7 +3,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Management;
 using System.Runtime.InteropServices;
@@ -156,7 +155,7 @@ namespace HardwareInformation.Providers
             {
                 GatherPnpDevices(ref information, win10);
             }
-            catch
+            catch (Exception e)
             {
                 // Intentionally left blank
             }
@@ -316,7 +315,8 @@ namespace HardwareInformation.Providers
 
                 if (!realData.ContainsKey(deviceDesc))
                 {
-                    var vidPid = FetchProductAndVendor(stringse.Key);
+                    var (vid, pid) = GetVidAndPid(stringse.Key);
+                    var (vendorName, productName) = USBVendorList.GetVendorAndProductName(vid, pid);
 
                     realData.Add(deviceDesc,
                         new USBDevice
@@ -325,8 +325,8 @@ namespace HardwareInformation.Providers
                             DriverVersion = stringse.Value[2], DriverDate = DateTime.Parse(stringse.Value[3]),
                             Class = stringse.Value[4], DriverProvider = stringse.Value[5],
                             Manufacturer = stringse.Value[7],
-                            DeviceID = stringse.Key, VendorID = vidPid.Item1, ProductID = vidPid.Item2,
-                            VendorName = vidPid.Item3, ProductName = vidPid.Item4
+                            DeviceID = stringse.Key, VendorID = vid, ProductID = pid,
+                            VendorName = vendorName, ProductName = productName
                         });
                 }
                 else
@@ -382,15 +382,20 @@ namespace HardwareInformation.Providers
                         device.DriverProvider = stringse.Value[5];
                         device.Manufacturer = stringse.Value[7];
 
-                        if (stringse.Key != device.DeviceID &&
-                            (device.ProductName is null || device.VendorName is null))
+                        if (stringse.Key != device.DeviceID)
                         {
-                            var vidPid = FetchProductAndVendor(stringse.Key);
+                            var (vid, pid) = GetVidAndPid(stringse.Key);
 
-                            device.VendorID ??= vidPid.Item1;
-                            device.ProductID ??= vidPid.Item2;
-                            device.VendorName ??= vidPid.Item3;
-                            device.ProductName ??= vidPid.Item4;
+                            if ((vid == null || vid == device.VendorID) && (pid == null || pid == device.ProductID))
+                            {
+                                continue;
+                            }
+
+                            var (vendorName, productName) = USBVendorList.GetVendorAndProductName(vid, pid);
+                            device.VendorID ??= vid;
+                            device.ProductID ??= pid;
+                            device.VendorName ??= vendorName;
+                            device.ProductName ??= productName;
                         }
                     }
                 }
@@ -399,19 +404,13 @@ namespace HardwareInformation.Providers
             information.UsbDevices = new List<USBDevice>(realData.Values).AsReadOnly();
         }
 
-        private Tuple<string, string, string, string> FetchProductAndVendor(string deviceId)
+        private Tuple<string, string> GetVidAndPid(string deviceId)
         {
             var vidPid = deviceId.Split('\\')[1];
             var vid = vidPid.StartsWith("VID_") ? vidPid.Split('&')[0].Replace("VID_", "") : null;
             var pid = vidPid.StartsWith("VID_") ? vidPid.Split('&')[1].Replace("PID_", "") : null;
-            var vidInt = vid != null ? int.Parse(vid, NumberStyles.HexNumber) : -1;
-            var pidInt = pid != null ? int.Parse(pid, NumberStyles.HexNumber) : -1;
-            var vendorName = vid is not null ? USBVendorList.GetVendorName(vidInt) : null;
-            var productName = vid is not null && pid is not null && vendorName is not null
-                ? USBVendorList.GetProductName(vidInt, pidInt)
-                : null;
 
-            return Tuple.Create(vid, pid, vendorName, productName);
+            return Tuple.Create(vid, pid);
         }
 
         private void GatherWin32BaseBoard(ref MachineInformation information, bool win10)

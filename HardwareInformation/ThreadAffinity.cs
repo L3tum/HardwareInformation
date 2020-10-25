@@ -60,16 +60,16 @@ namespace HardwareInformation
                     {
 	                    if (Environment.Is64BitProcess)
 	                    {
-		                    processThread.ProcessorAffinity = (IntPtr) mask;
+                            processThread.ProcessorAffinity = new IntPtr((long) mask);
                         }
 	                    else
 	                    {
-		                    processThread.ProcessorAffinity = (IntPtr) x86Mask;
+		                    processThread.ProcessorAffinity = new IntPtr(x86Mask);
                         }
                     }
                     catch (Win32Exception)
                     {
-                        //Console.WriteLine("{0} with mask {1}", e.Message, GetIntBinaryString(mask));
+                        // Console.WriteLine("{0} with mask {1}", e.Message, GetIntBinaryString(mask));
                         // Intentionally left blank
                     }
                     catch (OverflowException)

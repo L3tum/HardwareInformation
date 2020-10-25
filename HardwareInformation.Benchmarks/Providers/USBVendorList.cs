@@ -6,7 +6,7 @@ using BenchmarkDotNet.Order;
 
 namespace HardwareInformation.Benchmarks.Providers
 {
-    [SimpleJob(RuntimeMoniker.NetCoreApp31)]
+    [SimpleJob(RuntimeMoniker.NetCoreApp31, 30, 0)]
     [MemoryDiagnoser]
     [RPlotExporter]
     [MarkdownExporter]
@@ -24,33 +24,20 @@ namespace HardwareInformation.Benchmarks.Providers
         public string deviceId;
 
         [Benchmark]
-        public void FetchVendorIdString()
-        {
-            var vendorId = deviceId.Split('\\')[1].Split('&')[0].Replace("VID_", "");
-            HardwareInformation.Providers.USBVendorList.GetVendorName(vendorId);
-        }
-
-        [Benchmark]
-        public void FetchVendorIdInt()
-        {
-            var vendorId = deviceId.Split('\\')[1].Split('&')[0].Replace("VID_", "");
-            HardwareInformation.Providers.USBVendorList.GetVendorName(int.Parse(vendorId, NumberStyles.HexNumber));
-        }
-
-        [Benchmark]
-        public void FetchProductIdString()
+        public void FetchVendorAndProductIdString()
         {
             var vendorId = deviceId.Split('\\')[1].Split('&')[0].Replace("VID_", "");
             var productId = deviceId.Split('\\')[1].Split('&')[1].Replace("PID_", "");
-            HardwareInformation.Providers.USBVendorList.GetProductName(vendorId, productId);
+            HardwareInformation.Providers.USBVendorList.GetVendorAndProductName(vendorId, productId);
         }
 
-        [Benchmark(Baseline = true)]
-        public void FetchProductIdInt()
+        [Benchmark]
+        public void FetchVendorAndProductIdInt()
         {
             var vendorId = deviceId.Split('\\')[1].Split('&')[0].Replace("VID_", "");
             var productId = deviceId.Split('\\')[1].Split('&')[1].Replace("PID_", "");
-            HardwareInformation.Providers.USBVendorList.GetProductName(int.Parse(vendorId, NumberStyles.HexNumber),
+            HardwareInformation.Providers.USBVendorList.GetVendorAndProductName(
+                int.Parse(vendorId, NumberStyles.HexNumber),
                 int.Parse(productId, NumberStyles.HexNumber));
         }
     }

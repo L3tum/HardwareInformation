@@ -3,6 +3,8 @@
 <#@ import namespace="System.IO" #>
 <#@ import namespace="System.Net" #>
 <#@ import namespace="System.Globalization" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
 
 <#
     var wc = new WebClient();
@@ -73,69 +75,63 @@
     }
 
     sr.Close();
+
+    var vendorIdsToRemove = (from kvp in vendorProductIds where kvp.Value.Count == 0 select kvp.Key).ToList();
+
+    foreach (var vendorIdToRemove in vendorIdsToRemove)
+    {
+        vendorIds.Remove(vendorIdToRemove);
+        vendorProductIds.Remove(vendorIdToRemove);
+    }
+
+    Console.WriteLine($"Removed {vendorIdsToRemove.Count} vendors without any products");
 #>
 
 namespace HardwareInformation.Providers {
     using System.Collections.Generic;
     using System.Globalization;
+    using System;
+    using System.Runtime.CompilerServices;
 
     internal static class USBVendorList {
-        private static Dictionary<int, string> vendorIds = new Dictionary<int, string> {
+        private static Dictionary<int, Tuple<string, Dictionary<int, string>>> vendorAndProductIds = new Dictionary<int, Tuple<string, Dictionary<int, string>>> {
 <#
     foreach (var kvp in vendorIds)
     {
 #>
-    { <#= kvp.Key #>, "<#= kvp.Value #>" },
+    { <#= kvp.Key #>, Tuple.Create("<#= kvp.Value #>", new Dictionary<int, string>{
+<#
+
+    foreach (var productIdKvp in vendorProductIds[kvp.Key])
+    {
+#>
+{ <#= productIdKvp.Key #>, "<#= productIdKvp.Value #>" },
+<#
+    }
+
+#>
+    })
+ },
         <#
     }
 #>
         };
 
-        private static Dictionary<int, Dictionary<int, string>> vendorProductIds = new Dictionary<int, Dictionary<int, string>> {
-<#
-    foreach (var kvp in vendorProductIds)
-    {
-#>
-    { <#= kvp.Key #>, new Dictionary<int, string>(){ 
-    <#
-
-    foreach (var productIds in kvp.Value)
-    {
-#>
-{ <#= productIds.Key #>, "<#= productIds.Value #>" },
-<#
+    internal static Tuple<string, string> GetVendorAndProductName(string vendorId, string productId) {
+        return GetVendorAndProductName(vendorId != null ? int.Parse(vendorId, NumberStyles.HexNumber) : -1, productId != null ? int.Parse(productId, NumberStyles.HexNumber) : -1);
     }
 
-#>
- } },
-        <#
-    }
-#>
-        };
-
-    internal static string GetVendorName(string vendorId) {
-        return GetVendorName(int.Parse(vendorId, NumberStyles.HexNumber));
-    }
-
-    internal static string GetProductName(string vendorId, string productId) {
-        return GetProductName(int.Parse(vendorId, NumberStyles.HexNumber), int.Parse(productId, NumberStyles.HexNumber));
-    }
-
-    internal static string GetVendorName(int vendorId) {
-        if (vendorIds.TryGetValue(vendorId, out var vendorName)) {
-            return vendorName;
-        }    
-        return null;
-    }
-
-    internal static string GetProductName(int vendorId, int productId) {
-        if (vendorProductIds.TryGetValue(vendorId, out var vendorProducts)) {
-            if (vendorProducts.TryGetValue(productId, out var productName)) {
-                return productName;
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    internal static Tuple<string, string> GetVendorAndProductName(int vendorId, int productId) {
+        if (vendorId != -1 && vendorAndProductIds.TryGetValue(vendorId, out var vendorTuple)) {
+            if(productId != -1 && vendorTuple.Item2.TryGetValue(productId, out var productName)) {
+                return Tuple.Create(vendorTuple.Item1, productName);
             }
+
+            return Tuple.Create<string, string>(vendorTuple.Item1, string.Empty);
         }
-    
-        return null;
+
+        return Tuple.Create<string, string>(string.Empty, string.Empty);
     }
 
     }
