@@ -269,12 +269,7 @@ namespace HardwareInformation.Providers
 
         private void GatherPnpDevices(ref MachineInformation information, bool win10)
         {
-            if (!win10)
-            {
-                return;
-            }
-
-            var mos = new ManagementObjectSearcher("select * from Win32_PnPEntity");
+            using var mos = new ManagementObjectSearcher("select * from Win32_PnPEntity");
             var data = new Dictionary<string, string[]>();
 
             foreach (var managementBaseObject in mos.Get())
@@ -379,7 +374,7 @@ namespace HardwareInformation.Providers
                 else
                 {
                     var replace = false;
-                    
+
                     // Prefer composite over solely input
                     if (realData[deviceDesc].DriverName == "USB Input Device" && driverDesc == "USB Composite Device")
                     {
@@ -406,12 +401,12 @@ namespace HardwareInformation.Providers
 
                     if (replace)
                     {
-                        realData[deviceDesc] = new USBDevice
-                        {
-                            Name = deviceDesc, DriverName = driverDesc, DriverVersion = stringse.Value[2],
-                            DriverDate = DateTime.Parse(stringse.Value[3]), Class = stringse.Value[4],
-                            DriverProvider = stringse.Value[5]
-                        };
+                        realData[deviceDesc].Name = deviceDesc;
+                        realData[deviceDesc].DriverName = driverDesc;
+                        realData[deviceDesc].DriverVersion = stringse.Value[2];
+                        realData[deviceDesc].DriverDate = DateTime.Parse(stringse.Value[3]);
+                        realData[deviceDesc].Class = stringse.Value[4];
+                        realData[deviceDesc].DriverProvider = stringse.Value[5];
                     }
                 }
             }
@@ -421,7 +416,7 @@ namespace HardwareInformation.Providers
 
         private void GatherWin32BaseBoard(ref MachineInformation information, bool win10)
         {
-            var mos = new ManagementObjectSearcher("select Product,Manufacturer,Version from Win32_BaseBoard");
+            using var mos = new ManagementObjectSearcher("select Product,Manufacturer,Version from Win32_BaseBoard");
 
             foreach (var managementBaseObject in mos.Get())
             {
@@ -466,7 +461,7 @@ namespace HardwareInformation.Providers
 
         private void GatherWin32DiskDrive(ref MachineInformation information, bool win10)
         {
-            var mos = new ManagementObjectSearcher("select Model,Size,Caption from Win32_DiskDrive");
+            using var mos = new ManagementObjectSearcher("select Model,Size,Caption from Win32_DiskDrive");
             var disks = new List<Disk>();
 
             foreach (var managementBaseObject in mos.Get())
@@ -504,7 +499,7 @@ namespace HardwareInformation.Providers
 
         private void GatherWin32VideoController(ref MachineInformation information, bool win10)
         {
-            var mos = new ManagementObjectSearcher(
+            using var mos = new ManagementObjectSearcher(
                 "select AdapterCompatibility,Caption,Description,DriverDate,DriverVersion,Name,Status from Win32_VideoController");
             var gpus = new List<GPU>();
 
@@ -587,7 +582,7 @@ namespace HardwareInformation.Providers
 
         private void GatherWmiMonitorId(ref MachineInformation information, bool win10)
         {
-            var mos = new ManagementObjectSearcher("root\\wmi",
+            using var mos = new ManagementObjectSearcher("root\\wmi",
                 "select ManufacturerName,UserFriendlyName from WmiMonitorID");
             var displays = new List<Display>();
 
@@ -629,18 +624,19 @@ namespace HardwareInformation.Providers
 
         private void GatherWin32ProcessorInformation(ref MachineInformation information, bool win10)
         {
-            ManagementObjectSearcher mos;
+            string query;
 
             if (win10)
             {
-                mos = new ManagementObjectSearcher(
-                    "select Name,NumberOfEnabledCore,NumberOfLogicalProcessors,SocketDesignation,MaxClockSpeed from Win32_Processor");
+                query =
+                    "select Name,NumberOfEnabledCore,NumberOfLogicalProcessors,SocketDesignation,MaxClockSpeed from Win32_Processor";
             }
             else
             {
-                mos = new ManagementObjectSearcher(
-                    "select Name,NumberOfLogicalProcessors,SocketDesignation,MaxClockSpeed from Win32_Processor");
+                query = "select Name,NumberOfLogicalProcessors,SocketDesignation,MaxClockSpeed from Win32_Processor";
             }
+
+            using var mos = new ManagementObjectSearcher(query);
 
             foreach (var managementBaseObject in mos.Get())
             {
@@ -723,19 +719,20 @@ namespace HardwareInformation.Providers
 
         private void GatherWin32PhysicalMemory(ref MachineInformation information, bool win10)
         {
-            ManagementObjectSearcher mos;
+            string query;
             var ramSticks = new List<RAM>();
 
             if (win10)
             {
-                mos = new ManagementObjectSearcher(
-                    "select ConfiguredClockSpeed,Manufacturer,Capacity,DeviceLocator,PartNumber,FormFactor from Win32_PhysicalMemory");
+                query =
+                    "select ConfiguredClockSpeed,Manufacturer,Capacity,DeviceLocator,PartNumber,FormFactor from Win32_PhysicalMemory";
             }
             else
             {
-                mos = new ManagementObjectSearcher(
-                    "select Manufacturer,Capacity,DeviceLocator,PartNumber,FormFactor from Win32_PhysicalMemory");
+                query = "select Manufacturer,Capacity,DeviceLocator,PartNumber,FormFactor from Win32_PhysicalMemory";
             }
+
+            using var mos = new ManagementObjectSearcher(query);
 
             // There is currently no other way to gather RAM information so we don't need to check if it's already set
             foreach (var managementBaseObject in mos.Get())
@@ -811,7 +808,7 @@ namespace HardwareInformation.Providers
 
         private void GatherWin32Bios(ref MachineInformation information, bool win10)
         {
-            var mos = new ManagementObjectSearcher("select Name,Manufacturer,Version from Win32_BIOS");
+            using var mos = new ManagementObjectSearcher("select Name,Manufacturer,Version from Win32_BIOS");
 
             foreach (var managementBaseObject in mos.Get())
             {
