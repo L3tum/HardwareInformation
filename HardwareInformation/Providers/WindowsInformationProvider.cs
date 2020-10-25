@@ -3,7 +3,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Management;
@@ -179,7 +178,7 @@ namespace HardwareInformation.Providers
             {
                 return;
             }
-            
+
             using var mos = new ManagementObjectSearcher("select * from Win32_PnPEntity");
             var mbos = new ArrayList(mos.Get());
             var data = new Dictionary<string, string[]>();
@@ -408,7 +407,7 @@ namespace HardwareInformation.Providers
             var vidInt = vid != null ? int.Parse(vid, NumberStyles.HexNumber) : -1;
             var pidInt = pid != null ? int.Parse(pid, NumberStyles.HexNumber) : -1;
             var vendorName = vid is not null ? USBVendorList.GetVendorName(vidInt) : null;
-            var productName = vid is not null && pid is not null
+            var productName = vid is not null && pid is not null && vendorName is not null
                 ? USBVendorList.GetProductName(vidInt, pidInt)
                 : null;
 

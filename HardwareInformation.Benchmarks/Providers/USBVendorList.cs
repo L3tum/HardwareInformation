@@ -8,8 +8,13 @@ namespace HardwareInformation.Benchmarks.Providers
 {
     [SimpleJob(RuntimeMoniker.NetCoreApp31)]
     [MemoryDiagnoser]
-    [RPlotExporter, MarkdownExporter, AsciiDocExporter, HtmlExporter, CsvExporter]
-    [MinColumn, MaxColumn]
+    [RPlotExporter]
+    [MarkdownExporter]
+    [AsciiDocExporter]
+    [HtmlExporter]
+    [CsvExporter]
+    [MinColumn]
+    [MaxColumn]
     [Orderer(SummaryOrderPolicy.FastestToSlowest)]
     [RankColumn(NumeralSystem.Roman)]
     public class USBVendorList
