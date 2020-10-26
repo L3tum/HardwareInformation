@@ -355,8 +355,9 @@ namespace HardwareInformation.Providers
                             }
                             else
                             {
-                                foreach (string vendorString in Enum.GetValues(typeof(Vendors)))
+                                foreach (var field in typeof(Vendors).GetFields())
                                 {
+                                    var vendorString = field.GetValue(null) as string;
                                     if (relevant.Contains(vendorString))
                                     {
                                         vendor = vendorString;
