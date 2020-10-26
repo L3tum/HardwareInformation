@@ -146,6 +146,7 @@ namespace HardwareInformation.Providers
             GetGPUInformation(ref information);
             GetDiskInformation(ref information);
             GetRAMInformation(ref information);
+            GetUSBInformation(ref information);
         }
 
         public bool Available(MachineInformation information)
@@ -158,6 +159,101 @@ namespace HardwareInformation.Providers
             // Intentionally left blank
         }
 
+        private void GetUSBInformation(ref MachineInformation information)
+        {
+            if (information.UsbDevices.Count == 0)
+            {
+                var usbs = new List<USBDevice>();
+
+                try
+                {
+                    using var p = Util.StartProcess("lsusb", "");
+                    using var sr = p.StandardOutput;
+                    p.WaitForExit();
+
+                    var lines = sr.ReadToEnd().Trim()
+                        .Split(new[] {Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries);
+                    var data = new Dictionary<string, string>();
+
+                    foreach (var line in lines)
+                    {
+                        try
+                        {
+                            var parts = line.Split(' ');
+                            var busNumber = parts[1].Trim('0');
+                            var deviceNumber = parts[3].Replace(":", "").Trim('0');
+                            var deviceId = parts[5];
+
+                            data.Add($"{busNumber}-{deviceNumber}", deviceId);
+                        }
+                        catch
+                        {
+                            // Intentionally left blank
+                        }
+                    }
+
+                    using var pr = Util.StartProcess("lsusb", "-t");
+                    using var so = pr.StandardOutput;
+                    pr.WaitForExit();
+
+                    lines = sr.ReadToEnd().Trim()
+                        .Split(new[] {Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries);
+                    var lastBusNumber = "";
+
+                    foreach (var line in lines)
+                    {
+                        var parts = line.Split(' ').ToList();
+                        string busNumber;
+
+                        // Sub-device
+                        if (parts[0].StartsWith("|_"))
+                        {
+                            busNumber = lastBusNumber;
+                        }
+                        // Top-level HUB
+                        else
+                        {
+                            busNumber = parts[2].Split('.')[0].Trim('0');
+                            lastBusNumber = busNumber;
+                            parts.RemoveAt(1);
+                        }
+
+                        var deviceNumber = parts[4].Trim(',');
+                        var classSpecifier = parts[5].Split('=')[1].Trim(',');
+                        var driverName = parts[6].Split('=')[1].Trim(',');
+
+                        if (data.TryGetValue($"{busNumber}-{deviceNumber}", out var deviceId))
+                        {
+                            var vendorId = deviceId.Split(':')[0];
+                            var productId = deviceId.Split(':')[1];
+                            var (vendorName, productName) = USBVendorList.GetVendorAndProductName(vendorId, productId);
+
+                            var usb = new USBDevice
+                            {
+                                Class = classSpecifier, DriverName = driverName, VendorID = vendorId,
+                                ProductID = productId, VendorName = vendorName, ProductName = productName
+                            };
+
+                            usbs.Add(usb);
+                        }
+                        else
+                        {
+                            // Intentionally left blank
+                            // TODO: Logger
+                        }
+                    }
+                }
+                catch
+                {
+                    // Intentionally left blank
+                }
+                finally
+                {
+                    information.UsbDevices = usbs.AsReadOnly();
+                }
+            }
+        }
+
         private void GetGPUInformation(ref MachineInformation machineInformation)
         {
             if (machineInformation.Gpus.Count == 0)
@@ -166,7 +262,7 @@ namespace HardwareInformation.Providers
 
                 try
                 {
-                    var p = Util.StartProcess("lspci", "");
+                    using var p = Util.StartProcess("lspci", "");
                     using var sr = p.StandardOutput;
                     p.WaitForExit();
 
@@ -232,8 +328,8 @@ namespace HardwareInformation.Providers
 
                 try
                 {
-                    var p = Util.StartProcess("lshw", "-class disk");
-                    var sr = p.StandardOutput;
+                    using var p = Util.StartProcess("lshw", "-class disk");
+                    using var sr = p.StandardOutput;
                     p.WaitForExit();
                     var lines = sr.ReadToEnd()
                         .Split(new[] {Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries);
@@ -295,8 +391,8 @@ namespace HardwareInformation.Providers
 
                 try
                 {
-                    var p = Util.StartProcess("lshw", "-short -C memory");
-                    var sr = p.StandardOutput;
+                    using var p = Util.StartProcess("lshw", "-short -C memory");
+                    using var sr = p.StandardOutput;
                     p.WaitForExit();
                     var lines = sr.ReadToEnd().Split(new[] {Environment.NewLine},
                         StringSplitOptions.RemoveEmptyEntries);

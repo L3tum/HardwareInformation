@@ -189,7 +189,7 @@ namespace HardwareInformation.Providers
 
                 var deviceId = managementBaseObject.Properties["DeviceID"].Value as string;
 
-                if (deviceId is null || !deviceId.StartsWith("USB") || deviceId.Split('\\')[1].Contains("HUB"))
+                if (deviceId is null || !deviceId.StartsWith("USB"))
                 {
                     continue;
                 }
