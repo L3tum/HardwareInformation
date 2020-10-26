@@ -363,15 +363,9 @@ namespace HardwareInformation.Providers
                                         vendor = vendorString;
                                     }
                                 }
-
-                                if (string.IsNullOrWhiteSpace(vendor))
-                                {
-                                    // Assign a placeholder to vendor in order to successfully do the Replace below but not actually replace anything.
-                                    vendor = "blahbliblubnevergonnaappearinitjustplaceholder";
-                                }
                             }
 
-                            var name = relevant.Replace(vendor, "");
+                            var name = string.IsNullOrWhiteSpace(vendor) ? vendor : relevant.Replace(vendor, "");
 
                             if (!string.IsNullOrEmpty(name))
                             {
