@@ -1,6 +1,7 @@
 ﻿#region using
 
 using System;
+using System.Collections.Generic;
 using System.Runtime.ExceptionServices;
 using HardwareInformation;
 using Microsoft.Extensions.Logging;
@@ -18,6 +19,8 @@ namespace SimpleGatheringTest
 
         private static readonly ILogger<MachineInformation> Logger = LoggerFactory.CreateLogger<MachineInformation>();
 
+        private static List<Exception> exceptions = new List<Exception>();
+
         private static void Main(string[] args)
         {
             AppDomain.CurrentDomain.FirstChanceException += CurrentDomainOnFirstChanceException;
@@ -27,11 +30,21 @@ namespace SimpleGatheringTest
                     new StringEnumConverter()
                 )
             );
+
+            foreach (var exception in exceptions)
+            {
+                Logger.LogCritical(exception, "First Chance");
+            }
+
+            if (exceptions.Count > 0)
+            {
+                throw new Exception("Fuck");
+            }
         }
 
         private static void CurrentDomainOnFirstChanceException(object sender, FirstChanceExceptionEventArgs e)
         {
-	        Logger.LogError(e.Exception, "First Chance");
+            exceptions.Add(e.Exception);
         }
     }
 }

@@ -3,12 +3,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Management;
 using System.Runtime.InteropServices;
 using System.Security;
 using HardwareInformation.Information;
+using Microsoft.Extensions.Logging;
 
 #endregion
 
@@ -84,81 +84,81 @@ namespace HardwareInformation.Providers
                     }
                 }
             }
-            catch
+            catch (Exception e)
             {
-                // Intentionally left blank
+                MachineInformationGatherer.Logger.LogError(e, "Encountered while parsing OS Version info");
             }
 
             try
             {
                 GatherWin32ProcessorInformation(ref information, win10);
             }
-            catch
+            catch (Exception e)
             {
-                // Intentionally left blank
+                MachineInformationGatherer.Logger.LogError(e, "Encountered while parsing CPU info");
             }
 
             try
             {
                 GatherWin32PhysicalMemory(ref information, win10);
             }
-            catch
+            catch (Exception e)
             {
-                // Intentionally left blank
+                MachineInformationGatherer.Logger.LogError(e, "Encountered while parsing RAM info");
             }
 
             try
             {
                 GatherWin32Bios(ref information, win10);
             }
-            catch
+            catch (Exception e)
             {
-                // Intentionally left blank
+                MachineInformationGatherer.Logger.LogError(e, "Encountered while parsing BIOS info");
             }
 
             try
             {
                 GatherWin32BaseBoard(ref information, win10);
             }
-            catch
+            catch (Exception e)
             {
-                // Intentionally left blank
+                MachineInformationGatherer.Logger.LogError(e, "Encountered while parsing Mainboard info");
             }
 
             try
             {
                 GatherWin32DiskDrive(ref information, win10);
             }
-            catch
+            catch (Exception e)
             {
-                // Intentionally left blank
+                MachineInformationGatherer.Logger.LogError(e, "Encountered while parsing Disk info");
             }
 
             try
             {
                 GatherWin32VideoController(ref information, win10);
             }
-            catch
+            catch (Exception e)
             {
-                // Intentionally left blank
+                MachineInformationGatherer.Logger.LogError(e, "Encountered while parsing GPU info");
             }
 
             try
             {
                 GatherWmiMonitorId(ref information, win10);
             }
-            catch
+            catch (Exception e)
             {
-                // Intentionally left blank
+                MachineInformationGatherer.Logger.LogError(e, "Encountered while parsing Monitor info");
             }
 
             try
             {
                 GatherPnpDevices(ref information, win10);
             }
-            catch
+            catch (Exception e)
             {
-                // Intentionally left blank
+                MachineInformationGatherer.Logger.LogError(e, "Encountered while parsing USB info");
             }
         }
 
@@ -208,7 +208,7 @@ namespace HardwareInformation.Providers
                 {
                     continue;
                 }
-                
+
                 var mo = managementBaseObject as ManagementObject;
                 var inParams = mo.GetMethodParameters("GetDeviceProperties");
 
@@ -228,13 +228,12 @@ namespace HardwareInformation.Providers
                     var keyName = deviceProperties.Properties["KeyName"].Value as string;
                     var value = deviceProperties.Properties["Data"].Value as string;
 
-                    if (value is null || keyName is null)
+                    if (string.IsNullOrWhiteSpace(value) || string.IsNullOrWhiteSpace(keyName))
                     {
+                        MachineInformationGatherer.Logger.LogTrace(
+                            $"KeyName {keyName} or Value {value} was null or whitespace for device ID {deviceId}");
                         continue;
                     }
-
-                    // Cleanup (who the fuck makes typos in a driver)
-                    value = value.Replace("U SB", "USB").Replace("Micro soft", "Microsoft");
 
                     switch (keyName)
                     {
@@ -263,8 +262,7 @@ namespace HardwareInformation.Providers
                             var second = int.Parse(value.Substring(12, 2));
 
                             data[deviceId][3] =
-                                new DateTime(year, month, day, hour, minute, second).ToString(CultureInfo
-                                    .InvariantCulture);
+                                new DateTime(year, month, day, hour, minute, second).ToString();
                             break;
                         }
                         case "DEVPKEY_Device_Class":
@@ -320,6 +318,11 @@ namespace HardwareInformation.Providers
             {
                 var deviceDesc = stringse.Value[0];
                 var driverDesc = stringse.Value[1];
+
+                if (deviceDesc is null || driverDesc is null)
+                {
+                    continue;
+                }
 
                 if (!realData.ContainsKey(deviceDesc))
                 {

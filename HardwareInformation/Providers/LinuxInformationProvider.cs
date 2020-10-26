@@ -52,13 +52,13 @@ namespace HardwareInformation.Providers
                 return;
             }
 
-            var info = File.ReadAllLines("/proc/cpuinfo");
+            var procCpuInfo = File.ReadAllLines("/proc/cpuinfo");
             var modelNameRegex = new Regex(@"^model name\s+:\s+(.+)");
             var cpuSpeedRegex = new Regex(@"^cpu MHz\s+:\s+(.+)");
             var physicalCoresRegex = new Regex(@"^cpu cores\s+:\s+(.+)");
             var logicalCoresRegex = new Regex(@"^siblings\s+:\s+(.+)");
 
-            foreach (var s in info)
+            foreach (var s in procCpuInfo)
             {
                 try
                 {
@@ -76,7 +76,7 @@ namespace HardwareInformation.Providers
 
                     if (match.Success && information.Cpu.NormalClockSpeed == default)
                     {
-                        information.Cpu.NormalClockSpeed = uint.Parse(match.Groups[1].Value);
+                        information.Cpu.NormalClockSpeed = uint.Parse(match.Groups[1].Value.Split('.', ',')[0]);
 
                         continue;
                     }
@@ -115,6 +115,56 @@ namespace HardwareInformation.Providers
                 {
                     MachineInformationGatherer.Logger.LogError(e, "Encountered while parsing CPU info");
                 }
+            }
+
+            if (information.Cpu.NormalClockSpeed != default && information.Cpu.MaxClockSpeed != default &&
+                information.Cpu.LogicalCores != default && information.Cpu.PhysicalCores != default)
+            {
+                return;
+            }
+
+            try
+            {
+                using var p = Util.StartProcess("lscpu", "");
+                using var sr = p.StandardOutput;
+                p.WaitForExit();
+
+                var lines = sr.ReadToEnd()
+                    .Split(new[] {Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries);
+
+                foreach (var line in lines)
+                {
+                    if (line.StartsWith("CPU max MHz:") && information.Cpu.MaxClockSpeed == default)
+                    {
+                        var value = line.Split(':')[1].Trim();
+                        value = value.Split('.', ',')[0];
+
+                        information.Cpu.MaxClockSpeed = uint.Parse(value);
+                    }
+                    else if (line.StartsWith("CPU min MHz:") && information.Cpu.NormalClockSpeed == default)
+                    {
+                        var value = line.Split(':')[1].Trim();
+                        value = value.Split('.', ',')[0];
+
+                        information.Cpu.NormalClockSpeed = uint.Parse(value);
+                    }
+                    else if (line.StartsWith("CPU(s):") && information.Cpu.LogicalCores == default)
+                    {
+                        var value = line.Split(':')[1].Trim();
+
+                        information.Cpu.LogicalCores = uint.Parse(value);
+                    }
+                    else if (line.StartsWith("Core(s) per socket:") && information.Cpu.PhysicalCores == default)
+                    {
+                        var value = line.Split(':')[1].Trim();
+
+                        information.Cpu.PhysicalCores = uint.Parse(value);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                MachineInformationGatherer.Logger.LogError(e, "Encountered while parsing lscpu");
             }
         }
 
@@ -303,7 +353,12 @@ namespace HardwareInformation.Providers
                                 vendor = "NVIDIA Corporation";
                             }
 
-                            var name = relevant.Replace(vendor, "").Replace("[AMD/ATI]", "");
+                            var name = relevant.Replace(vendor, "");
+
+                            if (!string.IsNullOrEmpty(name))
+                            {
+                                name = name.Replace("[AMD/ATI]", "");
+                            }
 
                             var gpu = new GPU {Description = relevant, Vendor = vendor, Name = name};
 

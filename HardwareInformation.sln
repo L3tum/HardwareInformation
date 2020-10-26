@@ -10,6 +10,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8761C52A-B638-40F7-ADB3-7BF9AC689393}"
 	ProjectSection(SolutionItems) = preProject
 		README.md = README.md
+		LICENSE = LICENSE
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HardwareInformation.Typings", "HardwareInformation.Typings\HardwareInformation.Typings.csproj", "{EBC32D50-4BF7-4EF9-BFB8-B1B85BF7E042}"
