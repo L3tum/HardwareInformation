@@ -7,6 +7,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using HardwareInformation.Information;
+using HardwareInformation.Information.Gpu;
 using Microsoft.Extensions.Logging;
 
 #endregion
@@ -351,6 +352,22 @@ namespace HardwareInformation.Providers
                             else if (relevant.ToUpperInvariant().Contains("NVIDIA"))
                             {
                                 vendor = "NVIDIA Corporation";
+                            }
+                            else
+                            {
+                                foreach (string vendorString in Enum.GetValues(typeof(Vendors)))
+                                {
+                                    if (relevant.Contains(vendorString))
+                                    {
+                                        vendor = vendorString;
+                                    }
+                                }
+
+                                if (string.IsNullOrWhiteSpace(vendor))
+                                {
+                                    // Assign a placeholder to vendor in order to successfully do the Replace below but not actually replace anything.
+                                    vendor = "blahbliblubnevergonnaappearinitjustplaceholder";
+                                }
                             }
 
                             var name = relevant.Replace(vendor, "");

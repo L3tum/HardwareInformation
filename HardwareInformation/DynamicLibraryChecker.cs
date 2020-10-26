@@ -50,10 +50,10 @@ namespace HardwareInformation
             [DllImport("kernel32", SetLastError = true)]
             internal static extern void FreeLibrary(IntPtr handle);
 
-            [DllImport("libc")]
+            [DllImport("libdl")]
             internal static extern IntPtr dlopen(string fileName, int flag);
 
-            [DllImport("libc")]
+            [DllImport("libdl")]
             internal static extern int dlclose(IntPtr handle);
         }
     }
