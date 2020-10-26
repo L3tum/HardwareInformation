@@ -27,68 +27,68 @@ Result is cached internally so don't worry about calling it multiple times
 
 ## Features
 
-| Feature| Windows | Linux | Mac |
-| ----: | ---: |  ----: | ---: |
-| No Kernel driver |  :white_check_mark:  | :white_check_mark: | :white_check_mark: |
-| Operating System |  :white_check_mark:  | :white_check_mark: | :white_check_mark: |
-| BIOS Version*** |  :white_check_mark: | :white_check_mark: | :x: |
-| BIOS Vendor*** | :white_check_mark: | :white_check_mark: | :x:
-| BIOS Codename*** | :white_check_mark: | :white_check_mark: | :x:
-| Mainboard Version*** | :white_check_mark: | :white_check_mark: | :x:
-| Mainboard Name*** | :white_check_mark: | :white_check_mark: | :x:
-| Mainboard Vendor*** | :white_check_mark: | :white_check_mark: | :x:
-| CPU Physical Cores | :white_check_mark: | :white_check_mark: | :white_check_mark:
-| CPU Logical Cores | :white_check_mark: | :white_check_mark: | :white_check_mark:
-| CPU Logical Cores per Node**** | :white_check_mark: | :white_check_mark: | :white_check_mark:
-| CPU Architecture | :white_check_mark: | :white_check_mark: | :white_check_mark:
-| CPU Caption | :white_check_mark: | :white_check_mark: | :white_check_mark:
-| CPU Name | :white_check_mark: | :white_check_mark: | :white_check_mark:
-| CPU Vendor | :white_check_mark: | :white_check_mark: | :white_check_mark:
-| CPU Family | :white_check_mark: | :white_check_mark: | :white_check_mark:
-| CPU Model | :white_check_mark: | :white_check_mark: | :white_check_mark:
-| CPU Stepping | :white_check_mark: | :white_check_mark: | :white_check_mark:
-| CPU Type | :white_check_mark: | :white_check_mark: | :white_check_mark:
-| CPU Max Frequency*** | :white_check_mark: | :white_check_mark:* | :x:
-| CPU Base Frequency*** | :white_check_mark: | :white_check_mark:* | :white_check_mark:*
-| CPU Socket*** | :white_check_mark: | :x: | :x:
-| CPU Cores | :white_check_mark: | :white_check_mark: | :white_check_mark:
-| CPU Core Number of Physical Core**** | :white_check_mark: | :white_check_mark: | :white_check_mark:
-| CPU Core NUMA Node**** | :white_check_mark: | :white_check_mark: | :white_check_mark:
-| CPU Core Max Frequency*** | :white_check_mark: | :white_check_mark:* | :x:
-| CPU Core Base Frequency*** | :white_check_mark: | :white_check_mark:* | :x:
-| CPU Core Reference Max Frequency** | :white_check_mark: | :white_check_mark: | :white_check_mark:
-| CPU Core Reference Base Frequency** | :white_check_mark: | :white_check_mark: | :white_check_mark:
-| CPU Core Reference Bus Frequency** | :white_check_mark: | :white_check_mark: | :white_check_mark:
-| CPU Caches | :white_check_mark: | :white_check_mark: | :white_check_mark:
-| CPU Cache Type | :white_check_mark: | :white_check_mark: | :white_check_mark:
-| CPU Cache Level | :white_check_mark: | :white_check_mark: | :white_check_mark:
-| CPU Cores per Cache | :white_check_mark: | :white_check_mark: | :white_check_mark:
-| CPU Number of times present | :white_check_mark: | :white_check_mark: | :white_check_mark:
-| CPU Cache Capacity | :white_check_mark: | :white_check_mark: | :white_check_mark:
-| CPU Cache CapacityHRF | :white_check_mark: | :white_check_mark: | :white_check_mark:
-| CPU Cache Associativity | :white_check_mark: | :white_check_mark: | :white_check_mark:
-| CPU Cache LineSize | :white_check_mark: | :white_check_mark: | :white_check_mark:
-| CPU Cache Sets | :white_check_mark: | :white_check_mark: | :white_check_mark:
-| CPU Cache WBINVD | :white_check_mark: | :white_check_mark: | :white_check_mark:
-| **Lots** of feature flags | :white_check_mark: | :white_check_mark: | :white_check_mark:
-| RAM Speed*** | :white_check_mark: | :white_check_mark:* | :x:
-| RAM Manufacturer*** | :white_check_mark: | :x: | :x:
-| RAM Capacity*** | :white_check_mark: | :white_check_mark:* | :x:
-| RAM CapacityHRF*** | :white_check_mark: | :white_check_mark:* | :x:
-| RAM Locator*** | :white_check_mark: | :x: | :x:
-| RAM PartNumber (Product Name)*** | :white_check_mark: | :x: | :x:
-| RAM FormFactor*** | :white_check_mark: | :white_check_mark:* | :x:
+| Feature| Windows | Linux | Mac | OS Specific Functionality***
+| ----: | ---: |  ----: | ---: | ---: |
+| No Kernel driver |  :white_check_mark:  | :white_check_mark: | :white_check_mark: | :x:
+| Operating System |  :white_check_mark:  | :white_check_mark: | :white_check_mark: | :x:
+| BIOS Version |  :white_check_mark: | :white_check_mark: | :x: | :white_check_mark:
+| BIOS Vendor | :white_check_mark: | :white_check_mark: | :x: | :white_check_mark:
+| BIOS Codename | :white_check_mark: | :white_check_mark: | :x:´| :white_check_mark:
+| Mainboard Version | :white_check_mark: | :white_check_mark: | :x: | :white_check_mark:
+| Mainboard Name | :white_check_mark: | :white_check_mark: | :x: | :white_check_mark:
+| Mainboard Vendor | :white_check_mark: | :white_check_mark: | :x: | :white_check_mark:
+| CPU Physical Cores | :white_check_mark: | :white_check_mark: | :white_check_mark: | :x:
+| CPU Logical Cores | :white_check_mark: | :white_check_mark: | :white_check_mark: | :x:
+| CPU Logical Cores per Node**** | :white_check_mark: | :white_check_mark: | :white_check_mark: | :x:
+| CPU Architecture | :white_check_mark: | :white_check_mark: | :white_check_mark: | :x:
+| CPU Caption | :white_check_mark: | :white_check_mark: | :white_check_mark: | :x:
+| CPU Name | :white_check_mark: | :white_check_mark: | :white_check_mark: | :x:
+| CPU Vendor | :white_check_mark: | :white_check_mark: | :white_check_mark: | :x:
+| CPU Family | :white_check_mark: | :white_check_mark: | :white_check_mark: | :x:
+| CPU Model | :white_check_mark: | :white_check_mark: | :white_check_mark: | :x:
+| CPU Stepping | :white_check_mark: | :white_check_mark: | :white_check_mark: | :x:
+| CPU Type | :white_check_mark: | :white_check_mark: | :white_check_mark: | :x:
+| CPU Max Frequency | :white_check_mark: | :white_check_mark:* | :x: | :white_check_mark:
+| CPU Base Frequency | :white_check_mark: | :white_check_mark:* | :white_check_mark:* | :white_check_mark:
+| CPU Socket | :white_check_mark: | :x: | :x: | :white_check_mark:
+| CPU Cores | :white_check_mark: | :white_check_mark: | :white_check_mark: | :x:
+| CPU Core Number of Physical Core**** | :white_check_mark: | :white_check_mark: | :white_check_mark: | :x:
+| CPU Core NUMA Node**** | :white_check_mark: | :white_check_mark: | :white_check_mark: | :x:
+| CPU Core Max Frequency | :white_check_mark: | :white_check_mark:* | :x: | :white_check_mark:
+| CPU Core Base Frequency | :white_check_mark: | :white_check_mark:* | :x: | :white_check_mark:
+| CPU Core Reference Max Frequency** | :white_check_mark: | :white_check_mark: | :white_check_mark: | :x:
+| CPU Core Reference Base Frequency** | :white_check_mark: | :white_check_mark: | :white_check_mark: | :x:
+| CPU Core Reference Bus Frequency** | :white_check_mark: | :white_check_mark: | :white_check_mark: | :x:
+| CPU Caches | :white_check_mark: | :white_check_mark: | :white_check_mark: | :x:
+| CPU Cache Type | :white_check_mark: | :white_check_mark: | :white_check_mark: | :x:
+| CPU Cache Level | :white_check_mark: | :white_check_mark: | :white_check_mark: | :x:
+| CPU Cores per Cache | :white_check_mark: | :white_check_mark: | :white_check_mark: | :x:
+| CPU Number of times present | :white_check_mark: | :white_check_mark: | :white_check_mark: | :x:
+| CPU Cache Capacity | :white_check_mark: | :white_check_mark: | :white_check_mark: | :x:
+| CPU Cache CapacityHRF | :white_check_mark: | :white_check_mark: | :white_check_mark: | :x:
+| CPU Cache Associativity | :white_check_mark: | :white_check_mark: | :white_check_mark: | :x:
+| CPU Cache LineSize | :white_check_mark: | :white_check_mark: | :white_check_mark: | :x:
+| CPU Cache Sets | :white_check_mark: | :white_check_mark: | :white_check_mark: | :x:
+| CPU Cache WBINVD | :white_check_mark: | :white_check_mark: | :white_check_mark: | :x:
+| **Lots** of feature flags | :white_check_mark: | :white_check_mark: | :white_check_mark: | :x:
+| RAM Speed | :white_check_mark: | :white_check_mark:* | :x: | :white_check_mark:
+| RAM Manufacturer | :white_check_mark: | :x: | :x: | :white_check_mark:
+| RAM Capacity | :white_check_mark: | :white_check_mark:* | :x: | :white_check_mark:
+| RAM CapacityHRF | :white_check_mark: | :white_check_mark:* | :x: | :white_check_mark:
+| RAM Locator | :white_check_mark: | :x: | :x: | :white_check_mark:
+| RAM PartNumber (Product Name)*** | :white_check_mark: | :x: | :x: | :white_check_mark:
+| RAM FormFactor | :white_check_mark: | :white_check_mark:* | :x: | :white_check_mark:
 | RAM Latencies | :x: | :x: | :x:
-| GPUs Vendor | :white_check_mark:*** | :white_check_mark:* | :x:
-| GPUs Name | :white_check_mark:*** | :white_check_mark:* | :x:
-| GPUs Driver | :white_check_mark:*** | :x: | :x:
-| GPUs Status | :white_check_mark:*** | :x: | :x:
-| Disks Manufacturer*** | :white_check_mark: | :white_check_mark:* | :x:
-| Disks Caption*** | :white_check_mark: | :white_check_mark:* | :x:
-| Disks Capacity*** | :white_check_mark: | :white_check_mark:* | :x:
-| Displays Manufacturer | :white_check_mark:*** | :x: | :x:
-| Displays Name | :white_check_mark:*** | :x: | :x:
-| Multiple processors/Dual processors | :x: | :x: | :x:
+| GPUs Vendor | :white_check_mark: | :white_check_mark: | :x: | :x:
+| GPUs Name | :white_check_mark: | :white_check_mark: | :x:| :x:
+| GPUs Driver | :white_check_mark:*** | :x: | :x:| :x:
+| GPUs Status | :white_check_mark:*** | :x: | :x:| :x:
+| Disks Manufacturer | :white_check_mark: | :white_check_mark:* | :x: | :white_check_mark:
+| Disks Caption | :white_check_mark: | :white_check_mark:* | :x: | :white_check_mark:
+| Disks Capacity | :white_check_mark: | :white_check_mark:* | :x: | :white_check_mark:
+| Displays Manufacturer | :white_check_mark:*** | :x: | :x:| :x:
+| Displays Name | :white_check_mark:*** | :x: | :x:| :x:
+| Multiple processors/Dual processors | :x: | :x: | :x:| :x:
 
 HRF = Human Readable Format. Normal capacity/size is in bytes, while this is a string encoded with the appropriate sizing.
 
