@@ -52,9 +52,16 @@ namespace HardwareInformation.Providers
 
         public bool Available(MachineInformation information)
         {
-            using var instance = new Instance();
+            try
+            {
+                using var instance = new Instance();
 
-            return instance.EnumeratePhysicalDevices().Length > 0;
+                return instance.EnumeratePhysicalDevices().Length > 0;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         public void PostProviderUpdateInformation(ref MachineInformation information)

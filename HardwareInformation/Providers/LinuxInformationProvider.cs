@@ -7,6 +7,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using HardwareInformation.Information;
+using Microsoft.Extensions.Logging;
 
 #endregion
 
@@ -412,6 +413,7 @@ namespace HardwareInformation.Providers
                                 foreach (var part in parts)
                                 {
                                     var sizeRegex = new Regex("^([0-9]+)(K|M|G|T)iB");
+                                    var speedRegex = new Regex("^[0-9]+$");
                                     var formFactor = Enum.GetNames(typeof(RAM.FormFactors))
                                         .FirstOrDefault(ff => ff == part);
 
@@ -420,16 +422,23 @@ namespace HardwareInformation.Providers
                                         ram.FormFactor =
                                             (RAM.FormFactors) Enum.Parse(typeof(RAM.FormFactors), formFactor);
                                     }
-                                    else if (new Regex("^[0-9]+$").IsMatch(part))
+                                    else if (speedRegex.IsMatch(part))
                                     {
                                         ram.Speed = uint.Parse(part);
                                     }
                                     else if (sizeRegex.IsMatch(part))
                                     {
                                         var match = sizeRegex.Match(part);
-                                        var number = int.Parse(match.Groups[1].Value);
+
+                                        // TODO: DEBUGGING
+                                        if (match.Captures.Count < 2)
+                                        {
+                                            Console.WriteLine(match.Value);
+                                        }
+
+                                        var number = int.Parse(match.Captures[0].Value);
                                         var rawNumber = 0uL;
-                                        var exponent = match.Groups[2].Value;
+                                        var exponent = match.Captures[1].Value;
 
                                         if (exponent == "T")
                                         {
@@ -461,15 +470,15 @@ namespace HardwareInformation.Providers
                                 ramSticks.Add(ram);
                             }
                         }
-                        catch
+                        catch (Exception e)
                         {
-                            // Intentionally left blank
+                            MachineInformationGatherer.Logger.LogError(e, "Encountered while parsing RAM");
                         }
                     }
                 }
-                catch
+                catch (Exception e)
                 {
-                    // Intentionally left blank
+                    MachineInformationGatherer.Logger.LogError(e, "Encountered while parsing RAM");
                 }
                 finally
                 {
