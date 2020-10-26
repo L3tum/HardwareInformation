@@ -1,5 +1,7 @@
 
 
+// This file is auto-generated!
+
 namespace HardwareInformation.Providers {
     using System.Collections.Generic;
     using System.Globalization;
@@ -7,13 +9,19 @@ namespace HardwareInformation.Providers {
     using System.Runtime.CompilerServices;
 
     internal static class USBVendorList {
-        private static Dictionary<int, Tuple<string, Dictionary<int, string>>> vendorAndProductIds = new Dictionary<int, Tuple<string, Dictionary<int, string>>> {
+        private static readonly Dictionary<int, Tuple<string, Dictionary<int, string>>> vendorAndProductIds = new Dictionary<int, Tuple<string, Dictionary<int, string>>> {
     { 1, Tuple.Create("Fry's Electronics", new Dictionary<int, string>{
 { 30584, "Counterfeit flash drive [Kingston]" },
     })
  },
             { 2, Tuple.Create("Ingram", new Dictionary<int, string>{
 { 2, "passport00" },
+    })
+ },
+            { 3, Tuple.Create("Club Mac", new Dictionary<int, string>{
+    })
+ },
+            { 4, Tuple.Create("Nebraska Furniture Mart", new Dictionary<int, string>{
     })
  },
             { 17, Tuple.Create("Unknown", new Dictionary<int, string>{
@@ -43,6 +51,9 @@ namespace HardwareInformation.Providers {
  },
             { 133, Tuple.Create("Boeye Technology Co., Ltd.", new Dictionary<int, string>{
 { 1536, "eBook Reader" },
+    })
+ },
+            { 258, Tuple.Create("miniSTREAK", new Dictionary<int, string>{
     })
  },
             { 261, Tuple.Create("Trust International B.V.", new Dictionary<int, string>{
@@ -79,6 +90,9 @@ namespace HardwareInformation.Providers {
 { 5004, "PVR Mass Storage" },
     })
  },
+            { 771, Tuple.Create("Mini Automation Controller", new Dictionary<int, string>{
+    })
+ },
             { 804, Tuple.Create("OCZ Technology Inc", new Dictionary<int, string>{
 { 48134, "OCZ ATV USB 2.0 Flash Drive" },
 { 48136, "OCZ Rally2/ATV USB 2.0 Flash Drive" },
@@ -112,6 +126,12 @@ namespace HardwareInformation.Providers {
 { 21, "ATAPI Enclosure" },
 { 8483, "SiPix StyleCam Deluxe" },
 { 32772, "Aox 99001" },
+    })
+ },
+            { 1001, Tuple.Create("Thesys Microelectronics", new Dictionary<int, string>{
+    })
+ },
+            { 1002, Tuple.Create("Data Broadcasting Corp.", new Dictionary<int, string>{
     })
  },
             { 1003, Tuple.Create("Atmel Corp.", new Dictionary<int, string>{
@@ -205,6 +225,12 @@ namespace HardwareInformation.Providers {
 { 65281, "WootingOne" },
 { 65282, "WootingTwo" },
 { 65287, "Tux Droid fish dongle" },
+    })
+ },
+            { 1004, Tuple.Create("Iwatsu America, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 1005, Tuple.Create("Mitel Corp.", new Dictionary<int, string>{
     })
  },
             { 1006, Tuple.Create("Mitsumi", new Dictionary<int, string>{
@@ -754,6 +780,12 @@ namespace HardwareInformation.Providers {
 { 61886, "NEC Picty800" },
     })
  },
+            { 1009, Tuple.Create("Genoa Technology", new Dictionary<int, string>{
+    })
+ },
+            { 1010, Tuple.Create("Oak Technology, Inc.", new Dictionary<int, string>{
+    })
+ },
             { 1011, Tuple.Create("Adaptec, Inc.", new Dictionary<int, string>{
 { 32, "AWN-8020 WLAN [Intersil PRISM 2.5]" },
 { 128, "AVC-1100 Audio Capture" },
@@ -772,15 +804,33 @@ namespace HardwareInformation.Providers {
 { 44492, "Composite Device Support" },
     })
  },
+            { 1012, Tuple.Create("Diebold, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 1013, Tuple.Create("Siemens Electromechanical", new Dictionary<int, string>{
+    })
+ },
+            { 1016, Tuple.Create("Epson Imaging Technology Center", new Dictionary<int, string>{
+    })
+ },
             { 1017, Tuple.Create("KeyTronic Corp.", new Dictionary<int, string>{
 { 256, "KT-2001 Keyboard" },
 { 257, "Keyboard" },
 { 258, "Keyboard Mouse" },
     })
  },
+            { 1019, Tuple.Create("OPTi, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 1020, Tuple.Create("Elitegroup Computer Systems", new Dictionary<int, string>{
+    })
+ },
             { 1021, Tuple.Create("Xilinx, Inc.", new Dictionary<int, string>{
 { 8, "Platform Cable USB II" },
 { 80, "dfu downloader" },
+    })
+ },
+            { 1022, Tuple.Create("Farallon Comunications", new Dictionary<int, string>{
     })
  },
             { 1024, Tuple.Create("National Semiconductor Corp.", new Dictionary<int, string>{
@@ -795,6 +845,9 @@ namespace HardwareInformation.Providers {
 { 50009, "Logitech Harmony" },
 { 50011, "Printing Support" },
 { 50525, "Rigol Technologies DS5000USB Oscilloscope" },
+    })
+ },
+            { 1025, Tuple.Create("National Registry, Inc.", new Dictionary<int, string>{
     })
  },
             { 1026, Tuple.Create("ALi Corp.", new Dictionary<int, string>{
@@ -1000,6 +1053,15 @@ namespace HardwareInformation.Providers {
 { 809, "K018: USB-MSR JIS 2-Track MSR: POS Standard" },
 { 810, "K016: USB-MSR ISO 3-Track MSR: HID Keyboard Mode" },
 { 811, "K016/K018: USB-MSR Flash-Recovery/Download" },
+    })
+ },
+            { 1029, Tuple.Create("Synopsys, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 1030, Tuple.Create("Fujitsu-ICL Computers", new Dictionary<int, string>{
+    })
+ },
+            { 1031, Tuple.Create("Fujitsu Personal Systems, Inc.", new Dictionary<int, string>{
     })
  },
             { 1032, Tuple.Create("Quanta Computer, Inc.", new Dictionary<int, string>{
@@ -1226,10 +1288,19 @@ namespace HardwareInformation.Providers {
 { 25923, "Manhattan Magnetic Card Strip Reader" },
     })
  },
+            { 1036, Tuple.Create("VTech Computers, Ltd", new Dictionary<int, string>{
+    })
+ },
             { 1037, Tuple.Create("VIA Technologies, Inc.", new Dictionary<int, string>{
 { 12676, "VNT VT6656 USB-802.11 Wireless LAN Adapter" },
 { 13327, "Audinst HUD-mx2" },
 { 25093, "USB 2.0 Card Reader" },
+    })
+ },
+            { 1038, Tuple.Create("MCCI", new Dictionary<int, string>{
+    })
+ },
+            { 1039, Tuple.Create("Echo Speech Corp.", new Dictionary<int, string>{
     })
  },
             { 1041, Tuple.Create("BUFFALO INC. (formerly MelCo., Inc.)", new Dictionary<int, string>{
@@ -1296,6 +1367,9 @@ namespace HardwareInformation.Providers {
 { 638, "HD-LCU3" },
     })
  },
+            { 1042, Tuple.Create("Award Software International", new Dictionary<int, string>{
+    })
+ },
             { 1043, Tuple.Create("Leadtek Research, Inc.", new Dictionary<int, string>{
 { 4880, "WinFast TV - NTSC + FM" },
 { 4881, "WinFast TV - NTSC + MTS + FM" },
@@ -1338,6 +1412,9 @@ namespace HardwareInformation.Providers {
 { 28416, "WinFast DTV Dongle (STK7700P based)" },
     })
  },
+            { 1044, Tuple.Create("Giga-Byte Technology Co., Ltd", new Dictionary<int, string>{
+    })
+ },
             { 1046, Tuple.Create("Winbond Electronics Corp.", new Dictionary<int, string>{
 { 53, "W89C35 802.11bg WLAN Adapter" },
 { 257, "Hub" },
@@ -1370,6 +1447,12 @@ namespace HardwareInformation.Providers {
 { 49473, "Barcode Scanner" },
     })
  },
+            { 1047, Tuple.Create("Symbios Logic", new Dictionary<int, string>{
+    })
+ },
+            { 1048, Tuple.Create("AST Research", new Dictionary<int, string>{
+    })
+ },
             { 1049, Tuple.Create("Samsung Info. Systems America, Inc.", new Dictionary<int, string>{
 { 1, "IrDA Remote Controller / Creative Cordless Mouse" },
 { 1536, "Desktop Wireless 6000" },
@@ -1386,6 +1469,15 @@ namespace HardwareInformation.Providers {
 { 32769, "Hub" },
 { 32770, "SyncMaster HID Monitor Control" },
 { 43523, "SDAS-3 MP3 Player" },
+    })
+ },
+            { 1050, Tuple.Create("Phoenix Technologies, Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 1051, Tuple.Create("d'TV", new Dictionary<int, string>{
+    })
+ },
+            { 1053, Tuple.Create("S3, Inc.", new Dictionary<int, string>{
     })
  },
             { 1054, Tuple.Create("Creative Technology, Ltd", new Dictionary<int, string>{
@@ -1527,6 +1619,9 @@ namespace HardwareInformation.Providers {
 { 20495, "Broadband Blaster 8012U-V" },
 { 20501, "TECOM Bluetooth Device" },
 { 65535, "Webcam Live! Ultra" },
+    })
+ },
+            { 1055, Tuple.Create("LCS Telegraphics", new Dictionary<int, string>{
     })
  },
             { 1056, Tuple.Create("Chips and Technologies", new Dictionary<int, string>{
@@ -1675,6 +1770,9 @@ namespace HardwareInformation.Providers {
 { 2050, "CA-42 Phone Parent" },
     })
  },
+            { 1058, Tuple.Create("ADI Systems, Inc.", new Dictionary<int, string>{
+    })
+ },
             { 1059, Tuple.Create("Computer Access Technology Corp.", new Dictionary<int, string>{
 { 10, "NetMate Ethernet" },
 { 12, "NetMate2 Ethernet" },
@@ -1765,16 +1863,34 @@ namespace HardwareInformation.Providers {
 { 1062, "WDM Driver" },
     })
  },
+            { 1063, Tuple.Create("Motorola Electronics Taiwan, Ltd", new Dictionary<int, string>{
+    })
+ },
             { 1064, Tuple.Create("Advanced Gravis Computer Tech, Ltd", new Dictionary<int, string>{
 { 16385, "GamePad Pro" },
+    })
+ },
+            { 1065, Tuple.Create("Cirrus Logic", new Dictionary<int, string>{
+    })
+ },
+            { 1066, Tuple.Create("Ericsson Austrian, AG", new Dictionary<int, string>{
     })
  },
             { 1067, Tuple.Create("Intel Corp.", new Dictionary<int, string>{
 { 37654, "8x931Hx Customer Hub" },
     })
  },
+            { 1068, Tuple.Create("Innovative Semiconductors, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 1069, Tuple.Create("Micronics", new Dictionary<int, string>{
+    })
+ },
             { 1070, Tuple.Create("Acer, Inc.", new Dictionary<int, string>{
 { 896, "MP3 Player" },
+    })
+ },
+            { 1071, Tuple.Create("Molex, Inc.", new Dictionary<int, string>{
     })
  },
             { 1072, Tuple.Create("Sun Microsystems, Inc.", new Dictionary<int, string>{
@@ -1812,12 +1928,24 @@ namespace HardwareInformation.Providers {
 { 43947, "Keyboard" },
     })
  },
+            { 1076, Tuple.Create("Samsung Info. Systems America, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 1077, Tuple.Create("Hyundai Electronics America", new Dictionary<int, string>{
+    })
+ },
             { 1078, Tuple.Create("Taugagreining HF", new Dictionary<int, string>{
 { 5, "CameraMate (DPCM_USB)" },
     })
  },
+            { 1079, Tuple.Create("Framatome Connectors USA", new Dictionary<int, string>{
+    })
+ },
             { 1080, Tuple.Create("Advanced Micro Devices, Inc.", new Dictionary<int, string>{
 { 30976, "Root Hub" },
+    })
+ },
+            { 1081, Tuple.Create("Voice Technologies Group", new Dictionary<int, string>{
     })
  },
             { 1085, Tuple.Create("Lexmark International, Inc.", new Dictionary<int, string>{
@@ -1991,6 +2119,12 @@ namespace HardwareInformation.Providers {
 { 39937, "LGE Sync" },
     })
  },
+            { 1087, Tuple.Create("RadiSys Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 1088, Tuple.Create("Eizo Nanao Corp.", new Dictionary<int, string>{
+    })
+ },
             { 1089, Tuple.Create("Winbond Systems Lab.", new Dictionary<int, string>{
 { 5206, "Hub" },
     })
@@ -2004,15 +2138,33 @@ namespace HardwareInformation.Providers {
 { 46, "Millennium Keyboard" },
     })
  },
+            { 1093, Tuple.Create("Lucent Technologies, Inc.", new Dictionary<int, string>{
+    })
+ },
             { 1094, Tuple.Create("NMB Technologies Corp.", new Dictionary<int, string>{
 { 26497, "Keyboard with PS/2 Mouse Port" },
 { 26498, "Keyboard" },
+    })
+ },
+            { 1095, Tuple.Create("Momentum Microsystems", new Dictionary<int, string>{
     })
  },
             { 1097, Tuple.Create("Duta Multi Robotik", new Dictionary<int, string>{
 { 296, "Menengah" },
 { 528, "Dasar" },
 { 1554, "Lanjutan" },
+    })
+ },
+            { 1098, Tuple.Create("Shamrock Tech. Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 1099, Tuple.Create("WSI", new Dictionary<int, string>{
+    })
+ },
+            { 1100, Tuple.Create("CCL/ITRI", new Dictionary<int, string>{
+    })
+ },
+            { 1101, Tuple.Create("Siemens Nixdorf AG", new Dictionary<int, string>{
     })
  },
             { 1102, Tuple.Create("Alps Electric Co., Ltd", new Dictionary<int, string>{
@@ -2074,6 +2226,9 @@ namespace HardwareInformation.Providers {
 { 46713, "T-Rudder" },
 { 46727, "TWCS Throttle" },
 { 46848, "Tacticalboard" },
+    })
+ },
+            { 1104, Tuple.Create("DFI, Inc.", new Dictionary<int, string>{
     })
  },
             { 1105, Tuple.Create("Texas Instruments, Inc.", new Dictionary<int, string>{
@@ -2139,6 +2294,12 @@ namespace HardwareInformation.Providers {
             { 1107, Tuple.Create("CMD Technology", new Dictionary<int, string>{
 { 26497, "NMB Keyboard" },
 { 26499, "Chicony Composite Keyboard" },
+    })
+ },
+            { 1108, Tuple.Create("Vobis Microcomputer AG", new Dictionary<int, string>{
+    })
+ },
+            { 1109, Tuple.Create("Telematics International, Inc.", new Dictionary<int, string>{
     })
  },
             { 1110, Tuple.Create("Analog Devices, Inc.", new Dictionary<int, string>{
@@ -2268,6 +2429,9 @@ namespace HardwareInformation.Providers {
 { 28812, "Genius WideCam F100" },
     })
  },
+            { 1113, Tuple.Create("Adobe Systems, Inc.", new Dictionary<int, string>{
+    })
+ },
             { 1114, Tuple.Create("SONICblue, Inc.", new Dictionary<int, string>{
 { 2010, "Supra Express 56K modem" },
 { 2890, "SupraMax 2890 56K Modem [Lucent Atlas]" },
@@ -2299,6 +2463,9 @@ namespace HardwareInformation.Providers {
             { 1115, Tuple.Create("Hitachi, Ltd", new Dictionary<int, string>{
 { 83, "RX610 RX-Stick" },
 { 553, "mSATA Adapter [renkforce Pi-102]" },
+    })
+ },
+            { 1117, Tuple.Create("Nortel Networks, Ltd", new Dictionary<int, string>{
     })
  },
             { 1118, Tuple.Create("Microsoft Corp.", new Dictionary<int, string>{
@@ -2697,6 +2864,15 @@ namespace HardwareInformation.Providers {
 { 65535, "UPS" },
     })
  },
+            { 1124, Tuple.Create("AMP/Tycoelectronics Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 1127, Tuple.Create("AT&T Paradyne", new Dictionary<int, string>{
+    })
+ },
+            { 1128, Tuple.Create("Wieson Technologies Co., Ltd", new Dictionary<int, string>{
+    })
+ },
             { 1130, Tuple.Create("Cherry GmbH", new Dictionary<int, string>{
 { 1, "Keyboard" },
 { 3, "My3000 Hub" },
@@ -2730,6 +2906,9 @@ namespace HardwareInformation.Providers {
 { 769, "USB 1.0 Hub" },
 { 1280, "Serial & Parallel Ports" },
 { 65296, "Virtual Keyboard and Mouse" },
+    })
+ },
+            { 1132, Tuple.Create("Toshiba Corp., Digital Media Equipment", new Dictionary<int, string>{
     })
  },
             { 1133, Tuple.Create("Logitech, Inc.", new Dictionary<int, string>{
@@ -3169,6 +3348,9 @@ namespace HardwareInformation.Providers {
 { 26498, "BTC 7932 mouse+keyboard" },
     })
  },
+            { 1135, Tuple.Create("Crystal Semiconductor", new Dictionary<int, string>{
+    })
+ },
             { 1137, Tuple.Create("Philips (or NXP)", new Dictionary<int, string>{
 { 257, "DSS350 Digital Speaker System" },
 { 260, "DSS330 Digital Speaker System [uda1321]" },
@@ -3282,6 +3464,9 @@ namespace HardwareInformation.Providers {
 { 45201, "Webcam" },
     })
  },
+            { 1139, Tuple.Create("Sanyo Information Business Co., Ltd", new Dictionary<int, string>{
+    })
+ },
             { 1140, Tuple.Create("Sanyo Electric Co., Ltd", new Dictionary<int, string>{
 { 272, "Digital Voice Recorder R200" },
 { 535, "Xacti J2" },
@@ -3300,10 +3485,19 @@ namespace HardwareInformation.Providers {
 { 528, "Scorpio Ultra 3" },
     })
  },
+            { 1142, Tuple.Create("AESP", new Dictionary<int, string>{
+    })
+ },
+            { 1143, Tuple.Create("Seagate Technology, Inc.", new Dictionary<int, string>{
+    })
+ },
             { 1144, Tuple.Create("Connectix Corp.", new Dictionary<int, string>{
 { 1, "QuickCam" },
 { 2, "QuickClip" },
 { 3, "QuickCam Pro" },
+    })
+ },
+            { 1145, Tuple.Create("Advanced Peripheral Laboratories", new Dictionary<int, string>{
     })
  },
             { 1146, Tuple.Create("Semtech Corp.", new Dictionary<int, string>{
@@ -3455,6 +3649,9 @@ namespace HardwareInformation.Providers {
 { 53265, "Canvio Desk" },
     })
  },
+            { 1153, Tuple.Create("Zenith Data Systems", new Dictionary<int, string>{
+    })
+ },
             { 1154, Tuple.Create("Kyocera Corp.", new Dictionary<int, string>{
 { 14, "FS-1020D Printer" },
 { 15, "FS-1920 Mono Printer" },
@@ -3517,8 +3714,20 @@ namespace HardwareInformation.Providers {
 { 65296, "Swann ST56 Modem" },
     })
  },
+            { 1156, Tuple.Create("Specialix", new Dictionary<int, string>{
+    })
+ },
+            { 1157, Tuple.Create("Nokia Monitors", new Dictionary<int, string>{
+    })
+ },
             { 1158, Tuple.Create("ASUS Computers, Inc.", new Dictionary<int, string>{
 { 389, "EeePC T91MT HID Touch Panel" },
+    })
+ },
+            { 1159, Tuple.Create("Stewart Connector", new Dictionary<int, string>{
+    })
+ },
+            { 1160, Tuple.Create("Cirque Corp.", new Dictionary<int, string>{
     })
  },
             { 1161, Tuple.Create("Foxconn / Hon Hai", new Dictionary<int, string>{
@@ -3539,6 +3748,12 @@ namespace HardwareInformation.Providers {
 { 57429, "BCM43142A0 broadcom bluetooth" },
     })
  },
+            { 1162, Tuple.Create("S-MOS Systems, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 1164, Tuple.Create("Alps Electric Ireland, Ltd", new Dictionary<int, string>{
+    })
+ },
             { 1165, Tuple.Create("Integrated Technology Express, Inc.", new Dictionary<int, string>{
 { 4453, "IT1165 Flash Controller" },
 { 4466, "Flash Drive" },
@@ -3556,6 +3771,12 @@ namespace HardwareInformation.Providers {
 { 65369, "Hdmi-CEC Bridge" },
     })
  },
+            { 1167, Tuple.Create("Eicon Tech.", new Dictionary<int, string>{
+    })
+ },
+            { 1168, Tuple.Create("United Microelectronics Corp.", new Dictionary<int, string>{
+    })
+ },
             { 1169, Tuple.Create("Capetronic", new Dictionary<int, string>{
 { 3, "Taxan Monitor Control" },
     })
@@ -3565,8 +3786,20 @@ namespace HardwareInformation.Providers {
 { 321, "MP3 Player" },
     })
  },
+            { 1171, Tuple.Create("MAG Technology Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 1173, Tuple.Create("ESS Technology, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 1174, Tuple.Create("Micron Electronics", new Dictionary<int, string>{
+    })
+ },
             { 1175, Tuple.Create("Smile International", new Dictionary<int, string>{
 { 49153, "Camera Device" },
+    })
+ },
+            { 1176, Tuple.Create("Capetronic (Kaohsiung) Corp.", new Dictionary<int, string>{
     })
  },
             { 1177, Tuple.Create("Yamaha Corp.", new Dictionary<int, string>{
@@ -3651,8 +3884,17 @@ namespace HardwareInformation.Providers {
 { 28688, "UB99" },
     })
  },
+            { 1178, Tuple.Create("Gandalf Technologies, Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 1179, Tuple.Create("Curtis Computer Products", new Dictionary<int, string>{
+    })
+ },
             { 1180, Tuple.Create("Acer Advanced Labs, Inc.", new Dictionary<int, string>{
 { 2, "Keyboard (???)" },
+    })
+ },
+            { 1181, Tuple.Create("VLSI Technology", new Dictionary<int, string>{
     })
  },
             { 1183, Tuple.Create("Compaq Computer Corp.", new Dictionary<int, string>{
@@ -3682,8 +3924,17 @@ namespace HardwareInformation.Providers {
 { 34065, "iPAQ Networking 10/100 Ethernet [pegasus2]" },
     })
  },
+            { 1184, Tuple.Create("Digital Equipment Corp.", new Dictionary<int, string>{
+    })
+ },
             { 1185, Tuple.Create("SystemSoft Corp.", new Dictionary<int, string>{
 { 65520, "Telex Composite Device" },
+    })
+ },
+            { 1186, Tuple.Create("FirePower Systems", new Dictionary<int, string>{
+    })
+ },
+            { 1187, Tuple.Create("Trident Microsystems, Inc.", new Dictionary<int, string>{
     })
  },
             { 1188, Tuple.Create("Hitachi, Ltd", new Dictionary<int, string>{
@@ -4503,8 +4754,20 @@ namespace HardwareInformation.Providers {
 { 13019, "SELPHY CP1300" },
     })
  },
+            { 1194, Tuple.Create("DaeWoo Telecom, Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 1195, Tuple.Create("Chromatic Research", new Dictionary<int, string>{
+    })
+ },
+            { 1196, Tuple.Create("Micro Audiometrics Corp.", new Dictionary<int, string>{
+    })
+ },
             { 1197, Tuple.Create("Dooin Electronics", new Dictionary<int, string>{
 { 9473, "Bluetooth Device" },
+    })
+ },
+            { 1199, Tuple.Create("Winnov L.P.", new Dictionary<int, string>{
     })
  },
             { 1200, Tuple.Create("Nikon Corp.", new Dictionary<int, string>{
@@ -4584,6 +4847,9 @@ namespace HardwareInformation.Providers {
 { 16384, "Coolscan LS 40 ED" },
 { 16385, "LS 50 ED/Coolscan V ED" },
 { 16386, "Super Coolscan LS-5000 ED" },
+    })
+ },
+            { 1201, Tuple.Create("Pan International", new Dictionary<int, string>{
     })
  },
             { 1203, Tuple.Create("IBM Corp.", new Dictionary<int, string>{
@@ -4681,6 +4947,12 @@ namespace HardwareInformation.Providers {
  },
             { 1205, Tuple.Create("ROHM LSI Systems USA, LLC", new Dictionary<int, string>{
 { 12388, "Hantek DSO-3064" },
+    })
+ },
+            { 1206, Tuple.Create("Hint Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 1207, Tuple.Create("Compal Electronics, Inc.", new Dictionary<int, string>{
     })
  },
             { 1208, Tuple.Create("Seiko Epson Corp.", new Dictionary<int, string>{
@@ -4893,6 +5165,9 @@ namespace HardwareInformation.Providers {
 { 32768, "SafeNet Sentinel Hardware Key" },
     })
  },
+            { 1210, Tuple.Create("Toucan Systems, Ltd", new Dictionary<int, string>{
+    })
+ },
             { 1211, Tuple.Create("I-O Data Device, Inc.", new Dictionary<int, string>{
 { 257, "USB2-IDE/ATAPI Bridge Adapter" },
 { 330, "HDCL-UT" },
@@ -4925,6 +5200,12 @@ namespace HardwareInformation.Providers {
 { 2567, "USB2-iCN Adapter" },
 { 2568, "USB2-iCN Adapter" },
 { 3073, "FM-10 Pro Disk" },
+    })
+ },
+            { 1213, Tuple.Create("Toshiba Electronics Taiwan Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 1214, Tuple.Create("Telia Research AB", new Dictionary<int, string>{
     })
  },
             { 1215, Tuple.Create("TDK Corp.", new Dictionary<int, string>{
@@ -4962,9 +5243,15 @@ namespace HardwareInformation.Providers {
 { 12321, "56k Voice FaxModem Pro" },
     })
  },
+            { 1218, Tuple.Create("Methode Electronics Far East PTE, Ltd", new Dictionary<int, string>{
+    })
+ },
             { 1219, Tuple.Create("Maxi Switch, Inc.", new Dictionary<int, string>{
 { 4354, "Mouse" },
 { 8450, "Mouse" },
+    })
+ },
+            { 1220, Tuple.Create("Lockheed Martin Energy Research", new Dictionary<int, string>{
     })
  },
             { 1221, Tuple.Create("Fujitsu, Ltd", new Dictionary<int, string>{
@@ -4992,6 +5279,12 @@ namespace HardwareInformation.Providers {
 { 8207, "Sigma DP2 (Mass Storage)" },
 { 8208, "Sigma DP2 (PictBridge)" },
 { 8221, "SATA 3.0 6Gbit/s Adaptor [GROOVY]" },
+    })
+ },
+            { 1222, Tuple.Create("Toshiba America Electronic Components", new Dictionary<int, string>{
+    })
+ },
+            { 1223, Tuple.Create("Micro Macro Technologies", new Dictionary<int, string>{
     })
  },
             { 1224, Tuple.Create("Konica Corp.", new Dictionary<int, string>{
@@ -5132,6 +5425,9 @@ namespace HardwareInformation.Providers {
 { 33046, "Camera" },
     })
  },
+            { 1229, Tuple.Create("Tatung Co. Of America", new Dictionary<int, string>{
+    })
+ },
             { 1230, Tuple.Create("ScanLogic Corp.", new Dictionary<int, string>{
 { 2, "SL11R-IDE IDE Bridge" },
 { 256, "USB2PRN Printer Class" },
@@ -5151,6 +5447,12 @@ namespace HardwareInformation.Providers {
 { 39200, "CS8819A2-114 Mass Storage Device" },
     })
  },
+            { 1232, Tuple.Create("Digi International", new Dictionary<int, string>{
+    })
+ },
+            { 1233, Tuple.Create("ITT Canon", new Dictionary<int, string>{
+    })
+ },
             { 1234, Tuple.Create("Altec Lansing Technologies", new Dictionary<int, string>{
 { 112, "ADA70 Speakers" },
 { 773, "Non-Compliant Audio Device" },
@@ -5159,6 +5461,18 @@ namespace HardwareInformation.Providers {
 { 65285, "ADA-305 Speakers" },
 { 65351, "Lansing HID Audio Controls" },
 { 65353, "Lansing HID Audio Controls" },
+    })
+ },
+            { 1235, Tuple.Create("VidUS, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 1236, Tuple.Create("LSI Logic, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 1237, Tuple.Create("Forte Technologies, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 1238, Tuple.Create("Mentor Graphics", new Dictionary<int, string>{
     })
  },
             { 1239, Tuple.Create("Oki Semiconductor", new Dictionary<int, string>{
@@ -5288,6 +5602,12 @@ namespace HardwareInformation.Providers {
 { 15364, "JT-P100MR-20 [ePassport Reader]" },
     })
  },
+            { 1243, Tuple.Create("Hypertec Pty, Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 1244, Tuple.Create("Huan Hsin Holdings, Ltd", new Dictionary<int, string>{
+    })
+ },
             { 1245, Tuple.Create("Sharp Corp.", new Dictionary<int, string>{
 { 5030, "MFC2000" },
 { 24582, "AL-1216" },
@@ -5342,12 +5662,27 @@ namespace HardwareInformation.Providers {
 { 37786, "IS03" },
     })
  },
+            { 1246, Tuple.Create("MindShare, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 1247, Tuple.Create("Interlink Electronics", new Dictionary<int, string>{
+    })
+ },
             { 1249, Tuple.Create("Iiyama North America, Inc.", new Dictionary<int, string>{
 { 513, "Monitor Hub" },
     })
  },
             { 1250, Tuple.Create("Exar Corp.", new Dictionary<int, string>{
 { 5136, "XR21V1410 USB-UART IC" },
+    })
+ },
+            { 1251, Tuple.Create("Zilog, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 1252, Tuple.Create("ACC Microelectronics", new Dictionary<int, string>{
+    })
+ },
+            { 1253, Tuple.Create("Promise Technology", new Dictionary<int, string>{
     })
  },
             { 1254, Tuple.Create("SCM Microsystems, Inc.", new Dictionary<int, string>{
@@ -5668,8 +6003,26 @@ namespace HardwareInformation.Providers {
 { 65328, "SG_iMON" },
     })
  },
+            { 1257, Tuple.Create("PC-Tel, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 1258, Tuple.Create("Brooktree Corp.", new Dictionary<int, string>{
+    })
+ },
             { 1259, Tuple.Create("Northstar Systems, Inc.", new Dictionary<int, string>{
 { 57348, "eHome Infrared Transceiver" },
+    })
+ },
+            { 1260, Tuple.Create("Tokyo Electron Device, Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 1261, Tuple.Create("Annabooks", new Dictionary<int, string>{
+    })
+ },
+            { 1263, Tuple.Create("Pacific Electronic International, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 1264, Tuple.Create("Daewoo Electronics Co., Ltd", new Dictionary<int, string>{
     })
  },
             { 1265, Tuple.Create("Victor Company of Japan, Ltd", new Dictionary<int, string>{
@@ -5809,6 +6162,21 @@ namespace HardwareInformation.Providers {
 { 897, "Touchscreen" },
 { 1184, "Dream Cheeky Stress/Panic Button" },
 { 8756, "Touchscreen" },
+    })
+ },
+            { 1268, Tuple.Create("Harting Elektronik, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 1269, Tuple.Create("Fujitsu-ICL Systems, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 1270, Tuple.Create("Norand Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 1271, Tuple.Create("Newnex Technology Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 1272, Tuple.Create("FuturePlus Systems", new Dictionary<int, string>{
     })
  },
             { 1273, Tuple.Create("Brother Industries, Ltd", new Dictionary<int, string>{
@@ -6358,6 +6726,9 @@ namespace HardwareInformation.Providers {
 { 16897, "DS4201 Audio DAC" },
     })
  },
+            { 1275, Tuple.Create("Biostar Microtech International Corp.", new Dictionary<int, string>{
+    })
+ },
             { 1276, Tuple.Create("Sunplus Technology Co., Ltd", new Dictionary<int, string>{
 { 3, "CM1092 / Wintech CM-5098 Optical Mouse" },
 { 5, "USB OpticalWheel Mouse" },
@@ -6398,9 +6769,15 @@ namespace HardwareInformation.Providers {
 { 6, "Happy Hacking Keyboard Lite2" },
     })
  },
+            { 1279, Tuple.Create("E-CMOS Corp.", new Dictionary<int, string>{
+    })
+ },
             { 1280, Tuple.Create("Siam United Hi-Tech", new Dictionary<int, string>{
 { 1, "DART Keyboard Mouse" },
 { 2, "DART-2 Keyboard" },
+    })
+ },
+            { 1281, Tuple.Create("Fujikura DDK, Ltd", new Dictionary<int, string>{
     })
  },
             { 1282, Tuple.Create("Acer, Inc.", new Dictionary<int, string>{
@@ -6426,6 +6803,12 @@ namespace HardwareInformation.Providers {
 { 53249, "Divio NW801/DVC-V6+ Digital Camera" },
     })
  },
+            { 1283, Tuple.Create("Hitachi America, Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 1284, Tuple.Create("Hayes Microcomputer Products", new Dictionary<int, string>{
+    })
+ },
             { 1286, Tuple.Create("3Com Corp.", new Dictionary<int, string>{
 { 157, "HomeConnect Camera" },
 { 160, "3CREB96 Bluetooth Adapter" },
@@ -6449,12 +6832,24 @@ namespace HardwareInformation.Providers {
 { 17, "Konami ParaParaParadise Controller" },
     })
  },
+            { 1288, Tuple.Create("Clarion Co., Ltd", new Dictionary<int, string>{
+    })
+ },
             { 1289, Tuple.Create("Aztech Systems, Ltd", new Dictionary<int, string>{
 { 2049, "ADSL Modem" },
 { 2050, "ADSL Modem (RFC1483)" },
 { 2054, "DSL Modem" },
 { 2063, "Binatone ADSL500 Modem Network Interface" },
 { 2066, "Pirelli ADSL Modem Network Interface" },
+    })
+ },
+            { 1290, Tuple.Create("Cinch Connectors", new Dictionary<int, string>{
+    })
+ },
+            { 1291, Tuple.Create("Cable System International", new Dictionary<int, string>{
+    })
+ },
+            { 1292, Tuple.Create("InnoMedia, Inc.", new Dictionary<int, string>{
     })
  },
             { 1293, Tuple.Create("Belkin Components", new Dictionary<int, string>{
@@ -6547,6 +6942,9 @@ namespace HardwareInformation.Providers {
 { 54049, "Dynex DX-NUSB 802.11bgn Wireless Adapter [Broadcom BCM43231]" },
     })
  },
+            { 1294, Tuple.Create("Neon Technology, Inc.", new Dictionary<int, string>{
+    })
+ },
             { 1295, Tuple.Create("KC Technology, Inc.", new Dictionary<int, string>{
 { 1, "Hub" },
 { 3, "KC82C160S Hub" },
@@ -6564,6 +6962,24 @@ namespace HardwareInformation.Providers {
 { 43, "AOC DVB" },
     })
  },
+            { 1298, Tuple.Create("Hualon Microelectronics Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 1299, Tuple.Create("digital-X, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 1300, Tuple.Create("FCI Electronics", new Dictionary<int, string>{
+    })
+ },
+            { 1301, Tuple.Create("ACTC", new Dictionary<int, string>{
+    })
+ },
+            { 1302, Tuple.Create("Longwell Electronics", new Dictionary<int, string>{
+    })
+ },
+            { 1303, Tuple.Create("Butterfly Communications", new Dictionary<int, string>{
+    })
+ },
             { 1304, Tuple.Create("EzKEY Corp.", new Dictionary<int, string>{
 { 1, "USB to PS2 Adaptor v1.09" },
 { 2, "EZ-9900C Keyboard" },
@@ -6578,6 +6994,9 @@ namespace HardwareInformation.Providers {
 { 40965, "Smart Display Version 9973" },
     })
  },
+            { 1307, Tuple.Create("Silicon Graphics", new Dictionary<int, string>{
+    })
+ },
             { 1308, Tuple.Create("Shuttle, Inc.", new Dictionary<int, string>{
 { 5, "VFD Module" },
 { 49153, "eHome Infrared Receiver" },
@@ -6588,6 +7007,27 @@ namespace HardwareInformation.Providers {
 { 1, "UPS" },
 { 2, "Uninterruptible Power Supply" },
 { 3, "UPS" },
+    })
+ },
+            { 1310, Tuple.Create("Scientific Atlanta, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 1311, Tuple.Create("IO Systems (Elite Electronics), Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 1312, Tuple.Create("Taiwan Semiconductor Manufacturing Co.", new Dictionary<int, string>{
+    })
+ },
+            { 1313, Tuple.Create("Airborn Connectors", new Dictionary<int, string>{
+    })
+ },
+            { 1314, Tuple.Create("Advanced Connectek, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 1315, Tuple.Create("ATEN GmbH", new Dictionary<int, string>{
+    })
+ },
+            { 1316, Tuple.Create("Sola Electronics", new Dictionary<int, string>{
     })
  },
             { 1317, Tuple.Create("Netchip Technology, Inc.", new Dictionary<int, string>{
@@ -6611,6 +7051,12 @@ namespace HardwareInformation.Providers {
 { 42152, "Linux-USB Printer Gadget" },
 { 42153, "Linux-USB OBEX Gadget" },
 { 42154, "Linux-USB CDC Composite Gadge (Ethernet and ACM)" },
+    })
+ },
+            { 1318, Tuple.Create("Temic MHS S.A.", new Dictionary<int, string>{
+    })
+ },
+            { 1319, Tuple.Create("ALTRA", new Dictionary<int, string>{
     })
  },
             { 1320, Tuple.Create("ATI Technologies, Inc.", new Dictionary<int, string>{
@@ -6642,6 +7088,9 @@ namespace HardwareInformation.Providers {
 { 1568, "Token JC" },
     })
  },
+            { 1322, Tuple.Create("Crescent Heart Software", new Dictionary<int, string>{
+    })
+ },
             { 1323, Tuple.Create("Tekom Technologies, Inc.", new Dictionary<int, string>{
 { 258, "Ca508A HP1020 Camera v.1.3.1.6" },
 { 2049, "Yakumo MegaImage 37" },
@@ -6656,8 +7105,47 @@ namespace HardwareInformation.Providers {
 { 53249, "P35U Camera Capture" },
     })
  },
+            { 1324, Tuple.Create("Canon Information Systems, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 1325, Tuple.Create("Avid Electronics Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 1326, Tuple.Create("Standard Microsystems Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 1327, Tuple.Create("Unicore Software, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 1328, Tuple.Create("American Microsystems, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 1329, Tuple.Create("Wacom Technology Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 1330, Tuple.Create("Systech Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 1331, Tuple.Create("Alcatel Mobile Phones", new Dictionary<int, string>{
+    })
+ },
+            { 1332, Tuple.Create("Motorola, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 1333, Tuple.Create("LIH TZU Electric Co., Ltd", new Dictionary<int, string>{
+    })
+ },
             { 1334, Tuple.Create("Hand Held Products (Welch Allyn, Inc.)", new Dictionary<int, string>{
 { 416, "PDT" },
+    })
+ },
+            { 1335, Tuple.Create("Inventec Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 1336, Tuple.Create("Caldera International, Inc. (SCO)", new Dictionary<int, string>{
+    })
+ },
+            { 1337, Tuple.Create("Shyh Shiun Terminals Co., Ltd", new Dictionary<int, string>{
     })
  },
             { 1338, Tuple.Create("PrehKeyTec GmbH", new Dictionary<int, string>{
@@ -6665,8 +7153,26 @@ namespace HardwareInformation.Providers {
 { 2817, "Preh MCI 3100" },
     })
  },
+            { 1339, Tuple.Create("Global Village Communication", new Dictionary<int, string>{
+    })
+ },
+            { 1340, Tuple.Create("Institut of Microelectronic & Mechatronic Systems", new Dictionary<int, string>{
+    })
+ },
+            { 1341, Tuple.Create("Silicon Architect", new Dictionary<int, string>{
+    })
+ },
+            { 1342, Tuple.Create("Mobility Electronics", new Dictionary<int, string>{
+    })
+ },
+            { 1343, Tuple.Create("Synopsys, Inc.", new Dictionary<int, string>{
+    })
+ },
             { 1344, Tuple.Create("UniAccess AB", new Dictionary<int, string>{
 { 257, "Panache Surf ISDN TA" },
+    })
+ },
+            { 1345, Tuple.Create("Sirf Technology, Inc.", new Dictionary<int, string>{
     })
  },
             { 1347, Tuple.Create("ViewSonic Corp.", new Dictionary<int, string>{
@@ -6686,6 +7192,9 @@ namespace HardwareInformation.Providers {
 { 6673, "Wireless 802.11g Adapter" },
 { 7776, "TA310 - ATSC/NTSC/PAL Driver(PCM4)" },
 { 16723, "ViewSonic G773 Control (?)" },
+    })
+ },
+            { 1348, Tuple.Create("Cristie Electronics, Ltd", new Dictionary<int, string>{
     })
  },
             { 1349, Tuple.Create("Xirlink, Inc.", new Dictionary<int, string>{
@@ -6745,6 +7254,15 @@ namespace HardwareInformation.Providers {
  },
             { 1352, Tuple.Create("Tyan Computer Corp.", new Dictionary<int, string>{
 { 4101, "EZ Cart II GameBoy Flash Programmer" },
+    })
+ },
+            { 1353, Tuple.Create("Pixera Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 1354, Tuple.Create("Fujitsu Microelectronics, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 1355, Tuple.Create("New Media Corp.", new Dictionary<int, string>{
     })
  },
             { 1356, Tuple.Create("Sony Corp.", new Dictionary<int, string>{
@@ -6957,6 +7475,15 @@ namespace HardwareInformation.Providers {
 { 4096, "Wireless Buzz! Receiver" },
     })
  },
+            { 1357, Tuple.Create("Try Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 1358, Tuple.Create("Proside Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 1359, Tuple.Create("WYSE Technology Taiwan", new Dictionary<int, string>{
+    })
+ },
             { 1360, Tuple.Create("Fuji Xerox Co., Ltd", new Dictionary<int, string>{
 { 2, "InkJet Color Printer" },
 { 4, "InkJet Color Printer" },
@@ -6964,6 +7491,12 @@ namespace HardwareInformation.Providers {
 { 11, "Workcentre 24" },
 { 334, "CM215b Printer" },
 { 357, "DocuPrint M215b" },
+    })
+ },
+            { 1361, Tuple.Create("CompuTrend Systems, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 1362, Tuple.Create("Philips Monitors", new Dictionary<int, string>{
     })
  },
             { 1363, Tuple.Create("STMicroelectronics Imaging Division (VLSI Vision)", new Dictionary<int, string>{
@@ -6979,6 +7512,12 @@ namespace HardwareInformation.Providers {
 { 1652, "Multi-mode Camera" },
 { 1657, "NMS Video Camera (Webcam)" },
 { 4098, "Che-ez! Splash" },
+    })
+ },
+            { 1364, Tuple.Create("Dictaphone Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 1365, Tuple.Create("ANAM S&T Co., Ltd", new Dictionary<int, string>{
     })
  },
             { 1366, Tuple.Create("Asahi Kasei Microsystems Co., Ltd", new Dictionary<int, string>{
@@ -7013,6 +7552,18 @@ namespace HardwareInformation.Providers {
 { 8201, "GW Instek GDS-2000 Oscilloscope" },
     })
  },
+            { 1369, Tuple.Create("Cadence Design Systems, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 1370, Tuple.Create("Kenwood USA", new Dictionary<int, string>{
+    })
+ },
+            { 1371, Tuple.Create("KnowledgeTek, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 1372, Tuple.Create("Proton Electronic Ind.", new Dictionary<int, string>{
+    })
+ },
             { 1373, Tuple.Create("Samsung Electro-Mechanics Co.", new Dictionary<int, string>{
 { 1, "Keyboard" },
 { 2993, "Bluetooth Device" },
@@ -7036,6 +7587,9 @@ namespace HardwareInformation.Providers {
 { 45056, "11Mbps WLAN Mini Adapter" },
 { 45616, "Netopia 802.11b WLAN Adapter" },
 { 45617, "LG Wireless LAN 11b Adapter" },
+    })
+ },
+            { 1374, Tuple.Create("CTX Opto-Electronics Corp.", new Dictionary<int, string>{
     })
  },
             { 1375, Tuple.Create("Mustek Systems, Inc.", new Dictionary<int, string>{
@@ -7087,9 +7641,21 @@ namespace HardwareInformation.Providers {
 { 53252, "WCam 300AN" },
     })
  },
+            { 1376, Tuple.Create("Interface Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 1377, Tuple.Create("Oasis Design, Inc.", new Dictionary<int, string>{
+    })
+ },
             { 1378, Tuple.Create("Telex Communications, Inc.", new Dictionary<int, string>{
 { 1, "Enhanced Microphone" },
 { 2, "Telex Microphone" },
+    })
+ },
+            { 1379, Tuple.Create("Immersion Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 1380, Tuple.Create("Kodak Digital Product Center, Japan Ltd. (formerly Chinon Industries Inc.)", new Dictionary<int, string>{
     })
  },
             { 1381, Tuple.Create("Peracom Networks, Inc.", new Dictionary<int, string>{
@@ -7120,6 +7686,15 @@ namespace HardwareInformation.Providers {
 { 12551, "Keyboard" },
 { 12594, "Optical mouse M-DY4DR / M-DY6DR" },
 { 16390, "FID 638 Mouse (Sun Microsystems)" },
+    })
+ },
+            { 1383, Tuple.Create("Xyratex International, Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 1384, Tuple.Create("Quartz Ingenierie", new Dictionary<int, string>{
+    })
+ },
+            { 1385, Tuple.Create("SegaSoft", new Dictionary<int, string>{
     })
  },
             { 1386, Tuple.Create("Wacom Co., Ltd", new Dictionary<int, string>{
@@ -7322,6 +7897,9 @@ namespace HardwareInformation.Providers {
 { 20496, "TPC5010" },
     })
  },
+            { 1387, Tuple.Create("Decicon, Inc.", new Dictionary<int, string>{
+    })
+ },
             { 1388, Tuple.Create("eTEK Labs", new Dictionary<int, string>{
 { 6, "KwikLink Host-Host Connector" },
 { 32775, "Kwik232 Serial Port" },
@@ -7466,6 +8044,9 @@ namespace HardwareInformation.Providers {
 { 52480, "CDM-751 CD organizer" },
     })
  },
+            { 1392, Tuple.Create("Epson America", new Dictionary<int, string>{
+    })
+ },
             { 1393, Tuple.Create("Interex, Inc.", new Dictionary<int, string>{
 { 2, "echoFX InterView Lite" },
     })
@@ -7565,6 +8146,27 @@ namespace HardwareInformation.Providers {
 { 19768, "Hauppauge WinTV Pro (NTSC FM)" },
     })
  },
+            { 1396, Tuple.Create("City University of Hong Kong", new Dictionary<int, string>{
+    })
+ },
+            { 1397, Tuple.Create("Philips Creative Display Solutions", new Dictionary<int, string>{
+    })
+ },
+            { 1398, Tuple.Create("BAFO/Quality Computer Accessories", new Dictionary<int, string>{
+    })
+ },
+            { 1399, Tuple.Create("ELSA", new Dictionary<int, string>{
+    })
+ },
+            { 1400, Tuple.Create("Intrinsix Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 1401, Tuple.Create("GVC Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 1402, Tuple.Create("Samsung Electronics America", new Dictionary<int, string>{
+    })
+ },
             { 1403, Tuple.Create("Y-E Data, Inc.", new Dictionary<int, string>{
 { 0, "FlashBuster-U Floppy" },
 { 1, "Tri-Media Reader Floppy" },
@@ -7609,6 +8211,9 @@ namespace HardwareInformation.Providers {
 { 34049, "FRITZ WLAN N v2 [RT5572/rt2870.bin]" },
     })
  },
+            { 1405, Tuple.Create("Shark Multimedia, Inc.", new Dictionary<int, string>{
+    })
+ },
             { 1406, Tuple.Create("Nintendo Co., Ltd", new Dictionary<int, string>{
 { 768, "USB-EXI Adapter (GCP-2000)" },
 { 772, "RVT-H Reader" },
@@ -7625,6 +8230,9 @@ namespace HardwareInformation.Providers {
  },
             { 1407, Tuple.Create("QuickShot, Ltd", new Dictionary<int, string>{
 { 25144, "USB StrikePad" },
+    })
+ },
+            { 1408, Tuple.Create("Denron, Inc.", new Dictionary<int, string>{
     })
  },
             { 1409, Tuple.Create("Racal Data Group", new Dictionary<int, string>{
@@ -7930,6 +8538,18 @@ namespace HardwareInformation.Providers {
 { 13374, "N220 802.11bgn Wireless Adapter" },
     })
  },
+            { 1415, Tuple.Create("America Kotobuki Electronics Industries, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 1416, Tuple.Create("Sapien Design", new Dictionary<int, string>{
+    })
+ },
+            { 1417, Tuple.Create("Victron", new Dictionary<int, string>{
+    })
+ },
+            { 1418, Tuple.Create("Nohau Corp.", new Dictionary<int, string>{
+    })
+ },
             { 1419, Tuple.Create("Infineon Technologies", new Dictionary<int, string>{
 { 21, "Flash Loader utility" },
 { 28, "Flash Drive" },
@@ -7958,6 +8578,12 @@ namespace HardwareInformation.Providers {
 { 31, "Projector" },
 { 65509, "IN34 Projector" },
 { 65515, "Projector IN76" },
+    })
+ },
+            { 1421, Tuple.Create("Micrel Semiconductor", new Dictionary<int, string>{
+    })
+ },
+            { 1422, Tuple.Create("Tripath Technology, Inc.", new Dictionary<int, string>{
     })
  },
             { 1423, Tuple.Create("Alcor Micro Corp.", new Dictionary<int, string>{
@@ -8016,8 +8642,17 @@ namespace HardwareInformation.Providers {
 { 81, "FT232BM [E58CIFQ1 with FTDI USB2Serial Converter]" },
     })
  },
+            { 1425, Tuple.Create("Questra Consulting", new Dictionary<int, string>{
+    })
+ },
             { 1426, Tuple.Create("Powerware Corp.", new Dictionary<int, string>{
 { 2, "UPS (X-Slot)" },
+    })
+ },
+            { 1427, Tuple.Create("Incite", new Dictionary<int, string>{
+    })
+ },
+            { 1428, Tuple.Create("Princeton Graphic Systems", new Dictionary<int, string>{
     })
  },
             { 1429, Tuple.Create("Zoran Microelectronics, Ltd", new Dictionary<int, string>{
@@ -8031,6 +8666,18 @@ namespace HardwareInformation.Providers {
 { 2, "Touch Screen Controller" },
 { 1280, "PCT Multitouch HID Controller" },
 { 1347, "DELL XPS touchscreen" },
+    })
+ },
+            { 1431, Tuple.Create("Trisignal Communications", new Dictionary<int, string>{
+    })
+ },
+            { 1432, Tuple.Create("Niigata Canotec Co., Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 1433, Tuple.Create("Brilliance Semiconductor, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 1434, Tuple.Create("Spectrum Signal Processing, Inc.", new Dictionary<int, string>{
     })
  },
             { 1435, Tuple.Create("Iomega Corp.", new Dictionary<int, string>{
@@ -8081,6 +8728,15 @@ namespace HardwareInformation.Providers {
 { 4178, "DVD+RW External Drive" },
     })
  },
+            { 1436, Tuple.Create("A-Trend Technology Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 1437, Tuple.Create("Advanced Input Devices", new Dictionary<int, string>{
+    })
+ },
+            { 1438, Tuple.Create("Intelligent Instrumentation", new Dictionary<int, string>{
+    })
+ },
             { 1439, Tuple.Create("LaCie, Ltd", new Dictionary<int, string>{
 { 513, "StudioDrive USB2" },
 { 514, "StudioDrive USB2" },
@@ -8118,6 +8774,15 @@ namespace HardwareInformation.Providers {
 { 42498, "CD R/W" },
     })
  },
+            { 1440, Tuple.Create("Vetronix Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 1441, Tuple.Create("USC Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 1442, Tuple.Create("Fuji Film Microdevices Co., Ltd", new Dictionary<int, string>{
+    })
+ },
             { 1443, Tuple.Create("ARC International", new Dictionary<int, string>{
 { 33672, "Marvell 88W8388 802.11a/b/g WLAN" },
 { 37424, "Camera" },
@@ -8137,6 +8802,9 @@ namespace HardwareInformation.Providers {
 { 38967, "Targus Number Keypad" },
 { 39010, "Targus Number Keypad (Composite Device)" },
 { 39041, "IR receiver [VRC-1100 Vista MCE Remote Control]" },
+    })
+ },
+            { 1445, Tuple.Create("Sampo Technology Corp.", new Dictionary<int, string>{
     })
  },
             { 1446, Tuple.Create("Cisco Systems, Inc.", new Dictionary<int, string>{
@@ -8162,6 +8830,9 @@ namespace HardwareInformation.Providers {
 { 48209, "SoundLink Wireless Mobile speaker in DFU mode" },
     })
  },
+            { 1448, Tuple.Create("Spacetec IMC Corp.", new Dictionary<int, string>{
+    })
+ },
             { 1449, Tuple.Create("OmniVision Technologies, Inc.", new Dictionary<int, string>{
 { 1297, "OV511 Webcam" },
 { 1304, "OV518 Webcam" },
@@ -8178,6 +8849,9 @@ namespace HardwareInformation.Providers {
 { 34073, "OV519 Webcam" },
 { 42257, "OV511+ Webcam" },
 { 42264, "D-Link DSB-C310 Webcam" },
+    })
+ },
+            { 1450, Tuple.Create("Utilux South China, Ltd", new Dictionary<int, string>{
     })
  },
             { 1451, Tuple.Create("In-System Design", new Dictionary<int, string>{
@@ -8399,6 +9073,12 @@ namespace HardwareInformation.Providers {
 { 65535, "Bluetooth in DFU mode - Driver" },
     })
  },
+            { 1453, Tuple.Create("Y.C. Cable U.S.A., Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 1454, Tuple.Create("Synopsys, Inc.", new Dictionary<int, string>{
+    })
+ },
             { 1455, Tuple.Create("Jing-Mold Enterprise Co., Ltd", new Dictionary<int, string>{
 { 2054, "HP SK806A Keyboard" },
 { 2057, "Wireless Keyboard and Mouse" },
@@ -8406,6 +9086,9 @@ namespace HardwareInformation.Providers {
 { 12386, "Cordless Keyboard" },
 { 37223, "KB 9151B - 678" },
 { 37479, "KB 9251B - 678 Mouse" },
+    })
+ },
+            { 1456, Tuple.Create("Fountain Technologies, Inc.", new Dictionary<int, string>{
     })
  },
             { 1457, Tuple.Create("First International Computer, Inc.", new Dictionary<int, string>{
@@ -8417,10 +9100,22 @@ namespace HardwareInformation.Providers {
 { 24577, "HYUNDAI GDS30C6001 SSFDC / MMC I/F Controller" },
     })
  },
+            { 1461, Tuple.Create("Dialogic Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 1462, Tuple.Create("Proxima Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 1463, Tuple.Create("Medianix Semiconductor, Inc.", new Dictionary<int, string>{
+    })
+ },
             { 1464, Tuple.Create("SYSGRATION", new Dictionary<int, string>{
 { 12290, "Scroll Mouse" },
 { 12582, "APT-905 Wireless presenter" },
 { 12835, "ISY Wireless Presenter" },
+    })
+ },
+            { 1465, Tuple.Create("Philips Research Laboratories", new Dictionary<int, string>{
     })
  },
             { 1466, Tuple.Create("DigitalPersona, Inc.", new Dictionary<int, string>{
@@ -8429,8 +9124,29 @@ namespace HardwareInformation.Providers {
 { 10, "Fingerprint Reader" },
     })
  },
+            { 1467, Tuple.Create("Grey Cell Systems", new Dictionary<int, string>{
+    })
+ },
             { 1468, Tuple.Create("3G Green Green Globe Co., Ltd", new Dictionary<int, string>{
 { 4, "Trackball" },
+    })
+ },
+            { 1469, Tuple.Create("RAFI GmbH & Co. KG", new Dictionary<int, string>{
+    })
+ },
+            { 1470, Tuple.Create("Tyco Electronics (Raychem)", new Dictionary<int, string>{
+    })
+ },
+            { 1471, Tuple.Create("S & S Research", new Dictionary<int, string>{
+    })
+ },
+            { 1472, Tuple.Create("Keil Software", new Dictionary<int, string>{
+    })
+ },
+            { 1473, Tuple.Create("Kawasaki Microelectronics, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 1474, Tuple.Create("Media Phonics (Suisse) S.A.", new Dictionary<int, string>{
     })
  },
             { 1477, Tuple.Create("Digi International, Inc.", new Dictionary<int, string>{
@@ -8515,6 +9231,9 @@ namespace HardwareInformation.Providers {
 { 1051, "HP 2.0MP High Definition Webcam" },
     })
  },
+            { 1481, Tuple.Create("Semtech Corp.", new Dictionary<int, string>{
+    })
+ },
             { 1482, Tuple.Create("Ricoh Co., Ltd", new Dictionary<int, string>{
 { 257, "RDC-5300 Camera" },
 { 805, "Caplio GX (ptp)" },
@@ -8591,8 +9310,32 @@ namespace HardwareInformation.Providers {
 { 13155, "MicroLink ADSL Fun" },
     })
  },
+            { 1485, Tuple.Create("Silicom, Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 1486, Tuple.Create("sci-worx GmbH", new Dictionary<int, string>{
+    })
+ },
+            { 1487, Tuple.Create("Sung Forn Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 1488, Tuple.Create("GE Medical Systems Lunar", new Dictionary<int, string>{
+    })
+ },
             { 1489, Tuple.Create("Brainboxes, Ltd", new Dictionary<int, string>{
 { 3, "Bluetooth Adapter BL-554" },
+    })
+ },
+            { 1490, Tuple.Create("Wave Systems Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 1491, Tuple.Create("Tohoku Ricoh Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 1493, Tuple.Create("Super Gate Technology Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 1494, Tuple.Create("Philips Semiconductors, CICT", new Dictionary<int, string>{
     })
  },
             { 1495, Tuple.Create("Thomas & Betts Corp.", new Dictionary<int, string>{
@@ -8826,6 +9569,9 @@ namespace HardwareInformation.Providers {
 { 65425, "2Wire PC Port Phoneline 10Mbps Adapter" },
     })
  },
+            { 1503, Tuple.Create("Silicon Vision, Inc.", new Dictionary<int, string>{
+    })
+ },
             { 1504, Tuple.Create("Symbol Technologies", new Dictionary<int, string>{
 { 1792, "Bar Code Scanner (CS1504)" },
 { 2048, "Spectrum24 Wireless LAN Adapter" },
@@ -8846,6 +9592,9 @@ namespace HardwareInformation.Providers {
 { 2197, "STK016 Camera" },
 { 2198, "STK017 Camera" },
 { 8208, "ARCTIC Sound P261 Headphones" },
+    })
+ },
+            { 1506, Tuple.Create("ElecVision, Inc.", new Dictionary<int, string>{
     })
  },
             { 1507, Tuple.Create("Genesys Logic, Inc.", new Dictionary<int, string>{
@@ -8929,6 +9678,18 @@ namespace HardwareInformation.Providers {
 { 65024, "Razer Mouse" },
     })
  },
+            { 1508, Tuple.Create("Red Wing Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 1509, Tuple.Create("Fuji Electric Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 1510, Tuple.Create("Keithley Instruments", new Dictionary<int, string>{
+    })
+ },
+            { 1512, Tuple.Create("ICC, Inc.", new Dictionary<int, string>{
+    })
+ },
             { 1513, Tuple.Create("Kawasaki LSI", new Dictionary<int, string>{
 { 8, "KL5KUSB101B Ethernet [klsi]" },
 { 9, "Sony 10Mbps Ethernet [pegasus]" },
@@ -8939,6 +9700,15 @@ namespace HardwareInformation.Providers {
 { 8200, "Ethernet Adapter" },
     })
  },
+            { 1515, Tuple.Create("FFC, Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 1516, Tuple.Create("COM21, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 1518, Tuple.Create("Cytechinfo Inc.", new Dictionary<int, string>{
+    })
+ },
             { 1519, Tuple.Create("AVB, Inc. [anko?]", new Dictionary<int, string>{
 { 522, "Top Shot Pegasus Joystick" },
 { 34948, "Mag Turbo Force Wheel" },
@@ -8947,6 +9717,9 @@ namespace HardwareInformation.Providers {
  },
             { 1520, Tuple.Create("Canopus Co., Ltd", new Dictionary<int, string>{
 { 257, "DA-Port DAC" },
+    })
+ },
+            { 1521, Tuple.Create("Compass Communications", new Dictionary<int, string>{
     })
  },
             { 1522, Tuple.Create("Dexin Corp., Ltd", new Dictionary<int, string>{
@@ -8962,6 +9735,15 @@ namespace HardwareInformation.Providers {
 { 562, "X-Keys Switch Interface, Programming Mode" },
 { 609, "X-Keys Switch Interface, SPLAT Mode" },
 { 612, "X-Keys Switch Interface, Composite Mode" },
+    })
+ },
+            { 1525, Tuple.Create("Unixtar Technology, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 1526, Tuple.Create("AOC International", new Dictionary<int, string>{
+    })
+ },
+            { 1527, Tuple.Create("RFC Distribution(s) PTE, Ltd", new Dictionary<int, string>{
     })
  },
             { 1529, Tuple.Create("PSC Scanning, Inc.", new Dictionary<int, string>{
@@ -9016,6 +9798,12 @@ namespace HardwareInformation.Providers {
 { 12337, "Controller" },
     })
  },
+            { 1535, Tuple.Create("LeCroy Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 1536, Tuple.Create("Barco Display Systems", new Dictionary<int, string>{
+    })
+ },
             { 1537, Tuple.Create("Jazz Hipster Corp.", new Dictionary<int, string>{
 { 3, "Internet Security Co., Ltd. SecureKey" },
     })
@@ -9032,11 +9820,29 @@ namespace HardwareInformation.Providers {
 { 34321, "NTK96550 based camera" },
     })
  },
+            { 1540, Tuple.Create("Jean Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 1541, Tuple.Create("Anchor C&C Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 1542, Tuple.Create("Royal Information Electronics Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 1543, Tuple.Create("Bridge Information Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 1544, Tuple.Create("Genrad Ads", new Dictionary<int, string>{
+    })
+ },
             { 1545, Tuple.Create("SMK Manufacturing, Inc.", new Dictionary<int, string>{
 { 797, "eHome Infrared Receiver" },
 { 802, "eHome Infrared Receiver" },
 { 820, "eHome Infrared Receiver" },
 { 65298, "SMK Bluetooth Device" },
+    })
+ },
+            { 1546, Tuple.Create("Worthington Data Solutions, Inc.", new Dictionary<int, string>{
     })
  },
             { 1547, Tuple.Create("Solid Year", new Dictionary<int, string>{
@@ -9057,6 +9863,36 @@ namespace HardwareInformation.Providers {
 { 25137, "Thermaltake eSPORTS Meka Keyboard" },
 { 32775, "P-W1G1F12 VER:1 [Macally MegaCam]" },
 { 40961, "Maxwell Compact Pc PM3" },
+    })
+ },
+            { 1548, Tuple.Create("EEH Datalink GmbH", new Dictionary<int, string>{
+    })
+ },
+            { 1549, Tuple.Create("Auctor Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 1550, Tuple.Create("Transmonde Technologies, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 1551, Tuple.Create("Joinsoon Electronics Mfg. Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 1552, Tuple.Create("Costar Electronics, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 1553, Tuple.Create("Totoku Electric Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 1555, Tuple.Create("TransAct Technologies, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 1556, Tuple.Create("Bio-Rad Laboratories", new Dictionary<int, string>{
+    })
+ },
+            { 1557, Tuple.Create("Quabbin Wire & Cable Co., Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 1558, Tuple.Create("Future Techno Designs PVT, Ltd", new Dictionary<int, string>{
     })
  },
             { 1559, Tuple.Create("Swiss Federal Insitute of Technology", new Dictionary<int, string>{
@@ -9085,6 +9921,12 @@ namespace HardwareInformation.Providers {
 { 37376, "VKI-B Fingerprint Sensor/Flash Storage (smart)" },
     })
  },
+            { 1563, Tuple.Create("Promptus Communications, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 1564, Tuple.Create("Act Labs, Ltd", new Dictionary<int, string>{
+    })
+ },
             { 1565, Tuple.Create("Quatech, Inc.", new Dictionary<int, string>{
 { 49184, "SSU-100" },
     })
@@ -9101,6 +9943,15 @@ namespace HardwareInformation.Providers {
 { 11, "QuickVideo weeCam" },
     })
  },
+            { 1569, Tuple.Create("ODU-Steckverbindungssysteme GmbH & Co. KG", new Dictionary<int, string>{
+    })
+ },
+            { 1570, Tuple.Create("Iotech, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 1571, Tuple.Create("Littelfuse, Inc.", new Dictionary<int, string>{
+    })
+ },
             { 1572, Tuple.Create("Avocent Corp.", new Dictionary<int, string>{
 { 19, "SC Secure KVM" },
 { 584, "Virtual Hub" },
@@ -9111,6 +9962,21 @@ namespace HardwareInformation.Providers {
 { 1026, "Cisco Virtual Keyboard and Mouse" },
 { 1027, "Cisco Virtual Mass Storage" },
 { 6004, "Cybex SC985" },
+    })
+ },
+            { 1573, Tuple.Create("TiMedia Technology Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 1574, Tuple.Create("Nippon Systems Development Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 1575, Tuple.Create("Adomax Technology Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 1576, Tuple.Create("Tasking Software, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 1577, Tuple.Create("Zida Technologies, Ltd", new Dictionary<int, string>{
     })
  },
             { 1578, Tuple.Create("MosArt Semiconductor Corp.", new Dictionary<int, string>{
@@ -9132,8 +9998,32 @@ namespace HardwareInformation.Providers {
 { 36868, "USR9602 USB Internet Mini Phone" },
     })
  },
+            { 1579, Tuple.Create("Greatlink Electronics Taiwan, Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 1580, Tuple.Create("Institute for Information Industry", new Dictionary<int, string>{
+    })
+ },
+            { 1581, Tuple.Create("Taiwan Tai-Hao Enterprises Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 1582, Tuple.Create("Mainsuper Enterprises Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 1583, Tuple.Create("Sin Sheng Terminal & Machine, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 1585, Tuple.Create("JUJO Electronics Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 1587, Tuple.Create("Cyrix Corp.", new Dictionary<int, string>{
+    })
+ },
             { 1588, Tuple.Create("Micron Technology, Inc.", new Dictionary<int, string>{
 { 1621, "Embedded Mass Storage Drive [RealSSD]" },
+    })
+ },
+            { 1589, Tuple.Create("Methode Electronics, Inc.", new Dictionary<int, string>{
     })
  },
             { 1590, Tuple.Create("Sierra Imaging, Inc.", new Dictionary<int, string>{
@@ -9154,8 +10044,35 @@ namespace HardwareInformation.Providers {
 { 16388, "Minolta Dimage Scan Elite II AF-2920 (2888)" },
     })
  },
+            { 1593, Tuple.Create("Chrontel, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 1594, Tuple.Create("Techwin Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 1595, Tuple.Create("Taugagreining HF", new Dictionary<int, string>{
+    })
+ },
+            { 1596, Tuple.Create("Yamaichi Electronics Co., Ltd (Sakura)", new Dictionary<int, string>{
+    })
+ },
+            { 1597, Tuple.Create("Fong Kai Industrial Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 1598, Tuple.Create("RealMedia Technology, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 1599, Tuple.Create("New Technology Cable, Ltd", new Dictionary<int, string>{
+    })
+ },
             { 1600, Tuple.Create("Hitex Development Tools", new Dictionary<int, string>{
 { 38, "LPC-Stick" },
+    })
+ },
+            { 1601, Tuple.Create("Woods Industries, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 1602, Tuple.Create("VIA Medical Corp.", new Dictionary<int, string>{
     })
  },
             { 1604, Tuple.Create("TEAC Corp.", new Dictionary<int, string>{
@@ -9171,6 +10088,12 @@ namespace HardwareInformation.Providers {
 { 53264, "CD-RW/DVD Unit" },
     })
  },
+            { 1605, Tuple.Create("Who? Vision Systems, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 1606, Tuple.Create("UMAX", new Dictionary<int, string>{
+    })
+ },
             { 1607, Tuple.Create("Acton Research Corp.", new Dictionary<int, string>{
 { 256, "ARC SpectraPro UV/VIS/IR Monochromator/Spectrograph" },
 { 257, "ARC AM-VM Mono Airpath/Vacuum Monochromator/Spectrograph" },
@@ -9182,8 +10105,20 @@ namespace HardwareInformation.Providers {
 { 1004, "Inspectrum 256x1024 B VIS Spectrograph" },
     })
  },
+            { 1608, Tuple.Create("Inside Out Networks", new Dictionary<int, string>{
+    })
+ },
+            { 1609, Tuple.Create("Weli Science Co., Ltd", new Dictionary<int, string>{
+    })
+ },
             { 1611, Tuple.Create("Analog Devices, Inc. (White Mountain DSP)", new Dictionary<int, string>{
 { 357, "Blackfin 535 [ADZS HPUSB ICE]" },
+    })
+ },
+            { 1612, Tuple.Create("Ji-Haw Industrial Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 1613, Tuple.Create("TriTech Microelectronics, Ltd", new Dictionary<int, string>{
     })
  },
             { 1614, Tuple.Create("Suyin Corp.", new Dictionary<int, string>{
@@ -9227,6 +10162,18 @@ namespace HardwareInformation.Providers {
 { 21011, "CmStick/M (COMPOSITE, article no. 1011-xx-xxx)" },
     })
  },
+            { 1616, Tuple.Create("Dynapro Systems", new Dictionary<int, string>{
+    })
+ },
+            { 1617, Tuple.Create("Likom Technology Sdn. Bhd.", new Dictionary<int, string>{
+    })
+ },
+            { 1618, Tuple.Create("Stargate Solutions, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 1619, Tuple.Create("CNF, Inc.", new Dictionary<int, string>{
+    })
+ },
             { 1620, Tuple.Create("Granite Microsystems, Inc.", new Dictionary<int, string>{
 { 5, "Device Bay Controller" },
 { 6, "Hub" },
@@ -9234,13 +10181,43 @@ namespace HardwareInformation.Providers {
 { 22, "Hub" },
     })
  },
+            { 1621, Tuple.Create("Space Shuttle Hi-Tech Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 1622, Tuple.Create("Glory Mark Electronic, Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 1623, Tuple.Create("Tekcon Electronics Corp.", new Dictionary<int, string>{
+    })
+ },
             { 1624, Tuple.Create("Sigma Designs, Inc.", new Dictionary<int, string>{
 { 512, "Aeotec Z-Stick Gen5 (ZW090) - UZB" },
+    })
+ },
+            { 1625, Tuple.Create("Aethra", new Dictionary<int, string>{
     })
  },
             { 1626, Tuple.Create("Optoelectronics Co., Ltd", new Dictionary<int, string>{
 { 1, "Opticon OPR-2001 / NLV-1001 (keyboard mode)" },
 { 9, "NLV-1001 (serial mode) / OPN-2001 [Opticon]" },
+    })
+ },
+            { 1627, Tuple.Create("Tracewell Systems", new Dictionary<int, string>{
+    })
+ },
+            { 1630, Tuple.Create("Silicon Graphics", new Dictionary<int, string>{
+    })
+ },
+            { 1631, Tuple.Create("Good Way Technology Co., Ltd & GWC technology Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 1632, Tuple.Create("TSAY-E (BVI) International, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 1633, Tuple.Create("Hamamatsu Photonics K.K.", new Dictionary<int, string>{
+    })
+ },
+            { 1634, Tuple.Create("Kansai Electric Co., Ltd", new Dictionary<int, string>{
     })
  },
             { 1635, Tuple.Create("Topmax Electronic Co., Ltd", new Dictionary<int, string>{
@@ -9266,6 +10243,15 @@ namespace HardwareInformation.Providers {
 { 4001, "TD-U8000 Tape Drive" },
     })
  },
+            { 1640, Tuple.Create("WordWand", new Dictionary<int, string>{
+    })
+ },
+            { 1641, Tuple.Create("Oce' Printing Systems GmbH", new Dictionary<int, string>{
+    })
+ },
+            { 1642, Tuple.Create("Total Technologies, Ltd", new Dictionary<int, string>{
+    })
+ },
             { 1643, Tuple.Create("Linksys, Inc.", new Dictionary<int, string>{
 { 261, "SCM eUSB SmartMedia Card Reader" },
 { 266, "Melco MCR-U2 SmartMedia / CompactFlash Reader" },
@@ -9280,6 +10266,12 @@ namespace HardwareInformation.Providers {
 { 8723, "WUSB12v1.1 802.11b Adapter" },
 { 8729, "Instant Wireless Network Adapter" },
 { 16395, "USB10TX" },
+    })
+ },
+            { 1645, Tuple.Create("Entrega, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 1646, Tuple.Create("Acer Semiconductor America, Inc.", new Dictionary<int, string>{
     })
  },
             { 1647, Tuple.Create("SigmaTel, Inc.", new Dictionary<int, string>{
@@ -9408,6 +10400,9 @@ namespace HardwareInformation.Providers {
 { 20480, "Keyboard" },
     })
  },
+            { 1652, Tuple.Create("Key Mouse Electronic Enterprise Co., Ltd", new Dictionary<int, string>{
+    })
+ },
             { 1653, Tuple.Create("DrayTek Corp.", new Dictionary<int, string>{
 { 272, "Vigor 128 ISDN TA" },
 { 1328, "Vigor530 IEEE 802.11G Adapter (ISL3880+NET2280)" },
@@ -9416,9 +10411,15 @@ namespace HardwareInformation.Providers {
 { 26260, "miniVigor 128 ISDN TA" },
     })
  },
+            { 1654, Tuple.Create("Teles AG", new Dictionary<int, string>{
+    })
+ },
             { 1655, Tuple.Create("Aiwa Co., Ltd", new Dictionary<int, string>{
 { 2005, "TM-ED1285(USB)" },
 { 4001, "TD-U8000 Tape Drive" },
+    })
+ },
+            { 1656, Tuple.Create("ACard Technology Corp.", new Dictionary<int, string>{
     })
  },
             { 1659, Tuple.Create("Prolific Technology, Inc.", new Dictionary<int, string>{
@@ -9475,6 +10476,9 @@ namespace HardwareInformation.Providers {
 { 58688, "Speedstream Ethernet Adapter E240" },
     })
  },
+            { 1661, Tuple.Create("Hohner Corp.", new Dictionary<int, string>{
+    })
+ },
             { 1662, Tuple.Create("Intermec Technologies Corp.", new Dictionary<int, string>{
 { 2049, "HID Keyboard, Barcode scanner" },
 { 2051, "VCP, Barcode scanner" },
@@ -9506,6 +10510,12 @@ namespace HardwareInformation.Providers {
 { 46, "ADSL Router_S-141" },
 { 52, "GSM module MC35/ES75 USB Modem" },
 { 15366, "54g USB Network Adapter" },
+    })
+ },
+            { 1666, Tuple.Create("Victor Company of Japan, Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 1668, Tuple.Create("Actiontec Electronics, Inc.", new Dictionary<int, string>{
     })
  },
             { 1669, Tuple.Create("ZD Incorporated", new Dictionary<int, string>{
@@ -9554,6 +10564,12 @@ namespace HardwareInformation.Providers {
 { 16414, "Dimage E323 Camera" },
     })
  },
+            { 1674, Tuple.Create("Pertech, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 1675, Tuple.Create("Potrans International, Inc.", new Dictionary<int, string>{
+    })
+ },
             { 1678, Tuple.Create("CH Products, Inc.", new Dictionary<int, string>{
 { 211, "OEM 3 axis 5 button joystick" },
 { 226, "HFX OEM Joystick" },
@@ -9571,6 +10587,9 @@ namespace HardwareInformation.Providers {
  },
             { 1679, Tuple.Create("Nihon KOHDEN", new Dictionary<int, string>{
 { 49165, "MEK-6500" },
+    })
+ },
+            { 1680, Tuple.Create("Golden Bridge Electech, Inc.", new Dictionary<int, string>{
     })
  },
             { 1683, Tuple.Create("Hagiwara Sys-Com Co., Ltd", new Dictionary<int, string>{
@@ -9726,11 +10745,17 @@ namespace HardwareInformation.Providers {
 { 65461, "Cyborg Evo Force Joystick" },
     })
  },
+            { 1700, Tuple.Create("Xiamen Doowell Electron Co., Ltd", new Dictionary<int, string>{
+    })
+ },
             { 1701, Tuple.Create("Divio", new Dictionary<int, string>{
 { 0, "Typhoon Webcam 100k [nw8000]" },
 { 53249, "ProLink DS3303u Webcam" },
 { 55296, "Chicony TwinkleCam" },
 { 55328, "Wize Media 1000" },
+    })
+ },
+            { 1703, Tuple.Create("MicroStore, Inc.", new Dictionary<int, string>{
     })
  },
             { 1704, Tuple.Create("Topaz Systems, Inc.", new Dictionary<int, string>{
@@ -9746,6 +10771,24 @@ namespace HardwareInformation.Providers {
 { 14, "A90-211WG-01 802.11g Adapter [Intersil ISL3887]" },
     })
  },
+            { 1706, Tuple.Create("Sysgration, Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 1708, Tuple.Create("Fujitsu Laboratories of America, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 1709, Tuple.Create("Greatland Electronics Taiwan, Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 1710, Tuple.Create("Professional Multimedia Testing Centre", new Dictionary<int, string>{
+    })
+ },
+            { 1711, Tuple.Create("Harting, Inc. of North America", new Dictionary<int, string>{
+    })
+ },
+            { 1720, Tuple.Create("Pixela Corp.", new Dictionary<int, string>{
+    })
+ },
             { 1721, Tuple.Create("Alcatel Telecom", new Dictionary<int, string>{
 { 288, "SpeedTouch 120g 802.11g Wireless Adapter [Intersil ISL3886]" },
 { 289, "SpeedTouch 121g Wireless Dongle" },
@@ -9753,6 +10796,12 @@ namespace HardwareInformation.Providers {
 { 16481, "SpeedTouch ISDN or ADSL Modem" },
 { 16482, "SpeedTouch ISDN or ADSL router" },
 { 42405, "DynaMiTe Modem" },
+    })
+ },
+            { 1722, Tuple.Create("Smooth Cord & Connector Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 1723, Tuple.Create("EDA, Inc.", new Dictionary<int, string>{
     })
  },
             { 1724, Tuple.Create("Oki Data Corp.", new Dictionary<int, string>{
@@ -9796,6 +10845,9 @@ namespace HardwareInformation.Providers {
 { 53249, "P35U Camera Capture" },
     })
  },
+            { 1727, Tuple.Create("Leoco Corp.", new Dictionary<int, string>{
+    })
+ },
             { 1730, Tuple.Create("Phidgets Inc. (formerly GLAB)", new Dictionary<int, string>{
 { 48, "PhidgetRFID" },
 { 49, "RFID reader" },
@@ -9819,6 +10871,18 @@ namespace HardwareInformation.Providers {
 { 115, "PhidgetHumiditySensor" },
 { 116, "PhidgetPHSensor" },
 { 117, "PhidgetGyroscope" },
+    })
+ },
+            { 1732, Tuple.Create("Bizlink International Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 1733, Tuple.Create("Hagenuk, GmbH", new Dictionary<int, string>{
+    })
+ },
+            { 1734, Tuple.Create("Infowave Software, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 1736, Tuple.Create("SIIG, Inc.", new Dictionary<int, string>{
     })
  },
             { 1737, Tuple.Create("Taxan (Europe), Ltd", new Dictionary<int, string>{
@@ -9907,6 +10971,9 @@ namespace HardwareInformation.Providers {
 { 1570, "LapLink Gold USB-USB Bridge [net1080]" },
     })
  },
+            { 1745, Tuple.Create("Daewoo Electronics Co., Ltd", new Dictionary<int, string>{
+    })
+ },
             { 1747, Tuple.Create("Mitsubishi Electric Corp.", new Dictionary<int, string>{
 { 644, "FX-USB-AW/-BD RS482 Converters" },
 { 896, "CP8000D Port" },
@@ -9935,6 +11002,9 @@ namespace HardwareInformation.Providers {
 { 15232, "CP-M1" },
     })
  },
+            { 1748, Tuple.Create("Cisco Systems", new Dictionary<int, string>{
+    })
+ },
             { 1749, Tuple.Create("Toshiba", new Dictionary<int, string>{
 { 16384, "Japanese Keyboard" },
     })
@@ -9957,14 +11027,26 @@ namespace HardwareInformation.Providers {
 { 107, "TRUST AUDIO VIDEO EDITOR" },
     })
  },
+            { 1751, Tuple.Create("Network Computing Devices (NCD)", new Dictionary<int, string>{
+    })
+ },
+            { 1752, Tuple.Create("Technical Marketing Research, Inc.", new Dictionary<int, string>{
+    })
+ },
             { 1754, Tuple.Create("Phoenixtec Power Co., Ltd", new Dictionary<int, string>{
 { 2, "UPS" },
 { 3, "1300VA UPS" },
     })
  },
+            { 1755, Tuple.Create("Paradyne", new Dictionary<int, string>{
+    })
+ },
             { 1756, Tuple.Create("Foxlink Image Technology Co., Ltd", new Dictionary<int, string>{
 { 18, "Scan 1200c Scanner" },
 { 20, "Prolink Winscan Pro 2448U" },
+    })
+ },
+            { 1758, Tuple.Create("Heisei Electronics Co., Ltd", new Dictionary<int, string>{
     })
  },
             { 1760, Tuple.Create("Multi-Tech Systems, Inc.", new Dictionary<int, string>{
@@ -9990,6 +11072,9 @@ namespace HardwareInformation.Providers {
 { 42760, "saa7114H video input card (Instant VideoMPX)" },
 { 45879, "Mini DigitalTV" },
 { 46849, "DVD Xpress B" },
+    })
+ },
+            { 1764, Tuple.Create("Alcatel Microelectronics", new Dictionary<int, string>{
     })
  },
             { 1766, Tuple.Create("Tiger Jet Network, Inc.", new Dictionary<int, string>{
@@ -10085,6 +11170,12 @@ namespace HardwareInformation.Providers {
 { 2, "Roadster II 56k" },
     })
  },
+            { 1771, Tuple.Create("PC Expert Tech. Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 1775, Tuple.Create("I.A.C. Geometrische Ingenieurs B.V.", new Dictionary<int, string>{
+    })
+ },
             { 1776, Tuple.Create("T.N.C Industrial Co., Ltd", new Dictionary<int, string>{
 { 56833, "DualCam Video Camera" },
 { 56834, "DualCam Still Camera" },
@@ -10097,6 +11188,9 @@ namespace HardwareInformation.Providers {
  },
             { 1778, Tuple.Create("Emine Technology Co.", new Dictionary<int, string>{
 { 17, "KVM Switch Keyboard" },
+    })
+ },
+            { 1782, Tuple.Create("Wintrend Technology Co., Ltd", new Dictionary<int, string>{
     })
  },
             { 1783, Tuple.Create("Wailly Technology Ltd", new Dictionary<int, string>{
@@ -10122,10 +11216,34 @@ namespace HardwareInformation.Providers {
 { 57395, "Hercules HWNUp-150 802.11n Wireless N Pico [Realtek RTL8188CUS]" },
     })
  },
+            { 1785, Tuple.Create("ASYST electronic d.o.o.", new Dictionary<int, string>{
+    })
+ },
+            { 1786, Tuple.Create("HSD S.r.L", new Dictionary<int, string>{
+    })
+ },
+            { 1788, Tuple.Create("Motorola Semiconductor Products Sector", new Dictionary<int, string>{
+    })
+ },
             { 1789, Tuple.Create("Boston Acoustics", new Dictionary<int, string>{
 { 257, "Audio Device" },
 { 258, "Audio Device" },
 { 513, "2-piece Audio Device" },
+    })
+ },
+            { 1790, Tuple.Create("Gallant Computer, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 1793, Tuple.Create("Supercomal Wire & Cable SDN. BHD.", new Dictionary<int, string>{
+    })
+ },
+            { 1795, Tuple.Create("Bvtech Industry, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 1797, Tuple.Create("NKK Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 1798, Tuple.Create("Ariel Corp.", new Dictionary<int, string>{
     })
  },
             { 1799, Tuple.Create("Standard Microsystems Corp.", new Dictionary<int, string>{
@@ -10141,9 +11259,18 @@ namespace HardwareInformation.Providers {
 { 1150, "USB-1284 BRIDGE" },
     })
  },
+            { 1801, Tuple.Create("Silicon Systems, Ltd (SSL)", new Dictionary<int, string>{
+    })
+ },
             { 1802, Tuple.Create("Oki Electric Industry Co., Ltd", new Dictionary<int, string>{
 { 16386, "Bluetooth Device" },
 { 16387, "Bluetooth Device" },
+    })
+ },
+            { 1805, Tuple.Create("Comoss Electronic Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 1806, Tuple.Create("Excel Cell Electronic Co., Ltd", new Dictionary<int, string>{
     })
  },
             { 1808, Tuple.Create("Connect Tech, Inc.", new Dictionary<int, string>{
@@ -10169,8 +11296,14 @@ namespace HardwareInformation.Providers {
 { 20736, "Magic Control Technology Corp. (USB2VGA dongle)" },
     })
  },
+            { 1811, Tuple.Create("Interval Research Corp.", new Dictionary<int, string>{
+    })
+ },
             { 1812, Tuple.Create("NewMotion, Inc.", new Dictionary<int, string>{
 { 3, "ADB converter" },
+    })
+ },
+            { 1815, Tuple.Create("ZNK Corp.", new Dictionary<int, string>{
     })
  },
             { 1816, Tuple.Create("Imation Corp.", new Dictionary<int, string>{
@@ -10195,6 +11328,9 @@ namespace HardwareInformation.Providers {
 { 53248, "Disc Stakka CD/DVD Manager" },
     })
  },
+            { 1817, Tuple.Create("Tremon Enterprises Co., Ltd", new Dictionary<int, string>{
+    })
+ },
             { 1819, Tuple.Create("Domain Technologies, Inc.", new Dictionary<int, string>{
 { 2, "DTI-56362-USB Digital Interface Unit" },
 { 257, "Audio4-USB DSP Data Acquisition Unit" },
@@ -10205,11 +11341,17 @@ namespace HardwareInformation.Providers {
 { 12987, "Music Mediatouch" },
     })
  },
+            { 1820, Tuple.Create("Xionics Document Technologies, Inc.", new Dictionary<int, string>{
+    })
+ },
             { 1821, Tuple.Create("Eicon Networks Corp.", new Dictionary<int, string>{
 { 4096, "Diva 2.01 S/T [PSB2115F]" },
 { 4099, "Diva ISDN 2.0" },
 { 4101, "Diva ISDN 4.0 [HFC-S]" },
 { 8192, "Teledat Surf" },
+    })
+ },
+            { 1822, Tuple.Create("Ariston Technologies", new Dictionary<int, string>{
     })
  },
             { 1824, Tuple.Create("Keyence Corp.", new Dictionary<int, string>{
@@ -10220,8 +11362,14 @@ namespace HardwareInformation.Providers {
 { 2, "Palladia 300/400 Adsl Modem" },
     })
  },
+            { 1830, Tuple.Create("Vanguard International Semiconductor-America", new Dictionary<int, string>{
+    })
+ },
             { 1833, Tuple.Create("Amitm", new Dictionary<int, string>{
 { 4096, "USC-1000 Serial Port" },
+    })
+ },
+            { 1838, Tuple.Create("Sunix Co., Ltd", new Dictionary<int, string>{
     })
  },
             { 1839, Tuple.Create("Advanced Card Systems, Ltd", new Dictionary<int, string>{
@@ -10282,6 +11430,9 @@ namespace HardwareInformation.Providers {
 { 1320, "SonyEricsson DCU-11 Cable" },
     })
  },
+            { 1842, Tuple.Create("Goldfull Electronics & Telecommunications Corp.", new Dictionary<int, string>{
+    })
+ },
             { 1843, Tuple.Create("ViewQuest Technologies, Inc.", new Dictionary<int, string>{
 { 257, "Digital Video Camera" },
 { 272, "VQ110 Video Camera" },
@@ -10312,6 +11463,9 @@ namespace HardwareInformation.Providers {
 { 8449, "ISDN Adapter" },
 { 26260, "ISDNlink 128K" },
 { 50497, "ISDN TA 280" },
+    })
+ },
+            { 1846, Tuple.Create("Lorom Industrial Co., Ltd", new Dictionary<int, string>{
     })
  },
             { 1848, Tuple.Create("Mad Catz, Inc.", new Dictionary<int, string>{
@@ -10361,6 +11515,9 @@ namespace HardwareInformation.Providers {
 { 8752, "infrared dongle for remote" },
     })
  },
+            { 1851, Tuple.Create("Suncom Technologies", new Dictionary<int, string>{
+    })
+ },
             { 1852, Tuple.Create("Industrial Electronic Engineers, Inc.", new Dictionary<int, string>{
 { 773, "Pole Display (PC305-3415  2 x 20 Line Display)" },
 { 802, "Pole Display (PC322-3415  2 x 20 Line Display)" },
@@ -10392,9 +11549,30 @@ namespace HardwareInformation.Providers {
 { 8202, "ISDN TA [HFC-S]" },
     })
  },
+            { 1861, Tuple.Create("Syntech Information Co., Ltd", new Dictionary<int, string>{
+    })
+ },
             { 1862, Tuple.Create("Onkyo Corp.", new Dictionary<int, string>{
 { 18176, "Integra MZA-4.7" },
 { 21760, "SE-U55 Audio Device" },
+    })
+ },
+            { 1863, Tuple.Create("Labway Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 1864, Tuple.Create("Strong Man Enterprise Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 1865, Tuple.Create("EVer Electronics Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 1866, Tuple.Create("Ming Fortune Industry Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 1867, Tuple.Create("Polestar Tech. Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 1868, Tuple.Create("C-C-C Group PLC", new Dictionary<int, string>{
     })
  },
             { 1869, Tuple.Create("Micronas GmbH", new Dictionary<int, string>{
@@ -10408,8 +11586,14 @@ namespace HardwareInformation.Providers {
 { 2, "PS/2 Adapter" },
     })
  },
+            { 1877, Tuple.Create("Aureal Semiconductor", new Dictionary<int, string>{
+    })
+ },
             { 1879, Tuple.Create("Network Technologies, Inc.", new Dictionary<int, string>{
 { 2560, "SUN Adapter" },
+    })
+ },
+            { 1880, Tuple.Create("Carl Zeiss Microscopy GmbH", new Dictionary<int, string>{
     })
  },
             { 1883, Tuple.Create("Sophisticated Circuits, Inc.", new Dictionary<int, string>{
@@ -10499,6 +11683,9 @@ namespace HardwareInformation.Providers {
 { 516, "TopSpeed Cyberlink Remote Control" },
     })
  },
+            { 1895, Tuple.Create("Tokheim Corp.", new Dictionary<int, string>{
+    })
+ },
             { 1896, Tuple.Create("Camtel Technology Corp.", new Dictionary<int, string>{
 { 6, "Camtel Technology USB TV Genie Pro FM Model TVB330" },
 { 35, "eHome Infrared Receiver" },
@@ -10509,6 +11696,9 @@ namespace HardwareInformation.Providers {
 { 4595, "RT2570" },
 { 4599, "802.11g 54M WLAN Adapter" },
 { 12787, "RT2573" },
+    })
+ },
+            { 1898, Tuple.Create("Smart Technology Enablers, Inc.", new Dictionary<int, string>{
     })
  },
             { 1899, Tuple.Create("OmniKey AG", new Dictionary<int, string>{
@@ -10539,14 +11729,47 @@ namespace HardwareInformation.Providers {
 { 770, "RP-600" },
     })
  },
+            { 1901, Tuple.Create("Denso Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 1902, Tuple.Create("Kuan Tech Enterprise Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 1903, Tuple.Create("Jhen Vei Electronic Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 1904, Tuple.Create("Welch Allyn, Inc - Medical Division", new Dictionary<int, string>{
+    })
+ },
             { 1905, Tuple.Create("Observator Instruments BV", new Dictionary<int, string>{
 { 17493, "OMC45III" },
 { 44559, "OMC45III" },
     })
  },
+            { 1906, Tuple.Create("Your data Our Care", new Dictionary<int, string>{
+    })
+ },
+            { 1908, Tuple.Create("AmTRAN Technology Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 1909, Tuple.Create("Longshine Electronics Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 1910, Tuple.Create("Inalways Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 1911, Tuple.Create("Comda Enterprise Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 1912, Tuple.Create("Volex, Inc.", new Dictionary<int, string>{
+    })
+ },
             { 1913, Tuple.Create("ON Semiconductor (formerly Fairchild)", new Dictionary<int, string>{
 { 307, "FUSB307B" },
 { 308, "FUSB308B" },
+    })
+ },
+            { 1914, Tuple.Create("Sankyo Seiki Mfg. Co., Ltd", new Dictionary<int, string>{
     })
  },
             { 1915, Tuple.Create("Linksys", new Dictionary<int, string>{
@@ -10575,6 +11798,9 @@ namespace HardwareInformation.Providers {
 { 138, "NetLink Compact MPI/Profibus adapter" },
 { 352, "EDICblue" },
 { 544, "VAS5054A" },
+    })
+ },
+            { 1919, Tuple.Create("Well Excellent & Most Corp.", new Dictionary<int, string>{
     })
  },
             { 1920, Tuple.Create("Sagem Monetel GmbH", new Dictionary<int, string>{
@@ -10690,6 +11916,9 @@ namespace HardwareInformation.Providers {
 { 53193, "SDDR-489 ImageMate Pro Reader" },
     })
  },
+            { 1922, Tuple.Create("Trackerball", new Dictionary<int, string>{
+    })
+ },
             { 1923, Tuple.Create("C3PO", new Dictionary<int, string>{
 { 3, "LTC31 SmartCard Reader" },
 { 6, "LTC31v2" },
@@ -10747,6 +11976,30 @@ namespace HardwareInformation.Providers {
 { 1024, "Digitizer (Whiteboard)" },
     })
  },
+            { 1934, Tuple.Create("Brincom, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 1936, Tuple.Create("Pro-Image Manufacturing Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 1937, Tuple.Create("Copartner Wire and Cable Mfg. Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 1938, Tuple.Create("Axis Communications AB", new Dictionary<int, string>{
+    })
+ },
+            { 1939, Tuple.Create("Wha Yu Industrial Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 1940, Tuple.Create("ABL Electronics Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 1941, Tuple.Create("RealChip, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 1942, Tuple.Create("Certicom Corp.", new Dictionary<int, string>{
+    })
+ },
             { 1943, Tuple.Create("Grandtech Semiconductor Corp.", new Dictionary<int, string>{
 { 26625, "Flatbed Scanner" },
 { 26626, "InkJet Color Printer" },
@@ -10791,6 +12044,15 @@ namespace HardwareInformation.Providers {
  },
             { 1953, Tuple.Create("Digicom S.p.A.", new Dictionary<int, string>{
 { 55634, "Palladio USB V.92 Modem" },
+    })
+ },
+            { 1954, Tuple.Create("National Technical Systems", new Dictionary<int, string>{
+    })
+ },
+            { 1955, Tuple.Create("Onnto Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 1956, Tuple.Create("Be, Inc.", new Dictionary<int, string>{
     })
  },
             { 1958, Tuple.Create("ADMtek, Inc.", new Dictionary<int, string>{
@@ -10854,6 +12116,9 @@ namespace HardwareInformation.Providers {
 { 6, "ISDN TA 128 [HFC-S]" },
 { 7, "ISDN TA [HFC-S]" },
 { 8, "ISDN TA" },
+    })
+ },
+            { 1969, Tuple.Create("IMP, Inc.", new Dictionary<int, string>{
     })
  },
             { 1970, Tuple.Create("Motorola BCS, Inc.", new Dictionary<int, string>{
@@ -10949,6 +12214,12 @@ namespace HardwareInformation.Providers {
 { 39170, "GamePad" },
     })
  },
+            { 1974, Tuple.Create("Marubun Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 1975, Tuple.Create("TIME Interconnect, Ltd", new Dictionary<int, string>{
+    })
+ },
             { 1976, Tuple.Create("AboCom Systems Inc", new Dictionary<int, string>{
 { 4364, "XX1" },
 { 4609, "IEEE 802.11b Adapter" },
@@ -11004,6 +12275,12 @@ namespace HardwareInformation.Providers {
 { 57354, "Mass Storage Device" },
 { 58608, "Card Reader Driver" },
 { 61697, "DSB-560 Modem [atlas]" },
+    })
+ },
+            { 1980, Tuple.Create("Canon Computer Systems, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 1981, Tuple.Create("Webgear, Inc.", new Dictionary<int, string>{
     })
  },
             { 1982, Tuple.Create("Veridicom", new Dictionary<int, string>{
@@ -11067,6 +12344,9 @@ namespace HardwareInformation.Providers {
 { 3, "Bodega Wireless Network Adapter" },
     })
  },
+            { 1991, Tuple.Create("Powertech Industrial Co., Ltd", new Dictionary<int, string>{
+    })
+ },
             { 1992, Tuple.Create("B.U.G., Inc.", new Dictionary<int, string>{
 { 514, "MN128-SOHO PAL" },
     })
@@ -11095,6 +12375,9 @@ namespace HardwareInformation.Providers {
 { 47104, "MR800 FM Radio" },
 { 59520, "MPEG-2 Capture Device (E880)" },
 { 59522, "MPEG-2 Capture Device (E882)" },
+    })
+ },
+            { 1995, Tuple.Create("Kingmax Technology, Inc.", new Dictionary<int, string>{
     })
  },
             { 1996, Tuple.Create("Carry Computer Eng., Co., Ltd", new Dictionary<int, string>{
@@ -11257,8 +12540,26 @@ namespace HardwareInformation.Providers {
 { 64513, "DBT-120 Bluetooth Adapter" },
     })
  },
+            { 2002, Tuple.Create("Aptio Products, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 2003, Tuple.Create("Cyberdata Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 2005, Tuple.Create("Radiant Systems", new Dictionary<int, string>{
+    })
+ },
+            { 2007, Tuple.Create("GCC Technologies, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 2010, Tuple.Create("Arasan Chip Systems", new Dictionary<int, string>{
+    })
+ },
             { 2014, Tuple.Create("Diamond Multimedia", new Dictionary<int, string>{
 { 10272, "VC500 Video Capture Dongle" },
+    })
+ },
+            { 2015, Tuple.Create("David Electronics Co., Ltd", new Dictionary<int, string>{
     })
  },
             { 2016, Tuple.Create("NCP engineering GmbH", new Dictionary<int, string>{
@@ -11269,6 +12570,12 @@ namespace HardwareInformation.Providers {
 { 20993, "V.90 Modem" },
     })
  },
+            { 2018, Tuple.Create("Elmeg GmbH & Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 2019, Tuple.Create("Planex Communications, Inc.", new Dictionary<int, string>{
+    })
+ },
             { 2020, Tuple.Create("Movado Enterprise Co., Ltd", new Dictionary<int, string>{
 { 2407, "SCard R/W CSR-145" },
 { 2408, "SCard R/W CSR-145" },
@@ -11277,6 +12584,24 @@ namespace HardwareInformation.Providers {
             { 2021, Tuple.Create("QPS, Inc.", new Dictionary<int, string>{
 { 1474, "IDE-to-USB2.0 PCA" },
 { 23553, "Que! CDRW" },
+    })
+ },
+            { 2022, Tuple.Create("Allied Cable Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 2023, Tuple.Create("Mirvo Toys, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 2024, Tuple.Create("Labsystems", new Dictionary<int, string>{
+    })
+ },
+            { 2026, Tuple.Create("Iwatsu Electric Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 2027, Tuple.Create("Double-H Technology Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 2028, Tuple.Create("Taiyo Electric Wire & Cable Co., Ltd", new Dictionary<int, string>{
     })
  },
             { 2030, Tuple.Create("Torex Retail (formerly Logware)", new Dictionary<int, string>{
@@ -11291,9 +12616,15 @@ namespace HardwareInformation.Providers {
 { 1, "KEYLOK II" },
     })
  },
+            { 2038, Tuple.Create("Circuit Assembly Corp.", new Dictionary<int, string>{
+    })
+ },
             { 2039, Tuple.Create("Century Corp.", new Dictionary<int, string>{
 { 5, "ScanLogic/Century Corporation uATA" },
 { 286, "Century USB Disk Enclosure" },
+    })
+ },
+            { 2041, Tuple.Create("Dotop Technology, Inc.", new Dictionary<int, string>{
     })
  },
             { 2042, Tuple.Create("DrayTek Corp.", new Dictionary<int, string>{
@@ -11329,6 +12660,9 @@ namespace HardwareInformation.Providers {
 { 3, "Magstripe Insert Reader" },
     })
  },
+            { 2050, Tuple.Create("Mako Technologies, LLC", new Dictionary<int, string>{
+    })
+ },
             { 2051, Tuple.Create("Zoom Telephonics, Inc.", new Dictionary<int, string>{
 { 4864, "V92 Faxmodem" },
 { 12437, "V.92 56K Mini External Modem Model 3095" },
@@ -11339,6 +12673,12 @@ namespace HardwareInformation.Providers {
 { 38656, "2986L FaxModem" },
 { 38912, "Cable Modem" },
 { 41746, "Wireless-G" },
+    })
+ },
+            { 2057, Tuple.Create("Genicom Technology, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 2058, Tuple.Create("Evermuch Technology Co., Ltd", new Dictionary<int, string>{
     })
  },
             { 2059, Tuple.Create("Cross Match Technologies", new Dictionary<int, string>{
@@ -11385,6 +12725,9 @@ namespace HardwareInformation.Providers {
 { 1537, "Storage Adapter" },
     })
  },
+            { 2076, Tuple.Create("Mipsys", new Dictionary<int, string>{
+    })
+ },
             { 2078, Tuple.Create("AlphaSmart, Inc.", new Dictionary<int, string>{
 { 57088, "Handheld" },
     })
@@ -11395,6 +12738,21 @@ namespace HardwareInformation.Providers {
  },
             { 2082, Tuple.Create("Reudo Corp.", new Dictionary<int, string>{
 { 8193, "IRXpress Infrared Device" },
+    })
+ },
+            { 2085, Tuple.Create("GC Protronics", new Dictionary<int, string>{
+    })
+ },
+            { 2086, Tuple.Create("Data Transit", new Dictionary<int, string>{
+    })
+ },
+            { 2087, Tuple.Create("BroadLogic, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 2088, Tuple.Create("Sato Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 2089, Tuple.Create("DirecTV Broadband, Inc. (Telocity)", new Dictionary<int, string>{
     })
  },
             { 2093, Tuple.Create("Handspring", new Dictionary<int, string>{
@@ -11460,6 +12818,9 @@ namespace HardwareInformation.Providers {
             { 2099, Tuple.Create("Sourcenext Corp.", new Dictionary<int, string>{
 { 302, "KeikaiDenwa 8 with charger" },
 { 927, "KeikaiDenwa 8" },
+    })
+ },
+            { 2101, Tuple.Create("Action Star Enterprise Co., Ltd", new Dictionary<int, string>{
     })
  },
             { 2102, Tuple.Create("TrekStor", new Dictionary<int, string>{
@@ -11538,6 +12899,9 @@ namespace HardwareInformation.Providers {
 { 1, "Rio 500" },
     })
  },
+            { 2116, Tuple.Create("Welland Industrial Co., Ltd", new Dictionary<int, string>{
+    })
+ },
             { 2118, Tuple.Create("NetGear, Inc.", new Dictionary<int, string>{
 { 4097, "EA101 10 Mbps 10BASE-T Ethernet [Kawasaki LSI KL5KLUSB101B]" },
 { 4098, "Ethernet" },
@@ -11599,10 +12963,16 @@ namespace HardwareInformation.Providers {
 { 1, "Empeg-Car Mark I/II Player" },
     })
  },
+            { 2128, Tuple.Create("Fast Point Technologies, Inc.", new Dictionary<int, string>{
+    })
+ },
             { 2129, Tuple.Create("Macronix International Co., Ltd", new Dictionary<int, string>{
 { 5442, "SiPix Blink" },
 { 5443, "Maxell WS30 Slim Digital Camera, or Pandigital PI8004W01 digital photo frame" },
 { 41320, "MXIC" },
+    })
+ },
+            { 2130, Tuple.Create("CSEM", new Dictionary<int, string>{
     })
  },
             { 2131, Tuple.Create("Topre Corporation", new Dictionary<int, string>{
@@ -11623,6 +12993,9 @@ namespace HardwareInformation.Providers {
             { 2136, Tuple.Create("Hitachi Maxell, Ltd", new Dictionary<int, string>{
 { 12546, "Bluetooth Device" },
 { 65535, "Maxell module with BlueCore in DFU mode" },
+    })
+ },
+            { 2137, Tuple.Create("Minolta Systems Laboratory, Inc.", new Dictionary<int, string>{
     })
  },
             { 2138, Tuple.Create("Xircom", new Dictionary<int, string>{
@@ -11651,6 +13024,12 @@ namespace HardwareInformation.Providers {
 { 512, "Spyder 2" },
 { 768, "Spyder 3" },
 { 1024, "Spyder 4" },
+    })
+ },
+            { 2146, Tuple.Create("Teletrol Systems, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 2147, Tuple.Create("Filanet Corp.", new Dictionary<int, string>{
     })
  },
             { 2148, Tuple.Create("NetGear, Inc.", new Dictionary<int, string>{
@@ -11713,6 +13092,9 @@ namespace HardwareInformation.Providers {
 { 6432, "SGC-X2UL" },
     })
  },
+            { 2159, Tuple.Create("MEC IMEX, Inc.", new Dictionary<int, string>{
+    })
+ },
             { 2160, Tuple.Create("Metricom", new Dictionary<int, string>{
 { 1, "Ricochet GS" },
     })
@@ -11723,12 +13105,42 @@ namespace HardwareInformation.Providers {
 { 5, "SDDR-05 Compact Flash Reader" },
     })
  },
+            { 2163, Tuple.Create("Xpeed, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 2164, Tuple.Create("A-Tec Subsystem, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 2169, Tuple.Create("Comtrol Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 2172, Tuple.Create("Adesso/Kbtek America, Inc.", new Dictionary<int, string>{
+    })
+ },
             { 2173, Tuple.Create("Jaton Corp.", new Dictionary<int, string>{
 { 22276, "Ethernet" },
     })
  },
+            { 2174, Tuple.Create("Fujitsu Computer Products of America", new Dictionary<int, string>{
+    })
+ },
+            { 2175, Tuple.Create("QualCore Logic Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 2176, Tuple.Create("APT Technologies, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 2179, Tuple.Create("Recording Industry Association of America (RIAA)", new Dictionary<int, string>{
+    })
+ },
+            { 2181, Tuple.Create("Boca Research, Inc.", new Dictionary<int, string>{
+    })
+ },
             { 2182, Tuple.Create("XAC Automation Corp.", new Dictionary<int, string>{
 { 1584, "Intel PC Camera CS630" },
+    })
+ },
+            { 2183, Tuple.Create("Hannstar Electronics Corp.", new Dictionary<int, string>{
     })
  },
             { 2186, Tuple.Create("TechTools", new Dictionary<int, string>{
@@ -11762,8 +13174,26 @@ namespace HardwareInformation.Providers {
 { 5, "PowerDebug PRO" },
     })
  },
+            { 2204, Tuple.Create("United Technologies Research Cntr.", new Dictionary<int, string>{
+    })
+ },
+            { 2205, Tuple.Create("Icron Technologies Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 2206, Tuple.Create("NST Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 2207, Tuple.Create("Primex Aerospace Co.", new Dictionary<int, string>{
+    })
+ },
+            { 2213, Tuple.Create("e9, Inc.", new Dictionary<int, string>{
+    })
+ },
             { 2214, Tuple.Create("Toshiba TEC", new Dictionary<int, string>{
 { 81, "B-SV4" },
+    })
+ },
+            { 2216, Tuple.Create("Andrea Electronics", new Dictionary<int, string>{
     })
  },
             { 2217, Tuple.Create("CWAV Inc.", new Dictionary<int, string>{
@@ -11779,10 +13209,16 @@ namespace HardwareInformation.Providers {
 { 8228, "usbWiggler" },
     })
  },
+            { 2222, Tuple.Create("Macally (Mace Group, Inc.)", new Dictionary<int, string>{
+    })
+ },
             { 2224, Tuple.Create("Metrohm", new Dictionary<int, string>{
 { 6, "814 Sample Processor" },
 { 21, "857 Titrando" },
 { 26, "852 Titrando" },
+    })
+ },
+            { 2228, Tuple.Create("Sorenson Vision, Inc.", new Dictionary<int, string>{
     })
  },
             { 2231, Tuple.Create("NATSU", new Dictionary<int, string>{
@@ -11791,6 +13227,9 @@ namespace HardwareInformation.Providers {
  },
             { 2232, Tuple.Create("J. Gordon Electronic Design, Inc.", new Dictionary<int, string>{
 { 500, "USBSIMM1" },
+    })
+ },
+            { 2233, Tuple.Create("RadioShack Corp. (Tandy)", new Dictionary<int, string>{
     })
  },
             { 2235, Tuple.Create("Texas Instruments", new Dictionary<int, string>{
@@ -11845,6 +13284,15 @@ namespace HardwareInformation.Providers {
 { 754, "Farallon Home Phoneline Adapter" },
     })
  },
+            { 2247, Tuple.Create("Key Nice Enterprise Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 2248, Tuple.Create("2Wire, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 2249, Tuple.Create("Nippon Telegraph and Telephone Corp.", new Dictionary<int, string>{
+    })
+ },
             { 2250, Tuple.Create("Aiptek International, Inc.", new Dictionary<int, string>{
 { 1, "Tablet" },
 { 16, "Tablet" },
@@ -11879,9 +13327,21 @@ namespace HardwareInformation.Providers {
 { 8288, "Pocket DV5300" },
     })
  },
+            { 2253, Tuple.Create("Jue Hsun Ind. Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 2254, Tuple.Create("Long Well Electronics Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 2255, Tuple.Create("Productivity Enhancement Products", new Dictionary<int, string>{
+    })
+ },
             { 2257, Tuple.Create("smartBridges, Inc.", new Dictionary<int, string>{
 { 1, "smartNIC Ethernet [catc]" },
 { 3, "smartNIC 2 PnP Ethernet" },
+    })
+ },
+            { 2259, Tuple.Create("Virtual Ink", new Dictionary<int, string>{
     })
  },
             { 2260, Tuple.Create("Fujitsu Siemens Computers", new Dictionary<int, string>{
@@ -11892,6 +13352,9 @@ namespace HardwareInformation.Providers {
 { 2, "USB-to-CAN compact" },
 { 3, "USB-to-CAN II" },
 { 256, "USB-to-CAN" },
+    })
+ },
+            { 2265, Tuple.Create("Increment P Corp.", new Dictionary<int, string>{
     })
  },
             { 2269, Tuple.Create("Billionton Systems, Inc.", new Dictionary<int, string>{
@@ -11930,6 +13393,9 @@ namespace HardwareInformation.Providers {
 { 389, "DDJ-WeGO2" },
     })
  },
+            { 2277, Tuple.Create("Litronic", new Dictionary<int, string>{
+    })
+ },
             { 2278, Tuple.Create("Gemalto (was Gemplus)", new Dictionary<int, string>{
 { 1, "GemPC-Touch 430" },
 { 1072, "GemPC430 SmartCard Reader" },
@@ -11946,6 +13412,12 @@ namespace HardwareInformation.Providers {
 { 21761, "GemProx-PU Contactless Smart Card Reader" },
 { 21763, "Prox-DU Contactless Interface" },
 { 44256, "UA HYBRID TOKEN" },
+    })
+ },
+            { 2279, Tuple.Create("Pan-International Wire & Cable", new Dictionary<int, string>{
+    })
+ },
+            { 2280, Tuple.Create("Integrated Memory Logic", new Dictionary<int, string>{
     })
  },
             { 2281, Tuple.Create("Extended Systems, Inc.", new Dictionary<int, string>{
@@ -11999,12 +13471,24 @@ namespace HardwareInformation.Providers {
 { 2, "CECT M800 memory card" },
     })
  },
+            { 2286, Tuple.Create("CCSI/Hesso", new Dictionary<int, string>{
+    })
+ },
             { 2288, Tuple.Create("Corex Technologies", new Dictionary<int, string>{
 { 5, "CardScan 800c" },
     })
  },
+            { 2289, Tuple.Create("CTI Electronics Corp.", new Dictionary<int, string>{
+    })
+ },
             { 2290, Tuple.Create("Gotop Information Inc.", new Dictionary<int, string>{
 { 127, "Super Q2 Tablet" },
+    })
+ },
+            { 2293, Tuple.Create("SysTec Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 2294, Tuple.Create("Logic 3 International, Ltd", new Dictionary<int, string>{
     })
  },
             { 2295, Tuple.Create("Vernier", new Dictionary<int, string>{
@@ -12012,6 +13496,21 @@ namespace HardwareInformation.Providers {
 { 2, "EasyTemp/Go!Temp" },
 { 3, "Go!Link" },
 { 4, "Go!Motion" },
+    })
+ },
+            { 2296, Tuple.Create("Keen Top International Enterprise Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 2297, Tuple.Create("Wipro Technologies", new Dictionary<int, string>{
+    })
+ },
+            { 2298, Tuple.Create("Caere", new Dictionary<int, string>{
+    })
+ },
+            { 2299, Tuple.Create("Socket Communications", new Dictionary<int, string>{
+    })
+ },
+            { 2300, Tuple.Create("Sicon Cable Technology Co., Ltd", new Dictionary<int, string>{
     })
  },
             { 2301, Tuple.Create("Digianswer A/S", new Dictionary<int, string>{
@@ -12103,9 +13602,15 @@ namespace HardwareInformation.Providers {
 { 65535, "Sensor (Emulator)" },
     })
  },
+            { 2304, Tuple.Create("Pinnacle Systems, Inc.", new Dictionary<int, string>{
+    })
+ },
             { 2305, Tuple.Create("VST Technologies", new Dictionary<int, string>{
 { 1, "Hard Drive Adapter (TPP)" },
 { 2, "SigmaDrive Adapter (TPP)" },
+    })
+ },
+            { 2310, Tuple.Create("Faraday Technology Corp.", new Dictionary<int, string>{
     })
  },
             { 2312, Tuple.Create("Siemens AG", new Dictionary<int, string>{
@@ -12118,11 +13623,17 @@ namespace HardwareInformation.Providers {
 { 9985, "ShenZhen SANZHAI Technology Co.,Ltd Spy Pen VGA" },
     })
  },
+            { 2313, Tuple.Create("Audio-Technica Corp.", new Dictionary<int, string>{
+    })
+ },
             { 2314, Tuple.Create("Trumpion Microelectronics, Inc.", new Dictionary<int, string>{
 { 4097, "T33520 Flash Card Controller" },
 { 4352, "Comotron C3310 MP3 player" },
 { 4608, "MP3 player" },
 { 5440, "Digitex Container Flash Disk" },
+    })
+ },
+            { 2315, Tuple.Create("Neurosmith", new Dictionary<int, string>{
     })
  },
             { 2316, Tuple.Create("Silicon Motion, Inc. - Taiwan (formerly Feiya Technology Corp.)", new Dictionary<int, string>{
@@ -12148,10 +13659,25 @@ namespace HardwareInformation.Providers {
 { 62333, "Endoscope camera" },
     })
  },
+            { 2317, Tuple.Create("Multiport Computer Vertriebs GmbH", new Dictionary<int, string>{
+    })
+ },
+            { 2318, Tuple.Create("Shining Technology, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 2319, Tuple.Create("Fujitsu Devices, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 2320, Tuple.Create("Alation Systems, Inc.", new Dictionary<int, string>{
+    })
+ },
             { 2321, Tuple.Create("Philips Speech Processing", new Dictionary<int, string>{
 { 3100, "SpeechMike III" },
 { 5274, "SpeechMike II Pro Plus LFH5276" },
 { 9490, "SpeechMike Pro" },
+    })
+ },
+            { 2322, Tuple.Create("Voquette, Inc.", new Dictionary<int, string>{
     })
  },
             { 2325, Tuple.Create("GlobeSpan, Inc.", new Dictionary<int, string>{
@@ -12277,9 +13803,18 @@ namespace HardwareInformation.Providers {
 { 34918, "WiseGroup Ltd, MP-8866 Dual Joypad" },
     })
  },
+            { 2343, Tuple.Create("Summus, Ltd", new Dictionary<int, string>{
+    })
+ },
             { 2344, Tuple.Create("PLX Technology, Inc. (formerly Oxford Semiconductor, Ltd)", new Dictionary<int, string>{
 { 32768, "Firmware uploader" },
 { 65535, "Blank Oxford Device" },
+    })
+ },
+            { 2345, Tuple.Create("American Biometric Co.", new Dictionary<int, string>{
+    })
+ },
+            { 2346, Tuple.Create("Toshiba Information & Industrial Sys. And Services", new Dictionary<int, string>{
     })
  },
             { 2347, Tuple.Create("Sena Technologies, Inc.", new Dictionary<int, string>{
@@ -12380,6 +13915,9 @@ namespace HardwareInformation.Providers {
 { 40962, "SunplusIT SATA bridge" },
     })
  },
+            { 2353, Tuple.Create("Harmonic Data Systems, Ltd", new Dictionary<int, string>{
+    })
+ },
             { 2354, Tuple.Create("Crescentec Corp.", new Dictionary<int, string>{
 { 768, "VideoAdvantage" },
 { 770, "Syntek DC-112X" },
@@ -12388,6 +13926,12 @@ namespace HardwareInformation.Providers {
 { 4352, "DC-1100 Video Enhamcement Device" },
 { 4370, "Veo Web Camera" },
 { 41745, "Video Enhancement Device" },
+    })
+ },
+            { 2355, Tuple.Create("Quantum Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 2356, Tuple.Create("Spirent Communications", new Dictionary<int, string>{
     })
  },
             { 2358, Tuple.Create("NuTesla", new Dictionary<int, string>{
@@ -12451,6 +13995,27 @@ namespace HardwareInformation.Providers {
 { 1793, "NeoVI Blue vehicle bus interface" },
     })
  },
+            { 2365, Tuple.Create("InnoSync, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 2366, Tuple.Create("J.S.T. Mfg. Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 2367, Tuple.Create("Olympia Telecom Vertriebs GmbH", new Dictionary<int, string>{
+    })
+ },
+            { 2368, Tuple.Create("Japan Storage Battery Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 2369, Tuple.Create("Photobit Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 2370, Tuple.Create("i2Go.com, LLC", new Dictionary<int, string>{
+    })
+ },
+            { 2371, Tuple.Create("HCL Technologies India Private, Ltd", new Dictionary<int, string>{
+    })
+ },
             { 2372, Tuple.Create("KORG, Inc.", new Dictionary<int, string>{
 { 1, "PXR4 4-Track Digital Recorder" },
 { 32, "KAOSS Pad KP3 Dynamic Effect/Sampler" },
@@ -12460,6 +14025,9 @@ namespace HardwareInformation.Providers {
 { 271, "nanoKONTROL studio controller" },
 { 279, "nanoKONTROL2 MIDI Controller" },
 { 3843, "K-Series K61P MIDI studio controller" },
+    })
+ },
+            { 2373, Tuple.Create("Pasco Scientific", new Dictionary<int, string>{
     })
  },
             { 2376, Tuple.Create("Kronauer music in digital", new Dictionary<int, string>{
@@ -12472,6 +14040,9 @@ namespace HardwareInformation.Providers {
  },
             { 2379, Tuple.Create("Linkup Systems Corp.", new Dictionary<int, string>{
 { 1, "neonode N2" },
+    })
+ },
+            { 2381, Tuple.Create("Cable Television Laboratories", new Dictionary<int, string>{
     })
  },
             { 2383, Tuple.Create("Yano", new Dictionary<int, string>{
@@ -12521,6 +14092,9 @@ namespace HardwareInformation.Providers {
 { 5860, "HyperX Pulsefire Raid" },
     })
  },
+            { 2388, Tuple.Create("RPM Systems Corp.", new Dictionary<int, string>{
+    })
+ },
             { 2389, Tuple.Create("NVIDIA Corp.", new Dictionary<int, string>{
 { 28677, "Bootloader" },
 { 28696, "T186 [Tegra Parker]" },
@@ -12543,6 +14117,9 @@ namespace HardwareInformation.Providers {
 { 53001, "SHIELD Tablet" },
     })
  },
+            { 2390, Tuple.Create("BSquare Corp.", new Dictionary<int, string>{
+    })
+ },
             { 2391, Tuple.Create("Agilent Technologies, Inc.", new Dictionary<int, string>{
 { 512, "E-Video DC-350 Camera" },
 { 514, "E-Video DC-350 Camera" },
@@ -12556,6 +14133,9 @@ namespace HardwareInformation.Providers {
 { 64280, "LC Device" },
     })
  },
+            { 2392, Tuple.Create("CompuLink Research, Inc.", new Dictionary<int, string>{
+    })
+ },
             { 2393, Tuple.Create("Cologne Chip AG", new Dictionary<int, string>{
 { 11216, "Intelligent ISDN (Ver. 3.60.04) [HFC-S]" },
     })
@@ -12564,12 +14144,24 @@ namespace HardwareInformation.Providers {
 { 12291, "Express Ethernet" },
     })
  },
+            { 2395, Tuple.Create("Medialogic Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 2396, Tuple.Create("K-Tec Electronics", new Dictionary<int, string>{
+    })
+ },
             { 2397, Tuple.Create("Polycom, Inc.", new Dictionary<int, string>{
 { 1, "Polycom ViaVideo" },
     })
  },
+            { 2404, Tuple.Create("BITRAN", new Dictionary<int, string>{
+    })
+ },
             { 2407, Tuple.Create("Acer NeWeb Corp.", new Dictionary<int, string>{
 { 516, "WarpLink 802.11b Adapter" },
+    })
+ },
+            { 2408, Tuple.Create("Catalyst Enterprises, Inc.", new Dictionary<int, string>{
     })
  },
             { 2414, Tuple.Create("Feitian Technologies, Inc.", new Dictionary<int, string>{
@@ -12599,6 +14191,21 @@ namespace HardwareInformation.Providers {
 { 1, "e-gate Smart Card" },
     })
  },
+            { 2420, Tuple.Create("Datagraphix, a business unit of Anacomp", new Dictionary<int, string>{
+    })
+ },
+            { 2421, Tuple.Create("OL'E Communications, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 2422, Tuple.Create("Adirondack Wire & Cable", new Dictionary<int, string>{
+    })
+ },
+            { 2423, Tuple.Create("Lightsurf Technologies", new Dictionary<int, string>{
+    })
+ },
+            { 2424, Tuple.Create("Beckhoff GmbH", new Dictionary<int, string>{
+    })
+ },
             { 2425, Tuple.Create("Jeilin Technology Corp., Ltd", new Dictionary<int, string>{
 { 546, "Keychain Display" },
 { 548, "JL2005A Toy Camera" },
@@ -12610,8 +14217,23 @@ namespace HardwareInformation.Providers {
 { 1, "Digital Wallet" },
     })
  },
+            { 2427, Tuple.Create("Knudsen Engineering, Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 2428, Tuple.Create("Marunix Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 2429, Tuple.Create("Rosun Technologies, Inc.", new Dictionary<int, string>{
+    })
+ },
             { 2430, Tuple.Create("Biopac Systems Inc.", new Dictionary<int, string>{
 { 53, "MP35 v1.0" },
+    })
+ },
+            { 2431, Tuple.Create("Barun Electronics Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 2433, Tuple.Create("Oak Technology, Ltd", new Dictionary<int, string>{
     })
  },
             { 2436, Tuple.Create("Apricorn", new Dictionary<int, string>{
@@ -12625,9 +14247,27 @@ namespace HardwareInformation.Providers {
 { 163, "A3/200 or A3/300 Label Printer" },
     })
  },
+            { 2438, Tuple.Create("Matsushita Electric Works, Ltd.", new Dictionary<int, string>{
+    })
+ },
+            { 2444, Tuple.Create("Vitana Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 2445, Tuple.Create("INDesign", new Dictionary<int, string>{
+    })
+ },
+            { 2446, Tuple.Create("Integrated Intellectual Property, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 2447, Tuple.Create("Kenwood TMI Corp.", new Dictionary<int, string>{
+    })
+ },
             { 2451, Tuple.Create("Gemstar eBook Group, Ltd", new Dictionary<int, string>{
 { 1, "REB1100 eBook Reader" },
 { 2, "eBook" },
+    })
+ },
+            { 2454, Tuple.Create("Integrated Telecom Express, Inc.", new Dictionary<int, string>{
     })
  },
             { 2458, Tuple.Create("Zippy Technology Corp.", new Dictionary<int, string>{
@@ -12639,13 +14279,37 @@ namespace HardwareInformation.Providers {
 { 29024, "Hyper Slim Keyboard" },
     })
  },
+            { 2462, Tuple.Create("Trimble Navigation, Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 2467, Tuple.Create("PairGain Technologies", new Dictionary<int, string>{
+    })
+ },
+            { 2468, Tuple.Create("Contech Research, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 2469, Tuple.Create("VCON Telecommunications", new Dictionary<int, string>{
+    })
+ },
             { 2470, Tuple.Create("Poinchips", new Dictionary<int, string>{
 { 32769, "Mass Storage Device" },
+    })
+ },
+            { 2471, Tuple.Create("Data Transmission Network Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 2472, Tuple.Create("Lin Shiung Enterprise Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 2473, Tuple.Create("Smart Card Technologies Co., Ltd", new Dictionary<int, string>{
     })
  },
             { 2474, Tuple.Create("Intersil Corp.", new Dictionary<int, string>{
 { 4096, "Prism GT 802.11b/g Adapter" },
 { 13890, "Prism 2.x 802.11b Adapter" },
+    })
+ },
+            { 2475, Tuple.Create("Japan Cash Machine Co., Ltd.", new Dictionary<int, string>{
     })
  },
             { 2478, Tuple.Create("Tripp Lite", new Dictionary<int, string>{
@@ -12658,6 +14322,15 @@ namespace HardwareInformation.Providers {
  },
             { 2482, Tuple.Create("Franklin Electronic Publishers, Inc.", new Dictionary<int, string>{
 { 1, "eBookman Palm Computer" },
+    })
+ },
+            { 2483, Tuple.Create("Altius Solutions, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 2484, Tuple.Create("MDS Telephone Systems", new Dictionary<int, string>{
+    })
+ },
+            { 2485, Tuple.Create("Celltrix Technology Co., Ltd", new Dictionary<int, string>{
     })
  },
             { 2492, Tuple.Create("Grundig", new Dictionary<int, string>{
@@ -12698,6 +14371,9 @@ namespace HardwareInformation.Providers {
 { 4919, "TOUCHSTONE DEVICE" },
     })
  },
+            { 2498, Tuple.Create("Nisca Corp.", new Dictionary<int, string>{
+    })
+ },
             { 2499, Tuple.Create("HID Global", new Dictionary<int, string>{
 { 7, "Reader V2" },
 { 8, "ZFG-9800-AC SmartCard Reader" },
@@ -12712,6 +14388,9 @@ namespace HardwareInformation.Providers {
  },
             { 2500, Tuple.Create("ACTiSYS Corp.", new Dictionary<int, string>{
 { 17, "ACT-IR2000U IrDA Dongle" },
+    })
+ },
+            { 2501, Tuple.Create("Memory Corp.", new Dictionary<int, string>{
     })
  },
             { 2506, Tuple.Create("BMC Messsysteme GmbH", new Dictionary<int, string>{
@@ -12738,6 +14417,18 @@ namespace HardwareInformation.Providers {
 { 8193, "Psion WaveFinder DAB radio receiver" },
     })
  },
+            { 2510, Tuple.Create("City Electronics, Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 2511, Tuple.Create("Electronics Testing Center, Taiwan", new Dictionary<int, string>{
+    })
+ },
+            { 2513, Tuple.Create("NeoMagic, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 2514, Tuple.Create("Vreelin Engineering, Inc.", new Dictionary<int, string>{
+    })
+ },
             { 2515, Tuple.Create("Com One", new Dictionary<int, string>{
 { 1, "ISDN TA / Light Rider 128K" },
 { 11, "Bluetooth Adapter class 2" },
@@ -12750,6 +14441,9 @@ namespace HardwareInformation.Providers {
             { 2520, Tuple.Create("ELATEC GmbH", new Dictionary<int, string>{
 { 800, "TWN3 Multi125" },
 { 1030, "TWN4 MIFARE NFC" },
+    })
+ },
+            { 2521, Tuple.Create("KRF Tech, Ltd", new Dictionary<int, string>{
     })
  },
             { 2522, Tuple.Create("A4Tech Co., Ltd.", new Dictionary<int, string>{
@@ -12783,8 +14477,26 @@ namespace HardwareInformation.Providers {
 { 136, "USB-1616FS internal hub" },
     })
  },
+            { 2524, Tuple.Create("Aimex Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 2525, Tuple.Create("Fellowes, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 2527, Tuple.Create("Addonics Technologies Corp.", new Dictionary<int, string>{
+    })
+ },
             { 2529, Tuple.Create("Intellon Corp.", new Dictionary<int, string>{
 { 20769, "MicroLink dLAN" },
+    })
+ },
+            { 2533, Tuple.Create("Jo-Dan International, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 2534, Tuple.Create("Silutia, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 2535, Tuple.Create("Real 3D, Inc.", new Dictionary<int, string>{
     })
  },
             { 2536, Tuple.Create("AKAI  Professional M.I. Corp.", new Dictionary<int, string>{
@@ -12793,6 +14505,9 @@ namespace HardwareInformation.Providers {
 { 109, "EWI electronic wind instrument" },
 { 113, "MPK25 MIDI Keyboard" },
 { 118, "LPK25 MIDI Keyboard" },
+    })
+ },
+            { 2537, Tuple.Create("Chen-Source, Inc.", new Dictionary<int, string>{
     })
  },
             { 2539, Tuple.Create("IM Networks, Inc.", new Dictionary<int, string>{
@@ -12817,8 +14532,32 @@ namespace HardwareInformation.Providers {
 { 2128, "Adapter" },
     })
  },
+            { 2550, Tuple.Create("RocketChips, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 2551, Tuple.Create("Edu-Science (H.K.), Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 2552, Tuple.Create("SoftConnex Technologies, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 2553, Tuple.Create("Bay Associates", new Dictionary<int, string>{
+    })
+ },
+            { 2554, Tuple.Create("Mtek Vision", new Dictionary<int, string>{
+    })
+ },
             { 2555, Tuple.Create("Altera", new Dictionary<int, string>{
 { 24577, "Blaster" },
+    })
+ },
+            { 2559, Tuple.Create("Gain Technology Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 2560, Tuple.Create("Liquid Audio", new Dictionary<int, string>{
+    })
+ },
+            { 2561, Tuple.Create("ViA, Inc.", new Dictionary<int, string>{
     })
  },
             { 2565, Tuple.Create("Unknown Manufacturer", new Dictionary<int, string>{
@@ -12835,8 +14574,14 @@ namespace HardwareInformation.Providers {
 { 218, "ADU218 Solid-State Relay I/O Interface" },
     })
  },
+            { 2571, Tuple.Create("Cybex Computer Products Co.", new Dictionary<int, string>{
+    })
+ },
             { 2573, Tuple.Create("Servergy, Inc", new Dictionary<int, string>{
 { 9492, "CTS-1000 Internal Hub" },
+    })
+ },
+            { 2577, Tuple.Create("Xentec, Inc.", new Dictionary<int, string>{
     })
  },
             { 2578, Tuple.Create("Cambridge Silicon Radio, Ltd", new Dictionary<int, string>{
@@ -12864,6 +14609,15 @@ namespace HardwareInformation.Providers {
 { 4113, "Bluetooth Device" },
 { 4114, "Bluetooth Device" },
 { 65535, "USB Bluetooth Device in DFU State" },
+    })
+ },
+            { 2579, Tuple.Create("Telebyte, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 2580, Tuple.Create("Spacelabs Medical, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 2581, Tuple.Create("Scalar Corp.", new Dictionary<int, string>{
     })
  },
             { 2582, Tuple.Create("Trek Technology (S) PTE, Ltd", new Dictionary<int, string>{
@@ -12894,8 +14648,17 @@ namespace HardwareInformation.Providers {
 { 4097, "EI2000 Camera powered by Digita!" },
     })
  },
+            { 2584, Tuple.Create("Heidelberger Druckmaschinen AG", new Dictionary<int, string>{
+    })
+ },
+            { 2585, Tuple.Create("Hua Geng Technologies, Inc.", new Dictionary<int, string>{
+    })
+ },
             { 2593, Tuple.Create("Medtronic Physio Control Corp.", new Dictionary<int, string>{
 { 32769, "MMT-7305WW [Medtronic Minimed CareLink]" },
+    })
+ },
+            { 2594, Tuple.Create("Century Semiconductor USA, Inc.", new Dictionary<int, string>{
     })
  },
             { 2599, Tuple.Create("Datacard Group", new Dictionary<int, string>{
@@ -12916,8 +14679,23 @@ namespace HardwareInformation.Providers {
 { 138, "SAC Hub" },
     })
  },
+            { 2617, Tuple.Create("Gilat Satellite Networks, Ltd", new Dictionary<int, string>{
+    })
+ },
             { 2618, Tuple.Create("PentaMedia Co., Ltd", new Dictionary<int, string>{
 { 355, "KN-W510U 1.0 Wireless LAN Adapter" },
+    })
+ },
+            { 2620, Tuple.Create("NTT DoCoMo, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 2621, Tuple.Create("Varo Vision", new Dictionary<int, string>{
+    })
+ },
+            { 2623, Tuple.Create("Swissonic AG", new Dictionary<int, string>{
+    })
+ },
+            { 2627, Tuple.Create("Boca Systems, Inc.", new Dictionary<int, string>{
     })
  },
             { 2630, Tuple.Create("Davicom Semiconductor, Inc.", new Dictionary<int, string>{
@@ -12926,6 +14704,9 @@ namespace HardwareInformation.Providers {
 { 34069, "ADMtek ADM8515 NIC" },
 { 36864, "DM9000E Fast Ethernet Adapter" },
 { 38401, "DM9601 Fast Ethernet Adapter" },
+    })
+ },
+            { 2631, Tuple.Create("Hirose Electric", new Dictionary<int, string>{
     })
  },
             { 2632, Tuple.Create("I/O Interconnect", new Dictionary<int, string>{
@@ -12949,6 +14730,9 @@ namespace HardwareInformation.Providers {
  },
             { 2634, Tuple.Create("Ploytec GmbH", new Dictionary<int, string>{
 { 41984, "AUDIO JUNCTION 2.0" },
+    })
+ },
+            { 2635, Tuple.Create("Fujitsu Media Devices, Ltd", new Dictionary<int, string>{
     })
  },
             { 2636, Tuple.Create("Computex Co., Ltd", new Dictionary<int, string>{
@@ -12980,6 +14764,21 @@ namespace HardwareInformation.Providers {
 { 245, "UC-33e MIDI Controller" },
     })
  },
+            { 2638, Tuple.Create("Steinberg Soft-und Hardware GmbH", new Dictionary<int, string>{
+    })
+ },
+            { 2639, Tuple.Create("Litton Systems, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 2640, Tuple.Create("Mimaki Engineering Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 2641, Tuple.Create("Sony Electronics, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 2642, Tuple.Create("Jebsee Electronics Co., Ltd", new Dictionary<int, string>{
+    })
+ },
             { 2643, Tuple.Create("Portable Peripheral Co., Ltd", new Dictionary<int, string>{
 { 4096, "Scanner" },
 { 8192, "Q-Scan A6 Scanner" },
@@ -12994,6 +14793,12 @@ namespace HardwareInformation.Providers {
 { 12309, "BizCardReader 300G" },
 { 12330, "LM9832 - PA570 Mini Business Card Scanner [Targus]" },
 { 20481, "BizCardReader 900C" },
+    })
+ },
+            { 2650, Tuple.Create("Electronics For Imaging, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 2651, Tuple.Create("EAsics NV", new Dictionary<int, string>{
     })
  },
             { 2652, Tuple.Create("Broadcom Corp.", new Dictionary<int, string>{
@@ -13076,6 +14881,9 @@ namespace HardwareInformation.Providers {
 { 53531, "Eminent EM4045 [Broadcom 4320 USB]" },
     })
  },
+            { 2653, Tuple.Create("Diatrend Corp.", new Dictionary<int, string>{
+    })
+ },
             { 2655, Tuple.Create("Zebra", new Dictionary<int, string>{
 { 9, "LP2844 Printer" },
 { 80, "P120i / WM120i" },
@@ -13093,21 +14901,57 @@ namespace HardwareInformation.Providers {
 { 16, "MPMan MP-F40 MP3 Player" },
     })
  },
+            { 2662, Tuple.Create("ClearCube Technology", new Dictionary<int, string>{
+    })
+ },
+            { 2663, Tuple.Create("Medeli Electronics Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 2664, Tuple.Create("Comaide Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 2665, Tuple.Create("Chroma ate, Inc.", new Dictionary<int, string>{
+    })
+ },
             { 2667, Tuple.Create("Green House Co., Ltd", new Dictionary<int, string>{
 { 1, "Compact Flash R/W with MP3 player" },
 { 15, "FlashDisk" },
+    })
+ },
+            { 2668, Tuple.Create("Integrated Circuit Systems, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 2669, Tuple.Create("UPS Manufacturing", new Dictionary<int, string>{
+    })
+ },
+            { 2670, Tuple.Create("Benwin", new Dictionary<int, string>{
     })
  },
             { 2671, Tuple.Create("Core Technology, Inc.", new Dictionary<int, string>{
 { 1024, "Xanboo" },
     })
  },
+            { 2672, Tuple.Create("International Game Technology", new Dictionary<int, string>{
+    })
+ },
             { 2673, Tuple.Create("VIPColor Technologies USA, Inc.", new Dictionary<int, string>{
 { 1, "VP485 Printer" },
     })
  },
+            { 2674, Tuple.Create("Sanwa Denshi", new Dictionary<int, string>{
+    })
+ },
             { 2675, Tuple.Create("Mackie Designs", new Dictionary<int, string>{
 { 2, "XD-2 [Spike]" },
+    })
+ },
+            { 2685, Tuple.Create("NSTL, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 2686, Tuple.Create("Octagon Systems Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 2688, Tuple.Create("Rexon Technology Corp., Ltd", new Dictionary<int, string>{
     })
  },
             { 2689, Tuple.Create("Chesen Electronics Corp.", new Dictionary<int, string>{
@@ -13122,6 +14966,18 @@ namespace HardwareInformation.Providers {
             { 2690, Tuple.Create("Syscan", new Dictionary<int, string>{
 { 17920, "TravelScan 460/464" },
 { 26117, "ScanShell 800N" },
+    })
+ },
+            { 2691, Tuple.Create("NextComm, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 2692, Tuple.Create("Maui Innovative Peripherals", new Dictionary<int, string>{
+    })
+ },
+            { 2693, Tuple.Create("Idexx Labs", new Dictionary<int, string>{
+    })
+ },
+            { 2694, Tuple.Create("NITGen Co., Ltd", new Dictionary<int, string>{
     })
  },
             { 2697, Tuple.Create("Aktiv", new Dictionary<int, string>{
@@ -13154,8 +15010,14 @@ namespace HardwareInformation.Providers {
 { 130, "Rutoken PinPad 2" },
     })
  },
+            { 2701, Tuple.Create("Picturetel", new Dictionary<int, string>{
+    })
+ },
             { 2702, Tuple.Create("Japan Aviation Electronics Industry, Ltd", new Dictionary<int, string>{
 { 8209, "Filter Driver For JAE XMC R/W" },
+    })
+ },
+            { 2704, Tuple.Create("Candy Technology Co., Ltd", new Dictionary<int, string>{
     })
  },
             { 2705, Tuple.Create("Globlink Technology, Inc.", new Dictionary<int, string>{
@@ -13185,6 +15047,15 @@ namespace HardwareInformation.Providers {
 { 13, "Input Pen" },
 { 16, "C-Pen 20" },
 { 2707, "PayPen" },
+    })
+ },
+            { 2708, Tuple.Create("Intersense", new Dictionary<int, string>{
+    })
+ },
+            { 2723, Tuple.Create("Lava Computer Mfg., Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 2724, Tuple.Create("Develco Elektronik", new Dictionary<int, string>{
     })
  },
             { 2725, Tuple.Create("First International Digital", new Dictionary<int, string>{
@@ -13245,6 +15116,15 @@ namespace HardwareInformation.Providers {
 { 61467, "Medion MD 6242 MP3 Player" },
     })
  },
+            { 2730, Tuple.Create("Japan CBM Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 2731, Tuple.Create("Vision Shape Europe SA", new Dictionary<int, string>{
+    })
+ },
+            { 2732, Tuple.Create("iCompression, Inc.", new Dictionary<int, string>{
+    })
+ },
             { 2733, Tuple.Create("Rohde & Schwarz GmbH & Co. KG", new Dictionary<int, string>{
 { 3, "NRP-Z21" },
 { 12, "NRP-Z11" },
@@ -13271,6 +15151,15 @@ namespace HardwareInformation.Providers {
 { 281, "HMF / HMP / HMS-X / HMO series Oscilloscopes" },
     })
  },
+            { 2734, Tuple.Create("NEC infrontia Corp. (Nitsuko)", new Dictionary<int, string>{
+    })
+ },
+            { 2735, Tuple.Create("Digitalway Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 2736, Tuple.Create("Arrow Strong Electronics Co., Ltd", new Dictionary<int, string>{
+    })
+ },
             { 2737, Tuple.Create("FEIG ELECTRONIC GmbH", new Dictionary<int, string>{
 { 2, "OBID RFID-Reader" },
 { 4, "OBID classic-pro" },
@@ -13287,6 +15176,21 @@ namespace HardwareInformation.Providers {
  },
             { 2751, Tuple.Create("Diolan", new Dictionary<int, string>{
 { 13168, "I2C/SPI Adapter - U2C-12" },
+    })
+ },
+            { 2755, Tuple.Create("Sanyo Semiconductor Company Micro", new Dictionary<int, string>{
+    })
+ },
+            { 2756, Tuple.Create("Leco Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 2757, Tuple.Create("I & C Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 2758, Tuple.Create("Singing Electrons, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 2759, Tuple.Create("Panwest Corp.", new Dictionary<int, string>{
     })
  },
             { 2760, Tuple.Create("Z-Star Microelectronics Corp.", new Dictionary<int, string>{
@@ -13329,6 +15233,9 @@ namespace HardwareInformation.Providers {
 { 4192, "OPEN NT1 Plus II" },
     })
  },
+            { 2764, Tuple.Create("Koga Electronics Co.", new Dictionary<int, string>{
+    })
+ },
             { 2765, Tuple.Create("ID Tech", new Dictionary<int, string>{
 { 768, "IDT1221U RS-232 Adapter" },
 { 1025, "Spectrum III Hybrid Smartcard Reader" },
@@ -13352,8 +15259,41 @@ namespace HardwareInformation.Providers {
 { 45589, "802.11bg" },
     })
  },
+            { 2767, Tuple.Create("Intoto, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 2768, Tuple.Create("Intellix Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 2769, Tuple.Create("Remotec Technology, Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 2770, Tuple.Create("Service & Quality Technology Co., Ltd", new Dictionary<int, string>{
+    })
+ },
             { 2778, Tuple.Create("Data Encryption Systems Ltd.", new Dictionary<int, string>{
 { 5, "DK2" },
+    })
+ },
+            { 2787, Tuple.Create("Allion Computer, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 2788, Tuple.Create("Taito Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 2791, Tuple.Create("Neodym Systems, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 2792, Tuple.Create("System Support Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 2793, Tuple.Create("North Shore Circuit Design L.L.P.", new Dictionary<int, string>{
+    })
+ },
+            { 2794, Tuple.Create("SciEssence, LLC", new Dictionary<int, string>{
+    })
+ },
+            { 2795, Tuple.Create("TTP Communications, Ltd", new Dictionary<int, string>{
     })
  },
             { 2796, Tuple.Create("Neodio Technologies Corp.", new Dictionary<int, string>{
@@ -13396,6 +15336,9 @@ namespace HardwareInformation.Providers {
 { 53333, "Globetrotter GI0505 [iCON 505]" },
     })
  },
+            { 2806, Tuple.Create("Silver I Co., Ltd", new Dictionary<int, string>{
+    })
+ },
             { 2807, Tuple.Create("B2C2, Inc.", new Dictionary<int, string>{
 { 257, "Digital TV USB Receiver (DVB-S/T/C / ATSC)" },
     })
@@ -13407,6 +15350,21 @@ namespace HardwareInformation.Providers {
  },
             { 2810, Tuple.Create("DMC Co., Ltd.", new Dictionary<int, string>{
 { 2002, "Controller Board for Projected Capacitive Touch Screen DUS3000" },
+    })
+ },
+            { 2812, Tuple.Create("Zaptronix Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 2813, Tuple.Create("Tateno Dennou, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 2814, Tuple.Create("Cummins Engine Co.", new Dictionary<int, string>{
+    })
+ },
+            { 2815, Tuple.Create("Jump Zone Network Products, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 2816, Tuple.Create("INGENICO", new Dictionary<int, string>{
     })
  },
             { 2821, Tuple.Create("ASUSTek Computer, Inc.", new Dictionary<int, string>{
@@ -13540,8 +15498,41 @@ namespace HardwareInformation.Providers {
 { 1024, "DNxID" },
     })
  },
+            { 2832, Tuple.Create("Pcally", new Dictionary<int, string>{
+    })
+ },
+            { 2833, Tuple.Create("I Tech Solutions Co., Ltd", new Dictionary<int, string>{
+    })
+ },
             { 2846, Tuple.Create("Electronic Warfare Assoc., Inc. (EWA)", new Dictionary<int, string>{
 { 32775, "Blackhawk USB560-BP JTAG Emulator" },
+    })
+ },
+            { 2847, Tuple.Create("Insyde Software Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 2848, Tuple.Create("TransDimension, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 2849, Tuple.Create("Yokogawa Electric Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 2850, Tuple.Create("Japan System Development Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 2851, Tuple.Create("Pan-Asia Electronics Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 2852, Tuple.Create("Link Evolution Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 2855, Tuple.Create("Ritek Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 2856, Tuple.Create("Kenwood Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 2860, Tuple.Create("Village Center, Inc.", new Dictionary<int, string>{
     })
  },
             { 2864, Tuple.Create("PNY Technologies, Inc.", new Dictionary<int, string>{
@@ -13558,6 +15549,9 @@ namespace HardwareInformation.Providers {
 { 4112, "Vidamic Technomouse IQ" },
     })
  },
+            { 2871, Tuple.Create("Hitachi ULSI Systems Co., Ltd", new Dictionary<int, string>{
+    })
+ },
             { 2872, Tuple.Create("Gear Head", new Dictionary<int, string>{
 { 3, "Keyboard" },
 { 16, "107-Key Keyboard" },
@@ -13570,6 +15564,9 @@ namespace HardwareInformation.Providers {
 { 2049, "USB-Parallel Bridge" },
 { 2305, "OCT To Fast Ethernet Converter" },
 { 3075, "LAN DOCK Serial Converter" },
+    })
+ },
+            { 2874, Tuple.Create("IPaxess", new Dictionary<int, string>{
     })
  },
             { 2875, Tuple.Create("Tekram Technology Co., Ltd", new Dictionary<int, string>{
@@ -13590,6 +15587,9 @@ namespace HardwareInformation.Providers {
 { 50944, "Olicard 100 (Mass Storage mode)" },
     })
  },
+            { 2878, Tuple.Create("Kikusui Electronics Corp.", new Dictionary<int, string>{
+    })
+ },
             { 2881, Tuple.Create("Hal Corp.", new Dictionary<int, string>{
 { 17, "Crossam2+USB IR commander" },
     })
@@ -13597,6 +15597,9 @@ namespace HardwareInformation.Providers {
             { 2883, Tuple.Create("Play.com, Inc.", new Dictionary<int, string>{
 { 3, "PS2 Controller Converter" },
 { 5, "GameCube Adaptor" },
+    })
+ },
+            { 2887, Tuple.Create("Sportbug.com, Inc.", new Dictionary<int, string>{
     })
  },
             { 2888, Tuple.Create("TechnoTrend AG", new Dictionary<int, string>{
@@ -13647,13 +15650,52 @@ namespace HardwareInformation.Providers {
 { 35104, "MP3 Player" },
     })
  },
+            { 2896, Tuple.Create("Dumpries Co., Ltd", new Dictionary<int, string>{
+    })
+ },
             { 2897, Tuple.Create("Comfort Keyboard Co.", new Dictionary<int, string>{
 { 32, "Comfort Keyboard" },
+    })
+ },
+            { 2898, Tuple.Create("Colorado MicroDisplay, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 2900, Tuple.Create("Sinbon Electronics Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 2902, Tuple.Create("TYI Systems, Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 2903, Tuple.Create("Beijing HanwangTechnology Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 2905, Tuple.Create("Lake Communications, Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 2906, Tuple.Create("Corel Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 2911, Tuple.Create("Green Electronics Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 2912, Tuple.Create("Nsine, Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 2913, Tuple.Create("NEC Viewtechnology, Ltd", new Dictionary<int, string>{
     })
  },
             { 2914, Tuple.Create("Orange Micro, Inc.", new Dictionary<int, string>{
 { 11, "Bluetooth Device" },
 { 89, "iBOT2 Webcam" },
+    })
+ },
+            { 2915, Tuple.Create("ADLink Technology, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 2916, Tuple.Create("Wonderful Wire Cable Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 2917, Tuple.Create("Expert Magnetics Corp.", new Dictionary<int, string>{
     })
  },
             { 2918, Tuple.Create("Cybiko Inc.", new Dictionary<int, string>{
@@ -13664,16 +15706,46 @@ namespace HardwareInformation.Providers {
 { 21854, "SCB-R9000" },
     })
  },
+            { 2921, Tuple.Create("CacheVision", new Dictionary<int, string>{
+    })
+ },
             { 2922, Tuple.Create("Maxim Integrated Products", new Dictionary<int, string>{
 { 41266, "WUP-005 [Nintendo Wii U Pro Controller]" },
+    })
+ },
+            { 2927, Tuple.Create("Nagano Japan Radio Co., Ltd", new Dictionary<int, string>{
     })
  },
             { 2928, Tuple.Create("PortalPlayer, Inc.", new Dictionary<int, string>{
 { 186, "iRiver H10 20GB" },
     })
  },
+            { 2929, Tuple.Create("SHIN-EI Sangyo Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 2930, Tuple.Create("Embedded Wireless Technology Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 2931, Tuple.Create("Computone Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 2933, Tuple.Create("Roland DG Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 2937, Tuple.Create("Sunrise Telecom, Inc.", new Dictionary<int, string>{
+    })
+ },
             { 2938, Tuple.Create("Zeevo, Inc.", new Dictionary<int, string>{
 { 2000, "Bluetooth Dongle" },
+    })
+ },
+            { 2939, Tuple.Create("Taiko Denki Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 2940, Tuple.Create("ITRAN Communications, Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 2941, Tuple.Create("Astrodesign, Inc.", new Dictionary<int, string>{
     })
  },
             { 2945, Tuple.Create("id3 Technologies", new Dictionary<int, string>{
@@ -13688,6 +15760,12 @@ namespace HardwareInformation.Providers {
 { 545, "CL1356A smartcard reader (DFU + CCID + HID)" },
     })
  },
+            { 2948, Tuple.Create("Rextron Technology, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 2949, Tuple.Create("Elkat Electronics, Sdn., Bhd.", new Dictionary<int, string>{
+    })
+ },
             { 2950, Tuple.Create("Exputer Systems, Inc.", new Dictionary<int, string>{
 { 20736, "XMC5100 Zippy Drive" },
 { 20752, "XMC5110 Flash Drive" },
@@ -13696,6 +15774,15 @@ namespace HardwareInformation.Providers {
 { 20994, "XMC5200 Zippy Drive" },
 { 21120, "XMC5280 Storage Drive" },
 { 65520, "ISP5200 Debugger" },
+    })
+ },
+            { 2951, Tuple.Create("Plus-One I & T, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 2952, Tuple.Create("Sigma Koki Co., Ltd, Technology Center", new Dictionary<int, string>{
+    })
+ },
+            { 2953, Tuple.Create("Advanced Digital Broadcast, Ltd", new Dictionary<int, string>{
     })
  },
             { 2956, Tuple.Create("SMART Technologies Inc.", new Dictionary<int, string>{
@@ -13714,6 +15801,9 @@ namespace HardwareInformation.Providers {
 { 32299, "AX88772B Fast Ethernet Controller" },
     })
  },
+            { 2966, Tuple.Create("Sewon Telecom", new Dictionary<int, string>{
+    })
+ },
             { 2967, Tuple.Create("O2 Micro, Inc.", new Dictionary<int, string>{
 { 30514, "Smart Card Reader" },
 { 30561, "Oz776 1.1 Hub" },
@@ -13721,8 +15811,20 @@ namespace HardwareInformation.Providers {
 { 30578, "OZ776 CCID Smartcard Reader" },
     })
  },
+            { 2968, Tuple.Create("Playmates Toys, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 2969, Tuple.Create("Audio International, Inc.", new Dictionary<int, string>{
+    })
+ },
             { 2971, Tuple.Create("Dipl.-Ing. Stefan Kunde", new Dictionary<int, string>{
 { 16402, "Reflex RC-controller Interface" },
+    })
+ },
+            { 2973, Tuple.Create("Softprotec Co.", new Dictionary<int, string>{
+    })
+ },
+            { 2975, Tuple.Create("Chippo Technologies", new Dictionary<int, string>{
     })
  },
             { 2991, Tuple.Create("U.S. Robotics", new Dictionary<int, string>{
@@ -13751,9 +15853,15 @@ namespace HardwareInformation.Providers {
 { 20487, "3340z/Rollei DC3100" },
     })
  },
+            { 2993, Tuple.Create("Infinilink Corp.", new Dictionary<int, string>{
+    })
+ },
             { 2994, Tuple.Create("Ambit Microsystems Corp.", new Dictionary<int, string>{
 { 770, "U10H010 802.11b Wireless Adapter [Intersil PRISM 3]" },
 { 24728, "USB Cable Modem" },
+    })
+ },
+            { 2995, Tuple.Create("Ofuji Technology", new Dictionary<int, string>{
     })
  },
             { 2996, Tuple.Create("HTC (High Tech Computer Corp.)", new Dictionary<int, string>{
@@ -13965,6 +16073,39 @@ namespace HardwareInformation.Providers {
 { 11399, "Vive" },
     })
  },
+            { 2997, Tuple.Create("Murata Manufacturing Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 2998, Tuple.Create("Network Alchemy", new Dictionary<int, string>{
+    })
+ },
+            { 2999, Tuple.Create("Joytech Computer Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 3000, Tuple.Create("Hitachi Semiconductor and Devices Sales Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 3001, Tuple.Create("Eiger M&C Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 3002, Tuple.Create("ZAccess Systems", new Dictionary<int, string>{
+    })
+ },
+            { 3003, Tuple.Create("General Meters Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 3004, Tuple.Create("Assistive Technology, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 3005, Tuple.Create("System Connection, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 3008, Tuple.Create("Knilink Technology, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 3009, Tuple.Create("Fuw Yng Electronics Co., Ltd", new Dictionary<int, string>{
+    })
+ },
             { 3010, Tuple.Create("Seagate RSS LLC", new Dictionary<int, string>{
 { 1282, "ST3300601CB-RK 300 GB External Hard Drive" },
 { 1283, "ST3250824A [Barracuda 7200.9]" },
@@ -14026,6 +16167,15 @@ namespace HardwareInformation.Providers {
 { 1, "UMTS-TDD (TD-CDMA) modem" },
     })
  },
+            { 3012, Tuple.Create("Microcube Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 3013, Tuple.Create("JCN Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 3014, Tuple.Create("ExWAY, Inc.", new Dictionary<int, string>{
+    })
+ },
             { 3015, Tuple.Create("X10 Wireless Technology, Inc.", new Dictionary<int, string>{
 { 1, "ActiveHome (ACPI-compliant)" },
 { 2, "Firecracker Interface (ACPI-compliant)" },
@@ -14042,6 +16192,18 @@ namespace HardwareInformation.Providers {
 { 13, "Transceiver (ACPI-compliant)" },
 { 14, "Transceiver (ACPI-compliant)" },
 { 15, "Transceiver (ACPI-compliant)" },
+    })
+ },
+            { 3016, Tuple.Create("Telmax Communications", new Dictionary<int, string>{
+    })
+ },
+            { 3017, Tuple.Create("ECI Telecom, Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 3018, Tuple.Create("Startek Engineering, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 3019, Tuple.Create("Perfect Technic Enterprise Co., Ltd", new Dictionary<int, string>{
     })
  },
             { 3031, Tuple.Create("Andrew Pargeter & Associates", new Dictionary<int, string>{
@@ -14161,9 +16323,36 @@ namespace HardwareInformation.Providers {
 { 6438, "H5321 gw Mobile Broadband Module" },
     })
  },
+            { 3036, Tuple.Create("Y Media Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 3037, Tuple.Create("Orange PCS", new Dictionary<int, string>{
+    })
+ },
+            { 3042, Tuple.Create("Kanda Tsushin Kogyo Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 3043, Tuple.Create("TOYO Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 3044, Tuple.Create("Elka International, Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 3045, Tuple.Create("DOME imaging systems, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 3046, Tuple.Create("Dong Guan Humen Wonderful Wire Cable Factory", new Dictionary<int, string>{
+    })
+ },
             { 3053, Tuple.Create("MEI", new Dictionary<int, string>{
 { 4352, "CASHFLOW SC" },
 { 4353, "Series 2000 Combo Acceptor" },
+    })
+ },
+            { 3054, Tuple.Create("LTK Industries, Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 3055, Tuple.Create("Way2Call Communications", new Dictionary<int, string>{
     })
  },
             { 3056, Tuple.Create("Pace Micro Technology PLC", new Dictionary<int, string>{
@@ -14176,12 +16365,18 @@ namespace HardwareInformation.Providers {
 { 3, "netMod Driver Ver 2.4 (CAPI)" },
     })
  },
+            { 3058, Tuple.Create("Konexx", new Dictionary<int, string>{
+    })
+ },
             { 3062, Tuple.Create("Addonics Technologies, Inc.", new Dictionary<int, string>{
 { 259, "Storage Device" },
 { 4660, "Storage Device" },
 { 40960, "Cable 205 (TPP)" },
 { 40961, "Cable 205" },
 { 40962, "IDE Bridge" },
+    })
+ },
+            { 3063, Tuple.Create("Sunny Giken, Inc.", new Dictionary<int, string>{
     })
  },
             { 3064, Tuple.Create("Fujitsu Siemens Computers", new Dictionary<int, string>{
@@ -14207,6 +16402,18 @@ namespace HardwareInformation.Providers {
  },
             { 3072, Tuple.Create("FireFly Mouse Mat", new Dictionary<int, string>{
 { 5639, "Apex M500" },
+    })
+ },
+            { 3076, Tuple.Create("MOTO Development Group, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 3077, Tuple.Create("Appian Graphics", new Dictionary<int, string>{
+    })
+ },
+            { 3078, Tuple.Create("Hasbro Games, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 3079, Tuple.Create("Infinite Data Storage, Ltd", new Dictionary<int, string>{
     })
  },
             { 3080, Tuple.Create("Agate", new Dictionary<int, string>{
@@ -14250,6 +16457,9 @@ namespace HardwareInformation.Providers {
 { 39170, "VibraX" },
     })
  },
+            { 3093, Tuple.Create("Iris Graphics", new Dictionary<int, string>{
+    })
+ },
             { 3094, Tuple.Create("Gyration, Inc.", new Dictionary<int, string>{
 { 2, "RF Technology Receiver" },
 { 3, "RF Technology Receiver" },
@@ -14258,8 +16468,32 @@ namespace HardwareInformation.Providers {
 { 129, "eHome Infrared Receiver" },
     })
  },
+            { 3095, Tuple.Create("Cyberboard A/S", new Dictionary<int, string>{
+    })
+ },
+            { 3096, Tuple.Create("SynerTek Korea, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 3097, Tuple.Create("cyberPIXIE, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 3098, Tuple.Create("Silicon Motion, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 3099, Tuple.Create("MIPS Technologies", new Dictionary<int, string>{
+    })
+ },
+            { 3100, Tuple.Create("Hang Zhou Silan Electronics Co., Ltd", new Dictionary<int, string>{
+    })
+ },
             { 3103, Tuple.Create("Magicard", new Dictionary<int, string>{
 { 6144, "Tango 2E" },
+    })
+ },
+            { 3106, Tuple.Create("Tally Printer Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 3107, Tuple.Create("Lernout + Hauspie", new Dictionary<int, string>{
     })
  },
             { 3108, Tuple.Create("Taiyo Yuden", new Dictionary<int, string>{
@@ -14308,6 +16542,36 @@ namespace HardwareInformation.Providers {
  },
             { 3120, Tuple.Create("Mutoh Industries Ltd", new Dictionary<int, string>{
 { 24592, "Kona 1400 Cutting Plotter" },
+    })
+ },
+            { 3125, Tuple.Create("Eagletron, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 3126, Tuple.Create("E Ink Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 3127, Tuple.Create("e.Digital", new Dictionary<int, string>{
+    })
+ },
+            { 3128, Tuple.Create("Der An Electric Wire & Cable Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 3129, Tuple.Create("IFR", new Dictionary<int, string>{
+    })
+ },
+            { 3130, Tuple.Create("Furui Precise Component (Kunshan) Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 3131, Tuple.Create("Komatsu, Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 3132, Tuple.Create("Radius Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 3133, Tuple.Create("Innocom, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 3134, Tuple.Create("Nextcell, Inc.", new Dictionary<int, string>{
     })
  },
             { 3136, Tuple.Create("ELMCU", new Dictionary<int, string>{
@@ -14484,6 +16748,9 @@ namespace HardwareInformation.Providers {
 { 32778, "Vivitar Vivicam3350B" },
     })
  },
+            { 3142, Tuple.Create("WaveRider Communications, Inc.", new Dictionary<int, string>{
+    })
+ },
             { 3146, Tuple.Create("ALGE-TIMING GmbH", new Dictionary<int, string>{
 { 2185, "Timy" },
 { 2186, "Timy 2" },
@@ -14560,11 +16827,35 @@ namespace HardwareInformation.Providers {
 { 41005, "SeaLINK+8 (Port 7+8)" },
     })
  },
+            { 3155, Tuple.Create("ViewPLUS, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 3156, Tuple.Create("Glory, Ltd", new Dictionary<int, string>{
+    })
+ },
             { 3157, Tuple.Create("Spectrum Digital, Inc.", new Dictionary<int, string>{
 { 1296, "Spectrum Digital XDS510 JTAG Debugger" },
 { 1344, "SPI540" },
 { 21526, "TMS320C5416 DSK" },
 { 25622, "TMS320C6416 DDB" },
+    })
+ },
+            { 3158, Tuple.Create("Billion Bright, Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 3159, Tuple.Create("Imaginative Design Operation Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 3160, Tuple.Create("Vidar Systems Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 3161, Tuple.Create("Dong Guan Shinko Wire Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 3162, Tuple.Create("TRS International Mfg., Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 3166, Tuple.Create("Xytronix Research & Design", new Dictionary<int, string>{
     })
  },
             { 3168, Tuple.Create("Apogee Electronics Corp.", new Dictionary<int, string>{
@@ -14578,6 +16869,24 @@ namespace HardwareInformation.Providers {
 { 11, "MiC" },
 { 12, "MiC Bootloader" },
 { 32775, "Duet DFU Mode" },
+    })
+ },
+            { 3170, Tuple.Create("Chant Sincere Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 3171, Tuple.Create("Toko, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 3172, Tuple.Create("Signality System Engineering Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 3173, Tuple.Create("Eminence Enterprise Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 3174, Tuple.Create("Rexon Electronics Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 3175, Tuple.Create("Concept Telecom, Ltd", new Dictionary<int, string>{
     })
  },
             { 3178, Tuple.Create("ACS", new Dictionary<int, string>{
@@ -14624,13 +16933,43 @@ namespace HardwareInformation.Providers {
 { 4117, "SiPix CAMeleon" },
     })
  },
+            { 3192, Tuple.Create("Detto Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 3193, Tuple.Create("NuConnex Technologies Pte., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 3194, Tuple.Create("Wing-Span Enterprise Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 3206, Tuple.Create("NDA Technologies, Inc.", new Dictionary<int, string>{
+    })
+ },
             { 3208, Tuple.Create("Kyocera Wireless Corp.", new Dictionary<int, string>{
 { 33, "Handheld" },
 { 6106, "Qualcomm Kyocera CDMA Technologies MSM" },
     })
  },
+            { 3209, Tuple.Create("Honda Tsushin Kogyo Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 3210, Tuple.Create("Pathway Connectivity, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 3211, Tuple.Create("Wavefly Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 3212, Tuple.Create("Coactive Networks", new Dictionary<int, string>{
+    })
+ },
+            { 3213, Tuple.Create("Tempo", new Dictionary<int, string>{
+    })
+ },
             { 3214, Tuple.Create("Cesscom Co., Ltd", new Dictionary<int, string>{
 { 24576, "Luxian Series" },
+    })
+ },
+            { 3215, Tuple.Create("Applied Microsystems", new Dictionary<int, string>{
     })
  },
             { 3220, Tuple.Create("Cryptera", new Dictionary<int, string>{
@@ -14639,6 +16978,15 @@ namespace HardwareInformation.Providers {
  },
             { 3224, Tuple.Create("Berkshire Products, Inc.", new Dictionary<int, string>{
 { 4416, "USB PC Watchdog" },
+    })
+ },
+            { 3225, Tuple.Create("Innochips Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 3226, Tuple.Create("Hanwool Robotics Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 3227, Tuple.Create("Jobin Yvon, Inc.", new Dictionary<int, string>{
     })
  },
             { 3228, Tuple.Create("Brand Innovators BV", new Dictionary<int, string>{
@@ -14652,6 +17000,18 @@ namespace HardwareInformation.Providers {
 { 368, "3873 Manual Insert card reader" },
     })
  },
+            { 3234, Tuple.Create("Zyfer", new Dictionary<int, string>{
+    })
+ },
+            { 3235, Tuple.Create("Sega Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 3236, Tuple.Create("ST&T Instrument Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 3237, Tuple.Create("BAE Systems Canada, Inc.", new Dictionary<int, string>{
+    })
+ },
             { 3238, Tuple.Create("Castles Technology Co., Ltd", new Dictionary<int, string>{
 { 16, "EZUSB PC/SC Smart Card Reader" },
 { 80, "EZ220PU Reader Controller" },
@@ -14659,6 +17019,9 @@ namespace HardwareInformation.Providers {
 { 4222, "Reader Controller" },
 { 8208, "myPad110 PC/SC Smart Card Reader" },
 { 12368, "EZ710 Smart Card Reader" },
+    })
+ },
+            { 3239, Tuple.Create("Information Systems Laboratories", new Dictionary<int, string>{
     })
  },
             { 3242, Tuple.Create("Allied Telesis KK.", new Dictionary<int, string>{
@@ -14674,6 +17037,9 @@ namespace HardwareInformation.Providers {
 { 36865, "PowerPad Pocket PC Device" },
     })
  },
+            { 3246, Tuple.Create("Ascom Business Systems, Ltd", new Dictionary<int, string>{
+    })
+ },
             { 3247, Tuple.Create("Buslink", new Dictionary<int, string>{
 { 9479, "Hi-Speed USB-to-IDE Bridge Controller" },
 { 9493, "Flash Disk Embedded Hub" },
@@ -14685,11 +17051,77 @@ namespace HardwareInformation.Providers {
 { 15053, "Mass Storage Device" },
     })
  },
+            { 3248, Tuple.Create("Flying Pig Systems", new Dictionary<int, string>{
+    })
+ },
+            { 3249, Tuple.Create("Innovonics, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 3254, Tuple.Create("Celestix Networks, Pte., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 3255, Tuple.Create("Singatron Enterprise Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 3256, Tuple.Create("Opticis Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 3258, Tuple.Create("Trust Electronic (Shanghai) Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 3259, Tuple.Create("Shanghai Darong Electronics Co., Ltd", new Dictionary<int, string>{
+    })
+ },
             { 3260, Tuple.Create("Palmax Technology Co., Ltd", new Dictionary<int, string>{
 { 257, "Pocket PC P6C" },
 { 513, "Personal Digital Assistant" },
 { 769, "Personal Digital Assistant P6M+" },
 { 1025, "Pocket PC" },
+    })
+ },
+            { 3261, Tuple.Create("Pentel Co., Ltd (Electronics Equipment Div.)", new Dictionary<int, string>{
+    })
+ },
+            { 3262, Tuple.Create("Keryx Technologies, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 3263, Tuple.Create("Union Genius Computer Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 3264, Tuple.Create("Kuon Yi Industrial Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 3265, Tuple.Create("Given Imaging, Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 3266, Tuple.Create("Timex Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 3267, Tuple.Create("Rimage Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 3268, Tuple.Create("emsys GmbH", new Dictionary<int, string>{
+    })
+ },
+            { 3269, Tuple.Create("Sendo", new Dictionary<int, string>{
+    })
+ },
+            { 3270, Tuple.Create("Intermagic Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 3272, Tuple.Create("Technotools Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 3273, Tuple.Create("BroadMAX Technologies, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 3274, Tuple.Create("Amphenol", new Dictionary<int, string>{
+    })
+ },
+            { 3275, Tuple.Create("SKNet Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 3276, Tuple.Create("Domex Technology Corp.", new Dictionary<int, string>{
     })
  },
             { 3277, Tuple.Create("TerraTec Electronic GmbH", new Dictionary<int, string>{
@@ -14750,8 +17182,14 @@ namespace HardwareInformation.Providers {
 { 17, "Money Coin Unit" },
     })
  },
+            { 3287, Tuple.Create("NewChip S.r.l.", new Dictionary<int, string>{
+    })
+ },
             { 3288, Tuple.Create("JS Digitech, Inc.", new Dictionary<int, string>{
 { 8199, "Smart Card Reader/JSTU-9700" },
+    })
+ },
+            { 3289, Tuple.Create("Hitachi Shin Din Cable, Ltd", new Dictionary<int, string>{
     })
  },
             { 3294, Tuple.Create("Z-Com", new Dictionary<int, string>{
@@ -14802,6 +17240,9 @@ namespace HardwareInformation.Providers {
 { 4626, "PicoScope 4000 series PC Oscilloscope" },
     })
  },
+            { 3313, Tuple.Create("e-Conn Electronic Co., Ltd", new Dictionary<int, string>{
+    })
+ },
             { 3314, Tuple.Create("ENE Technology, Inc.", new Dictionary<int, string>{
 { 25120, "SD Card Reader (SG361)" },
 { 25125, "SD card reader (UB6225)" },
@@ -14840,8 +17281,26 @@ namespace HardwareInformation.Providers {
 { 58112, "QCA61x4 Bluetooth 4.0" },
     })
  },
+            { 3316, Tuple.Create("Fomtex Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 3317, Tuple.Create("Cellink Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 3318, Tuple.Create("Compucable Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 3319, Tuple.Create("ishoni Networks", new Dictionary<int, string>{
+    })
+ },
             { 3320, Tuple.Create("Clarisys, Inc.", new Dictionary<int, string>{
 { 1872, "Claritel-i750 - vp" },
+    })
+ },
+            { 3321, Tuple.Create("Central System Research Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 3322, Tuple.Create("Inviso, Inc.", new Dictionary<int, string>{
     })
  },
             { 3324, Tuple.Create("Minolta-QMS, Inc.", new Dictionary<int, string>{
@@ -14855,13 +17314,46 @@ namespace HardwareInformation.Providers {
 { 800, "SR-380N" },
     })
  },
+            { 3334, Tuple.Create("telos EDV Systementwicklung GmbH", new Dictionary<int, string>{
+    })
+ },
             { 3336, Tuple.Create("UTStarcom", new Dictionary<int, string>{
 { 1538, "DV007 [serial]" },
 { 1539, "DV007 [storage]" },
     })
  },
+            { 3339, Tuple.Create("Contemporary Controls", new Dictionary<int, string>{
+    })
+ },
+            { 3340, Tuple.Create("Astron Electronics Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 3341, Tuple.Create("MKNet Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 3342, Tuple.Create("Hybrid Networks, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 3343, Tuple.Create("Feng Shin Cable Co., Ltd", new Dictionary<int, string>{
+    })
+ },
             { 3344, Tuple.Create("Elastic Networks", new Dictionary<int, string>{
 { 1, "StormPort (WDM)" },
+    })
+ },
+            { 3345, Tuple.Create("Maspro Denkoh Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 3346, Tuple.Create("Hansol Electronics, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 3347, Tuple.Create("BMF Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 3348, Tuple.Create("Array Comm, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 3349, Tuple.Create("OnStream b.v.", new Dictionary<int, string>{
     })
  },
             { 3350, Tuple.Create("Hi-Touch Imaging Technologies Co., Ltd", new Dictionary<int, string>{
@@ -14895,6 +17387,15 @@ namespace HardwareInformation.Providers {
 { 2048, "X610" },
     })
  },
+            { 3351, Tuple.Create("NALTEC, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 3352, Tuple.Create("coaXmedia", new Dictionary<int, string>{
+    })
+ },
+            { 3353, Tuple.Create("Hank Connection Industrial Co., Ltd", new Dictionary<int, string>{
+    })
+ },
             { 3368, Tuple.Create("NXP", new Dictionary<int, string>{
 { 516, "ARM mbed" },
     })
@@ -14903,15 +17404,45 @@ namespace HardwareInformation.Providers {
 { 2, "Pump It Up Pad" },
     })
  },
+            { 3378, Tuple.Create("Leo Hui Electric Wire & Cable Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 3379, Tuple.Create("AirSpeak, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 3380, Tuple.Create("Rearden Steel Technologies", new Dictionary<int, string>{
+    })
+ },
+            { 3381, Tuple.Create("Dah Kun Co., Ltd", new Dictionary<int, string>{
+    })
+ },
             { 3386, Tuple.Create("Posiflex Technologies, Inc.", new Dictionary<int, string>{
 { 518, "Series 3xxx Cash Drawer" },
 { 519, "Series 3xxx Cash Drawer" },
 { 1280, "Magnetic Stripe Reader" },
     })
  },
+            { 3388, Tuple.Create("Sri Cable Technology, Ltd", new Dictionary<int, string>{
+    })
+ },
             { 3389, Tuple.Create("Tangtop Technology Co., Ltd", new Dictionary<int, string>{
 { 1, "HID Keyboard" },
 { 64, "PS/2 Adapter" },
+    })
+ },
+            { 3390, Tuple.Create("Fitcom, inc.", new Dictionary<int, string>{
+    })
+ },
+            { 3391, Tuple.Create("MTS Systems Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 3392, Tuple.Create("Ascor, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 3393, Tuple.Create("Ta Yun Terminals Industrial Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 3394, Tuple.Create("Full Der Co., Ltd", new Dictionary<int, string>{
     })
  },
             { 3398, Tuple.Create("Kobil Systems GmbH", new Dictionary<int, string>{
@@ -14946,16 +17477,49 @@ namespace HardwareInformation.Providers {
 { 29776, "Basics Portable USB Device" },
     })
  },
+            { 3402, Tuple.Create("NF Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 3403, Tuple.Create("Grape Systems, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 3404, Tuple.Create("Tedas AG", new Dictionary<int, string>{
+    })
+ },
+            { 3405, Tuple.Create("Coherent, Inc.", new Dictionary<int, string>{
+    })
+ },
             { 3406, Tuple.Create("Agere Systems Netherland BV", new Dictionary<int, string>{
 { 1146, "WLAN Card" },
 { 4096, "Wireless Card Model 0801" },
 { 4097, "Wireless Card Model 0802" },
     })
  },
+            { 3407, Tuple.Create("EADS Airbus France", new Dictionary<int, string>{
+    })
+ },
             { 3408, Tuple.Create("Cleware GmbH", new Dictionary<int, string>{
 { 17, "USB-Temp2 Thermometer" },
 { 48, "Multiplexer" },
 { 64, "F4 foot switch" },
+    })
+ },
+            { 3409, Tuple.Create("Volex (Asia) Pte., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 3411, Tuple.Create("HMI Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 3412, Tuple.Create("Holon Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 3413, Tuple.Create("ASKA Technologies, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 3414, Tuple.Create("AVLAB Technology, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 3415, Tuple.Create("Solomon Microtech, Ltd", new Dictionary<int, string>{
     })
  },
             { 3417, Tuple.Create("TRC Simulators b.v.", new Dictionary<int, string>{
@@ -14971,6 +17535,15 @@ namespace HardwareInformation.Providers {
 { 9030, "BT Digital Access adapter" },
     })
  },
+            { 3423, Tuple.Create("CSI, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 3424, Tuple.Create("IVL Technologies, Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 3425, Tuple.Create("Meilu Electronics (Shenzhen) Co., Ltd", new Dictionary<int, string>{
+    })
+ },
             { 3426, Tuple.Create("Darfon Electronics Corp.", new Dictionary<int, string>{
 { 3, "Smartcard Reader" },
 { 4, "Keyboard" },
@@ -14984,6 +17557,9 @@ namespace HardwareInformation.Providers {
 { 8454, "Dell L20U Multimedia Keyboard" },
 { 37134, "HP Business Slim Keyboard" },
 { 41216, "Optical Mouse" },
+    })
+ },
+            { 3427, Tuple.Create("Fritz Gegauf AG", new Dictionary<int, string>{
     })
  },
             { 3428, Tuple.Create("DXG Technology Corp.", new Dictionary<int, string>{
@@ -15003,8 +17579,56 @@ namespace HardwareInformation.Providers {
 { 21862, "Contour Roam Model 1600" },
     })
  },
+            { 3429, Tuple.Create("KMJP Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 3430, Tuple.Create("TMT", new Dictionary<int, string>{
+    })
+ },
+            { 3431, Tuple.Create("Advanet, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 3432, Tuple.Create("Super Link Electronics Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 3433, Tuple.Create("NSI", new Dictionary<int, string>{
+    })
+ },
+            { 3434, Tuple.Create("Megapower International Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 3435, Tuple.Create("And-Or Logic", new Dictionary<int, string>{
+    })
+ },
+            { 3440, Tuple.Create("Try Computer Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 3441, Tuple.Create("Hirakawa Hewtech Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 3442, Tuple.Create("Winmate Communication, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 3443, Tuple.Create("Hit's Communications, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 3446, Tuple.Create("MFP Korea, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 3447, Tuple.Create("Power Sentry/Newpoint", new Dictionary<int, string>{
+    })
+ },
+            { 3448, Tuple.Create("Japan Distributor Corp.", new Dictionary<int, string>{
+    })
+ },
             { 3450, Tuple.Create("MARX Datentechnik GmbH", new Dictionary<int, string>{
 { 1, "CrypToken" },
+    })
+ },
+            { 3451, Tuple.Create("Wellco Technology Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 3452, Tuple.Create("Taiwan Line Tek Electronic Co., Ltd", new Dictionary<int, string>{
     })
  },
             { 3453, Tuple.Create("Phison Electronics Corp.", new Dictionary<int, string>{
@@ -15035,8 +17659,26 @@ namespace HardwareInformation.Providers {
 { 256, "P5 Glove glove controller" },
     })
  },
+            { 3456, Tuple.Create("H.R. Silvine Electronics, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 3457, Tuple.Create("TechnoVision", new Dictionary<int, string>{
+    })
+ },
+            { 3459, Tuple.Create("Think Outside, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 3463, Tuple.Create("Dolby Laboratories Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 3465, Tuple.Create("Oz Software", new Dictionary<int, string>{
+    })
+ },
             { 3466, Tuple.Create("King Jim Co., Ltd", new Dictionary<int, string>{
 { 257, "TEPRA PRO" },
+    })
+ },
+            { 3467, Tuple.Create("Ascom Telecommunications, Ltd", new Dictionary<int, string>{
     })
  },
             { 3468, Tuple.Create("C-Media Electronics, Inc.", new Dictionary<int, string>{
@@ -15115,6 +17757,12 @@ namespace HardwareInformation.Providers {
 { 31233, "PRISM25 802.11b Adapter" },
     })
  },
+            { 3471, Tuple.Create("Pitney Bowes", new Dictionary<int, string>{
+    })
+ },
+            { 3472, Tuple.Create("Sure-Fire Electrical Corp.", new Dictionary<int, string>{
+    })
+ },
             { 3478, Tuple.Create("Skanhex Technology, Inc.", new Dictionary<int, string>{
 { 0, "Jenoptik JD350 video" },
 { 13056, "SX330z Camera" },
@@ -15135,8 +17783,20 @@ namespace HardwareInformation.Providers {
 { 4103, "Discovery Kids Digital Camera" },
     })
  },
+            { 3481, Tuple.Create("Trazer Technologies, Inc.", new Dictionary<int, string>{
+    })
+ },
             { 3482, Tuple.Create("RTX AS", new Dictionary<int, string>{
 { 1, "Bluetooth Device" },
+    })
+ },
+            { 3483, Tuple.Create("Tat Shing Electrical Co.", new Dictionary<int, string>{
+    })
+ },
+            { 3484, Tuple.Create("Chee Chen Hi-Technology Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 3485, Tuple.Create("Sanwa Supply, Inc.", new Dictionary<int, string>{
     })
  },
             { 3486, Tuple.Create("Avaya", new Dictionary<int, string>{
@@ -15153,10 +17813,25 @@ namespace HardwareInformation.Providers {
 { 166, "Black Knight PRO Uninterruptible Power Supply (HID PDC)" },
     })
  },
+            { 3488, Tuple.Create("Danger Research", new Dictionary<int, string>{
+    })
+ },
+            { 3489, Tuple.Create("Suzhou Peter's Precise Industrial Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 3490, Tuple.Create("Land Instruments International, Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 3491, Tuple.Create("Nippon Electro-Sensory Devices Corp.", new Dictionary<int, string>{
+    })
+ },
             { 3492, Tuple.Create("Polar Electro Oy", new Dictionary<int, string>{
 { 1, "Interface" },
 { 3, "FlowLink" },
 { 8, "Loop" },
+    })
+ },
+            { 3495, Tuple.Create("IOGear, Inc.", new Dictionary<int, string>{
     })
  },
             { 3496, Tuple.Create("softDSP Co., Ltd", new Dictionary<int, string>{
@@ -15165,6 +17840,9 @@ namespace HardwareInformation.Providers {
  },
             { 3499, Tuple.Create("Cubig Group", new Dictionary<int, string>{
 { 256, "DVR/CVR-M140 MP3 Player" },
+    })
+ },
+            { 3501, Tuple.Create("Westover Scientific", new Dictionary<int, string>{
     })
  },
             { 3504, Tuple.Create("Micro Star International", new Dictionary<int, string>{
@@ -15207,6 +17885,18 @@ namespace HardwareInformation.Providers {
 { 65535, "Bluetooth Adapter in DFU mode" },
     })
  },
+            { 3505, Tuple.Create("Wen Te Electronics Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 3506, Tuple.Create("Shian Hwi Plug Parts, Plastic Factory", new Dictionary<int, string>{
+    })
+ },
+            { 3507, Tuple.Create("Tekram Technology Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 3508, Tuple.Create("Chung Fu Chen Yeh Enterprise Corp.", new Dictionary<int, string>{
+    })
+ },
             { 3509, Tuple.Create("Access IS", new Dictionary<int, string>{
 { 313, "Barcode Module - CDC serial" },
 { 314, "Barcode Module - Virtual Keyboard" },
@@ -15229,6 +17919,9 @@ namespace HardwareInformation.Providers {
 { 3, "AND Serial Cable [AND Smart Cable]" },
     })
  },
+            { 3518, Tuple.Create("Jiuh Shiuh Precision Industry Co., Ltd", new Dictionary<int, string>{
+    })
+ },
             { 3519, Tuple.Create("Jess-Link International", new Dictionary<int, string>{
 { 2, "SmartDongle Security Key" },
 { 512, "HDD Storage Solution" },
@@ -15237,6 +17930,12 @@ namespace HardwareInformation.Providers {
 { 819, "Storage Adapter" },
 { 1282, "FSC Storagebird XL hard disk" },
 { 1799, "ZIV Drive" },
+    })
+ },
+            { 3520, Tuple.Create("G7 Solutions (formerly Great Notions)", new Dictionary<int, string>{
+    })
+ },
+            { 3521, Tuple.Create("Tamagawa Seiki Co., Ltd", new Dictionary<int, string>{
     })
  },
             { 3523, Tuple.Create("Athena Smartcard Solutions, Inc.", new Dictionary<int, string>{
@@ -15257,8 +17956,14 @@ namespace HardwareInformation.Providers {
 { 656, "Mass Storage Device [NT2 U3.1]" },
     })
  },
+            { 3525, Tuple.Create("SDK Co., Ltd", new Dictionary<int, string>{
+    })
+ },
             { 3526, Tuple.Create("Precision Squared Technology Corp.", new Dictionary<int, string>{
 { 8961, "Wireless Touchpad Keyboard" },
+    })
+ },
+            { 3527, Tuple.Create("First Cable Line, Inc.", new Dictionary<int, string>{
     })
  },
             { 3533, Tuple.Create("NetworkFab Corp.", new Dictionary<int, string>{
@@ -15270,12 +17975,24 @@ namespace HardwareInformation.Providers {
 { 4098, "Triple Talk Speech Synthesizer" },
     })
  },
+            { 3537, Tuple.Create("Contek Electronics Co., Ltd", new Dictionary<int, string>{
+    })
+ },
             { 3538, Tuple.Create("Power Quotient International Co., Ltd", new Dictionary<int, string>{
 { 3, "Mass Storage (P)" },
     })
  },
+            { 3539, Tuple.Create("MediaQ", new Dictionary<int, string>{
+    })
+ },
             { 3540, Tuple.Create("Custom Engineering SPA", new Dictionary<int, string>{
 { 567, "K80 80mm Thermal Printer" },
+    })
+ },
+            { 3541, Tuple.Create("California Micro Devices", new Dictionary<int, string>{
+    })
+ },
+            { 3543, Tuple.Create("Kocom Co., Ltd", new Dictionary<int, string>{
     })
  },
             { 3544, Tuple.Create("Netac Technology Co., Ltd", new Dictionary<int, string>{
@@ -15283,6 +18000,9 @@ namespace HardwareInformation.Providers {
 { 4192, "USB-CF-Card" },
 { 57351, "OnlyDisk U222 Pendrive" },
 { 62983, "OnlyDisk U210 1G flash drive [U-SAFE]" },
+    })
+ },
+            { 3545, Tuple.Create("HighSpeed Surfing", new Dictionary<int, string>{
     })
  },
             { 3546, Tuple.Create("Integrated Circuit Solution, Inc.", new Dictionary<int, string>{
@@ -15317,14 +18037,35 @@ namespace HardwareInformation.Providers {
 { 8993, "UFD MP3 player" },
     })
  },
+            { 3547, Tuple.Create("Tamarack, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 3549, Tuple.Create("Datelink Technology Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 3550, Tuple.Create("Ubicom, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 3552, Tuple.Create("BD Consumer Healthcare", new Dictionary<int, string>{
+    })
+ },
             { 3559, Tuple.Create("USBmicro", new Dictionary<int, string>{
 { 401, "U401 Interface card" },
 { 421, "U421 interface card" },
 { 451, "U451 relay interface card" },
     })
  },
+            { 3562, Tuple.Create("UTECH Electronic (D.G.) Co., Ltd.", new Dictionary<int, string>{
+    })
+ },
+            { 3565, Tuple.Create("Novasonics", new Dictionary<int, string>{
+    })
+ },
             { 3566, Tuple.Create("Lifetime Memory Products", new Dictionary<int, string>{
 { 16400, "Storage Adapter" },
+    })
+ },
+            { 3567, Tuple.Create("Full Rise Electronic Co., Ltd", new Dictionary<int, string>{
     })
  },
             { 3572, Tuple.Create("NET&SYS", new Dictionary<int, string>{
@@ -15393,11 +18134,20 @@ namespace HardwareInformation.Providers {
 { 6146, "Card Reader" },
     })
  },
+            { 3578, Tuple.Create("Toyo Communication Equipment Co., Ltd", new Dictionary<int, string>{
+    })
+ },
             { 3580, Tuple.Create("GeneralTouch Technology Co., Ltd", new Dictionary<int, string>{
 { 1, "Touchscreen" },
 { 3, "MultiTouch TouchScreen(Dualtouch)" },
 { 257, "5-point Touch Screen" },
 { 53511, "MultiTouch TouchScreen" },
+    })
+ },
+            { 3587, Tuple.Create("Nippon Systemware Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 3592, Tuple.Create("Winbest Technology Co., Ltd", new Dictionary<int, string>{
     })
  },
             { 3595, Tuple.Create("Amigo Technology Inc.", new Dictionary<int, string>{
@@ -15427,6 +18177,21 @@ namespace HardwareInformation.Providers {
 { 63498, "Smoker FX2" },
     })
  },
+            { 3606, Tuple.Create("JMTek, LLC", new Dictionary<int, string>{
+    })
+ },
+            { 3607, Tuple.Create("Walex Electronic, Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 3610, Tuple.Create("Unisys", new Dictionary<int, string>{
+    })
+ },
+            { 3611, Tuple.Create("Crewave", new Dictionary<int, string>{
+    })
+ },
+            { 3614, Tuple.Create("Green Hills Software", new Dictionary<int, string>{
+    })
+ },
             { 3616, Tuple.Create("Pegasus Technologies Ltd.", new Dictionary<int, string>{
 { 257, "NoteTaker" },
 { 512, "Seiko Instruments InkLink Handwriting System" },
@@ -15450,6 +18215,27 @@ namespace HardwareInformation.Providers {
 { 2336, "J3" },
     })
  },
+            { 3618, Tuple.Create("Symbian Ltd.", new Dictionary<int, string>{
+    })
+ },
+            { 3619, Tuple.Create("Liou Yuane Enterprise Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 3621, Tuple.Create("VinChip Systems, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 3622, Tuple.Create("J-Phone East Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 3632, Tuple.Create("HeartMath LLC", new Dictionary<int, string>{
+    })
+ },
+            { 3636, Tuple.Create("Micro Computer Control Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 3637, Tuple.Create("3Pea Technologies, Inc.", new Dictionary<int, string>{
+    })
+ },
             { 3638, Tuple.Create("TiePie engineering", new Dictionary<int, string>{
 { 9, "Handyscope HS3" },
 { 11, "Handyscope HS4" },
@@ -15466,12 +18252,18 @@ namespace HardwareInformation.Providers {
 { 254, "USB To Parallel adapter" },
     })
  },
+            { 3640, Tuple.Create("Stratitec, Inc.", new Dictionary<int, string>{
+    })
+ },
             { 3641, Tuple.Create("Smart Modular Technologies, Inc.", new Dictionary<int, string>{
 { 311, "Bluetooth Device" },
     })
  },
             { 3642, Tuple.Create("Neostar Technology Co., Ltd", new Dictionary<int, string>{
 { 4352, "CW-1100 Wireless Network Adapter" },
+    })
+ },
+            { 3643, Tuple.Create("Mansella, Ltd", new Dictionary<int, string>{
     })
  },
             { 3649, Tuple.Create("Line6, Inc.", new Dictionary<int, string>{
@@ -15488,8 +18280,14 @@ namespace HardwareInformation.Providers {
 { 21325, "SeaMonkey" },
     })
  },
+            { 3652, Tuple.Create("Sun-Riseful Technology Co., Ltd.", new Dictionary<int, string>{
+    })
+ },
             { 3656, Tuple.Create("Julia Corp., Ltd", new Dictionary<int, string>{
 { 256, "CardPro SmartCard Reader" },
+    })
+ },
+            { 3658, Tuple.Create("Shenzhen Bao Hing Electric Wire & Cable Mfr. Co.", new Dictionary<int, string>{
     })
  },
             { 3660, Tuple.Create("Radica Games, Ltd", new Dictionary<int, string>{
@@ -15514,10 +18312,19 @@ namespace HardwareInformation.Providers {
 { 24609, "K-PEX 100" },
     })
  },
+            { 3674, Tuple.Create("Active Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 3675, Tuple.Create("Union Power Information Industrial Co., Ltd", new Dictionary<int, string>{
+    })
+ },
             { 3676, Tuple.Create("Bitland Information Technology Co., Ltd", new Dictionary<int, string>{
 { 24856, "LCD Device" },
 { 24857, "remote receive and control device" },
 { 25665, "C-Media Sound Device" },
+    })
+ },
+            { 3677, Tuple.Create("Neltron Industrial Co., Ltd", new Dictionary<int, string>{
     })
  },
             { 3678, Tuple.Create("Conwise Technology Co., Ltd.", new Dictionary<int, string>{
@@ -15584,6 +18391,15 @@ namespace HardwareInformation.Providers {
 { 63744, "Afterglow AX.1" },
     })
  },
+            { 3696, Tuple.Create("Tokyo Electronic Industry Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 3698, Tuple.Create("Hsi-Chin Electronics Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 3701, Tuple.Create("TVS Electronics, Ltd", new Dictionary<int, string>{
+    })
+ },
             { 3705, Tuple.Create("Archos, Inc.", new Dictionary<int, string>{
 { 4358, "Pocket Media Assistant - PMA400" },
 { 4612, "Gmini XS 200" },
@@ -15597,9 +18413,21 @@ namespace HardwareInformation.Providers {
 { 12289, "40 Titanium" },
     })
  },
+            { 3707, Tuple.Create("On-Tech Industry Co., Ltd", new Dictionary<int, string>{
+    })
+ },
             { 3710, Tuple.Create("Gmate, Inc.", new Dictionary<int, string>{
 { 1, "Yopy 3000 PDA" },
 { 4097, "YP3X00 PDA" },
+    })
+ },
+            { 3714, Tuple.Create("Ching Tai Electric Wire & Cable Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 3715, Tuple.Create("Shin An Wire & Cable Co.", new Dictionary<int, string>{
+    })
+ },
+            { 3724, Tuple.Create("Well Force Electronic Co., Ltd", new Dictionary<int, string>{
     })
  },
             { 3725, Tuple.Create("MediaTek Inc.", new Dictionary<int, string>{
@@ -15636,6 +18464,18 @@ namespace HardwareInformation.Providers {
 { 256, "Storage Adapter V1" },
     })
  },
+            { 3729, Tuple.Create("VTech Engineering Canada, Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 3730, Tuple.Create("C's Glory Enterprise Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 3731, Tuple.Create("eM Technics Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 3733, Tuple.Create("Future Technology Co., Ltd", new Dictionary<int, string>{
+    })
+ },
             { 3734, Tuple.Create("Aplux Communications, Ltd", new Dictionary<int, string>{
 { 49153, "TRUST 380 USB2 SPACEC@M" },
     })
@@ -15644,8 +18484,23 @@ namespace HardwareInformation.Providers {
 { 2312, "Composite HID (Keyboard and Mouse)" },
     })
  },
+            { 3736, Tuple.Create("Advanced Analogic Technologies, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 3737, Tuple.Create("Parallel Dice Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 3738, Tuple.Create("TA HSING Industries, Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 3739, Tuple.Create("ADTEC Corp.", new Dictionary<int, string>{
+    })
+ },
             { 3740, Tuple.Create("Streamzap, Inc.", new Dictionary<int, string>{
 { 0, "Streamzap Remote Control" },
+    })
+ },
+            { 3743, Tuple.Create("Tamura Corp.", new Dictionary<int, string>{
     })
  },
             { 3744, Tuple.Create("Ours Technology, Inc.", new Dictionary<int, string>{
@@ -15659,6 +18514,18 @@ namespace HardwareInformation.Providers {
 { 26712, "OTi-6858 serial adapter" },
     })
  },
+            { 3750, Tuple.Create("Nihon Computer Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 3751, Tuple.Create("MSL Enterprises Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 3752, Tuple.Create("CenDyne, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 3757, Tuple.Create("Humax Co., Ltd", new Dictionary<int, string>{
+    })
+ },
             { 3760, Tuple.Create("NovaTech", new Dictionary<int, string>{
 { 36896, "NovaTech NV-902W" },
 { 36897, "RT2573" },
@@ -15670,6 +18537,15 @@ namespace HardwareInformation.Providers {
 { 28679, "WinFast WalkieTV WDM Capture" },
     })
  },
+            { 3762, Tuple.Create("Y-S Electronic Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 3763, Tuple.Create("Saint Technology Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 3767, Tuple.Create("Endor AG", new Dictionary<int, string>{
+    })
+ },
             { 3768, Tuple.Create("Mettler Toledo", new Dictionary<int, string>{
 { 8704, "Ariva Scale" },
 { 61440, "BC60 Scale" },
@@ -15677,6 +18553,33 @@ namespace HardwareInformation.Providers {
  },
             { 3771, Tuple.Create("Thermo Fisher Scientific", new Dictionary<int, string>{
 { 2, "FT-IR Spectrometer" },
+    })
+ },
+            { 3774, Tuple.Create("VWeb Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 3775, Tuple.Create("Omega Technology of Taiwan, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 3776, Tuple.Create("LHI Technology (China) Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 3777, Tuple.Create("Abit Computer Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 3778, Tuple.Create("Sweetray Industrial, Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 3779, Tuple.Create("Axell Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 3780, Tuple.Create("Ballracing Developments, Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 3781, Tuple.Create("GT Information System Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 3782, Tuple.Create("InnoVISION Multimedia, Ltd", new Dictionary<int, string>{
     })
  },
             { 3783, Tuple.Create("Theta Link Corp.", new Dictionary<int, string>{
@@ -15688,10 +18591,22 @@ namespace HardwareInformation.Providers {
 { 41216, "LDW-411SX DVD/CD Rewritable Drive" },
     })
  },
+            { 3790, Tuple.Create("TaiSol Electronics Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 3791, Tuple.Create("Phogenix Imaging, LLC", new Dictionary<int, string>{
+    })
+ },
             { 3793, Tuple.Create("WinMaxGroup", new Dictionary<int, string>{
 { 26208, "Flash Disk 64M-C" },
 { 26240, "Flash Disk 64M-B" },
 { 30260, "MP3 Player" },
+    })
+ },
+            { 3794, Tuple.Create("Kyoto Micro Computer Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 3795, Tuple.Create("Wing-Tech Enterprise Co., Ltd", new Dictionary<int, string>{
     })
  },
             { 3797, Tuple.Create("Fiberbyte", new Dictionary<int, string>{
@@ -15700,8 +18615,20 @@ namespace HardwareInformation.Providers {
 { 61953, "Fiberbyte USB-inSync DAQ-2500X" },
     })
  },
+            { 3802, Tuple.Create("Noriake Itron Corp.", new Dictionary<int, string>{
+    })
+ },
             { 3807, Tuple.Create("e-MDT Co., Ltd", new Dictionary<int, string>{
 { 8288, "FID irock! 100 Series" },
+    })
+ },
+            { 3808, Tuple.Create("Shima Seiki Mfg., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 3809, Tuple.Create("Sarotech Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 3810, Tuple.Create("AMI Semiconductor, Inc.", new Dictionary<int, string>{
     })
  },
             { 3811, Tuple.Create("ComTrue Technology Corp.", new Dictionary<int, string>{
@@ -15726,13 +18653,49 @@ namespace HardwareInformation.Providers {
 { 49152, "Multitouch Capacitive Touchscreen eGalaxTouch EXC3188-4643-08.00.00.00 Sirius_4643 PCAP3188UR Series [IIyama Prolite PLT1932MSC]" },
     })
  },
+            { 3824, Tuple.Create("Hitachi Cable, Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 3825, Tuple.Create("Aichi Micro Intelligent Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 3826, Tuple.Create("I/O Magic Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 3827, Tuple.Create("Lynn Products, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 3828, Tuple.Create("DSI Datotech", new Dictionary<int, string>{
+    })
+ },
             { 3829, Tuple.Create("PointChips", new Dictionary<int, string>{
 { 8706, "Flash Disk" },
 { 9062, "Flash Disk" },
     })
  },
+            { 3830, Tuple.Create("Yield Microelectronics Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 3831, Tuple.Create("SM Tech Co., Ltd (Tulip)", new Dictionary<int, string>{
+    })
+ },
+            { 3837, Tuple.Create("Oasis Semiconductor", new Dictionary<int, string>{
+    })
+ },
+            { 3838, Tuple.Create("Wem Technology, Inc.", new Dictionary<int, string>{
+    })
+ },
             { 3843, Tuple.Create("Unitek UPS Systems", new Dictionary<int, string>{
 { 1, "Alpha 1200Sx" },
+    })
+ },
+            { 3846, Tuple.Create("Visual Frontier Enterprise Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 3848, Tuple.Create("CSL Wire & Plug (Shen Zhen) Co.", new Dictionary<int, string>{
+    })
+ },
+            { 3852, Tuple.Create("CAS Corp.", new Dictionary<int, string>{
     })
  },
             { 3853, Tuple.Create("Hori Co., Ltd", new Dictionary<int, string>{
@@ -15747,6 +18710,9 @@ namespace HardwareInformation.Providers {
 { 120, "Real Arcade Pro V Kai for Xbox One / Xbox 360" },
 { 144, "Horipad Ultimate" },
 { 193, "HORIPAD for Nintendo Switch" },
+    })
+ },
+            { 3854, Tuple.Create("Energy Full Corp.", new Dictionary<int, string>{
     })
  },
             { 3855, Tuple.Create("Silego Technology Inc", new Dictionary<int, string>{
@@ -15771,6 +18737,12 @@ namespace HardwareInformation.Providers {
 { 8256, "Machine Test System" },
     })
  },
+            { 3858, Tuple.Create("Mars Engineering Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 3859, Tuple.Create("Acetek Technology Co., Ltd", new Dictionary<int, string>{
+    })
+ },
             { 3860, Tuple.Create("Ingenico", new Dictionary<int, string>{
 { 18, "Vital'Act 3S" },
 { 56, "XIRING Smart Card Terminal LEO V2" },
@@ -15786,6 +18758,39 @@ namespace HardwareInformation.Providers {
 { 13, "Guider" },
     })
  },
+            { 3865, Tuple.Create("Oracom Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 3867, Tuple.Create("Onset Computer Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 3868, Tuple.Create("Funai Electric Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 3869, Tuple.Create("Iwill Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 3873, Tuple.Create("IOI Technology Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 3874, Tuple.Create("Senior Industries, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 3875, Tuple.Create("Leader Tech Manufacturer Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 3876, Tuple.Create("Flex-P Industries, Snd., Bhd.", new Dictionary<int, string>{
+    })
+ },
+            { 3885, Tuple.Create("ViPower, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 3886, Tuple.Create("Geniality Maple Technology Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 3887, Tuple.Create("Priva Design Services", new Dictionary<int, string>{
+    })
+ },
             { 3888, Tuple.Create("Jess Technology Co., Ltd", new Dictionary<int, string>{
 { 28, "PS3 Guitar Controller Dongle" },
 { 267, "Philips Recoil" },
@@ -15796,6 +18801,18 @@ namespace HardwareInformation.Providers {
 { 34952, "BigBen XBMiniPad Controller" },
     })
  },
+            { 3889, Tuple.Create("Chrysalis Development", new Dictionary<int, string>{
+    })
+ },
+            { 3890, Tuple.Create("YFC-BonEagle Electric Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 3895, Tuple.Create("Kokuyo Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 3896, Tuple.Create("Nien-Yi Industrial Corp.", new Dictionary<int, string>{
+    })
+ },
             { 3897, Tuple.Create("TG3 Electronics", new Dictionary<int, string>{
 { 1028, "Recreated ZX Spectrum Keyboard" },
 { 2166, "Keyboard [87 Francium Pro]" },
@@ -15804,6 +18821,12 @@ namespace HardwareInformation.Providers {
  },
             { 3901, Tuple.Create("Airprime, Incorporated", new Dictionary<int, string>{
 { 274, "CDMA 1xEVDO PC Card, PC 5220" },
+    })
+ },
+            { 3905, Tuple.Create("RDC Semiconductor Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 3906, Tuple.Create("Nital Consulting Services, Inc.", new Dictionary<int, string>{
     })
  },
             { 3908, Tuple.Create("Polhemus", new Dictionary<int, string>{
@@ -15817,16 +18840,46 @@ namespace HardwareInformation.Providers {
 { 2560, "Zenius" },
     })
  },
+            { 3915, Tuple.Create("St. John Technology Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 3916, Tuple.Create("WorldWide Cable Opto Corp.", new Dictionary<int, string>{
+    })
+ },
             { 3917, Tuple.Create("Microtune, Inc.", new Dictionary<int, string>{
 { 4096, "Bluetooth Dongle" },
+    })
+ },
+            { 3918, Tuple.Create("Freedom Scientific", new Dictionary<int, string>{
+    })
+ },
+            { 3922, Tuple.Create("Wing Key Electrical Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 3923, Tuple.Create("Dongguan White Horse Cable Factory, Ltd", new Dictionary<int, string>{
     })
  },
             { 3924, Tuple.Create("Kawai Musical Instruments Mfg. Co., Ltd", new Dictionary<int, string>{
 { 257, "MP6 Stage Piano" },
     })
  },
+            { 3925, Tuple.Create("AmbiCom, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 3932, Tuple.Create("Prairiecomm, Inc.", new Dictionary<int, string>{
+    })
+ },
             { 3933, Tuple.Create("NewAge International, LLC", new Dictionary<int, string>{
 { 37973, "Compact Drive" },
+    })
+ },
+            { 3935, Tuple.Create("Key Technology Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 3936, Tuple.Create("NTK, Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 3937, Tuple.Create("Varian, Inc.", new Dictionary<int, string>{
     })
  },
             { 3938, Tuple.Create("Acrox Technologies Co., Ltd", new Dictionary<int, string>{
@@ -15853,6 +18906,15 @@ namespace HardwareInformation.Providers {
 { 4864, "Didj UK/France (Leapster Advance)" },
     })
  },
+            { 3944, Tuple.Create("Kobe Steel, Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 3945, Tuple.Create("Dionex Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 3946, Tuple.Create("Vibren Technologies, Inc.", new Dictionary<int, string>{
+    })
+ },
             { 3950, Tuple.Create("INTELLIGENT SYSTEMS", new Dictionary<int, string>{
 { 256, "IS-CGB-EMULATOR" },
 { 513, "GameBoy Advance Flash Gang Writer" },
@@ -15867,14 +18929,80 @@ namespace HardwareInformation.Providers {
 { 1281, "IS-TWL-CAPTURE" },
     })
  },
+            { 3955, Tuple.Create("DFI", new Dictionary<int, string>{
+    })
+ },
+            { 3960, Tuple.Create("Guntermann & Drunck GmbH", new Dictionary<int, string>{
+    })
+ },
+            { 3964, Tuple.Create("DQ Technology, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 3965, Tuple.Create("NetBotz, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 3966, Tuple.Create("Fluke Corp.", new Dictionary<int, string>{
+    })
+ },
             { 3976, Tuple.Create("VTech Holdings, Ltd", new Dictionary<int, string>{
 { 12306, "RT2570" },
 { 12308, "ZD1211B" },
     })
  },
+            { 3979, Tuple.Create("Yazaki Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 3980, Tuple.Create("Young Generation International Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 3981, Tuple.Create("Uniwill Computer Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 3982, Tuple.Create("Kingnet Technology Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 3983, Tuple.Create("Soma Networks", new Dictionary<int, string>{
+    })
+ },
+            { 3991, Tuple.Create("CviLux Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 3992, Tuple.Create("CyberBank Corp.", new Dictionary<int, string>{
+    })
+ },
             { 3996, Tuple.Create("Hyun Won, Inc.", new Dictionary<int, string>{
 { 769, "M-Any Premium DAH-610 MP3/WMA Player" },
 { 818, "mobiBLU DAH-1200 MP3/Ogg Player" },
+    })
+ },
+            { 3998, Tuple.Create("Lucent Technologies", new Dictionary<int, string>{
+    })
+ },
+            { 4003, Tuple.Create("Starconn Electronic Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 4004, Tuple.Create("ATL Technology", new Dictionary<int, string>{
+    })
+ },
+            { 4005, Tuple.Create("Sotec Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 4007, Tuple.Create("Epox Computer Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 4008, Tuple.Create("Logic Controls, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 4015, Tuple.Create("Winpoint Electronic Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 4016, Tuple.Create("Haurtian Wire & Cable Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 4017, Tuple.Create("Inclose Design, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 4018, Tuple.Create("Juan-Chern Industrial Co., Ltd", new Dictionary<int, string>{
     })
  },
             { 4022, Tuple.Create("Heber Ltd", new Dictionary<int, string>{
@@ -15886,8 +19014,26 @@ namespace HardwareInformation.Providers {
 { 2, "eHome Infrared Receiver" },
     })
  },
+            { 4025, Tuple.Create("AACom Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 4026, Tuple.Create("San Shing Electronics Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 4027, Tuple.Create("Bitwise Systems, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 4033, Tuple.Create("Mitac Internatinal Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 4034, Tuple.Create("Plug and Jack Industrial, Inc.", new Dictionary<int, string>{
+    })
+ },
             { 4037, Tuple.Create("Delcom Engineering", new Dictionary<int, string>{
 { 4642, "I/O Development Board" },
+    })
+ },
+            { 4038, Tuple.Create("Dataplus Supplies, Inc.", new Dictionary<int, string>{
     })
  },
             { 4042, Tuple.Create("Research In Motion, Ltd.", new Dictionary<int, string>{
@@ -16031,8 +19177,20 @@ namespace HardwareInformation.Providers {
 { 4105, "ANTUSB-m Stick" },
     })
  },
+            { 4048, Tuple.Create("Tulip Computers B.V.", new Dictionary<int, string>{
+    })
+ },
+            { 4049, Tuple.Create("Giant Electronics Ltd.", new Dictionary<int, string>{
+    })
+ },
             { 4050, Tuple.Create("Seac Banche", new Dictionary<int, string>{
 { 1, "RDS 6000" },
+    })
+ },
+            { 4052, Tuple.Create("Tenovis GmbH & Co., KG", new Dictionary<int, string>{
+    })
+ },
+            { 4053, Tuple.Create("Direct Access Technology, Inc.", new Dictionary<int, string>{
     })
  },
             { 4057, Tuple.Create("Elgato Systems GmbH", new Dictionary<int, string>{
@@ -16054,6 +19212,9 @@ namespace HardwareInformation.Providers {
 { 256, "quanton flight control" },
     })
  },
+            { 4060, Tuple.Create("Micro Plus", new Dictionary<int, string>{
+    })
+ },
             { 4062, Tuple.Create("Oregon Scientific", new Dictionary<int, string>{
 { 51713, "WMRS200 weather station" },
 { 51717, "CM160" },
@@ -16064,6 +19225,15 @@ namespace HardwareInformation.Providers {
 { 256, "Bluetooth Mouse" },
 { 257, "Bluetooth IMU" },
 { 512, "Bluetooth Keypad" },
+    })
+ },
+            { 4066, Tuple.Create("Air Techniques", new Dictionary<int, string>{
+    })
+ },
+            { 4068, Tuple.Create("IN-Tech Electronics, Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 4069, Tuple.Create("Greenconn (U.S.A.), Inc.", new Dictionary<int, string>{
     })
  },
             { 4070, Tuple.Create("ICS Advent", new Dictionary<int, string>{
@@ -16082,6 +19252,30 @@ namespace HardwareInformation.Providers {
 { 56184, "FusionHDTV DVB-T Dual Digital 4 (ZL10353+xc2028/xc3028) (initialized)" },
     })
  },
+            { 4074, Tuple.Create("United Computer Accessories", new Dictionary<int, string>{
+    })
+ },
+            { 4075, Tuple.Create("CRS Electronic Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 4076, Tuple.Create("UMC Electronics Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 4077, Tuple.Create("Access Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 4078, Tuple.Create("Xsido Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 4079, Tuple.Create("MJ Research, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 4086, Tuple.Create("Core Valley Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 4087, Tuple.Create("CHI SHING Computer Accessories Co., Ltd", new Dictionary<int, string>{
+    })
+ },
             { 4092, Tuple.Create("Clavia DMI AB", new Dictionary<int, string>{
 { 33, "Nord Stage 2" },
 { 42, "Nord Piano 4" },
@@ -16091,8 +19285,14 @@ namespace HardwareInformation.Providers {
 { 65280, "OEM" },
     })
  },
+            { 4095, Tuple.Create("Aopen, Inc.", new Dictionary<int, string>{
+    })
+ },
             { 4096, Tuple.Create("Speed Tech Corp.", new Dictionary<int, string>{
 { 5435, "TerraTec Electronic GmbH" },
+    })
+ },
+            { 4097, Tuple.Create("Ritronics Components (S) Pte., Ltd", new Dictionary<int, string>{
     })
  },
             { 4099, Tuple.Create("Sigma Corp.", new Dictionary<int, string>{
@@ -16164,6 +19364,9 @@ namespace HardwareInformation.Providers {
 { 41152, "MP3 Player" },
     })
  },
+            { 4107, Tuple.Create("Chou Chin Industrial Co., Ltd", new Dictionary<int, string>{
+    })
+ },
             { 4109, Tuple.Create("Netopia, Inc.", new Dictionary<int, string>{
 { 13122, "Cayman 3352 DSL Modem" },
 { 13186, "3380 Series Network Interface" },
@@ -16173,8 +19376,26 @@ namespace HardwareInformation.Providers {
 { 51969, "Cayman 3341 Ethernet DSL Router" },
     })
  },
+            { 4112, Tuple.Create("Fukuda Denshi Co., Ltd", new Dictionary<int, string>{
+    })
+ },
             { 4113, Tuple.Create("Mobile Media Tech.", new Dictionary<int, string>{
 { 1, "AccFast Mp3" },
+    })
+ },
+            { 4114, Tuple.Create("SDKM Fibres, Wires & Cables Berhad", new Dictionary<int, string>{
+    })
+ },
+            { 4115, Tuple.Create("TST-Touchless Sensor Technology AG", new Dictionary<int, string>{
+    })
+ },
+            { 4116, Tuple.Create("Densitron Technologies PLC", new Dictionary<int, string>{
+    })
+ },
+            { 4117, Tuple.Create("Softronics Pty., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 4118, Tuple.Create("Xiamen Hung's Enterprise Co., Ltd", new Dictionary<int, string>{
     })
  },
             { 4119, Tuple.Create("Speedy Industrial Supplies, Pte., Ltd", new Dictionary<int, string>{
@@ -16192,6 +19413,9 @@ namespace HardwareInformation.Providers {
 { 262, "Wireless Optical Mouse/Keyboard" },
     })
  },
+            { 4130, Tuple.Create("Shinko Shoji Co., Ltd", new Dictionary<int, string>{
+    })
+ },
             { 4133, Tuple.Create("Hyper-Paltek", new Dictionary<int, string>{
 { 94, "USB DVB-T device" },
 { 95, "USB DVB-T device" },
@@ -16199,10 +19423,37 @@ namespace HardwareInformation.Providers {
 { 848, "MP3 Player" },
     })
  },
+            { 4134, Tuple.Create("Newly Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 4135, Tuple.Create("Time Domain", new Dictionary<int, string>{
+    })
+ },
+            { 4136, Tuple.Create("Inovys Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 4137, Tuple.Create("Atlantic Coast Telesys", new Dictionary<int, string>{
+    })
+ },
+            { 4138, Tuple.Create("Ramos Technology Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 4139, Tuple.Create("Infotronic America, Inc.", new Dictionary<int, string>{
+    })
+ },
             { 4140, Tuple.Create("Etoms Electronics Corp.", new Dictionary<int, string>{
 { 24913, "Q-Cam Sangha CIF" },
 { 25169, "Q-Cam VGA" },
 { 65292, "Joytech Wireless Advanced Controller" },
+    })
+ },
+            { 4141, Tuple.Create("Winic Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 4145, Tuple.Create("Comax Technology, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 4146, Tuple.Create("C-One Technology Corp.", new Dictionary<int, string>{
     })
  },
             { 4147, Tuple.Create("Nucam Corp.", new Dictionary<int, string>{
@@ -16268,6 +19519,12 @@ namespace HardwareInformation.Providers {
 { 8208, "4-Port hub" },
     })
  },
+            { 4171, Tuple.Create("Mylex / Buslogic", new Dictionary<int, string>{
+    })
+ },
+            { 4172, Tuple.Create("AMCO TEC International, Inc.", new Dictionary<int, string>{
+    })
+ },
             { 4173, Tuple.Create("Newport Corporation", new Dictionary<int, string>{
 { 4099, "Model-52 LED Light Source Power Supply and Driver" },
 { 12289, "ESP301 3 Axis Motion Controller" },
@@ -16306,9 +19563,21 @@ namespace HardwareInformation.Providers {
 { 1040, "Yubikey plus OTP+U2F" },
     })
  },
+            { 4179, Tuple.Create("Immanuel Electronics Co., Ltd", new Dictionary<int, string>{
+    })
+ },
             { 4180, Tuple.Create("BMS International Beheer N.V.", new Dictionary<int, string>{
 { 20484, "DSL 7420 Loader" },
 { 20485, "DSL 7420 LAN Modem" },
+    })
+ },
+            { 4181, Tuple.Create("Complex Micro Interconnection Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 4182, Tuple.Create("Hsin Chen Ent Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 4183, Tuple.Create("ON Semiconductor", new Dictionary<int, string>{
     })
  },
             { 4184, Tuple.Create("Western Digital Technologies, Inc.", new Dictionary<int, string>{
@@ -16399,6 +19668,21 @@ namespace HardwareInformation.Providers {
 { 57445, "BCM43142A0 Bluetooth module" },
     })
  },
+            { 4188, Tuple.Create("Hong Ji Electric Wire & Cable (Dongguan) Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 4189, Tuple.Create("Delkin Devices, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 4190, Tuple.Create("Valence Semiconductor Design, Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 4191, Tuple.Create("Chin Shong Enterprise Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 4192, Tuple.Create("Easthome Industrial Co., Ltd", new Dictionary<int, string>{
+    })
+ },
             { 4195, Tuple.Create("Motorola Electronics Taiwan, Ltd [hex]", new Dictionary<int, string>{
 { 5461, "MC141555 Hub" },
 { 16640, "SB4100 USB Cable Modem" },
@@ -16411,6 +19695,9 @@ namespace HardwareInformation.Providers {
  },
             { 4200, Tuple.Create("Micropi Elettronica", new Dictionary<int, string>{
 { 1, "CPUSB - V 1.8 - software-rights management key" },
+    })
+ },
+            { 4202, Tuple.Create("Loyal Legend, Ltd", new Dictionary<int, string>{
     })
  },
             { 4204, Tuple.Create("Curitel Communications, Inc.", new Dictionary<int, string>{
@@ -16485,6 +19772,12 @@ namespace HardwareInformation.Providers {
 { 57856, "Packet Service" },
     })
  },
+            { 4205, Tuple.Create("San Chieh Manufacturing, Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 4206, Tuple.Create("ConectL", new Dictionary<int, string>{
+    })
+ },
             { 4207, Tuple.Create("Money Controls", new Dictionary<int, string>{
 { 9, "CT10x Coin Transaction" },
 { 10, "CR10x Coin Recycler" },
@@ -16501,6 +19794,18 @@ namespace HardwareInformation.Providers {
 { 12297, "eHome Infrared Transceiver" },
 { 21938, "WBU-110 802.11b Wireless Adapter [Intersil PRISM 3]" },
 { 22002, "WGU-210 802.11g Adapter [Intersil ISL3886]" },
+    })
+ },
+            { 4221, Tuple.Create("Arlec Australia, Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 4222, Tuple.Create("Midoriya Electric Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 4223, Tuple.Create("KidzMouse, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 4226, Tuple.Create("Shin-Etsukaken Co., Ltd", new Dictionary<int, string>{
     })
  },
             { 4227, Tuple.Create("Canon Electronics, Inc.", new Dictionary<int, string>{
@@ -16537,6 +19842,12 @@ namespace HardwareInformation.Providers {
 { 5725, "DR-P208II" },
     })
  },
+            { 4228, Tuple.Create("Pantech Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 4234, Tuple.Create("Chloride Power Protection", new Dictionary<int, string>{
+    })
+ },
             { 4235, Tuple.Create("Grand-tek Technology Co., Ltd", new Dictionary<int, string>{
 { 5, "HID Keyboard/Mouse PS/2 Translator" },
     })
@@ -16545,8 +19856,17 @@ namespace HardwareInformation.Providers {
 { 382, "GTC 400 C" },
     })
  },
+            { 4238, Tuple.Create("Lotes Co., Ltd.", new Dictionary<int, string>{
+    })
+ },
             { 4241, Tuple.Create("Numerik Jena", new Dictionary<int, string>{
 { 33025, "Absoflex" },
+    })
+ },
+            { 4249, Tuple.Create("Surface Optics Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 4250, Tuple.Create("DATASOFT Systems GmbH", new Dictionary<int, string>{
     })
  },
             { 4251, Tuple.Create("Hisense", new Dictionary<int, string>{
@@ -16559,6 +19879,12 @@ namespace HardwareInformation.Providers {
             { 4255, Tuple.Create("eSOL Co., Ltd", new Dictionary<int, string>{
 { 12643, "Trigem Mobile SmartDisplay84" },
 { 12644, "Trigem Mobile SmartDisplay121" },
+    })
+ },
+            { 4256, Tuple.Create("Hirotech, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 4259, Tuple.Create("Mitsubishi Materials Corp.", new Dictionary<int, string>{
     })
  },
             { 4265, Tuple.Create("SK Teletech Co., Ltd", new Dictionary<int, string>{
@@ -16598,12 +19924,21 @@ namespace HardwareInformation.Providers {
 { 28727, "Pantech Android composite" },
     })
  },
+            { 4266, Tuple.Create("Cables To Go", new Dictionary<int, string>{
+    })
+ },
             { 4267, Tuple.Create("USI Co., Ltd", new Dictionary<int, string>{
 { 4098, "Bluetooth Device" },
 { 4099, "BC02-EXT in DFU" },
 { 4101, "Bluetooth Adptr" },
 { 4102, "BC04-EXT in DFU" },
 { 4293, "Sony-Ericsson / Samsung DataCable" },
+    })
+ },
+            { 4268, Tuple.Create("Honeywell, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 4270, Tuple.Create("Princeton Technology Corp.", new Dictionary<int, string>{
     })
  },
             { 4271, Tuple.Create("Liebert Corp.", new Dictionary<int, string>{
@@ -16627,6 +19962,12 @@ namespace HardwareInformation.Providers {
 { 3001, "DVB-T reference design (MOD300) (warm)" },
 { 3014, "DVB-T reference design (MOD3000P) (cold)" },
 { 3015, "DVB-T reference design (MOD3000P) (warm)" },
+    })
+ },
+            { 4283, Tuple.Create("TM Technology, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 4284, Tuple.Create("Dinging Technology Co., Ltd", new Dictionary<int, string>{
     })
  },
             { 4285, Tuple.Create("TMT Technology, Inc.", new Dictionary<int, string>{
@@ -16710,8 +20051,17 @@ namespace HardwareInformation.Providers {
 { 33178, "FM Radio" },
     })
  },
+            { 4294, Tuple.Create("Intec, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 4299, Tuple.Create("Eratech", new Dictionary<int, string>{
+    })
+ },
             { 4300, Tuple.Create("GBM Connector Co., Ltd", new Dictionary<int, string>{
 { 4353, "MP3 Player" },
+    })
+ },
+            { 4301, Tuple.Create("Kycon, Inc.", new Dictionary<int, string>{
     })
  },
             { 4302, Tuple.Create("Silicon Labs", new Dictionary<int, string>{
@@ -16743,6 +20093,9 @@ namespace HardwareInformation.Providers {
 { 21059, "RayComposer" },
     })
  },
+            { 4308, Tuple.Create("Man Boon Manufactory, Ltd", new Dictionary<int, string>{
+    })
+ },
             { 4309, Tuple.Create("Uni Class Technology Co., Ltd", new Dictionary<int, string>{
 { 4, "PS/2 Converter" },
 { 21842, "KVM Human Interface Composite Device (Keyboard/Mouse ports)" },
@@ -16762,8 +20115,23 @@ namespace HardwareInformation.Providers {
 { 65382, "Craig 2GB MP3/Video Player" },
     })
  },
+            { 4318, Tuple.Create("Authenex, Inc.", new Dictionary<int, string>{
+    })
+ },
             { 4319, Tuple.Create("In-Win Development, Inc.", new Dictionary<int, string>{
 { 1280, "iAPP CR-e500 Card reader" },
+    })
+ },
+            { 4320, Tuple.Create("Post-Op Video, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 4321, Tuple.Create("CablePlus, Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 4322, Tuple.Create("Nada Electronics, Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 4332, Tuple.Create("Vast Technologies, Inc.", new Dictionary<int, string>{
     })
  },
             { 4336, Tuple.Create("Nexio Co., Ltd", new Dictionary<int, string>{
@@ -16811,6 +20179,9 @@ namespace HardwareInformation.Providers {
 { 50563, "EFM03" },
     })
  },
+            { 4347, Tuple.Create("Pictos Technologies, Inc.", new Dictionary<int, string>{
+    })
+ },
             { 4349, Tuple.Create("Anubis Electronics, Ltd", new Dictionary<int, string>{
 { 32336, "FlyCam Usb 100" },
 { 32845, "Typhoon Webshot II Webcam [zc0301]" },
@@ -16828,6 +20199,9 @@ namespace HardwareInformation.Providers {
  },
             { 4353, Tuple.Create("EasyPass Industrial Co., Ltd", new Dictionary<int, string>{
 { 1, "FSK Electronics Super GSM Reader" },
+    })
+ },
+            { 4360, Tuple.Create("Brightcom Technologies, Ltd", new Dictionary<int, string>{
     })
  },
             { 4362, Tuple.Create("Moxa Technologies Co., Ltd.", new Dictionary<int, string>{
@@ -16863,13 +20237,25 @@ namespace HardwareInformation.Providers {
 { 34952, "Evolution Device" },
     })
  },
+            { 4370, Tuple.Create("YM ELECTRIC CO., Ltd", new Dictionary<int, string>{
+    })
+ },
             { 4371, Tuple.Create("Medion AG", new Dictionary<int, string>{
 { 41122, "Active Sync device" },
+    })
+ },
+            { 4382, Tuple.Create("VSO Electric Co., Ltd", new Dictionary<int, string>{
     })
  },
             { 4394, Tuple.Create("RedRat", new Dictionary<int, string>{
 { 1, "RedRat3 IR Transceiver" },
 { 5, "RedRat3II IR Transceiver" },
+    })
+ },
+            { 4398, Tuple.Create("Master Hill Electric Wire and Cable Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 4399, Tuple.Create("Cellon International, Inc.", new Dictionary<int, string>{
     })
  },
             { 4400, Tuple.Create("Tenx Technology, Inc.", new Dictionary<int, string>{
@@ -16907,9 +20293,18 @@ namespace HardwareInformation.Providers {
 { 12593, "CTS LS515" },
     })
  },
+            { 4412, Tuple.Create("Arin Tech Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 4413, Tuple.Create("Mapower Electronics Co., Ltd", new Dictionary<int, string>{
+    })
+ },
             { 4415, Tuple.Create("Integrated Biometrics, LLC", new Dictionary<int, string>{
 { 4128, "Watson Two-Finger Roll Scanner" },
 { 4352, "Columbo Single-Finger Scanner" },
+    })
+ },
+            { 4417, Tuple.Create("V One Multimedia, Pte., Ltd", new Dictionary<int, string>{
     })
  },
             { 4418, Tuple.Create("CyberScan Technologies, Inc.", new Dictionary<int, string>{
@@ -16920,13 +20315,31 @@ namespace HardwareInformation.Providers {
 { 1, "AirH PHONE AH-J3001V/J3002V" },
     })
  },
+            { 4422, Tuple.Create("Shimane SANYO Electric Co., Ltd.", new Dictionary<int, string>{
+    })
+ },
+            { 4423, Tuple.Create("Ever Great Electric Wire and Cable Co., Ltd", new Dictionary<int, string>{
+    })
+ },
             { 4427, Tuple.Create("Sphairon Access Systems GmbH", new Dictionary<int, string>{
 { 272, "Turbolink UB801R WLAN Adapter" },
 { 336, "Turbolink UB801RE Wireless 802.11g 54Mbps Network Adapter [RTL8187]" },
     })
  },
+            { 4428, Tuple.Create("Tinius Olsen Testing Machine Co., Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 4429, Tuple.Create("Alpha Imaging Technology Corp.", new Dictionary<int, string>{
+    })
+ },
             { 4431, Tuple.Create("Wavecom", new Dictionary<int, string>{
 { 4660, "Fastrack Xtend FXT001 Modem" },
+    })
+ },
+            { 4443, Tuple.Create("Salix Technology Co., Ltd.", new Dictionary<int, string>{
+    })
+ },
+            { 4450, Tuple.Create("Secugen Corp.", new Dictionary<int, string>{
     })
  },
             { 4451, Tuple.Create("DeLorme Publishing, Inc.", new Dictionary<int, string>{
@@ -16944,10 +20357,37 @@ namespace HardwareInformation.Providers {
 { 26113, "Digital TV Tuner Card [RTL2832U]" },
     })
  },
+            { 4453, Tuple.Create("Telson Electronics Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 4454, Tuple.Create("Bantam Interactive Technologies", new Dictionary<int, string>{
+    })
+ },
+            { 4455, Tuple.Create("Salient Systems Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 4456, Tuple.Create("BizConn International Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 4462, Tuple.Create("Gigastorage Corp.", new Dictionary<int, string>{
+    })
+ },
             { 4463, Tuple.Create("Silicon 10 Technology Corp.", new Dictionary<int, string>{
 { 5, "Flash Card Reader" },
 { 49416, "Flash Card Reader" },
 { 49417, "Flash Card Reader" },
+    })
+ },
+            { 4469, Tuple.Create("Shengyih Steel Mold Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 4477, Tuple.Create("Santa Electronic, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 4478, Tuple.Create("JNC, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 4482, Tuple.Create("Venture Corp., Ltd", new Dictionary<int, string>{
     })
  },
             { 4483, Tuple.Create("Compaq Computer Corp. [hex] (Digital Dream ??)", new Dictionary<int, string>{
@@ -16957,13 +20397,34 @@ namespace HardwareInformation.Providers {
 { 20554, "PJB-100 Personal Jukebox" },
     })
  },
+            { 4484, Tuple.Create("Kyocera Elco Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 4488, Tuple.Create("Bloomberg L.P.", new Dictionary<int, string>{
+    })
+ },
             { 4489, Tuple.Create("Acer Communications & Multimedia", new Dictionary<int, string>{
 { 2195, "EP-1427X-2 Ethernet Adapter [Acer]" },
+    })
+ },
+            { 4495, Tuple.Create("You Yang Technology Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 4496, Tuple.Create("Tripace", new Dictionary<int, string>{
+    })
+ },
+            { 4497, Tuple.Create("Loyalty Founder Enterprise Co., Ltd", new Dictionary<int, string>{
     })
  },
             { 4502, Tuple.Create("Yankee Robotics, LLC", new Dictionary<int, string>{
 { 16, "Trifid Camera without code" },
 { 17, "Trifid Camera" },
+    })
+ },
+            { 4503, Tuple.Create("Technoimagia Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 4504, Tuple.Create("StarShine Technology Corp.", new Dictionary<int, string>{
     })
  },
             { 4505, Tuple.Create("Sierra Wireless, Inc.", new Dictionary<int, string>{
@@ -17018,6 +20479,9 @@ namespace HardwareInformation.Providers {
 { 36985, "EM7455" },
     })
  },
+            { 4506, Tuple.Create("ZHAN QI Technology Co., Ltd", new Dictionary<int, string>{
+    })
+ },
             { 4507, Tuple.Create("ruwido austria GmbH", new Dictionary<int, string>{
 { 1024, "Infrared Keyboard V2.01" },
     })
@@ -17033,6 +20497,9 @@ namespace HardwareInformation.Providers {
  },
             { 4522, Tuple.Create("GlobalMedia Group, LLC", new Dictionary<int, string>{
 { 5400, "iREZ K2" },
+    })
+ },
+            { 4523, Tuple.Create("Exito Electronics Co., Ltd", new Dictionary<int, string>{
     })
  },
             { 4524, Tuple.Create("Nike", new Dictionary<int, string>{
@@ -17069,6 +20536,9 @@ namespace HardwareInformation.Providers {
             { 4571, Tuple.Create("Topfield Co., Ltd.", new Dictionary<int, string>{
 { 4096, "PVR" },
 { 4352, "PVR" },
+    })
+ },
+            { 4582, Tuple.Create("K.I. Technology Co. Ltd.", new Dictionary<int, string>{
     })
  },
             { 4597, Tuple.Create("Siemens AG", new Dictionary<int, string>{
@@ -17364,6 +20834,9 @@ namespace HardwareInformation.Providers {
 { 65535, "Life2Device Smart House" },
     })
  },
+            { 4622, Tuple.Create("Hudson Soft Co., Ltd", new Dictionary<int, string>{
+    })
+ },
             { 4623, Tuple.Create("Magellan", new Dictionary<int, string>{
 { 21070, "RoadMate 1475T" },
 { 21088, "Triton Handheld GPS Receiver (300/400/500/1500/2000)" },
@@ -17406,10 +20879,16 @@ namespace HardwareInformation.Providers {
 { 64202, "programmable keyboard" },
     })
  },
+            { 4643, Tuple.Create("SKYCABLE ENTERPRISE. CO., LTD.", new Dictionary<int, string>{
+    })
+ },
             { 4648, Tuple.Create("Datapaq Limited", new Dictionary<int, string>{
 { 18, "Q18 Data Logger" },
 { 21, "TPaq21/MPaq21 Datalogger" },
 { 22604, "XL2 Logger" },
+    })
+ },
+            { 4656, Tuple.Create("Chipidea-Microelectronica, S.A.", new Dictionary<int, string>{
     })
  },
             { 4659, Tuple.Create("Denver Electronics", new Dictionary<int, string>{
@@ -17529,6 +21008,9 @@ namespace HardwareInformation.Providers {
 { 60962, "SMC2862W-G v3 EZ Connect 802.11g Adapter [Intersil ISL3887]" },
     })
  },
+            { 4708, Tuple.Create("Covidien Energy-based Devices", new Dictionary<int, string>{
+    })
+ },
             { 4710, Tuple.Create("Pirelli Broadband Solutions", new Dictionary<int, string>{
 { 25346, "Fastweb DRG A226M ADSL Router" },
     })
@@ -17541,11 +21023,23 @@ namespace HardwareInformation.Providers {
 { 49154, "Wireless Optical Mouse" },
     })
  },
+            { 4716, Tuple.Create("Aristocrat Technologies", new Dictionary<int, string>{
+    })
+ },
+            { 4717, Tuple.Create("Bel Stewart", new Dictionary<int, string>{
+    })
+ },
+            { 4718, Tuple.Create("Strobe Data, Inc.", new Dictionary<int, string>{
+    })
+ },
             { 4719, Tuple.Create("TwinMOS", new Dictionary<int, string>{
 { 355, "Storage device (2gB thumb drive)" },
 { 4901, "Mobile Disk" },
 { 8552, "Mobile Disk III" },
 { 40966, "G240 802.11bg" },
+    })
+ },
+            { 4724, Tuple.Create("Ensoniq", new Dictionary<int, string>{
     })
  },
             { 4725, Tuple.Create("Xaxero Marine Software Engineering, Ltd.", new Dictionary<int, string>{
@@ -17628,11 +21122,20 @@ namespace HardwareInformation.Providers {
 { 6184, "Gigaset USB Adapter 300" },
     })
  },
+            { 4775, Tuple.Create("Trendchip Technologies Corp.", new Dictionary<int, string>{
+    })
+ },
             { 4779, Tuple.Create("Honey Bee Electronic International Ltd.", new Dictionary<int, string>{
 { 4, "Dance Pad for Xbox 360" },
 { 769, "Afterglow Wired Controller for Xbox 360" },
 { 771, "Mortal Kombat Klassic FightStick for Xbox 360" },
 { 34825, "Dance Dance Revolution Dance Pad" },
+    })
+ },
+            { 4792, Tuple.Create("Zhejiang Xinya Electronic Technology Co., Ltd.", new Dictionary<int, string>{
+    })
+ },
+            { 4793, Tuple.Create("E28", new Dictionary<int, string>{
     })
  },
             { 4794, Tuple.Create("Licensed by Sony Computer Entertainment America", new Dictionary<int, string>{
@@ -17717,6 +21220,9 @@ namespace HardwareInformation.Providers {
 { 14347, "WiMAX USB modem(s)" },
     })
  },
+            { 4818, Tuple.Create("LINE TECH INDUSTRIAL CO., LTD.", new Dictionary<int, string>{
+    })
+ },
             { 4819, Tuple.Create("LINAK", new Dictionary<int, string>{
 { 2, "DeskLine CBD Control Box" },
     })
@@ -17724,6 +21230,9 @@ namespace HardwareInformation.Providers {
             { 4822, Tuple.Create("EMS Dr. Thomas Wuensche", new Dictionary<int, string>{
 { 1092, "CPC-USB/ARM7" },
 { 2184, "CPC-USB/M16C" },
+    })
+ },
+            { 4823, Tuple.Create("BETTER WIRE FACTORY CO., LTD.", new Dictionary<int, string>{
     })
  },
             { 4824, Tuple.Create("Araneus Information Systems Oy", new Dictionary<int, string>{
@@ -17742,6 +21251,9 @@ namespace HardwareInformation.Providers {
 { 10, "Braille embosser [SpotDot Emprint]" },
     })
  },
+            { 4853, Tuple.Create("Dynamic System Electronics Corp.", new Dictionary<int, string>{
+    })
+ },
             { 4855, Tuple.Create("Memorex Products, Inc.", new Dictionary<int, string>{
 { 6656, "TD Classic 003B" },
 { 7715, "TravelDrive 2007 Flash Drive" },
@@ -17753,6 +21265,9 @@ namespace HardwareInformation.Providers {
  },
             { 4863, Tuple.Create("Fascinating Electronics, Inc.", new Dictionary<int, string>{
 { 257, "Advanced RC Servo Controller" },
+    })
+ },
+            { 4870, Tuple.Create("FM20 Barcode Scanner", new Dictionary<int, string>{
     })
  },
             { 4871, Tuple.Create("Transcend Information, Inc.", new Dictionary<int, string>{
@@ -17773,6 +21288,9 @@ namespace HardwareInformation.Providers {
  },
             { 4880, Tuple.Create("Roper", new Dictionary<int, string>{
 { 1, "Class 1 Bluetooth Dongle" },
+    })
+ },
+            { 4882, Tuple.Create("ICS Electronics", new Dictionary<int, string>{
     })
  },
             { 4883, Tuple.Create("ThorLabs", new Dictionary<int, string>{
@@ -17925,11 +21443,17 @@ namespace HardwareInformation.Providers {
 { 1201, "Gx CCD-BI CCD" },
     })
  },
+            { 4936, Tuple.Create("Katsuragawa Electric Co., Ltd.", new Dictionary<int, string>{
+    })
+ },
             { 4940, Tuple.Create("PanJit International Inc.", new Dictionary<int, string>{
 { 1, "Touch Panel Controller" },
 { 2, "Touch Panel Controller" },
 { 3, "Touch Panel Controller" },
 { 4, "Touch Panel Controller" },
+    })
+ },
+            { 4942, Tuple.Create("Digby's Bitpile, Inc. DBA D Bit", new Dictionary<int, string>{
     })
  },
             { 4951, Tuple.Create("P&E Microcomputer Systems", new Dictionary<int, string>{
@@ -17961,6 +21485,9 @@ namespace HardwareInformation.Providers {
 { 4117, "J-Link" },
     })
  },
+            { 4971, Tuple.Create("STEC", new Dictionary<int, string>{
+    })
+ },
             { 4974, Tuple.Create("Andor Technology Ltd.", new Dictionary<int, string>{
 { 18, "iXon Ultra CCD" },
 { 20, "Zyla 5.5 sCMOS camera" },
@@ -17980,6 +21507,9 @@ namespace HardwareInformation.Providers {
 { 36898, "CWD-854 [RT2573]" },
 { 36914, "CWD-854 rev F" },
 { 37889, "CWD-854 Wireless 802.11g 54Mbps Network Adapter [RTL8187]" },
+    })
+ },
+            { 4982, Tuple.Create("Vimtron Electronics Co., Ltd.", new Dictionary<int, string>{
     })
  },
             { 4983, Tuple.Create("Sennheiser electronic GmbH & Co. KG", new Dictionary<int, string>{
@@ -18136,10 +21666,19 @@ namespace HardwareInformation.Providers {
 { 48, "Multimix 8" },
     })
  },
+            { 5043, Tuple.Create("Nippon Dics Co., Ltd.", new Dictionary<int, string>{
+    })
+ },
             { 5050, Tuple.Create("PCPlay", new Dictionary<int, string>{
 { 1, "Konig Electronic CMP-KEYPAD12 Numeric Keypad" },
 { 23, "PS/2 Keyboard+Mouse Adapter" },
 { 24, "Barcode PCP-BCG4209" },
+    })
+ },
+            { 5054, Tuple.Create("Ricoh Printing Systems, Ltd.", new Dictionary<int, string>{
+    })
+ },
+            { 5066, Tuple.Create("JyeTai Precision Industrial Co., Ltd.", new Dictionary<int, string>{
     })
  },
             { 5071, Tuple.Create("Wisair Ltd.", new Dictionary<int, string>{
@@ -18233,9 +21772,21 @@ namespace HardwareInformation.Providers {
 { 12, "T8-R2 forensic bridge" },
     })
  },
+            { 5084, Tuple.Create("ALEREON, INC.", new Dictionary<int, string>{
+    })
+ },
+            { 5085, Tuple.Create("i.Tech Dynamic Limited", new Dictionary<int, string>{
+    })
+ },
+            { 5089, Tuple.Create("Kaibo Wire & Cable (Shenzhen) Co., Ltd.", new Dictionary<int, string>{
+    })
+ },
             { 5093, Tuple.Create("Rane", new Dictionary<int, string>{
 { 1, "SL-1" },
 { 3, "TTM 57SL" },
+    })
+ },
+            { 5094, Tuple.Create("TechnoScope Co., Ltd.", new Dictionary<int, string>{
     })
  },
             { 5098, Tuple.Create("Hengstler", new Dictionary<int, string>{
@@ -18295,6 +21846,12 @@ namespace HardwareInformation.Providers {
 { 25344, "SP Mobile C31 (64GB)" },
     })
  },
+            { 5120, Tuple.Create("Axxion Group Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 5122, Tuple.Create("Bowe Bell & Howell", new Dictionary<int, string>{
+    })
+ },
             { 5123, Tuple.Create("Sitronix", new Dictionary<int, string>{
 { 1, "Digital Photo Frame" },
 { 3, "Digital Photo Frame (DPF-1104)" },
@@ -18340,6 +21897,9 @@ namespace HardwareInformation.Providers {
 { 8192, "Sony Playstation Eye" },
     })
  },
+            { 5145, Tuple.Create("ABILITY ENTERPRISE CO., LTD.", new Dictionary<int, string>{
+    })
+ },
             { 5153, Tuple.Create("Sensor Technology", new Dictionary<int, string>{
 { 1541, "Sentech Camera" },
     })
@@ -18370,6 +21930,9 @@ namespace HardwareInformation.Providers {
 { 4120, "4610-1NR FV EJ" },
     })
  },
+            { 5161, Tuple.Create("Vega Technologies Industrial (Austria) Co.", new Dictionary<int, string>{
+    })
+ },
             { 5162, Tuple.Create("Thales E-Transactions", new Dictionary<int, string>{
 { 3, "Artema Hybrid" },
 { 5, "Artema Modular" },
@@ -18389,6 +21952,9 @@ namespace HardwareInformation.Providers {
 { 63489, "Controller" },
     })
  },
+            { 5169, Tuple.Create("Pertech Resources, Inc.", new Dictionary<int, string>{
+    })
+ },
             { 5173, Tuple.Create("Wistron NeWeb", new Dictionary<int, string>{
 { 1063, "UR054g 802.11g Wireless Adapter [Intersil ISL3887]" },
 { 1809, "UR055G 802.11bg" },
@@ -18397,6 +21963,12 @@ namespace HardwareInformation.Providers {
 { 2087, "AR5523 (no firmware)" },
 { 2088, "AR5523" },
 { 2089, "AR5523 (no firmware)" },
+    })
+ },
+            { 5174, Tuple.Create("Denali Software, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 5180, Tuple.Create("Altek Corporation", new Dictionary<int, string>{
     })
  },
             { 5187, Tuple.Create("Digilent", new Dictionary<int, string>{
@@ -18431,6 +22003,9 @@ namespace HardwareInformation.Providers {
 { 16422, "26-183 Serial Cable" },
     })
  },
+            { 5206, Tuple.Create("Extending Wire & Cable Co., Ltd.", new Dictionary<int, string>{
+    })
+ },
             { 5207, Tuple.Create("First International Computer, Inc.", new Dictionary<int, string>{
 { 20759, "OpenMoko Neo1973 kernel usbnet (g_ether, CDC Ethernet) mode" },
 { 20760, "OpenMoko Neo1973 Debug board (V2+)" },
@@ -18463,6 +22038,9 @@ namespace HardwareInformation.Providers {
  },
             { 5216, Tuple.Create("Tatung Co.", new Dictionary<int, string>{
 { 37200, "eHome Infrared Transceiver" },
+    })
+ },
+            { 5217, Tuple.Create("Staccato Communications", new Dictionary<int, string>{
     })
  },
             { 5218, Tuple.Create("Micro Star International", new Dictionary<int, string>{
@@ -18502,6 +22080,9 @@ namespace HardwareInformation.Providers {
 { 12289, "TCS1C EIM/STM32 Fingerprint sensor" },
     })
  },
+            { 5247, Tuple.Create("Hama GmbH & Co., KG", new Dictionary<int, string>{
+    })
+ },
             { 5250, Tuple.Create("Vaillant", new Dictionary<int, string>{
 { 4101, "VRD PC-Interface" },
     })
@@ -18514,6 +22095,12 @@ namespace HardwareInformation.Providers {
             { 5253, Tuple.Create("Silicom", new Dictionary<int, string>{
 { 1, "U2E" },
 { 2, "Psion Gold Port Ethernet" },
+    })
+ },
+            { 5255, Tuple.Create("DSP Group, Ltd.", new Dictionary<int, string>{
+    })
+ },
+            { 5262, Tuple.Create("EVATRONIX SA", new Dictionary<int, string>{
     })
  },
             { 5263, Tuple.Create("Ralink Technology, Corp.", new Dictionary<int, string>{
@@ -18556,6 +22143,9 @@ namespace HardwareInformation.Providers {
 { 30, "Ibisbill [Ambit3 Run]" },
     })
  },
+            { 5271, Tuple.Create("Panstrong Company Ltd.", new Dictionary<int, string>{
+    })
+ },
             { 5272, Tuple.Create("Microtek International Inc.", new Dictionary<int, string>{
 { 41104, "DVB-T Tuner" },
     })
@@ -18572,6 +22162,15 @@ namespace HardwareInformation.Providers {
 { 545, "WT-220U DVB-T dongle" },
 { 555, "WT-220U DVB-T dongle" },
 { 769, "AVermedia/Yakumo/Hama/Typhoon DVB-T USB2.0 (warm)" },
+    })
+ },
+            { 5293, Tuple.Create("CTK Corporation", new Dictionary<int, string>{
+    })
+ },
+            { 5294, Tuple.Create("Printronix Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 5295, Tuple.Create("ATP Electronics Inc.", new Dictionary<int, string>{
     })
  },
             { 5296, Tuple.Create("StarTech.com Ltd.", new Dictionary<int, string>{
@@ -18595,6 +22194,9 @@ namespace HardwareInformation.Providers {
 { 15400, "Conceptronic C300RU v2 802.11bgn Wireless Adapter [Ralink RT2770]" },
 { 15403, "NEC NP02LM 802.11bgn Wireless Adapter [Ralink RT3072]" },
 { 15404, "Keebox W150NU 802.11bgn Wireless Adapter [Ralink RT3070]" },
+    })
+ },
+            { 5312, Tuple.Create("Rockwell Automation, Inc.", new Dictionary<int, string>{
     })
  },
             { 5314, Tuple.Create("Gemlight Computer, Ltd", new Dictionary<int, string>{
@@ -18624,6 +22226,9 @@ namespace HardwareInformation.Providers {
 { 34312, "Hub [Super Top]" },
     })
  },
+            { 5336, Tuple.Create("JAMER INDUSTRIES CO., LTD.", new Dictionary<int, string>{
+    })
+ },
             { 5341, Tuple.Create("Raritan Computer, Inc.", new Dictionary<int, string>{
 { 4103, "D2CIM-VUSB KVM connector" },
     })
@@ -18634,6 +22239,9 @@ namespace HardwareInformation.Providers {
  },
             { 5345, Tuple.Create("Dialogue Technology Corp.", new Dictionary<int, string>{
 { 20480, "PenMount 5000 Touch Controller" },
+    })
+ },
+            { 5349, Tuple.Create("SAIN Information & Communications Co., Ltd.", new Dictionary<int, string>{
     })
  },
             { 5354, Tuple.Create("Planex Communications", new Dictionary<int, string>{
@@ -18663,8 +22271,17 @@ namespace HardwareInformation.Providers {
 { 1280, "DVB-PC TV Star HD" },
     })
  },
+            { 5376, Tuple.Create("Ellisys", new Dictionary<int, string>{
+    })
+ },
+            { 5377, Tuple.Create("Pine-Tum Enterprise Co., Ltd.", new Dictionary<int, string>{
+    })
+ },
             { 5380, Tuple.Create("Bixolon CO LTD", new Dictionary<int, string>{
 { 31, "SRP-350II Thermal Receipt Printer" },
+    })
+ },
+            { 5384, Tuple.Create("Fibocom", new Dictionary<int, string>{
     })
  },
             { 5385, Tuple.Create("First International Computer, Inc.", new Dictionary<int, string>{
@@ -18727,6 +22344,9 @@ namespace HardwareInformation.Providers {
 { 301, "ZEM5310-A4" },
 { 304, "XEM7310-A75" },
 { 305, "XEM7310-A200" },
+    })
+ },
+            { 5408, Tuple.Create("Bitwire Corp.", new Dictionary<int, string>{
     })
  },
             { 5412, Tuple.Create("ENE Technology Inc", new Dictionary<int, string>{
@@ -19067,8 +22687,14 @@ namespace HardwareInformation.Providers {
 { 64005, "Flash Drive" },
     })
  },
+            { 5453, Tuple.Create("ConnectCounty Holdings Berhad", new Dictionary<int, string>{
+    })
+ },
             { 5454, Tuple.Create("D&M Holdings, Inc. (Denon/Marantz)", new Dictionary<int, string>{
 { 12288, "Marantz RC9001 Remote Control" },
+    })
+ },
+            { 5455, Tuple.Create("SNBC CO., Ltd", new Dictionary<int, string>{
     })
  },
             { 5460, Tuple.Create("Prolink Microsystems Corp.", new Dictionary<int, string>{
@@ -19081,6 +22707,18 @@ namespace HardwareInformation.Providers {
 { 2688, "Gobi Wireless Modem (QDL mode)" },
 { 30496, "model 01+ Ethernet" },
 { 33104, "model 01 Ethernet interface" },
+    })
+ },
+            { 5480, Tuple.Create("Sunf Pu Technology Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 5487, Tuple.Create("Quantum Corporation", new Dictionary<int, string>{
+    })
+ },
+            { 5488, Tuple.Create("ALLTOP TECHNOLOGY CO., LTD.", new Dictionary<int, string>{
+    })
+ },
+            { 5499, Tuple.Create("Ketron SRL", new Dictionary<int, string>{
     })
  },
             { 5502, Tuple.Create("TRENDnet", new Dictionary<int, string>{
@@ -19104,8 +22742,17 @@ namespace HardwareInformation.Providers {
 { 24579, "WL-430U 802.11bg" },
     })
  },
+            { 5511, Tuple.Create("SMA Technologie AG", new Dictionary<int, string>{
+    })
+ },
+            { 5517, Tuple.Create("Oakley Inc.", new Dictionary<int, string>{
+    })
+ },
             { 5518, Tuple.Create("JDS Uniphase Corporation (JDSU)", new Dictionary<int, string>{
 { 2080, "SmartPocket Class Device" },
+    })
+ },
+            { 5528, Tuple.Create("Kunshan Guoji Electronics Co., Ltd.", new Dictionary<int, string>{
     })
  },
             { 5538, Tuple.Create("Freescale Semiconductor, Inc.", new Dictionary<int, string>{
@@ -19131,6 +22778,9 @@ namespace HardwareInformation.Providers {
 { 36886, "AF9015 DVB-T USB2.0 stick" },
     })
  },
+            { 5544, Tuple.Create("Teams Power Limited", new Dictionary<int, string>{
+    })
+ },
             { 5545, Tuple.Create("Gemtek", new Dictionary<int, string>{
 { 2, "SparkLAN WL-682 802.11bg Wireless Adapter [Intersil ISL3887]" },
 { 4, "WUBR-177G [Ralink RT2571W]" },
@@ -19138,6 +22788,12 @@ namespace HardwareInformation.Providers {
 { 16, "802.11n USB Wireless Card" },
 { 18, "WUBR-208N 802.11abgn Wireless Adapter [Ralink RT2870]" },
 { 45, "WLTUBA-107 [Yota 4G LTE]" },
+    })
+ },
+            { 5546, Tuple.Create("Gearway Electronics (Dong Guan) Co., Ltd.", new Dictionary<int, string>{
+    })
+ },
+            { 5549, Tuple.Create("VMware Inc.", new Dictionary<int, string>{
     })
  },
             { 5562, Tuple.Create("Olimex Ltd.", new Dictionary<int, string>{
@@ -19191,10 +22847,16 @@ namespace HardwareInformation.Providers {
 { 12801, "EVER EV-W100/EV-W250" },
     })
  },
+            { 5577, Tuple.Create("D-Box Technologies", new Dictionary<int, string>{
+    })
+ },
             { 5578, Tuple.Create("Textech International Ltd.", new Dictionary<int, string>{
 { 195, "Mini Optical Mouse" },
 { 257, "MIDI Interface cable" },
 { 6150, "MIDI Interface cable" },
+    })
+ },
+            { 5589, Tuple.Create("Coulomb Electronics Ltd.", new Dictionary<int, string>{
     })
  },
             { 5593, Tuple.Create("Trust International B.V.", new Dictionary<int, string>{
@@ -19205,6 +22867,12 @@ namespace HardwareInformation.Providers {
 { 2637, "Optical Mouse" },
 { 2638, "AM-5400 [Optical Mouse]" },
 { 2639, "Optical Mouse" },
+    })
+ },
+            { 5596, Tuple.Create("Hynix Semiconductor Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 5600, Tuple.Create("Seong Ji Industrial Co., Ltd.", new Dictionary<int, string>{
     })
  },
             { 5601, Tuple.Create("RSA", new Dictionary<int, string>{
@@ -19229,6 +22897,9 @@ namespace HardwareInformation.Providers {
 { 1230, "MemoryFrame MF-570" },
 { 6504, "MemoryFrame MF-570" },
 { 6505, "Digital Frame" },
+    })
+ },
+            { 5612, Tuple.Create("Belcarra Technologies Corp.", new Dictionary<int, string>{
     })
  },
             { 5620, Tuple.Create("HanfTek", new Dictionary<int, string>{
@@ -19373,8 +23044,23 @@ namespace HardwareInformation.Providers {
 { 8194, "NVX-P1 Personal Navigation System" },
     })
  },
+            { 5657, Tuple.Create("L & K Precision Technology Co., Ltd.", new Dictionary<int, string>{
+    })
+ },
             { 5660, Tuple.Create("Digitech Systems", new Dictionary<int, string>{
 { 2, "DTC-02U [Digi Touch Controller]" },
+    })
+ },
+            { 5665, Tuple.Create("Wionics Research", new Dictionary<int, string>{
+    })
+ },
+            { 5672, Tuple.Create("Stonestreet One, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 5674, Tuple.Create("Airgo Networks Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 5679, Tuple.Create("WiQuest Communications, Inc.", new Dictionary<int, string>{
     })
  },
             { 5680, Tuple.Create("2Wire, Inc.", new Dictionary<int, string>{
@@ -19423,6 +23109,9 @@ namespace HardwareInformation.Providers {
 { 512, "SpYder USBSPYDER08" },
     })
  },
+            { 5706, Tuple.Create("ChipX", new Dictionary<int, string>{
+    })
+ },
             { 5708, Tuple.Create("Matrix Vision GmbH", new Dictionary<int, string>{
 { 257, "mvBlueFOX camera (no firmware)" },
 { 259, "mvBlueFOX camera" },
@@ -19443,6 +23132,9 @@ namespace HardwareInformation.Providers {
 { 2, "Serial Adapter" },
 { 6, "FT232 [ICS adapter HS]" },
 { 8, "FT232 [Dual adapter HS]" },
+    })
+ },
+            { 5728, Tuple.Create("Creatix Polymedia GmbH", new Dictionary<int, string>{
     })
  },
             { 5735, Tuple.Create("GIGA-TMS INC.", new Dictionary<int, string>{
@@ -19509,6 +23201,12 @@ namespace HardwareInformation.Providers {
 { 5, "DocuBrain(R) WWVB Transmitter" },
     })
  },
+            { 5762, Tuple.Create("Maxwise Production Enterprise Ltd.", new Dictionary<int, string>{
+    })
+ },
+            { 5764, Tuple.Create("Godspeed Computer Corp.", new Dictionary<int, string>{
+    })
+ },
             { 5765, Tuple.Create("Delock", new Dictionary<int, string>{
 { 512, "Infrared adapter" },
     })
@@ -19524,6 +23222,9 @@ namespace HardwareInformation.Providers {
 { 21129, "FlashDisk" },
 { 25105, "FlashDisk" },
 { 25107, "FlashDisk" },
+    })
+ },
+            { 5768, Tuple.Create("Saab AB", new Dictionary<int, string>{
     })
  },
             { 5769, Tuple.Create("Razer USA, Ltd", new Dictionary<int, string>{
@@ -19571,6 +23272,15 @@ namespace HardwareInformation.Providers {
 { 65042, "Bootloader" },
     })
  },
+            { 5782, Tuple.Create("Hitachi Video and Information System, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 5783, Tuple.Create("VTec Test, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 5797, Tuple.Create("Shenzhen Zhengerya Cable Co., Ltd.", new Dictionary<int, string>{
+    })
+ },
             { 5798, Tuple.Create("Unigraf", new Dictionary<int, string>{
 { 12288, "VTG-3xxx Video Test Generator family" },
 { 16384, "VTG-4xxx Video Test Generator family" },
@@ -19583,6 +23293,9 @@ namespace HardwareInformation.Providers {
 { 30722, "AR5523 (no firmware)" },
 { 30737, "AR5523" },
 { 30738, "AR5523 (no firmware)" },
+    })
+ },
+            { 5804, Tuple.Create("Dongguan ChingLung Wire & Cable Co., Ltd.", new Dictionary<int, string>{
     })
  },
             { 5812, Tuple.Create("iStation", new Dictionary<int, string>{
@@ -19658,6 +23371,9 @@ namespace HardwareInformation.Providers {
 { 5378, "Bluetooth Dongle" },
     })
  },
+            { 5836, Tuple.Create("silex technology, Inc.", new Dictionary<int, string>{
+    })
+ },
             { 5840, Tuple.Create("MCS", new Dictionary<int, string>{
 { 1078, "Xylanta Ltd, XSP Device" },
 { 1176, "Braintechnology USB-LPS" },
@@ -19698,6 +23414,9 @@ namespace HardwareInformation.Providers {
 { 1025, "SUP-SFR400(A) BioMini Fingerprint Reader" },
     })
  },
+            { 5843, Tuple.Create("Frontline Test Equipment, Inc.", new Dictionary<int, string>{
+    })
+ },
             { 5845, Tuple.Create("AnyDATA Corporation", new Dictionary<int, string>{
 { 25090, "CDMA/UMTS/GPRS modem" },
 { 25857, "CDMA 2000 1xRTT/EV-DO Modem" },
@@ -19733,18 +23452,36 @@ namespace HardwareInformation.Providers {
 { 21, "CML Control, Measurement and Data Logging System" },
     })
  },
+            { 5854, Tuple.Create("Telemecanique", new Dictionary<int, string>{
+    })
+ },
+            { 5855, Tuple.Create("King Billion Electronics Co., Ltd.", new Dictionary<int, string>{
+    })
+ },
             { 5872, Tuple.Create("GN Hearing A/S", new Dictionary<int, string>{
 { 1, "Speedlink Programming Interface" },
 { 3, "Airlink Wireless Programming Interface" },
 { 4, "Accessory Programming Interface" },
     })
  },
+            { 5877, Tuple.Create("Futurelogic Inc.", new Dictionary<int, string>{
+    })
+ },
             { 5890, Tuple.Create("FDI-MATELEC", new Dictionary<int, string>{
 { 2, "Encodeur" },
     })
  },
+            { 5894, Tuple.Create("BlueView Technologies, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 5895, Tuple.Create("ARTIMI", new Dictionary<int, string>{
+    })
+ },
             { 5899, Tuple.Create("Swissonic", new Dictionary<int, string>{
 { 17, "MIDI-USB 1x1" },
+    })
+ },
+            { 5901, Tuple.Create("Avnera", new Dictionary<int, string>{
     })
  },
             { 5905, Tuple.Create("Leica Microsystems", new Dictionary<int, string>{
@@ -19754,6 +23491,9 @@ namespace HardwareInformation.Providers {
  },
             { 5924, Tuple.Create("Meyer Instruments (MIS)", new Dictionary<int, string>{
 { 277, "PAXcam5" },
+    })
+ },
+            { 5925, Tuple.Create("Vitesse Semiconductor", new Dictionary<int, string>{
     })
  },
             { 5926, Tuple.Create("Axesstel, Inc.", new Dictionary<int, string>{
@@ -19778,6 +23518,9 @@ namespace HardwareInformation.Providers {
  },
             { 5939, Tuple.Create("Cellink Technology Co., Ltd", new Dictionary<int, string>{
 { 257, "RF Wireless Optical Mouse OP-701" },
+    })
+ },
+            { 5942, Tuple.Create("CANON IMAGING SYSTEM TECHNOLOGIES INC.", new Dictionary<int, string>{
     })
  },
             { 5943, Tuple.Create("802.11g Adapter [Linksys WUSB54GC v3]", new Dictionary<int, string>{
@@ -19815,6 +23558,9 @@ namespace HardwareInformation.Providers {
 { 38661, "EnGenius 802.11n Wireless USB Adapter" },
 { 38662, "EUB9706 802.11n Wireless Adapter [Ralink RT3072]" },
 { 38913, "EUB9801 802.11abgn Wireless Adapter [Ralink RT3572]" },
+    })
+ },
+            { 5955, Tuple.Create("General Atomics", new Dictionary<int, string>{
     })
  },
             { 5960, Tuple.Create("MQP Electronics", new Dictionary<int, string>{
@@ -19867,12 +23613,18 @@ namespace HardwareInformation.Providers {
 { 6, "DiviPitch" },
     })
  },
+            { 5977, Tuple.Create("LucidPort Technology, Inc.", new Dictionary<int, string>{
+    })
+ },
             { 5985, Tuple.Create("ASUSTek Computer, Inc. (wrong ID)", new Dictionary<int, string>{
 { 2821, "802.11n Network Adapter (wrong ID - swapped vendor and device)" },
     })
  },
             { 6000, Tuple.Create("MSI", new Dictionary<int, string>{
 { 65280, "steel series rgb keyboard" },
+    })
+ },
+            { 6002, Tuple.Create("System Level Solutions, Inc.", new Dictionary<int, string>{
     })
  },
             { 6006, Tuple.Create("Arowana", new Dictionary<int, string>{
@@ -19933,8 +23685,20 @@ namespace HardwareInformation.Providers {
 { 17, "eHome Infrared Transceiver" },
     })
  },
+            { 6023, Tuple.Create("ATI AIB", new Dictionary<int, string>{
+    })
+ },
+            { 6024, Tuple.Create("ShenZhen Litkconn Technology Co., Ltd.", new Dictionary<int, string>{
+    })
+ },
             { 6030, Tuple.Create("ASUSTek Computer, Inc. (wrong ID)", new Dictionary<int, string>{
 { 2821, "CrossLink cable 2GB (wrong ID - swapped vendor and device)" },
+    })
+ },
+            { 6038, Tuple.Create("Printrex, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 6039, Tuple.Create("JALCO CO., LTD.", new Dictionary<int, string>{
     })
  },
             { 6041, Tuple.Create("Thales Norway A/S", new Dictionary<int, string>{
@@ -19977,6 +23741,12 @@ namespace HardwareInformation.Providers {
 { 2, "Performance Monitor 4" },
     })
  },
+            { 6053, Tuple.Create("Advanced Connection Technology Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 6055, Tuple.Create("MICOMSOFT CO., LTD.", new Dictionary<int, string>{
+    })
+ },
             { 6056, Tuple.Create("Kamstrup A/S", new Dictionary<int, string>{
 { 1, "Optical Eye/3-wire" },
 { 5, "M-Bus Master MultiPort 250D" },
@@ -20002,6 +23772,9 @@ namespace HardwareInformation.Providers {
 { 5393, "Onboard Emulator on SAUModule development kit" },
     })
  },
+            { 6083, Tuple.Create("Singim International Corp.", new Dictionary<int, string>{
+    })
+ },
             { 6092, Tuple.Create("Native Instruments", new Dictionary<int, string>{
 { 1052, "Audio 2 DJ" },
 { 1053, "Traktor Audio 2" },
@@ -20020,6 +23793,15 @@ namespace HardwareInformation.Providers {
 { 18193, "Kore Controller" },
 { 18194, "Kore Controller 2" },
 { 47871, "Traktor Kontrol S4" },
+    })
+ },
+            { 6095, Tuple.Create("Hip Hing Cable & Plug Mfy. Ltd.", new Dictionary<int, string>{
+    })
+ },
+            { 6096, Tuple.Create("Sanford L.P.", new Dictionary<int, string>{
+    })
+ },
+            { 6099, Tuple.Create("Korea Techtron Co., Ltd.", new Dictionary<int, string>{
     })
  },
             { 6121, Tuple.Create("DisplayLink", new Dictionary<int, string>{
@@ -20041,6 +23823,9 @@ namespace HardwareInformation.Providers {
 { 17170, "S2340T" },
 { 17262, "Dell D3100 Docking Station" },
 { 65296, "I1659FWUX {AOC Powered Monitor]" },
+    })
+ },
+            { 6123, Tuple.Create("Cornice, Inc.", new Dictionary<int, string>{
     })
  },
             { 6127, Tuple.Create("Lenovo", new Dictionary<int, string>{
@@ -20132,6 +23917,9 @@ namespace HardwareInformation.Providers {
 { 43690, "Jazz Blood Glucose Meter" },
     })
  },
+            { 6133, Tuple.Create("K.K. Rocky", new Dictionary<int, string>{
+    })
+ },
             { 6134, Tuple.Create("Unicomp, Inc.", new Dictionary<int, string>{
 { 1801, "Model M Keyboard" },
 { 2082, "Ruffian 6 Keyboard v3 [Model M]" },
@@ -20147,8 +23935,20 @@ namespace HardwareInformation.Providers {
 { 12802, "VisionDTV USB-Ter/HAMA USB DVB-T device warm" },
     })
  },
+            { 6193, Tuple.Create("Gwo Jinn Industries Co., Ltd.", new Dictionary<int, string>{
+    })
+ },
+            { 6194, Tuple.Create("Huizhou Shenghua Industrial Co., Ltd.", new Dictionary<int, string>{
+    })
+ },
             { 6205, Tuple.Create("VIVOphone", new Dictionary<int, string>{
 { 16, "VoiceKey" },
+    })
+ },
+            { 6211, Tuple.Create("Vaisala", new Dictionary<int, string>{
+    })
+ },
+            { 6217, Tuple.Create("ASRock Incorporation", new Dictionary<int, string>{
     })
  },
             { 6223, Tuple.Create("K2L GmbH", new Dictionary<int, string>{
@@ -20161,11 +23961,20 @@ namespace HardwareInformation.Providers {
 { 31010, "Audiotrak DR.DAC2 DX [GYROCOM C&C]" },
     })
  },
+            { 6228, Tuple.Create("Memory Devices Ltd.", new Dictionary<int, string>{
+    })
+ },
             { 6235, Tuple.Create("Compro", new Dictionary<int, string>{
 { 12320, "K100 Infrared Receiver" },
 { 12418, "K100 Infrared Receiver v2" },
 { 53248, "Compro Videomate DVB-U2000 - DVB-T USB cold" },
 { 53249, "Compro Videomate DVB-U2000 - DVB-T USB warm" },
+    })
+ },
+            { 6241, Tuple.Create("Tech Technology Industrial Company", new Dictionary<int, string>{
+    })
+ },
+            { 6242, Tuple.Create("Teridian Semiconductor Corp.", new Dictionary<int, string>{
     })
  },
             { 6256, Tuple.Create("Nexio Co., Ltd", new Dictionary<int, string>{
@@ -20199,9 +24008,15 @@ namespace HardwareInformation.Providers {
 { 769, "VeNice" },
     })
  },
+            { 6290, Tuple.Create("Vast Technologies, Inc.", new Dictionary<int, string>{
+    })
+ },
             { 6292, Tuple.Create("Topseed", new Dictionary<int, string>{
 { 22066, "Atek Tote Remote" },
 { 22081, "TSAM-004 Presentation Remote" },
+    })
+ },
+            { 6295, Tuple.Create("Evertop Wire Cable Co.", new Dictionary<int, string>{
     })
  },
             { 6303, Tuple.Create("3Shape A/S", new Dictionary<int, string>{
@@ -20238,6 +24053,12 @@ namespace HardwareInformation.Providers {
 { 5769, "DUTV009" },
 { 65530, "EC168 (v2) based USB DVB-T receiver" },
 { 65531, "EC168 (v3) based USB DVB-T receiver" },
+    })
+ },
+            { 6326, Tuple.Create("Mikkon Technology Limited", new Dictionary<int, string>{
+    })
+ },
+            { 6327, Tuple.Create("Zotek Electronic Co., Ltd.", new Dictionary<int, string>{
     })
  },
             { 6341, Tuple.Create("AMIT Technology, Inc.", new Dictionary<int, string>{
@@ -20295,8 +24116,14 @@ namespace HardwareInformation.Providers {
 { 53514, "LG G2x MTP (debug)" },
     })
  },
+            { 6357, Tuple.Create("Starline International Group Limited", new Dictionary<int, string>{
+    })
+ },
             { 6361, Tuple.Create("Kaba", new Dictionary<int, string>{
 { 416, "B-Net 91 07" },
+    })
+ },
+            { 6364, Tuple.Create("LKC Technologies, Inc.", new Dictionary<int, string>{
     })
  },
             { 6365, Tuple.Create("Planon System Solutions Inc.", new Dictionary<int, string>{
@@ -20362,6 +24189,9 @@ namespace HardwareInformation.Providers {
 { 519, "ST1570" },
     })
  },
+            { 6397, Tuple.Create("FineArch Inc.", new Dictionary<int, string>{
+    })
+ },
             { 6401, Tuple.Create("GE Healthcare", new Dictionary<int, string>{
 { 21, "Nemo Tracker" },
     })
@@ -20374,6 +24204,12 @@ namespace HardwareInformation.Providers {
 { 8304, "Honk HK-5002 USB Speaker" },
 { 8736, "Buildwin Media-Player" },
 { 8977, "Generic UVC 1.00 camera [AppoTech AX2311]" },
+    })
+ },
+            { 6413, Tuple.Create("Motorola GSG", new Dictionary<int, string>{
+    })
+ },
+            { 6420, Tuple.Create("Alco Digital Devices Limited", new Dictionary<int, string>{
     })
  },
             { 6421, Tuple.Create("Nordic Semiconductor ASA", new Dictionary<int, string>{
@@ -20438,6 +24274,12 @@ namespace HardwareInformation.Providers {
 { 2326, "ADNS-2710 Optical Mouse Controller" },
     })
  },
+            { 6448, Tuple.Create("Shenzhen Xianhe Technology Co., Ltd.", new Dictionary<int, string>{
+    })
+ },
+            { 6449, Tuple.Create("Ningbo Broad Telecommunication Co., Ltd.", new Dictionary<int, string>{
+    })
+ },
             { 6452, Tuple.Create("Feature Integration Technology Inc. (Fintek)", new Dictionary<int, string>{
 { 1538, "F71610 or F71612 Consumer Infrared Receiver/Transceiver" },
 { 1794, "Integrated Consumer Infrared Receiver/Transceiver" },
@@ -20486,8 +24328,14 @@ namespace HardwareInformation.Providers {
 { 769, "AudioBox" },
     })
  },
+            { 6481, Tuple.Create("Hyperstone AG", new Dictionary<int, string>{
+    })
+ },
             { 6483, Tuple.Create("Ironkey Inc.", new Dictionary<int, string>{
 { 514, "S200 2GB Rev. 1" },
+    })
+ },
+            { 6484, Tuple.Create("Radiient Technologies", new Dictionary<int, string>{
     })
  },
             { 6493, Tuple.Create("Itron Technology iONE", new Dictionary<int, string>{
@@ -20509,6 +24357,12 @@ namespace HardwareInformation.Providers {
 { 26, "BCD436HP Scanner" },
     })
  },
+            { 6503, Tuple.Create("CASIO HITACHI Mobile Communications Co., Ltd.", new Dictionary<int, string>{
+    })
+ },
+            { 6507, Tuple.Create("Wispro Technology Inc.", new Dictionary<int, string>{
+    })
+ },
             { 6512, Tuple.Create("Dane-Elec Corp. USA", new Dictionary<int, string>{
 { 0, "Z Mate 16GB" },
     })
@@ -20517,6 +24371,9 @@ namespace HardwareInformation.Providers {
 { 2, "Pivot recovery" },
 { 3, "Pivot Media Transfer Protocol" },
 { 4, "Pivot Media Transfer Protocol" },
+    })
+ },
+            { 6517, Tuple.Create("Dongguan Guneetal Wire & Cable Co., Ltd.", new Dictionary<int, string>{
     })
  },
             { 6518, Tuple.Create("Chipsbrand Microelectronics (HK) Co., Ltd.", new Dictionary<int, string>{
@@ -20536,9 +24393,15 @@ namespace HardwareInformation.Providers {
 { 2056, "Clickfree C2 Slimline (527SE)" },
     })
  },
+            { 6537, Tuple.Create("Nuconn Technology Corp.", new Dictionary<int, string>{
+    })
+ },
             { 6543, Tuple.Create("Beceem Communications Inc.", new Dictionary<int, string>{
 { 528, "BCS200 WiMAX Adapter" },
 { 544, "BCSM250 WiMAX Adapter" },
+    })
+ },
+            { 6544, Tuple.Create("Acron Precision Industrial Co., Ltd.", new Dictionary<int, string>{
     })
  },
             { 6549, Tuple.Create("Trillium Technology Pty. Ltd.", new Dictionary<int, string>{
@@ -20566,11 +24429,17 @@ namespace HardwareInformation.Providers {
 { 33879, "DFK AFU130-L53 camera" },
     })
  },
+            { 6559, Tuple.Create("Benica Corporation", new Dictionary<int, string>{
+    })
+ },
             { 6565, Tuple.Create("HARRIS Corp.", new Dictionary<int, string>{
 { 4, "Remote NDIS Network Device" },
 { 18, "RF-7800S Secure Personal Radio" },
 { 1025, "Mass Storage Device" },
 { 1026, "Falcon III RF-7800V family RNDIS" },
+    })
+ },
+            { 6568, Tuple.Create("Biforst Technology Inc.", new Dictionary<int, string>{
     })
  },
             { 6571, Tuple.Create("Bodelin", new Dictionary<int, string>{
@@ -20593,6 +24462,12 @@ namespace HardwareInformation.Providers {
 { 257, "Handheld Digital Microscope 44302" },
     })
  },
+            { 6581, Tuple.Create("B & W Group", new Dictionary<int, string>{
+    })
+ },
+            { 6582, Tuple.Create("Infotech Logistic, LLC", new Dictionary<int, string>{
+    })
+ },
             { 6585, Tuple.Create("Data Robotics", new Dictionary<int, string>{
 { 19216, "Drobo" },
 { 36128, "Drobo Elite" },
@@ -20608,6 +24483,9 @@ namespace HardwareInformation.Providers {
  },
             { 6607, Tuple.Create("Parrot SA", new Dictionary<int, string>{
 { 1, "MiniKit Slim handsfree car kit in firmware update mode" },
+    })
+ },
+            { 6609, Tuple.Create("BYD", new Dictionary<int, string>{
     })
  },
             { 6610, Tuple.Create("ZTE WCDMA Technologies MSM", new Dictionary<int, string>{
@@ -20649,6 +24527,15 @@ namespace HardwareInformation.Providers {
 { 753, "NAUT324C" },
     })
  },
+            { 6625, Tuple.Create("WeiDuan Electronic Accessory (S.Z.) Co., Ltd.", new Dictionary<int, string>{
+    })
+ },
+            { 6632, Tuple.Create("Industrial Technology Research Institute", new Dictionary<int, string>{
+    })
+ },
+            { 6639, Tuple.Create("Pak Heng Technology (Shenzhen) Co., Ltd.", new Dictionary<int, string>{
+    })
+ },
             { 6647, Tuple.Create("RODE Microphones", new Dictionary<int, string>{
 { 1, "Podcaster" },
     })
@@ -20656,6 +24543,9 @@ namespace HardwareInformation.Providers {
             { 6650, Tuple.Create("Gampaq Co.Ltd", new Dictionary<int, string>{
 { 1543, "GAME CONTROLLER" },
 { 1795, "Steering Wheel" },
+    })
+ },
+            { 6653, Tuple.Create("MTI Instruments Inc.", new Dictionary<int, string>{
     })
  },
             { 6655, Tuple.Create("Dynex", new Dictionary<int, string>{
@@ -20666,12 +24556,24 @@ namespace HardwareInformation.Providers {
 { 569, "Bluetooth 4.0 Adapter [Broadcom, 1.12, BCM20702A0]" },
     })
  },
+            { 6664, Tuple.Create("Bellwood International, Inc.", new Dictionary<int, string>{
+    })
+ },
             { 6666, Tuple.Create("USB-IF non-workshop", new Dictionary<int, string>{
 { 47837, "USB OTG Compliance test device" },
     })
  },
+            { 6674, Tuple.Create("KES Co., Ltd.", new Dictionary<int, string>{
+    })
+ },
             { 6685, Tuple.Create("Veho", new Dictionary<int, string>{
 { 1031, "Mimi WiFi speakers" },
+    })
+ },
+            { 6693, Tuple.Create("Amphenol East Asia Ltd.", new Dictionary<int, string>{
+    })
+ },
+            { 6698, Tuple.Create("Seagate Branded Solutions", new Dictionary<int, string>{
     })
  },
             { 6700, Tuple.Create("China Resource Semico Co., Ltd", new Dictionary<int, string>{
@@ -20690,13 +24592,28 @@ namespace HardwareInformation.Providers {
 { 2050, "Gamepad" },
     })
  },
+            { 6710, Tuple.Create("Biwin Technology Ltd.", new Dictionary<int, string>{
+    })
+ },
             { 6720, Tuple.Create("Terminus Technology Inc.", new Dictionary<int, string>{
 { 257, "Hub" },
 { 513, "FE 2.1 7-port Hub" },
     })
  },
+            { 6721, Tuple.Create("Action Electronics Co., Ltd.", new Dictionary<int, string>{
+    })
+ },
             { 6724, Tuple.Create("VASCO Data Security International", new Dictionary<int, string>{
 { 1, "Digipass 905 SmartCard Reader" },
+    })
+ },
+            { 6730, Tuple.Create("Silicon Image", new Dictionary<int, string>{
+    })
+ },
+            { 6731, Tuple.Create("SafeBoot International B.V.", new Dictionary<int, string>{
+    })
+ },
+            { 6746, Tuple.Create("Tandberg Data", new Dictionary<int, string>{
     })
  },
             { 6753, Tuple.Create("Abbott Diabetes Care", new Dictionary<int, string>{
@@ -20710,6 +24627,18 @@ namespace HardwareInformation.Providers {
 { 0, "MasterBus Link" },
     })
  },
+            { 6762, Tuple.Create("Spansion Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 6765, Tuple.Create("SamYoung Electronics Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 6766, Tuple.Create("Global Unichip Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 6767, Tuple.Create("Sagem Orga GmbH", new Dictionary<int, string>{
+    })
+ },
             { 6770, Tuple.Create("Physik Instrumente", new Dictionary<int, string>{
 { 4104, "E-861 PiezoWalk NEXACT Controller" },
     })
@@ -20720,6 +24649,9 @@ namespace HardwareInformation.Providers {
 { 25344, "Contour next link" },
 { 29712, "Contour Next" },
 { 30720, "Contour Plus One" },
+    })
+ },
+            { 6779, Tuple.Create("Lumberg Connect  GmbH & Co. KG", new Dictionary<int, string>{
     })
  },
             { 6780, Tuple.Create("Evoluent", new Dictionary<int, string>{
@@ -20754,10 +24686,28 @@ namespace HardwareInformation.Providers {
 { 57352, "HID-based serial adapater" },
     })
  },
+            { 6793, Tuple.Create("Dynalith Systems Co., Ltd.", new Dictionary<int, string>{
+    })
+ },
+            { 6795, Tuple.Create("SGS Taiwan Ltd.", new Dictionary<int, string>{
+    })
+ },
             { 6797, Tuple.Create("BandRich, Inc.", new Dictionary<int, string>{
 { 4098, "BandLuxe 3.5G HSDPA Adapter" },
 { 4105, "BandLuxe 3.5G HSPA Adapter" },
 { 4109, "4G LTE adapter" },
+    })
+ },
+            { 6808, Tuple.Create("Leica Camera AG", new Dictionary<int, string>{
+    })
+ },
+            { 6820, Tuple.Create("Data Drive Thru, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 6821, Tuple.Create("UBeacon Technologies, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 6822, Tuple.Create("eFortune Technology Corp.", new Dictionary<int, string>{
     })
  },
             { 6827, Tuple.Create("Silvercreations Software AG", new Dictionary<int, string>{
@@ -20782,8 +24732,14 @@ namespace HardwareInformation.Providers {
 { 1, "Vision device" },
     })
  },
+            { 6859, Tuple.Create("Salcomp Plc", new Dictionary<int, string>{
+    })
+ },
             { 6860, Tuple.Create("Midiplus Co, Ltd.", new Dictionary<int, string>{
 { 259, "AudioLink plus 4x4 2.9.28" },
+    })
+ },
+            { 6865, Tuple.Create("Desay Wire Co., Ltd.", new Dictionary<int, string>{
     })
  },
             { 6868, Tuple.Create("APS", new Dictionary<int, string>{
@@ -20795,12 +24751,24 @@ namespace HardwareInformation.Providers {
 { 3, "CDC Ethernet Gadget" },
     })
  },
+            { 6884, Tuple.Create("ic-design Reinhard Gottinger GmbH", new Dictionary<int, string>{
+    })
+ },
             { 6887, Tuple.Create("X-TENSIONS", new Dictionary<int, string>{
 { 897, "VS-DVB-T 380U (af9015 based)" },
 { 1317, "X-Tensions ISDN TA XC-525 [HFC-S USB]" },
 { 8193, "SpeedLink Snappy Mic webcam (SL-6825-SBK)" },
 { 36867, "SpeedLink Vicious And Devine Laplace webcam, white (VD-1504-SWT)" },
 { 36868, "SpeedLink Vicious And Devine Laplace webcam, black (VD-1504-SBK)" },
+    })
+ },
+            { 6893, Tuple.Create("High Top Precision Electronic Co., Ltd.", new Dictionary<int, string>{
+    })
+ },
+            { 6895, Tuple.Create("Conntech Electronic (Suzhou) Corporation", new Dictionary<int, string>{
+    })
+ },
+            { 6897, Tuple.Create("Connect One Ltd.", new Dictionary<int, string>{
     })
  },
             { 6899, Tuple.Create("Kingsis Technology Corporation", new Dictionary<int, string>{
@@ -20952,12 +24920,30 @@ namespace HardwareInformation.Providers {
 { 49184, "HmIP-RFUSB" },
     })
  },
+            { 6944, Tuple.Create("MStar Semiconductor, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 6946, Tuple.Create("WiLinx Corp.", new Dictionary<int, string>{
+    })
+ },
             { 6948, Tuple.Create("Telegent Systems, Inc.", new Dictionary<int, string>{
 { 16385, "TLG2300 Hybrid TV Device" },
     })
  },
+            { 6950, Tuple.Create("Cellex Power Products, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 6951, Tuple.Create("Current Electronics Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 6952, Tuple.Create("NAVIsis Inc.", new Dictionary<int, string>{
+    })
+ },
             { 6962, Tuple.Create("Ugobe Life Forms, Inc.", new Dictionary<int, string>{
 { 100, "Pleo robotic dinosaur" },
+    })
+ },
+            { 6966, Tuple.Create("ViXS Systems, Inc.", new Dictionary<int, string>{
     })
  },
             { 6971, Tuple.Create("iPassion Technology Inc.", new Dictionary<int, string>{
@@ -20997,6 +24983,9 @@ namespace HardwareInformation.Providers {
 { 1, "CHUSB Duo Charger (NiMH AA/AAA USB smart charger)" },
     })
  },
+            { 6984, Tuple.Create("Plastron Precision Co., Ltd.", new Dictionary<int, string>{
+    })
+ },
             { 6994, Tuple.Create("ARH Inc.", new Dictionary<int, string>{
 { 8449, "FXMC Neural Network Controller" },
 { 8450, "FXMC Neural Network Controller V2" },
@@ -21022,9 +25011,21 @@ namespace HardwareInformation.Providers {
 { 33027, "Camera V3" },
     })
  },
+            { 7001, Tuple.Create("K.S. Terminals Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 7002, Tuple.Create("Chao Zhou Kai Yuan Electric Co., Ltd.", new Dictionary<int, string>{
+    })
+ },
+            { 7013, Tuple.Create("The Hong Kong Standards and Testing Centre Ltd.", new Dictionary<int, string>{
+    })
+ },
             { 7025, Tuple.Create("Fushicai", new Dictionary<int, string>{
 { 80, "Encore ENUTV-4 Analog TV Tuner" },
 { 12290, "USBTV007 Video Grabber [EasyCAP]" },
+    })
+ },
+            { 7026, Tuple.Create("ATERGI TECHNOLOGY CO., LTD.", new Dictionary<int, string>{
     })
  },
             { 7027, Tuple.Create("Fresco Logic", new Dictionary<int, string>{
@@ -21037,6 +25038,9 @@ namespace HardwareInformation.Providers {
 { 33159, "AirLive WL-1600USB 802.11g Adapter [Realtek RTL8187L]" },
 { 37232, "AirLive X.USB 802.11abgn [Atheros AR9170+AR9104]" },
 { 41472, "AirLive WN-200USB wireless 11b/g/n dongle" },
+    })
+ },
+            { 7030, Tuple.Create("Legend Silicon Corp.", new Dictionary<int, string>{
     })
  },
             { 7040, Tuple.Create("Afatech", new Dictionary<int, string>{
@@ -21059,13 +25063,49 @@ namespace HardwareInformation.Providers {
 { 58377, "IT9137FN Dual DVB-T [KWorld UB499-2T]" },
     })
  },
+            { 7046, Tuple.Create("Dongguan Guanshang Electronics Co., Ltd.", new Dictionary<int, string>{
+    })
+ },
+            { 7048, Tuple.Create("ShenMing Electron (Dong Guan) Co., Ltd.", new Dictionary<int, string>{
+    })
+ },
+            { 7052, Tuple.Create("Altium Limited", new Dictionary<int, string>{
+    })
+ },
+            { 7053, Tuple.Create("e-MOVE Technology Co., Ltd.", new Dictionary<int, string>{
+    })
+ },
+            { 7054, Tuple.Create("Amlogic, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 7055, Tuple.Create("MA LABS, Inc.", new Dictionary<int, string>{
+    })
+ },
             { 7062, Tuple.Create("N-Trig", new Dictionary<int, string>{
 { 1, "Duosense Transparent Electromagnetic Digitizer" },
+    })
+ },
+            { 7064, Tuple.Create("YMax Communications Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 7065, Tuple.Create("Shenzhen Yuanchuan Electronic", new Dictionary<int, string>{
+    })
+ },
+            { 7073, Tuple.Create("JINQ CHERN ENTERPRISE CO., LTD.", new Dictionary<int, string>{
+    })
+ },
+            { 7074, Tuple.Create("Lite Metals & Plastic (Shenzhen) Co., Ltd.", new Dictionary<int, string>{
     })
  },
             { 7076, Tuple.Create("Ember Corporation", new Dictionary<int, string>{
 { 1, "InSight USB Link" },
 { 2, "EM358 Virtual COM Port" },
+    })
+ },
+            { 7078, Tuple.Create("Abilis Systems", new Dictionary<int, string>{
+    })
+ },
+            { 7080, Tuple.Create("China Telecommunication Technology Labs", new Dictionary<int, string>{
     })
  },
             { 7085, Tuple.Create("Harmonix Music", new Dictionary<int, string>{
@@ -21142,6 +25182,12 @@ namespace HardwareInformation.Providers {
 { 18525, "EliteIV" },
     })
  },
+            { 7108, Tuple.Create("Ford Motor Co.", new Dictionary<int, string>{
+    })
+ },
+            { 7109, Tuple.Create("AVIXE Technology (China) Ltd.", new Dictionary<int, string>{
+    })
+ },
             { 7111, Tuple.Create("Telit Wireless Solutions", new Dictionary<int, string>{
 { 32, "HE863" },
 { 33, "HE910" },
@@ -21159,6 +25205,9 @@ namespace HardwareInformation.Providers {
 { 4362, "ME310" },
 { 4608, "LE920 (old firmware)" },
 { 4609, "LE910 / LE920" },
+    })
+ },
+            { 7118, Tuple.Create("Contac Cable Industrial Limited", new Dictionary<int, string>{
     })
  },
             { 7119, Tuple.Create("Sunplus Innovation Technology Inc.", new Dictionary<int, string>{
@@ -21186,9 +25235,30 @@ namespace HardwareInformation.Providers {
 { 11374, "Laptop Integrated WebCam HD" },
     })
  },
+            { 7120, Tuple.Create("Hangzhou Riyue Electronic Co., Ltd.", new Dictionary<int, string>{
+    })
+ },
+            { 7125, Tuple.Create("BG Systems, Inc.", new Dictionary<int, string>{
+    })
+ },
             { 7130, Tuple.Create("University Of Southampton", new Dictionary<int, string>{
 { 16, "Power Board v4 Rev B" },
 { 17, "Student Robotics SBv4B" },
+    })
+ },
+            { 7134, Tuple.Create("P-TWO INDUSTRIES, INC.", new Dictionary<int, string>{
+    })
+ },
+            { 7151, Tuple.Create("Shenzhen Tongyuan Network-Communication Cables Co., Ltd", new Dictionary<int, string>{
+    })
+ },
+            { 7152, Tuple.Create("RealVision Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 7157, Tuple.Create("Extranet Systems Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 7158, Tuple.Create("Orient Semiconductor Electronics, Ltd.", new Dictionary<int, string>{
     })
  },
             { 7165, Tuple.Create("TouchPack", new Dictionary<int, string>{
@@ -21200,6 +25270,9 @@ namespace HardwareInformation.Providers {
 { 10600, "Touch Screen" },
 { 22888, "Touch Screen" },
 { 26984, "Touch Screen" },
+    })
+ },
+            { 7170, Tuple.Create("Kreton Corporation", new Dictionary<int, string>{
     })
  },
             { 7172, Tuple.Create("QNAP System Inc.", new Dictionary<int, string>{
@@ -21215,12 +25288,42 @@ namespace HardwareInformation.Providers {
 { 258, "Plug Computer" },
     })
  },
+            { 7181, Tuple.Create("Relm Wireless", new Dictionary<int, string>{
+    })
+ },
+            { 7184, Tuple.Create("Lanterra Industrial Co., Ltd.", new Dictionary<int, string>{
+    })
+ },
             { 7185, Tuple.Create("Input Club Inc.", new Dictionary<int, string>{
 { 45133, "ErgoDox Infinity" },
     })
  },
+            { 7187, Tuple.Create("ALECTRONIC LIMITED", new Dictionary<int, string>{
+    })
+ },
             { 7194, Tuple.Create("Datel Electronics Ltd.", new Dictionary<int, string>{
 { 256, "Action Replay DS \"3DS/DSi/DS/Lite Compatible\"" },
+    })
+ },
+            { 7195, Tuple.Create("Volkswagen of America, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 7199, Tuple.Create("Goldvish S.A.", new Dictionary<int, string>{
+    })
+ },
+            { 7200, Tuple.Create("Fuji Electric Device Technology Co., Ltd.", new Dictionary<int, string>{
+    })
+ },
+            { 7201, Tuple.Create("ADDMM LLC", new Dictionary<int, string>{
+    })
+ },
+            { 7202, Tuple.Create("ZHONGSHAN CHIANG YU ELECTRIC CO., LTD.", new Dictionary<int, string>{
+    })
+ },
+            { 7206, Tuple.Create("Shanghai Haiying Electronics Co., Ltd.", new Dictionary<int, string>{
+    })
+ },
+            { 7207, Tuple.Create("HuiYang D & S Cable Co., Ltd.", new Dictionary<int, string>{
     })
  },
             { 7208, Tuple.Create("PMD Technologies", new Dictionary<int, string>{
@@ -21241,6 +25344,9 @@ namespace HardwareInformation.Providers {
 { 4348, "enCore device" },
     })
  },
+            { 7217, Tuple.Create("LS Cable Ltd.", new Dictionary<int, string>{
+    })
+ },
             { 7220, Tuple.Create("SpringCard", new Dictionary<int, string>{
 { 29249, "Prox'N'Roll RFID Scanner" },
     })
@@ -21249,12 +25355,21 @@ namespace HardwareInformation.Providers {
 { 24976, "U2F Fido-compliant cryptotoken" },
     })
  },
+            { 7229, Tuple.Create("NONIN MEDICAL INC.", new Dictionary<int, string>{
+    })
+ },
+            { 7230, Tuple.Create("Wep Peripherals", new Dictionary<int, string>{
+    })
+ },
             { 7232, Tuple.Create("EZPrototypes", new Dictionary<int, string>{
 { 1331, "TiltStick" },
 { 1332, "i2c-tiny-usb interface" },
 { 1333, "glcd2usb interface" },
 { 1334, "Swiss ColorPAL" },
 { 1335, "MIST Board" },
+    })
+ },
+            { 7241, Tuple.Create("Cherng Weei Technology Corp.", new Dictionary<int, string>{
     })
  },
             { 7243, Tuple.Create("Geratherm Medical AG", new Dictionary<int, string>{
@@ -21284,6 +25399,9 @@ namespace HardwareInformation.Providers {
 { 41507, "DVD Writer Slimtype eUAU108" },
     })
  },
+            { 7276, Tuple.Create("Skydigital Inc.", new Dictionary<int, string>{
+    })
+ },
             { 7281, Tuple.Create("Humanware Inc", new Dictionary<int, string>{
 { 49156, "Braille Note Apex (braille terminal mode)" },
     })
@@ -21296,10 +25414,22 @@ namespace HardwareInformation.Providers {
 { 648, "KeyStep" },
     })
  },
+            { 7287, Tuple.Create("Kaetat Industrial Co., Ltd.", new Dictionary<int, string>{
+    })
+ },
+            { 7288, Tuple.Create("Datascope Corp.", new Dictionary<int, string>{
+    })
+ },
+            { 7289, Tuple.Create("Unigen Corporation", new Dictionary<int, string>{
+    })
+ },
             { 7290, Tuple.Create("LighTuning Technology Inc.", new Dictionary<int, string>{
 { 1399, "Fingerprint Sensor" },
 { 1539, "ES603 Swipe Fingerprint Sensor" },
 { 2049, "Fingerprint Reader" },
+    })
+ },
+            { 7291, Tuple.Create("LUXSHARE PRECISION INDUSTRY (SHENZHEN) CO., LTD.", new Dictionary<int, string>{
     })
  },
             { 7298, Tuple.Create("Atracsys", new Dictionary<int, string>{
@@ -21313,13 +25443,28 @@ namespace HardwareInformation.Providers {
 { 5, "Mobile RFID Reader" },
     })
  },
+            { 7303, Tuple.Create("2N TELEKOMUNIKACE a.s.", new Dictionary<int, string>{
+    })
+ },
             { 7304, Tuple.Create("Somagic, Inc.", new Dictionary<int, string>{
 { 7, "SMI Grabber (EasyCAP DC60+ clone) (no firmware) [SMI-2021CBE]" },
 { 60, "SMI Grabber (EasyCAP DC60+ clone) [SMI-2021CBE]" },
     })
  },
+            { 7305, Tuple.Create("HONGKONG WEIDIDA ELECTRON LIMITED", new Dictionary<int, string>{
+    })
+ },
+            { 7310, Tuple.Create("ASTRON INTERNATIONAL CORP.", new Dictionary<int, string>{
+    })
+ },
+            { 7320, Tuple.Create("ALPINE ELECTRONICS, INC.", new Dictionary<int, string>{
+    })
+ },
             { 7326, Tuple.Create("OMEGA TECHNOLOGY", new Dictionary<int, string>{
 { 24673, "WL-72B 3.5G MODEM" },
+    })
+ },
+            { 7328, Tuple.Create("ACCARIO Inc.", new Dictionary<int, string>{
     })
  },
             { 7329, Tuple.Create("Symwave", new Dictionary<int, string>{
@@ -21329,6 +25474,12 @@ namespace HardwareInformation.Providers {
             { 7340, Tuple.Create("Kinstone", new Dictionary<int, string>{
 { 41778, "C8 Webcam" },
 { 45704, "C18 Webcam" },
+    })
+ },
+            { 7347, Tuple.Create("Aces Electronic Co., Ltd.", new Dictionary<int, string>{
+    })
+ },
+            { 7348, Tuple.Create("OPEX CORPORATION", new Dictionary<int, string>{
     })
  },
             { 7350, Tuple.Create("IdeaCom Technology Inc.", new Dictionary<int, string>{
@@ -21341,6 +25492,39 @@ namespace HardwareInformation.Providers {
 { 255, "Stellaris ROM DFU Bootloader" },
 { 358, "CANAL USB2CAN" },
 { 576, "McGill Robotics TM4C Microcontroller" },
+    })
+ },
+            { 7359, Tuple.Create("FORTAT SKYMARK INDUSTRIAL COMPANY", new Dictionary<int, string>{
+    })
+ },
+            { 7360, Tuple.Create("PlantSense", new Dictionary<int, string>{
+    })
+ },
+            { 7370, Tuple.Create("NextWave Broadband Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 7373, Tuple.Create("Bodatong Technology (Shenzhen) Co., Ltd.", new Dictionary<int, string>{
+    })
+ },
+            { 7380, Tuple.Create("adp corporation", new Dictionary<int, string>{
+    })
+ },
+            { 7381, Tuple.Create("Firecomms Ltd.", new Dictionary<int, string>{
+    })
+ },
+            { 7382, Tuple.Create("Antonio Precise Products Manufactory Ltd.", new Dictionary<int, string>{
+    })
+ },
+            { 7390, Tuple.Create("Telecommunications Technology Association (TTA)", new Dictionary<int, string>{
+    })
+ },
+            { 7391, Tuple.Create("WonTen Technology Co., Ltd.", new Dictionary<int, string>{
+    })
+ },
+            { 7392, Tuple.Create("EDIMAX TECHNOLOGY CO., LTD.", new Dictionary<int, string>{
+    })
+ },
+            { 7393, Tuple.Create("Amphenol KAE", new Dictionary<int, string>{
     })
  },
             { 7409, Tuple.Create("Dresden Elektronik", new Dictionary<int, string>{
@@ -21360,16 +25544,40 @@ namespace HardwareInformation.Providers {
 { 48, "ZigBee gateway [ConBee II]" },
     })
  },
+            { 7420, Tuple.Create("ANDES TECHNOLOGY CORPORATION", new Dictionary<int, string>{
+    })
+ },
+            { 7421, Tuple.Create("Flextronics Digital Design Japan, LTD.", new Dictionary<int, string>{
+    })
+ },
             { 7427, Tuple.Create("iCON", new Dictionary<int, string>{
 { 40, "iCreativ MIDI Controller" },
+    })
+ },
+            { 7431, Tuple.Create("Solid-Motion", new Dictionary<int, string>{
+    })
+ },
+            { 7432, Tuple.Create("NINGBO HENTEK DRAGON ELECTRONICS CO., LTD.", new Dictionary<int, string>{
     })
  },
             { 7433, Tuple.Create("TechFaith Wireless Technology Limited", new Dictionary<int, string>{
 { 4134, "HSUPA Modem FLYING-LARK46-VER0.07 [Flying Angel]" },
     })
  },
+            { 7434, Tuple.Create("Johnson Controls, Inc. The Automotive Business Unit", new Dictionary<int, string>{
+    })
+ },
+            { 7435, Tuple.Create("HAN HUA CABLE & WIRE TECHNOLOGY (J.X.) CO., LTD.", new Dictionary<int, string>{
+    })
+ },
             { 7437, Tuple.Create("TDKMedia", new Dictionary<int, string>{
 { 532, "Trans-It Drive" },
+    })
+ },
+            { 7439, Tuple.Create("Sonix Technology Co., Ltd.", new Dictionary<int, string>{
+    })
+ },
+            { 7444, Tuple.Create("ALPHA-SAT TECHNOLOGY LIMITED", new Dictionary<int, string>{
     })
  },
             { 7447, Tuple.Create("C-Thru Music Ltd.", new Dictionary<int, string>{
@@ -21384,6 +25592,12 @@ namespace HardwareInformation.Providers {
 { 24837, "Video grabber" },
 { 24842, "Video grabber" },
 { 33282, "DK DVBC/T DONGLE" },
+    })
+ },
+            { 7455, Tuple.Create("Diostech Co., Ltd.", new Dictionary<int, string>{
+    })
+ },
+            { 7456, Tuple.Create("SAMTACK INC.", new Dictionary<int, string>{
     })
  },
             { 7463, Tuple.Create("ASUS", new Dictionary<int, string>{
@@ -21748,6 +25962,9 @@ namespace HardwareInformation.Providers {
 { 64032, "2.4GHz Wireless Reciever (Mini Keyboard & Mouse)" },
     })
  },
+            { 7515, Tuple.Create("Smartronix, Inc.", new Dictionary<int, string>{
+    })
+ },
             { 7516, Tuple.Create("Fresco Logic", new Dictionary<int, string>{
 { 8192, "FL2000/FL2000DX VGA/DVI/HDMI Adapter" },
     })
@@ -21783,6 +26000,9 @@ namespace HardwareInformation.Providers {
 { 4114, "Docking Station Topline 2016" },
     })
  },
+            { 7634, Tuple.Create("Leo Bodnar Electronics Ltd", new Dictionary<int, string>{
+    })
+ },
             { 7635, Tuple.Create("Dajc Inc.", new Dictionary<int, string>{
 { 1, "Expert I/O 1000" },
     })
@@ -21790,6 +26010,9 @@ namespace HardwareInformation.Providers {
             { 7649, Tuple.Create("Actions Microelectronics Co.", new Dictionary<int, string>{
 { 4353, "Generic Display Device (Mass storage mode)" },
 { 49409, "Generic Display Device" },
+    })
+ },
+            { 7654, Tuple.Create("MICRORISC s.r.o.", new Dictionary<int, string>{
     })
  },
             { 7694, Tuple.Create("Qualcomm / Option", new Dictionary<int, string>{
@@ -21807,6 +26030,9 @@ namespace HardwareInformation.Providers {
             { 7709, Tuple.Create("Kanguru Solutions", new Dictionary<int, string>{
 { 357, "Secure Pen drive" },
 { 4353, "FlashBlu Flash Drive" },
+    })
+ },
+            { 7711, Tuple.Create("INVIA", new Dictionary<int, string>{
     })
  },
             { 7721, Tuple.Create("Festo AG & Co. KG", new Dictionary<int, string>{
@@ -22017,6 +26243,9 @@ namespace HardwareInformation.Providers {
 { 32512, "MW-U3500 WiMAX adapter" },
     })
  },
+            { 7867, Tuple.Create("NuCORE Technology, Inc.", new Dictionary<int, string>{
+    })
+ },
             { 7883, Tuple.Create("AMTelecom", new Dictionary<int, string>{
 { 738, "JMR1140 [Jiofi]" },
     })
@@ -22146,6 +26375,9 @@ namespace HardwareInformation.Providers {
 { 1, "Wi-Fi Body Scale (WBS01)" },
     })
  },
+            { 8122, Tuple.Create("DERMALOG Identification Systems GmbH", new Dictionary<int, string>{
+    })
+ },
             { 8125, Tuple.Create("Delphin Technology AG", new Dictionary<int, string>{
 { 1, "Expert Key - Data aquisition system" },
     })
@@ -22183,6 +26415,9 @@ namespace HardwareInformation.Providers {
 { 139, "Mini Maestro 18-Channel Servo Controller" },
 { 140, "Mini Maestro 24-Channel Servo Controller" },
 { 176, "AVR Programmer v2" },
+    })
+ },
+            { 8191, Tuple.Create("Ideofy Inc.", new Dictionary<int, string>{
     })
  },
             { 8192, Tuple.Create("CMX Systems", new Dictionary<int, string>{
@@ -22263,8 +26498,14 @@ namespace HardwareInformation.Providers {
 { 61720, "Formosa 4" },
     })
  },
+            { 8194, Tuple.Create("DAP Technologies", new Dictionary<int, string>{
+    })
+ },
             { 8195, Tuple.Create("detectomat", new Dictionary<int, string>{
 { 60001, "dc3500" },
+    })
+ },
+            { 8198, Tuple.Create("LenovoMobile", new Dictionary<int, string>{
     })
  },
             { 8201, Tuple.Create("iStorage", new Dictionary<int, string>{
@@ -22325,6 +26566,9 @@ namespace HardwareInformation.Providers {
  },
             { 8222, Tuple.Create("Haier", new Dictionary<int, string>{
 { 8201, "CE100 CDMA EVDO" },
+    })
+ },
+            { 8250, Tuple.Create("PARALLELS", new Dictionary<int, string>{
     })
  },
             { 8253, Tuple.Create("Encore Electronics Inc.", new Dictionary<int, string>{
@@ -22462,6 +26706,9 @@ namespace HardwareInformation.Providers {
 { 12, "BNRV700 [Nook Glowlight Plus]" },
     })
  },
+            { 8326, Tuple.Create("SIMPASS", new Dictionary<int, string>{
+    })
+ },
             { 8327, Tuple.Create("Cando", new Dictionary<int, string>{
 { 2561, "Multi Touch Panel" },
 { 2562, "Multi Touch Panel" },
@@ -22559,6 +26806,9 @@ namespace HardwareInformation.Providers {
             { 8452, Tuple.Create("Tobii Technology AB", new Dictionary<int, string>{
 { 80, "Eye tracker [EYEX2]" },
 { 292, "Eyechip" },
+    })
+ },
+            { 8455, Tuple.Create("RDING TECH CO.,LTD", new Dictionary<int, string>{
     })
  },
             { 8457, Tuple.Create("VIA Labs, Inc.", new Dictionary<int, string>{
@@ -22723,6 +26973,9 @@ namespace HardwareInformation.Providers {
 { 16464, "AirStick joystick" },
     })
  },
+            { 8742, Tuple.Create("Copper Mountain technologies", new Dictionary<int, string>{
+    })
+ },
             { 8743, Tuple.Create("SAMWOO Enterprise", new Dictionary<int, string>{
 { 12549, "SKYDATA SKD-U100" },
     })
@@ -22796,8 +27049,14 @@ namespace HardwareInformation.Providers {
 { 61454, "Tablet 2 secure multifunction biometric tablet" },
     })
  },
+            { 8814, Tuple.Create("DISPLAX", new Dictionary<int, string>{
+    })
+ },
             { 8845, Tuple.Create("8D Technologies inc.", new Dictionary<int, string>{
 { 1, "Terminal Bike Key Reader" },
+    })
+ },
+            { 8868, Tuple.Create("VERZO Technology", new Dictionary<int, string>{
     })
  },
             { 8870, Tuple.Create("Pie Digital, Inc.", new Dictionary<int, string>{
@@ -22933,6 +27192,9 @@ namespace HardwareInformation.Providers {
 { 3569, "duraSign Pad Biometric 10.0" },
     })
  },
+            { 8909, Tuple.Create("Kinova Robotics Inc.", new Dictionary<int, string>{
+    })
+ },
             { 8916, Tuple.Create("Laview Technology", new Dictionary<int, string>{
 { 4865, "Mionix NAOS 8200 [STM32F103 MCU]" },
 { 4872, "Mionix Avior 7000" },
@@ -22951,6 +27213,12 @@ namespace HardwareInformation.Providers {
  },
             { 8924, Tuple.Create("Mellanox Technologies", new Dictionary<int, string>{
 { 4, "BlueField SOC" },
+    })
+ },
+            { 8926, Tuple.Create("WeTelecom Incorporated", new Dictionary<int, string>{
+    })
+ },
+            { 8927, Tuple.Create("Medicom MTD, Ltd", new Dictionary<int, string>{
     })
  },
             { 8928, Tuple.Create("secunet Security Networks AG", new Dictionary<int, string>{
@@ -23028,6 +27296,9 @@ namespace HardwareInformation.Providers {
 { 259, "Huwaii 3g wireless modem" },
     })
  },
+            { 8980, Tuple.Create("INQ Mobile", new Dictionary<int, string>{
+    })
+ },
             { 8984, Tuple.Create("Shining Technologies, Inc. [hex]", new Dictionary<int, string>{
 { 17, "CitiDISK Jr. IDE Enclosure" },
     })
@@ -23042,6 +27313,9 @@ namespace HardwareInformation.Providers {
  },
             { 9006, Tuple.Create("EA Elektro-Automatik GmbH & Co. KG", new Dictionary<int, string>{
 { 16, "EA-PS-2000 B Series Power Supply" },
+    })
+ },
+            { 9024, Tuple.Create("Teleepoch", new Dictionary<int, string>{
     })
  },
             { 9025, Tuple.Create("Arduino SA", new Dictionary<int, string>{
@@ -23060,6 +27334,9 @@ namespace HardwareInformation.Providers {
 { 32822, "Leonardo (CDC ACM, HID)" },
 { 32824, "Robot Control Board (CDC ACM, HID)" },
 { 32825, "Robot Motor Board (CDC ACM, HID)" },
+    })
+ },
+            { 9033, Tuple.Create("P2 Engineering Group, LLC", new Dictionary<int, string>{
     })
  },
             { 9035, Tuple.Create("Free Software Initiative of Japan", new Dictionary<int, string>{
@@ -23186,6 +27463,9 @@ namespace HardwareInformation.Providers {
 { 26248, "PD7X Portable Storage" },
     })
  },
+            { 9248, Tuple.Create("IRiver", new Dictionary<int, string>{
+    })
+ },
             { 9262, Tuple.Create("Vossloh-Schwabe Deutschland GmbH", new Dictionary<int, string>{
 { 1, "DALI Master" },
 { 2, "LiCS Bootloader Mode" },
@@ -23211,6 +27491,9 @@ namespace HardwareInformation.Providers {
 { 1, "BLED112 Bluetooth 4.0 Single Mode Dongle" },
     })
  },
+            { 9311, Tuple.Create("Chord Electronics Limited", new Dictionary<int, string>{
+    })
+ },
             { 9316, Tuple.Create("Nest", new Dictionary<int, string>{
 { 1, "Learning Thermostat" },
 { 2, "Learning Thermostat (2nd Generation)" },
@@ -23234,6 +27517,9 @@ namespace HardwareInformation.Providers {
             { 9354, Tuple.Create("Maxxter", new Dictionary<int, string>{
 { 33638, "Wireless Optical Mouse ACT-MUSW-002" },
 { 33639, "Telink Wireless Receiver" },
+    })
+ },
+            { 9372, Tuple.Create("M2Tech s.r.l.", new Dictionary<int, string>{
     })
  },
             { 9380, Tuple.Create("Primare AB", new Dictionary<int, string>{
@@ -23291,9 +27577,15 @@ namespace HardwareInformation.Providers {
 { 1030, "JaCarta SF GOST" },
     })
  },
+            { 9440, Tuple.Create("Yoctopuce Sarl", new Dictionary<int, string>{
+    })
+ },
             { 9441, Tuple.Create("Paratronic", new Dictionary<int, string>{
 { 12289, "Adp-usb" },
 { 12293, "Radius" },
+    })
+ },
+            { 9443, Tuple.Create("K-Touch", new Dictionary<int, string>{
     })
  },
             { 9450, Tuple.Create("Meva", new Dictionary<int, string>{
@@ -23308,6 +27600,9 @@ namespace HardwareInformation.Providers {
 { 261, "Das Keyboard 4" },
 { 320, "Das Keyboard 4" },
 { 8224, "Das Keyboard 5Q" },
+    })
+ },
+            { 9471, Tuple.Create("Acroname Inc.", new Dictionary<int, string>{
     })
  },
             { 9472, Tuple.Create("Ettus Research LLC", new Dictionary<int, string>{
@@ -23353,6 +27648,9 @@ namespace HardwareInformation.Providers {
 { 4200, "NS1068/NS1068X SATA Bridge Controller" },
     })
  },
+            { 9540, Tuple.Create("Energy Micro AS", new Dictionary<int, string>{
+    })
+ },
             { 9542, Tuple.Create("Ravensburger", new Dictionary<int, string>{
 { 58113, "TipToi Pen" },
     })
@@ -23364,6 +27662,9 @@ namespace HardwareInformation.Providers {
  },
             { 9550, Tuple.Create("SHF Communication Technologies AG", new Dictionary<int, string>{
 { 58035, "SHF 58035 A BiasBoard" },
+    })
+ },
+            { 9556, Tuple.Create("ASSA ABLOY AB", new Dictionary<int, string>{
     })
  },
             { 9557, Tuple.Create("Basis Science Inc.", new Dictionary<int, string>{
@@ -23416,6 +27717,9 @@ namespace HardwareInformation.Providers {
 { 2400, "VB342" },
     })
  },
+            { 9589, Tuple.Create("Weida Hi-Tech Co., Ltd.", new Dictionary<int, string>{
+    })
+ },
             { 9590, Tuple.Create("AFO Co., Ltd.", new Dictionary<int, string>{
 { 3, "TCM" },
 { 5, "BL [Boot Loader]" },
@@ -23430,6 +27734,12 @@ namespace HardwareInformation.Providers {
 { 6151, "Generic HID Smartcard" },
 { 6152, "WinUSB Smartcard" },
 { 61904, "FIDO U2F Security Key" },
+    })
+ },
+            { 9613, Tuple.Create("Sequans Communications", new Dictionary<int, string>{
+    })
+ },
+            { 9626, Tuple.Create("TriQuint Semiconductor", new Dictionary<int, string>{
     })
  },
             { 9639, Tuple.Create("Areson Technology Corp", new Dictionary<int, string>{
@@ -23462,12 +27772,21 @@ namespace HardwareInformation.Providers {
 { 2, "Isostick updater" },
     })
  },
+            { 9668, Tuple.Create("ARCAM", new Dictionary<int, string>{
+    })
+ },
+            { 9670, Tuple.Create("Vitus Audio (AVA Group A/S)", new Dictionary<int, string>{
+    })
+ },
             { 9672, Tuple.Create("Visual Planet Ltd", new Dictionary<int, string>{
 { 20, "Single User touchfoil(tm) (SU2-80)" },
     })
  },
             { 9690, Tuple.Create("Netatmo", new Dictionary<int, string>{
 { 1, "Weather Station" },
+    })
+ },
+            { 9699, Tuple.Create("Lumigon", new Dictionary<int, string>{
     })
  },
             { 9712, Tuple.Create("ShanWan", new Dictionary<int, string>{
@@ -23480,6 +27799,9 @@ namespace HardwareInformation.Providers {
  },
             { 9732, Tuple.Create("Tenda", new Dictionary<int, string>{
 { 18, "U12" },
+    })
+ },
+            { 9765, Tuple.Create("MilDef AB", new Dictionary<int, string>{
     })
  },
             { 9766, Tuple.Create("Aruba Networks", new Dictionary<int, string>{
@@ -23542,6 +27864,12 @@ namespace HardwareInformation.Providers {
 { 4625, "MediaTV Pro III (US)" },
 { 4626, "MediaTV Pro III MiniPCIe (EU)" },
 { 4627, "MediaTV Pro III MiniPCIe (US)" },
+    })
+ },
+            { 9826, Tuple.Create("Moog Music Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 9838, Tuple.Create("Silicon Integrated Systems", new Dictionary<int, string>{
     })
  },
             { 9842, Tuple.Create("GoPro", new Dictionary<int, string>{
@@ -23645,6 +27973,9 @@ namespace HardwareInformation.Providers {
 { 39191, "Fusion Flash Drive" },
     })
  },
+            { 9954, Tuple.Create("Ingenieurbuero Dietzsch und Thiele, PartG", new Dictionary<int, string>{
+    })
+ },
             { 9970, Tuple.Create("Micromega", new Dictionary<int, string>{
 { 512, "MyDac" },
     })
@@ -23673,6 +28004,9 @@ namespace HardwareInformation.Providers {
 { 65384, "Mi-4c" },
 { 65408, "Mi/Redmi series (RNDIS)" },
 { 65416, "Mi/Redmi series (RNDIS + ADB)" },
+    })
+ },
+            { 10026, Tuple.Create("StarLeaf Ltd.", new Dictionary<int, string>{
     })
  },
             { 10028, Tuple.Create("Signum Systems", new Dictionary<int, string>{
@@ -23793,8 +28127,14 @@ namespace HardwareInformation.Providers {
 { 22336, "Fingerprint Reader" },
     })
  },
+            { 10196, Tuple.Create("Blackstar Amplification Limited", new Dictionary<int, string>{
+    })
+ },
             { 10205, Tuple.Create("Mindeo", new Dictionary<int, string>{
 { 2, "Mindeo Virtual COM Port" },
+    })
+ },
+            { 10226, Tuple.Create("Softnautics LLP", new Dictionary<int, string>{
     })
  },
             { 10243, Tuple.Create("StarLine LLC.", new Dictionary<int, string>{
@@ -23820,6 +28160,9 @@ namespace HardwareInformation.Providers {
 { 13056, "WL-140 / Hawking HWU36D 802.11b Wireless Adapter [Intersil PRISM 3]" },
     })
  },
+            { 10274, Tuple.Create("REFLEXdigital", new Dictionary<int, string>{
+    })
+ },
             { 10291, Tuple.Create("Oculus VR, Inc.", new Dictionary<int, string>{
 { 1, "Rift Developer Kit 1" },
 { 33, "Rift DK2" },
@@ -23833,6 +28176,9 @@ namespace HardwareInformation.Providers {
 { 8225, "Rift DK2" },
 { 8241, "Rift CV1" },
 { 12337, "Rift CV1" },
+    })
+ },
+            { 10294, Tuple.Create("OUYA", new Dictionary<int, string>{
     })
  },
             { 10347, Tuple.Create("STANEO SAS", new Dictionary<int, string>{
@@ -23939,6 +28285,9 @@ namespace HardwareInformation.Providers {
 { 12488, "D1 24-bit DAC" },
     })
  },
+            { 10518, Tuple.Create("Yota Devices", new Dictionary<int, string>{
+    })
+ },
             { 10545, Tuple.Create("Jolla Oy", new Dictionary<int, string>{
 { 2561, "Jolla Phone MTP" },
 { 2562, "Jolla Phone Developer" },
@@ -23995,6 +28344,18 @@ namespace HardwareInformation.Providers {
 { 17, "Stream 4x5" },
     })
  },
+            { 10691, Tuple.Create("Noviga", new Dictionary<int, string>{
+    })
+ },
+            { 10722, Tuple.Create("Huatune Technology (Shanghai) Co., Ltd.", new Dictionary<int, string>{
+    })
+ },
+            { 10727, Tuple.Create("Brunel University", new Dictionary<int, string>{
+    })
+ },
+            { 10728, Tuple.Create("4Links Limited", new Dictionary<int, string>{
+    })
+ },
             { 10730, Tuple.Create("Kinesis Corporation", new Dictionary<int, string>{
 { 258, "Advantage2 Keyboard" },
     })
@@ -24030,6 +28391,9 @@ namespace HardwareInformation.Providers {
 { 32828, "Arduino Explora (CDC ACM)" },
 { 32833, "Arduino Yun (CDC ACM)" },
 { 32845, "Arduino Zero Pro (CDC ACM)" },
+    })
+ },
+            { 10766, Tuple.Create("Shenzhen DreamSource Technology Co., Ltd.", new Dictionary<int, string>{
     })
  },
             { 10771, Tuple.Create("Grabba International", new Dictionary<int, string>{
@@ -24115,6 +28479,9 @@ namespace HardwareInformation.Providers {
  },
             { 10888, Tuple.Create("DFU Technology Ltd", new Dictionary<int, string>{
 { 65535, "DFU" },
+    })
+ },
+            { 10893, Tuple.Create("Keysight Technologies, Inc.", new Dictionary<int, string>{
     })
  },
             { 10934, Tuple.Create("T+A elektroakustik GmbH & Co KG, Germany", new Dictionary<int, string>{
@@ -24208,8 +28575,14 @@ namespace HardwareInformation.Providers {
 { 1031, "Astra Mini S" },
     })
  },
+            { 11212, Tuple.Create("InoTec GmbH Organisationssysteme", new Dictionary<int, string>{
+    })
+ },
             { 11222, Tuple.Create("Coroware, Inc.", new Dictionary<int, string>{
 { 16897, "RS-485 Controller and Interface [Cypress Semiconductor]" },
+    })
+ },
+            { 11224, Tuple.Create("ROPEX Industrie-Elektronik GmbH", new Dictionary<int, string>{
     })
  },
             { 11266, Tuple.Create("Planex Communications", new Dictionary<int, string>{
@@ -24280,6 +28653,12 @@ namespace HardwareInformation.Providers {
 { 528, "L830-EB-00 LTE WWAN Modem" },
     })
  },
+            { 11456, Tuple.Create("Hangzhou Zero Zero Infinity Technology Co., Ltd.", new Dictionary<int, string>{
+    })
+ },
+            { 11458, Tuple.Create("Lautsprecher Teufel GmbH", new Dictionary<int, string>{
+    })
+ },
             { 11471, Tuple.Create("Hypersecu", new Dictionary<int, string>{
 { 2176, "HyperFIDO" },
     })
@@ -24301,8 +28680,17 @@ namespace HardwareInformation.Providers {
 { 21072, "bladeRF 2.0 micro" },
     })
  },
+            { 11551, Tuple.Create("Wacom Taiwan Information Co. Ltd.", new Dictionary<int, string>{
+    })
+ },
+            { 11557, Tuple.Create("Kronegger GmbH.", new Dictionary<int, string>{
+    })
+ },
             { 11565, Tuple.Create("proxmark.org", new Dictionary<int, string>{
 { 20557, "Proxmark3" },
+    })
+ },
+            { 11575, Tuple.Create("Zhuhai Poskey Technology Co.,Ltd", new Dictionary<int, string>{
     })
  },
             { 11627, Tuple.Create("NetUP Inc.", new Dictionary<int, string>{
@@ -24366,6 +28754,9 @@ namespace HardwareInformation.Providers {
 { 5768, "X91 Xbox One controller" },
     })
  },
+            { 11835, Tuple.Create("uSens Inc.", new Dictionary<int, string>{
+    })
+ },
             { 11863, Tuple.Create("MEGWARE Computer Vertrieb und Service GmbH", new Dictionary<int, string>{
 { 17741, "SlideSX EnergyMeter" },
 { 17742, "SlideSX EnergyMeter DFU" },
@@ -24386,6 +28777,15 @@ namespace HardwareInformation.Providers {
 { 6406, "KX906 Smart Token (Mass Storage)" },
     })
  },
+            { 12205, Tuple.Create("Definium Technologies", new Dictionary<int, string>{
+    })
+ },
+            { 12208, Tuple.Create("Infocrypt", new Dictionary<int, string>{
+    })
+ },
+            { 12210, Tuple.Create("Fujitsu, Ltd", new Dictionary<int, string>{
+    })
+ },
             { 12224, Tuple.Create("Sensidyne, LP", new Dictionary<int, string>{
 { 1, "Project Archer" },
     })
@@ -24401,12 +28801,18 @@ namespace HardwareInformation.Providers {
 { 35822, "XAP-EA-003 ENF Access Card" },
     })
  },
+            { 12259, Tuple.Create("NordicSemiconductor", new Dictionary<int, string>{
+    })
+ },
             { 12263, Tuple.Create("ELGIN S.A.", new Dictionary<int, string>{
 { 1, "SMART S@T" },
     })
  },
             { 12267, Tuple.Create("Beijing Veikk E-Commerce Co., Ltd.", new Dictionary<int, string>{
 { 4, "Veikk A15 Pen Tablet" },
+    })
+ },
+            { 12276, Tuple.Create("Quixant Plc", new Dictionary<int, string>{
     })
  },
             { 12310, Tuple.Create("Boundary Devices, LLC", new Dictionary<int, string>{
@@ -24416,6 +28822,9 @@ namespace HardwareInformation.Providers {
             { 12342, Tuple.Create("Control iD", new Dictionary<int, string>{
 { 1, "Print iD" },
 { 2, "iDBio" },
+    })
+ },
+            { 12343, Tuple.Create("Beijing Chushifengmang Technology Development Co.,Ltd.", new Dictionary<int, string>{
     })
  },
             { 12375, Tuple.Create("Kingsis Corporation", new Dictionary<int, string>{
@@ -24465,8 +28874,14 @@ namespace HardwareInformation.Providers {
 { 5000, "SPL Meter" },
     })
  },
+            { 12489, Tuple.Create("Luxvisions Innotech Limited", new Dictionary<int, string>{
+    })
+ },
             { 12526, Tuple.Create("Fujitsu Connected Technologies Limited", new Dictionary<int, string>{
 { 4097, "F-01L" },
+    })
+ },
+            { 12530, Tuple.Create("Varex Imaging", new Dictionary<int, string>{
     })
  },
             { 12561, Tuple.Create("Hiperscan GmbH", new Dictionary<int, string>{
@@ -24484,6 +28899,18 @@ namespace HardwareInformation.Providers {
 { 1, "TrackerPod Camera Stand" },
     })
  },
+            { 12598, Tuple.Create("Navini Networks", new Dictionary<int, string>{
+    })
+ },
+            { 12613, Tuple.Create("SafeLogic Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 12615, Tuple.Create("Tanvas, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 12652, Tuple.Create("SigmaSense, LLC", new Dictionary<int, string>{
+    })
+ },
             { 12653, Tuple.Create("Purism, SPC", new Dictionary<int, string>{
 { 19531, "Librem Key" },
     })
@@ -24498,6 +28925,9 @@ namespace HardwareInformation.Providers {
 { 19, "ClusterCTRL A+6" },
 { 20, "ClusterCTRL Triple" },
 { 21, "ClusterCTRL Single" },
+    })
+ },
+            { 12662, Tuple.Create("Whanam Electronics Co., Ltd", new Dictionary<int, string>{
     })
  },
             { 12693, Tuple.Create("Link Instruments", new Dictionary<int, string>{
@@ -24522,12 +28952,21 @@ namespace HardwareInformation.Providers {
 { 68, "SKO44 Optical Keyboard" },
     })
  },
+            { 12828, Tuple.Create("Premio, Inc.", new Dictionary<int, string>{
+    })
+ },
+            { 12876, Tuple.Create("CUPRIS Ltd.", new Dictionary<int, string>{
+    })
+ },
             { 12909, Tuple.Create("Agile Display Solutions Co., Ltd", new Dictionary<int, string>{
 { 1, "Avocor USB Camera" },
     })
  },
             { 12917, Tuple.Create("VidzMedia Pte Ltd", new Dictionary<int, string>{
 { 20401, "MonsterTV P2H" },
+    })
+ },
+            { 12947, Tuple.Create("Unhuman Inc.", new Dictionary<int, string>{
     })
  },
             { 12979, Tuple.Create("TEXA", new Dictionary<int, string>{
@@ -24577,6 +29016,9 @@ namespace HardwareInformation.Providers {
  },
             { 13693, Tuple.Create("Sharkoon", new Dictionary<int, string>{
 { 30600, "JMicron JMS567 ATA/ATAPI Bridge" },
+    })
+ },
+            { 13878, Tuple.Create("InVibro", new Dictionary<int, string>{
     })
  },
             { 14183, Tuple.Create("Fanatec", new Dictionary<int, string>{
@@ -24852,6 +29294,9 @@ namespace HardwareInformation.Providers {
 { 37780, "Game Cube USB Memory Adaptor 64M" },
     })
  },
+            { 18164, Tuple.Create("QEMU", new Dictionary<int, string>{
+    })
+ },
             { 18258, Tuple.Create("Miditech", new Dictionary<int, string>{
 { 17, "Midistart-2" },
     })
@@ -24932,6 +29377,9 @@ namespace HardwareInformation.Providers {
  },
             { 21332, Tuple.Create("Meyer Instruments (MIS)", new Dictionary<int, string>{
 { 23, "PAXcam2" },
+    })
+ },
+            { 21581, Tuple.Create("Transmeta Corp.", new Dictionary<int, string>{
     })
  },
             { 21827, Tuple.Create("UC-Logic Technology Corp.", new Dictionary<int, string>{
@@ -25033,6 +29481,9 @@ namespace HardwareInformation.Providers {
 { 40962, "Lenovo EasyCamera Integrated Webcam" },
     })
  },
+            { 23011, Tuple.Create("Nonolith Labs", new Dictionary<int, string>{
+    })
+ },
             { 23127, Tuple.Create("Zinwell", new Dictionary<int, string>{
 { 608, "RT2570" },
 { 640, "802.11a/b/g/n USB Wireless LAN Card" },
@@ -25112,6 +29563,9 @@ namespace HardwareInformation.Providers {
 { 256, "Ir reciver f. remote control" },
     })
  },
+            { 25452, Tuple.Create("CoreLogic, Inc.", new Dictionary<int, string>{
+    })
+ },
             { 25714, Tuple.Create("Sony Corp.", new Dictionary<int, string>{
 { 456, "PlayStation Portable [Mass Storage]" },
     })
@@ -25159,6 +29613,9 @@ namespace HardwareInformation.Providers {
  },
             { 27027, Tuple.Create("Yealink Network Technology Co., Ltd.", new Dictionary<int, string>{
 { 45057, "VoIP Phone" },
+    })
+ },
+            { 27253, Tuple.Create("Shanghai Jujo Electronics Co., Ltd", new Dictionary<int, string>{
     })
  },
             { 28932, Tuple.Create("CME (Central Music Co.)", new Dictionary<int, string>{
@@ -25355,6 +29812,9 @@ namespace HardwareInformation.Providers {
 { 4, "R3 Compatible Device" },
     })
  },
+            { 38166, Tuple.Create("Studiologic", new Dictionary<int, string>{
+    })
+ },
             { 38672, Tuple.Create("MosChip Semiconductor", new Dictionary<int, string>{
 { 30467, "MCS7703 Serial Port Adapter" },
 { 30469, "MCS7705 Parallel port adapter" },
@@ -25498,6 +29958,9 @@ namespace HardwareInformation.Providers {
 { 768, "AirPcap NX [Atheros AR9170+AR9104]" },
     })
  },
+            { 52498, Tuple.Create("SMART TECHNOLOGY INDUSTRIAL LTD.", new Dictionary<int, string>{
+    })
+ },
             { 53768, Tuple.Create("Ultimarc", new Dictionary<int, string>{
 { 784, "Mini-PAC Arcade Control Interface" },
     })
@@ -25563,6 +30026,12 @@ namespace HardwareInformation.Providers {
 { 58197, "KWorld DVB-T 355U Digital TV Dongle" },
     })
  },
+            { 60202, Tuple.Create("KWorld", new Dictionary<int, string>{
+    })
+ },
+            { 61208, Tuple.Create("SMART TECHNOLOGY INDUSTRIAL LTD.", new Dictionary<int, string>{
+    })
+ },
             { 61443, Tuple.Create("Hewlett Packard", new Dictionary<int, string>{
 { 24578, "PhotoSmart C500" },
     })
@@ -25604,6 +30073,9 @@ namespace HardwareInformation.Providers {
 { 257, "MIDI Cable UA0037" },
     })
  },
+            { 65280, Tuple.Create("Power Delivery", new Dictionary<int, string>{
+    })
+ },
             { 65518, Tuple.Create("FNK Tech", new Dictionary<int, string>{
 { 256, "Card Reader Controller RTS5101/RTS5111/RTS5116" },
     })
@@ -25616,12 +30088,16 @@ namespace HardwareInformation.Providers {
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     internal static Tuple<string, string> GetVendorAndProductName(int vendorId, int productId) {
-        if (vendorId != -1 && vendorAndProductIds.TryGetValue(vendorId, out var vendorTuple)) {
-            if(productId != -1 && vendorTuple.Item2.TryGetValue(productId, out var productName)) {
-                return Tuple.Create(vendorTuple.Item1, productName);
+        if (vendorId != -1) {
+            if (vendorAndProductIds.TryGetValue(vendorId, out var vendorTuple)) {
+                if (productId != -1) {
+                    if (vendorTuple.Item2.TryGetValue(productId, out var productName)) {
+                        return Tuple.Create(vendorTuple.Item1, productName);
+                    }
+        
+                    return Tuple.Create<string, string>(vendorTuple.Item1, string.Empty);
+                }
             }
-
-            return Tuple.Create<string, string>(vendorTuple.Item1, string.Empty);
         }
 
         return Tuple.Create<string, string>(string.Empty, string.Empty);

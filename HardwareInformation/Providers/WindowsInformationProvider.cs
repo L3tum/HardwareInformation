@@ -3,6 +3,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Management;
 using System.Runtime.InteropServices;
@@ -202,6 +203,10 @@ namespace HardwareInformation.Providers
                 {
                     data.Add(deviceId, new string[8]);
                 }
+                else if (data.ContainsKey(deviceId))
+                {
+                    continue;
+                }
 
                 var mo = managementBaseObject as ManagementObject;
                 var inParams = mo.GetMethodParameters("GetDeviceProperties");
@@ -256,7 +261,9 @@ namespace HardwareInformation.Providers
                             var minute = int.Parse(value.Substring(10, 2));
                             var second = int.Parse(value.Substring(12, 2));
 
-                            data[deviceId][3] = new DateTime(year, month, day, hour, minute, second).ToString();
+                            data[deviceId][3] =
+                                new DateTime(year, month, day, hour, minute, second).ToString(CultureInfo
+                                    .InvariantCulture);
                             break;
                         }
                         case "DEVPKEY_Device_Class":

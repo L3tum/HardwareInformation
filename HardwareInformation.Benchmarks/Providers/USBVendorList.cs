@@ -6,7 +6,7 @@ using BenchmarkDotNet.Order;
 
 namespace HardwareInformation.Benchmarks.Providers
 {
-    [SimpleJob(RuntimeMoniker.NetCoreApp31, 30, 0)]
+    [SimpleJob(RuntimeMoniker.NetCoreApp31, 2, 0, targetCount:500, invocationCount: 10000)]
     [MemoryDiagnoser]
     [RPlotExporter]
     [MarkdownExporter]
@@ -19,8 +19,8 @@ namespace HardwareInformation.Benchmarks.Providers
     [RankColumn(NumeralSystem.Roman)]
     public class USBVendorList
     {
-        [Params("USB\\VID_046D&PID_0A66\\8&2A1B065E&0&6", "USB\\VID_046D&PID_C07D&MI_01\\8&39C8A24B&0&0001",
-            "USB\\VID_0B05&PID_18F3\\9876543210")]
+        // First has no ProductName, second does
+        [Params("USB\\VID_0B05&PID_18F3\\9876543210", "USB\\VID_046D&PID_C07D&MI_01\\8&39C8A24B&0&0001")]
         public string deviceId;
 
         [Benchmark]

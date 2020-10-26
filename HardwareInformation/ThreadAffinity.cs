@@ -60,11 +60,11 @@ namespace HardwareInformation
                     {
 	                    if (Environment.Is64BitProcess)
 	                    {
-                            processThread.ProcessorAffinity = new IntPtr((long) mask);
+                            processThread.ProcessorAffinity = (IntPtr) mask;
                         }
 	                    else
 	                    {
-		                    processThread.ProcessorAffinity = new IntPtr(x86Mask);
+		                    processThread.ProcessorAffinity = (IntPtr) x86Mask;
                         }
                     }
                     catch (Win32Exception)

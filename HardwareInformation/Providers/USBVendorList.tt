@@ -75,17 +75,9 @@
     }
 
     sr.Close();
-
-    var vendorIdsToRemove = (from kvp in vendorProductIds where kvp.Value.Count == 0 select kvp.Key).ToList();
-
-    foreach (var vendorIdToRemove in vendorIdsToRemove)
-    {
-        vendorIds.Remove(vendorIdToRemove);
-        vendorProductIds.Remove(vendorIdToRemove);
-    }
-
-    Console.WriteLine($"Removed {vendorIdsToRemove.Count} vendors without any products");
 #>
+
+// This file is auto-generated!
 
 namespace HardwareInformation.Providers {
     using System.Collections.Generic;
@@ -94,7 +86,7 @@ namespace HardwareInformation.Providers {
     using System.Runtime.CompilerServices;
 
     internal static class USBVendorList {
-        private static Dictionary<int, Tuple<string, Dictionary<int, string>>> vendorAndProductIds = new Dictionary<int, Tuple<string, Dictionary<int, string>>> {
+        private static readonly Dictionary<int, Tuple<string, Dictionary<int, string>>> vendorAndProductIds = new Dictionary<int, Tuple<string, Dictionary<int, string>>> {
 <#
     foreach (var kvp in vendorIds)
     {
@@ -123,12 +115,16 @@ namespace HardwareInformation.Providers {
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     internal static Tuple<string, string> GetVendorAndProductName(int vendorId, int productId) {
-        if (vendorId != -1 && vendorAndProductIds.TryGetValue(vendorId, out var vendorTuple)) {
-            if(productId != -1 && vendorTuple.Item2.TryGetValue(productId, out var productName)) {
-                return Tuple.Create(vendorTuple.Item1, productName);
+        if (vendorId != -1) {
+            if (vendorAndProductIds.TryGetValue(vendorId, out var vendorTuple)) {
+                if (productId != -1) {
+                    if (vendorTuple.Item2.TryGetValue(productId, out var productName)) {
+                        return Tuple.Create(vendorTuple.Item1, productName);
+                    }
+        
+                    return Tuple.Create<string, string>(vendorTuple.Item1, string.Empty);
+                }
             }
-
-            return Tuple.Create<string, string>(vendorTuple.Item1, string.Empty);
         }
 
         return Tuple.Create<string, string>(string.Empty, string.Empty);
