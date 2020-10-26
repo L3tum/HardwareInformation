@@ -174,11 +174,6 @@ namespace HardwareInformation.Providers
 
         private void GatherPnpDevices(ref MachineInformation information, bool win10)
         {
-            if (!win10)
-            {
-                return;
-            }
-
             using var mos = new ManagementObjectSearcher("select * from Win32_PnPEntity");
             var mbos = new ArrayList(mos.Get());
             var data = new Dictionary<string, string[]>();
@@ -208,6 +203,12 @@ namespace HardwareInformation.Providers
                     continue;
                 }
 
+                // Win32_PnpDeviceProperty is only available with Windows 10
+                if (!win10)
+                {
+                    continue;
+                }
+                
                 var mo = managementBaseObject as ManagementObject;
                 var inParams = mo.GetMethodParameters("GetDeviceProperties");
 

@@ -5,7 +5,7 @@ using BenchmarkDotNet.Order;
 
 namespace HardwareInformation.Benchmarks
 {
-    [SimpleJob(RuntimeMoniker.NetCoreApp31, 1, 0, targetCount:10, invocationCount: 1)]
+    [SimpleJob(RuntimeMoniker.NetCoreApp31, 2, 0, targetCount:5, invocationCount: 1)]
     [MemoryDiagnoser]
     [RPlotExporter]
     [MarkdownExporter]
