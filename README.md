@@ -27,7 +27,7 @@ Result is cached internally so don't worry about calling it multiple times
 
 ## Features
 
-| Feature| Windows | Linux | Mac | OS Specific Functionality***
+| Feature| Windows | Linux | Mac | OS Specific***
 | ----: | ---: |  ----: | ---: | ---: |
 | No Kernel driver |  :white_check_mark:  | :white_check_mark: | :white_check_mark: | :x:
 | Operating System |  :white_check_mark:  | :white_check_mark: | :white_check_mark: | :x:
