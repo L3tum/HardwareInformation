@@ -402,6 +402,8 @@ namespace HardwareInformation.Providers
                     {
                         try
                         {
+                            // TODO: Debugging
+                            Console.WriteLine(line);
                             var relevant = line.Split(new[] {"memory"}, StringSplitOptions.RemoveEmptyEntries)[1]
                                 .Trim();
 
@@ -429,13 +431,6 @@ namespace HardwareInformation.Providers
                                     else if (sizeRegex.IsMatch(part))
                                     {
                                         var match = sizeRegex.Match(part);
-
-                                        // TODO: DEBUGGING
-                                        if (match.Captures.Count < 2)
-                                        {
-                                            Console.WriteLine(match.Value);
-                                        }
-
                                         var number = int.Parse(match.Captures[0].Value);
                                         var rawNumber = 0uL;
                                         var exponent = match.Captures[1].Value;
