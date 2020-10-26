@@ -81,13 +81,13 @@ Result is cached internally so don't worry about calling it multiple times
 | RAM Latencies | :x: | :x: | :x: | :x:
 | GPUs Vendor | :white_check_mark: | :white_check_mark: | :x: | :x:
 | GPUs Name | :white_check_mark: | :white_check_mark: | :x:| :x:
-| GPUs Driver | :white_check_mark: | :x: | :x:| :x: | :white_check_mark:
-| GPUs Status | :white_check_mark: | :x: | :x:| :x: | :white_check_mark:
+| GPUs Driver | :white_check_mark: | :x: | :x:| :white_check_mark:
+| GPUs Status | :white_check_mark: | :x: | :x:| :white_check_mark:
 | Disks Manufacturer | :white_check_mark: | :white_check_mark:* | :x: | :white_check_mark:
 | Disks Caption | :white_check_mark: | :white_check_mark:* | :x: | :white_check_mark:
 | Disks Capacity | :white_check_mark: | :white_check_mark:* | :x: | :white_check_mark:
-| Displays Manufacturer | :white_check_mark: | :x: | :x:| :x: | :white_check_mark:
-| Displays Name | :white_check_mark: | :x: | :x:| :x: | :white_check_mark:
+| Displays Manufacturer | :white_check_mark: | :x: | :x:| :white_check_mark:
+| Displays Name | :white_check_mark: | :x: | :x:| :white_check_mark:
 | Multiple processors/Dual processors | :x: | :x: | :x:| :x:
 
 HRF = Human Readable Format. Normal capacity/size is in bytes, while this is a string encoded with the appropriate sizing.
