@@ -19,6 +19,8 @@ namespace HardwareInformation
     /// </summary>
     public static class MachineInformationGatherer
     {
+        internal static ILogger<MachineInformation> Logger;
+        
         private static readonly InformationProvider[] InformationProviders =
         {
             new CommonInformationProvider(),
@@ -56,23 +58,25 @@ namespace HardwareInformation
                 logger = new NullLogger<MachineInformation>();
             }
 
+            Logger = logger;
+
             if (information != null && lastSkipClockspeedTest == skipClockspeedTest && !invalidateCache)
             {
-                logger.LogInformation("Returning cached information");
+                Logger.LogInformation("Returning cached information");
                 return information;
             }
 
             if (RuntimeInformation.ProcessArchitecture == Architecture.X86 ||
                 RuntimeInformation.ProcessArchitecture == Architecture.X64)
             {
-                logger.LogInformation("Loading OpCodes for CPUID");
+                Logger.LogInformation("Loading OpCodes for CPUID");
                 Opcode.Open();
 
                 AppDomain.CurrentDomain.DomainUnload += (sender, args) => { Opcode.Close(); };
             }
             else
             {
-                logger.LogInformation("No CPUID available on non-x86 CPUs");
+                Logger.LogInformation("No CPUID available on non-x86 CPUs");
             }
 
             lastSkipClockspeedTest = skipClockspeedTest;
@@ -80,7 +84,7 @@ namespace HardwareInformation
 
             foreach (var informationProvider in InformationProviders)
             {
-                logger.LogInformation("Collecting information from {Provider}",
+                Logger.LogInformation("Collecting information from {Provider}",
                     informationProvider.GetType().Name);
 
                 try
@@ -92,7 +96,7 @@ namespace HardwareInformation
                 }
                 catch (Exception e)
                 {
-                    logger.LogError(e, "Exception when collecting information from {Provider}",
+                    Logger.LogError(e, "Exception when collecting information from {Provider}",
                         informationProvider.GetType().Name);
                 }
             }
@@ -112,7 +116,7 @@ namespace HardwareInformation
 
             foreach (var informationProvider in InformationProviders)
             {
-                logger.LogInformation("Running post update on {Provider}", informationProvider.GetType().Name);
+                Logger.LogInformation("Running post update on {Provider}", informationProvider.GetType().Name);
 
                 try
                 {
@@ -123,7 +127,7 @@ namespace HardwareInformation
                 }
                 catch (Exception e)
                 {
-                    logger.LogError(e, "Exception when running post-update from {Provider}",
+                    Logger.LogError(e, "Exception when running post-update from {Provider}",
                         informationProvider.GetType().Name);
                 }
             }
@@ -131,7 +135,7 @@ namespace HardwareInformation
             if (!skipClockspeedTest && (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ||
                                         RuntimeInformation.IsOSPlatform(OSPlatform.Linux)))
             {
-                logger.LogWarning("Running clockspeed tests");
+                Logger.LogWarning("Running clockspeed tests");
                 GetCoreSpeeds();
             }
 

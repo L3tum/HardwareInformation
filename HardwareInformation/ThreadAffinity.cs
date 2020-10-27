@@ -60,7 +60,7 @@ namespace HardwareInformation
                     {
 	                    if (Environment.Is64BitProcess)
 	                    {
-		                    processThread.ProcessorAffinity = (IntPtr) mask;
+                            processThread.ProcessorAffinity = (IntPtr) mask;
                         }
 	                    else
 	                    {
@@ -69,10 +69,10 @@ namespace HardwareInformation
                     }
                     catch (Win32Exception)
                     {
-                        //Console.WriteLine("{0} with mask {1}", e.Message, GetIntBinaryString(mask));
+                        // Console.WriteLine("{0} with mask {1}", e.Message, GetIntBinaryString(mask));
                         // Intentionally left blank
                     }
-                    catch (OverflowException e)
+                    catch (OverflowException)
                     {
 	                    // Intentionally left blank
                     }

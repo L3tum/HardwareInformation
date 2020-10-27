@@ -1,12 +1,14 @@
 ﻿#region using
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Management;
 using System.Runtime.InteropServices;
 using System.Security;
 using HardwareInformation.Information;
+using Microsoft.Extensions.Logging;
 
 #endregion
 
@@ -15,111 +17,10 @@ namespace HardwareInformation.Providers
     #region Win32API
 
     // Taken from https://github.com/pruggitorg/detect-windows-version
-    internal enum ProductType : byte
-    {
-        /// <summary>
-        ///     The operating system is Windows 10, Windows 8, Windows 7,...
-        /// </summary>
-        /// <remarks>VER_NT_WORKSTATION</remarks>
-        Workstation = 0x0000001,
-
-        /// <summary>
-        ///     The system is a domain controller and the operating system is Windows Server.
-        /// </summary>
-        /// <remarks>VER_NT_DOMAIN_CONTROLLER</remarks>
-        DomainController = 0x0000002,
-
-        /// <summary>
-        ///     The operating system is Windows Server. Note that a server that is also a domain controller
-        ///     is reported as VER_NT_DOMAIN_CONTROLLER, not VER_NT_SERVER.
-        /// </summary>
-        /// <remarks>VER_NT_SERVER</remarks>
-        Server = 0x0000003
-    }
-
-
-    // Taken from https://github.com/pruggitorg/detect-windows-version
-    [Flags]
-    internal enum SuiteMask : ushort
-    {
-        /// <summary>
-        ///     Microsoft BackOffice components are installed.
-        /// </summary>
-        VER_SUITE_BACKOFFICE = 0x00000004,
-
-        /// <summary>
-        ///     Windows Server 2003, Web Edition is installed
-        /// </summary>
-        VER_SUITE_BLADE = 0x00000400,
-
-        /// <summary>
-        ///     Windows Server 2003, Compute Cluster Edition is installed.
-        /// </summary>
-        VER_SUITE_COMPUTE_SERVER = 0x00004000,
-
-        /// <summary>
-        ///     Windows Server 2008 Datacenter, Windows Server 2003, Datacenter Edition, or Windows 2000 Datacenter Server is
-        ///     installed.
-        /// </summary>
-        VER_SUITE_DATACENTER = 0x00000080,
-
-        /// <summary>
-        ///     Windows Server 2008 Enterprise, Windows Server 2003, Enterprise Edition, or Windows 2000 Advanced Server is
-        ///     installed.
-        ///     Refer to the Remarks section for more information about this bit flag.
-        /// </summary>
-        VER_SUITE_ENTERPRISE = 0x00000002,
-
-        /// <summary>
-        ///     Windows XP Embedded is installed.
-        /// </summary>
-        VER_SUITE_EMBEDDEDNT = 0x00000040,
-
-        /// <summary>
-        ///     Windows Vista Home Premium, Windows Vista Home Basic, or Windows XP Home Edition is installed.
-        /// </summary>
-        VER_SUITE_PERSONAL = 0x00000200,
-
-        /// <summary>
-        ///     Remote Desktop is supported, but only one interactive session is supported. This value is set unless the system is
-        ///     running in application server mode.
-        /// </summary>
-        VER_SUITE_SINGLEUSERTS = 0x00000100,
-
-        /// <summary>
-        ///     Microsoft Small Business Server was once installed on the system, but may have been upgraded to another version of
-        ///     Windows.
-        ///     Refer to the Remarks section for more information about this bit flag.
-        /// </summary>
-        VER_SUITE_SMALLBUSINESS = 0x00000001,
-
-        /// <summary>
-        ///     Microsoft Small Business Server is installed with the restrictive client license in force. Refer to the Remarks
-        ///     section for more information about this bit flag.
-        /// </summary>
-        VER_SUITE_SMALLBUSINESS_RESTRICTED = 0x00000020,
-
-        /// <summary>
-        ///     Windows Storage Server 2003 R2 or Windows Storage Server 2003is installed.
-        /// </summary>
-        VER_SUITE_STORAGE_SERVER = 0x00002000,
-
-        /// <summary>
-        ///     Terminal Services is installed. This value is always set.
-        ///     If VER_SUITE_TERMINAL is set but VER_SUITE_SINGLEUSERTS is not set, the system is running in application server
-        ///     mode.
-        /// </summary>
-        VER_SUITE_TERMINAL = 0x00000010,
-
-        /// <summary>
-        ///     Windows Home Server is installed.
-        /// </summary>
-        VER_SUITE_WH_SERVER = 0x00008000
-
-        //VER_SUITE_MULTIUSERTS = 0x00020000
-    }
-
-    // Taken from https://github.com/pruggitorg/detect-windows-version
+    // ReSharper disable InconsistentNaming
+    // ReSharper disable FieldCanBeMadeReadOnly.Global
+    // ReSharper disable MemberCanBePrivate.Global
+    // ReSharper disable IdentifierTypo
     internal enum NTSTATUS : uint
     {
         /// <summary>
@@ -144,8 +45,8 @@ namespace HardwareInformation.Providers
 
         public ushort ServicePackMajor;
         public ushort ServicePackMinor;
-        public SuiteMask SuiteMask;
-        public ProductType ProductType;
+        public ushort SuiteMask;
+        public byte ProductType;
         public byte Reserved;
     }
 
@@ -157,6 +58,10 @@ namespace HardwareInformation.Providers
         [DllImport(NTDLL, EntryPoint = "RtlGetVersion", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern NTSTATUS ntdll_RtlGetVersion(ref OSVERSIONINFOEX versionInfo);
     }
+    // ReSharper restore InconsistentNaming
+    // ReSharper restore FieldCanBeMadeReadOnly.Global
+    // ReSharper restore MemberCanBePrivate.Global
+    // ReSharper restore IdentifierTypo
 
     #endregion
 
@@ -179,72 +84,81 @@ namespace HardwareInformation.Providers
                     }
                 }
             }
-            catch
+            catch (Exception e)
             {
-                // Intentionally left blank
+                MachineInformationGatherer.Logger.LogError(e, "Encountered while parsing OS Version info");
             }
 
             try
             {
                 GatherWin32ProcessorInformation(ref information, win10);
             }
-            catch
+            catch (Exception e)
             {
-                // Intentionally left blank
+                MachineInformationGatherer.Logger.LogError(e, "Encountered while parsing CPU info");
             }
 
             try
             {
                 GatherWin32PhysicalMemory(ref information, win10);
             }
-            catch
+            catch (Exception e)
             {
-                // Intentionally left blank
+                MachineInformationGatherer.Logger.LogError(e, "Encountered while parsing RAM info");
             }
 
             try
             {
                 GatherWin32Bios(ref information, win10);
             }
-            catch
+            catch (Exception e)
             {
-                // Intentionally left blank
+                MachineInformationGatherer.Logger.LogError(e, "Encountered while parsing BIOS info");
             }
 
             try
             {
                 GatherWin32BaseBoard(ref information, win10);
             }
-            catch
+            catch (Exception e)
             {
-                // Intentionally left blank
+                MachineInformationGatherer.Logger.LogError(e, "Encountered while parsing Mainboard info");
             }
 
             try
             {
                 GatherWin32DiskDrive(ref information, win10);
             }
-            catch
+            catch (Exception e)
             {
-                // Intentionally left blank
+                MachineInformationGatherer.Logger.LogError(e, "Encountered while parsing Disk info");
             }
 
             try
             {
                 GatherWin32VideoController(ref information, win10);
             }
-            catch
+            catch (Exception e)
             {
-                // Intentionally left blank
+                MachineInformationGatherer.Logger.LogError(e, "Encountered while parsing GPU info");
             }
 
             try
             {
                 GatherWmiMonitorId(ref information, win10);
             }
-            catch
+            catch (Exception e)
             {
-                // Intentionally left blank
+                MachineInformationGatherer.Logger.LogError(e, "Encountered while parsing Monitor info");
+            }
+
+            try
+            {
+                GatherPnpDevices(ref information, win10);
+            }
+            catch (Exception e)
+            {
+                MachineInformationGatherer.Logger.LogError(e, "Encountered while parsing USB info");
             }
         }
 
@@ -258,9 +172,261 @@ namespace HardwareInformation.Providers
             // Intentionally left blank
         }
 
+        private void GatherPnpDevices(ref MachineInformation information, bool win10)
+        {
+            using var mos = new ManagementObjectSearcher("select * from Win32_PnPEntity");
+            var mbos = new ArrayList(mos.Get());
+            var data = new Dictionary<string, string[]>();
+
+            for (var i = 0; i < mbos.Count; i++)
+            {
+                var managementBaseObject = mbos[i] as ManagementBaseObject;
+
+                if (managementBaseObject is null)
+                {
+                    continue;
+                }
+
+                var deviceId = managementBaseObject.Properties["DeviceID"].Value as string;
+
+                if (deviceId is null || !deviceId.StartsWith("USB"))
+                {
+                    continue;
+                }
+
+                if (!data.ContainsKey(deviceId))
+                {
+                    data.Add(deviceId, new string[8]);
+                }
+                else if (data.ContainsKey(deviceId))
+                {
+                    continue;
+                }
+
+                // Win32_PnpDeviceProperty is only available with Windows 10
+                if (!win10)
+                {
+                    continue;
+                }
+
+                var mo = managementBaseObject as ManagementObject;
+                var inParams = mo.GetMethodParameters("GetDeviceProperties");
+
+                var result = mo.InvokeMethod(
+                    "GetDeviceProperties",
+                    inParams,
+                    new InvokeMethodOptions()
+                );
+
+                if (result?.Properties["deviceProperties"].Value is null)
+                {
+                    continue;
+                }
+
+                foreach (var deviceProperties in result.Properties["deviceProperties"].Value as ManagementBaseObject[])
+                {
+                    var keyName = deviceProperties.Properties["KeyName"].Value as string;
+                    var value = deviceProperties.Properties["Data"].Value as string;
+
+                    if (string.IsNullOrWhiteSpace(value) || string.IsNullOrWhiteSpace(keyName))
+                    {
+                        MachineInformationGatherer.Logger.LogTrace(
+                            $"KeyName {keyName} or Value {value} was null or whitespace for device ID {deviceId}");
+                        continue;
+                    }
+
+                    switch (keyName)
+                    {
+                        case "DEVPKEY_Device_BusReportedDeviceDesc":
+                        {
+                            data[deviceId][0] = value;
+                            break;
+                        }
+                        case "DEVPKEY_Device_DriverDesc":
+                        {
+                            data[deviceId][1] = value;
+                            break;
+                        }
+                        case "DEVPKEY_Device_DriverVersion":
+                        {
+                            data[deviceId][2] = value;
+                            break;
+                        }
+                        case "DEVPKEY_Device_DriverDate":
+                        {
+                            var year = int.Parse(value.Substring(0, 4));
+                            var month = int.Parse(value.Substring(4, 2));
+                            var day = int.Parse(value.Substring(6, 2));
+                            var hour = int.Parse(value.Substring(8, 2));
+                            var minute = int.Parse(value.Substring(10, 2));
+                            var second = int.Parse(value.Substring(12, 2));
+
+                            data[deviceId][3] =
+                                new DateTime(year, month, day, hour, minute, second).ToString();
+                            break;
+                        }
+                        case "DEVPKEY_Device_Class":
+                        {
+                            data[deviceId][4] = value;
+                            break;
+                        }
+                        case "DEVPKEY_Device_DriverProvider":
+                        {
+                            data[deviceId][5] = value;
+                            break;
+                        }
+                        case "DEVPKEY_NAME":
+                        {
+                            data[deviceId][6] = value;
+                            break;
+                        }
+                        case "DEVPKEY_Device_Manufacturer":
+                        {
+                            data[deviceId][7] = value;
+                            break;
+                        }
+                        case "DEVPKEY_Device_Children":
+                        {
+                            var children = deviceProperties.Properties["DEVPKEY_Device_Children"];
+                            if (children.Value is not null)
+                            {
+                                if (children.IsArray)
+                                {
+                                    foreach (var child in children.Value as string[])
+                                    {
+                                        mos.Query = new ObjectQuery(
+                                            $"select * from Win32_PnPEntity where DeviceID = {child}");
+                                        var childs = mos.Get();
+
+                                        foreach (var child1 in childs)
+                                        {
+                                            mbos.Add(child1);
+                                        }
+                                    }
+                                }
+                            }
+
+                            break;
+                        }
+                    }
+                }
+            }
+
+            var realData = new Dictionary<string, USBDevice>();
+
+            foreach (var stringse in data)
+            {
+                var deviceDesc = stringse.Value[0];
+                var driverDesc = stringse.Value[1];
+
+                if (deviceDesc is null || driverDesc is null)
+                {
+                    continue;
+                }
+
+                if (!realData.ContainsKey(deviceDesc))
+                {
+                    var (vid, pid) = GetVidAndPid(stringse.Key);
+                    var (vendorName, productName) = USBVendorList.GetVendorAndProductName(vid, pid);
+
+                    realData.Add(deviceDesc,
+                        new USBDevice
+                        {
+                            Name = stringse.Value[6], BusReportedName = deviceDesc, DriverName = driverDesc,
+                            DriverVersion = stringse.Value[2], DriverDate = DateTime.Parse(stringse.Value[3]),
+                            Class = stringse.Value[4], DriverProvider = stringse.Value[5],
+                            Manufacturer = stringse.Value[7],
+                            DeviceID = stringse.Key, VendorID = vid, ProductID = pid,
+                            VendorName = vendorName, ProductName = productName
+                        });
+                }
+                else
+                {
+                    var device = realData[deviceDesc];
+                    var replace = false;
+
+                    // Prefer composite over solely input
+                    if (device.DriverName == "USB Input Device" && driverDesc == "USB Composite Device")
+                    {
+                        replace = true;
+                    }
+                    // Prefer composite over solely output
+                    else if (device.DriverName == "USB Output Device" &&
+                             driverDesc == "USB Composite Device")
+                    {
+                        replace = true;
+                    }
+                    // Prefer composite over solely audio
+                    else if (device.DriverName == "USB Audio Device" &&
+                             driverDesc == "USB Composite Device")
+                    {
+                        replace = true;
+                    }
+                    // Prefer different DriverProvider over Microsoft (standard)
+                    else if (device.DriverProvider == "Microsoft" && stringse.Value[5] != "Microsoft")
+                    {
+                        replace = true;
+                    }
+                    // Prefer different (or any) Manufacturer over Microsoft
+                    else if (device.Manufacturer is null or "Microsoft" &&
+                             stringse.Value[7] is not null and not "Microsoft")
+                    {
+                        replace = true;
+                    }
+                    // Prefer custom description over windows-default
+                    else if (driverDesc is not "USB Input Device" and not "USB Composite Device" and not
+                                 "USB Output Device" and not "USB Audio Device" and not "USB Mass Storage Device"
+                                 and not "Disk Drive" and not "USB Attached SCSI (UAS) Mass Storage Device"
+                             && !driverDesc.StartsWith("Generic"))
+                    {
+                        replace = true;
+                    }
+
+                    if (replace)
+                    {
+                        device.Name = stringse.Value[6];
+                        device.BusReportedName = deviceDesc;
+                        device.DriverName = driverDesc;
+                        device.DriverVersion = stringse.Value[2];
+                        device.DriverDate = DateTime.Parse(stringse.Value[3]);
+                        device.Class = stringse.Value[4];
+                        device.DriverProvider = stringse.Value[5];
+                        device.Manufacturer = stringse.Value[7];
+
+                        if (stringse.Key != device.DeviceID)
+                        {
+                            var (vid, pid) = GetVidAndPid(stringse.Key);
+
+                            if ((vid == null || vid == device.VendorID) && (pid == null || pid == device.ProductID))
+                            {
+                                continue;
+                            }
+
+                            var (vendorName, productName) = USBVendorList.GetVendorAndProductName(vid, pid);
+                            device.VendorID ??= vid;
+                            device.ProductID ??= pid;
+                            device.VendorName ??= vendorName;
+                            device.ProductName ??= productName;
+                        }
+                    }
+                }
+            }
+
+            information.UsbDevices = new List<USBDevice>(realData.Values).AsReadOnly();
+        }
+
+        private Tuple<string, string> GetVidAndPid(string deviceId)
+        {
+            var vidPid = deviceId.Split('\\')[1];
+            var vid = vidPid.StartsWith("VID_") ? vidPid.Split('&')[0].Replace("VID_", "") : null;
+            var pid = vidPid.StartsWith("VID_") ? vidPid.Split('&')[1].Replace("PID_", "") : null;
+
+            return Tuple.Create(vid, pid);
+        }
+
         private void GatherWin32BaseBoard(ref MachineInformation information, bool win10)
         {
-            var mos = new ManagementObjectSearcher("select Product,Manufacturer,Version from Win32_BaseBoard");
+            using var mos = new ManagementObjectSearcher("select Product,Manufacturer,Version from Win32_BaseBoard");
 
             foreach (var managementBaseObject in mos.Get())
             {
@@ -305,7 +471,7 @@ namespace HardwareInformation.Providers
 
         private void GatherWin32DiskDrive(ref MachineInformation information, bool win10)
         {
-            var mos = new ManagementObjectSearcher("select Model,Size,Caption from Win32_DiskDrive");
+            using var mos = new ManagementObjectSearcher("select Model,Size,Caption from Win32_DiskDrive");
             var disks = new List<Disk>();
 
             foreach (var managementBaseObject in mos.Get())
@@ -343,7 +509,7 @@ namespace HardwareInformation.Providers
 
         private void GatherWin32VideoController(ref MachineInformation information, bool win10)
         {
-            var mos = new ManagementObjectSearcher(
+            using var mos = new ManagementObjectSearcher(
                 "select AdapterCompatibility,Caption,Description,DriverDate,DriverVersion,Name,Status from Win32_VideoController");
             var gpus = new List<GPU>();
 
@@ -426,7 +592,7 @@ namespace HardwareInformation.Providers
 
         private void GatherWmiMonitorId(ref MachineInformation information, bool win10)
         {
-            var mos = new ManagementObjectSearcher("root\\wmi",
+            using var mos = new ManagementObjectSearcher("root\\wmi",
                 "select ManufacturerName,UserFriendlyName from WmiMonitorID");
             var displays = new List<Display>();
 
@@ -468,18 +634,19 @@ namespace HardwareInformation.Providers
 
         private void GatherWin32ProcessorInformation(ref MachineInformation information, bool win10)
         {
-            ManagementObjectSearcher mos;
+            string query;
 
             if (win10)
             {
-                mos = new ManagementObjectSearcher(
-                    "select Name,NumberOfEnabledCore,NumberOfLogicalProcessors,SocketDesignation,MaxClockSpeed from Win32_Processor");
+                query =
+                    "select Name,NumberOfEnabledCore,NumberOfLogicalProcessors,SocketDesignation,MaxClockSpeed from Win32_Processor";
             }
             else
             {
-                mos = new ManagementObjectSearcher(
-                    "select Name,NumberOfLogicalProcessors,SocketDesignation,MaxClockSpeed from Win32_Processor");
+                query = "select Name,NumberOfLogicalProcessors,SocketDesignation,MaxClockSpeed from Win32_Processor";
             }
+
+            using var mos = new ManagementObjectSearcher(query);
 
             foreach (var managementBaseObject in mos.Get())
             {
@@ -562,19 +729,20 @@ namespace HardwareInformation.Providers
 
         private void GatherWin32PhysicalMemory(ref MachineInformation information, bool win10)
         {
-            ManagementObjectSearcher mos;
+            string query;
             var ramSticks = new List<RAM>();
 
             if (win10)
             {
-                mos = new ManagementObjectSearcher(
-                    "select ConfiguredClockSpeed,Manufacturer,Capacity,DeviceLocator,PartNumber,FormFactor from Win32_PhysicalMemory");
+                query =
+                    "select ConfiguredClockSpeed,Manufacturer,Capacity,DeviceLocator,PartNumber,FormFactor from Win32_PhysicalMemory";
             }
             else
             {
-                mos = new ManagementObjectSearcher(
-                    "select Manufacturer,Capacity,DeviceLocator,PartNumber,FormFactor from Win32_PhysicalMemory");
+                query = "select Manufacturer,Capacity,DeviceLocator,PartNumber,FormFactor from Win32_PhysicalMemory";
             }
+
+            using var mos = new ManagementObjectSearcher(query);
 
             // There is currently no other way to gather RAM information so we don't need to check if it's already set
             foreach (var managementBaseObject in mos.Get())
@@ -650,7 +818,7 @@ namespace HardwareInformation.Providers
 
         private void GatherWin32Bios(ref MachineInformation information, bool win10)
         {
-            var mos = new ManagementObjectSearcher("select Name,Manufacturer,Version from Win32_BIOS");
+            using var mos = new ManagementObjectSearcher("select Name,Manufacturer,Version from Win32_BIOS");
 
             foreach (var managementBaseObject in mos.Get())
             {

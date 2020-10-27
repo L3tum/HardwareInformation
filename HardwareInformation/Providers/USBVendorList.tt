@@ -1,0 +1,134 @@
+<#@ template language="C#" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Net" #>
+<#@ import namespace="System.Globalization" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+
+<#
+    var wc = new WebClient();
+    using var webData = wc.OpenRead("http://www.linux-usb.org/usb.ids");
+    using var sr = new StreamReader(webData);
+
+    var vendorIds = new Dictionary<int, string>();
+    var vendorProductIds = new Dictionary<int, Dictionary<int, string>>();
+    var currentManufacturer = 0;
+
+    while (!sr.EndOfStream)
+    {
+        var line = sr.ReadLine();
+
+        if (line is null)
+        {
+            break;
+        }
+
+        // Cutoff point
+        if (line is "# List of known device classes, subclasses and protocols")
+        {
+            break;
+        }
+
+        if (line.StartsWith("#") || string.IsNullOrWhiteSpace(line))
+        {
+            continue;
+        }
+
+        if (line.StartsWith("\t") && !line.StartsWith("\t\t"))
+        {
+            var parts = line.Split(new[] {" "}, 2, StringSplitOptions.RemoveEmptyEntries);
+            var id = int.Parse(parts[0].Trim(), NumberStyles.HexNumber);
+            var name = parts[1].Trim().Replace("\\", "\\\\").Replace("\"", "\\\"");
+
+            if (!vendorProductIds.ContainsKey(currentManufacturer))
+            {
+                vendorProductIds.Add(currentManufacturer, new Dictionary<int, string>());
+            }
+
+            if (vendorProductIds[currentManufacturer].ContainsKey(id))
+            {
+                Console.WriteLine($"{currentManufacturer} has multiple products under ID {id}");
+                continue;
+            }
+
+            vendorProductIds[currentManufacturer].Add(id, name);
+        }
+        else if (!line.StartsWith("\t"))
+        {
+            var parts = line.Split(new[] {" "}, 2, StringSplitOptions.RemoveEmptyEntries);
+            var id = int.Parse(parts[0].Trim(), NumberStyles.HexNumber);
+            var name = parts[1].Trim().Replace("\\", "\\\\").Replace("\"", "\\\"");
+
+            if (!vendorIds.ContainsKey(id))
+            {
+                vendorIds.Add(id, name);
+            }
+
+            currentManufacturer = id;
+
+            if (!vendorProductIds.ContainsKey(currentManufacturer))
+            {
+                vendorProductIds.Add(currentManufacturer, new Dictionary<int, string>());
+            }
+        }
+    }
+
+    sr.Close();
+#>
+
+// This file is auto-generated!
+
+namespace HardwareInformation.Providers {
+    using System.Collections.Generic;
+    using System.Globalization;
+    using System;
+    using System.Runtime.CompilerServices;
+
+    internal static class USBVendorList {
+        private static readonly Dictionary<int, Tuple<string, Dictionary<int, string>>> vendorAndProductIds = new Dictionary<int, Tuple<string, Dictionary<int, string>>> {
+<#
+    foreach (var kvp in vendorIds)
+    {
+#>
+    { <#= kvp.Key #>, Tuple.Create("<#= kvp.Value #>", new Dictionary<int, string>{
+<#
+
+    foreach (var productIdKvp in vendorProductIds[kvp.Key])
+    {
+#>
+{ <#= productIdKvp.Key #>, "<#= productIdKvp.Value #>" },
+<#
+    }
+
+#>
+    })
+ },
+        <#
+    }
+#>
+        };
+
+    internal static Tuple<string, string> GetVendorAndProductName(string vendorId, string productId) {
+        return GetVendorAndProductName(vendorId != null ? int.Parse(vendorId, NumberStyles.HexNumber) : -1, productId != null ? int.Parse(productId, NumberStyles.HexNumber) : -1);
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    internal static Tuple<string, string> GetVendorAndProductName(int vendorId, int productId) {
+        if (vendorId != -1) {
+            if (vendorAndProductIds.TryGetValue(vendorId, out var vendorTuple)) {
+                if (productId != -1) {
+                    if (vendorTuple.Item2.TryGetValue(productId, out var productName)) {
+                        return Tuple.Create(vendorTuple.Item1, productName);
+                    }
+        
+                    return Tuple.Create<string, string>(vendorTuple.Item1, string.Empty);
+                }
+            }
+        }
+
+        return Tuple.Create<string, string>(string.Empty, string.Empty);
+    }
+
+    }
+}

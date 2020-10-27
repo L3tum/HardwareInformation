@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using HardwareInformation.Information;
 using HardwareInformation.Information.Gpu;
+using Microsoft.Extensions.Logging;
 using Vulkan;
 
 namespace HardwareInformation.Providers
@@ -52,9 +53,23 @@ namespace HardwareInformation.Providers
 
         public bool Available(MachineInformation information)
         {
-            using var instance = new Instance();
+            try
+            {
+                if (!DynamicLibraryChecker.CheckLibrary("vulkan-1"))
+                {
+                    MachineInformationGatherer.Logger.LogWarning("Vulkan shared library is not available.");
 
-            return instance.EnumeratePhysicalDevices().Length > 0;
+                    return false;
+                }
+                
+                using var instance = new Instance();
+
+                return instance.EnumeratePhysicalDevices().Length > 0;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         public void PostProviderUpdateInformation(ref MachineInformation information)
