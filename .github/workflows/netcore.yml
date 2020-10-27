@@ -27,19 +27,28 @@ jobs:
         run: dotnet run --project SimpleGatheringTest/SimpleGatheringTest.csproj
       - name: Publish Windows
         if: matrix.os == 'windows-latest'
-        run: dotnet publish -c Debug -r windows-x64 /p:PublishSingleFile=true /p:PublishTrimmed=true -o SimpleGatheringTest/bin/Debug/publish
+        run: dotnet publish SimpleGatheringTest/SimpleGatheringTest.csproj -c Debug -r windows-x64 /p:PublishSingleFile=true /p:PublishTrimmed=true -o SimpleGatheringTest/bin/Debug/publish
       - name: Publish Linux
         if: matrix.os == 'ubuntu-latest'
-        run: dotnet publish -c Debug -r linux-x64 /p:PublishSingleFile=true /p:PublishTrimmed=true -o SimpleGatheringTest/bin/Debug/publish
+        run: dotnet publish SimpleGatheringTest/SimpleGatheringTest.csproj -c Debug -r linux-x64 /p:PublishSingleFile=true /p:PublishTrimmed=true -o SimpleGatheringTest/bin/Debug/publish
       - name: Publish OSX
         if: matrix.os == 'macOS-latest'
-        run: dotnet publish -c Debug -r osx-x64 /p:PublishSingleFile=true /p:PublishTrimmed=true -o SimpleGatheringTest/bin/Debug/publish
+        run: dotnet publish SimpleGatheringTest/SimpleGatheringTest.csproj -c Debug -r osx-x64 /p:PublishSingleFile=true /p:PublishTrimmed=true -o SimpleGatheringTest/bin/Debug/publish
       - name: Upload Artifacts
         uses: actions/upload-artifact@v2.2.0
         with:
           name: SimpleGatheringTest
           path: SimpleGatheringTest/bin/Debug/publish/*
           if-no-files-found: error
+  benchmark:
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    strategy:
+      fail-fast: false
+    name: Benchmarking
+    steps:
+      - uses: actions/checkout@v1
+      - run: dotnet run -c Release --project HardwareInformation.Benchmarks/HardwareInformation.Benchmarks.csproj
   build:
     runs-on: ubuntu-latest
     continue-on-error: false
