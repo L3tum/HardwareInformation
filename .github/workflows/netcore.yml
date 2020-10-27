@@ -27,7 +27,7 @@ jobs:
         run: dotnet run --project SimpleGatheringTest/SimpleGatheringTest.csproj
       - name: Publish Windows
         if: matrix.os == 'windows-latest'
-        run: dotnet publish SimpleGatheringTest/SimpleGatheringTest.csproj -c Debug -r windows-x64 /p:PublishSingleFile=true /p:PublishTrimmed=true -o SimpleGatheringTest/bin/Debug/publish
+        run: dotnet publish SimpleGatheringTest/SimpleGatheringTest.csproj -c Debug -r win-x64 /p:PublishSingleFile=true /p:PublishTrimmed=true -o SimpleGatheringTest/bin/Debug/publish
       - name: Publish Linux
         if: matrix.os == 'ubuntu-latest'
         run: dotnet publish SimpleGatheringTest/SimpleGatheringTest.csproj -c Debug -r linux-x64 /p:PublishSingleFile=true /p:PublishTrimmed=true -o SimpleGatheringTest/bin/Debug/publish
