@@ -3,15 +3,39 @@ name: .NET Core CI
 
 on: 
   push:
-    branches: 
-      - master
   release:
     types:
       - created
 
 jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    continue-on-error: true
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macOS-latest]
+        dotnet: [ '3.1.x' ]
+    name: Dotnet ${{ matrix.dotnet }} build on ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v1
+      - name: Setup dotnet
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: ${{ matrix.dotnet }}
+      - name: Test
+        run: dotnet run --project SimpleGatheringTest/SimpleGatheringTest.csproj
+      - name: Publish
+        run: dotnet publish -c Debug /p:PublishSingleFile=true /p:PublishTrimmed=true
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v2.2.0
+        with:
+          name: SimpleGatheringTest
+          path: SimpleGatheringTest/bin/Debug/publish/SimpleGatheringTest*
+          if-no-files-found: error
   build:
     runs-on: ubuntu-latest
+    continue-on-error: false
     name: Dotnet build and push
     steps:
       - uses: actions/checkout@v1
