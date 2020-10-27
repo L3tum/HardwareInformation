@@ -37,8 +37,8 @@ jobs:
       - name: Upload Artifacts
         uses: actions/upload-artifact@v2.2.0
         with:
-          name: SimpleGatheringTest
-          path: SimpleGatheringTest/bin/Debug/publish/*
+          name: SimpleGatheringTest-${{ matrix.dotnet }}-${{ matrix.os }}
+          path: SimpleGatheringTest/bin/Debug/publish
           if-no-files-found: error
   benchmark:
     runs-on: ubuntu-latest
@@ -49,6 +49,10 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - run: dotnet run -c Release --project HardwareInformation.Benchmarks/HardwareInformation.Benchmarks.csproj
+      - uses: actions/upload-artifact@v2.2.0
+        with:
+          name: BenchmarkLogs
+          path: HardwareInformation.Benchmarks/bin/Release/netcoreapp3.1/BenchmarkDotNet.Artifacts
   build:
     runs-on: ubuntu-latest
     continue-on-error: false
