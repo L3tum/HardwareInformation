@@ -365,7 +365,7 @@ namespace HardwareInformation.Providers
                                 }
                             }
 
-                            var name = string.IsNullOrWhiteSpace(vendor) ? vendor : relevant.Replace(vendor, "");
+                            var name = string.IsNullOrWhiteSpace(vendor) ? relevant : relevant.Replace(vendor, "");
 
                             if (!string.IsNullOrEmpty(name))
                             {

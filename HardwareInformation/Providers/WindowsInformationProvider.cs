@@ -174,7 +174,7 @@ namespace HardwareInformation.Providers
 
         private void GatherPnpDevices(ref MachineInformation information, bool win10)
         {
-            using var mos = new ManagementObjectSearcher("select * from Win32_PnPEntity");
+            using var mos = new ManagementObjectSearcher("select DeviceID from Win32_PnPEntity");
             var mbos = new ArrayList(mos.Get());
             var data = new Dictionary<string, string[]>();
 
