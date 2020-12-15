@@ -83,11 +83,20 @@ Result is cached internally so don't worry about calling it multiple times
 | GPUs Name | :white_check_mark: | :white_check_mark: | :x:| :x:
 | GPUs Driver | :white_check_mark: | :x: | :x:| :white_check_mark:
 | GPUs Status | :white_check_mark: | :x: | :x:| :white_check_mark:
+| GPUs VRAM | :white_check_mark: | :white_check_mark: | :x: | :x:
+| GPUs VRAM HRF | :white_check_mark: | :white_check_mark: | :x: | :x:
+| GPUs Type | :white_check_mark: | :x: | :x: | :white_check_mark:
 | Disks Manufacturer | :white_check_mark: | :white_check_mark:* | :x: | :white_check_mark:
 | Disks Caption | :white_check_mark: | :white_check_mark:* | :x: | :white_check_mark:
 | Disks Capacity | :white_check_mark: | :white_check_mark:* | :x: | :white_check_mark:
 | Displays Manufacturer | :white_check_mark: | :x: | :x:| :white_check_mark:
 | Displays Name | :white_check_mark: | :x: | :x:| :white_check_mark:
+| USB Vendor ID | :white_check_mark: | :white_check_mark: | :x: | :white_check_mark:
+| USB Vendor Name | :white_check_mark: | :white_check_mark: | :x: | :white_check_mark:
+| USB Product ID | :white_check_mark: | :white_check_mark: | :x: | :white_check_mark:
+| USB Product Name | :white_check_mark: | :white_check_mark: | :x: | :white_check_mark:
+| USB Driver | :white_check_mark: | :white_check_mark: | :x: | :white_check_mark:
+| USB Class | :white_check_mark: | :white_check_mark: | :x: | :white_check_mark:
 | Multiple processors/Dual processors | :x: | :x: | :x:| :x:
 
 HRF = Human Readable Format. Normal capacity/size is in bytes, while this is a string encoded with the appropriate sizing.
