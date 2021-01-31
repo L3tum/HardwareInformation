@@ -13,35 +13,14 @@ namespace HardwareInformation.Providers
 {
     internal class IntelInformationProvider : InformationProvider
     {
-        public void GatherInformation(ref MachineInformation information)
-        {
-            GatherFeatureFlags(ref information);
-
-            if (information.Cpu.MaxCpuIdFeatureLevel >= 0x1f)
-            {
-                GatherNumberOfPhysicalCores(ref information);
-            }
-            else if (information.Cpu.MaxCpuIdFeatureLevel >= 11)
-            {
-                GatherNumberOfPhysicalCoresLegacy(ref information);
-            }
-
-            if (information.Cpu.MaxCpuIdExtendedFeatureLevel >= 4)
-            {
-                GatherCpuName(ref information);
-            }
-
-            GatherCacheTopology(ref information);
-        }
-
-        public bool Available(MachineInformation information)
+        public override bool Available(MachineInformation information)
         {
             return information.Cpu.Vendor == Vendors.Intel &&
                    (RuntimeInformation.ProcessArchitecture == Architecture.X86 ||
                     RuntimeInformation.ProcessArchitecture == Architecture.X64);
         }
 
-        public void PostProviderUpdateInformation(ref MachineInformation information)
+        public override void PostProviderUpdateInformation(ref MachineInformation information)
         {
             if (information.Cpu.PhysicalCores != 0)
             {
@@ -61,16 +40,17 @@ namespace HardwareInformation.Providers
             }
         }
 
-        private void GatherCacheTopology(ref MachineInformation information)
+        public override void GatherCpuCacheTopologyInformation(ref MachineInformation information)
         {
-            var threads = new List<Task>();
-            var caches = new List<Cache>();
             var supportsCacheTopologyExtensions = information.Cpu.MaxCpuIdFeatureLevel >= 4;
 
             if (!supportsCacheTopologyExtensions)
             {
                 return;
             }
+
+            var threads = new List<Task>();
+            var caches = new List<Cache>();
 
             foreach (var core in information.Cpu.Cores)
             {
@@ -131,7 +111,24 @@ namespace HardwareInformation.Providers
             information.Cpu.Caches = caches.AsReadOnly();
         }
 
-        private void GatherNumberOfPhysicalCores(ref MachineInformation information)
+        public override void GatherCpuInformation(ref MachineInformation information)
+        {
+            if (information.Cpu.MaxCpuIdFeatureLevel >= 0x1f)
+            {
+                GatherNumberOfPhysicalCores(ref information);
+            }
+            else if (information.Cpu.MaxCpuIdFeatureLevel >= 11)
+            {
+                GatherNumberOfPhysicalCoresLegacy(ref information);
+            }
+
+            if (information.Cpu.MaxCpuIdExtendedFeatureLevel >= 4)
+            {
+                GatherCpuName(ref information);
+            }
+        }
+
+        private static void GatherNumberOfPhysicalCores(ref MachineInformation information)
         {
             var ecx = 0u;
             var apicIds = new Dictionary<uint, uint>();
@@ -168,7 +165,7 @@ namespace HardwareInformation.Providers
             information.Cpu.PhysicalCores = (uint) apicIds.Count;
         }
 
-        private void GatherNumberOfPhysicalCoresLegacy(ref MachineInformation information)
+        private static void GatherNumberOfPhysicalCoresLegacy(ref MachineInformation information)
         {
             var threads = new List<Task>();
             var cores = 0u;
@@ -190,7 +187,7 @@ namespace HardwareInformation.Providers
             information.Cpu.PhysicalCores = cores;
         }
 
-        private void GatherCpuName(ref MachineInformation information)
+        private static void GatherCpuName(ref MachineInformation information)
         {
             Opcode.Cpuid(out var partOne, 0x80000002, 0);
             Opcode.Cpuid(out var partTwo, 0x80000003, 0);
@@ -211,7 +208,7 @@ namespace HardwareInformation.Providers
             information.Cpu.Name = sb.ToString();
         }
 
-        private void GatherFeatureFlags(ref MachineInformation information)
+        public override void GatherCpuFeatureFlagInformation(ref MachineInformation information)
         {
             if (information.Cpu.MaxCpuIdExtendedFeatureLevel >= 1)
             {

@@ -4,9 +4,11 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Threading;
 using HardwareInformation.Providers;
+using HardwareInformation.Providers.Windows;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 
@@ -19,8 +21,8 @@ namespace HardwareInformation
     /// </summary>
     public static class MachineInformationGatherer
     {
-        internal static ILogger<MachineInformation> Logger;
-        
+        internal static ILogger Logger;
+
         private static readonly InformationProvider[] InformationProviders =
         {
             new CommonInformationProvider(),
@@ -29,7 +31,8 @@ namespace HardwareInformation
             new VulkanInformationProvider(),
             new WindowsInformationProvider(),
             new LinuxInformationProvider(),
-            new OSXInformationProvider()
+            new OSXInformationProvider(),
+            new RyzenMasterProvider()
         };
 
         private static MachineInformation information;
@@ -49,9 +52,10 @@ namespace HardwareInformation
         ///     Default false. Whether to re-gather all the informations.
         /// </param>
         /// <param name="logger"></param>
+        /// <param name="options">NULL means default all</param>
         /// <returns></returns>
         public static MachineInformation GatherInformation(bool skipClockspeedTest = true, bool invalidateCache = false,
-            ILogger<MachineInformation> logger = null)
+            ILogger logger = null, GatheringOptions options = null)
         {
             if (logger == null)
             {
@@ -65,6 +69,8 @@ namespace HardwareInformation
                 Logger.LogInformation("Returning cached information");
                 return information;
             }
+
+            options ??= new GatheringOptions();
 
             if (RuntimeInformation.ProcessArchitecture == Architecture.X86 ||
                 RuntimeInformation.ProcessArchitecture == Architecture.X64)
@@ -81,18 +87,17 @@ namespace HardwareInformation
 
             lastSkipClockspeedTest = skipClockspeedTest;
             information = new MachineInformation();
+            var informationProviders =
+                InformationProviders.Where(provider => provider.Available(information)).ToArray();
 
-            foreach (var informationProvider in InformationProviders)
+            foreach (var informationProvider in informationProviders)
             {
-                Logger.LogInformation("Collecting information from {Provider}",
+                Logger.LogInformation("Collecting General System information from {Provider}",
                     informationProvider.GetType().Name);
 
                 try
                 {
-                    if (informationProvider.Available(information))
-                    {
-                        informationProvider.GatherInformation(ref information);
-                    }
+                    informationProvider.GatherGeneralSystemInformation(ref information);
                 }
                 catch (Exception e)
                 {
@@ -101,34 +106,75 @@ namespace HardwareInformation
                 }
             }
 
-            foreach (var cpuCore in information.Cpu.Cores)
+            foreach (var informationProvider in informationProviders)
             {
-                if (cpuCore.NormalClockSpeed == 0)
-                {
-                    cpuCore.NormalClockSpeed = information.Cpu.NormalClockSpeed;
-                }
+                Logger.LogInformation("Collecting information from {Provider}",
+                    informationProvider.GetType().Name);
 
-                if (cpuCore.MaxClockSpeed == 0)
+                foreach (var fieldInfo in typeof(GatheringOptions).GetProperties(BindingFlags.Instance |
+                    BindingFlags.Public))
                 {
-                    cpuCore.MaxClockSpeed = information.Cpu.MaxClockSpeed;
-                }
-            }
-
-            foreach (var informationProvider in InformationProviders)
-            {
-                Logger.LogInformation("Running post update on {Provider}", informationProvider.GetType().Name);
-
-                try
-                {
-                    if (informationProvider.Available(information))
+                    try
                     {
-                        informationProvider.PostProviderUpdateInformation(ref information);
+                        switch (fieldInfo.Name)
+                        {
+                            case nameof(GatheringOptions.GatherCpuInformation):
+                            {
+                                informationProvider.GatherCpuInformation(ref information);
+                                break;
+                            }
+                            case nameof(GatheringOptions.GatherCpuSpeedInformation):
+                            {
+                                informationProvider.GatherCpuSpeedInformation(ref information);
+                                break;
+                            }
+                            case nameof(GatheringOptions.GatherCpuCacheTopologyInformation):
+                            {
+                                informationProvider.GatherCpuCacheTopologyInformation(ref information);
+                                break;
+                            }
+                            case nameof(GatheringOptions.GatherCpuFeatureFlagInformation):
+                            {
+                                informationProvider.GatherCpuFeatureFlagInformation(ref information);
+                                break;
+                            }
+                            case nameof(GatheringOptions.GatherMainboardInformation):
+                            {
+                                informationProvider.GatherMainboardInformation(ref information);
+                                break;
+                            }
+                            case nameof(GatheringOptions.GatherRamInformation):
+                            {
+                                informationProvider.GatherRamInformation(ref information);
+                                break;
+                            }
+                            case nameof(GatheringOptions.GatherDiskInformation):
+                            {
+                                informationProvider.GatherDiskInformation(ref information);
+                                break;
+                            }
+                            case nameof(GatheringOptions.GatherGpuInformation):
+                            {
+                                informationProvider.GatherGpuInformation(ref information);
+                                break;
+                            }
+                            case nameof(GatheringOptions.GatherUsbInformation):
+                            {
+                                informationProvider.GatherUsbInformation(ref information);
+                                break;
+                            }
+                            case nameof(GatheringOptions.GatherMonitorInformation):
+                            {
+                                informationProvider.GatherMonitorInformation(ref information);
+                                break;
+                            }
+                        }
                     }
-                }
-                catch (Exception e)
-                {
-                    Logger.LogError(e, "Exception when running post-update from {Provider}",
-                        informationProvider.GetType().Name);
+                    catch (Exception e)
+                    {
+                        Logger.LogError(e, "Exception when collecting information from {Provider}",
+                            informationProvider.GetType().Name);
+                    }
                 }
             }
 
@@ -139,6 +185,28 @@ namespace HardwareInformation
                 GetCoreSpeeds();
             }
 
+            PostOperations();
+
+            foreach (var informationProvider in informationProviders)
+            {
+                Logger.LogInformation("Running post update on {Provider}", informationProvider.GetType().Name);
+
+                try
+                {
+                    informationProvider.PostProviderUpdateInformation(ref information);
+                }
+                catch (Exception e)
+                {
+                    Logger.LogError(e, "Exception when running post-update from {Provider}",
+                        informationProvider.GetType().Name);
+                }
+            }
+
+            return information;
+        }
+
+        private static void PostOperations()
+        {
             // Fix some things that may be propagated from lower-level information providers
 
             if (information.Cpu != null)
@@ -154,10 +222,19 @@ namespace HardwareInformation
                 }
             }
 
-            return information;
-        }
+            foreach (var cpuCore in information.Cpu.Cores)
+            {
+                if (cpuCore.NormalClockSpeed == 0)
+                {
+                    cpuCore.NormalClockSpeed = information.Cpu.NormalClockSpeed;
+                }
 
-        // TODO: Tests
+                if (cpuCore.MaxClockSpeed == 0)
+                {
+                    cpuCore.MaxClockSpeed = information.Cpu.MaxClockSpeed;
+                }
+            }
+        }
 
         private static void GetCoreSpeeds()
         {

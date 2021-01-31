@@ -15,10 +15,32 @@ namespace HardwareInformation.Providers
 {
     internal class AMDInformationProvider : InformationProvider
     {
-        public void GatherInformation(ref MachineInformation information)
+        public override bool Available(MachineInformation information)
         {
-            GatherFeatureFlags(ref information);
+            return (information.Cpu.Vendor == Vendors.AMD ||
+                    information.Cpu.Vendor == Vendors.AMD_LEGACY) &&
+                   (RuntimeInformation.ProcessArchitecture == Architecture.X86 ||
+                    RuntimeInformation.ProcessArchitecture == Architecture.X64);
+        }
 
+        public override void PostProviderUpdateInformation(ref MachineInformation information)
+        {
+            if (information.Cpu.AMDFeatureFlags.ExtendedFeatureFlagsF81One.HasFlag(AMDFeatureFlags
+                .ExtendedFeatureFlagsF81ECX.TOPOEXT) && information.Cpu.PhysicalCores != 0)
+            {
+                foreach (var cache in information.Cpu.Caches)
+                {
+                    var threadsPerCore = information.Cpu.LogicalCores / information.Cpu.PhysicalCores;
+
+                    cache.TimesPresent++;
+                    cache.TimesPresent /= cache.CoresPerCache;
+                    cache.CoresPerCache /= threadsPerCore;
+                }
+            }
+        }
+
+        public override void GatherCpuInformation(ref MachineInformation information)
+        {
             if (information.Cpu.MaxCpuIdExtendedFeatureLevel >= 4)
             {
                 Opcode.Cpuid(out var partOne, 0x80000002, 0);
@@ -76,35 +98,9 @@ namespace HardwareInformation.Providers
                     information.Cpu.PhysicalCores /= 2;
                 }
             }
-
-            GatherCacheTopology(ref information);
         }
 
-        public bool Available(MachineInformation information)
-        {
-            return (information.Cpu.Vendor == Vendors.AMD ||
-                    information.Cpu.Vendor == Vendors.AMD_LEGACY) &&
-                   (RuntimeInformation.ProcessArchitecture == Architecture.X86 ||
-                    RuntimeInformation.ProcessArchitecture == Architecture.X64);
-        }
-
-        public void PostProviderUpdateInformation(ref MachineInformation information)
-        {
-            if (information.Cpu.AMDFeatureFlags.ExtendedFeatureFlagsF81One.HasFlag(AMDFeatureFlags
-                .ExtendedFeatureFlagsF81ECX.TOPOEXT) && information.Cpu.PhysicalCores != 0)
-            {
-                foreach (var cache in information.Cpu.Caches)
-                {
-                    var threadsPerCore = information.Cpu.LogicalCores / information.Cpu.PhysicalCores;
-
-                    cache.TimesPresent++;
-                    cache.TimesPresent /= cache.CoresPerCache;
-                    cache.CoresPerCache /= threadsPerCore;
-                }
-            }
-        }
-
-        private void GatherCacheTopology(ref MachineInformation information)
+        public override void GatherCpuCacheTopologyInformation(ref MachineInformation information)
         {
             var threads = new List<Task>();
             var caches = new List<Cache>();
@@ -301,7 +297,7 @@ namespace HardwareInformation.Providers
             information.Cpu.Caches = caches.AsReadOnly();
         }
 
-        private void GatherFeatureFlags(ref MachineInformation information)
+        public override void GatherCpuFeatureFlagInformation(ref MachineInformation information)
         {
             if (information.Cpu.MaxCpuIdExtendedFeatureLevel >= 1)
             {

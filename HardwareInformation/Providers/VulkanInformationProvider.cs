@@ -9,7 +9,7 @@ namespace HardwareInformation.Providers
 {
     internal class VulkanInformationProvider : InformationProvider
     {
-        public void GatherInformation(ref MachineInformation information)
+        public override void GatherGpuInformation(ref MachineInformation information)
         {
             using var instance = new Instance();
             var gpus = new List<GPU>();
@@ -51,7 +51,7 @@ namespace HardwareInformation.Providers
             information.Gpus = gpus.AsReadOnly();
         }
 
-        public bool Available(MachineInformation information)
+        public override bool Available(MachineInformation information)
         {
             try
             {
@@ -61,7 +61,7 @@ namespace HardwareInformation.Providers
 
                     return false;
                 }
-                
+
                 using var instance = new Instance();
 
                 return instance.EnumeratePhysicalDevices().Length > 0;
@@ -72,12 +72,7 @@ namespace HardwareInformation.Providers
             }
         }
 
-        public void PostProviderUpdateInformation(ref MachineInformation information)
-        {
-            // Intentionally left blank
-        }
-
-        private DeviceType GetDeviceTypeFromVulkanDeviceType(PhysicalDeviceType type)
+        private static DeviceType GetDeviceTypeFromVulkanDeviceType(PhysicalDeviceType type)
         {
             return type switch
             {
@@ -89,7 +84,7 @@ namespace HardwareInformation.Providers
             };
         }
 
-        private string GetVendorNameFromVendorId(uint vendorId)
+        private static string GetVendorNameFromVendorId(uint vendorId)
         {
             return vendorId switch
             {

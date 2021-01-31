@@ -69,6 +69,11 @@ namespace HardwareInformation.Information
 	    public string Vendor { get; internal set; }
 
 	    /// <summary>
+	    ///     Chipset of the Mainboard
+	    /// </summary>
+	    public string Chipset { get; internal set; }
+
+	    /// <summary>
 	    ///     Stepping: Current iteration of the same model, mostly to fix errata
 	    /// </summary>
 	    public uint Stepping { get; internal set; }
@@ -126,12 +131,12 @@ namespace HardwareInformation.Information
 	    /// <summary>
 	    ///     AMD-specific feature flags
 	    /// </summary>
-	    public AMDFeatureFlags AMDFeatureFlags { get; internal set; } = new AMDFeatureFlags();
+	    public AMDFeatureFlags AMDFeatureFlags { get; internal set; } = new();
 
 	    /// <summary>
 	    ///     Intel-specific feature flags
 	    /// </summary>
-	    public IntelFeatureFlags IntelFeatureFlags { get; internal set; } = new IntelFeatureFlags();
+	    public IntelFeatureFlags IntelFeatureFlags { get; internal set; } = new();
 
 	    /// <summary>
 	    ///     The socket the CPU is installed in/needs

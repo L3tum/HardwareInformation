@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 using HardwareInformation.Information;
 using HardwareInformation.Information.Cpu;
 
@@ -10,23 +11,12 @@ namespace HardwareInformation.Providers
 {
     internal class CommonInformationProvider : InformationProvider
     {
-        public void GatherInformation(ref MachineInformation information)
-        {
-            GetCommonCpuInformation(ref information);
-            GatherCommonPerCoreInformation(ref information);
-        }
-
-        public bool Available(MachineInformation information)
+        public override bool Available(MachineInformation information)
         {
             return Opcode.IsOpen;
         }
 
-        public void PostProviderUpdateInformation(ref MachineInformation information)
-        {
-            // Intentionally left blank
-        }
-
-        private void GetCommonCpuInformation(ref MachineInformation information)
+        public override void GatherGeneralSystemInformation(ref MachineInformation information)
         {
             information.OperatingSystem = Environment.OSVersion;
             information.Platform = Expression.Empty() switch
@@ -54,12 +44,6 @@ namespace HardwareInformation.Providers
 
             information.Cpu.Cores = cores.AsReadOnly();
 
-            if (RuntimeInformation.ProcessArchitecture != Architecture.X86 &&
-                RuntimeInformation.ProcessArchitecture != Architecture.X64)
-            {
-                return;
-            }
-
             Opcode.Cpuid(out var result, 0, 0);
 
             var vendorString = string.Format("{0}{1}{2}",
@@ -69,10 +53,16 @@ namespace HardwareInformation.Providers
 
             information.Cpu.Vendor = vendorString;
             information.Cpu.MaxCpuIdFeatureLevel = result.eax;
+            
+            Opcode.Cpuid(out result, 0x80000000, 0);
+            information.Cpu.MaxCpuIdExtendedFeatureLevel = result.eax;
+        }
 
+        public override void GatherCpuInformation(ref MachineInformation information)
+        {
             if (information.Cpu.MaxCpuIdFeatureLevel >= 1)
             {
-                Opcode.Cpuid(out result, 1, 0);
+                Opcode.Cpuid(out var result, 1, 0);
 
                 information.Cpu.Stepping = result.eax & 0xF;
 
@@ -98,6 +88,16 @@ namespace HardwareInformation.Providers
 
                 information.Cpu.Type =
                     (CPU.ProcessorType) ((result.eax & 0b11000000000000) >> 12);
+            }
+        }
+
+        public override void GatherCpuFeatureFlagInformation(ref MachineInformation information)
+        {
+            Opcode.Result result;
+
+            if (information.Cpu.MaxCpuIdFeatureLevel >= 1)
+            {
+                Opcode.Cpuid(out result, 1, 0);
                 information.Cpu.FeatureFlagsOne = (CPU.FeatureFlagEDX) result.edx;
                 information.Cpu.FeatureFlagsTwo = (CPU.FeatureFlagECX) result.ecx;
             }
@@ -113,19 +113,11 @@ namespace HardwareInformation.Providers
                 information.Cpu.ExtendedFeatureFlagsF7Three =
                     (CPU.ExtendedFeatureFlagsF7EDX) result.edx;
             }
-
-            Opcode.Cpuid(out result, 0x80000000, 0);
-
-            information.Cpu.MaxCpuIdExtendedFeatureLevel = result.eax;
         }
 
-        private void GatherCommonPerCoreInformation(ref MachineInformation information)
+        public override void GatherCpuSpeedInformation(ref MachineInformation information)
         {
-            if (RuntimeInformation.ProcessArchitecture != Architecture.X86 &&
-                RuntimeInformation.ProcessArchitecture != Architecture.X64)
-            {
-                return;
-            }
+            var threads = new List<Task>();
 
             for (var i = 0; i < information.Cpu.LogicalCores; i++)
             {
@@ -144,8 +136,10 @@ namespace HardwareInformation.Providers
                     }
                 });
 
-                thread.Wait();
+                threads.Add(thread);
             }
+
+            Task.WaitAll(threads.ToArray());
         }
     }
 }

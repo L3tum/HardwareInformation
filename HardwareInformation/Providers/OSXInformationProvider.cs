@@ -9,7 +9,7 @@ namespace HardwareInformation.Providers
 {
     internal class OSXInformationProvider : InformationProvider
     {
-        public void GatherInformation(ref MachineInformation information)
+        public override void GatherCpuInformation(ref MachineInformation information)
         {
             if (information.Cpu.Name == default || information.Cpu.NormalClockSpeed == default ||
                 information.Cpu.Name == information.Cpu.Caption)
@@ -86,14 +86,9 @@ namespace HardwareInformation.Providers
             }
         }
 
-        public bool Available(MachineInformation information)
+        public override bool Available(MachineInformation information)
         {
             return RuntimeInformation.IsOSPlatform(OSPlatform.OSX);
-        }
-
-        public void PostProviderUpdateInformation(ref MachineInformation information)
-        {
-            // Intentionally left blank
         }
     }
 }

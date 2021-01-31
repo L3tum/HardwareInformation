@@ -67,10 +67,10 @@ namespace HardwareInformation.Providers
 
     internal class WindowsInformationProvider : InformationProvider
     {
-        public void GatherInformation(ref MachineInformation information)
-        {
-            var win10 = false;
+        private bool win10;
 
+        public override void GatherGeneralSystemInformation(ref MachineInformation information)
+        {
             try
             {
                 var osVersionInfoEx = new OSVERSIONINFOEX();
@@ -88,91 +88,14 @@ namespace HardwareInformation.Providers
             {
                 MachineInformationGatherer.Logger.LogError(e, "Encountered while parsing OS Version info");
             }
-
-            try
-            {
-                GatherWin32ProcessorInformation(ref information, win10);
-            }
-            catch (Exception e)
-            {
-                MachineInformationGatherer.Logger.LogError(e, "Encountered while parsing CPU info");
-            }
-
-            try
-            {
-                GatherWin32PhysicalMemory(ref information, win10);
-            }
-            catch (Exception e)
-            {
-                MachineInformationGatherer.Logger.LogError(e, "Encountered while parsing RAM info");
-            }
-
-            try
-            {
-                GatherWin32Bios(ref information, win10);
-            }
-            catch (Exception e)
-            {
-                MachineInformationGatherer.Logger.LogError(e, "Encountered while parsing BIOS info");
-            }
-
-            try
-            {
-                GatherWin32BaseBoard(ref information, win10);
-            }
-            catch (Exception e)
-            {
-                MachineInformationGatherer.Logger.LogError(e, "Encountered while parsing Mainboard info");
-            }
-
-            try
-            {
-                GatherWin32DiskDrive(ref information, win10);
-            }
-            catch (Exception e)
-            {
-                MachineInformationGatherer.Logger.LogError(e, "Encountered while parsing Disk info");
-            }
-
-            try
-            {
-                GatherWin32VideoController(ref information, win10);
-            }
-            catch (Exception e)
-            {
-                MachineInformationGatherer.Logger.LogError(e, "Encountered while parsing GPU info");
-            }
-
-            try
-            {
-                GatherWmiMonitorId(ref information, win10);
-            }
-            catch (Exception e)
-            {
-                MachineInformationGatherer.Logger.LogError(e, "Encountered while parsing Monitor info");
-            }
-
-            try
-            {
-                GatherPnpDevices(ref information, win10);
-            }
-            catch (Exception e)
-            {
-                MachineInformationGatherer.Logger.LogError(e, "Encountered while parsing USB info");
-            }
         }
 
-        public bool Available(MachineInformation information)
+        public override bool Available(MachineInformation information)
         {
             return RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
         }
 
-        public void PostProviderUpdateInformation(ref MachineInformation information)
-        {
-            // Intentionally left blank
-        }
-
-        private void GatherPnpDevices(ref MachineInformation information, bool win10)
+        public override void GatherUsbInformation(ref MachineInformation information)
         {
             using var mos = new ManagementObjectSearcher("select DeviceID from Win32_PnPEntity");
             var mbos = new ArrayList(mos.Get());
@@ -415,7 +338,7 @@ namespace HardwareInformation.Providers
             information.UsbDevices = new List<USBDevice>(realData.Values).AsReadOnly();
         }
 
-        private Tuple<string, string> GetVidAndPid(string deviceId)
+        private static Tuple<string, string> GetVidAndPid(string deviceId)
         {
             var vidPid = deviceId.Split('\\')[1];
             var vid = vidPid.StartsWith("VID_") ? vidPid.Split('&')[0].Replace("VID_", "") : null;
@@ -424,52 +347,68 @@ namespace HardwareInformation.Providers
             return Tuple.Create(vid, pid);
         }
 
-        private void GatherWin32BaseBoard(ref MachineInformation information, bool win10)
+        public override void GatherMainboardInformation(ref MachineInformation information)
         {
-            using var mos = new ManagementObjectSearcher("select Product,Manufacturer,Version from Win32_BaseBoard");
-
-            foreach (var managementBaseObject in mos.Get())
+            using (var mos = new ManagementObjectSearcher("select Product,Manufacturer,Version from Win32_BaseBoard"))
             {
-                if (managementBaseObject?.Properties == null || managementBaseObject.Properties.Count == 0)
+                foreach (var managementBaseObject in mos.Get())
                 {
-                    continue;
-                }
-
-                foreach (var propertyData in managementBaseObject.Properties)
-                {
-                    if (propertyData?.Value == null)
+                    if (managementBaseObject?.Properties == null || managementBaseObject.Properties.Count == 0)
                     {
                         continue;
                     }
 
-                    switch (propertyData.Name)
+                    information.SmBios.BoardName = managementBaseObject.Properties["Product"].Value.ToString();
+                    information.SmBios.BoardVendor = managementBaseObject.Properties["Manufacturer"].Value.ToString();
+                    information.SmBios.BoardVersion = managementBaseObject.Properties["Version"].Value.ToString();
+                }
+            }
+
+            using (var mos = new ManagementObjectSearcher("select Name,Manufacturer,Version from Win32_BIOS"))
+            {
+                foreach (var managementBaseObject in mos.Get())
+                {
+                    if (managementBaseObject?.Properties == null || managementBaseObject.Properties.Count == 0)
                     {
-                        case "Product":
-                        {
-                            information.SmBios.BoardName = propertyData.Value.ToString();
+                        continue;
+                    }
 
-                            break;
+                    foreach (var propertyData in managementBaseObject.Properties)
+                    {
+                        if (propertyData?.Value == null)
+                        {
+                            continue;
                         }
 
-                        case "Manufacturer":
+                        switch (propertyData.Name)
                         {
-                            information.SmBios.BoardVendor = propertyData.Value.ToString();
+                            case "Name":
+                            {
+                                information.SmBios.BIOSVersion = propertyData.Value.ToString();
 
-                            break;
-                        }
+                                break;
+                            }
 
-                        case "Version":
-                        {
-                            information.SmBios.BoardVersion = propertyData.Value.ToString();
+                            case "Manufacturer":
+                            {
+                                information.SmBios.BIOSVendor = propertyData.Value.ToString();
 
-                            break;
+                                break;
+                            }
+
+                            case "Version":
+                            {
+                                information.SmBios.BIOSCodename = propertyData.Value.ToString();
+
+                                break;
+                            }
                         }
                     }
                 }
             }
         }
 
-        private void GatherWin32DiskDrive(ref MachineInformation information, bool win10)
+        public override void GatherDiskInformation(ref MachineInformation information)
         {
             using var mos = new ManagementObjectSearcher("select Model,Size,Caption from Win32_DiskDrive");
             var disks = new List<Disk>();
@@ -507,7 +446,7 @@ namespace HardwareInformation.Providers
             information.Disks = disks.AsReadOnly();
         }
 
-        private void GatherWin32VideoController(ref MachineInformation information, bool win10)
+        public override void GatherGpuInformation(ref MachineInformation information)
         {
             using var mos = new ManagementObjectSearcher(
                 "select AdapterCompatibility,Caption,Description,DriverDate,DriverVersion,Name,Status from Win32_VideoController");
@@ -590,7 +529,7 @@ namespace HardwareInformation.Providers
             }
         }
 
-        private void GatherWmiMonitorId(ref MachineInformation information, bool win10)
+        public override void GatherMonitorInformation(ref MachineInformation information)
         {
             using var mos = new ManagementObjectSearcher("root\\wmi",
                 "select ManufacturerName,UserFriendlyName from WmiMonitorID");
@@ -632,7 +571,7 @@ namespace HardwareInformation.Providers
             information.Displays = displays.AsReadOnly();
         }
 
-        private void GatherWin32ProcessorInformation(ref MachineInformation information, bool win10)
+        public override void GatherCpuInformation(ref MachineInformation information)
         {
             string query;
 
@@ -727,7 +666,7 @@ namespace HardwareInformation.Providers
             }
         }
 
-        private void GatherWin32PhysicalMemory(ref MachineInformation information, bool win10)
+        public override void GatherRamInformation(ref MachineInformation information)
         {
             string query;
             var ramSticks = new List<RAM>();
@@ -814,51 +753,6 @@ namespace HardwareInformation.Providers
             }
 
             information.RAMSticks = ramSticks.AsReadOnly();
-        }
-
-        private void GatherWin32Bios(ref MachineInformation information, bool win10)
-        {
-            using var mos = new ManagementObjectSearcher("select Name,Manufacturer,Version from Win32_BIOS");
-
-            foreach (var managementBaseObject in mos.Get())
-            {
-                if (managementBaseObject?.Properties == null || managementBaseObject.Properties.Count == 0)
-                {
-                    continue;
-                }
-
-                foreach (var propertyData in managementBaseObject.Properties)
-                {
-                    if (propertyData?.Value == null)
-                    {
-                        continue;
-                    }
-
-                    switch (propertyData.Name)
-                    {
-                        case "Name":
-                        {
-                            information.SmBios.BIOSVersion = propertyData.Value.ToString();
-
-                            break;
-                        }
-
-                        case "Manufacturer":
-                        {
-                            information.SmBios.BIOSVendor = propertyData.Value.ToString();
-
-                            break;
-                        }
-
-                        case "Version":
-                        {
-                            information.SmBios.BIOSCodename = propertyData.Value.ToString();
-
-                            break;
-                        }
-                    }
-                }
-            }
         }
     }
 }

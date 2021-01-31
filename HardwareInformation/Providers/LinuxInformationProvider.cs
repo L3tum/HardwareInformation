@@ -16,27 +16,12 @@ namespace HardwareInformation.Providers
 {
     internal class LinuxInformationProvider : InformationProvider
     {
-        public void GatherInformation(ref MachineInformation information)
-        {
-            GetCPUInformation(ref information);
-            GetMainboardInformation(ref information);
-            GetGPUInformation(ref information);
-            GetDiskInformation(ref information);
-            GetRAMInformation(ref information);
-            GetUSBInformation(ref information);
-        }
-
-        public bool Available(MachineInformation information)
+        public override bool Available(MachineInformation information)
         {
             return RuntimeInformation.IsOSPlatform(OSPlatform.Linux);
         }
 
-        public void PostProviderUpdateInformation(ref MachineInformation information)
-        {
-            // Intentionally left blank
-        }
-
-        private void GetCPUInformation(ref MachineInformation information)
+        public override void GatherCpuInformation(ref MachineInformation information)
         {
             if (!File.Exists("/proc/cpuinfo"))
             {
@@ -169,7 +154,7 @@ namespace HardwareInformation.Providers
             }
         }
 
-        private void GetMainboardInformation(ref MachineInformation information)
+        public override void GatherMainboardInformation(ref MachineInformation information)
         {
             if (information.SmBios.BIOSVersion == default)
             {
@@ -220,7 +205,7 @@ namespace HardwareInformation.Providers
             }
         }
 
-        private void GetUSBInformation(ref MachineInformation information)
+        public override void GatherUsbInformation(ref MachineInformation information)
         {
             if (information.UsbDevices.Count != 0)
             {
@@ -312,7 +297,7 @@ namespace HardwareInformation.Providers
             }
         }
 
-        private void GetGPUInformation(ref MachineInformation information)
+        public override void GatherGpuInformation(ref MachineInformation information)
         {
             if (information.Gpus.Count != 0)
             {
@@ -389,7 +374,7 @@ namespace HardwareInformation.Providers
             }
         }
 
-        private void GetDiskInformation(ref MachineInformation information)
+        public override void GatherDiskInformation(ref MachineInformation information)
         {
             if (information.Disks.Count != 0)
             {
@@ -454,7 +439,7 @@ namespace HardwareInformation.Providers
             }
         }
 
-        private void GetRAMInformation(ref MachineInformation information)
+        public override void GatherRamInformation(ref MachineInformation information)
         {
             if (information.RAMSticks.Count != 0)
             {
