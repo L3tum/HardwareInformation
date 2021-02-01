@@ -56,5 +56,10 @@ namespace HardwareInformation
         ///     Monitor information
         /// </summary>
         public bool GatherMonitorInformation { get; set; } = true;
+
+        /// <summary>
+        ///     Gather per-core information
+        /// </summary>
+        public bool GatherPerCoreInformation { get; set; } = true;
     }
 }

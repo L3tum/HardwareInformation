@@ -53,7 +53,7 @@ namespace HardwareInformation.Providers
 
             information.Cpu.Vendor = vendorString;
             information.Cpu.MaxCpuIdFeatureLevel = result.eax;
-            
+
             Opcode.Cpuid(out result, 0x80000000, 0);
             information.Cpu.MaxCpuIdExtendedFeatureLevel = result.eax;
         }

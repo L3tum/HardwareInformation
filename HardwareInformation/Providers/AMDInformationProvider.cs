@@ -17,6 +17,18 @@ namespace HardwareInformation.Providers
     {
         public override bool Available(MachineInformation information)
         {
+            if (string.IsNullOrEmpty(information.Cpu.Vendor) && Opcode.IsOpen)
+            {
+                Opcode.Cpuid(out var result, 0, 0);
+
+                var vendorString = string.Format("{0}{1}{2}",
+                    string.Join("", $"{result.ebx:X}".HexStringToString().Reverse()),
+                    string.Join("", $"{result.edx:X}".HexStringToString().Reverse()),
+                    string.Join("", $"{result.ecx:X}".HexStringToString().Reverse()));
+
+                information.Cpu.Vendor = vendorString;
+            }
+            
             return (information.Cpu.Vendor == Vendors.AMD ||
                     information.Cpu.Vendor == Vendors.AMD_LEGACY) &&
                    (RuntimeInformation.ProcessArchitecture == Architecture.X86 ||
