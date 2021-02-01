@@ -373,37 +373,9 @@ namespace HardwareInformation.Providers
                         continue;
                     }
 
-                    foreach (var propertyData in managementBaseObject.Properties)
-                    {
-                        if (propertyData?.Value == null)
-                        {
-                            continue;
-                        }
-
-                        switch (propertyData.Name)
-                        {
-                            case "Name":
-                            {
-                                information.SmBios.BIOSVersion = propertyData.Value.ToString();
-
-                                break;
-                            }
-
-                            case "Manufacturer":
-                            {
-                                information.SmBios.BIOSVendor = propertyData.Value.ToString();
-
-                                break;
-                            }
-
-                            case "Version":
-                            {
-                                information.SmBios.BIOSCodename = propertyData.Value.ToString();
-
-                                break;
-                            }
-                        }
-                    }
+                    information.SmBios.BIOSCodename = managementBaseObject.Properties["Name"].Value.ToString();
+                    information.SmBios.BIOSVendor = managementBaseObject.Properties["Manufacturer"].Value.ToString();
+                    information.SmBios.BIOSVersion = managementBaseObject.Properties["Version"].Value.ToString();
                 }
             }
         }
@@ -415,30 +387,13 @@ namespace HardwareInformation.Providers
 
             foreach (var managementBaseObject in mos.Get())
             {
-                var disk = new Disk();
-
-                foreach (var propertyData in managementBaseObject.Properties)
+                var disk = new Disk
                 {
-                    switch (propertyData.Name)
-                    {
-                        case "Model":
-                        {
-                            disk.Model = propertyData.Value.ToString();
-                            break;
-                        }
-                        case "Size":
-                        {
-                            disk.Capacity = ulong.Parse(propertyData.Value.ToString());
-                            disk.CapacityHRF = Util.FormatBytes(disk.Capacity);
-                            break;
-                        }
-                        case "Caption":
-                        {
-                            disk.Caption = propertyData.Value.ToString();
-                            break;
-                        }
-                    }
-                }
+                    Model = managementBaseObject.Properties["Model"].Value.ToString(),
+                    Capacity = ulong.Parse(managementBaseObject.Properties["Size"].Value.ToString()),
+                    Caption = managementBaseObject.Properties["Caption"].Value.ToString()
+                };
+                disk.CapacityHRF = Util.FormatBytes(disk.Capacity);
 
                 disks.Add(disk);
             }
@@ -454,56 +409,16 @@ namespace HardwareInformation.Providers
 
             foreach (var managementBaseObject in mos.Get())
             {
-                var gpu = new GPU();
-
-                foreach (var propertyData in managementBaseObject.Properties)
+                var gpu = new GPU
                 {
-                    switch (propertyData.Name)
-                    {
-                        case "AdapterCompatibility":
-                        {
-                            gpu.Vendor = propertyData.Value.ToString();
-
-                            break;
-                        }
-                        case "Caption":
-                        {
-                            gpu.Caption = propertyData.Value.ToString();
-
-                            break;
-                        }
-                        case "DriverDate":
-                        {
-                            gpu.DriverDate = propertyData.Value.ToString();
-
-                            break;
-                        }
-                        case "DriverVersion":
-                        {
-                            gpu.DriverVersion = propertyData.Value.ToString();
-
-                            break;
-                        }
-                        case "Description":
-                        {
-                            gpu.Description = propertyData.Value.ToString();
-
-                            break;
-                        }
-                        case "Name":
-                        {
-                            gpu.Name = propertyData.Value.ToString();
-
-                            break;
-                        }
-                        case "Status":
-                        {
-                            gpu.Status = propertyData.Value.ToString();
-
-                            break;
-                        }
-                    }
-                }
+                    Vendor = managementBaseObject.Properties["AdapterCompatibility"].Value.ToString(),
+                    Caption = managementBaseObject.Properties["Caption"].Value.ToString(),
+                    DriverDate = managementBaseObject.Properties["DriverDate"].Value.ToString(),
+                    DriverVersion = managementBaseObject.Properties["DriverVersion"].Value.ToString(),
+                    Description = managementBaseObject.Properties["Description"].Value.ToString(),
+                    Name = managementBaseObject.Properties["Name"].Value.ToString(),
+                    Status = managementBaseObject.Properties["Status"].Value.ToString()
+                };
 
                 gpus.Add(gpu);
             }
@@ -539,26 +454,15 @@ namespace HardwareInformation.Providers
             {
                 try
                 {
-                    var display = new Display();
-
-                    foreach (var propertyData in managementBaseObject.Properties)
+                    var display = new Display
                     {
-                        switch (propertyData.Name)
-                        {
-                            case "ManufacturerName":
-                            {
-                                display.Manufacturer = string.Join("", ((IEnumerable<ushort>) propertyData.Value)
-                                    .Select(u => char.ConvertFromUtf32(u)).Where(s => s != "\u0000").ToList());
-                                break;
-                            }
-                            case "UserFriendlyName":
-                            {
-                                display.Name = string.Join("", ((IEnumerable<ushort>) propertyData.Value)
-                                    .Select(u => char.ConvertFromUtf32(u)).Where(s => s != "\u0000").ToList());
-                                break;
-                            }
-                        }
-                    }
+                        Manufacturer = string.Join("",
+                            ((IEnumerable<ushort>) managementBaseObject.Properties["ManufacturerName"].Value)
+                            .Select(u => char.ConvertFromUtf32(u)).Where(s => s != "\u0000").ToList()),
+                        Name = string.Join("",
+                            ((IEnumerable<ushort>) managementBaseObject.Properties["UserFriendlyName"].Value)
+                            .Select(u => char.ConvertFromUtf32(u)).Where(s => s != "\u0000").ToList())
+                    };
 
                     displays.Add(display);
                 }
@@ -570,7 +474,7 @@ namespace HardwareInformation.Providers
 
             information.Displays = displays.AsReadOnly();
         }
-
+        
         public override void GatherCpuInformation(ref MachineInformation information)
         {
             string query;
