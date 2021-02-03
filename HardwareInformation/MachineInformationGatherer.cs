@@ -105,7 +105,7 @@ namespace HardwareInformation
             }
 
             var info = new MachineInformation();
-            
+
             foreach (var informationProvider in informationProviders)
             {
                 Logger.LogInformation("Collecting General System information from {Provider}",
@@ -253,10 +253,12 @@ namespace HardwareInformation
                     o.Condition((src, dst, srcMember) => CanBeMapped(srcMember)));
                 cfg.CreateMap<GPU, GPU>().EqualityComparison((dst, src) => dst.Name == src.Name);
                 cfg.CreateMap<RAM, RAM>().EqualityComparison((dst, src) => dst.Name == src.Name);
-                cfg.CreateMap<Core, Core>().EqualityComparison((dst, src) => dst.CoreId == src.CoreId);
+                cfg.CreateMap<Core, Core>()
+                    .EqualityComparison((dst, src) => dst.Number == src.Number && dst.Node == src.Node);
                 cfg.CreateMap<Cache, Cache>()
                     .EqualityComparison((dst, src) => dst.Level == src.Level && dst.Type == src.Type);
-                cfg.CreateMap<USBDevice, USBDevice>().EqualityComparison((dst, src) => dst.DeviceID == src.DeviceID);
+                cfg.CreateMap<USBDevice, USBDevice>().EqualityComparison((dst, src) =>
+                    dst.VendorID == src.VendorID && dst.ProductID == src.ProductID);
                 cfg.CreateMap<Display, Display>().EqualityComparison((dst, src) =>
                     dst.Name == src.Name && dst.Manufacturer == src.Manufacturer);
                 cfg.CreateMap<Disk, Disk>().EqualityComparison((dst, src) =>

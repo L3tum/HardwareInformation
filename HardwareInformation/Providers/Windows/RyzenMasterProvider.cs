@@ -88,13 +88,10 @@ namespace HardwareInformation.Providers.Windows
                 return;
             }
 
-            information.Cpu.Vendor ??= cpu.GetVendor();
-            information.Cpu.Socket ??= cpu.GetPackage();
-            information.Cpu.Chipset ??= cpu.GetChipsetName();
-            if (information.Cpu.PhysicalCores == 0 && cpu.GetCoreCount() != null)
-            {
-                information.Cpu.PhysicalCores = (uint) cpu.GetCoreCount()!;
-            }
+            information.Cpu.Vendor = cpu.GetVendor();
+            information.Cpu.Socket = cpu.GetPackage();
+            information.Cpu.Chipset = cpu.GetChipsetName();
+            information.Cpu.PhysicalCores = (uint) (cpu.GetCoreCount() != null ? cpu.GetCoreCount()! : 0);
         }
 
         private void GetDevices()

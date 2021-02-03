@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using HardwareInformation.Information;
 using HardwareInformation.Information.Cpu;
+using Microsoft.Extensions.Logging;
 
 #endregion
 
@@ -86,7 +87,7 @@ namespace HardwareInformation.Providers
 
                 if (!string.IsNullOrWhiteSpace(hammerString))
                 {
-                    Console.WriteLine(hammerString);
+                    MachineInformationGatherer.Logger.LogInformation("{Message}", hammerString);
                 }
             }
             catch (Exception)

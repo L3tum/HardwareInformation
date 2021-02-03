@@ -23,11 +23,6 @@ namespace HardwareInformation.Providers
 
         public override void GatherCpuInformation(ref MachineInformation information)
         {
-            if (!File.Exists("/proc/cpuinfo"))
-            {
-                return;
-            }
-
             try
             {
                 File.OpenRead("/proc/cpuinfo").Dispose();
@@ -50,8 +45,7 @@ namespace HardwareInformation.Providers
                 {
                     var match = modelNameRegex.Match(s);
 
-                    if (match.Success && (information.Cpu.Name == default ||
-                                          information.Cpu.Name == information.Cpu.Caption))
+                    if (match.Success)
                     {
                         information.Cpu.Name = match.Groups[1].Value.Trim();
 
@@ -60,7 +54,7 @@ namespace HardwareInformation.Providers
 
                     match = cpuSpeedRegex.Match(s);
 
-                    if (match.Success && information.Cpu.NormalClockSpeed == default)
+                    if (match.Success)
                     {
                         information.Cpu.NormalClockSpeed = uint.Parse(match.Groups[1].Value.Split('.', ',')[0]);
 
@@ -71,42 +65,22 @@ namespace HardwareInformation.Providers
 
                     if (match.Success)
                     {
-                        var val = uint.Parse(match.Groups[1].Value);
+                        information.Cpu.PhysicalCores = uint.Parse(match.Groups[1].Value);
 
-                        // Safety check
-                        if (information.Cpu.PhysicalCores == default ||
-                            information.Cpu.PhysicalCores == information.Cpu.LogicalCores ||
-                            val != 0 && val != information.Cpu.PhysicalCores)
-                        {
-                            information.Cpu.PhysicalCores = val;
-
-                            continue;
-                        }
+                        continue;
                     }
 
                     match = logicalCoresRegex.Match(s);
 
                     if (match.Success)
                     {
-                        var val = uint.Parse(match.Groups[1].Value);
-
-                        if (match.Success && information.Cpu.LogicalCores == default ||
-                            val != 0 && val != information.Cpu.LogicalCores)
-                        {
-                            information.Cpu.LogicalCores = val;
-                        }
+                        information.Cpu.LogicalCores = uint.Parse(match.Groups[1].Value);
                     }
                 }
                 catch (Exception e)
                 {
                     MachineInformationGatherer.Logger.LogError(e, "Encountered while parsing CPU info");
                 }
-            }
-
-            if (information.Cpu.NormalClockSpeed != default && information.Cpu.MaxClockSpeed != default &&
-                information.Cpu.LogicalCores != default && information.Cpu.PhysicalCores != default)
-            {
-                return;
             }
 
             try
@@ -156,62 +130,45 @@ namespace HardwareInformation.Providers
 
         public override void GatherMainboardInformation(ref MachineInformation information)
         {
-            if (information.SmBios.BIOSVersion == default)
+            try
             {
-                try
-                {
-                    information.SmBios.BIOSVersion = File.ReadAllText("/sys/class/dmi/id/bios_version").Trim();
-                }
-                catch (Exception e)
-                {
-                    MachineInformationGatherer.Logger.LogError(e, "Encountered while parsing BIOSVersion");
-                }
+                information.SmBios.BIOSVersion = File.ReadAllText("/sys/class/dmi/id/bios_version").Trim();
+            }
+            catch (Exception e)
+            {
+                MachineInformationGatherer.Logger.LogError(e, "Encountered while parsing BIOSVersion");
             }
 
-            if (information.SmBios.BIOSVendor == default)
+            try
             {
-                try
-                {
-                    information.SmBios.BIOSVendor = File.ReadAllText("/sys/class/dmi/id/bios_vendor").Trim();
-                }
-                catch (Exception e)
-                {
-                    MachineInformationGatherer.Logger.LogError(e, "Encountered while parsing BIOSVendor");
-                }
+                information.SmBios.BIOSVendor = File.ReadAllText("/sys/class/dmi/id/bios_vendor").Trim();
+            }
+            catch (Exception e)
+            {
+                MachineInformationGatherer.Logger.LogError(e, "Encountered while parsing BIOSVendor");
             }
 
-            if (information.SmBios.BoardName == default)
+            try
             {
-                try
-                {
-                    information.SmBios.BoardName = File.ReadAllText("/sys/class/dmi/id/board_name").Trim();
-                }
-                catch (Exception e)
-                {
-                    MachineInformationGatherer.Logger.LogError(e, "Encountered while parsing BoardName");
-                }
+                information.SmBios.BoardName = File.ReadAllText("/sys/class/dmi/id/board_name").Trim();
+            }
+            catch (Exception e)
+            {
+                MachineInformationGatherer.Logger.LogError(e, "Encountered while parsing BoardName");
             }
 
-            if (information.SmBios.BoardVendor == default)
+            try
             {
-                try
-                {
-                    information.SmBios.BoardVendor = File.ReadAllText("/sys/class/dmi/id/board_vendor").Trim();
-                }
-                catch (Exception e)
-                {
-                    MachineInformationGatherer.Logger.LogError(e, "Encountered while parsing BoardVendor");
-                }
+                information.SmBios.BoardVendor = File.ReadAllText("/sys/class/dmi/id/board_vendor").Trim();
+            }
+            catch (Exception e)
+            {
+                MachineInformationGatherer.Logger.LogError(e, "Encountered while parsing BoardVendor");
             }
         }
 
         public override void GatherUsbInformation(ref MachineInformation information)
         {
-            if (information.UsbDevices.Count != 0)
-            {
-                return;
-            }
-
             var usbs = new List<USBDevice>();
 
             try
@@ -299,11 +256,6 @@ namespace HardwareInformation.Providers
 
         public override void GatherGpuInformation(ref MachineInformation information)
         {
-            if (information.Gpus.Count != 0)
-            {
-                return;
-            }
-
             var gpus = new List<GPU>();
 
             try
@@ -376,11 +328,6 @@ namespace HardwareInformation.Providers
 
         public override void GatherDiskInformation(ref MachineInformation information)
         {
-            if (information.Disks.Count != 0)
-            {
-                return;
-            }
-
             var disks = new List<Disk>();
 
             try
@@ -441,11 +388,6 @@ namespace HardwareInformation.Providers
 
         public override void GatherRamInformation(ref MachineInformation information)
         {
-            if (information.RAMSticks.Count != 0)
-            {
-                return;
-            }
-
             var ramSticks = new List<RAM>();
 
             try

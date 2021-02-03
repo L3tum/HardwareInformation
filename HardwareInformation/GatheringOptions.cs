@@ -12,7 +12,7 @@ namespace HardwareInformation
 
         /// <summary>
         ///     CPU Information
-        ///     NOTE: Some information needs to be gathered irrespective of this option
+        ///     NOTE: Some information needs to be gathered regardless of this option
         /// </summary>
         public bool GatherCpuInformation { get; set; } = true;
 
