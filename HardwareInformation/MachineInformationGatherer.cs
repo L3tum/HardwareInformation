@@ -5,14 +5,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Threading;
-using AutoMapper;
-using AutoMapper.EquivalencyExpression;
-using HardwareInformation.Information;
 using HardwareInformation.Information.Cpu;
-using HardwareInformation.Information.Gpu;
 using HardwareInformation.Providers;
 using HardwareInformation.Providers.Windows;
 using Microsoft.Extensions.Logging;
@@ -44,8 +39,6 @@ namespace HardwareInformation
 
         private static MachineInformation machineInformation;
 
-        private static bool lastSkipClockspeedTest = true;
-
         /// <summary>
         ///     Gathers lots of information about the running processor.
         ///     Currently does NOT support multi-processor setups (e.g. two Intel Xeon CPUs).
@@ -66,15 +59,25 @@ namespace HardwareInformation
         {
             Logger = logger ?? new NullLogger<MachineInformation>();
 
-            if (machineInformation != null && lastSkipClockspeedTest == skipClockspeedTest && !invalidateCache)
+            if (machineInformation != null && !invalidateCache)
             {
                 Logger.LogInformation("Returning cached information");
                 return machineInformation;
             }
 
             Options = options ?? new GatheringOptions();
-            var mapper = CreateMapper();
+            
+            ThreadAffinity.SetCurrentProcess();
 
+            machineInformation = GetInformation(skipClockspeedTest);
+
+            PostOperations();
+
+            return machineInformation;
+        }
+
+        private static MachineInformation GetInformation(bool skipClockspeedTest)
+        {
             if (RuntimeInformation.ProcessArchitecture == Architecture.X86 ||
                 RuntimeInformation.ProcessArchitecture == Architecture.X64)
             {
@@ -88,13 +91,12 @@ namespace HardwareInformation
                 Logger.LogInformation("No CPUID available on non-x86 CPUs");
             }
 
-            lastSkipClockspeedTest = skipClockspeedTest;
-            machineInformation = new MachineInformation();
             var informationProviders = new List<InformationProvider>();
+            var info = new MachineInformation();
 
             foreach (var provider in InformationProviders)
             {
-                if (provider.Available(machineInformation))
+                if (provider.Available(info))
                 {
                     informationProviders.Add(provider);
                 }
@@ -103,8 +105,6 @@ namespace HardwareInformation
                     Logger.LogWarning("{Provider} is not available", provider.GetType().Name);
                 }
             }
-
-            var info = new MachineInformation();
 
             foreach (var informationProvider in informationProviders)
             {
@@ -131,73 +131,9 @@ namespace HardwareInformation
 
                 // Copy general system info from before onto a MachineInformation for each provider
                 var information = new MachineInformation();
-                information = mapper.Map(info, information);
+                MachineInformationMapper.MapMachineInformation(ref information, info);
 
-                foreach (var fieldInfo in typeof(GatheringOptions).GetProperties(BindingFlags.Instance |
-                    BindingFlags.Public))
-                {
-                    try
-                    {
-                        switch (fieldInfo.Name)
-                        {
-                            case nameof(GatheringOptions.GatherCpuInformation):
-                            {
-                                informationProvider.GatherCpuInformation(ref information);
-                                break;
-                            }
-                            case nameof(GatheringOptions.GatherCpuSpeedInformation):
-                            {
-                                informationProvider.GatherCpuSpeedInformation(ref information);
-                                break;
-                            }
-                            case nameof(GatheringOptions.GatherCpuCacheTopologyInformation):
-                            {
-                                informationProvider.GatherCpuCacheTopologyInformation(ref information);
-                                break;
-                            }
-                            case nameof(GatheringOptions.GatherCpuFeatureFlagInformation):
-                            {
-                                informationProvider.GatherCpuFeatureFlagInformation(ref information);
-                                break;
-                            }
-                            case nameof(GatheringOptions.GatherMainboardInformation):
-                            {
-                                informationProvider.GatherMainboardInformation(ref information);
-                                break;
-                            }
-                            case nameof(GatheringOptions.GatherRamInformation):
-                            {
-                                informationProvider.GatherRamInformation(ref information);
-                                break;
-                            }
-                            case nameof(GatheringOptions.GatherDiskInformation):
-                            {
-                                informationProvider.GatherDiskInformation(ref information);
-                                break;
-                            }
-                            case nameof(GatheringOptions.GatherGpuInformation):
-                            {
-                                informationProvider.GatherGpuInformation(ref information);
-                                break;
-                            }
-                            case nameof(GatheringOptions.GatherUsbInformation):
-                            {
-                                informationProvider.GatherUsbInformation(ref information);
-                                break;
-                            }
-                            case nameof(GatheringOptions.GatherMonitorInformation):
-                            {
-                                informationProvider.GatherMonitorInformation(ref information);
-                                break;
-                            }
-                        }
-                    }
-                    catch (Exception e)
-                    {
-                        Logger.LogError(e, "Exception when collecting information from {Provider}",
-                            informationProvider.GetType().Name);
-                    }
-                }
+                GatherInformationFromProvider(informationProvider, ref information);
 
                 informations.Add(informationProvider.GetType().Name, information);
             }
@@ -225,122 +161,148 @@ namespace HardwareInformation
                 }
             }
 
-
             var dest = new MachineInformation();
 
             foreach (var kvp in informations)
             {
-                dest = mapper.Map(kvp.Value, dest);
+                MachineInformationMapper.MapMachineInformation(ref dest, kvp.Value);
             }
 
-            machineInformation = dest;
-
-            PostOperations();
-
-            return machineInformation;
+            return dest;
         }
 
-        private static IMapper CreateMapper()
+        private static void GatherInformationFromProvider(InformationProvider informationProvider,
+            ref MachineInformation information)
         {
-            var config = new MapperConfiguration(cfg =>
+            if (Options.GatherCpuInformation)
             {
-                cfg.AddCollectionMappers();
-                cfg.CreateMap<MachineInformation, MachineInformation>().ForAllMembers(o =>
-                    o.Condition((src, dst, srcMember) => CanBeMapped(srcMember)));
-                cfg.CreateMap<CPU, CPU>().ForAllMembers(o =>
-                    o.Condition((src, dst, srcMember) => CanBeMapped(srcMember)));
-                cfg.CreateMap<SMBios, SMBios>().ForAllMembers(o =>
-                    o.Condition((src, dst, srcMember) => CanBeMapped(srcMember)));
-                cfg.CreateMap<GPU, GPU>().EqualityComparison((dst, src) => dst.Name == src.Name);
-                cfg.CreateMap<RAM, RAM>().EqualityComparison((dst, src) => dst.Name == src.Name);
-                cfg.CreateMap<Core, Core>()
-                    .EqualityComparison((dst, src) => dst.Number == src.Number && dst.Node == src.Node);
-                cfg.CreateMap<Cache, Cache>()
-                    .EqualityComparison((dst, src) => dst.Level == src.Level && dst.Type == src.Type);
-                cfg.CreateMap<USBDevice, USBDevice>().EqualityComparison((dst, src) =>
-                    dst.VendorID == src.VendorID && dst.ProductID == src.ProductID);
-                cfg.CreateMap<Display, Display>().EqualityComparison((dst, src) =>
-                    dst.Name == src.Name && dst.Manufacturer == src.Manufacturer);
-                cfg.CreateMap<Disk, Disk>().EqualityComparison((dst, src) =>
-                    dst.Caption == src.Caption && dst.Model == src.Model && dst.Vendor == src.Vendor);
-                cfg.CreateMap<MachineInformation.Platforms, MachineInformation.Platforms>()
-                    .ConvertUsing((src, dst) => src == MachineInformation.Platforms.Unknown ? dst : src);
-
-                cfg.CreateMap<CPU.FeatureFlagECX, CPU.FeatureFlagECX>()
-                    .ConvertUsing((src, dst) => src == CPU.FeatureFlagECX.NONE ? dst : src);
-                cfg.CreateMap<CPU.FeatureFlagEDX, CPU.FeatureFlagEDX>()
-                    .ConvertUsing((src, dst) => src == CPU.FeatureFlagEDX.NONE ? dst : src);
-                cfg.CreateMap<CPU.ExtendedFeatureFlagsF7EBX, CPU.ExtendedFeatureFlagsF7EBX>()
-                    .ConvertUsing((src, dst) => src == CPU.ExtendedFeatureFlagsF7EBX.NONE ? dst : src);
-                cfg.CreateMap<CPU.ExtendedFeatureFlagsF7ECX, CPU.ExtendedFeatureFlagsF7ECX>()
-                    .ConvertUsing((src, dst) => src == CPU.ExtendedFeatureFlagsF7ECX.NONE ? dst : src);
-                cfg.CreateMap<CPU.ExtendedFeatureFlagsF7EDX, CPU.ExtendedFeatureFlagsF7EDX>()
-                    .ConvertUsing((src, dst) => src == CPU.ExtendedFeatureFlagsF7EDX.NONE ? dst : src);
-                cfg.CreateMap<AMDFeatureFlags.FeatureFlagsAPM, AMDFeatureFlags.FeatureFlagsAPM>()
-                    .ConvertUsing((src, dst) => src == AMDFeatureFlags.FeatureFlagsAPM.NONE ? dst : src);
-                cfg.CreateMap<AMDFeatureFlags.FeatureFlagsSVM, AMDFeatureFlags.FeatureFlagsSVM>()
-                    .ConvertUsing((src, dst) => src == AMDFeatureFlags.FeatureFlagsSVM.NONE ? dst : src);
-                cfg.CreateMap<AMDFeatureFlags.ExtendedFeatureFlagsF81ECX, AMDFeatureFlags.ExtendedFeatureFlagsF81ECX>()
-                    .ConvertUsing((src, dst) => src == AMDFeatureFlags.ExtendedFeatureFlagsF81ECX.NONE ? dst : src);
-                cfg.CreateMap<AMDFeatureFlags.ExtendedFeatureFlagsF81EDX, AMDFeatureFlags.ExtendedFeatureFlagsF81EDX>()
-                    .ConvertUsing((src, dst) => src == AMDFeatureFlags.ExtendedFeatureFlagsF81EDX.NONE ? dst : src);
-                cfg.CreateMap<IntelFeatureFlags.FeatureFlagsAPM, IntelFeatureFlags.FeatureFlagsAPM>()
-                    .ConvertUsing((src, dst) => src == IntelFeatureFlags.FeatureFlagsAPM.NONE ? dst : src);
-                cfg.CreateMap<IntelFeatureFlags.TPMFeatureFlagsEAX, IntelFeatureFlags.TPMFeatureFlagsEAX>()
-                    .ConvertUsing((src, dst) => src == IntelFeatureFlags.TPMFeatureFlagsEAX.NONE ? dst : src);
-                cfg.CreateMap<IntelFeatureFlags.ExtendedFeatureFlagsF81ECX, IntelFeatureFlags.ExtendedFeatureFlagsF81ECX
-                    >()
-                    .ConvertUsing((src, dst) => src == IntelFeatureFlags.ExtendedFeatureFlagsF81ECX.NONE ? dst : src);
-                cfg.CreateMap<IntelFeatureFlags.ExtendedFeatureFlagsF81EDX, IntelFeatureFlags.ExtendedFeatureFlagsF81EDX
-                    >()
-                    .ConvertUsing((src, dst) => src == IntelFeatureFlags.ExtendedFeatureFlagsF81EDX.NONE ? dst : src);
-
-                cfg.CreateMap<DeviceType, DeviceType>()
-                    .ConvertUsing((src, dst) => src == DeviceType.UNKNOWN ? dst : src);
-            });
-
-            config.AssertConfigurationIsValid();
-            return config.CreateMapper();
-        }
-
-        private static bool CanBeMapped(object src)
-        {
-            if (src == null)
-            {
-                return false;
+                try
+                {
+                    informationProvider.GatherCpuInformation(ref information);
+                }
+                catch (Exception e)
+                {
+                    Logger.LogError(e, "Exception when collecting information from {Provider}",
+                        informationProvider.GetType().Name);
+                }
             }
 
-            if (src is string srcStr && string.IsNullOrEmpty(srcStr))
+            if (Options.GatherCpuFeatureFlagInformation)
             {
-                return false;
+                try
+                {
+                    informationProvider.GatherCpuFeatureFlagInformation(ref information);
+                }
+                catch (Exception e)
+                {
+                    Logger.LogError(e, "Exception when collecting information from {Provider}",
+                        informationProvider.GetType().Name);
+                }
             }
 
-            if (src is uint srcUint && srcUint == 0)
+            if (Options.GatherCpuSpeedInformation)
             {
-                return false;
+                try
+                {
+                    informationProvider.GatherCpuSpeedInformation(ref information);
+                }
+                catch (Exception e)
+                {
+                    Logger.LogError(e, "Exception when collecting information from {Provider}",
+                        informationProvider.GetType().Name);
+                }
             }
 
-            if (src is int srcInt && srcInt == 0)
+            if (Options.GatherCpuCacheTopologyInformation)
             {
-                return false;
+                try
+                {
+                    informationProvider.GatherCpuCacheTopologyInformation(ref information);
+                }
+                catch (Exception e)
+                {
+                    Logger.LogError(e, "Exception when collecting information from {Provider}",
+                        informationProvider.GetType().Name);
+                }
             }
 
-            if (src is ulong srcUlong && srcUlong == 0)
+            if (Options.GatherMainboardInformation)
             {
-                return false;
+                try
+                {
+                    informationProvider.GatherMainboardInformation(ref information);
+                }
+                catch (Exception e)
+                {
+                    Logger.LogError(e, "Exception when collecting information from {Provider}",
+                        informationProvider.GetType().Name);
+                }
             }
 
-            if (src is long srcLong && srcLong == 0)
+            if (Options.GatherRamInformation)
             {
-                return false;
+                try
+                {
+                    informationProvider.GatherRamInformation(ref information);
+                }
+                catch (Exception e)
+                {
+                    Logger.LogError(e, "Exception when collecting information from {Provider}",
+                        informationProvider.GetType().Name);
+                }
             }
 
-            if (src is double srcDouble && srcDouble == 0)
+            if (Options.GatherDiskInformation)
             {
-                return false;
+                try
+                {
+                    informationProvider.GatherDiskInformation(ref information);
+                }
+                catch (Exception e)
+                {
+                    Logger.LogError(e, "Exception when collecting information from {Provider}",
+                        informationProvider.GetType().Name);
+                }
             }
 
-            return true;
+            if (Options.GatherGpuInformation)
+            {
+                try
+                {
+                    informationProvider.GatherGpuInformation(ref information);
+                }
+                catch (Exception e)
+                {
+                    Logger.LogError(e, "Exception when collecting information from {Provider}",
+                        informationProvider.GetType().Name);
+                }
+            }
+
+            if (Options.GatherUsbInformation)
+            {
+                try
+                {
+                    informationProvider.GatherUsbInformation(ref information);
+                }
+                catch (Exception e)
+                {
+                    Logger.LogError(e, "Exception when collecting information from {Provider}",
+                        informationProvider.GetType().Name);
+                }
+            }
+
+            if (Options.GatherMonitorInformation)
+            {
+                try
+                {
+                    informationProvider.GatherMonitorInformation(ref information);
+                }
+                catch (Exception e)
+                {
+                    Logger.LogError(e, "Exception when collecting information from {Provider}",
+                        informationProvider.GetType().Name);
+                }
+            }
         }
 
         private static void PostOperations()
@@ -359,16 +321,19 @@ namespace HardwareInformation
                     machineInformation.Cpu.Caption = machineInformation.Cpu.Caption.Trim();
                 }
 
-                foreach (var cpuCore in machineInformation.Cpu.Cores)
+                if (Options.GatherPerCoreInformation && machineInformation.Cpu.Cores != null)
                 {
-                    if (cpuCore.NormalClockSpeed == 0)
+                    foreach (var cpuCore in machineInformation.Cpu.Cores)
                     {
-                        cpuCore.NormalClockSpeed = machineInformation.Cpu.NormalClockSpeed;
-                    }
+                        if (cpuCore.NormalClockSpeed == 0)
+                        {
+                            cpuCore.NormalClockSpeed = machineInformation.Cpu.NormalClockSpeed;
+                        }
 
-                    if (cpuCore.MaxClockSpeed == 0)
-                    {
-                        cpuCore.MaxClockSpeed = machineInformation.Cpu.MaxClockSpeed;
+                        if (cpuCore.MaxClockSpeed == 0)
+                        {
+                            cpuCore.MaxClockSpeed = machineInformation.Cpu.MaxClockSpeed;
+                        }
                     }
                 }
 

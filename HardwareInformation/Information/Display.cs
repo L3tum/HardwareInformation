@@ -14,5 +14,15 @@
 	    ///     Name of the monitor
 	    /// </summary>
 	    public string Name { get; internal set; }
+
+	    /// <summary>
+	    ///     Device ID of this monitor
+	    /// </summary>
+	    public string DeviceID { get; internal set; }
+
+	    /// <summary>
+	    ///     Vendor ID of the manufacturer of this monitor
+	    /// </summary>
+	    public string VendorID { get; internal set; }
     }
 }

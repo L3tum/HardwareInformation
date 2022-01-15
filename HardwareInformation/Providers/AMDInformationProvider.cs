@@ -161,7 +161,7 @@ namespace HardwareInformation.Providers
 
                             lock (caches)
                             {
-                                var orig = caches.FirstOrDefault(c => c.Equals(cache));
+                                var orig = caches.FirstOrDefault(c => c.CustomEquals(cache));
 
                                 if (orig == null)
                                 {
@@ -198,7 +198,7 @@ namespace HardwareInformation.Providers
 
                             lock (caches)
                             {
-                                var orig = caches.FirstOrDefault(c => c.Equals(cache));
+                                var orig = caches.FirstOrDefault(c => c.CustomEquals(cache));
 
                                 if (orig == null)
                                 {
@@ -225,7 +225,7 @@ namespace HardwareInformation.Providers
 
                             lock (caches)
                             {
-                                var instOrig = caches.FirstOrDefault(c => c.Equals(instCache));
+                                var instOrig = caches.FirstOrDefault(c => c.CustomEquals(instCache));
 
                                 if (instOrig == null)
                                 {
@@ -258,7 +258,7 @@ namespace HardwareInformation.Providers
 
                             lock (caches)
                             {
-                                var l2CacheOrig = caches.FirstOrDefault(c => c.Equals(l2Cache));
+                                var l2CacheOrig = caches.FirstOrDefault(c => c.CustomEquals(l2Cache));
 
                                 if (l2CacheOrig == null)
                                 {
@@ -289,7 +289,7 @@ namespace HardwareInformation.Providers
 
                             lock (caches)
                             {
-                                var l3CacheOrig = caches.FirstOrDefault(c => c.Equals(l3Cache));
+                                var l3CacheOrig = caches.FirstOrDefault(c => c.CustomEquals(l3Cache));
 
                                 if (l3CacheOrig == null)
                                 {
@@ -307,7 +307,7 @@ namespace HardwareInformation.Providers
 
             Task.WaitAll(threads.ToArray());
 
-            information.Cpu.Caches = caches.AsReadOnly();
+            information.Cpu.Caches = caches;
         }
 
         public override void GatherCpuFeatureFlagInformation(ref MachineInformation information)

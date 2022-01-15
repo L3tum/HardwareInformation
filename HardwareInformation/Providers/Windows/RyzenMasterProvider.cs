@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Versioning;
 using HardwareInformation.Information.Cpu;
 using RyzenMasterBindings;
 
@@ -15,6 +17,11 @@ namespace HardwareInformation.Providers.Windows
 
         public override bool Available(MachineInformation information)
         {
+            if (!OperatingSystem.IsWindows())
+            {
+                return false;
+            }
+
             if (!hasLoadedNativeLibraries)
             {
                 var success = RyzenMasterLibrary.Init(MachineInformationGatherer.Logger);
@@ -37,6 +44,7 @@ namespace HardwareInformation.Providers.Windows
             return hasSuccessfullyLoadedNativeLibraries;
         }
 
+        [SupportedOSPlatform("windows")]
         public override void PostProviderUpdateInformation(ref MachineInformation information)
         {
             cpu.Dispose();
@@ -45,6 +53,7 @@ namespace HardwareInformation.Providers.Windows
             RyzenMasterLibrary.UnInit();
         }
 
+        [SupportedOSPlatform("windows")]
         public override void GatherCpuCacheTopologyInformation(ref MachineInformation information)
         {
             if (cpu == null)
@@ -70,7 +79,7 @@ namespace HardwareInformation.Providers.Windows
                     var caches = new List<Cache>();
                     caches.AddRange(information.Cpu.Caches);
                     caches.Add(cache);
-                    information.Cpu.Caches = caches.AsReadOnly();
+                    information.Cpu.Caches = caches;
                 }
 
                 cache.Associativity = (uint) info.Associativity;
@@ -81,6 +90,7 @@ namespace HardwareInformation.Providers.Windows
             }
         }
 
+        [SupportedOSPlatform("windows")]
         public override void GatherCpuInformation(ref MachineInformation information)
         {
             if (cpu == null)
@@ -91,9 +101,15 @@ namespace HardwareInformation.Providers.Windows
             information.Cpu.Vendor = cpu.GetVendor();
             information.Cpu.Socket = cpu.GetPackage();
             information.Cpu.Chipset = cpu.GetChipsetName();
-            information.Cpu.PhysicalCores = (uint) (cpu.GetCoreCount() != null ? cpu.GetCoreCount()! : 0);
+            information.Cpu.PhysicalCores = cpu.GetCoreCount() switch
+            {
+                null => 0,
+                uint number when number != null => number,
+                _ => throw new ArgumentOutOfRangeException()
+            };
         }
 
+        [SupportedOSPlatform("windows")]
         private void GetDevices()
         {
             using var deviceManager = platform.GetDeviceManager();

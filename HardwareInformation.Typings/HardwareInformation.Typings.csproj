@@ -1,13 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
     <Platforms>AnyCPU;x86</Platforms>
     <LangVersion>9</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Reinforced.Typings" Version="1.5.6" />
+    <PackageReference Include="Reinforced.Typings" Version="1.5.9" />
   </ItemGroup>
 
   <ItemGroup>

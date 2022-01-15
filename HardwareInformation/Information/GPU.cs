@@ -61,5 +61,15 @@ namespace HardwareInformation.Information
 	    ///     The available VRAM in Human-readable-form on this card
 	    /// </summary>
 	    public string AvailableVideoMemoryHRF { get; internal set; }
+
+	    /// <summary>
+	    ///     Vendor ID of this card
+	    /// </summary>
+	    public string VendorID { get; internal set; }
+
+	    /// <summary>
+	    ///     Device ID of this card
+	    /// </summary>
+	    public string DeviceID { get; internal set; }
     }
 }

@@ -5,6 +5,8 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -108,6 +110,8 @@ namespace HardwareInformation
             return Convert.ToDouble(enumerable.ElementAt(midpoint));
         }
 
+        [SkipLocalsInit]
+        [MethodImpl(MethodImplOptions.AggressiveOptimization | MethodImplOptions.AggressiveInlining)]
         internal static Task RunAffinity(ulong affinity, Action action)
         {
             return Task.Run(() =>
@@ -129,19 +133,25 @@ namespace HardwareInformation
             });
         }
 
+        [SkipLocalsInit]
+        [MethodImpl(MethodImplOptions.AggressiveOptimization | MethodImplOptions.AggressiveInlining)]
         internal static string FormatBytes(ulong bytes)
         {
-            string[] Suffix = {"B", "KiB", "MiB", "GiB", "TiB", "PiB"};
+            ReadOnlySpan<string> suffix = new[] {"B", "KiB", "MiB", "GiB", "TiB", "PiB"};
             int i;
-            double dblSByte = bytes;
-            for (i = 0; i < Suffix.Length && bytes >= 1024; i++, bytes /= 1024)
+            float dblSByte = bytes;
+            for (i = 0; i < suffix.Length && dblSByte >= 1024.0f; i++)
             {
-                dblSByte = bytes / 1024.0;
+                dblSByte /= 1024.0f;
             }
 
-            return string.Format("{0:0.##} {1}", Math.Round(dblSByte, 2), Suffix[i]);
+            dblSByte = MathF.Round(dblSByte, 2);
+
+            return $"{dblSByte:F2} {suffix[i]}";
         }
 
+        [SkipLocalsInit]
+        [MethodImpl(MethodImplOptions.AggressiveOptimization)]
         internal static uint ExtractBits(uint number, int start, int end)
         {
             var numBits = end - start + 1;

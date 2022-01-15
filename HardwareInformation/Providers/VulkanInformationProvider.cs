@@ -9,9 +9,10 @@ namespace HardwareInformation.Providers
 {
     internal class VulkanInformationProvider : InformationProvider
     {
+        private Instance instance;
+        
         public override void GatherGpuInformation(ref MachineInformation information)
         {
-            using var instance = new Instance();
             var gpus = new List<GPU>();
 
             foreach (var device in instance.EnumeratePhysicalDevices())
@@ -21,6 +22,7 @@ namespace HardwareInformation.Providers
                 {
                     Name = props.DeviceName,
                     Vendor = GetVendorNameFromVendorId(props.VendorId),
+                    VendorID = props.VendorId.ToString(),
                     Caption = props.DeviceName,
                     DriverVersion = Version.ToString(props.DriverVersion),
                     Type = GetDeviceTypeFromVulkanDeviceType(props.DeviceType),
@@ -57,12 +59,12 @@ namespace HardwareInformation.Providers
             {
                 if (!DynamicLibraryChecker.CheckLibrary("vulkan-1"))
                 {
-                    MachineInformationGatherer.Logger.LogWarning("Vulkan shared library is not available.");
+                    MachineInformationGatherer.Logger.LogWarning("Vulkan shared library is not available");
 
                     return false;
                 }
 
-                using var instance = new Instance();
+                instance = new Instance();
 
                 return instance.EnumeratePhysicalDevices().Length > 0;
             }
@@ -70,6 +72,11 @@ namespace HardwareInformation.Providers
             {
                 return false;
             }
+        }
+
+        public override void PostProviderUpdateInformation(ref MachineInformation information)
+        {
+            instance?.Dispose();
         }
 
         private static DeviceType GetDeviceTypeFromVulkanDeviceType(PhysicalDeviceType type)
@@ -84,7 +91,7 @@ namespace HardwareInformation.Providers
             };
         }
 
-        private static string GetVendorNameFromVendorId(uint vendorId)
+        internal static string GetVendorNameFromVendorId(uint vendorId)
         {
             return vendorId switch
             {

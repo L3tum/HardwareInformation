@@ -5,7 +5,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Management;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using System.Runtime.Versioning;
 using System.Security;
 using HardwareInformation.Information;
 using Microsoft.Extensions.Logging;
@@ -69,6 +71,7 @@ namespace HardwareInformation.Providers
     {
         private bool win10;
 
+        [SupportedOSPlatform("windows")]
         public override void GatherGeneralSystemInformation(ref MachineInformation information)
         {
             try
@@ -95,24 +98,24 @@ namespace HardwareInformation.Providers
             return RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
         }
 
+        [SkipLocalsInit]
+        [SupportedOSPlatform("windows")]
         public override void GatherUsbInformation(ref MachineInformation information)
         {
             using var mos = new ManagementObjectSearcher("select DeviceID from Win32_PnPEntity");
             var mbos = new ArrayList(mos.Get());
             var data = new Dictionary<string, string[]>();
+            var entityClass = new ManagementClass("Win32_PnPEntity");
 
             for (var i = 0; i < mbos.Count; i++)
             {
-                var managementBaseObject = mbos[i] as ManagementBaseObject;
-
-                if (managementBaseObject is null)
+                if (mbos[i] is not ManagementBaseObject managementBaseObject)
                 {
                     continue;
                 }
 
-                var deviceId = managementBaseObject.Properties["DeviceID"].Value as string;
-
-                if (deviceId is null || !deviceId.StartsWith("USB"))
+                if (managementBaseObject.Properties["DeviceID"].Value is not string deviceId ||
+                    !deviceId.StartsWith("USB"))
                 {
                     continue;
                 }
@@ -132,7 +135,7 @@ namespace HardwareInformation.Providers
                     continue;
                 }
 
-                var mo = managementBaseObject as ManagementObject;
+                var mo = (ManagementObject) managementBaseObject;
                 var inParams = mo.GetMethodParameters("GetDeviceProperties");
 
                 var result = mo.InvokeMethod(
@@ -146,7 +149,7 @@ namespace HardwareInformation.Providers
                     continue;
                 }
 
-                foreach (var deviceProperties in result.Properties["deviceProperties"].Value as ManagementBaseObject[])
+                foreach (var deviceProperties in (ManagementBaseObject[]) result.Properties["deviceProperties"].Value)
                 {
                     var keyName = deviceProperties.Properties["KeyName"].Value as string;
                     var value = deviceProperties.Properties["Data"].Value as string;
@@ -154,7 +157,8 @@ namespace HardwareInformation.Providers
                     if (string.IsNullOrWhiteSpace(value) || string.IsNullOrWhiteSpace(keyName))
                     {
                         MachineInformationGatherer.Logger.LogTrace(
-                            $"KeyName {keyName} or Value {value} was null or whitespace for device ID {deviceId}");
+                            "KeyName {KeyName} or Value {Value} was null or whitespace for device ID {DeviceId}",
+                            keyName, value, deviceId);
                         continue;
                     }
 
@@ -215,11 +219,12 @@ namespace HardwareInformation.Providers
                             {
                                 if (children.IsArray)
                                 {
+                                    var searcher = new ManagementObjectSearcher();
                                     foreach (var child in children.Value as string[])
                                     {
-                                        mos.Query = new ObjectQuery(
+                                        searcher.Query = new ObjectQuery(
                                             $"select * from Win32_PnPEntity where DeviceID = {child}");
-                                        var childs = mos.Get();
+                                        var childs = searcher.Get();
 
                                         foreach (var child1 in childs)
                                         {
@@ -347,6 +352,7 @@ namespace HardwareInformation.Providers
             return Tuple.Create(vid, pid);
         }
 
+        [SupportedOSPlatform("windows")]
         public override void GatherMainboardInformation(ref MachineInformation information)
         {
             using (var mos = new ManagementObjectSearcher("select Product,Manufacturer,Version from Win32_BaseBoard"))
@@ -380,9 +386,11 @@ namespace HardwareInformation.Providers
             }
         }
 
+        [SupportedOSPlatform("windows")]
         public override void GatherDiskInformation(ref MachineInformation information)
         {
-            using var mos = new ManagementObjectSearcher("select Model,Size,Caption from Win32_DiskDrive");
+            using var mos =
+                new ManagementObjectSearcher("select Model,Size,Caption,Partitions,DeviceID from Win32_DiskDrive");
             var disks = new List<Disk>();
 
             foreach (var managementBaseObject in mos.Get())
@@ -391,7 +399,9 @@ namespace HardwareInformation.Providers
                 {
                     Model = managementBaseObject.Properties["Model"].Value.ToString(),
                     Capacity = ulong.Parse(managementBaseObject.Properties["Size"].Value.ToString()),
-                    Caption = managementBaseObject.Properties["Caption"].Value.ToString()
+                    Caption = managementBaseObject.Properties["Caption"].Value.ToString(),
+                    Partitions = uint.Parse(managementBaseObject.Properties["Partitions"].Value.ToString()),
+                    DeviceID = managementBaseObject.Properties["DeviceID"].Value.ToString()
                 };
                 disk.CapacityHRF = Util.FormatBytes(disk.Capacity);
 
@@ -401,10 +411,11 @@ namespace HardwareInformation.Providers
             information.Disks = disks.AsReadOnly();
         }
 
+        [SupportedOSPlatform("windows")]
         public override void GatherGpuInformation(ref MachineInformation information)
         {
             using var mos = new ManagementObjectSearcher(
-                "select AdapterCompatibility,Caption,Description,DriverDate,DriverVersion,Name,Status from Win32_VideoController");
+                "select AdapterCompatibility,Caption,Description,DriverDate,DriverVersion,Name,Status,PNPDeviceID from Win32_VideoController");
             var gpus = new List<GPU>();
 
             foreach (var managementBaseObject in mos.Get())
@@ -417,7 +428,9 @@ namespace HardwareInformation.Providers
                     DriverVersion = managementBaseObject.Properties["DriverVersion"].Value.ToString(),
                     Description = managementBaseObject.Properties["Description"].Value.ToString(),
                     Name = managementBaseObject.Properties["Name"].Value.ToString(),
-                    Status = managementBaseObject.Properties["Status"].Value.ToString()
+                    Status = managementBaseObject.Properties["Status"].Value.ToString(),
+                    VendorID = managementBaseObject.Properties["PNPDeviceID"].Value.ToString()?.Split("VEN_")[1].Split("&")[0],
+                    DeviceID = managementBaseObject.Properties["PNPDeviceID"].Value.ToString()?.Split("DEV_")[1].Split("&")[0],
                 };
 
                 gpus.Add(gpu);
@@ -444,10 +457,11 @@ namespace HardwareInformation.Providers
             }
         }
 
+        [SupportedOSPlatform("windows")]
         public override void GatherMonitorInformation(ref MachineInformation information)
         {
             using var mos = new ManagementObjectSearcher("root\\wmi",
-                "select ManufacturerName,UserFriendlyName from WmiMonitorID");
+                "select ManufacturerName,UserFriendlyName,InstanceName from WmiMonitorID");
             var displays = new List<Display>();
 
             foreach (var managementBaseObject in mos.Get())
@@ -461,7 +475,9 @@ namespace HardwareInformation.Providers
                             .Select(u => char.ConvertFromUtf32(u)).Where(s => s != "\u0000").ToList()),
                         Name = string.Join("",
                             ((IEnumerable<ushort>) managementBaseObject.Properties["UserFriendlyName"].Value)
-                            .Select(u => char.ConvertFromUtf32(u)).Where(s => s != "\u0000").ToList())
+                            .Select(u => char.ConvertFromUtf32(u)).Where(s => s != "\u0000").ToList()),
+                        VendorID = managementBaseObject.Properties["InstanceName"].Value.ToString()?.Split("\\")[1].Substring(0, 3),
+                        DeviceID = managementBaseObject.Properties["InstanceName"].Value.ToString()?.Split("\\")[1].Substring(3, 4),
                     };
 
                     displays.Add(display);
@@ -474,7 +490,8 @@ namespace HardwareInformation.Providers
 
             information.Displays = displays.AsReadOnly();
         }
-        
+
+        [SupportedOSPlatform("windows")]
         public override void GatherCpuInformation(ref MachineInformation information)
         {
             string query;
@@ -570,6 +587,7 @@ namespace HardwareInformation.Providers
             }
         }
 
+        [SupportedOSPlatform("windows")]
         public override void GatherRamInformation(ref MachineInformation information)
         {
             string query;

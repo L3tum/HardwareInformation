@@ -69,7 +69,7 @@
 	    /// </summary>
 	    /// <param name="obj"></param>
 	    /// <returns></returns>
-	    public override bool Equals(object obj)
+	    public bool CustomEquals(object obj)
         {
             if (obj.GetType() != typeof(Cache))
             {
@@ -81,15 +81,6 @@
             return cache.WBINVD == WBINVD && cache.LineSize == LineSize && cache.Associativity == Associativity &&
                    cache.Capacity == Capacity && cache.CoresPerCache == CoresPerCache && cache.Level == Level &&
                    cache.Type == Type && cache.Sets == Sets && cache.Partitions == Partitions;
-        }
-
-	    /// <summary>
-	    ///     To stop the warning
-	    /// </summary>
-	    /// <returns></returns>
-	    public override int GetHashCode()
-        {
-            return base.GetHashCode();
         }
 #pragma warning disable 1591
 	    /// <summary>

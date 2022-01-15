@@ -2,13 +2,13 @@
 
     <PropertyGroup>
         <OutputType>Exe</OutputType>
-        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <TargetFramework>net5.0</TargetFramework>
         <SignAssembly>true</SignAssembly>
         <AssemblyOriginatorKeyFile>..\HardwareInformation\sgKey.snk</AssemblyOriginatorKeyFile>
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="BenchmarkDotNet" Version="0.12.1" />
+      <PackageReference Include="BenchmarkDotNet" Version="0.13.0" />
     </ItemGroup>
 
     <ItemGroup>

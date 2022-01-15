@@ -29,5 +29,16 @@
 	    ///     Human readable format of the capacity this disk has
 	    /// </summary>
 	    public string CapacityHRF { get; internal set; }
+
+	    /// <summary>
+	    ///     Number of partitions on this disk
+	    /// </summary>
+	    public uint Partitions { get; internal set; }
+
+
+	    /// <summary>
+	    ///     Device ID of this disk
+	    /// </summary>
+	    public string DeviceID { get; internal set; }
     }
 }

@@ -3,6 +3,7 @@
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 #endregion
@@ -11,6 +12,21 @@ namespace HardwareInformation
 {
     internal static class ThreadAffinity
     {
+        private static Process currentProcess;
+
+        /// <summary>
+        /// Sets the current process to cache information retrieval
+        /// Please beware that it does not check if the current process is still the right process
+        /// when setting the thread affinity.
+        /// You need to check so yourself if the process may change.
+        /// </summary>
+        internal static void SetCurrentProcess()
+        {
+            currentProcess = Process.GetCurrentProcess();
+        }
+
+        [SkipLocalsInit]
+        [MethodImpl(MethodImplOptions.AggressiveOptimization)]
         internal static ulong Set(ulong mask = 0xffffffffuL)
         {
             if (mask == 0)
@@ -22,12 +38,11 @@ namespace HardwareInformation
 
             var returnMask = 0xffffffffuL;
 
-            // Unix/POSIX
-            if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+            if (OperatingSystem.IsLinux() || OperatingSystem.IsAndroid())
             {
-                ulong result = 0;
-                if (NativeMethods.sched_getaffinity(0, (IntPtr) Marshal.SizeOf(result),
-                    ref result) != 0)
+                // UNIX/POSIX
+                if (NativeMethods.sched_getaffinity(0, (IntPtr) Marshal.SizeOf(returnMask),
+                    ref returnMask) != 0)
                 {
                     return 0;
                 }
@@ -37,47 +52,43 @@ namespace HardwareInformation
                 {
                     return 0;
                 }
-
-                return result;
             }
-
-            if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+            else if (OperatingSystem.IsWindows())
             {
-                // OSX
-                return returnMask;
-            }
+                currentProcess ??= Process.GetCurrentProcess();
 
-            // Windows
-            var threads = Process.GetCurrentProcess().Threads;
+                // Windows
+                var threads = currentProcess.Threads;
 
-            foreach (ProcessThread processThread in threads)
-            {
-                var threadId = NativeMethods.GetCurrentThreadId();
-
-                if (processThread.Id == threadId)
+                foreach (ProcessThread processThread in threads)
                 {
-                    try
-                    {
-	                    if (Environment.Is64BitProcess)
-	                    {
-                            processThread.ProcessorAffinity = (IntPtr) mask;
-                        }
-	                    else
-	                    {
-		                    processThread.ProcessorAffinity = (IntPtr) x86Mask;
-                        }
-                    }
-                    catch (Win32Exception)
-                    {
-                        // Console.WriteLine("{0} with mask {1}", e.Message, GetIntBinaryString(mask));
-                        // Intentionally left blank
-                    }
-                    catch (OverflowException)
-                    {
-	                    // Intentionally left blank
-                    }
+                    var threadId = NativeMethods.GetCurrentThreadId();
 
-                    break;
+                    if (processThread.Id == threadId)
+                    {
+                        try
+                        {
+                            if (Environment.Is64BitProcess)
+                            {
+                                processThread.ProcessorAffinity = (IntPtr) mask;
+                            }
+                            else
+                            {
+                                processThread.ProcessorAffinity = (IntPtr) x86Mask;
+                            }
+                        }
+                        catch (Win32Exception)
+                        {
+                            // Console.WriteLine("{0} with mask {1}", e.Message, GetIntBinaryString(mask));
+                            // Intentionally left blank
+                        }
+                        catch (OverflowException)
+                        {
+                            // Intentionally left blank
+                        }
+
+                        break;
+                    }
                 }
             }
 
@@ -117,6 +128,7 @@ namespace HardwareInformation
             private const string LIBC = "libc";
 
             [DllImport(KERNEL, CallingConvention = CallingConvention.Winapi)]
+            [SuppressGCTransition]
             public static extern int GetCurrentThreadId();
 
             [DllImport(KERNEL, CallingConvention = CallingConvention.Winapi)]
@@ -130,6 +142,7 @@ namespace HardwareInformation
             /// <param name="mask"></param>
             /// <returns></returns>
             [DllImport(LIBC)]
+            [SuppressGCTransition]
             public static extern int sched_getaffinity(int pid, IntPtr maskSize,
                 ref ulong mask);
 
@@ -141,6 +154,7 @@ namespace HardwareInformation
             /// <param name="mask"></param>
             /// <returns></returns>
             [DllImport(LIBC)]
+            [SuppressGCTransition]
             public static extern int sched_setaffinity(int pid, IntPtr maskSize,
                 ref ulong mask);
 

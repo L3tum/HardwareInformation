@@ -101,7 +101,7 @@ namespace HardwareInformation.Providers
 
                         lock (caches)
                         {
-                            var orig = caches.FirstOrDefault(c => c.Equals(cache));
+                            var orig = caches.FirstOrDefault(c => c.CustomEquals(cache));
 
                             if (orig == null)
                             {
@@ -120,7 +120,7 @@ namespace HardwareInformation.Providers
 
             Task.WaitAll(threads.ToArray());
 
-            information.Cpu.Caches = caches.AsReadOnly();
+            information.Cpu.Caches = caches;
         }
 
         public override void GatherCpuInformation(ref MachineInformation information)

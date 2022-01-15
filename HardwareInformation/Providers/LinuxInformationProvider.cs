@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Runtime.Versioning;
 using System.Text.RegularExpressions;
 using HardwareInformation.Information;
 using HardwareInformation.Information.Gpu;
@@ -21,65 +22,69 @@ namespace HardwareInformation.Providers
             return RuntimeInformation.IsOSPlatform(OSPlatform.Linux);
         }
 
+        [SupportedOSPlatform("linux")]
         public override void GatherCpuInformation(ref MachineInformation information)
         {
-            try
-            {
-                File.OpenRead("/proc/cpuinfo").Dispose();
-            }
-            catch (Exception e)
-            {
-                MachineInformationGatherer.Logger.LogError(e, "Encountered while parsing CPU info");
-                return;
-            }
-
-            var procCpuInfo = File.ReadAllLines("/proc/cpuinfo");
-            var modelNameRegex = new Regex(@"^model name\s+:\s+(.+)");
-            var cpuSpeedRegex = new Regex(@"^cpu MHz\s+:\s+(.+)");
-            var physicalCoresRegex = new Regex(@"^cpu cores\s+:\s+(.+)");
-            var logicalCoresRegex = new Regex(@"^siblings\s+:\s+(.+)");
-
-            foreach (var s in procCpuInfo)
+            if (File.Exists("/proc/cpuinfo"))
             {
                 try
                 {
-                    var match = modelNameRegex.Match(s);
-
-                    if (match.Success)
-                    {
-                        information.Cpu.Name = match.Groups[1].Value.Trim();
-
-                        continue;
-                    }
-
-                    match = cpuSpeedRegex.Match(s);
-
-                    if (match.Success)
-                    {
-                        information.Cpu.NormalClockSpeed = uint.Parse(match.Groups[1].Value.Split('.', ',')[0]);
-
-                        continue;
-                    }
-
-                    match = physicalCoresRegex.Match(s);
-
-                    if (match.Success)
-                    {
-                        information.Cpu.PhysicalCores = uint.Parse(match.Groups[1].Value);
-
-                        continue;
-                    }
-
-                    match = logicalCoresRegex.Match(s);
-
-                    if (match.Success)
-                    {
-                        information.Cpu.LogicalCores = uint.Parse(match.Groups[1].Value);
-                    }
+                    File.OpenRead("/proc/cpuinfo").Dispose();
                 }
                 catch (Exception e)
                 {
                     MachineInformationGatherer.Logger.LogError(e, "Encountered while parsing CPU info");
+                    return;
+                }
+
+                var procCpuInfo = File.ReadAllLines("/proc/cpuinfo");
+                var modelNameRegex = new Regex(@"^model name\s+:\s+(.+)");
+                var cpuSpeedRegex = new Regex(@"^cpu MHz\s+:\s+(.+)");
+                var physicalCoresRegex = new Regex(@"^cpu cores\s+:\s+(.+)");
+                var logicalCoresRegex = new Regex(@"^siblings\s+:\s+(.+)");
+
+                foreach (var s in procCpuInfo)
+                {
+                    try
+                    {
+                        var match = modelNameRegex.Match(s);
+
+                        if (match.Success)
+                        {
+                            information.Cpu.Name = match.Groups[1].Value.Trim();
+
+                            continue;
+                        }
+
+                        match = cpuSpeedRegex.Match(s);
+
+                        if (match.Success)
+                        {
+                            information.Cpu.NormalClockSpeed = uint.Parse(match.Groups[1].Value.Split('.', ',')[0]);
+
+                            continue;
+                        }
+
+                        match = physicalCoresRegex.Match(s);
+
+                        if (match.Success)
+                        {
+                            information.Cpu.PhysicalCores = uint.Parse(match.Groups[1].Value);
+
+                            continue;
+                        }
+
+                        match = logicalCoresRegex.Match(s);
+
+                        if (match.Success)
+                        {
+                            information.Cpu.LogicalCores = uint.Parse(match.Groups[1].Value);
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        MachineInformationGatherer.Logger.LogError(e, "Encountered while parsing CPU info");
+                    }
                 }
             }
 
@@ -128,45 +133,59 @@ namespace HardwareInformation.Providers
             }
         }
 
+        [SupportedOSPlatform("linux")]
         public override void GatherMainboardInformation(ref MachineInformation information)
         {
-            try
+            if (File.Exists("/sys/class/dmi/id/bios_version"))
             {
-                information.SmBios.BIOSVersion = File.ReadAllText("/sys/class/dmi/id/bios_version").Trim();
-            }
-            catch (Exception e)
-            {
-                MachineInformationGatherer.Logger.LogError(e, "Encountered while parsing BIOSVersion");
-            }
-
-            try
-            {
-                information.SmBios.BIOSVendor = File.ReadAllText("/sys/class/dmi/id/bios_vendor").Trim();
-            }
-            catch (Exception e)
-            {
-                MachineInformationGatherer.Logger.LogError(e, "Encountered while parsing BIOSVendor");
+                try
+                {
+                    information.SmBios.BIOSVersion = File.ReadAllText("/sys/class/dmi/id/bios_version").Trim();
+                }
+                catch (Exception e)
+                {
+                    MachineInformationGatherer.Logger.LogError(e, "Encountered while parsing BIOSVersion");
+                }
             }
 
-            try
+            if (File.Exists("/sys/class/dmi/id/bios_vendor"))
             {
-                information.SmBios.BoardName = File.ReadAllText("/sys/class/dmi/id/board_name").Trim();
-            }
-            catch (Exception e)
-            {
-                MachineInformationGatherer.Logger.LogError(e, "Encountered while parsing BoardName");
+                try
+                {
+                    information.SmBios.BIOSVendor = File.ReadAllText("/sys/class/dmi/id/bios_vendor").Trim();
+                }
+                catch (Exception e)
+                {
+                    MachineInformationGatherer.Logger.LogError(e, "Encountered while parsing BIOSVendor");
+                }
             }
 
-            try
+            if (File.Exists("/sys/class/dmi/id/board_name"))
             {
-                information.SmBios.BoardVendor = File.ReadAllText("/sys/class/dmi/id/board_vendor").Trim();
+                try
+                {
+                    information.SmBios.BoardName = File.ReadAllText("/sys/class/dmi/id/board_name").Trim();
+                }
+                catch (Exception e)
+                {
+                    MachineInformationGatherer.Logger.LogError(e, "Encountered while parsing BoardName");
+                }
             }
-            catch (Exception e)
+
+            if (File.Exists("/sys/class/dmi/id/board_vendor"))
             {
-                MachineInformationGatherer.Logger.LogError(e, "Encountered while parsing BoardVendor");
+                try
+                {
+                    information.SmBios.BoardVendor = File.ReadAllText("/sys/class/dmi/id/board_vendor").Trim();
+                }
+                catch (Exception e)
+                {
+                    MachineInformationGatherer.Logger.LogError(e, "Encountered while parsing BoardVendor");
+                }
             }
         }
 
+        [SupportedOSPlatform("linux")]
         public override void GatherUsbInformation(ref MachineInformation information)
         {
             var usbs = new List<USBDevice>();
@@ -254,6 +273,7 @@ namespace HardwareInformation.Providers
             }
         }
 
+        [SupportedOSPlatform("linux")]
         public override void GatherGpuInformation(ref MachineInformation information)
         {
             var gpus = new List<GPU>();
@@ -326,6 +346,7 @@ namespace HardwareInformation.Providers
             }
         }
 
+        [SupportedOSPlatform("linux")]
         public override void GatherDiskInformation(ref MachineInformation information)
         {
             var disks = new List<Disk>();
@@ -386,6 +407,7 @@ namespace HardwareInformation.Providers
             }
         }
 
+        [SupportedOSPlatform("linux")]
         public override void GatherRamInformation(ref MachineInformation information)
         {
             var ramSticks = new List<RAM>();

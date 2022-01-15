@@ -8,7 +8,7 @@ namespace HardwareInformation
         /// <summary>
         ///     USB Information
         /// </summary>
-        public bool GatherUsbInformation { get; set; } = true;
+        public bool GatherUsbInformation { get; set; } = false;
 
         /// <summary>
         ///     CPU Information
@@ -60,6 +60,6 @@ namespace HardwareInformation
         /// <summary>
         ///     Gather per-core information
         /// </summary>
-        public bool GatherPerCoreInformation { get; set; } = true;
+        public bool GatherPerCoreInformation { get; set; } = false;
     }
 }

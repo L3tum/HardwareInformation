@@ -1,7 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <Authors>L3tum</Authors>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
@@ -14,11 +13,13 @@
     <Description>.NET Standard 2 Cross-Platform Hardware Information Gatherer</Description>
     <Configurations>Debug;Release</Configurations>
     <Platforms>AnyCPU;X86</Platforms>
+    <TargetFramework>net5.0</TargetFramework>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
   <PropertyGroup>
     <DocumentationFile>bin\$(Configuration)\$(AssemblyName).xml</DocumentationFile>
-    <LangVersion>9.0</LangVersion>
+    <LangVersion>default</LangVersion>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -29,8 +30,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AutoMapper" Version="10.1.1" />
-    <PackageReference Include="AutoMapper.Collection" Version="7.0.1" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="5.0.0" />
     <PackageReference Include="RyzenMasterBindings" Version="1.0.2" />
     <PackageReference Include="System.Diagnostics.PerformanceCounter" Version="5.0.0" />

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Management;
+using System.Runtime.Versioning;
 using System.Threading;
 
 namespace HardwareInformation.Providers.Windows
@@ -10,6 +11,7 @@ namespace HardwareInformation.Providers.Windows
     /// <summary>
     /// Provides abstractions around using a high-priority background thread for frequency measuring
     /// </summary>
+    [SupportedOSPlatform("windows")]
     public class FrequencyMeasurer : IDisposable
     {
         private readonly double baseFrequency;
