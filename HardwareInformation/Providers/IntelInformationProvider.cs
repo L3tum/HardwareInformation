@@ -136,7 +136,10 @@ namespace HardwareInformation.Providers
             var ecx = 0u;
             var apicIds = new Dictionary<uint, uint>();
             var currentIteration = 0;
-            var maxIterations = int.MaxValue;
+            
+            // Some high enough value. Theoretically right now the max configuration of physical cores for Intel
+            // is 56 Cores (or 112 Cores in 4x Socket Systems), so this leaves plenty of leeway.
+            var maxIterations = 256;
 
             while (currentIteration < maxIterations)
             {
