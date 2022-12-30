@@ -9,7 +9,7 @@
 ![Build](https://github.com/L3tum/HardwareInformation/workflows/.NET%20Core%20CI/badge.svg?style=flat-square)
 ![Simple Test](https://github.com/L3tum/HardwareInformation/workflows/.NET%20Core%20Simple%20Test/badge.svg?style=flat-square)
 
-- [Features](#features)
+- [Features](#overall-features)
 - [Goal](#goal)
 
 ## Usage
@@ -18,11 +18,9 @@ Download from [Nuget](https://www.nuget.org/packages/HardwareInformation/) via y
 
 `dotnet add package HardwareInformation`
 
-Starting with version 2.1.20 HardwareInformation is also available via Github Package Registry!
-
 Get hardware information from the gatherer
 
-`MachinInformation info = MachineInformationGatherer.GatherInformation(bool skipClockspeedTest = true)`
+`MachineInformation info = MachineInformationGatherer.GatherInformation(bool skipClockspeedTest = true)`
 
 Result is cached internally so don't worry about calling it multiple times
 
