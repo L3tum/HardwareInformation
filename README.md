@@ -32,6 +32,7 @@ Result is cached internally so don't worry about calling it multiple times
 - Supports multiple CPUs (i.e. multiple Sockets) and GPUs
 - Supports BIG.little as far as Intel and Apple provided it
 - Supports ARM, x86 and AMD64
+- Lots of information provided
 
 A detailed list of information gathered by this library can be found in [here](./docs/SupportedInformation.md), although the OS-specific remarks may not always be accurate.
 
