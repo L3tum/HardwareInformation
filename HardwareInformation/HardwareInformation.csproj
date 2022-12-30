@@ -13,8 +13,8 @@
         <Description>.NET 5 Cross-Platform Hardware Information Gatherer</Description>
         <Configurations>Debug;Release</Configurations>
         <Platforms>AnyCPU;X86</Platforms>
-        <TargetFramework>net5.0</TargetFramework>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+        <TargetFramework>net5.0</TargetFramework>
     </PropertyGroup>
 
     <PropertyGroup>
@@ -31,7 +31,6 @@
 
     <ItemGroup>
         <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="5.0.0" />
-        <PackageReference Include="RyzenMasterBindings" Version="1.0.2" />
         <PackageReference Include="System.Diagnostics.PerformanceCounter" Version="5.0.0" />
         <PackageReference Include="System.Management" Version="5.0.0" />
         <PackageReference Include="VulkanSharp" Version="0.1.10" />
