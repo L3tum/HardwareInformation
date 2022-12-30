@@ -44,7 +44,7 @@ namespace HardwareInformation.Information
         }
 #pragma warning restore 1591
 	    /// <summary>
-	    ///     Speed in MHz
+	    ///     Speed in MT/s
 	    /// </summary>
 	    public uint Speed { get; set; }
 
@@ -87,5 +87,15 @@ namespace HardwareInformation.Information
 	    ///     FormFactor of the module (DIMM vs SODIMM etc.)
 	    /// </summary>
 	    public FormFactors FormFactor { get; internal set; }
+
+	    /// <summary>
+	    ///     Which bank the ram stick is installed into
+	    /// </summary>
+	    public string BankLabel { get; internal set; }
+
+	    /// <summary>
+	    ///     Nominal voltage, which may or may not be the real voltage this stick is operating at
+	    /// </summary>
+	    public uint NominalVoltage { get; internal set; }
     }
 }

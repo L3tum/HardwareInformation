@@ -1,8 +1,4 @@
-﻿#region using
-
-#endregion
-
-namespace HardwareInformation.Information.Cpu
+﻿namespace HardwareInformation.Information.Cpu
 {
 	/// <summary>
 	///     Construct to represent a logical CPU core
@@ -10,7 +6,7 @@ namespace HardwareInformation.Information.Cpu
 	public class Core
     {
 	    /// <summary>
-	    ///     Core "ID"
+	    ///     Logical Core "ID"
 	    /// </summary>
 	    public uint Number { get; set; }
 

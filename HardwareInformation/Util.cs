@@ -6,10 +6,10 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using HardwareInformation.Information;
 
 #endregion
 
@@ -46,7 +46,7 @@ namespace HardwareInformation
                     hexChar = hexString.Substring(i, 2);
                 }
 
-                var cha = (char) Convert.ToByte(hexChar, 16);
+                var cha = (char)Convert.ToByte(hexChar, 16);
 
                 if (cha == '\u0000')
                 {
@@ -135,9 +135,92 @@ namespace HardwareInformation
 
         [SkipLocalsInit]
         [MethodImpl(MethodImplOptions.AggressiveOptimization | MethodImplOptions.AggressiveInlining)]
+        internal static Task[] RunAffinityOnNumberOfThreads(uint threads, Action<uint> action)
+        {
+            return Enumerable.Range(0, (int)threads).Select(index =>
+            {
+                var capturedIndex = index;
+                return Task.Run(() =>
+                {
+                    var mask = 0xffffffffuL;
+
+                    try
+                    {
+                        Thread.BeginThreadAffinity();
+                        mask = ThreadAffinity.Set(1uL << capturedIndex);
+
+                        action((uint)capturedIndex);
+                    }
+                    finally
+                    {
+                        ThreadAffinity.Set(mask);
+                        Thread.EndThreadAffinity();
+                    }
+                });
+            }).ToArray();
+        }
+
+        [SkipLocalsInit]
+        [MethodImpl(MethodImplOptions.AggressiveOptimization | MethodImplOptions.AggressiveInlining)]
+        internal static Task[] RunAffinityPerCpu(IReadOnlyList<CPU> cpus, Action<int> action)
+        {
+            return cpus.Select((cpu, cpuIndex) =>
+            {
+                var index = (int)cpu.LogicalCoresInCpu.First();
+                return Task.Run(() =>
+                {
+                    var mask = 0xffffffffuL;
+
+                    try
+                    {
+                        Thread.BeginThreadAffinity();
+                        mask = ThreadAffinity.Set(1uL << index);
+
+                        action(cpuIndex);
+                    }
+                    finally
+                    {
+                        ThreadAffinity.Set(mask);
+                        Thread.EndThreadAffinity();
+                    }
+                });
+            }).ToArray();
+        }
+
+        [SkipLocalsInit]
+        [MethodImpl(MethodImplOptions.AggressiveOptimization | MethodImplOptions.AggressiveInlining)]
+        internal static Task[][] RunAffinityPerCpuCore(IReadOnlyList<CPU> cpus, Action<int, int> action)
+        {
+            return cpus.Select((cpu, cpuIndex) =>
+            {
+                return cpu.LogicalCoresInCpu.Select((core, coreIndex) =>
+                {
+                    return Task.Run(() =>
+                    {
+                        var mask = 0xffffffffuL;
+
+                        try
+                        {
+                            Thread.BeginThreadAffinity();
+                            mask = ThreadAffinity.Set(1uL << coreIndex);
+
+                            action(cpuIndex, coreIndex);
+                        }
+                        finally
+                        {
+                            ThreadAffinity.Set(mask);
+                            Thread.EndThreadAffinity();
+                        }
+                    });
+                }).ToArray();
+            }).ToArray();
+        }
+
+        [SkipLocalsInit]
+        [MethodImpl(MethodImplOptions.AggressiveOptimization | MethodImplOptions.AggressiveInlining)]
         internal static string FormatBytes(ulong bytes)
         {
-            ReadOnlySpan<string> suffix = new[] {"B", "KiB", "MiB", "GiB", "TiB", "PiB"};
+            ReadOnlySpan<string> suffix = new[] { "B", "KiB", "MiB", "GiB", "TiB", "PiB" };
             int i;
             float dblSByte = bytes;
             for (i = 0; i < suffix.Length && dblSByte >= 1024.0f; i++)

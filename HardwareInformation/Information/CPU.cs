@@ -8,145 +8,167 @@ using HardwareInformation.Information.Cpu;
 
 namespace HardwareInformation.Information
 {
-	/// <summary>
-	///     Construct to represent a CPU
-	/// </summary>
-	public class CPU
+    /// <summary>
+    ///     Construct to represent a CPU
+    /// </summary>
+    public class CPU
     {
-	    /// <summary>
-	    ///     Feature flags found in CPUID 7
-	    /// </summary>
-	    public ExtendedFeatureFlagsF7EBX ExtendedFeatureFlagsF7One { get; internal set; }
+        /// <summary>
+        ///     The logical core "numbers" (the "ID" for example used for thread affinity) in this CPU
+        /// </summary>
+        public HashSet<uint> LogicalCoresInCpu { get; internal set; } = new();
 
-	    /// <summary>
-	    ///     Continuation of Feature flags found in CPUID 7
-	    /// </summary>
-	    public ExtendedFeatureFlagsF7ECX ExtendedFeatureFlagsF7Two { get; internal set; }
+        /// <summary>
+        ///     Feature flags found in CPUID 7
+        /// </summary>
+        public ExtendedFeatureFlagsF7EBX ExtendedFeatureFlagsF7One { get; internal set; }
 
-	    /// <summary>
-	    ///     Continuation of Feature flags found in CPUID 7
-	    /// </summary>
-	    public ExtendedFeatureFlagsF7EDX ExtendedFeatureFlagsF7Three { get; internal set; }
+        /// <summary>
+        ///     Continuation of Feature flags found in CPUID 7
+        /// </summary>
+        public ExtendedFeatureFlagsF7ECX ExtendedFeatureFlagsF7Two { get; internal set; }
 
-	    /// <summary>
-	    ///     Amount of physical cores in the CPU
-	    /// </summary>
-	    public uint PhysicalCores { get; internal set; }
+        /// <summary>
+        ///     Continuation of Feature flags found in CPUID 7
+        /// </summary>
+        public ExtendedFeatureFlagsF7EDX ExtendedFeatureFlagsF7Three { get; internal set; }
 
-	    /// <summary>
-	    ///     Amount of logical cores in the CPU
-	    /// </summary>
-	    public uint LogicalCores { get; internal set; }
+        /// <summary>
+        ///     Amount of physical cores in the CPU
+        /// </summary>
+        public uint PhysicalCores { get; internal set; }
 
-	    /// <summary>
-	    ///     Amount of NUMA Nodes in the CPU
-	    /// </summary>
-	    public uint Nodes { get; internal set; }
+        /// <summary>
+        ///     Amount of logical cores in the CPU
+        /// </summary>
+        public uint LogicalCores => (uint)LogicalCoresInCpu.Count;
 
-	    /// <summary>
-	    ///     Amount of logical cores per NUMA node
-	    /// </summary>
-	    public uint LogicalCoresPerNode { get; internal set; }
+        /// <summary>
+        ///     Amount of NUMA Nodes in the CPU
+        /// </summary>
+        public uint Nodes { get; internal set; }
 
-	    /// <summary>
-	    ///     The architecture (e.g. x86/x64), supplied by .NET
-	    /// </summary>
-	    public string Architecture { get; internal set; }
+        /// <summary>
+        ///     Amount of logical cores per NUMA node
+        /// </summary>
+        public uint LogicalCoresPerNode { get; internal set; }
 
-	    /// <summary>
-	    ///     Caption of the CPU, often including vendor and stepping
-	    /// </summary>
-	    public string Caption { get; internal set; }
+        /// <summary>
+        ///     The architecture (e.g. x86/x64), supplied by .NET
+        /// </summary>
+        public string Architecture { get; internal set; }
 
-	    /// <summary>
-	    ///     The actual name of the CPU as people know it
-	    /// </summary>
-	    public string Name { get; internal set; }
+        /// <summary>
+        ///     Caption of the CPU, often including vendor and stepping
+        /// </summary>
+        public string Caption { get; internal set; }
 
-	    /// <summary>
-	    ///     Vendor/Manufacturer of the CPU. Corresponds to Vendors enum
-	    /// </summary>
-	    public string Vendor { get; internal set; }
+        /// <summary>
+        ///     The actual name of the CPU as people know it
+        /// </summary>
+        public string Name { get; internal set; }
 
-	    /// <summary>
-	    ///     Chipset of the Mainboard
-	    /// </summary>
-	    public string Chipset { get; internal set; }
+        /// <summary>
+        ///     Vendor/Manufacturer of the CPU. Corresponds to Vendors enum
+        /// </summary>
+        public string Vendor { get; internal set; }
 
-	    /// <summary>
-	    ///     Stepping: Current iteration of the same model, mostly to fix errata
-	    /// </summary>
-	    public uint Stepping { get; internal set; }
+        /// <summary>
+        ///     Chipset of the Mainboard
+        /// </summary>
+        public string Chipset { get; internal set; }
 
-	    /// <summary>
-	    ///     Model of the CPU
-	    /// </summary>
-	    public uint Model { get; internal set; }
+        /// <summary>
+        ///     Stepping: Current iteration of the same model, mostly to fix errata
+        /// </summary>
+        public uint Stepping { get; internal set; }
 
-	    /// <summary>
-	    ///     Family of the CPU. For example 17h for Ryzen, 15h for Bulldozer.
-	    /// </summary>
-	    public uint Family { get; internal set; }
+        /// <summary>
+        ///     Model of the CPU
+        /// </summary>
+        public uint Model { get; internal set; }
 
-	    /// <summary>
-	    ///     Type of processor, mostly for Intel
-	    /// </summary>
-	    public ProcessorType Type { get; internal set; }
+        /// <summary>
+        ///     Family of the CPU. For example 17h for Ryzen, 15h for Bulldozer.
+        /// </summary>
+        public uint Family { get; internal set; }
 
-	    /// <summary>
-	    ///     Feature flags found in CPUID 1
-	    /// </summary>
-	    public FeatureFlagEDX FeatureFlagsOne { get; internal set; }
+        /// <summary>
+        ///     Type of processor, mostly for Intel
+        /// </summary>
+        public ProcessorType Type { get; internal set; }
 
-	    /// <summary>
-	    ///     Continuation of Feature flags found in CPUID 1
-	    /// </summary>
-	    public FeatureFlagECX FeatureFlagsTwo { get; internal set; }
+        /// <summary>
+        ///     Feature flags found in CPUID 1
+        /// </summary>
+        public FeatureFlagEDX FeatureFlagsOne { get; internal set; }
 
-	    /// <summary>
-	    ///     Maximum CPUID level supported by the CPU.
-	    /// </summary>
-	    public uint MaxCpuIdFeatureLevel { get; internal set; }
+        /// <summary>
+        ///     Continuation of Feature flags found in CPUID 1
+        /// </summary>
+        public FeatureFlagECX FeatureFlagsTwo { get; internal set; }
 
-	    /// <summary>
-	    ///     Maximum extended CPUID level supported by the CPU. Often returns 0xfffffff, so not a good indicator
-	    /// </summary>
-	    public uint MaxCpuIdExtendedFeatureLevel { get; internal set; }
+        /// <summary>
+        ///     Maximum CPUID level supported by the CPU.
+        /// </summary>
+        public uint MaxCpuIdFeatureLevel { get; internal set; }
 
-	    /// <summary>
-	    ///     Maximum clock speed reached by any core of the CPU. Needs the clockSpeedTest.
-	    /// </summary>
-	    public uint MaxClockSpeed { get; internal set; }
+        /// <summary>
+        ///     Maximum extended CPUID level supported by the CPU. Often returns 0xfffffff, so not a good indicator
+        /// </summary>
+        public uint MaxCpuIdExtendedFeatureLevel { get; internal set; }
 
-	    /// <summary>
-	    ///     Normal clock speed as supplied by OS.
-	    /// </summary>
-	    public uint NormalClockSpeed { get; internal set; }
+        /// <summary>
+        ///     Maximum clock speed reached by any core of the CPU. Needs the clockSpeedTest.
+        /// </summary>
+        public uint MaxClockSpeed { get; internal set; }
 
-	    /// <summary>
-	    ///     List of logical cores in the CPU
-	    /// </summary>
-	    public IReadOnlyList<Core> Cores { get; internal set; }
+        /// <summary>
+        ///     Normal clock speed as supplied by OS.
+        /// </summary>
+        public uint NormalClockSpeed { get; internal set; }
 
-	    /// <summary>
-	    ///     AMD-specific feature flags
-	    /// </summary>
-	    public AMDFeatureFlags AMDFeatureFlags { get; internal set; } = new();
+        /// <summary>
+        ///     List of logical cores in the CPU
+        /// </summary>
+        public IReadOnlyList<Core> Cores { get; internal set; }
 
-	    /// <summary>
-	    ///     Intel-specific feature flags
-	    /// </summary>
-	    public IntelFeatureFlags IntelFeatureFlags { get; internal set; } = new();
+        /// <summary>
+        ///     AMD-specific feature flags
+        /// </summary>
+        public AMDFeatureFlags AMDFeatureFlags { get; internal set; } = new();
 
-	    /// <summary>
-	    ///     The socket the CPU is installed in/needs
-	    /// </summary>
-	    public string Socket { get; internal set; }
+        /// <summary>
+        ///     Intel-specific feature flags
+        /// </summary>
+        public IntelFeatureFlags IntelFeatureFlags { get; internal set; } = new();
 
-	    /// <summary>
-	    ///     List of caches in the CPU
-	    /// </summary>
-	    public IReadOnlyList<Cache> Caches { get; internal set; }
+        /// <summary>
+        ///     The socket the CPU is installed in/needs
+        /// </summary>
+        public string Socket { get; internal set; }
+
+        /// <summary>
+        ///     List of caches in the CPU
+        /// </summary>
+        public IReadOnlyList<Cache> Caches { get; internal set; }
+
+        /// <summary>
+        ///     If a CPU vendor hides an easter egg and we find it
+        /// </summary>
+        public string EasterEgg { get; internal set; }
+
+        internal void InitializeLists()
+        {
+            var cores = new List<Core>((int)LogicalCores);
+            for (uint i = 0; i < LogicalCores; i++)
+            {
+                cores.Add(new Core { Number = i });
+            }
+
+            Cores = cores.AsReadOnly();
+            Caches ??= new List<Cache>((int)LogicalCores).AsReadOnly();
+        }
 #pragma warning disable 1591
         [Flags]
         public enum ExtendedFeatureFlagsF7EBX : uint

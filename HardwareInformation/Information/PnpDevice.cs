@@ -3,9 +3,9 @@ using System;
 namespace HardwareInformation.Information
 {
     /// <summary>
-    ///     Represents a single connected USB device
+    ///     Represents a single connected PNP device
     /// </summary>
-    public class USBDevice
+    public class PnpDevice
     {
         /// <summary>
         ///     Name of the device according to the device itself.

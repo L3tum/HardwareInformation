@@ -12,18 +12,7 @@ namespace HardwareInformation
 {
     internal static class ThreadAffinity
     {
-        private static Process currentProcess;
-
-        /// <summary>
-        /// Sets the current process to cache information retrieval
-        /// Please beware that it does not check if the current process is still the right process
-        /// when setting the thread affinity.
-        /// You need to check so yourself if the process may change.
-        /// </summary>
-        internal static void SetCurrentProcess()
-        {
-            currentProcess = Process.GetCurrentProcess();
-        }
+        private static Process CurrentProcess => Process.GetCurrentProcess();
 
         [SkipLocalsInit]
         [MethodImpl(MethodImplOptions.AggressiveOptimization)]
@@ -55,10 +44,8 @@ namespace HardwareInformation
             }
             else if (OperatingSystem.IsWindows())
             {
-                currentProcess ??= Process.GetCurrentProcess();
-
                 // Windows
-                var threads = currentProcess.Threads;
+                var threads = CurrentProcess.Threads;
 
                 foreach (ProcessThread processThread in threads)
                 {

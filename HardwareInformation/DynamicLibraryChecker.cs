@@ -1,5 +1,9 @@
+#region using
+
 using System;
 using System.Runtime.InteropServices;
+
+#endregion
 
 namespace HardwareInformation
 {

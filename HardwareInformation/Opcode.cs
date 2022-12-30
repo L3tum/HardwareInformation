@@ -85,6 +85,8 @@ namespace HardwareInformation
                 return;
             }
 
+            AppDomain.CurrentDomain.DomainUnload += (sender, args) => Close();
+
             IsOpen = true;
 
             byte[] rdtscCode;
@@ -103,7 +105,7 @@ namespace HardwareInformation
                     : CPUID_64_WINDOWS;
             }
 
-            size = (ulong) (rdtscCode.Length + cpuidCode.Length);
+            size = (ulong)(rdtscCode.Length + cpuidCode.Length);
 
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
             {
@@ -125,7 +127,7 @@ namespace HardwareInformation
             {
                 // Windows
                 codeBuffer = NativeMethods.VirtualAlloc(IntPtr.Zero,
-                    (UIntPtr) size, AllocationType.COMMIT | AllocationType.RESERVE,
+                    (UIntPtr)size, AllocationType.COMMIT | AllocationType.RESERVE,
                     MemoryProtection.EXECUTE_READWRITE);
             }
 
@@ -137,11 +139,11 @@ namespace HardwareInformation
             IntPtr cpuidAddress;
             if (Environment.Is64BitProcess)
             {
-                cpuidAddress = (IntPtr) ((long) codeBuffer + rdtscCode.Length);
+                cpuidAddress = (IntPtr)((long)codeBuffer + rdtscCode.Length);
             }
             else
             {
-                cpuidAddress = (IntPtr) ((int) codeBuffer + rdtscCode.Length);
+                cpuidAddress = (IntPtr)((int)codeBuffer + rdtscCode.Length);
             }
 
             Marshal.Copy(cpuidCode, 0, cpuidAddress, cpuidCode.Length);

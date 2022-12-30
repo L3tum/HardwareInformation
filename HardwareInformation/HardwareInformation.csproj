@@ -1,61 +1,68 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <Authors>L3tum</Authors>
-    <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <PackageProjectUrl>https://github.com/L3tum/HardwareInformation</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/L3tum/HardwareInformation</RepositoryUrl>
-    <RepositoryType>Github</RepositoryType>
-    <SignAssembly>true</SignAssembly>
-    <DelaySign>false</DelaySign>
-    <AssemblyOriginatorKeyFile>sgKey.snk</AssemblyOriginatorKeyFile>
-    <Description>.NET Standard 2 Cross-Platform Hardware Information Gatherer</Description>
-    <Configurations>Debug;Release</Configurations>
-    <Platforms>AnyCPU;X86</Platforms>
-    <TargetFramework>net5.0</TargetFramework>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-  </PropertyGroup>
+    <PropertyGroup>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <Authors>L3tum</Authors>
+        <PackageLicenseFile>LICENSE</PackageLicenseFile>
+        <PackageProjectUrl>https://github.com/L3tum/HardwareInformation</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/L3tum/HardwareInformation</RepositoryUrl>
+        <RepositoryType>Github</RepositoryType>
+        <SignAssembly>true</SignAssembly>
+        <DelaySign>false</DelaySign>
+        <AssemblyOriginatorKeyFile>sgKey.snk</AssemblyOriginatorKeyFile>
+        <Description>.NET Standard 2 Cross-Platform Hardware Information Gatherer</Description>
+        <Configurations>Debug;Release</Configurations>
+        <Platforms>AnyCPU;X86</Platforms>
+        <TargetFramework>net5.0</TargetFramework>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    </PropertyGroup>
 
-  <PropertyGroup>
-    <DocumentationFile>bin\$(Configuration)\$(AssemblyName).xml</DocumentationFile>
-    <LangVersion>default</LangVersion>
-  </PropertyGroup>
+    <PropertyGroup>
+        <DocumentationFile>bin\$(Configuration)\$(AssemblyName).xml</DocumentationFile>
+        <LangVersion>default</LangVersion>
+    </PropertyGroup>
 
-  <PropertyGroup>
-    <IncludeSymbols>true</IncludeSymbols>
-    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-    <Version>4.0.1</Version>
-  </PropertyGroup>
+    <PropertyGroup>
+        <IncludeSymbols>true</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+        <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+        <Version>4.0.1</Version>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="5.0.0" />
-    <PackageReference Include="RyzenMasterBindings" Version="1.0.2" />
-    <PackageReference Include="System.Diagnostics.PerformanceCounter" Version="5.0.0" />
-    <PackageReference Include="System.Management" Version="5.0.0" />
-    <PackageReference Include="VulkanSharp" Version="0.1.10" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="5.0.0" />
+        <PackageReference Include="RyzenMasterBindings" Version="1.0.2" />
+        <PackageReference Include="System.Diagnostics.PerformanceCounter" Version="5.0.0" />
+        <PackageReference Include="System.Management" Version="5.0.0" />
+        <PackageReference Include="VulkanSharp" Version="0.1.10" />
+    </ItemGroup>
 
-  <ItemGroup>
-    <None Include="..\LICENSE">
-      <Pack>True</Pack>
-      <PackagePath></PackagePath>
-    </None>
-    <None Include="bin\$(Configuration)\$(AssemblyName).xml">
-      <Pack>True</Pack>
-      <PackagePath></PackagePath>
-    </None>
-    <None Update="Providers\USBVendorList.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>USBVendorList.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
+    <ItemGroup>
+        <None Include="..\LICENSE">
+            <Pack>True</Pack>
+            <PackagePath></PackagePath>
+        </None>
+        <None Include="bin\$(Configuration)\$(AssemblyName).xml">
+            <Pack>True</Pack>
+            <PackagePath></PackagePath>
+        </None>
+        <None Update="Providers\USBVendorList.tt">
+            <Generator>TextTemplatingFileGenerator</Generator>
+            <LastGenOutput>USBVendorList.cs</LastGenOutput>
+        </None>
+        <None Update="Providers\PCIVendorList.tt">
+          <Generator>TextTemplatingFileGenerator</Generator>
+          <LastGenOutput>PCIVendorList.cs</LastGenOutput>
+        </None>
+    </ItemGroup>
 
-  <ItemGroup>
-    <Compile Update="Providers\USBVendorList.cs">
-      <DependentUpon>USBVendorList.tt</DependentUpon>
-    </Compile>
-  </ItemGroup>
+    <ItemGroup>
+        <Compile Update="Providers\USBVendorList.cs">
+            <DependentUpon>USBVendorList.tt</DependentUpon>
+        </Compile>
+        <Compile Update="Providers\PCIVendorList.cs">
+          <DependentUpon>PCIVendorList.tt</DependentUpon>
+        </Compile>
+    </ItemGroup>
 
 </Project>

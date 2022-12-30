@@ -8,11 +8,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="BenchmarkDotNet" Version="0.13.0" />
+        <PackageReference Include="BenchmarkDotNet" Version="0.13.0"/>
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\HardwareInformation\HardwareInformation.csproj" />
+        <ProjectReference Include="..\HardwareInformation\HardwareInformation.csproj"/>
     </ItemGroup>
 
 </Project>

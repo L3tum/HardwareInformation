@@ -1,4 +1,8 @@
+#region using
+
 using BenchmarkDotNet.Running;
+
+#endregion
 
 namespace HardwareInformation.Benchmarks
 {

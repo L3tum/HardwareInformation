@@ -1,4 +1,5 @@
 # HardwareInformation
+
 .NET Core Cross-Platform Hardware Information Gatherer
 ================
 
@@ -8,9 +9,9 @@
 ![Build](https://github.com/L3tum/HardwareInformation/workflows/.NET%20Core%20CI/badge.svg?style=flat-square)
 ![Simple Test](https://github.com/L3tum/HardwareInformation/workflows/.NET%20Core%20Simple%20Test/badge.svg?style=flat-square)
 
-  - [Features](#features)
-  - [Goal](#goal)
-  
+- [Features](#features)
+- [Goal](#goal)
+
 ## Usage
 
 Download from [Nuget](https://www.nuget.org/packages/HardwareInformation/) via your favorite Nuget client like dotnet
@@ -99,21 +100,23 @@ Result is cached internally so don't worry about calling it multiple times
 | USB Class | :white_check_mark: | :white_check_mark: | :x: | :white_check_mark:
 | Multiple processors/Dual processors | :x: | :x: | :x:| :x:
 
-HRF = Human Readable Format. Normal capacity/size is in bytes, while this is a string encoded with the appropriate sizing.
+HRF = Human Readable Format. Normal capacity/size is in bytes, while this is a string encoded with the appropriate
+sizing.
 
 **\* Inaccurate or false measurements may be possible. Use with caution.**
 
 **\*\* Only available on Intel platforms.**
 
-**\*\*\* Accesses operating system features (Windows WMI and Linux /proc, /sys or lshw etc.) and thus may not be accurate if those features are not available.**
+**\*\*\* Accesses operating system features (Windows WMI and Linux /proc, /sys or lshw etc.) and thus may not be
+accurate if those features are not available.**
 
 **\*\*\*\* Only available on AMD platforms.**
 
 ## Goal
 
-The immediate goal is somewhat feature-parity with CPU-Z/CPUID. 
-While this may be impossible for some features (like RAM latencies) without a kernel driver, part of the goal is
-also to bring these kind of capabilities without requiring a software installation or kernel driver.
+The immediate goal is somewhat feature-parity with CPU-Z/CPUID. While this may be impossible for some features (like RAM
+latencies) without a kernel driver, part of the goal is also to bring these kind of capabilities without requiring a
+software installation or kernel driver.
 
 In some parts, this library has already more features than CPU-Z/CPUID, since it's cross-platform (for most features).
 

@@ -1,12 +1,16 @@
+#region using
+
 using System.Globalization;
 using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Jobs;
 using BenchmarkDotNet.Mathematics;
 using BenchmarkDotNet.Order;
 
+#endregion
+
 namespace HardwareInformation.Benchmarks.Providers
 {
-    [SimpleJob(RuntimeMoniker.NetCoreApp31, 2, 0, targetCount:500, invocationCount: 10000)]
+    [SimpleJob(RuntimeMoniker.NetCoreApp31, 2, 0, 500, 10000)]
     [MemoryDiagnoser]
     [RPlotExporter]
     [MarkdownExporter]

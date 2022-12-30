@@ -1,21 +1,21 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>net5.0</TargetFramework>
-    <LangVersion>8.0</LangVersion>
-    <Configurations>Debug;Release</Configurations>
-    <Platforms>AnyCPU;X86</Platforms>
-  </PropertyGroup>
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net5.0</TargetFramework>
+        <LangVersion>8.0</LangVersion>
+        <Configurations>Debug;Release</Configurations>
+        <Platforms>AnyCPU;X86</Platforms>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="5.0.0-rc.2.20475.5" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="5.0.0-rc.2.20475.5" />
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.3-beta2" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="5.0.0-rc.2.20475.5"/>
+        <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="5.0.0-rc.2.20475.5"/>
+        <PackageReference Include="Newtonsoft.Json" Version="12.0.3-beta2"/>
+    </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\HardwareInformation\HardwareInformation.csproj" />
-  </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\HardwareInformation\HardwareInformation.csproj"/>
+    </ItemGroup>
 
 </Project>

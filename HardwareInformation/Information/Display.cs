@@ -24,5 +24,10 @@
 	    ///     Vendor ID of the manufacturer of this monitor
 	    /// </summary>
 	    public string VendorID { get; internal set; }
+
+	    /// <summary>
+	    ///     Which year the monitor was built
+	    /// </summary>
+	    public string YearManufactured { get; internal set; }
     }
 }

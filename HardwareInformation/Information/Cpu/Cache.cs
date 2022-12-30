@@ -1,4 +1,6 @@
-﻿namespace HardwareInformation.Information.Cpu
+﻿using System;
+
+namespace HardwareInformation.Information.Cpu
 {
 	/// <summary>
 	///     Construct to represent a CPU cache level
@@ -25,14 +27,19 @@
 
 
 	    /// <summary>
-	    ///     How many cores are using this cache.
+	    ///     How many logical cores are using this cache.
+	    /// </summary>
+	    public uint LogicalCoresPerCache { get; set; }
+
+	    /// <summary>
+	    ///     How many physical cores are using this cache.
 	    /// </summary>
 	    public uint CoresPerCache { get; set; }
 
 	    /// <summary>
 	    ///     How many times this exact cache has been found in the processor.
 	    /// </summary>
-	    public uint TimesPresent { get; set; }
+	    public uint TimesPresent { get; set; } = 1;
 
 	    /// <summary>
 	    ///     Capacity in bytes
@@ -76,10 +83,10 @@
                 return false;
             }
 
-            var cache = (Cache) obj;
+            var cache = (Cache)obj;
 
             return cache.WBINVD == WBINVD && cache.LineSize == LineSize && cache.Associativity == Associativity &&
-                   cache.Capacity == Capacity && cache.CoresPerCache == CoresPerCache && cache.Level == Level &&
+                   cache.Capacity == Capacity && cache.LogicalCoresPerCache == LogicalCoresPerCache && cache.Level == Level &&
                    cache.Type == Type && cache.Sets == Sets && cache.Partitions == Partitions;
         }
 #pragma warning disable 1591

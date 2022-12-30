@@ -13,7 +13,7 @@
 // For some reason this is the fastest, although it doesn't make that much sense. Eh
 
     var wc = new WebClient();
-    using var webData = wc.OpenRead("http://www.linux-usb.org/usb.ids");
+    using var webData = wc.OpenRead("https://pci-ids.ucw.cz/v2.2/pci.ids");
     using var sr = new StreamReader(webData);
 
     var vendorIds = new Dictionary<int, string>();
@@ -90,7 +90,7 @@ namespace HardwareInformation.Providers {
     using System;
     using System.Runtime.CompilerServices;
 
-    internal static class USBVendorList {
+    internal static class PCIVendorList {
         private static readonly Dictionary<int, Tuple<string, Dictionary<int, string>>> vendorAndProductIds = new Dictionary<int, Tuple<string, Dictionary<int, string>>> {
 <#
     foreach (var kvp in vendorIds)

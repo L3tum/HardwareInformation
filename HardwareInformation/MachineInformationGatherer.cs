@@ -7,9 +7,12 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading;
-using HardwareInformation.Information.Cpu;
 using HardwareInformation.Providers;
+using HardwareInformation.Providers.General;
+using HardwareInformation.Providers.Linux;
+using HardwareInformation.Providers.MacOs;
 using HardwareInformation.Providers.Windows;
+using HardwareInformation.Providers.X86;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 
@@ -25,16 +28,36 @@ namespace HardwareInformation
         internal static ILogger Logger;
         internal static GatheringOptions Options;
 
+        /// <summary>
+        ///     This list should be ordered from specific to less-specific. For example x86 is more specific than Windows
+        ///     One example for an outlier is the AMD Provider, since that one only expands on the info already gathered by x86 and
+        ///     is thus "less" specific.
+        ///     Vulkan is run after the Windows provider because the Windows provider can actually supply more information than the
+        ///     Vulkan one
+        /// </summary>
         private static readonly InformationProvider[] InformationProviders =
         {
-            new CommonInformationProvider(),
-            new AMDInformationProvider(),
+            new DotNetInformationProvider(),
+            new X86InformationProvider(),
+            new AmdInformationProvider(),
             new IntelInformationProvider(),
-            new VulkanInformationProvider(),
-            new WindowsInformationProvider(),
-            new LinuxInformationProvider(),
+            new WindowsSystemInformationProvider(),
+            new WindowsCpuInformationProvider(),
+            new WindowsDisplayInformationProvider(),
+            new WindowsRamInformationProvider(),
+            new WindowsDiskInformationProvider(),
+            new WindowsUsbInformationProvider(),
+            new WindowsPciInformationProvider(),
+            new WindowsGpuInformationProvider(),
+            new LinuxSystemInformationProvider(),
+            new LinuxCpuInformationProvider(),
+            new LinuxDiskInformationProvider(),
+            new LinuxUsbInformationProvider(),
+            new LinuxPciInformationProvider(),
+            new LinuxGpuInformationProvider(),
             new OSXInformationProvider(),
-            new RyzenMasterProvider()
+            new VulkanInformationProvider(),
+            new EasterEggInformationProvider()
         };
 
         private static MachineInformation machineInformation;
@@ -66,31 +89,16 @@ namespace HardwareInformation
             }
 
             Options = options ?? new GatheringOptions();
-            
-            ThreadAffinity.SetCurrentProcess();
+
+            // ThreadAffinity.SetCurrentProcess();
 
             machineInformation = GetInformation(skipClockspeedTest);
-
-            PostOperations();
 
             return machineInformation;
         }
 
         private static MachineInformation GetInformation(bool skipClockspeedTest)
         {
-            if (RuntimeInformation.ProcessArchitecture == Architecture.X86 ||
-                RuntimeInformation.ProcessArchitecture == Architecture.X64)
-            {
-                Logger.LogInformation("Loading OpCodes for CPUID");
-                Opcode.Open();
-
-                AppDomain.CurrentDomain.DomainUnload += (sender, args) => { Opcode.Close(); };
-            }
-            else
-            {
-                Logger.LogInformation("No CPUID available on non-x86 CPUs");
-            }
-
             var informationProviders = new List<InformationProvider>();
             var info = new MachineInformation();
 
@@ -113,29 +121,15 @@ namespace HardwareInformation
 
                 try
                 {
-                    informationProvider.GatherGeneralSystemInformation(ref info);
+                    var sw = Stopwatch.StartNew();
+                    informationProvider.GatherInformation(info);
+                    Logger.LogDebug("{Provider} took {time}ms", informationProvider.GetType().Name, sw.ElapsedMilliseconds);
                 }
                 catch (Exception e)
                 {
                     Logger.LogError(e, "Exception when collecting information from {Provider}",
                         informationProvider.GetType().Name);
                 }
-            }
-
-            var informations = new Dictionary<string, MachineInformation>();
-
-            foreach (var informationProvider in informationProviders)
-            {
-                Logger.LogInformation("Collecting information from {Provider}",
-                    informationProvider.GetType().Name);
-
-                // Copy general system info from before onto a MachineInformation for each provider
-                var information = new MachineInformation();
-                MachineInformationMapper.MapMachineInformation(ref information, info);
-
-                GatherInformationFromProvider(informationProvider, ref information);
-
-                informations.Add(informationProvider.GetType().Name, information);
             }
 
             if (!skipClockspeedTest && (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ||
@@ -149,10 +143,9 @@ namespace HardwareInformation
             {
                 Logger.LogInformation("Running post update on {Provider}", informationProvider.GetType().Name);
 
-                var information = informations[informationProvider.GetType().Name];
                 try
                 {
-                    informationProvider.PostProviderUpdateInformation(ref information);
+                    informationProvider.PostProviderUpdateInformation(info);
                 }
                 catch (Exception e)
                 {
@@ -161,187 +154,9 @@ namespace HardwareInformation
                 }
             }
 
-            var dest = new MachineInformation();
+            machineInformation = info;
 
-            foreach (var kvp in informations)
-            {
-                MachineInformationMapper.MapMachineInformation(ref dest, kvp.Value);
-            }
-
-            return dest;
-        }
-
-        private static void GatherInformationFromProvider(InformationProvider informationProvider,
-            ref MachineInformation information)
-        {
-            if (Options.GatherCpuInformation)
-            {
-                try
-                {
-                    informationProvider.GatherCpuInformation(ref information);
-                }
-                catch (Exception e)
-                {
-                    Logger.LogError(e, "Exception when collecting information from {Provider}",
-                        informationProvider.GetType().Name);
-                }
-            }
-
-            if (Options.GatherCpuFeatureFlagInformation)
-            {
-                try
-                {
-                    informationProvider.GatherCpuFeatureFlagInformation(ref information);
-                }
-                catch (Exception e)
-                {
-                    Logger.LogError(e, "Exception when collecting information from {Provider}",
-                        informationProvider.GetType().Name);
-                }
-            }
-
-            if (Options.GatherCpuSpeedInformation)
-            {
-                try
-                {
-                    informationProvider.GatherCpuSpeedInformation(ref information);
-                }
-                catch (Exception e)
-                {
-                    Logger.LogError(e, "Exception when collecting information from {Provider}",
-                        informationProvider.GetType().Name);
-                }
-            }
-
-            if (Options.GatherCpuCacheTopologyInformation)
-            {
-                try
-                {
-                    informationProvider.GatherCpuCacheTopologyInformation(ref information);
-                }
-                catch (Exception e)
-                {
-                    Logger.LogError(e, "Exception when collecting information from {Provider}",
-                        informationProvider.GetType().Name);
-                }
-            }
-
-            if (Options.GatherMainboardInformation)
-            {
-                try
-                {
-                    informationProvider.GatherMainboardInformation(ref information);
-                }
-                catch (Exception e)
-                {
-                    Logger.LogError(e, "Exception when collecting information from {Provider}",
-                        informationProvider.GetType().Name);
-                }
-            }
-
-            if (Options.GatherRamInformation)
-            {
-                try
-                {
-                    informationProvider.GatherRamInformation(ref information);
-                }
-                catch (Exception e)
-                {
-                    Logger.LogError(e, "Exception when collecting information from {Provider}",
-                        informationProvider.GetType().Name);
-                }
-            }
-
-            if (Options.GatherDiskInformation)
-            {
-                try
-                {
-                    informationProvider.GatherDiskInformation(ref information);
-                }
-                catch (Exception e)
-                {
-                    Logger.LogError(e, "Exception when collecting information from {Provider}",
-                        informationProvider.GetType().Name);
-                }
-            }
-
-            if (Options.GatherGpuInformation)
-            {
-                try
-                {
-                    informationProvider.GatherGpuInformation(ref information);
-                }
-                catch (Exception e)
-                {
-                    Logger.LogError(e, "Exception when collecting information from {Provider}",
-                        informationProvider.GetType().Name);
-                }
-            }
-
-            if (Options.GatherUsbInformation)
-            {
-                try
-                {
-                    informationProvider.GatherUsbInformation(ref information);
-                }
-                catch (Exception e)
-                {
-                    Logger.LogError(e, "Exception when collecting information from {Provider}",
-                        informationProvider.GetType().Name);
-                }
-            }
-
-            if (Options.GatherMonitorInformation)
-            {
-                try
-                {
-                    informationProvider.GatherMonitorInformation(ref information);
-                }
-                catch (Exception e)
-                {
-                    Logger.LogError(e, "Exception when collecting information from {Provider}",
-                        informationProvider.GetType().Name);
-                }
-            }
-        }
-
-        private static void PostOperations()
-        {
-            // Fix some things that may be propagated from lower-level information providers
-
-            if (machineInformation.Cpu != null)
-            {
-                if (machineInformation.Cpu.Name != null)
-                {
-                    machineInformation.Cpu.Name = machineInformation.Cpu.Name.Trim();
-                }
-
-                if (machineInformation.Cpu.Caption != null)
-                {
-                    machineInformation.Cpu.Caption = machineInformation.Cpu.Caption.Trim();
-                }
-
-                if (Options.GatherPerCoreInformation && machineInformation.Cpu.Cores != null)
-                {
-                    foreach (var cpuCore in machineInformation.Cpu.Cores)
-                    {
-                        if (cpuCore.NormalClockSpeed == 0)
-                        {
-                            cpuCore.NormalClockSpeed = machineInformation.Cpu.NormalClockSpeed;
-                        }
-
-                        if (cpuCore.MaxClockSpeed == 0)
-                        {
-                            cpuCore.MaxClockSpeed = machineInformation.Cpu.MaxClockSpeed;
-                        }
-                    }
-                }
-
-                if (!Options.GatherPerCoreInformation)
-                {
-                    machineInformation.Cpu.Cores = new List<Core>().AsReadOnly();
-                }
-            }
+            return info;
         }
 
         private static void GetCoreSpeeds()
@@ -387,7 +202,7 @@ namespace HardwareInformation
 
                 if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
                 {
-                    value = (uint) (counter.NextValue() / 100.0f * value);
+                    value = (uint)(counter.NextValue() / 100.0f * value);
                     counter.Dispose();
                 }
                 else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
@@ -398,7 +213,7 @@ namespace HardwareInformation
                         var freq = ulong.Parse(
                             File.ReadAllText($"/sys/devices/system/cpu/cpu{i}/cpufreq/scaling_cur_freq"));
 
-                        value = (uint) (freq / 1000);
+                        value = (uint)(freq / 1000);
                     }
                     catch (Exception)
                     {
