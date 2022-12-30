@@ -2,16 +2,16 @@
 
     <PropertyGroup>
         <TargetFramework>net5.0</TargetFramework>
-        <Platforms>AnyCPU;x86</Platforms>
+        <Platforms>AnyCPU</Platforms>
         <LangVersion>9</LangVersion>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Reinforced.Typings" Version="1.5.9"/>
+        <PackageReference Include="Reinforced.Typings" Version="1.6.1" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\HardwareInformation\HardwareInformation.csproj"/>
+        <ProjectReference Include="..\HardwareInformation\HardwareInformation.csproj" />
     </ItemGroup>
 
 </Project>

@@ -34,7 +34,7 @@ namespace HardwareInformation.Typings
                 typeof(Core),
                 typeof(AMDFeatureFlags),
                 typeof(IntelFeatureFlags),
-                typeof(USBDevice)
+                typeof(PnpDevice)
             }, configBuilder =>
             {
                 configBuilder.WithAllFields().WithAllMethods()
@@ -72,7 +72,7 @@ namespace HardwareInformation.Typings
                 typeof(IntelFeatureFlags.ExtendedFeatureFlagsF81ECX),
                 typeof(IntelFeatureFlags.ExtendedFeatureFlagsF81EDX),
                 typeof(IntelFeatureFlags.FeatureFlagsAPM),
-                typeof(IntelFeatureFlags.TPMFeatureFlagsEAX),
+                typeof(IntelFeatureFlags.FeatureFlagsTPM),
                 typeof(DeviceType)
             });
         }

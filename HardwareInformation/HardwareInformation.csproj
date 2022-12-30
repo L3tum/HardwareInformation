@@ -10,7 +10,7 @@
         <SignAssembly>true</SignAssembly>
         <DelaySign>false</DelaySign>
         <AssemblyOriginatorKeyFile>sgKey.snk</AssemblyOriginatorKeyFile>
-        <Description>.NET Standard 2 Cross-Platform Hardware Information Gatherer</Description>
+        <Description>.NET 5 Cross-Platform Hardware Information Gatherer</Description>
         <Configurations>Debug;Release</Configurations>
         <Platforms>AnyCPU;X86</Platforms>
         <TargetFramework>net5.0</TargetFramework>
