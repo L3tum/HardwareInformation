@@ -1,8 +1,4 @@
-﻿#region using
-
-#endregion
-
-namespace HardwareInformation.Information
+﻿namespace HardwareInformation.Information
 {
 	/// <summary>
 	///     BIOS and Mainboard information

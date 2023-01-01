@@ -1,4 +1,8 @@
+#region using
+
 using System;
+
+#endregion
 
 namespace HardwareInformation.Information
 {

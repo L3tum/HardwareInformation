@@ -1,8 +1,4 @@
-﻿#region using
-
-#endregion
-
-namespace HardwareInformation.Information.Cpu
+﻿namespace HardwareInformation.Information.Cpu
 {
 #pragma warning disable 1591
 	/// <summary>

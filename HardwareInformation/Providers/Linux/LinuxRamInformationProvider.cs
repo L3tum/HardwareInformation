@@ -97,5 +97,4 @@ public class LinuxRamInformationProvider : LinuxInformationProvider
 //                 information.RAMSticks = ramSticks.AsReadOnly();
 //             }
 //         }
-
 }

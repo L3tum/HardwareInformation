@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace HardwareInformation.Information.Cpu
+﻿namespace HardwareInformation.Information.Cpu
 {
 	/// <summary>
 	///     Construct to represent a CPU cache level

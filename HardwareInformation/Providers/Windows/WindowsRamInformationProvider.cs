@@ -40,14 +40,14 @@ public class WindowsRamInformationProvider : WindowsInformationProvider
 
                 var ram = new RAM
                 {
-                    Speed = information.Windows10 ? uint.Parse(managementBaseObject.Properties["ConfiguredClockSpeed"].Value.ToString() ?? "0") : 0,
-                    Manufacturer = managementBaseObject.Properties["Manufacturer"].Value.ToString(),
-                    Name = managementBaseObject.Properties["DeviceLocator"].Value.ToString(),
-                    PartNumber = managementBaseObject.Properties["PartNumber"].Value.ToString(),
-                    FormFactor = (RAM.FormFactors)Enum.Parse(typeof(RAM.FormFactors), managementBaseObject.Properties["FormFactor"].Value.ToString() ?? "0"),
-                    Capacity = ulong.Parse(managementBaseObject.Properties["Capacity"].Value.ToString() ?? "0"),
-                    NominalVoltage = uint.Parse(managementBaseObject.Properties["ConfiguredVoltage"].Value.ToString() ?? "0"),
-                    BankLabel = managementBaseObject.Properties["BankLabel"].Value.ToString(),
+                    Speed = information.Windows10 ? uint.Parse(managementBaseObject.Properties["ConfiguredClockSpeed"].Value?.ToString() ?? "0") : 0,
+                    Manufacturer = managementBaseObject.Properties["Manufacturer"].Value?.ToString(),
+                    Name = managementBaseObject.Properties["DeviceLocator"].Value?.ToString(),
+                    PartNumber = managementBaseObject.Properties["PartNumber"].Value?.ToString(),
+                    FormFactor = (RAM.FormFactors)Enum.Parse(typeof(RAM.FormFactors), managementBaseObject.Properties["FormFactor"].Value?.ToString() ?? "0"),
+                    Capacity = ulong.Parse(managementBaseObject.Properties["Capacity"].Value?.ToString() ?? "0"),
+                    NominalVoltage = uint.Parse(managementBaseObject.Properties["ConfiguredVoltage"].Value?.ToString() ?? "0"),
+                    BankLabel = managementBaseObject.Properties["BankLabel"].Value?.ToString(),
                 };
 
                 ram.CapacityHRF = Util.FormatBytes(ram.Capacity);

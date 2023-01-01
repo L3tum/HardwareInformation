@@ -51,18 +51,18 @@ public class OSXInformationProvider : UnixHelperInformationProvider
             {
                 information.Cpu.Stepping = uint.Parse(value.Trim());
             }
-            
+
             if (GetValueFromStartingText(lines, @"hw\.physicalcpu", out value))
             {
                 information.Cpu.PhysicalCores = uint.Parse(value.Trim());
             }
-            
+
             if (GetValueFromStartingText(lines, @"hw\.logicalcpu", out value))
             {
                 information.Cpu.LogicalCoresInCpu = Enumerable.Range(0, int.Parse(value.Trim())).Select(number => (uint)number).ToHashSet();
                 information.Cpu.InitializeLists();
             }
-            
+
             // ARM Macs use this instead of machdep.cpu.family :)
             if (GetValueFromStartingText(lines, @"hw\.cpufamily", out value))
             {

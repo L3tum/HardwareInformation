@@ -1,6 +1,10 @@
+#region using
+
 using System;
 using System.Linq.Expressions;
 using System.Runtime.InteropServices;
+
+#endregion
 
 namespace HardwareInformation.Providers.General;
 

@@ -189,12 +189,12 @@ namespace HardwareInformation.Information.Cpu
 	///     Feature flags only present on Intel CPUs
 	/// </summary>
 	public class IntelFeatureFlags
-	{
-		/// <summary>
-		///     Intel-specific TPM feature flags (thermal power management)
-		/// </summary>
-		[Obsolete("Use FeatureFlagsTpm instead")]
-		public FeatureFlagsTPM TPMFeatureFlags => FeatureFlagsTpm;
+    {
+	    /// <summary>
+	    ///     Intel-specific TPM feature flags (thermal power management)
+	    /// </summary>
+	    [Obsolete("Use FeatureFlagsTpm instead")]
+        public FeatureFlagsTPM TPMFeatureFlags => FeatureFlagsTpm;
 
 	    /// <summary>
 	    ///     Intel-specific TPM feature flags (thermal power management)
@@ -369,42 +369,43 @@ namespace HardwareInformation.Information.Cpu
             RESERVED12 = 0b1000000000000000000000000000000,
             RESERVED13 = 0b10000000000000000000000000000000
         }
+
         [Flags]
         public enum FeatureFlagsTPM : uint
         {
-	        NONE = 0b0,
-	        DTS = 0b1,
-	        TURBO = 0b10,
-	        ARAT = 0b100,
-	        RESERVED = 0b1000,
-	        PLN = 0b10000,
-	        ECMD = 0b100000,
-	        PTM = 0b1000000,
-	        HWP = 0b10000000,
-	        HWP_NOT = 0b100000000,
-	        HWP_AW = 0b1000000000,
-	        HWP_EPP = 0b10000000000,
-	        HWP_PLR = 0b100000000000,
-	        RESERVED2 = 0b1000000000000,
-	        HDC = 0b10000000000000,
-	        BOOST_MAX = 0b100000000000000,
-	        HWP_CAP = 0b1000000000000000,
-	        HWP_PECI = 0b10000000000000000,
-	        HWP_FLEX = 0b100000000000000000,
-	        HWP_FAST = 0b1000000000000000000,
-	        HWP_FEEDBACK = 0b10000000000000000000,
-	        HWP_IGNORE_IDLE = 0b100000000000000000000,
-	        RESERVED3 = 0b1000000000000000000000,
-	        RESERVED4 = 0b10000000000000000000000,
-	        RESERVED5 = 0b100000000000000000000000,
-	        RESERVED6 = 0b1000000000000000000000000,
-	        RESERVED7 = 0b10000000000000000000000000,
-	        RESERVED8 = 0b100000000000000000000000000,
-	        RESERVED9 = 0b1000000000000000000000000000,
-	        RESERVED10 = 0b10000000000000000000000000000,
-	        RESERVED11 = 0b100000000000000000000000000000,
-	        RESERVED12 = 0b1000000000000000000000000000000,
-	        RESERVED13 = 0b10000000000000000000000000000000
+            NONE = 0b0,
+            DTS = 0b1,
+            TURBO = 0b10,
+            ARAT = 0b100,
+            RESERVED = 0b1000,
+            PLN = 0b10000,
+            ECMD = 0b100000,
+            PTM = 0b1000000,
+            HWP = 0b10000000,
+            HWP_NOT = 0b100000000,
+            HWP_AW = 0b1000000000,
+            HWP_EPP = 0b10000000000,
+            HWP_PLR = 0b100000000000,
+            RESERVED2 = 0b1000000000000,
+            HDC = 0b10000000000000,
+            BOOST_MAX = 0b100000000000000,
+            HWP_CAP = 0b1000000000000000,
+            HWP_PECI = 0b10000000000000000,
+            HWP_FLEX = 0b100000000000000000,
+            HWP_FAST = 0b1000000000000000000,
+            HWP_FEEDBACK = 0b10000000000000000000,
+            HWP_IGNORE_IDLE = 0b100000000000000000000,
+            RESERVED3 = 0b1000000000000000000000,
+            RESERVED4 = 0b10000000000000000000000,
+            RESERVED5 = 0b100000000000000000000000,
+            RESERVED6 = 0b1000000000000000000000000,
+            RESERVED7 = 0b10000000000000000000000000,
+            RESERVED8 = 0b100000000000000000000000000,
+            RESERVED9 = 0b1000000000000000000000000000,
+            RESERVED10 = 0b10000000000000000000000000000,
+            RESERVED11 = 0b100000000000000000000000000000,
+            RESERVED12 = 0b1000000000000000000000000000000,
+            RESERVED13 = 0b10000000000000000000000000000000
         }
 #pragma warning restore 1591
     }

@@ -1,4 +1,8 @@
-﻿using HardwareInformation.Information.Gpu;
+﻿#region using
+
+using HardwareInformation.Information.Gpu;
+
+#endregion
 
 namespace HardwareInformation.Information
 {
