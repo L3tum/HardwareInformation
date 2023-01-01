@@ -15,12 +15,12 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest, macOS-latest]
-        dotnet: [ '3.1.x' ]
+        dotnet: [ '5.0.x', '6.0.x', '7.0.x' ]
     name: Dotnet ${{ matrix.dotnet }} build on ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v1
       - name: Setup dotnet
-        uses: actions/setup-dotnet@v1
+        uses: actions/setup-dotnet@v3
         with:
           dotnet-version: ${{ matrix.dotnet }}
       - name: Test
