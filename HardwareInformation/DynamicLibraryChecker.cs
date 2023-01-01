@@ -48,16 +48,16 @@ namespace HardwareInformation
 
         private static class NativeMethods
         {
-            [DllImport("kernel32", SetLastError = true)]
+            [DllImport("kernel32", SetLastError = true, CharSet = CharSet.Unicode)]
             internal static extern IntPtr LoadLibrary(string fileName);
 
             [DllImport("kernel32", SetLastError = true)]
             internal static extern void FreeLibrary(IntPtr handle);
 
-            [DllImport("libdl")]
+            [DllImport("libc", CharSet = CharSet.Unicode)]
             internal static extern IntPtr dlopen(string fileName, int flag);
 
-            [DllImport("libdl")]
+            [DllImport("libc")]
             internal static extern int dlclose(IntPtr handle);
         }
     }
