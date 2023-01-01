@@ -31,6 +31,7 @@ public class OSXInformationProvider : UnixHelperInformationProvider
             if (information.Cpus.Count == 0)
             {
                 information.Cpus = new[] { new CPU() }.ToList().AsReadOnly();
+                information.Cpus[0].InitializeLists();
             }
 
             using var p = Util.StartProcess("sysctl", "-a");
