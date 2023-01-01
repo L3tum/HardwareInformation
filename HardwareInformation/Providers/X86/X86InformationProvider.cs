@@ -1,9 +1,7 @@
 #region using
 
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using HardwareInformation.Information;
 
 #endregion
@@ -23,6 +21,7 @@ namespace HardwareInformation.Providers.X86
 
         protected override void GatherPerCpuInformation(int cpuIndex, MachineInformation information)
         {
+            GatherCpuModelInformation(cpuIndex, information);
             IdentifyVendorAndLevelInformation(cpuIndex, information);
             IdentifyExtendedFeatureFlags(cpuIndex, information);
             IdentifyExtendedName(cpuIndex, information);
@@ -114,20 +113,6 @@ namespace HardwareInformation.Providers.X86
         }
 
         /// <summary>
-        ///     We assume that every processor supports at least Level 1.
-        ///     If that is not the case, then tough luck. The CPU is probably so old
-        ///     that it can't even run C# on it.
-        ///     EAX = 1, ECX = 0
-        ///     EBX=[23..16:Logical Processor Count]
-        /// </summary>
-        /// <returns></returns>
-        private uint GetNumberOfLogicalCores()
-        {
-            Opcode.Cpuid(out var result, 1, 0);
-            return Util.ExtractBits(result.ebx, 16, 23);
-        }
-
-        /// <summary>
         ///     EAX = 1, ECX = 0
         ///     EAX=[27..20:Extended Family],[19..16:Extended Model],[13..12:Type],[11..8:Family],[7..4:Model],[3..0: Stepping]
         ///     EBX=[31..24: Default APIC ID],[23..16:Logical Processor Count],[15..8:CFLUSH Chunk Count],[7..0:Brand ID]
@@ -135,84 +120,30 @@ namespace HardwareInformation.Providers.X86
         ///     EDX=Feature Flags
         /// </summary>
         /// <param name="information"></param>
-        protected override void IdentifyCpus(MachineInformation information)
+        private void GatherCpuModelInformation(int cpuIndex, MachineInformation information)
         {
-            var threads = GetNumberOfLogicalCores();
-            var cpus = new List<CPU>();
-            var tasks = Util.RunAffinityOnNumberOfThreads(threads, thread =>
+            Opcode.Cpuid(out var result, 1, 0);
+            information.Cpus[cpuIndex].Type = (CPU.ProcessorType)Util.ExtractBits(result.eax, 12, 13);
+            information.Cpus[cpuIndex].Family = Util.ExtractBits(result.eax, 8, 12);
+            information.Cpus[cpuIndex].Model = Util.ExtractBits(result.eax, 4, 7);
+            information.Cpus[cpuIndex].Stepping = Util.ExtractBits(result.eax, 0, 3);
+
+            if (information.Cpus[cpuIndex].Family is 15)
             {
-                Opcode.Cpuid(out var result, 1, 0);
-                var cpu = new CPU
-                {
-                    Type = (CPU.ProcessorType)Util.ExtractBits(result.eax, 12, 13),
-                    Family = Util.ExtractBits(result.eax, 8, 12),
-                    Model = Util.ExtractBits(result.eax, 4, 7),
-                    Stepping = Util.ExtractBits(result.eax, 0, 3)
-                };
-
-                if (cpu.Family is 15)
-                {
-                    // Family needs to be added together
-                    cpu.Family = Util.ExtractBits(result.eax, 20, 27) + cpu.Family;
-                    // Model needs to be concatenated
-                    cpu.Model = (Util.ExtractBits(result.eax, 16, 19) << 4) + cpu.Model;
-                }
-
-                if (cpu.Family is 6)
-                {
-                    // Model needs to be concatenated
-                    cpu.Model = (Util.ExtractBits(result.eax, 16, 19) << 4) + cpu.Model;
-                }
-
-                cpu.FeatureFlagsOne = (CPU.FeatureFlagEDX)result.edx;
-                cpu.FeatureFlagsTwo = (CPU.FeatureFlagECX)result.ecx;
-                cpu.LogicalCoresInCpu.Add(thread);
-                lock (cpus)
-                {
-                    cpus.Add(cpu);
-                }
-            });
-
-            Task.WaitAll(tasks);
-
-            // Check if Family, Model, Type and Stepping are different (deduplicate CPUs)
-            var finalCpus = new List<CPU>();
-            foreach (var cpu in cpus)
-            {
-                CPU equalCpu = null;
-                foreach (var finalCpu in finalCpus)
-                {
-                    if (
-                        finalCpu.Family == cpu.Family
-                        && finalCpu.Model == cpu.Model
-                        && finalCpu.Type == cpu.Type
-                        && finalCpu.Stepping == cpu.Stepping
-                        && finalCpu.FeatureFlagsOne == cpu.FeatureFlagsOne
-                        && finalCpu.FeatureFlagsTwo == cpu.FeatureFlagsTwo
-                    )
-                    {
-                        equalCpu = finalCpu;
-                        break;
-                    }
-                }
-
-                if (equalCpu == null)
-                {
-                    finalCpus.Add(cpu);
-                }
-                else
-                {
-                    equalCpu.LogicalCoresInCpu.UnionWith(cpu.LogicalCoresInCpu);
-                }
+                // Family needs to be added together
+                information.Cpus[cpuIndex].Family = Util.ExtractBits(result.eax, 20, 27) + information.Cpus[cpuIndex].Family;
+                // Model needs to be concatenated
+                information.Cpus[cpuIndex].Model = (Util.ExtractBits(result.eax, 16, 19) << 4) + information.Cpus[cpuIndex].Model;
             }
 
-            foreach (var finalCpu in finalCpus)
+            if (information.Cpus[cpuIndex].Family is 6)
             {
-                finalCpu.LogicalCoresInCpu = finalCpu.LogicalCoresInCpu.OrderBy(key => key).ToHashSet();
-                finalCpu.InitializeLists();
+                // Model needs to be concatenated
+                information.Cpus[cpuIndex].Model = (Util.ExtractBits(result.eax, 16, 19) << 4) + information.Cpus[cpuIndex].Model;
             }
 
-            information.Cpus = finalCpus.AsReadOnly();
+            information.Cpus[cpuIndex].FeatureFlagsOne = (CPU.FeatureFlagEDX)result.edx;
+            information.Cpus[cpuIndex].FeatureFlagsTwo = (CPU.FeatureFlagECX)result.ecx;
         }
 
         /// <summary>

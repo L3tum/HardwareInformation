@@ -3,6 +3,7 @@
 using System;
 using System.Linq;
 using System.Runtime.InteropServices;
+using HardwareInformation.Information;
 using HardwareInformation.Providers.Unix;
 using Microsoft.Extensions.Logging;
 
@@ -17,10 +18,21 @@ public class OSXInformationProvider : UnixHelperInformationProvider
         return RuntimeInformation.IsOSPlatform(OSPlatform.OSX);
     }
 
-    public override void GatherInformation(MachineInformation information)
+    protected override void IdentifyCpus(MachineInformation information)
     {
         try
         {
+            // MacOS does not offer a way to retrieve multiple CPUs, and I don't think there are any Macs like that to begin with.
+            if (information.Cpus.Count > 1)
+            {
+                return;
+            }
+
+            if (information.Cpus.Count == 0)
+            {
+                information.Cpus = new[] { new CPU() }.ToList().AsReadOnly();
+            }
+
             using var p = Util.StartProcess("sysctl", "-a");
             using var sr = p.StandardOutput;
             p.WaitForExit();

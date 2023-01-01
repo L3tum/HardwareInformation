@@ -47,6 +47,8 @@ public class IntelInformationProvider : InformationProvider
         foreach (var cpu in information.Cpus)
         {
             cpu.PhysicalCores = (uint)cpu.Cores.Select(core => core.CoreId).Distinct().Count();
+            cpu.Nodes = (uint)cpu.Cores.Select(core => core.Node).Distinct().Count();
+            cpu.LogicalCoresPerNode = cpu.LogicalCores / cpu.Nodes;
 
             foreach (var cache in cpu.Caches)
             {

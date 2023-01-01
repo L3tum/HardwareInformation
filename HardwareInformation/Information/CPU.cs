@@ -51,6 +51,7 @@ namespace HardwareInformation.Information
         /// <summary>
         ///     Amount of logical cores per NUMA node
         /// </summary>
+        [Obsolete("With BIG.little designs and other such shenanigans this value isn't really representative anymore.")]
         public uint LogicalCoresPerNode { get; internal set; }
 
         /// <summary>

@@ -12,7 +12,7 @@ namespace HardwareInformation.Providers.Linux;
 public class LinuxCpuInformationProvider : LinuxInformationProvider
 {
     [SupportedOSPlatform("linux")]
-    public override void GatherInformation(MachineInformation information)
+    protected override void IdentifyCpus(MachineInformation information)
     {
         #region Example
 
@@ -172,8 +172,10 @@ power management:
                             continue;
                         }
 
+                        var startOfLogicalCoreNumbering = (int) information.Cpus.Sum(cpu => cpu.LogicalCores);
+
                         var cpu = new CPU
-                            { Name = name, LogicalCoresInCpu = Enumerable.Range(0, numberOfLogicalCores).Select(number => (uint)number).ToHashSet() };
+                            { Name = name, LogicalCoresInCpu = Enumerable.Range(startOfLogicalCoreNumbering, numberOfLogicalCores).Select(number => (uint)number).ToHashSet() };
                         cpu.InitializeLists();
                         information.Cpus = information.Cpus.ToList().Append(cpu).ToList().AsReadOnly();
                     }

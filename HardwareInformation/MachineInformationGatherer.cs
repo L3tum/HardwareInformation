@@ -38,11 +38,13 @@ namespace HardwareInformation
         private static readonly InformationProvider[] InformationProviders =
         {
             new DotNetInformationProvider(),
+            new WindowsCpuInformationProvider(),
+            new LinuxCpuInformationProvider(),
+            new OSXInformationProvider(),
             new X86InformationProvider(),
             new AmdInformationProvider(),
             new IntelInformationProvider(),
             new WindowsSystemInformationProvider(),
-            new WindowsCpuInformationProvider(),
             new WindowsDisplayInformationProvider(),
             new WindowsRamInformationProvider(),
             new WindowsDiskInformationProvider(),
@@ -50,12 +52,10 @@ namespace HardwareInformation
             new WindowsPciInformationProvider(),
             new WindowsGpuInformationProvider(),
             new LinuxSystemInformationProvider(),
-            new LinuxCpuInformationProvider(),
             new LinuxDiskInformationProvider(),
             new LinuxUsbInformationProvider(),
             new LinuxPciInformationProvider(),
             new LinuxGpuInformationProvider(),
-            new OSXInformationProvider(),
             new VulkanInformationProvider(),
             new EasterEggInformationProvider()
         };
