@@ -48,6 +48,8 @@ jobs:
     continue-on-error: true
     strategy:
       fail-fast: false
+      matrix:
+        dotnet: [ '5.0.x' ]
     name: Benchmarking
     steps:
       - uses: actions/checkout@v1
@@ -66,8 +68,15 @@ jobs:
     runs-on: ubuntu-latest
     continue-on-error: false
     name: Dotnet build and push
+    strategy:
+      matrix:
+        dotnet: [ '5.0.x' ]
     steps:
       - uses: actions/checkout@v1
+      - name: Setup dotnet
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: ${{ matrix.dotnet }}
       - run: echo $(date "+%Y.%-m.%-d") > ./version
       - run: echo ${{ github.ref }} > ./version && sed -ie 's/refs\/tags\///' ./version
         if: startsWith(github.ref, 'refs/tags/')
