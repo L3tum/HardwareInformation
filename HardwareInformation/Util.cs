@@ -164,8 +164,18 @@ namespace HardwareInformation
         [MethodImpl(MethodImplOptions.AggressiveOptimization | MethodImplOptions.AggressiveInlining)]
         internal static Task[] RunAffinityPerCpu(IReadOnlyList<CPU> cpus, Action<int> action)
         {
+            if (cpus.Count == 0)
+            {
+                return Array.Empty<Task>();
+            }
+
             return cpus.Select((cpu, cpuIndex) =>
             {
+                if (cpu.LogicalCoresInCpu.Count == 0)
+                {
+                    return Task.Run(() => { });
+                }
+
                 var index = (int)cpu.LogicalCoresInCpu.First();
                 return Task.Run(() =>
                 {
