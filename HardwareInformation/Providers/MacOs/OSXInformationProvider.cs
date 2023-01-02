@@ -41,44 +41,44 @@ public class OSXInformationProvider : UnixHelperInformationProvider
             var lines = sr.ReadToEnd().Trim().Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries);
             string value;
 
-            if (GetValueFromStartingText(lines, @"machdep\.cpu\.vendor", out value))
+            if (GetValueFromStartingText(lines, @"machdep.cpu.vendor", out value))
             {
                 information.Cpu.Vendor = value.Trim();
             }
 
-            if (GetValueFromStartingText(lines, @"machdep\.cpu\.brand_string", out value))
+            if (GetValueFromStartingText(lines, @"machdep.cpu.brand_string", out value))
             {
                 information.Cpu.Caption = value.Trim();
             }
 
-            if (GetValueFromStartingText(lines, @"machdep\.cpu\.family", out value))
+            if (GetValueFromStartingText(lines, @"machdep.cpu.family", out value))
             {
                 information.Cpu.Family = uint.Parse(value.Trim());
             }
 
-            if (GetValueFromStartingText(lines, @"machdep\.cpu\.model", out value))
+            if (GetValueFromStartingText(lines, @"machdep.cpu.model", out value))
             {
                 information.Cpu.Model = uint.Parse(value.Trim());
             }
 
-            if (GetValueFromStartingText(lines, @"machdep\.cpu\.stepping", out value))
+            if (GetValueFromStartingText(lines, @"machdep.cpu.stepping", out value))
             {
                 information.Cpu.Stepping = uint.Parse(value.Trim());
             }
 
-            if (GetValueFromStartingText(lines, @"hw\.physicalcpu", out value))
+            if (GetValueFromStartingText(lines, @"hw.physicalcpu", out value))
             {
                 information.Cpu.PhysicalCores = uint.Parse(value.Trim());
             }
 
-            if (GetValueFromStartingText(lines, @"hw\.logicalcpu", out value))
+            if (GetValueFromStartingText(lines, @"hw.logicalcpu", out value))
             {
                 information.Cpu.LogicalCoresInCpu = Enumerable.Range(0, int.Parse(value.Trim())).Select(number => (uint)number).ToHashSet();
                 information.Cpu.InitializeLists();
             }
 
             // ARM Macs use this instead of machdep.cpu.family :)
-            if (GetValueFromStartingText(lines, @"hw\.cpufamily", out value))
+            if (GetValueFromStartingText(lines, @"hw.cpufamily", out value))
             {
                 information.Cpu.Family = uint.Parse(value.Trim());
             }
