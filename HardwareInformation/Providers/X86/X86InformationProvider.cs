@@ -36,8 +36,8 @@ namespace HardwareInformation.Providers.X86
         {
             foreach (var cpu in information.Cpus)
             {
-                cpu.MaxClockSpeed = cpu.Cores.Max(core => core.ReferenceMaxClockSpeed);
-                cpu.NormalClockSpeed = (uint)cpu.Cores.Average(core => core.ReferenceNormalClockSpeed);
+                cpu.MaxClockSpeed = cpu.Cores.Count > 0 ? cpu.Cores.Max(core => core.ReferenceMaxClockSpeed) : 0;
+                cpu.NormalClockSpeed = cpu.Cores.Count > 0 ? (uint)cpu.Cores.Average(core => core.ReferenceNormalClockSpeed) : 0;
             }
         }
 

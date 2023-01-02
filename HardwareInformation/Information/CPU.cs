@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using HardwareInformation.Information.Cpu;
 
 #endregion
@@ -161,13 +162,7 @@ namespace HardwareInformation.Information
 
         internal void InitializeLists()
         {
-            var cores = new List<Core>((int)LogicalCores);
-            for (uint i = 0; i < LogicalCores; i++)
-            {
-                cores.Add(new Core { Number = i });
-            }
-
-            Cores = cores.AsReadOnly();
+            Cores = LogicalCoresInCpu.Select(number => new Core { Number = number }).ToList().AsReadOnly();
             Caches ??= new List<Cache>((int)LogicalCores).AsReadOnly();
         }
 #pragma warning disable 1591

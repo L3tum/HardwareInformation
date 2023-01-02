@@ -1,6 +1,7 @@
 #region using
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 using HardwareInformation.Information;
@@ -30,7 +31,7 @@ public class OSXInformationProvider : UnixHelperInformationProvider
 
             if (information.Cpus.Count == 0)
             {
-                information.Cpus = new[] { new CPU() }.ToList().AsReadOnly();
+                information.Cpus = new List<CPU> { new() }.ToList().AsReadOnly();
                 information.Cpus[0].InitializeLists();
             }
 
