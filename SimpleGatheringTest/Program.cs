@@ -40,10 +40,10 @@ namespace SimpleGatheringTest
                 Logger.LogCritical(exception, "First Chance");
             }
 
-            if (exceptions.Count > 0)
-            {
-                throw new Exception("Fuck");
-            }
+            // if (exceptions.Count > 0)
+            // {
+            //     throw new Exception("Fuck");
+            // }
         }
 
         private static void CurrentDomainOnFirstChanceException(object sender, FirstChanceExceptionEventArgs e)
