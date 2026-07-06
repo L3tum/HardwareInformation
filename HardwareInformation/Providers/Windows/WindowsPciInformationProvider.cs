@@ -7,8 +7,14 @@ using System.Runtime.Versioning;
 
 namespace HardwareInformation.Providers.Windows;
 
+/// <summary>
+///     Derives from PnP provider and filters for PCI devices, extracting vendor/product IDs.
+/// </summary>
 public class WindowsPciInformationProvider : WindowsPnpInformationProvider
 {
+    /// <summary>
+    ///     Filters PCI devices, parses VID/PID from device ID, and adds vendor/product names.
+    /// </summary>
     [SupportedOSPlatform("windows")]
     public override void GatherInformation(MachineInformation information)
     {

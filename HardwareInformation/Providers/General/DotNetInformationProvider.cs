@@ -8,13 +8,22 @@ using System.Runtime.InteropServices;
 
 namespace HardwareInformation.Providers.General;
 
+/// <summary>
+///     Provides .NET runtime and platform information (OS, Windows/Linux/macOS).
+/// </summary>
 public class DotNetInformationProvider : InformationProvider
 {
+    /// <summary>
+    ///     Always available.
+    /// </summary>
     public override bool Available(MachineInformation information)
     {
         return true;
     }
 
+    /// <summary>
+    ///     Sets OperatingSystem and Platform fields.
+    /// </summary>
     public override void GatherInformation(MachineInformation information)
     {
         information.OperatingSystem = Environment.OSVersion;

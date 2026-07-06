@@ -10,8 +10,14 @@ using Microsoft.Extensions.Logging;
 
 namespace HardwareInformation.Providers.Linux;
 
+/// <summary>
+///     Reads PCI device list from lspci -n and populates Vendor/Device IDs.
+/// </summary>
 public class LinuxPciInformationProvider : LinuxInformationProvider
 {
+    /// <summary>
+    ///     Runs lspci -n, parses vendor:device ID pairs, and adds vendor/product names.
+    /// </summary>
     public override void GatherInformation(MachineInformation information)
     {
         #region Example

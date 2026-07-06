@@ -9,8 +9,14 @@ using HardwareInformation.Information;
 
 namespace HardwareInformation.Providers.Windows;
 
+/// <summary>
+///     Queries Win32_Processor via WMI to identify CPUs.
+/// </summary>
 public class WindowsCpuInformationProvider : WindowsInformationProvider
 {
+    /// <summary>
+    ///     Populates CPU name, caption, socket, clock speed, and logical core count from WMI.
+    /// </summary>
     [SupportedOSPlatform("windows")]
     protected override void IdentifyCpus(MachineInformation information)
     {

@@ -9,8 +9,14 @@ using Microsoft.Extensions.Logging;
 
 namespace HardwareInformation.Providers.Linux;
 
+/// <summary>
+///     Reads block device information from lsblk and smartctl (if available).
+/// </summary>
 public class LinuxDiskInformationProvider : LinuxInformationProvider
 {
+    /// <summary>
+    ///     Uses lsblk to enumerate disks, parses size/model, and optionally runs smartctl for model name.
+    /// </summary>
     public override void GatherInformation(MachineInformation information)
     {
         #region Example

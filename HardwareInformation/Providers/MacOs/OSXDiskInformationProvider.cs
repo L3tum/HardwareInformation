@@ -17,11 +17,17 @@ namespace HardwareInformation.Providers.MacOs;
 /// </summary>
 public class OSXDiskInformationProvider : InformationProvider
 {
+    /// <summary>
+    ///     Returns true if running on macOS.
+    /// </summary>
     public override bool Available(MachineInformation information)
     {
         return RuntimeInformation.IsOSPlatform(OSPlatform.OSX);
     }
 
+    /// <summary>
+    ///     Runs diskutil list and parses disk capacity, type, and vendor.
+    /// </summary>
     public override void GatherInformation(MachineInformation information)
     {
         try

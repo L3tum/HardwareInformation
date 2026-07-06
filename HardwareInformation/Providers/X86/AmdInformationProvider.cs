@@ -9,8 +9,14 @@ using HardwareInformation.Information.Cpu;
 
 namespace HardwareInformation.Providers.X86
 {
+    /// <summary>
+    ///     AMD-specific CPU information provider using extended CPUID leaves for topology, cache, and feature flags.
+    /// </summary>
     public class AmdInformationProvider : InformationProvider
     {
+        /// <summary>
+        ///     Checks if the CPU vendor string is "AuthenticAMD" or "AMDAthlon" and opens Opcode for CPUID.
+        /// </summary>
         public override bool Available(MachineInformation information)
         {
             Opcode.Open();
@@ -29,17 +35,26 @@ namespace HardwareInformation.Providers.X86
             return vendorString == Vendors.AMD || vendorString == Vendors.AMD_LEGACY;
         }
 
+        /// <summary>
+        ///     Gathers AMD extended feature flags (0x80000001, 0x80000007, 0x80000008, 0x8000000A) and physical core count.
+        /// </summary>
         protected override void GatherPerCpuInformation(int cpuIndex, MachineInformation information)
         {
             GatherAmdSpecificFeatureFlags(cpuIndex, information);
         }
 
+        /// <summary>
+        ///     Uses AMD extended topology (0x8000001E) and cache topology (0x8000001D) to identify core IDs, nodes, and caches.
+        /// </summary>
         protected override void GatherPerCoreInformation(int cpuIndex, int coreIndex, MachineInformation information)
         {
             GatherCoreAndNodeIds(cpuIndex, coreIndex, information);
             GatherCacheTopology(cpuIndex, coreIndex, information);
         }
 
+        /// <summary>
+        ///     Calculates physical cores, nodes, and per-node logical cores from core topology. Updates cache statistics.
+        /// </summary>
         public override void PostProviderUpdateInformation(MachineInformation information)
         {
             foreach (var cpu in information.Cpus)
@@ -49,7 +64,10 @@ namespace HardwareInformation.Providers.X86
                 {
                     cpu.PhysicalCores = (uint)cpu.Cores.Select(core => core.CoreId).Distinct().Count();
                     cpu.Nodes = (uint)cpu.Cores.Select(core => core.Node).Distinct().Count();
+                    // Obsolete property, kept for legacy compatibility.
+                    #pragma warning disable CS0618
                     cpu.LogicalCoresPerNode = (uint)cpu.Cores.Select(core => core.Node).Count(node => node == cpu.Cores.FirstOrDefault()?.Node);
+                    #pragma warning restore CS0618
                 }
 
                 foreach (var cache in cpu.Caches)

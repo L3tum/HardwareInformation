@@ -9,8 +9,14 @@ using HardwareInformation.Information;
 
 namespace HardwareInformation.Providers.Windows;
 
+/// <summary>
+///     Queries Win32_DiskDrive via WMI to populate disk list.
+/// </summary>
 public class WindowsDiskInformationProvider : WindowsInformationProvider
 {
+    /// <summary>
+    ///     Uses WMI to get model, size, caption, partitions, and device ID.
+    /// </summary>
     [SupportedOSPlatform("windows")]
     public override void GatherInformation(MachineInformation information)
     {

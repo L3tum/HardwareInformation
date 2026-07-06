@@ -17,11 +17,17 @@ namespace HardwareInformation.Providers.MacOs;
 /// </summary>
 public class OSXRamInformationProvider : InformationProvider
 {
+    /// <summary>
+    ///     Returns true if running on macOS.
+    /// </summary>
     public override bool Available(MachineInformation information)
     {
         return RuntimeInformation.IsOSPlatform(OSPlatform.OSX);
     }
 
+    /// <summary>
+    ///     Queries sysctl hw.memsize and creates a single RAM entry with total capacity.
+    /// </summary>
     public override void GatherInformation(MachineInformation information)
     {
         try

@@ -11,8 +11,14 @@ using Microsoft.Extensions.Logging;
 
 namespace HardwareInformation.Providers.Unix;
 
+/// <summary>
+///     Helper class for Linux/macOS providers that read system files (/proc, /sys) and use regex.
+/// </summary>
 public abstract class UnixHelperInformationProvider : InformationProvider
 {
+    /// <summary>
+    ///     Reads an entire file as a string. Returns false if file doesn't exist or is unreadable.
+    /// </summary>
     [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
     protected bool ReadFile(string file, out string data)
     {
@@ -37,6 +43,9 @@ public abstract class UnixHelperInformationProvider : InformationProvider
         return false;
     }
 
+    /// <summary>
+    ///     Reads an entire file as an array of lines. Returns false if file doesn't exist or is unreadable.
+    /// </summary>
     [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
     protected bool ReadFileAsLines(string file, out string[] lines)
     {
@@ -61,6 +70,9 @@ public abstract class UnixHelperInformationProvider : InformationProvider
         return false;
     }
 
+    /// <summary>
+    ///     Matches a regex against a string. Returns the match if successful.
+    /// </summary>
     [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
     protected bool GetFromStringWithRegex(string data, string regex, out Match match)
     {
@@ -69,6 +81,9 @@ public abstract class UnixHelperInformationProvider : InformationProvider
         return match.Success;
     }
 
+    /// <summary>
+    ///     Matches a regex against a collection of strings. Returns the first successful match.
+    /// </summary>
     [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
     protected bool GetFromStringsWithRegex(IEnumerable<string> data, string regex, out Match match)
     {
@@ -84,6 +99,9 @@ public abstract class UnixHelperInformationProvider : InformationProvider
         return false;
     }
 
+    /// <summary>
+    ///     Finds a line that starts with a given text and extracts the value after the colon.
+    /// </summary>
     [MethodImpl(MethodImplOptions.AggressiveInlining | MethodImplOptions.AggressiveOptimization)]
     protected bool GetValueFromStartingText(IEnumerable<string> data, string startingText, out string value)
     {

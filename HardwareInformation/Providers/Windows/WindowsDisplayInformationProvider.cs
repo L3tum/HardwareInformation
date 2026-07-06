@@ -10,8 +10,14 @@ using HardwareInformation.Information;
 
 namespace HardwareInformation.Providers.Windows;
 
+/// <summary>
+///     Queries Win32_DisplayConfiguration for display monitor info.
+/// </summary>
 public class WindowsDisplayInformationProvider : WindowsInformationProvider
 {
+    /// <summary>
+    ///     Retrieves display configuration and populates display list.
+    /// </summary>
     [SupportedOSPlatform("windows")]
     public override void GatherInformation(MachineInformation information)
     {

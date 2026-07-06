@@ -6,8 +6,14 @@ using System.Runtime.Versioning;
 
 namespace HardwareInformation.Providers.Linux;
 
+/// <summary>
+///     Reads SMBIOS (BIOS and motherboard) information from /sys/class/dmi/id.
+/// </summary>
 public class LinuxSystemInformationProvider : LinuxInformationProvider
 {
+    /// <summary>
+    ///     Reads BIOS version, vendor, and motherboard name/vendor from sysfs DMI entries.
+    /// </summary>
     [SupportedOSPlatform("linux")]
     public override void GatherInformation(MachineInformation information)
     {

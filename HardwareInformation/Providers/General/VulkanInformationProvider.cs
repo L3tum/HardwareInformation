@@ -10,10 +10,16 @@ using Vulkan;
 
 namespace HardwareInformation.Providers.General;
 
+/// <summary>
+///     Gathers GPU information via Vulkan, including device type, VRAM, and vendor name.
+/// </summary>
 public class VulkanInformationProvider : InformationProvider
 {
     private Instance instance;
 
+    /// <summary>
+    ///     Enumerates Vulkan physical devices and populates GPU information (name, vendor, type, VRAM).
+    /// </summary>
     public override void GatherInformation(MachineInformation information)
     {
         foreach (var device in instance.EnumeratePhysicalDevices())
@@ -68,6 +74,9 @@ public class VulkanInformationProvider : InformationProvider
         }
     }
 
+    /// <summary>
+    ///     Checks if the Vulkan loader library exists and at least one physical device is available.
+    /// </summary>
     public override bool Available(MachineInformation information)
     {
         try
@@ -93,6 +102,9 @@ public class VulkanInformationProvider : InformationProvider
         }
     }
 
+    /// <summary>
+    ///     Disposes the Vulkan instance to release unmanaged resources.
+    /// </summary>
     public override void PostProviderUpdateInformation(MachineInformation information)
     {
         instance?.Dispose();

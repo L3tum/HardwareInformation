@@ -10,8 +10,14 @@ using HardwareInformation.Information;
 
 namespace HardwareInformation.Providers.Windows;
 
+/// <summary>
+///     Queries Win32_PhysicalMemory via WMI to enumerate individual RAM sticks.
+/// </summary>
 public class WindowsRamInformationProvider : WindowsInformationProvider
 {
+    /// <summary>
+    ///     Retrieves speed, manufacturer, name, part number, form factor, voltage, and bank label for each stick.
+    /// </summary>
     [SupportedOSPlatform("windows")]
     public override void GatherInformation(MachineInformation information)
     {

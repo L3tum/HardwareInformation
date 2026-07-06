@@ -7,13 +7,22 @@ using System.Linq;
 
 namespace HardwareInformation.Providers.General;
 
+/// <summary>
+///     Reads the CPUID 0x8FFFFFFF leaf (AMD K7/K8 "hammer time" easter egg). Only works on older AMD CPUs.
+/// </summary>
 public class EasterEggInformationProvider : InformationProvider
 {
+    /// <summary>
+    ///     Always available, though the easter egg itself may not exist on newer CPUs.
+    /// </summary>
     public override bool Available(MachineInformation information)
     {
         return true;
     }
 
+    /// <summary>
+    ///     Reads the AMD easter egg string from CPUID leaf 0x8FFFFFFF.
+    /// </summary>
     protected override void GatherPerCpuInformation(int cpuIndex, MachineInformation information)
     {
         if (Opcode.IsOpen)

@@ -9,8 +9,14 @@ using HardwareInformation.Information;
 
 namespace HardwareInformation.Providers.Linux;
 
+/// <summary>
+///     Reads /proc/cpuinfo to identify CPUs and populate name, vendor, speed, and core count.
+/// </summary>
 public class LinuxCpuInformationProvider : LinuxInformationProvider
 {
+    /// <summary>
+    ///     Parses /proc/cpuinfo blocks (split by empty lines) to build CPU topology.
+    /// </summary>
     [SupportedOSPlatform("linux")]
     protected override void IdentifyCpus(MachineInformation information)
     {
@@ -227,6 +233,9 @@ power management:
         }
     }
 
+    /// <summary>
+    ///     Calculates PhysicalCores as the number of distinct core IDs for each CPU.
+    /// </summary>
     public override void PostProviderUpdateInformation(MachineInformation information)
     {
         foreach (var cpu in information.Cpus)

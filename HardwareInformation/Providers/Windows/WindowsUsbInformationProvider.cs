@@ -7,8 +7,14 @@ using System.Runtime.Versioning;
 
 namespace HardwareInformation.Providers.Windows;
 
+/// <summary>
+///     Derives from PnP provider and filters for USB devices, extracting vendor/product IDs.
+/// </summary>
 public class WindowsUsbInformationProvider : WindowsPnpInformationProvider
 {
+    /// <summary>
+    ///     Filters USB devices, parses VID/PID, and adds vendor/product names.
+    /// </summary>
     [SupportedOSPlatform("windows")]
     public override void GatherInformation(MachineInformation information)
     {
