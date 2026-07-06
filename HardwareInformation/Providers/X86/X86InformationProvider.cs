@@ -9,16 +9,22 @@ using HardwareInformation.Information;
 namespace HardwareInformation.Providers.X86
 {
     /// <summary>
-    ///     All values that are available in all (i.e. Intel and AMD) x86 CPUs
+    ///     X86-specific provider using Opcode for vendor/model/capability info.
     /// </summary>
     internal class X86InformationProvider : InformationProvider
     {
+        /// <summary>
+        ///     Opens the Opcode class (CPUID/RDTSC) if available on this architecture.
+        /// </summary>
         public override bool Available(MachineInformation information)
         {
             Opcode.Open();
             return Opcode.IsOpen;
         }
 
+        /// <summary>
+        ///     Gathers vendor, model, extended name, feature flags, and per-core speed via standard CPUID leaves.
+        /// </summary>
         protected override void GatherPerCpuInformation(int cpuIndex, MachineInformation information)
         {
             GatherCpuModelInformation(cpuIndex, information);
@@ -27,11 +33,17 @@ namespace HardwareInformation.Providers.X86
             IdentifyExtendedName(cpuIndex, information);
         }
 
+        /// <summary>
+        ///     Gathers per-core clock speed if the CPU supports CPUID leaf 0x16 (Intel-only).
+        /// </summary>
         protected override void GatherPerCoreInformation(int cpuIndex, int coreIndex, MachineInformation information)
         {
             GatherCoreSpeedInformation(cpuIndex, coreIndex, information);
         }
 
+        /// <summary>
+        ///     Updates max clock speed, normal clock speed from per-core reference speeds.
+        /// </summary>
         public override void PostProviderUpdateInformation(MachineInformation information)
         {
             foreach (var cpu in information.Cpus)
@@ -119,7 +131,8 @@ namespace HardwareInformation.Providers.X86
         ///     ECX=Feature Flags
         ///     EDX=Feature Flags
         /// </summary>
-        /// <param name="information"></param>
+        /// <param name="cpuIndex">Index of the CPU in the information array.</param>
+        /// <param name="information">Machine information to populate.</param>
         private void GatherCpuModelInformation(int cpuIndex, MachineInformation information)
         {
             Opcode.Cpuid(out var result, 1, 0);

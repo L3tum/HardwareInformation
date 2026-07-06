@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace HardwareInformation.Providers
 {
+    /// <summary>
+    ///     Base class for all information providers. Derive from this to add a new platform-specific provider.
+    /// </summary>
     public abstract class InformationProvider
     {
         /// <summary>
@@ -15,6 +18,9 @@ namespace HardwareInformation.Providers
         /// <returns></returns>
         public abstract bool Available(MachineInformation information);
 
+        /// <summary>
+        ///     Entry point for gathering all information. Runs IdentifyCpus, then per-cpu and per-core tasks with affinity pinning.
+        /// </summary>
         public virtual void GatherInformation(MachineInformation information)
         {
             IdentifyCpus(information);
@@ -38,10 +44,16 @@ namespace HardwareInformation.Providers
         {
         }
 
+        /// <summary>
+        ///     Gather CPU-specific information. Override to implement per-CPU logic.
+        /// </summary>
         protected virtual void GatherPerCpuInformation(int cpuIndex, MachineInformation information)
         {
         }
 
+        /// <summary>
+        ///     Gather per-core information. Override to implement per-core logic.
+        /// </summary>
         protected virtual void GatherPerCoreInformation(int cpuIndex, int coreIndex, MachineInformation information)
         {
         }

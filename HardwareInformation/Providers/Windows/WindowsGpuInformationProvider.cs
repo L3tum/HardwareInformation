@@ -10,8 +10,14 @@ using HardwareInformation.Information;
 
 namespace HardwareInformation.Providers.Windows;
 
+/// <summary>
+///     Queries Win32_VideoController via WMI to enumerate GPUs.
+/// </summary>
 public class WindowsGpuInformationProvider : WindowsInformationProvider
 {
+    /// <summary>
+    ///     Populates GPU name, VRAM, and type from WMI.
+    /// </summary>
     [SupportedOSPlatform("windows")]
     public override void GatherInformation(MachineInformation information)
     {

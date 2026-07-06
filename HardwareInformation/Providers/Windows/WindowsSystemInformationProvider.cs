@@ -9,8 +9,14 @@ using Microsoft.Extensions.Logging;
 
 namespace HardwareInformation.Providers.Windows;
 
+/// <summary>
+///     Queries Win32_BaseBoard and Win32_BIOS via WMI to populate system and motherboard info.
+/// </summary>
 public class WindowsSystemInformationProvider : WindowsInformationProvider
 {
+    /// <summary>
+    ///     Reads BIOS version/vendor, motherboard name/vendor, and checks if Windows 10+ for Win32 queries.
+    /// </summary>
     [SupportedOSPlatform("windows")]
     public override void GatherInformation(MachineInformation information)
     {

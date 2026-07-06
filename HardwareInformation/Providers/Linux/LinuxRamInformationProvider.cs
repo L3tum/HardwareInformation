@@ -1,5 +1,8 @@
 namespace HardwareInformation.Providers.Linux;
 
+/// <summary>
+///     Linux RAM provider using lshw (currently disabled).
+/// </summary>
 public class LinuxRamInformationProvider : LinuxInformationProvider
 {
     //         [SupportedOSPlatform("linux")]

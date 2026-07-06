@@ -9,8 +9,14 @@ using HardwareInformation.Information.Cpu;
 
 namespace HardwareInformation.Providers.X86;
 
+/// <summary>
+///     Intel-specific CPU information provider using CPUID for extended feature flags and cache topology.
+/// </summary>
 public class IntelInformationProvider : InformationProvider
 {
+    /// <summary>
+    ///     Checks if the CPU vendor string is "GenuineIntel" and opens Opcode for CPUID.
+    /// </summary>
     public override bool Available(MachineInformation information)
     {
         Opcode.Open();
@@ -30,25 +36,37 @@ public class IntelInformationProvider : InformationProvider
         return vendorString == Vendors.Intel;
     }
 
+    /// <summary>
+    ///     Gathers CPU name from extended CPUID leaves and Intel-specific feature flags.
+    /// </summary>
     protected override void GatherPerCpuInformation(int cpuIndex, MachineInformation information)
     {
         GatherCpuName(cpuIndex, information);
         GatherCpuFeatureFlagInformation(cpuIndex, information);
     }
 
+    /// <summary>
+    ///     Uses Intel topology leaves (0x1f, 0xb) to identify core IDs and nodes, and caches from leaf 0x4.
+    /// </summary>
     protected override void GatherPerCoreInformation(int cpuIndex, int coreIndex, MachineInformation information)
     {
         GatherApicCoreId(cpuIndex, coreIndex, information);
         GatherCacheTopology(cpuIndex, coreIndex, information);
     }
 
+    /// <summary>
+    ///     Calculates physical cores, nodes, and per-node logical cores. Updates cache statistics.
+    /// </summary>
     public override void PostProviderUpdateInformation(MachineInformation information)
     {
         foreach (var cpu in information.Cpus)
         {
             cpu.PhysicalCores = (uint)cpu.Cores.Select(core => core.CoreId).Distinct().Count();
             cpu.Nodes = (uint)Math.Max(cpu.Cores.Select(core => core.Node).Distinct().Count(), 1);
+            // Obsolete property, kept for legacy compatibility.
+            #pragma warning disable CS0618
             cpu.LogicalCoresPerNode = cpu.LogicalCores / cpu.Nodes;
+            #pragma warning restore CS0618
 
             foreach (var cache in cpu.Caches)
             {

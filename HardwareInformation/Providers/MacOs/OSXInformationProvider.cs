@@ -14,17 +14,21 @@ using Microsoft.Extensions.Logging;
 namespace HardwareInformation.Providers.MacOs;
 
 /// <summary>
-///     macOS CPU information provider using per-key sysctl queries.
-///     <see cref="SysctlGetAll"/> (sysctl -a) requires elevated permissions and can cause
-///     AccessViolationException on Intel macOS (e.g., 12.16.3). Individual queries are safer.
+///     macOS CPU information provider using per-key sysctl queries (avoids sysctl -a).
 /// </summary>
 public class OSXInformationProvider : UnixHelperInformationProvider
 {
+    /// <summary>
+    ///     Returns true if running on macOS.
+    /// </summary>
     public override bool Available(MachineInformation information)
     {
         return RuntimeInformation.IsOSPlatform(OSPlatform.OSX);
     }
 
+    /// <summary>
+    ///     Queries individual sysctl keys to build CPU topology (vendor, name, cores).
+    /// </summary>
     protected override void IdentifyCpus(MachineInformation information)
     {
         try

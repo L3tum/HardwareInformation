@@ -9,8 +9,14 @@ using Microsoft.Extensions.Logging;
 
 namespace HardwareInformation.Providers.Linux;
 
+/// <summary>
+///     Reads USB device list from lsusb.
+/// </summary>
 public class LinuxUsbInformationProvider : LinuxInformationProvider
 {
+    /// <summary>
+    ///     Runs lsusb, parses vendor:product IDs, and adds vendor/product names.
+    /// </summary>
     public override void GatherInformation(MachineInformation information)
     {
         #region Example

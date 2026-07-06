@@ -13,8 +13,14 @@ using Microsoft.Extensions.Logging;
 
 namespace HardwareInformation.Providers.Windows;
 
+/// <summary>
+///     Base class for Windows PnP device providers, querying Win32_PnPEntity and GetDeviceProperties.
+/// </summary>
 public abstract class WindowsPnpInformationProvider : WindowsInformationProvider
 {
+    /// <summary>
+    ///     Retrieves a list of PnP devices of the given type (e.g., "PCI", "USB") with full properties.
+    /// </summary>
     [SupportedOSPlatform("windows")]
     protected List<PnpDevice> GetPnpDevices(string type, bool windows10)
     {
