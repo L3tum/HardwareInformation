@@ -1,11 +1,13 @@
-  
 name: .NET Core CI
 
-on: 
+on:
   push:
+    branches: [master]
+  pull_request:
+    branches: [master]
   release:
     types:
-      - created
+      - published
 
 jobs:
   test:
@@ -15,14 +17,21 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest, macOS-latest]
-        dotnet: [ '5.0.x' ]
+        dotnet: ["5.0.x", "10.0.x"]
     name: Dotnet ${{ matrix.dotnet }} build on ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v7
       - name: Setup dotnet
-        uses: actions/setup-dotnet@v3
+        uses: actions/setup-dotnet@v4
         with:
           dotnet-version: ${{ matrix.dotnet }}
+      - name: Cache NuGet packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-nuget-
       - name: Setup libc
         run: sudo apt-get install -y libc-dev libc++-dev
         if: matrix.os == 'ubuntu-latest'
@@ -38,43 +47,22 @@ jobs:
         if: matrix.os == 'macOS-latest'
         run: dotnet publish SimpleGatheringTest/SimpleGatheringTest.csproj -c Debug -r osx-x64 /p:PublishSingleFile=true /p:PublishTrimmed=true -o SimpleGatheringTest/bin/Debug/publish
       - name: Upload Artifacts
-        uses: actions/upload-artifact@v2.2.0
+        uses: actions/upload-artifact@v4
         with:
           name: SimpleGatheringTest-${{ matrix.dotnet }}-${{ matrix.os }}
           path: SimpleGatheringTest/bin/Debug/publish
-          if-no-files-found: error
-  benchmark:
-    runs-on: ubuntu-latest
-    continue-on-error: true
-    strategy:
-      fail-fast: false
-      matrix:
-        dotnet: [ '5.0.x' ]
-    name: Benchmarking
-    steps:
-      - uses: actions/checkout@v1
-      - name: Setup dotnet
-        uses: actions/setup-dotnet@v3
-        with:
-          dotnet-version: ${{ matrix.dotnet }}
-      - name: Setup libc
-        run: sudo apt-get install -y libc-dev libc++-dev
-      - run: dotnet run -c Release --project HardwareInformation.Benchmarks/HardwareInformation.Benchmarks.csproj
-      - uses: actions/upload-artifact@v2.2.0
-        with:
-          name: BenchmarkLogs
-          path: HardwareInformation.Benchmarks/bin/Release/net5.0/BenchmarkDotNet.Artifacts
+
   build:
     runs-on: ubuntu-latest
     continue-on-error: false
     name: Dotnet build and push
     strategy:
       matrix:
-        dotnet: [ '5.0.x' ]
+        dotnet: ["5.0.x", "10.0.x"]
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v7
       - name: Setup dotnet
-        uses: actions/setup-dotnet@v3
+        uses: actions/setup-dotnet@v4
         with:
           dotnet-version: ${{ matrix.dotnet }}
       - run: echo $(date "+%Y.%-m.%-d") > ./version
@@ -85,18 +73,18 @@ jobs:
       - name: Nuget release
         if: startsWith(github.ref, 'refs/tags/')
         run: dotnet nuget push nupkgs/HardwareInformation.$(cat ./version).nupkg -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json
-        
+
       - name: GPR-Hack
         if: startsWith(github.ref, 'refs/tags/')
         run: |
-           for f in ./nupkgs/*.nupkg
-           do
-             curl -vX PUT -u "L3tum:${{ secrets.GITHUB_TOKEN }}" -F package=@$f https://nuget.pkg.github.com/L3tum/
-           done
-      - uses: actions/setup-node@v1
+          for f in ./nupkgs/*.nupkg
+          do
+            curl -vX PUT -u "L3tum:${{ secrets.GITHUB_TOKEN }}" -F package=@$f https://nuget.pkg.github.com/L3tum/
+          done
+      - uses: actions/setup-node@v6
         if: startsWith(github.ref, 'refs/tags/')
         with:
-          node-version: 12
+          node-version: 24
           registry-url: https://registry.npmjs.org/
       - name: Setup node package
         if: startsWith(github.ref, 'refs/tags/')
@@ -113,19 +101,19 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
         run: |
-          cd package 
+          cd package
           npm publish --access public
         if: startsWith(github.ref, 'refs/tags/')
-      - uses: actions/setup-node@v1
+      - uses: actions/setup-node@v6
         with:
-          node-version: 12
+          node-version: 24
           registry-url: https://npm.pkg.github.com/
-          scope: '@l3tum'
+          scope: "@l3tum"
         if: startsWith(github.ref, 'refs/tags/')
       - name: Publish to GPR
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
         run: |
-          cd package 
+          cd package
           npm publish --access public
         if: startsWith(github.ref, 'refs/tags/')
