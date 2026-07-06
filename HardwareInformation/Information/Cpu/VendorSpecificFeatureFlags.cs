@@ -6,30 +6,30 @@ using System;
 
 namespace HardwareInformation.Information.Cpu
 {
-	/// <summary>
-	///     Feature flags only present on AMD CPUs
-	/// </summary>
-	public class AMDFeatureFlags
+    /// <summary>
+    ///     Feature flags only present on AMD CPUs
+    /// </summary>
+    public class AMDFeatureFlags
     {
-	    /// <summary>
-	    ///     AMD-specific feature flags found in CPUID 8000_0001
-	    /// </summary>
-	    public ExtendedFeatureFlagsF81ECX ExtendedFeatureFlagsF81One { get; set; }
+        /// <summary>
+        ///     AMD-specific feature flags found in CPUID 8000_0001
+        /// </summary>
+        public ExtendedFeatureFlagsF81ECX ExtendedFeatureFlagsF81One { get; set; }
 
-	    /// <summary>
-	    ///     Continuation of AMD-specific feature flags found in CPUID 8000_0001
-	    /// </summary>
-	    public ExtendedFeatureFlagsF81EDX ExtendedFeatureFlagsF81Two { get; set; }
+        /// <summary>
+        ///     Continuation of AMD-specific feature flags found in CPUID 8000_0001
+        /// </summary>
+        public ExtendedFeatureFlagsF81EDX ExtendedFeatureFlagsF81Two { get; set; }
 
-	    /// <summary>
-	    ///     AMD-specific feature flags for SVM (secure virtual machine)
-	    /// </summary>
-	    public FeatureFlagsSVM FeatureFlagsSvm { get; set; }
+        /// <summary>
+        ///     AMD-specific feature flags for SVM (secure virtual machine)
+        /// </summary>
+        public FeatureFlagsSVM FeatureFlagsSvm { get; set; }
 
-	    /// <summary>
-	    ///     AMD-specific feature flags for the APM
-	    /// </summary>
-	    public FeatureFlagsAPM FeatureFlagsApm { get; set; }
+        /// <summary>
+        ///     AMD-specific feature flags for the APM
+        /// </summary>
+        public FeatureFlagsAPM FeatureFlagsApm { get; set; }
 #pragma warning disable 1591
         [Flags]
         public enum ExtendedFeatureFlagsF81ECX : uint
@@ -185,36 +185,36 @@ namespace HardwareInformation.Information.Cpu
 #pragma warning restore 1591
     }
 
-	/// <summary>
-	///     Feature flags only present on Intel CPUs
-	/// </summary>
-	public class IntelFeatureFlags
+    /// <summary>
+    ///     Feature flags only present on Intel CPUs
+    /// </summary>
+    public class IntelFeatureFlags
     {
-	    /// <summary>
-	    ///     Intel-specific TPM feature flags (thermal power management)
-	    /// </summary>
-	    [Obsolete("Use FeatureFlagsTpm instead")]
+        /// <summary>
+        ///     Intel-specific TPM feature flags (thermal power management)
+        /// </summary>
+        [Obsolete("Use FeatureFlagsTpm instead")]
         public FeatureFlagsTPM TPMFeatureFlags => FeatureFlagsTpm;
 
-	    /// <summary>
-	    ///     Intel-specific TPM feature flags (thermal power management)
-	    /// </summary>
-	    public FeatureFlagsTPM FeatureFlagsTpm { get; set; }
+        /// <summary>
+        ///     Intel-specific TPM feature flags (thermal power management)
+        /// </summary>
+        public FeatureFlagsTPM FeatureFlagsTpm { get; set; }
 
-	    /// <summary>
-	    ///     Feature flags only present on Intel systems, mostly just longmode.
-	    /// </summary>
-	    public ExtendedFeatureFlagsF81ECX ExtendedFeatureFlagsF81One { get; set; }
+        /// <summary>
+        ///     Feature flags only present on Intel systems, mostly just longmode.
+        /// </summary>
+        public ExtendedFeatureFlagsF81ECX ExtendedFeatureFlagsF81One { get; set; }
 
-	    /// <summary>
-	    ///     Feature flags only present on Intel systems, mostly just things to make the CPU compatible with AMD
-	    /// </summary>
-	    public ExtendedFeatureFlagsF81EDX ExtendedFeatureFlagsF81Two { get; set; }
+        /// <summary>
+        ///     Feature flags only present on Intel systems, mostly just things to make the CPU compatible with AMD
+        /// </summary>
+        public ExtendedFeatureFlagsF81EDX ExtendedFeatureFlagsF81Two { get; set; }
 
-	    /// <summary>
-	    ///     APM feature flags for Intel, only TSC invariant right now
-	    /// </summary>
-	    public FeatureFlagsAPM FeatureFlagsApm { get; set; }
+        /// <summary>
+        ///     APM feature flags for Intel, only TSC invariant right now
+        /// </summary>
+        public FeatureFlagsAPM FeatureFlagsApm { get; set; }
 
 #pragma warning disable 1591
         [Flags]

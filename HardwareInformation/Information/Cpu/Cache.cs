@@ -1,80 +1,80 @@
 ﻿namespace HardwareInformation.Information.Cpu
 {
-	/// <summary>
-	///     Construct to represent a CPU cache level
-	/// </summary>
-	public class Cache
+    /// <summary>
+    ///     Construct to represent a CPU cache level
+    /// </summary>
+    public class Cache
     {
-	    /// <summary>
-	    ///     Cache level (Level1, 2 or 3 Cache)
-	    /// </summary>
-	    public CacheLevel Level { get; set; }
+        /// <summary>
+        ///     Cache level (Level1, 2 or 3 Cache)
+        /// </summary>
+        public CacheLevel Level { get; set; }
 
-	    /// <summary>
-	    ///     Cache type (instruction, data, unified)
-	    /// </summary>
-	    public CacheType Type { get; set; }
+        /// <summary>
+        ///     Cache type (instruction, data, unified)
+        /// </summary>
+        public CacheType Type { get; set; }
 
-	    /// <summary>
-	    ///     Write-back invalidate.
-	    ///     If 0, writing back to this cache automatically invalidates all lower-level caches of cores sharing this cache.
-	    ///     If 1, this is not guaranteed to happen.
-	    ///     Cast to bool this means 0 => true, 1 => false.
-	    /// </summary>
-	    public bool WBINVD { get; set; }
+        /// <summary>
+        ///     Write-back invalidate.
+        ///     If 0, writing back to this cache automatically invalidates all lower-level caches of cores sharing this cache.
+        ///     If 1, this is not guaranteed to happen.
+        ///     Cast to bool this means 0 => true, 1 => false.
+        /// </summary>
+        public bool WBINVD { get; set; }
 
 
-	    /// <summary>
-	    ///     How many logical cores are using this cache.
-	    /// </summary>
-	    public uint LogicalCoresPerCache { get; set; }
+        /// <summary>
+        ///     How many logical cores are using this cache.
+        /// </summary>
+        public uint LogicalCoresPerCache { get; set; }
 
-	    /// <summary>
-	    ///     How many physical cores are using this cache.
-	    /// </summary>
-	    public uint CoresPerCache { get; set; }
+        /// <summary>
+        ///     How many physical cores are using this cache.
+        /// </summary>
+        public uint CoresPerCache { get; set; }
 
-	    /// <summary>
-	    ///     How many times this exact cache has been found in the processor.
-	    /// </summary>
-	    public uint TimesPresent { get; set; } = 1;
+        /// <summary>
+        ///     How many times this exact cache has been found in the processor.
+        /// </summary>
+        public uint TimesPresent { get; set; } = 1;
 
-	    /// <summary>
-	    ///     Capacity in bytes
-	    /// </summary>
-	    public ulong Capacity { get; set; }
+        /// <summary>
+        ///     Capacity in bytes
+        /// </summary>
+        public ulong Capacity { get; set; }
 
-	    /// <summary>
-	    ///     Capacity in human readable format
-	    /// </summary>
-	    public string CapacityHRF { get; set; }
+        /// <summary>
+        ///     Capacity in human readable format
+        /// </summary>
+        public string CapacityHRF { get; set; }
 
-	    /// <summary>
-	    ///     0xffffffff for fully associative
-	    /// </summary>
-	    public uint Associativity { get; set; }
+        /// <summary>
+        ///     0xffffffff for fully associative
+        /// </summary>
+        public uint Associativity { get; set; }
 
-	    /// <summary>
-	    ///     Line size in bytes
-	    /// </summary>
-	    public uint LineSize { get; set; }
+        /// <summary>
+        ///     Line size in bytes
+        /// </summary>
+        public uint LineSize { get; set; }
 
-	    /// <summary>
-	    ///     Number of physical line partitions
-	    /// </summary>
-	    public uint Partitions { get; set; }
+        /// <summary>
+        ///     Number of physical line partitions
+        /// </summary>
+        public uint Partitions { get; set; }
 
-	    /// <summary>
-	    ///     Number of sets
-	    /// </summary>
-	    public uint Sets { get; set; }
+        /// <summary>
+        ///     Number of sets
+        /// </summary>
+        public uint Sets { get; set; }
 
-	    /// <summary>
-	    ///     Custom equals for TimesPresent counting
-	    /// </summary>
-	    /// <param name="obj"></param>
-	    /// <returns></returns>
-	    public bool CustomEquals(object obj)
+        /// <summary>
+        ///     Custom equals for TimesPresent counting
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public bool CustomEquals(object obj)
         {
             if (obj.GetType() != typeof(Cache))
             {
@@ -88,10 +88,10 @@
                    cache.Type == Type && cache.Sets == Sets && cache.Partitions == Partitions;
         }
 #pragma warning disable 1591
-	    /// <summary>
-	    ///     An enum of cache levels and their values
-	    /// </summary>
-	    public enum CacheLevel : uint
+        /// <summary>
+        ///     An enum of cache levels and their values
+        /// </summary>
+        public enum CacheLevel : uint
         {
             RESERVED = 0b0,
             LEVEL1 = 0b1,
@@ -103,10 +103,10 @@
             RESERVED5 = 0b111
         }
 
-	    /// <summary>
-	    ///     The cache types and their values
-	    /// </summary>
-	    public enum CacheType : uint
+        /// <summary>
+        ///     The cache types and their values
+        /// </summary>
+        public enum CacheType : uint
         {
             NONE = 0x0,
             DATA = 0x1,

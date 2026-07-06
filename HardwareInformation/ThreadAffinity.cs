@@ -23,20 +23,20 @@ namespace HardwareInformation
                 return 0;
             }
 
-            var x86Mask = (int) mask;
+            var x86Mask = (int)mask;
 
             var returnMask = 0xffffffffuL;
 
             if (OperatingSystem.IsLinux() || OperatingSystem.IsAndroid())
             {
                 // UNIX/POSIX
-                if (NativeMethods.sched_getaffinity(0, (IntPtr) Marshal.SizeOf(returnMask),
+                if (NativeMethods.sched_getaffinity(0, (IntPtr)Marshal.SizeOf(returnMask),
                     ref returnMask) != 0)
                 {
                     return 0;
                 }
 
-                if (NativeMethods.sched_setaffinity(0, (IntPtr) Marshal.SizeOf(mask),
+                if (NativeMethods.sched_setaffinity(0, (IntPtr)Marshal.SizeOf(mask),
                     ref mask) != 0)
                 {
                     return 0;
@@ -57,11 +57,11 @@ namespace HardwareInformation
                         {
                             if (Environment.Is64BitProcess)
                             {
-                                processThread.ProcessorAffinity = (IntPtr) mask;
+                                processThread.ProcessorAffinity = (IntPtr)mask;
                             }
                             else
                             {
-                                processThread.ProcessorAffinity = (IntPtr) x86Mask;
+                                processThread.ProcessorAffinity = (IntPtr)x86Mask;
                             }
                         }
                         catch (Win32Exception)

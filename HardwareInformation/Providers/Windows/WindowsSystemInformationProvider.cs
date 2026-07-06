@@ -31,7 +31,7 @@ public class WindowsSystemInformationProvider : WindowsInformationProvider
         {
             MachineInformationGatherer.Logger.LogError(e, "Encountered while parsing OS Version info");
         }
-        
+
         using (var mos = new ManagementObjectSearcher("select Product,Manufacturer,Version from Win32_BaseBoard"))
         {
             foreach (var managementBaseObject in mos.Get())

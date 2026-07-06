@@ -23,8 +23,8 @@ public class VulkanInformationProvider : InformationProvider
             var memoryProperties = device.GetMemoryProperties();
 
             var deviceLocalIds = (from memoryType in memoryProperties.MemoryTypes
-                where (memoryType.PropertyFlags & MemoryPropertyFlags.DeviceLocal) != 0
-                select memoryType.HeapIndex).ToList();
+                                  where (memoryType.PropertyFlags & MemoryPropertyFlags.DeviceLocal) != 0
+                                  select memoryType.HeapIndex).ToList();
             var totalAvailableVram = 0uL;
 
             for (var index = 0u; index < memoryProperties.MemoryHeaps.Length; index++)

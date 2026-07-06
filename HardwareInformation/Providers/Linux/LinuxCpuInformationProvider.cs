@@ -172,10 +172,10 @@ power management:
                             continue;
                         }
 
-                        var startOfLogicalCoreNumbering = (int) information.Cpus.Sum(cpu => cpu.LogicalCores);
+                        var startOfLogicalCoreNumbering = (int)information.Cpus.Sum(cpu => cpu.LogicalCores);
 
                         var cpu = new CPU
-                            { Name = name, LogicalCoresInCpu = Enumerable.Range(startOfLogicalCoreNumbering, numberOfLogicalCores).Select(number => (uint)number).ToHashSet() };
+                        { Name = name, LogicalCoresInCpu = Enumerable.Range(startOfLogicalCoreNumbering, numberOfLogicalCores).Select(number => (uint)number).ToHashSet() };
                         cpu.InitializeLists();
                         information.Cpus = information.Cpus.ToList().Append(cpu).ToList().AsReadOnly();
                     }

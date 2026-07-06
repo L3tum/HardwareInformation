@@ -1,10 +1,10 @@
 ﻿namespace HardwareInformation.Information.Cpu
 {
 #pragma warning disable 1591
-	/// <summary>
-	///     Different CPU vendor strings.
-	/// </summary>
-	public static class Vendors
+    /// <summary>
+    ///     Different CPU vendor strings.
+    /// </summary>
+    public static class Vendors
     {
         public static string ACRN = "ACRNACRNACRN";
         public static string AMD = "AuthenticAMD";

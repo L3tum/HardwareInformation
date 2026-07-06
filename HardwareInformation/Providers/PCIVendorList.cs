@@ -2,13 +2,15 @@
 
 // This file is auto-generated!
 
-namespace HardwareInformation.Providers {
+namespace HardwareInformation.Providers
+{
     using System.Collections.Generic;
     using System.Globalization;
     using System;
     using System.Runtime.CompilerServices;
 
-    internal static class PCIVendorList {
+    internal static class PCIVendorList
+    {
         private static readonly Dictionary<int, Tuple<string, Dictionary<int, string>>> vendorAndProductIds = new Dictionary<int, Tuple<string, Dictionary<int, string>>> {
     { 1, Tuple.Create("SafeNet (wrong ID)", new Dictionary<int, string>{
     })
@@ -24336,26 +24338,32 @@ namespace HardwareInformation.Providers {
  },
                 };
 
-    internal static Tuple<string, string> GetVendorAndProductName(string vendorId, string productId) {
-        return GetVendorAndProductName(vendorId != null ? int.Parse(vendorId, NumberStyles.HexNumber) : -1, productId != null ? int.Parse(productId, NumberStyles.HexNumber) : -1);
-    }
-
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    internal static Tuple<string, string> GetVendorAndProductName(int vendorId, int productId) {
-        if (vendorId != -1) {
-            if (vendorAndProductIds.TryGetValue(vendorId, out var vendorTuple)) {
-                if (productId != -1) {
-                    if (vendorTuple.Item2.TryGetValue(productId, out var productName)) {
-                        return Tuple.Create(vendorTuple.Item1, productName);
-                    }
-        
-                    return Tuple.Create<string, string>(vendorTuple.Item1, string.Empty);
-                }
-            }
+        internal static Tuple<string, string> GetVendorAndProductName(string vendorId, string productId)
+        {
+            return GetVendorAndProductName(vendorId != null ? int.Parse(vendorId, NumberStyles.HexNumber) : -1, productId != null ? int.Parse(productId, NumberStyles.HexNumber) : -1);
         }
 
-        return Tuple.Create<string, string>(string.Empty, string.Empty);
-    }
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        internal static Tuple<string, string> GetVendorAndProductName(int vendorId, int productId)
+        {
+            if (vendorId != -1)
+            {
+                if (vendorAndProductIds.TryGetValue(vendorId, out var vendorTuple))
+                {
+                    if (productId != -1)
+                    {
+                        if (vendorTuple.Item2.TryGetValue(productId, out var productName))
+                        {
+                            return Tuple.Create(vendorTuple.Item1, productName);
+                        }
+
+                        return Tuple.Create<string, string>(vendorTuple.Item1, string.Empty);
+                    }
+                }
+            }
+
+            return Tuple.Create<string, string>(string.Empty, string.Empty);
+        }
 
     }
 }

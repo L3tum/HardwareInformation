@@ -80,76 +80,76 @@ public abstract class WindowsPnpInformationProvider : WindowsInformationProvider
                 switch (keyName)
                 {
                     case "DEVPKEY_Device_BusReportedDeviceDesc":
-                    {
-                        deviceDescription = value;
-                        break;
-                    }
-                    case "DEVPKEY_Device_DriverDesc":
-                    {
-                        driverDescription = value;
-                        break;
-                    }
-                    case "DEVPKEY_Device_DriverVersion":
-                    {
-                        driverVersion = value;
-                        break;
-                    }
-                    case "DEVPKEY_Device_DriverDate":
-                    {
-                        var year = int.Parse(value.Substring(0, 4));
-                        var month = int.Parse(value.Substring(4, 2));
-                        var day = int.Parse(value.Substring(6, 2));
-                        var hour = int.Parse(value.Substring(8, 2));
-                        var minute = int.Parse(value.Substring(10, 2));
-                        var second = int.Parse(value.Substring(12, 2));
-
-                        driverDate = new DateTime(year, month, day, hour, minute, second).ToString();
-                        break;
-                    }
-                    case "DEVPKEY_Device_Class":
-                    {
-                        deviceClass = value;
-                        break;
-                    }
-                    case "DEVPKEY_Device_DriverProvider":
-                    {
-                        driverProvider = value;
-                        break;
-                    }
-                    case "DEVPKEY_NAME":
-                    {
-                        name = value;
-                        break;
-                    }
-                    case "DEVPKEY_Device_Manufacturer":
-                    {
-                        manufacturer = value;
-                        break;
-                    }
-                    case "DEVPKEY_Device_Children":
-                    {
-                        var children = deviceProperties.Properties["DEVPKEY_Device_Children"];
-                        if (children.Value is not null)
                         {
-                            if (children.IsArray)
-                            {
-                                var searcher = new ManagementObjectSearcher();
-                                foreach (var child in children.Value as string[])
-                                {
-                                    searcher.Query = new ObjectQuery(
-                                        $"select * from Win32_PnPEntity where DeviceID = {child}");
-                                    var childs = searcher.Get();
+                            deviceDescription = value;
+                            break;
+                        }
+                    case "DEVPKEY_Device_DriverDesc":
+                        {
+                            driverDescription = value;
+                            break;
+                        }
+                    case "DEVPKEY_Device_DriverVersion":
+                        {
+                            driverVersion = value;
+                            break;
+                        }
+                    case "DEVPKEY_Device_DriverDate":
+                        {
+                            var year = int.Parse(value.Substring(0, 4));
+                            var month = int.Parse(value.Substring(4, 2));
+                            var day = int.Parse(value.Substring(6, 2));
+                            var hour = int.Parse(value.Substring(8, 2));
+                            var minute = int.Parse(value.Substring(10, 2));
+                            var second = int.Parse(value.Substring(12, 2));
 
-                                    foreach (var child1 in childs)
+                            driverDate = new DateTime(year, month, day, hour, minute, second).ToString();
+                            break;
+                        }
+                    case "DEVPKEY_Device_Class":
+                        {
+                            deviceClass = value;
+                            break;
+                        }
+                    case "DEVPKEY_Device_DriverProvider":
+                        {
+                            driverProvider = value;
+                            break;
+                        }
+                    case "DEVPKEY_NAME":
+                        {
+                            name = value;
+                            break;
+                        }
+                    case "DEVPKEY_Device_Manufacturer":
+                        {
+                            manufacturer = value;
+                            break;
+                        }
+                    case "DEVPKEY_Device_Children":
+                        {
+                            var children = deviceProperties.Properties["DEVPKEY_Device_Children"];
+                            if (children.Value is not null)
+                            {
+                                if (children.IsArray)
+                                {
+                                    var searcher = new ManagementObjectSearcher();
+                                    foreach (var child in children.Value as string[])
                                     {
-                                        mbos.Add(child1);
+                                        searcher.Query = new ObjectQuery(
+                                            $"select * from Win32_PnPEntity where DeviceID = {child}");
+                                        var childs = searcher.Get();
+
+                                        foreach (var child1 in childs)
+                                        {
+                                            mbos.Add(child1);
+                                        }
                                     }
                                 }
                             }
-                        }
 
-                        break;
-                    }
+                            break;
+                        }
                 }
             }
 
