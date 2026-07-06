@@ -83,6 +83,10 @@ public class VulkanInformationProvider : InformationProvider
 
             return instance.EnumeratePhysicalDevices().Length > 0;
         }
+        catch (ResultException)
+        {
+            return false;
+        }
         catch
         {
             return false;
