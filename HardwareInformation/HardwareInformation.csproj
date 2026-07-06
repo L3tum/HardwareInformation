@@ -14,7 +14,7 @@
         <Configurations>Debug;Release</Configurations>
         <Platforms>AnyCPU;X86</Platforms>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-        <TargetFramework>net5.0</TargetFramework>
+        <TargetFramework>net8.0</TargetFramework>
     </PropertyGroup>
 
     <PropertyGroup>
