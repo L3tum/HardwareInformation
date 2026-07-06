@@ -17,7 +17,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest, macOS-latest]
-        dotnet: ["5.0.x", "10.0.x"]
+        dotnet: ["8.0.x", "10.0.x"]
     name: Dotnet ${{ matrix.dotnet }} build on ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v7
@@ -52,13 +52,37 @@ jobs:
           name: SimpleGatheringTest-${{ matrix.dotnet }}-${{ matrix.os }}
           path: SimpleGatheringTest/bin/Debug/publish
 
+  benchmark:
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    strategy:
+      fail-fast: false
+      matrix:
+        dotnet: ["8.0.x", "10.0.x"]
+    name: Benchmarking on .NET ${{ matrix.dotnet }}
+    steps:
+      - uses: actions/checkout@v7
+      - name: Setup dotnet
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ matrix.dotnet }}
+      - name: Setup libc
+        run: sudo apt-get install -y libc-dev libc++-dev
+      - name: Run benchmarks
+        run: dotnet run -c Release --project HardwareInformation.Benchmarks/HardwareInformation.Benchmarks.csproj
+      - name: Upload Benchmark Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: BenchmarkLogs-${{ matrix.dotnet }}
+          path: HardwareInformation.Benchmarks/bin/Release/${{ matrix.dotnet }}.0/BenchmarkDotNet.Artifacts
+
   build:
     runs-on: ubuntu-latest
     continue-on-error: false
     name: Dotnet build and push
     strategy:
       matrix:
-        dotnet: ["5.0.x", "10.0.x"]
+        dotnet: ["8.0.x", "10.0.x"]
     steps:
       - uses: actions/checkout@v7
       - name: Setup dotnet
