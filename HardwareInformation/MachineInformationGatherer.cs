@@ -41,6 +41,8 @@ namespace HardwareInformation
             new WindowsCpuInformationProvider(),
             new LinuxCpuInformationProvider(),
             new OSXInformationProvider(),
+            new OSXRamInformationProvider(),
+            new OSXDiskInformationProvider(),
             new X86InformationProvider(),
             new AmdInformationProvider(),
             new IntelInformationProvider(),

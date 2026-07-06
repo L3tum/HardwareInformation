@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 using HardwareInformation.Information;
 using HardwareInformation.Providers.Unix;
 using Microsoft.Extensions.Logging;
@@ -12,6 +13,11 @@ using Microsoft.Extensions.Logging;
 
 namespace HardwareInformation.Providers.MacOs;
 
+/// <summary>
+///     macOS CPU information provider using per-key sysctl queries.
+///     <see cref="SysctlGetAll"/> (sysctl -a) requires elevated permissions and can cause
+///     AccessViolationException on Intel macOS (e.g., 12.16.3). Individual queries are safer.
+/// </summary>
 public class OSXInformationProvider : UnixHelperInformationProvider
 {
     public override bool Available(MachineInformation information)
@@ -23,7 +29,7 @@ public class OSXInformationProvider : UnixHelperInformationProvider
     {
         try
         {
-            // MacOS does not offer a way to retrieve multiple CPUs, and I don't think there are any Macs like that to begin with.
+            // macOS does not offer a way to retrieve multiple CPUs, and I don't think there are any Macs like that to begin with.
             if (information.Cpus.Count > 1)
             {
                 return;
@@ -35,50 +41,49 @@ public class OSXInformationProvider : UnixHelperInformationProvider
                 information.Cpus[0].InitializeLists();
             }
 
-            using var p = Util.StartProcess("sysctl", "-a");
-            using var sr = p.StandardOutput;
-            p.WaitForExit();
-            var lines = sr.ReadToEnd().Trim().Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries);
+            // Query each sysctl key individually to avoid privilege requirements and
+            // AccessViolationException on Intel macOS (12.16.3). Individual queries are
+            // faster and don't require root.
             string value;
 
-            if (GetValueFromStartingText(lines, @"machdep.cpu.vendor", out value))
+            if (GetSysctlValue(@"machdep.cpu.vendor", out value))
             {
                 information.Cpu.Vendor = value.Trim();
             }
 
-            if (GetValueFromStartingText(lines, @"machdep.cpu.brand_string", out value))
+            if (GetSysctlValue(@"machdep.cpu.brand_string", out value))
             {
                 information.Cpu.Caption = value.Trim();
             }
 
-            if (GetValueFromStartingText(lines, @"machdep.cpu.family", out value))
+            if (GetSysctlValue(@"machdep.cpu.family", out value))
             {
                 information.Cpu.Family = uint.Parse(value.Trim());
             }
 
-            if (GetValueFromStartingText(lines, @"machdep.cpu.model", out value))
+            if (GetSysctlValue(@"machdep.cpu.model", out value))
             {
                 information.Cpu.Model = uint.Parse(value.Trim());
             }
 
-            if (GetValueFromStartingText(lines, @"machdep.cpu.stepping", out value))
+            if (GetSysctlValue(@"machdep.cpu.stepping", out value))
             {
                 information.Cpu.Stepping = uint.Parse(value.Trim());
             }
 
-            if (GetValueFromStartingText(lines, @"hw.physicalcpu", out value))
+            if (GetSysctlValue(@"hw.physicalcpu", out value))
             {
                 information.Cpu.PhysicalCores = uint.Parse(value.Trim());
             }
 
-            if (GetValueFromStartingText(lines, @"hw.logicalcpu", out value))
+            if (GetSysctlValue(@"hw.logicalcpu", out value))
             {
                 information.Cpu.LogicalCoresInCpu = Enumerable.Range(0, int.Parse(value.Trim())).Select(number => (uint)number).ToHashSet();
                 information.Cpu.InitializeLists();
             }
 
-            // ARM Macs use this instead of machdep.cpu.family :)
-            if (GetValueFromStartingText(lines, @"hw.cpufamily", out value))
+            // ARM Macs use this instead of machdep.cpu.family
+            if (GetSysctlValue(@"hw.cpufamily", out value))
             {
                 information.Cpu.Family = uint.Parse(value.Trim());
             }
@@ -86,6 +91,45 @@ public class OSXInformationProvider : UnixHelperInformationProvider
         catch (Exception e)
         {
             MachineInformationGatherer.Logger.LogError(e, "Encountered while parsing information from sysctl on OSX");
+        }
+    }
+
+    /// <summary>
+    ///     Queries a single sysctl value by key. Does not require elevated privileges and avoids
+    ///     AccessViolationException on Intel macOS that can occur with sysctl -a.
+    /// </summary>
+    /// <param name="key">The sysctl key (e.g. machdep.cpu.vendor)</param>
+    /// <param name="value">The resolved value</param>
+    /// <returns>true if the key exists and was read successfully</returns>
+    private static bool GetSysctlValue(string key, out string value)
+    {
+        value = null;
+        try
+        {
+            using var p = Util.StartProcess("sysctl", key);
+            using var sr = p.StandardOutput;
+            p.WaitForExit();
+            var output = sr.ReadToEnd().Trim();
+
+            if (string.IsNullOrEmpty(output))
+            {
+                return false;
+            }
+
+            // Output format: "key: value"
+            var parts = output.Split(':');
+            if (parts.Length >= 2)
+            {
+                value = string.Join(":", parts.Skip(1)).Trim();
+                return true;
+            }
+
+            return false;
+        }
+        catch (Exception e)
+        {
+            MachineInformationGatherer.Logger.LogDebug(e, "sysctl query failed for {Key}", key);
+            return false;
         }
     }
 }
