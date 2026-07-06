@@ -28,7 +28,8 @@ namespace HardwareInformation.Providers.Windows
             measuringThreadTokenSource = new CancellationTokenSource();
             measuringThread = new Thread(() => MeasureCpuFrequency(measuringThreadTokenSource.Token))
             {
-                Priority = ThreadPriority.Highest, IsBackground = true
+                Priority = ThreadPriority.Highest,
+                IsBackground = true
             };
             measuringThread.Start();
 
@@ -85,8 +86,8 @@ namespace HardwareInformation.Providers.Windows
                 var highestFrequency = frequencies.Max();
                 var lowestFrequency = frequencies.Min();
 
-                return Tuple.Create((int) (baseFrequency * 1000), (int) (averageFrequency * 1000),
-                    (int) (highestFrequency * 1000), (int) (lowestFrequency * 1000));
+                return Tuple.Create((int)(baseFrequency * 1000), (int)(averageFrequency * 1000),
+                    (int)(highestFrequency * 1000), (int)(lowestFrequency * 1000));
             }
         }
 

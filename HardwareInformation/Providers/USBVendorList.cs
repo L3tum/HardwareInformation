@@ -2,13 +2,15 @@
 
 // This file is auto-generated!
 
-namespace HardwareInformation.Providers {
+namespace HardwareInformation.Providers
+{
     using System.Collections.Generic;
     using System.Globalization;
     using System;
     using System.Runtime.CompilerServices;
 
-    internal static class USBVendorList {
+    internal static class USBVendorList
+    {
         private static readonly Dictionary<int, Tuple<string, Dictionary<int, string>>> vendorAndProductIds = new Dictionary<int, Tuple<string, Dictionary<int, string>>> {
     { 1, Tuple.Create("Fry's Electronics", new Dictionary<int, string>{
 { 30584, "Counterfeit flash drive [Kingston]" },
@@ -2503,7 +2505,7 @@ namespace HardwareInformation.Providers {
 { 8, "SideWinder Precision Pro" },
 { 9, "IntelliMouse" },
 { 11, "Natural Keyboard Elite" },
-{ 14, "SideWinder® Freestyle Pro" },
+{ 14, "SideWinderï¿½ Freestyle Pro" },
 { 20, "Digital Sound System 80" },
 { 26, "SideWinder Precision Racing Wheel" },
 { 27, "SideWinder Force Feedback 2 Joystick" },
@@ -3738,7 +3740,7 @@ namespace HardwareInformation.Providers {
 { 2811, "Android Fastboot device" },
 { 4871, "Cytronix 6in1 Card Reader" },
 { 5693, "Cool Icam Digi-MP3" },
-{ 8213, "TouchChip® Fingerprint Reader" },
+{ 8213, "TouchChipï¿½ Fingerprint Reader" },
 { 8214, "Fingerprint Reader" },
 { 8215, "Biometric Smart Card Reader" },
 { 8216, "BioSimKey" },
@@ -5839,18 +5841,18 @@ namespace HardwareInformation.Providers {
             { 1255, Tuple.Create("Elo TouchSystems", new Dictionary<int, string>{
 { 1, "TouchScreen" },
 { 2, "Touchmonitor Interface 2600 Rev 2" },
-{ 4, "4000U CarrollTouch® Touchmonitor Interface" },
-{ 7, "2500U IntelliTouch® Touchmonitor Interface" },
-{ 8, "3000U AccuTouch® Touchmonitor Interface" },
-{ 9, "4000U CarrollTouch® Touchmonitor Interface" },
+{ 4, "4000U CarrollTouchï¿½ Touchmonitor Interface" },
+{ 7, "2500U IntelliTouchï¿½ Touchmonitor Interface" },
+{ 8, "3000U AccuTouchï¿½ Touchmonitor Interface" },
+{ 9, "4000U CarrollTouchï¿½ Touchmonitor Interface" },
 { 32, "Touchscreen Interface (2700)" },
 { 33, "Touchmonitor Interface" },
-{ 48, "4500U CarrollTouch® Touchmonitor Interface" },
+{ 48, "4500U CarrollTouchï¿½ Touchmonitor Interface" },
 { 50, "Touchmonitor Interface" },
 { 51, "Touchmonitor Interface" },
 { 65, "5010 Surface Capacitive Touchmonitor Interface" },
 { 66, "Touchmonitor Interface" },
-{ 80, "2216 AccuTouch® Touchmonitor Interface" },
+{ 80, "2216 AccuTouchï¿½ Touchmonitor Interface" },
 { 113, "Touchmonitor Interface" },
 { 114, "Touchmonitor Interface" },
 { 129, "Touchmonitor Interface" },
@@ -13936,9 +13938,9 @@ namespace HardwareInformation.Providers {
 { 8853, "Colorado 300" },
 { 8886, "eTrex Vista HCx (Mass Storage mode)" },
 { 8987, "Oregon 400t" },
-{ 9043, "Nüvi 205T" },
+{ 9043, "Nï¿½vi 205T" },
 { 9088, "Oregon series" },
-{ 9164, "nüvi 1350" },
+{ 9164, "nï¿½vi 1350" },
 { 9305, "GPSmap 62/78 series" },
 { 9361, "Edge 800" },
 { 9496, "eTrex 10" },
@@ -16467,7 +16469,7 @@ namespace HardwareInformation.Providers {
 { 22353, "Integrated Webcam" },
 { 22389, "HP \"Truevision HD\" laptop camera" },
 { 22390, "HP Truevision HD integrated webcam" },
-{ 22451, "Acer 640 × 480 laptop camera" },
+{ 22451, "Acer 640 ï¿½ 480 laptop camera" },
 { 22476, "HD Webcam - Realtek Semiconductor" },
 { 22479, "HD WebCam" },
 { 22490, "Built-In Video Camera" },
@@ -17340,7 +17342,7 @@ namespace HardwareInformation.Providers {
 { 53, "Miditech Play'n Roll" },
 { 54, "Cinergy 250 Audio" },
 { 55, "Cinergy 250 Audio" },
-{ 56, "Cinergy T² DVB-T Receiver" },
+{ 56, "Cinergy Tï¿½ DVB-T Receiver" },
 { 57, "Grabster AV 400" },
 { 59, "Cinergy 400" },
 { 60, "Grabster AV 250" },
@@ -17349,7 +17351,7 @@ namespace HardwareInformation.Providers {
 { 78, "Cinergy T XS" },
 { 79, "Cinergy Analog XS" },
 { 85, "Cinergy T XE (Version 1, AF9005)" },
-{ 92, "Cinergy T²" },
+{ 92, "Cinergy Tï¿½" },
 { 105, "Cinergy T XE (Version 2, AF9015)" },
 { 107, "Cinergy HT PVR (EU)" },
 { 114, "Cinergy Hybrid T" },
@@ -26262,7 +26264,7 @@ namespace HardwareInformation.Providers {
 { 1026, "FTDI232 [EasyPort]" },
 { 1027, "FTDI232 [EasyPort Mini]" },
 { 1028, "FTDI232 [Netzteil-GL]" },
-{ 1029, "FTDI232 [MotorPrüfstand]" },
+{ 1029, "FTDI232 [MotorPrï¿½fstand]" },
 { 1030, "STM32F103 [EasyKit]" },
 { 1031, "LPC2378 [Robotino]" },
 { 1032, "LPC2378 [Robotino-Arm]" },
@@ -30001,8 +30003,8 @@ namespace HardwareInformation.Providers {
 { 9288, "82801 PCI Bridge" },
 { 12544, "PRO/DSL 3220 Modem - WAN" },
 { 12545, "PRO/DSL 3220 Modem" },
-{ 12864, "AnyPoint® 3240 Modem - WAN" },
-{ 12865, "AnyPoint® 3240 Modem" },
+{ 12864, "AnyPointï¿½ 3240 Modem - WAN" },
+{ 12865, "AnyPointï¿½ 3240 Modem" },
 { 34306, "Miniature Card Slot" },
 { 35878, "8 Series/C220 Series  EHCI #1" },
 { 35885, "8 Series/C220 Series EHCI #2" },
@@ -30366,26 +30368,32 @@ namespace HardwareInformation.Providers {
  },
                 };
 
-    internal static Tuple<string, string> GetVendorAndProductName(string vendorId, string productId) {
-        return GetVendorAndProductName(vendorId != null ? int.Parse(vendorId, NumberStyles.HexNumber) : -1, productId != null ? int.Parse(productId, NumberStyles.HexNumber) : -1);
-    }
-
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    internal static Tuple<string, string> GetVendorAndProductName(int vendorId, int productId) {
-        if (vendorId != -1) {
-            if (vendorAndProductIds.TryGetValue(vendorId, out var vendorTuple)) {
-                if (productId != -1) {
-                    if (vendorTuple.Item2.TryGetValue(productId, out var productName)) {
-                        return Tuple.Create(vendorTuple.Item1, productName);
-                    }
-        
-                    return Tuple.Create<string, string>(vendorTuple.Item1, string.Empty);
-                }
-            }
+        internal static Tuple<string, string> GetVendorAndProductName(string vendorId, string productId)
+        {
+            return GetVendorAndProductName(vendorId != null ? int.Parse(vendorId, NumberStyles.HexNumber) : -1, productId != null ? int.Parse(productId, NumberStyles.HexNumber) : -1);
         }
 
-        return Tuple.Create<string, string>(string.Empty, string.Empty);
-    }
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        internal static Tuple<string, string> GetVendorAndProductName(int vendorId, int productId)
+        {
+            if (vendorId != -1)
+            {
+                if (vendorAndProductIds.TryGetValue(vendorId, out var vendorTuple))
+                {
+                    if (productId != -1)
+                    {
+                        if (vendorTuple.Item2.TryGetValue(productId, out var productName))
+                        {
+                            return Tuple.Create(vendorTuple.Item1, productName);
+                        }
+
+                        return Tuple.Create<string, string>(vendorTuple.Item1, string.Empty);
+                    }
+                }
+            }
+
+            return Tuple.Create<string, string>(string.Empty, string.Empty);
+        }
 
     }
 }

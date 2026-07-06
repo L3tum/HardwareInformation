@@ -15,7 +15,8 @@ namespace SimpleGatheringTest
     internal class Program
     {
         private static readonly ILoggerFactory LoggerFactory =
-            Microsoft.Extensions.Logging.LoggerFactory.Create(builder => { 
+            Microsoft.Extensions.Logging.LoggerFactory.Create(builder =>
+            {
                 builder.AddConsole();
                 builder.SetMinimumLevel(LogLevel.Debug);
             });
