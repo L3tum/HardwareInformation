@@ -85,6 +85,16 @@ namespace HardwareInformation
                 return;
             }
 
+            // Executing this on MacOS ARM silicon results in an Access Violation.
+            // Likely some issue with either Rosetta or the way MacOS does its things.
+            // So we add this additional gate to hopefully prevent that.
+            var arch = RuntimeInformation.ProcessArchitecture;
+            if (arch != Architecture.X86 && arch != Architecture.X64)
+            {
+                IsOpen = false;
+                return;
+            }
+
             AppDomain.CurrentDomain.DomainUnload += (sender, args) => Close();
 
             IsOpen = true;
