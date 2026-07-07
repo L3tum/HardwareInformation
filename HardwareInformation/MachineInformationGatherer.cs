@@ -57,7 +57,7 @@ namespace HardwareInformation
             new LinuxDiskInformationProvider(),
             new LinuxUsbInformationProvider(),
             new LinuxPciInformationProvider(),
-            new LinuxGpuInformationProvider(),
+            // new LinuxGpuInformationProvider(), TODO: Currently (i.e. porting the old code to this structure) there is no information provided by Linux that can't be fetched with Vulkan
             new VulkanInformationProvider(),
             new EasterEggInformationProvider()
         };
