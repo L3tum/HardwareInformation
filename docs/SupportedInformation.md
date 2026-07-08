@@ -45,9 +45,9 @@
 |                     CPU Cache WBINVD | :white_check_mark: |  :white_check_mark: |  :white_check_mark: |                :x: |
 |            **Lots** of feature flags | :white_check_mark: |  :white_check_mark: |  :white_check_mark: |                :x: |
 |                            RAM Speed | :white_check_mark: | :white_check_mark:* |                 :x: | :white_check_mark: |
-|                     RAM Manufacturer | :white_check_mark: |                 :x: |                 :x: | :white_check_mark: |
-|                         RAM Capacity | :white_check_mark: | :white_check_mark:* |                 :x: | :white_check_mark: |
-|                      RAM CapacityHRF | :white_check_mark: | :white_check_mark:* |                 :x: | :white_check_mark: |
+|                     RAM Manufacturer | :white_check_mark: |                 :x: |  :white_check_mark: | :white_check_mark: |
+|                         RAM Capacity | :white_check_mark: | :white_check_mark:* |  :white_check_mark: | :white_check_mark: |
+|                      RAM CapacityHRF | :white_check_mark: | :white_check_mark:* |  :white_check_mark: | :white_check_mark: |
 |                          RAM Locator | :white_check_mark: |                 :x: |                 :x: | :white_check_mark: |
 |        RAM PartNumber (Product Name) | :white_check_mark: |                 :x: |                 :x: | :white_check_mark: |
 |                       RAM FormFactor | :white_check_mark: | :white_check_mark:* |                 :x: | :white_check_mark: |
@@ -59,9 +59,9 @@
 |                            GPUs VRAM | :white_check_mark: |  :white_check_mark: |                 :x: |                :x: |
 |                        GPUs VRAM HRF | :white_check_mark: |  :white_check_mark: |                 :x: |                :x: |
 |                            GPUs Type | :white_check_mark: |                 :x: |                 :x: | :white_check_mark: |
-|                   Disks Manufacturer | :white_check_mark: | :white_check_mark:* |                 :x: | :white_check_mark: |
+|                   Disks Manufacturer | :white_check_mark: | :white_check_mark:* |  :white_check_mark: | :white_check_mark: |
 |                        Disks Caption | :white_check_mark: | :white_check_mark:* |                 :x: | :white_check_mark: |
-|                       Disks Capacity | :white_check_mark: | :white_check_mark:* |                 :x: | :white_check_mark: |
+|                       Disks Capacity | :white_check_mark: | :white_check_mark:* |  :white_check_mark: | :white_check_mark: |
 |                Displays Manufacturer | :white_check_mark: |                 :x: |                 :x: | :white_check_mark: |
 |                        Displays Name | :white_check_mark: |                 :x: |                 :x: | :white_check_mark: |
 |                        USB Vendor ID | :white_check_mark: |  :white_check_mark: |                 :x: | :white_check_mark: |
@@ -83,3 +83,5 @@ sizing.
 accurate if those features are not available.**
 
 **\*\*\*\* Only available on AMD platforms.**
+
+**\*\*\*\*\* RAM & Disk may be a little inaccurate due to Apple shenanigans.**
